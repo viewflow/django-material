@@ -26,19 +26,19 @@
     <!-- Header -->
     <nav id="header" class="navbar navbar-default">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#topbar">
                 <i class="sr-only">Toggle navigation</i><i class="icon-bar"></i> <i class="icon-bar"></i><i class="icon-bar"></i>
             </button>
             {% block branding %}{% endblock %}
         </div>
         
-        <div class="navbar-collapse collapse navbar-responsive-collapse">
+        <div id="topbar" class="navbar-collapse collapse navbar-responsive-collapse">
             {% if user.is_active and user.is_staff %}
             <ul id="user-tools" class="nav navbar-nav navbar-right">
                 {% block nav-global %}{% endblock %}
                 
                 <li class="dropdown">
-                    <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">{% firstof user.get_short_name user.get_username|title %} <b class="caret"></b></a>
+                    <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i> {% firstof user.get_short_name user.get_username|title %} <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         {% if user.has_usable_password %}
                         <li><a href="{% url 'admin:password_change' %}"><i class="glyphicon glyphicon-lock"></i> {% trans 'Change password' %}</a></li>
