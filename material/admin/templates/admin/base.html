@@ -1,0 +1,101 @@
+{% load admin_static %}{% load firstof from future %}<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE|default:"en-us" }}">
+<head>
+    <title>{% block title %}{% endblock %}</title>
+
+    {% include 'material/includes/material_css.html' %}
+    <link rel="stylesheet" type="text/css" href="{% block stylesheet %}{% static 'material/admin/css/base.css' %}{% endblock %}" />
+    {% block extrastyle %}{% endblock %}
+
+    <script type="text/javascript">window.__admin_media_prefix__ = "{% filter escapejs %}{% static "admin/" %}{% endfilter %}";</script>
+    <script type="text/javascript">window.__admin_utc_offset__ = "{% filter escapejs %}{% now "Z" %}{% endfilter %}";</script>
+    {% include 'material/includes/material_js.html' %}
+
+    {% block extrahead %}{% endblock %}
+    {% block blockbots %}<meta name="robots" content="NONE,NOARCHIVE" />{% endblock %}
+</head>
+{% load i18n %}
+
+<body class="{% if is_popup %}popup {% endif %}{% block bodyclass %}{% endblock %}">
+
+<!-- Container -->
+<div id="container">
+
+    {% if not is_popup %}
+    <!-- Header -->
+    <nav id="header" class="navbar navbar-default">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <i class="sr-only">Toggle navigation</i><i class="icon-bar"></i> <i class="icon-bar"></i><i class="icon-bar"></i>
+            </button>
+            {% block branding %}{% endblock %}
+        </div>
+        
+        <div class="navbar-collapse collapse navbar-responsive-collapse">
+            {% if user.is_active and user.is_staff %}
+            <ul id="user-tools" class="nav navbar-nav navbar-right">
+                {% block nav-global %}{% endblock %}
+                
+                <li class="dropdown">
+                    <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">{% firstof user.get_short_name user.get_username|title %} <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        {% if user.has_usable_password %}
+                        <li><a href="{% url 'admin:password_change' %}"><i class="glyphicon glyphicon-lock"></i> {% trans 'Change password' %}</a></li>
+                        {% endif %}
+                        <li><a href="{% url 'admin:logout' %}"><i class="glyphicon glyphicon-log-out"></i> {% trans 'Log out' %}</a></li>
+                    </ul>
+                </li>
+            </ul>
+            {% endif %}
+        </div>
+    </nav>
+    {% endif %}
+    <!-- END Header -->
+
+    <div class="container">
+        {% if not is_popup %}
+        {% block breadcrumbs %}
+        <div class="row">
+            <div class="col-md-12 col-lg-12 hidden-sm hidden-xs breadcrumbs">
+                <ul class="breadcrumb well">
+                    <li><a href="{% url 'admin:index' %}">{% trans 'Home' %}</a></li>
+                    {% if title %}<li>{{ title }}{% endif %}
+                </ul>
+            </div>
+        </div>
+        {% endblock %}
+        {% endif %}
+
+        {% block messages %}
+        {% if messages %}
+        {% for message in messages %}
+        <span class="snackbar_open" data-timeout=0 data-toggle=snackbar data-style="alert-{{ message.tags }}" data-content="{{ message|capfirst }}"></span>
+        {% endfor %}
+        <script>
+            $(document).ready(function(){
+                $(".snackbar_open").snackbar("show");
+            });
+        </script>
+        {% endif %}
+        {% endblock messages %}
+        
+        <!-- Content -->
+        <div id="content" class="{% block coltype %}row{% endblock %}">
+            <!-- {% block pretitle %}{% endblock %} -->
+            <!-- {% block content_title %}{% if title %}<h1>{{ title }}</h1>{% endif %}{% endblock %} -->
+            {% block content %}
+            {% block object-tools %}{% endblock %}
+            {{ content }}
+            {% endblock %}
+            {% block sidebar %}{% endblock %}
+            <br class="clear" />
+        </div>
+        <!-- END Content -->
+    </div>
+
+    {% block footer %}<div id="footer"></div>{% endblock %}
+</div>
+<!-- END Container -->
+
+</body>
+</html>
