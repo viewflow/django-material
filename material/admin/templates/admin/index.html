@@ -22,7 +22,7 @@
             {% for model in app.models %}
             <tr class="model-{{ model.object_name|lower }}">
                 {% if model.admin_url %}
-                <th scope="row"  style="vertical-align:middle"><h4><a href="{{ model.admin_url }}">{{ model.name }}</a></h4></th>
+                <th scope="row"  style="vertical-align:middle"><a class="btn btn-flat btn-primary" href="{{ model.admin_url }}">{{ model.name }}</a></th>
                 {% else %}
                 <th scope="row">{{ model.name }}</th>
                 {% endif %}
