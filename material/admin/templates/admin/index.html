@@ -1,0 +1,56 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_static %}
+
+{% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% static "admin/css/dashboard.css" %}" />{% endblock %}
+
+{% block bodyclass %}{{ block.super }} dashboard{% endblock %}
+
+{% block breadcrumbs %}{% endblock %}
+
+{% block content %}
+<div id="content-main" class="col-xs-12">
+    {% if app_list %}
+    {% for app in app_list %}
+    <div class="app-{{ app.app_label }} module well well-lg">
+        <table class="table table-hover">
+            <caption>
+                <h4 class="header">
+                    <i class="col-xs-2 adm-app-default adm-app-{{ app.app_label }}"></i>
+                    <div class="col-xs-10" style="padding-top:13px">{{ app.name }}</div>
+                </h4>
+            </caption>
+            {% for model in app.models %}
+            <tr class="model-{{ model.object_name|lower }}">
+                {% if model.admin_url %}
+                <th scope="row"  style="vertical-align:middle"><h4><a href="{{ model.admin_url }}">{{ model.name }}</a></h4></th>
+                {% else %}
+                <th scope="row">{{ model.name }}</th>
+                {% endif %}
+                
+                {% if model.add_url %}
+                <td><a href="{{ model.add_url }}" class="btn btn-flat btn-default addlink">
+                        <i class="mdi-content-add"></i>
+                        {% trans 'Add' %}
+                </a></td>
+                {% else %}
+                <td>&nbsp;</td>
+                {% endif %}
+                
+                {% if model.admin_url %}
+                <td><a href="{{ model.admin_url }}" class="btn btn-flat btn-default changelink hidden-xs">
+                        <i class="mdi-editor-mode-edit"></i>
+                        {% trans 'Change' %}
+                </a></td>
+                {% else %}
+                <td>&nbsp;</td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    {% endfor %}
+    {% else %}
+    <p>{% trans "You don't have permission to edit anything." %}</p>
+    {% endif %}
+</div>
+{% endblock %}

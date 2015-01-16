@@ -1,3 +1,6 @@
+/*
+  Snackbar
+*/
 .snackbar.alert-success {
   background-color: #0f9d58;
 }
@@ -9,4 +12,53 @@
 }
 .snackbar.alert-error {
   background-color: #f44336;
+}
+
+
+/*
+   App list icons
+*/
+[class^=adm-app-], [class*=" adm-app-"] {
+    speak: none;
+    font-style: normal;
+    font-weight: 400;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    font-size:45px;
+    position:relative;
+    top:10p;
+    max-width:50px;
+}
+
+.adm-app-default:before {
+    font-family: Material-Design-Icons;
+    content: "\e690";
+}
+
+.adm-app-auth:before {
+    font-family: Material-Design-Icons;
+    content: "\e605";
+}
+
+.adm-app-comments:before {
+    font-family: Material-Design-Icons;
+    content: "\e6de";
+}
+
+.adm-app-flatpages:before {
+    font-size:40px;
+    font-family: 'Glyphicons Halflings';
+    content: "\e043";
+}
+
+.adm-app-redirects:before {
+    font-family: Material-Design-Icons;
+    content: "\e6db";
+}
+
+.adm-app-sites:before {
+    font-size:40px;
+    font-family: 'Glyphicons Halflings';
+    content: "\e010";
 }
