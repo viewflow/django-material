@@ -1,0 +1,3 @@
+.tox
+*.pyc
+db*.sqlite
