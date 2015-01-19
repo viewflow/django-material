@@ -4,7 +4,7 @@ from collections import defaultdict
 from django.forms.forms import BoundField
 from django.template.base import (
     TemplateSyntaxError, Library,
-    Node, token_kwargs)
+    Node, Variable, token_kwargs)
 from django.template.loader import get_template
 from django.template.loader_tags import IncludeNode
 
@@ -48,6 +48,7 @@ class FormNode(Node):
             if key not in ('form', 'layout', 'template'):
                 raise TemplateSyntaxError("%r received an invalid key: %r" %
                                           (bits[0], key))
+            self.kwargs[key] = Variable(self.kwargs[key])
 
         self.nodelist = parser.parse(('end{}'.format(bits[0]),))
         parser.delete_first_token()
@@ -104,8 +105,8 @@ class FormPartNode(Node):
                 "%r accepts at most 2 arguments (part_id, section), got: {}" %
                 (bits[0], bits[1:]))
 
-        self.part_id = bits[1]
-        self.section = bits[2].token if len(bits) == 3 else None
+        self.part_id = Variable(bits[1])
+        self.section = bits[2] if len(bits) == 3 else None
 
         self.nodelist = parser.parse(('end{}'.format(bits[0]),))
         parser.delete_first_token()
@@ -116,7 +117,7 @@ class FormPartNode(Node):
             part = part.field
         return part
 
-    def render_tag(self, context):
+    def render(self, context):
         part = self.resolve_part(context)
         parts = context['form_parts']
 

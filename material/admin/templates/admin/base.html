@@ -20,11 +20,11 @@
 <body class="{% if is_popup %}popup {% endif %}{% block bodyclass %}{% endblock %}">
 
 <!-- Container -->
-<div id="container">
+<div id="container" class="{% block containerclass %}{% endblock %}">
 
     {% if not is_popup %}
     <!-- Header -->
-    <nav id="header" class="navbar navbar-default">
+    <nav id="header" class="navbar navbar-default {% block navclass %}panel{% endblock %}">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#topbar">
                 <i class="sr-only">Toggle navigation</i><i class="icon-bar"></i> <i class="icon-bar"></i><i class="icon-bar"></i>

@@ -1,0 +1,42 @@
+{% load material_form material_form_internal %}
+
+{% part form %}
+    {% if form_show_non_field_errors and form.non_field_errors%}
+        <!-- Form errors -->
+        <div class="alert alert-danger alert-formerror">
+        {% for error in form.non_field_errors %}
+            <small>{{ error }}</small>
+        {% endfor %}
+        </div>
+    {% endif %}
+
+    <!-- Hidden fields -->
+    {% part form hidden %}
+        {% for hidden in form.hidden_fields %}
+            {{ hidden }}
+        {% endfor %}
+    {% endpart %}
+
+    {% if layout %}
+        {% part form visible %}
+            {% form_render layout %}
+        {% endpart %}
+    {% else %}
+        <!-- Default form layout -->
+        {% part form visible %}
+            {% for bound_field in form.visible_fields %}
+                {% part bound_field.field %}
+                    {% form_render bound_field %}
+                {% endpart %}
+            {% endfor %}
+        {% endpart %}
+
+        {% part 'inlines' %}
+            <!-- django-extra-view inlines -->
+            {% for inline in inlines %}
+                {{ inline }}
+            {% endfor %}
+        {% endpart %}
+    {% endif %}
+
+{% endpart %}
