@@ -10,7 +10,6 @@
 
     <script type="text/javascript">window.__admin_media_prefix__ = "{% filter escapejs %}{% static "admin/" %}{% endfilter %}";</script>
     <script type="text/javascript">window.__admin_utc_offset__ = "{% filter escapejs %}{% now "Z" %}{% endfilter %}";</script>
-    {% include 'material/includes/material_js.html' %}
 
     {% block extrahead %}{% endblock %}
     {% block blockbots %}<meta name="robots" content="NONE,NOARCHIVE" />{% endblock %}
@@ -53,7 +52,7 @@
     {% endif %}
     <!-- END Header -->
 
-    <div class="container">
+    <div class="{% block contentclass %}container{% endblock %}">
         {% if not is_popup %}
         {% block breadcrumbs %}
         <div class="row">
@@ -98,5 +97,7 @@
 </div>
 <!-- END Container -->
 
+{% include 'material/includes/material_js.html' %}
+{% block extrajs %}{% endblock %}
 </body>
 </html>

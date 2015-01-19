@@ -62,3 +62,14 @@
     font-family: 'Glyphicons Halflings';
     content: "\e010";
 }
+
+
+/*
+  Login form
+*/
+#login-form {
+    width: 26em;
+    min-width: 280px;
+    margin-left: 1em;
+    margin-right: 1em;
+}

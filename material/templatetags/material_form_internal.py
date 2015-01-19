@@ -41,7 +41,7 @@ class TagAttrsNode(Node):
         self.nodelist = parser.parse(('end{}'.format(bits[0]),))
         parser.delete_first_token()
 
-    def render_tag(self, context):
+    def render(self, context):
         value = self.nodelist.render(context)
         return re.sub('[\n ]+', ' ', value).strip()
 

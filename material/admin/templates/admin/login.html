@@ -9,6 +9,8 @@
 
 {% block navclass %}{% endblock %}
 
+{% block contentclass %}container-fluid{% endblock %}
+
 {% block usertools %}{% endblock %}
 
 {% block nav-global %}{% endblock %}
@@ -34,7 +36,12 @@
 
 <div id="content-main">
 <form action="{{ app_path }}" method="post" id="login-form">{% csrf_token %}
-  {% form %}{% endform %}
+    {% with form_label_class="sr-only" form_control_class="floating-label" form_with_placeholder=True %}
+    {% form %}
+        {% part form.username prepend %}<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>{% endpart %}
+        {% part form.password prepend %}<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>{% endpart %}
+    {% endform %}
+    {% endwith %}
   {% url 'admin_password_reset' as password_reset_url %}
   {% if password_reset_url %}
   <div class="password-reset-link">
@@ -42,7 +49,7 @@
   </div>
   {% endif %}
   <div class="submit-row">
-    <label>&nbsp;</label><input type="submit" value="{% trans 'Log in' %}" />
+      <button type="submit" class="btn btn-primary">{% trans 'Log in' %}</button>
   </div>
 </form>
 
