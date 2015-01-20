@@ -53,8 +53,25 @@
   </div>
 </form>
 
-<script type="text/javascript">
-document.getElementById('id_username').focus()
-</script>
 </div>
+{% endblock %}
+
+{% block extrajs %}
+<script type="text/javascript">
+    $(function() {
+        function autofix() {
+            $('input[name=password]').removeClass('empty');
+            userInteracted();
+        }
+        function userInteracted() {
+            $('body').off('input propertychange', 'input[name=username]', autofix);
+            $('body,html').unbind("scroll mousedown DOMMouseScroll mousewheel keyup", userInteracted);
+        }
+        $('body').on('input propertychange', 'input[name=username]', autofix);
+        $("body,html").bind("scroll mousedown DOMMouseScroll mousewheel keyup", userInteracted);
+    });
+    /* for some strange reason, this breaks autofill fix work
+       document.getElementById('id_username').focus() 
+     */
+</script>
 {% endblock %}
