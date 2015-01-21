@@ -79,3 +79,11 @@
 #toolbar .form-control-wrapper {
     margin-left: 0px;
 }
+
+/*
+  Actions
+*/
+.addlink {
+    margin-top: 0px;
+    padding: 20px;
+}

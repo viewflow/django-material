@@ -51,27 +51,28 @@
 
 {% block content %}
 <div id="content-main" class="row">
-    <div class="col-lg-4 col-lg-push-8">
+    <div class="col-lg-3 col-lg-push-9">
         <div class="row">
-            <!--div class="col-xs-12">
-                <div class="well">
-                    {% if action_form and actions_on_top and cl.full_result_count %}{% admin_actions %}{% endif %}
-                    {% block object-tools %}
-                    {% if has_add_permission %}
-                    <ul class="object-tools">
-                        {% block object-tools-items %}
-                        <li>
-                            {% url cl.opts|admin_urlname:'add' as add_url %}
-                            <a href="{% add_preserved_filters add_url is_popup to_field %}" class="addlink">
-                                {% blocktrans with cl.opts.verbose_name as name %}Add {{ name }}{% endblocktrans %}
-                            </a>
-                        </li>
-                        {% endblock %}
-                    </ul>
-                    {% endif %}
-                    {% endblock %}
+            <div class="col-xs-12">
+                <div class="">
+            {% block object-tools %}
+            {% if has_add_permission %}            
+                {% block object-tools-items %}                
+                    {% url cl.opts|admin_urlname:'add' as add_url %}
+                    <a href="{% add_preserved_filters add_url is_popup to_field %}"
+                       class="btn btn-primary mdi-content-add col-xs-12 addlink"
+                       alt="">                        
+                        {% blocktrans with cl.opts.verbose_name as name %}Add {{ name }}{% endblocktrans %}
+                    </a>
+                {% endblock %}
+            {% endif %}
+            {% endblock %}
+                    <!--
+                    {% if action_form and cl.full_result_count %}{% admin_actions %}{% endif %}
+                    -->
                 </div>
-            </div-->
+            </div>
+
             <div class="col-xs-12">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
@@ -94,8 +95,8 @@
         </div>
     </div>
 
-    <div class="col-lg-8 col-lg-pull-4">
-        <div class="well">            
+    <div class="col-lg-9 col-lg-pull-3">
+        <div class="well">
             {% if cl.formset.errors %}
             <p class="errornote">
                 {% if cl.formset.total_error_count == 1 %}{% trans "Please correct the error below." %}{% else %}{% trans "Please correct the errors below." %}{% endif %}

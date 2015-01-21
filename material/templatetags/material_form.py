@@ -48,13 +48,16 @@ class FormNode(Node):
             if key not in ('form', 'layout', 'template'):
                 raise TemplateSyntaxError("%r received an invalid key: %r" %
                                           (bits[0], key))
-            self.kwargs[key] = Variable(self.kwargs[key])
+
+            self.kwargs[key] = self.kwargs[key]
 
         self.nodelist = parser.parse(('end{}'.format(bits[0]),))
         parser.delete_first_token()
 
     def render(self, context):
-        form = self.kwargs.get('form', context.get('form'))
+        form = self.kwargs.get('form')
+        form = form.resolve(context) if form else context.get('form')
+
         if form is None:
             return ''
 

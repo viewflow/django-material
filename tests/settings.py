@@ -29,6 +29,8 @@ INSTALLED_APPS = (
     'django.contrib.flatpages',
     'django.contrib.redirects',
     'django.contrib.sites',
+    'debug_toolbar',
+    'autofixture',
 )
 
 MIDDLEWARE_CLASSES = (
