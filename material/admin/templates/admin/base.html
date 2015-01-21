@@ -65,19 +65,6 @@
         </div>
         {% endblock %}
         {% endif %}
-
-        {% block messages %}
-        {% if messages %}
-        {% for message in messages %}
-        <span class="snackbar_open" data-timeout=0 data-toggle=snackbar data-style="alert-{{ message.tags }}" data-content="{{ message|capfirst }}"></span>
-        {% endfor %}
-        <script>
-            $(document).ready(function(){
-                $(".snackbar_open").snackbar("show");
-            });
-        </script>
-        {% endif %}
-        {% endblock messages %}
         
         <!-- Content -->
         <div id="content" class="{% block coltype %}row{% endblock %}">
@@ -99,5 +86,19 @@
 
 {% include 'material/includes/material_js.html' %}
 {% block extrajs %}{% endblock %}
+
+{% block messages %}
+{% if messages %}
+{% for message in messages %}
+<span class="snackbar_open" data-timeout=0 data-toggle=snackbar data-style="alert-{{ message.tags }}" data-content="{{ message|capfirst }}"></span>
+{% endfor %}
+<script>
+    $(document).ready(function(){
+        $(".snackbar_open").snackbar("show");
+    });
+</script>
+{% endif %}
+{% endblock messages %}
+
 </body>
 </html>
