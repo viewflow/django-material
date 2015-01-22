@@ -26,11 +26,16 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'debug_toolbar',
+    'autofixture',
+    # test admin apps
     'django.contrib.flatpages',
     'django.contrib.redirects',
     'django.contrib.sites',
-    'debug_toolbar',
-    'autofixture',
+    'django_comments',
+    'mptt',
+    'tagging',
+    'zinnia'
 )
 
 MIDDLEWARE_CLASSES = (

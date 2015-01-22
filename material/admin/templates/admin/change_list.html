@@ -1,5 +1,5 @@
 {% extends "admin/base_site.html" %}
-{% load i18n admin_urls admin_static admin_list %}
+{% load i18n admin_urls admin_static admin_list material_admin %}
 
 {% block extrastyle %}
   {{ block.super }}
@@ -98,6 +98,8 @@
                         {% endif %}
                         {% endblock %}
 
+                        {% block date_hierarchy %}{% date_hierarchy cl %}{% endblock %}
+
                     </div>
                 </div>
             </div>
@@ -113,8 +115,6 @@
             {{ cl.formset.non_form_errors }}
             {% endif %}
             <div class="module{% if cl.has_filters %} filtered{% endif %}" id="changelist">
-                {% block date_hierarchy %}{% date_hierarchy cl %}{% endblock %}
-
                 <form id="changelist-form" action="" method="post"{% if cl.formset.is_multipart %} enctype="multipart/form-data"{% endif %} novalidate>{% csrf_token %}
                     {% if cl.formset %}
                     <div>{{ cl.formset.management_form }}</div>
