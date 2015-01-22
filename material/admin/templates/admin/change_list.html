@@ -25,9 +25,15 @@
 (function($) {
     $(document).ready(function($) {
         $("tr input.action-select").actions();
-        $("#changelist-search-button").click(function(){
+        
+        $("#changelist-search-button").click(function() {
             $("#changelist-search").submit();
         });
+        
+        $(".admin_filter").change(function() {
+		    window.location.href = $(this).val();
+		});
+		
     });
 })(django.jQuery);
 </script>
