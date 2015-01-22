@@ -30,8 +30,7 @@
 {% block content %}<div id="content-main" class="row">
     <div class="{% if is_popup %}col-xs-12{% else %}col-xs-9{% endif %}">
         <div class="well">
-            <h4>{{ title }}</h4><br/>
-            <div class="pull-right">
+            <div class="pull-right" style="position:relative;top:-10px">
                 {% block object-tools %}
                 {% if change %}{% if not is_popup %}
                 {% block object-tools-items %}
@@ -40,11 +39,20 @@
                    class="btn btn-primary btn-fab mdi-action-history historylink"
                    alt="{% trans 'History' %}">
                 </a>
-                {% if has_absolute_url %}<li><a href="{{ absolute_url }}" class="viewsitelink">{% trans "View on site" %}</a></li>{% endif%}
+                {% if has_absolute_url %}
+                &nbsp;&nbsp;
+                <a href="{{ absolute_url }}"
+                   class="btn btn-primary btn-fab mdi-communication-call-made historylink"
+                   class="viewsitelink"
+                   alt="{% trans 'View on site' %}">
+                </a>
+                {% endif%}
                 {% endblock %}
                 {% endif %}{% endif %}
                 {% endblock %}
             </div>
+
+            <h4>{{ title }}</h4><br/>
 
             <form {% if has_file_field %}enctype="multipart/form-data" {% endif %}action="{{ form_url }}" method="post" id="{{ opts.model_name }}_form" novalidate>{% csrf_token %}{% block form_top %}{% endblock %}
                 <div>
