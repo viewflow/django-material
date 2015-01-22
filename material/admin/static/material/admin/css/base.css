@@ -80,6 +80,14 @@
     margin-left: 0px;
 }
 
+#changelist-search-button {
+    color:black;
+}
+
+#changelist-search-button:hover,#changelist-search-button:focus,#changelist-search-button:active {
+    text-decoration:none;
+}
+
 /*
   Actions
 */

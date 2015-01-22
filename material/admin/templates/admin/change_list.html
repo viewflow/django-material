@@ -25,6 +25,9 @@
 (function($) {
     $(document).ready(function($) {
         $("tr input.action-select").actions();
+        $("#changelist-search-button").click(function(){
+            $("#changelist-search").submit();
+        });
     });
 })(django.jQuery);
 </script>

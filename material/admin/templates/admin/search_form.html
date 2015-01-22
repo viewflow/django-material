@@ -5,7 +5,9 @@
     <form id="changelist-search" action="" method="get">
         <div class="input-group">
             <input type="text" class="form-control" size="40" name="{{ search_var }}" value="{{ cl.query }}" id="searchbar" placeholder="Search {{ cl.opts.verbose_name_plural|capfirst }}"/>
-            <a href="#"  style="z-index:1000;position:absolute;right:10px;top:5px"><i class="mdi-action-search"></i></a>
+            <a href="#"  style="z-index:1000;position:absolute;right:10px;top:5px" id="changelist-search-button">
+                <i class="mdi-action-search"></i>
+            </a>           
         </div>
 
         {% if show_result_count %}
