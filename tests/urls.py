@@ -17,6 +17,10 @@ urlpatterns = [
         form_class=forms.RegistrationForm,
         success_url='/demo/registration/',
         template_name="demo.html")),
+    url(r'^demo/contact/$', generic.FormView.as_view(
+        form_class=forms.ContactForm,
+        success_url='/demo/contact/',
+        template_name="demo.html")),
     url(r'^weblog/', include('zinnia.urls', namespace='zinnia')),
     url(r'^admin/', include(admin.site.urls)),
 ]

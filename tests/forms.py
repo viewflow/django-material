@@ -45,16 +45,16 @@ class RegistrationForm(forms.Form):
     {% with form_label_class="sr-only" form_control_class="floating-label" form_with_placeholder=True %}
     {% form %}
         {% part form.username prepend %}
-            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+            <span class="input-group-addon prepend"><i class="glyphicon glyphicon-user"></i></span>
         {% endpart %}
         {% part form.email prepend %}
-            <span class="input-group-addon"><i class="glyphicon glyphicon-inbox"></i></span>
+            <span class="input-group-addon prepend"><i class="glyphicon glyphicon-inbox"></i></span>
         {% endpart %}
         {% part form.password prepend %}
-            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+            <span class="input-group-addon prepend"><i class="glyphicon glyphicon-lock"></i></span>
         {% endpart %}
         {% part form.password_confirm prepend %}
-            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+            <span class="input-group-addon prepend"><i class="glyphicon glyphicon-lock"></i></span>
         {% endpart %}
     {% endform %}
     {% endwith %}
@@ -72,8 +72,36 @@ class ContactForm(forms.Form):
     email = forms.EmailField()
     subject = forms.CharField()
     message = forms.CharField(widget=forms.Textarea)
-    captcha = forms.CharField()
-    send_copy = forms.BooleanField(required=False)
+    captcha = forms.CharField(label="Enter characters below")
+    send_copy = forms.BooleanField(required=False,
+                                   label="Send a copy to my e-mail address")
+
+    template = Template("""
+    {% form %}
+        {% part form.name append %}
+            <span class="input-group-addon append"><i class="glyphicon glyphicon-user"></i></span>
+        {% endpart %}
+        {% part form.email append %}
+            <span class="input-group-addon append"><i class="glyphicon glyphicon-envelope"></i></span>
+        {% endpart %}
+        {% part form.subject append %}
+            <span class="input-group-addon append"><i class="glyphicon glyphicon-tag"></i></span>
+        {% endpart %}
+        #}
+        {% part form.message rows %}4{% endpart %}
+        {% part form.captcha append %}
+            <span class="input-group-addon append">
+                <img height="28px" src="http://image.captchas.net?client=demo&random=RandomZufall">
+            </span>
+        {% endpart %}
+    {% endform %}
+    """)
+
+    buttons = Template("""
+        <button class="btn btn-primary pull-right" type="submit">Send message</button>
+    """)
+
+    title = "Contact form"
 
 
 class OrderForm(forms.Form):

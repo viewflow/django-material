@@ -7,6 +7,7 @@
             <h1 class="panel-title">{% block formtitle %}Form{% endblock %}</h1>
         </div>
         <form method="POST">
+            {% csrf_token %}
             <div class="panel-body">
                 {% block formbody %}{% endblock %}
             </div>
