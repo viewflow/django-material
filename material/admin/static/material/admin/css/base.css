@@ -96,6 +96,10 @@
     padding: 20px;
 }
 
+.action_span {
+    padding-left: 20px;
+}
+
 /*
   Forms
 */
