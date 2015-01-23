@@ -1,53 +1,14 @@
+{% extends 'base_form.html' %}
 {% load material_form %}
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Material Design for Django Forms and Admin</title>
 
-    {% include 'material/includes/material_css.html' %}
+{% block formclass %}col-xs-12 col-sm-8 col-md-6 col-lg-5{% endblock %}
 
-    <style type="text/css">
-      .panel-heading h1 {
-          font-size: 22px;
-          padding-top: 15px;
-          padding-bottom: 15px;
-          padding-left: 15px;
-      }
-    </style>
-  </head>
-  <body>
-      <div class="container">
-          <div class="col-xs-12 col-sm-8 col-md-6 col-lg-5 center-block" style="float:none; margin-top:60px">
-              <div class="panel panel-primary">
-                  <div class="panel-heading">
-                      <h1 class="panel-title">Login form</h1>
-                  </div>
-                  <div class="panel-body">
-                      {% with form_label_class="sr-only" form_control_class="floating-label" form_with_placeholder=True %}
-                      <form type="POST">
-                          <div style="padding:20px;padding-bottom:20px;padding-right:40px">
-                          {% form %}
-                          {% part form.email prepend %}<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>{% endpart %}
-                          {% part form.password prepend %}<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>{% endpart %}
-                          {% part form.keep_logged group_class %}form-group pull-right{% endpart %}
-                          {% endform %}
-                          </div>
-                      </form>
-                      {% endwith %}
-                  </div>
-                  <div class="panel-footer">
-                      <div class="btn-toolbar">
-                          <button class="btn btn-primary pull-right" type="submit">Login</button>
-                          <button class="btn btn-default pull-right">Register</button>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div>
+{% block formtitle %}{{ form.title }}{% endblock %}
 
-    {% include 'material/includes/material_js.html' %}
-  </body>
-</html>
+{% block formbody %}
+    {% include form.template %}
+{% endblock %}
+
+{% block formbuttons %}
+    {% include form.buttons %}
+{% endblock %}

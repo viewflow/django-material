@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="{% block formclass %}col-xs-12 col-sm-8 col-md-6 col-lg-5{% endblock %} center-block" style="float:none; margin-top:60px">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h1 class="panel-title">{% block formtitle %}Form{% endblock %}</h1>
+        </div>
+        <form method="POST">
+            <div class="panel-body">
+                {% block formbody %}{% endblock %}
+            </div>
+            <div class="panel-footer">
+                <div class="btn-toolbar">
+                    {% block formbuttons %}<button class="btn btn-primary pull-right" type="submit">Submit</button>{% endblock %}
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

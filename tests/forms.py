@@ -9,22 +9,62 @@ class LoginForm(forms.Form):
     keep_logged = forms.BooleanField(required=False, label="Keep me logged in")
 
     template = Template("""
+    {% with form_label_class="sr-only" form_control_class="floating-label" form_with_placeholder=True %}
+    {% form %}
+        {% part form.email prepend %}
+            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+        {% endpart %}
+        {% part form.password prepend %}
+            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+        {% endpart %}
+        {% part form.keep_logged group_class %}form-group pull-right{% endpart %}
+    {% endform %}
+    {% endwith %}
     """)
+
+    buttons = Template("""
+        <button class="btn btn-primary pull-right" type="submit">Login</button>
+        <button class="btn btn-default pull-right">Register</button>
+    """)
+
+    title = "Login form"
 
 
 class RegistrationForm(forms.Form):
     username = forms.CharField()
-    email = forms.EmailField()
+    email = forms.EmailField(label="Email Address")
     password = forms.CharField(widget=forms.PasswordInput)
-    password_confirm = forms.CharField(widget=forms.PasswordInput)
+    password_confirm = forms.CharField(widget=forms.PasswordInput, label="Confirm password")
     first_name = forms.CharField(required=False)
     last_name = forms.CharField(required=False)
     gender = forms.ChoiceField(choices=(('F', 'Female'), ('M', 'Male'), ('O', 'Other')))
-    receive_news = forms.BooleanField(required=False)
-    agree_toc = forms.BooleanField(required=True)
+    receive_news = forms.BooleanField(required=False, label='I want to receive news and special offers')
+    agree_toc = forms.BooleanField(required=True, label='I agree with the Terms and Conditions')
 
     template = Template("""
+    {% with form_label_class="sr-only" form_control_class="floating-label" form_with_placeholder=True %}
+    {% form %}
+        {% part form.username prepend %}
+            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+        {% endpart %}
+        {% part form.email prepend %}
+            <span class="input-group-addon"><i class="glyphicon glyphicon-inbox"></i></span>
+        {% endpart %}
+        {% part form.password prepend %}
+            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+        {% endpart %}
+        {% part form.password_confirm prepend %}
+            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+        {% endpart %}
+    {% endform %}
+    {% endwith %}
     """)
+
+    buttons = Template("""
+        <button class="btn btn-primary pull-right" type="submit">Submit</button>
+    """)
+
+    title = "Registration form"
 
 
 class ContactForm(forms.Form):
