@@ -1,0 +1,27 @@
+{% load i18n material_form %}
+<div class="actions">
+    {% form form=action_form %}
+       
+    {% endform %}
+    
+    <button type="submit" class="btn btn-primary mdi-navigation-arrow-forward" title="{% trans "Run the selected action" %}" name="index" value="{{ action_index|default:0 }}">
+        {% trans "Go" %}
+    </button>
+      
+    {% if actions_selection_counter %}
+        <script type="text/javascript">var _actions_icnt="{{ cl.result_list|length|default:"0" }}";</script>
+       
+        <span class="action_span action-counter mdi-content">{{ selection_note }}</span>
+        {% if cl.result_count != cl.result_list|length %}
+        <span class="action_span all mdi-content">{{ selection_note_all }}</span>
+       
+        <span class="action_span question">
+            <a href="javascript:;" class="mdi-action-done title="{% trans "Click here to select the objects across all pages" %}">
+            {% blocktrans with cl.result_count as total_count %}Select all {{ total_count }} {{ module_name }}{% endblocktrans %}
+            </a>
+        </span>
+        <span class="action_span clear"><a href="javascript:;" class="mdi-content-clear">{% trans "Clear selection" %}</a></span>
+        {% endif %}
+    {% endif %}
+  
+</div>
