@@ -95,3 +95,19 @@
     margin-top: 0px;
     padding: 20px;
 }
+
+/*
+  Forms
+*/
+
+.form-group .checkbox label {
+    font-weight: bold !important;
+    font-size: 14px !important;
+    color: rgba(0,0,0,.84) !important;
+}
+
+.form-group .hint {
+    padding-left: 45px;
+    padding-top: 20px;
+    font-size: 12px;
+}
