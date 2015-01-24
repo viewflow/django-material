@@ -109,9 +109,9 @@ class OrderForm(forms.Form):
     company = forms.CharField()
     email = forms.EmailField()
     phone = forms.CharField()
-    interest = forms.ChoiceField(choices=(('D', 'Design'), ('C', 'Development'), ('I', 'Illustration'),
-                                          ('B', 'Branding'), ('V', 'Video')))
-    bugget = forms.ChoiceField(choices=(('S', 'Less than $5000'), ('M', '$5000-$10000'),
+    interest = forms.ChoiceField(choices=((None, 'Interested in'), ('D', 'Design'), ('C', 'Development'),
+                                          ('I', 'Illustration'), ('B', 'Branding'), ('V', 'Video')))
+    bugget = forms.ChoiceField(choices=((None, 'Budget'), ('S', 'Less than $5000'), ('M', '$5000-$10000'),
                                         ('L', '$10000-$20000'), ('XL', 'More than $20000')))
     start_date = forms.DateField()
     finish_date = forms.DateField()
@@ -119,6 +119,19 @@ class OrderForm(forms.Form):
     attachment = forms.FileField()
 
     message = forms.CharField(widget=forms.Textarea)
+
+    template = Template("""
+    {% with form_label_class="sr-only" form_control_class="floating-label" form_with_placeholder=True %}
+    {% form %}
+    {% endform %}
+    {% endwith %}
+    """)
+
+    buttons = Template("""
+        <button class="btn btn-primary pull-right" type="submit">Submit request</button>
+    """)
+
+    title = "Order services"
 
 
 class CheckoutForm(forms.Form):
@@ -132,11 +145,51 @@ class CheckoutForm(forms.Form):
     address = forms.CharField()
     additional_info = forms.CharField(widget=forms.Textarea)
     card_type = forms.ChoiceField(choices=(('V', 'Visa'), ('M', 'MasterCard'), ('P', 'Paypal')))
-    card_holder = forms.CharField()
-    card_number = forms.CharField()
-    card_ccv2 = forms.IntegerField()
+    card_holder = forms.CharField(label="Name on card")
+    card_number = forms.CharField(label="Card number")
+    card_ccv2 = forms.IntegerField(label="CVV2")
     card_exp_month = forms.ChoiceField(choices=((1, 'January'), (2, 'February'), (3, 'March'),
                                                 (4, 'April'), (5, 'May'), (6, 'June'),
                                                 (7, 'July'), (8, 'August'), (9, 'September'),
                                                 (10, 'October'), (11, 'November'), (12, 'December')))
-    card_exp_year = forms.IntegerField()
+    card_exp_year = forms.IntegerField(label="Year")
+
+    template = Template("""
+    {% with form_label_class="sr-only" form_control_class="floating-label" form_with_placeholder=True %}
+    {% form %}
+    {% endform %}
+    {% endwith %}
+    """)
+
+    buttons = Template("""
+        <button class="btn btn-primary pull-right" type="submit">Submit request</button>
+    """)
+
+    title = "Checkout form"
+
+
+class CommentForm(forms.Form):
+    name = forms.CharField()
+    email = forms.EmailField()
+    website = forms.URLField()
+    comment = forms.CharField(widget=forms.Textarea)
+    captcha = forms.CharField(label="Enter characters below")
+
+    template = Template("""
+    {% with form_label_class="sr-only" form_control_class="floating-label" form_with_placeholder=True %}
+    {% form %}
+        {% part form.comment rows %}4{% endpart %}
+        {% part form.captcha append %}
+            <span class="input-group-addon append">
+                <img height="28px" src="http://image.captchas.net?client=demo&random=RandomZufall">
+            </span>
+        {% endpart %}
+    {% endform %}
+    {% endwith %}
+    """)
+
+    buttons = Template("""
+        <button class="btn btn-primary pull-right" type="submit">Add comment</button>
+    """)
+
+    title = "Comment form"
