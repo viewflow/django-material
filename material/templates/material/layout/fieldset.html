@@ -1,0 +1,10 @@
+{% load material_form_internal %}
+<fieldset>
+{% if parent.label %}
+<legend>{{ parent.label }}</legend>
+{% endif %}
+
+{% for element in parent.elements %}
+    {% form_render element %}
+{% endfor %}
+</fieldset>

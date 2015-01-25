@@ -1,5 +1,5 @@
 from django.template import Template
-
+from material import Layout, Row, Fieldset
 import tests.demo as forms
 
 
@@ -37,9 +37,13 @@ class RegistrationForm(forms.Form):
     password_confirm = forms.CharField(widget=forms.PasswordInput, label="Confirm password")
     first_name = forms.CharField(required=False)
     last_name = forms.CharField(required=False)
-    gender = forms.ChoiceField(choices=(('F', 'Female'), ('M', 'Male'), ('O', 'Other')))
+    gender = forms.ChoiceField(choices=((None, 'Gender'), ('F', 'Female'), ('M', 'Male'), ('O', 'Other')))
     receive_news = forms.BooleanField(required=False, label='I want to receive news and special offers')
     agree_toc = forms.BooleanField(required=True, label='I agree with the Terms and Conditions')
+
+    layout = Layout('username', 'email', 'password', 'password_confirm',
+                    Row('first_name', 'last_name'),
+                    'gender', 'receive_news', 'agree_toc')
 
     template = Template("""
     {% with form_label_class="sr-only" form_control_class="floating-label" form_with_placeholder=True %}
@@ -111,18 +115,36 @@ class OrderForm(forms.Form):
     phone = forms.CharField()
     interest = forms.ChoiceField(choices=((None, 'Interested in'), ('D', 'Design'), ('C', 'Development'),
                                           ('I', 'Illustration'), ('B', 'Branding'), ('V', 'Video')))
-    bugget = forms.ChoiceField(choices=((None, 'Budget'), ('S', 'Less than $5000'), ('M', '$5000-$10000'),
+    budget = forms.ChoiceField(choices=((None, 'Budget'), ('S', 'Less than $5000'), ('M', '$5000-$10000'),
                                         ('L', '$10000-$20000'), ('XL', 'More than $20000')))
-    start_date = forms.DateField()
-    finish_date = forms.DateField()
+    start_date = forms.DateField(label="Expected start date")
+    finish_date = forms.DateField(label="Expected finish date")
 
     attachment = forms.FileField()
 
     message = forms.CharField(widget=forms.Textarea)
 
+    layout = Layout('name', 'company', 'email', 'phone',
+                    Row('interest', 'budget'),
+                    Row('start_date', 'finish_date'),
+                    'attachment', 'message')
+
     template = Template("""
     {% with form_label_class="sr-only" form_control_class="floating-label" form_with_placeholder=True %}
     {% form %}
+        {% part form.name append %}
+            <span class="input-group-addon append"><i class="glyphicon glyphicon-user"></i></span>
+        {% endpart %}
+        {% part form.company append %}
+            <span class="input-group-addon append"><i class="glyphicon glyphicon-briefcase"></i></span>
+        {% endpart %}
+        {% part form.email append %}
+            <span class="input-group-addon append"><i class="glyphicon glyphicon-envelope"></i></span>
+        {% endpart %}
+        {% part form.phone append %}
+            <span class="input-group-addon append"><i class="glyphicon glyphicon-phone-alt"></i></span>
+        {% endpart %}
+        {% part form.message rows %}4{% endpart %}
     {% endform %}
     {% endwith %}
     """)

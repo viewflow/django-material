@@ -7,7 +7,7 @@
             {% part field add_group_class %}{% endpart %}
             {% endpart %}"{% endtagattrs %}>
     {% part field label %}
-    <label for="{{ bound_field.id_for_label }}" class="control-label {% part field add_label_class %}{% endpart %}">{{ bound_field.label }}</label>
+    <label for="{{ bound_field.id_for_label }}" class="control-label {% part field add_label_class %}{{ form_label_class }}{% endpart %}">{{ bound_field.label }}</label>
     {% endpart %}
     <div class="input-group" style="width:100%">
         {% part field prepend %}{% endpart %}{% part field control %}

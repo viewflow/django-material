@@ -1,0 +1,44 @@
+{% load material_form_internal %}
+
+<fieldset>
+{% if parent.label %}
+<legend>{{ parent.label }}</legend>
+{% endif %}
+
+<div data-formset-prefix="{{ inline.prefix }}" data-viewform-control="formset">
+    <table class="table">
+        <thead>
+            <tr>
+                {% for field in inline.empty_form.visible_fields %}
+                    <td>
+                        <label>{% if field.name != 'DELETE' %}{{ field.label }}{% endif %}</label>
+                    </td>
+                {% endfor %}
+        </tr>
+        </thead>
+        {% with label_cls='sr-only' %}
+        <tbody data-formset-body>
+            {% for form in inline.forms %}
+            <tr data-formset-form>
+                {% part form hidden %}
+                    {% for hidden in form.hidden_fields %}
+                        {{ hidden }}
+                    {% endfor %}
+                {% endvpart %}
+                {% part form visible %}
+                {% for bound_field in form.visible_fields %}
+                <td>
+                    {% part bound_field.field %}
+                        {% viewfield bound_field %}
+                    {% endpart %}
+                </td>
+                {% endfor %}
+                {% endpart %}
+            </tr>
+            {% endfor %}
+        </tbody>
+        {% endwith %}
+    </table>
+    {{ inline.management_form }}
+</div>
+</fieldset>
