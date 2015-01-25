@@ -12,7 +12,7 @@
     <div class="input-group" style="width:100%">
         {% part field prepend %}{% endpart %}{% part field control %}
         <textarea {% tagattrs %}
-                  class="form-control {% part field add_control_class %}{% endpart %}"
+                  class="form-control {% part field add_control_class %}{{ form_control_class }}{% endpart %}"
                   name="{{ bound_field.html_name }}"
                   id="id_{{ bound_field.html_name }}"
                   {% if form_with_placeholder %}placeholder="{{ bound_field.label }}"{% endif %}

@@ -120,7 +120,7 @@ class OrderForm(forms.Form):
     start_date = forms.DateField(label="Expected start date")
     finish_date = forms.DateField(label="Expected finish date")
 
-    attachment = forms.FileField()
+    attachment = forms.FileField(label="Include some file...")
 
     message = forms.CharField(widget=forms.Textarea)
 

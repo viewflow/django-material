@@ -11,11 +11,13 @@
     {% endpart %}
     <div class="input-group" style="width:100%">
         {% part field prepend %}{% endpart %}{% part field control %}
-        <input {% tagattrs %}
-               type="{{ field.widget.input_type }}"
+        <input type="text"
+               readonly=""
                class="form-control {% part field add_control_class %}{{ form_control_class }}{% endpart %}"
+               {% if form_with_placeholder %}placeholder="{{ bound_field.label }}"{% endif %}>
+        <input {% tagattrs %}
+               type="file"
                name="{{ bound_field.html_name }}"
-               {% if form_with_placeholder %}placeholder="{{ bound_field.label }}"{% endif %}
                id="id_{{ bound_field.html_name }}"{% endtagattrs %}{% if bound_field.value %} value="{{ bound_field.value }}"{% endif %}>
         {% endpart %}{% part field append %}{% endpart %}
     </div>
