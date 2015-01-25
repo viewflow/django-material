@@ -197,10 +197,22 @@ class CommentForm(forms.Form):
     comment = forms.CharField(widget=forms.Textarea)
     captcha = forms.CharField(label="Enter characters below")
 
+    layout = Layout(Row('name', 'email'),
+                     'website', 'comment', 'captcha')
+
     template = Template("""
     {% with form_label_class="sr-only" form_control_class="floating-label" form_with_placeholder=True %}
     {% form %}
         {% part form.comment rows %}4{% endpart %}
+        {% part form.name prepend %}
+            <span class="input-group-addon prepend"><i class="glyphicon glyphicon-user"></i></span>
+        {% endpart %}
+        {% part form.email prepend %}
+            <span class="input-group-addon prepend"><i class="glyphicon glyphicon-envelope"></i></span>
+        {% endpart %}
+        {% part form.website prepend %}
+            <span class="input-group-addon prepend"><i class="glyphicon glyphicon-briefcase"></i></span>
+        {% endpart %}
         {% part form.captcha append %}
             <span class="input-group-addon append">
                 <img height="28px" src="http://image.captchas.net?client=demo&random=RandomZufall">
