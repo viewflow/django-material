@@ -25,9 +25,10 @@
           padding-right: 0;
       }
     </style>
+    {% block extrahead %}{% endblock %}
   </head>
   <body>
-      <div class="container">
+      <div class="{% block container_class %}container{% endblock %}">
           {% block content %}{% endblock %}
       </div>
 

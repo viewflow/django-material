@@ -6,9 +6,7 @@ from . import forms
 
 
 urlpatterns = [
-    # Examples:
-    # url(r'^$', 'tests.views.home', name='home'),
-    # url(r'^blog/', include('blog.urls')),
+    url(r'^$', generic.TemplateView.as_view(template_name="index.html")),
     url(r'^demo/login/$', generic.FormView.as_view(
         form_class=forms.LoginForm, success_url='/demo/login/', template_name="demo.html")),
     url(r'^demo/registration/$', generic.FormView.as_view(
