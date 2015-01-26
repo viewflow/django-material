@@ -1,4 +1,6 @@
-{% load static %}
+{% load static i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+{% get_language_info for LANGUAGE_CODE as lang %}
 <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.2.1/js/material.min.js"></script>
@@ -7,4 +9,11 @@
 <script src="{% static 'material/js/snackbar.min.js' %}"></script>
 <script type="text/javascript">
     $.material.init();
+    $('[data-form-control="date"]').each(function() {
+        var input = $(this);
+        input.datetimepicker({
+            format: input.data('date-format'),
+            timepicker:false,
+            lang: '{{ lang.code }}'});
+    });
 </script>

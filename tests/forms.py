@@ -1,5 +1,5 @@
 from django.template import Template
-from material import Layout, Row, Fieldset
+from material import Layout, Row
 import tests.demo as forms
 
 
