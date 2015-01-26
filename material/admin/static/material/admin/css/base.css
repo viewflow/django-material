@@ -94,11 +94,33 @@
 .addlink {
     margin-top: 0px;
     padding: 20px;
+    width:98%
 }
 
 .action_span {
     padding-left: 20px;
 }
+
+.formbtn.btn-group {
+    width: 98%;
+    margin-top: 0px;
+}
+
+.formbtn.btn-group .dropdown-toggle {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding: 20px;
+}
+
+.formbtn.btn-group a:not(.dropdown-toggle) {
+    padding: 20px;
+    width: calc(100% - 48px);
+}
+
+.formbtn .dropdown-menu {
+    width: 98%
+}
+
 
 /*
   Forms
