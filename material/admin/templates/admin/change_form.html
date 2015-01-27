@@ -4,6 +4,15 @@
 {% block extrahead %}{{ block.super }}
 <script type="text/javascript" src="{% url 'admin:jsi18n' %}"></script>
 {{ media }}
+<script type="text/javascript">
+(function($) {
+    $(document).ready(function($) {
+        $("#save_btn").click(function() {
+            $("#{{ opts.model_name }}_form").submit();
+        });        
+    });
+})(django.jQuery);
+</script>
 {% endblock %}
 
 {% block coltype %}{% endblock %}
@@ -27,6 +36,7 @@
 
 {% block content %}
 <div id="content-main" class="row">
+    <form {% if has_file_field %}enctype="multipart/form-data" {% endif %}action="{{ form_url }}" method="post" id="{{ opts.model_name }}_form" novalidate>{% csrf_token %}{% block form_top %}{% endblock %}
     <div class="{% if is_popup %}col-xs-12{% else %}col-lg-9{% endif %}">
         <div class="panel">
             <div class="panel-body" style="padding-left:35px;padding-right:35px">
@@ -39,9 +49,7 @@
                     {% endblock %}
                 </div>
             
-                <h2>{{ title }}</h2><br/>
-                <form {% if has_file_field %}enctype="multipart/form-data" {% endif %}action="{{ form_url }}" method="post" id="{{ opts.model_name }}_form" novalidate>{% csrf_token %}{% block form_top %}{% endblock %}
-                    
+                <h2>{{ title }}</h2><br/>                    
                     <div>
                         {% if is_popup %}<input type="hidden" name="{{ is_popup_var }}" value="1" />{% endif %}
                         {% if to_field %}<input type="hidden" name="{{ to_field_var }}" value="{{ to_field }}" />{% endif %}
@@ -92,32 +100,41 @@
             <div class="panel-footer">
                 <div class="pull-right">
                     <button type="submit" name="_continue" 
-                     class="btn btn-default mdi-content-save save_btn">
+                     class="btn btn-default mdi-content-save">
                          {% trans "Save and continue editing" %}
                     </button> 
 
                     <button type="submit" name="_addanother" 
-                     class="btn btn-default mdi-content-save save_btn">
+                     class="btn btn-default mdi-content-save">
                          {% trans "Save and add another" %}
                     </button> 
                     
                     <button type="submit" name="_save" 
-                     class="btn btn-primary mdi-content-save save_btn">
+                     class="btn btn-primary mdi-content-save">
                          {% trans "Save" %}
                     </button>                   
                 </div>
                 <div class="clearfix"></div>
-            </div>
-            </form>
+            </div>            
         </div>
     </div>
     <div class="{% if is_popup %}hidden-lg{% else %}col-lg-3{% endif %}">
         <div class="btn-group btn-flat formbtn">
-            <a href="javascript:void(0)" class="btn btn-primary"><i class="mdi-content-save"></i> Save</a>
+            <a href="javascript:void(0)" class="btn btn-primary" id="save_btn"><i class="mdi-content-save"></i> Save</a>
              <a href="bootstrap-elements.html" data-target="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
             <ul class="dropdown-menu">
-                <li><a href="javascript:void(0)"><i class="mdi-content-forward"></i> Save and add another</a></li>
-                <li><a href="javascript:void(0)"><i class="mdi-content-save"></i>  Save and continue</a></li>
+                <li>
+                    <button type="submit" name="_addanother" 
+                     class="btn btn-default mdi-content-forward">
+                         {% trans "Save and add another" %}
+                    </button> 
+                </li>
+                <li>
+                    <button type="submit" name="_continue" 
+                     class="btn btn-default mdi-content-save">
+                         {% trans "Save and continue" %}
+                    </button> 
+                </li>
             </ul>
         </div>
         <div class="panel panel-primary" style="width:98%">
@@ -145,5 +162,6 @@
             </div>
         </div>
     </div>
+    </form>
 </div>
 {% endblock %}
