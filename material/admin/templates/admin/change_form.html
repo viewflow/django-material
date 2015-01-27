@@ -33,22 +33,7 @@
                 <div class="pull-right" style="position:relative;top:-10px">
                     {% block object-tools %}
                     {% if change %}{% if not is_popup %}
-                    {% block object-tools-items %}
-                    <!--
-                        {% url opts|admin_urlname:'history' original.pk|admin_urlquote as history_url %}
-                        <a href="{% add_preserved_filters history_url %}"
-                           class="btn btn-primary btn-fab mdi-action-history historylink"
-                           alt="{% trans 'History' %}">
-                        </a>
-                        -->
-                    {% if has_absolute_url %}
-                    &nbsp;&nbsp;
-                    <a href="{{ absolute_url }}"
-                       class="btn btn-primary btn-fab mdi-communication-call-made historylink"
-                       class="viewsitelink"
-                       alt="{% trans 'View on site' %}">
-                    </a>
-                    {% endif%}
+                    {% block object-tools-items %}                   
                     {% endblock %}
                     {% endif %}{% endif %}
                     {% endblock %}
@@ -135,21 +120,25 @@
         <div class="panel panel-primary" style="width:98%">
             <div class="panel-heading">Actions</div>
             <div class="panel-body">
-        <a href="{% add_preserved_filters add_url is_popup to_field %}"
-           class="btn btn-default btn-flat mdi-communication-call-made col-xs-12 addlink"
-           alt="">                        
-            View on site
-        </a>
-        <a href="{% add_preserved_filters add_url is_popup to_field %}"
-           class="btn btn-default btn-flat mdi-action-history col-xs-12 addlink"
-           alt="">                        
-            History
-        </a>
-        <a href="{% add_preserved_filters add_url is_popup to_field %}"
-           class="btn btn-danger btn-flat mdi-action-delete col-xs-12 addlink"
-           alt="">                        
-            Delete
-        </a>
+            {% if has_absolute_url %}
+                <a href="{{ absolute_url }}"
+                    class="btn btn-default btn-flat mdi-communication-call-made col-xs-12 addLink"              
+                    alt="{% trans 'View on site' %}">
+                    View on Site
+                </a>
+            {% endif %}
+            {% url opts|admin_urlname:'history' original.pk|admin_urlquote as history_url %}
+            <a href="{% add_preserved_filters history_url %}"
+               class="btn btn-default btn-flat mdi-action-history col-xs-12 addlink"
+               alt="">                        
+                History
+            </a>
+            {% url opts|admin_urlname:'delete' original.pk|admin_urlquote as delete_url %}
+            <a href="{% add_preserved_filters delete_url %}"
+               class="btn btn-danger btn-flat mdi-action-delete col-xs-12 addlink"
+               alt="">                        
+                Delete
+            </a>
             </div>
         </div>
     </div>
