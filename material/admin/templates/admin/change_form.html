@@ -87,25 +87,28 @@
                         {# JavaScript for prepopulated fields #}
                         {% prepopulated_fields_js %}
                     </div>
-                </form>
+                
             </div>
             <div class="panel-footer">
                 <div class="pull-right">
-                    <a href="{% add_preserved_filters add_url is_popup to_field %}"
-                       class="btn btn-default mdi-content-save" alt="">                        
-                        Save and continue editing
-                    </a>
-                    <a href="{% add_preserved_filters add_url is_popup to_field %}"
-                       class="btn btn-default mdi-content-save" alt="">                        
-                        Save and add another
-                    </a>
-                    <a href="{% add_preserved_filters add_url is_popup to_field %}"
-                       class="btn btn-primary mdi-content-save" alt="">                        
-                        Save
-                    </a>
+                    <button type="submit" name="_continue" 
+                     class="btn btn-default mdi-content-save save_btn">
+                         {% trans "Save and continue editing" %}
+                    </button> 
+
+                    <button type="submit" name="_addanother" 
+                     class="btn btn-default mdi-content-save save_btn">
+                         {% trans "Save and add another" %}
+                    </button> 
+                    
+                    <button type="submit" name="_save" 
+                     class="btn btn-primary mdi-content-save save_btn">
+                         {% trans "Save" %}
+                    </button>                   
                 </div>
                 <div class="clearfix"></div>
             </div>
+            </form>
         </div>
     </div>
     <div class="{% if is_popup %}hidden-lg{% else %}col-lg-3{% endif %}">
