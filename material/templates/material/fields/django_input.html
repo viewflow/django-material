@@ -17,13 +17,15 @@
                name="{{ bound_field.html_name }}"
                {% if form_with_placeholder %}placeholder="{{ bound_field.label }}"{% endif %}
                id="id_{{ bound_field.html_name }}"{% endtagattrs %}{% if bound_field.value %} value="{{ bound_field.value }}"{% endif %}>
-        {% endpart %}{% part field append %}{% endpart %}
+        {% endpart %}
+        {% part field errors %}
+            {% if bound_field.errors %}
+                {% include  'material/field_errors.html' %}
+            {% endif %}
+        {% endpart %}
+        {% part field append %}{% endpart %}
     </div>
-    {% part field errors %}
-        {% if bound_field.errors %}
-            {% include  'material/field_errors.html' %}
-        {% endif %}
-    {% endpart %}{% part field help_text %}
+    {% part field help_text %}
     {% if field.help_text %}
         <span class="help-block">{{ bound_field.help_text }}</span>
     {% endif %}

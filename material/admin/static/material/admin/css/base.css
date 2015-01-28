@@ -137,3 +137,7 @@
     padding-top: 20px;
     font-size: 12px;
 }
+
+.has-error .input-group-addon{     
+    padding-top: 0;
+}
