@@ -27,6 +27,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'debug_toolbar',
+    'template_debug',
     'autofixture',
     # test admin apps
     'django.contrib.flatpages',

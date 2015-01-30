@@ -9,7 +9,7 @@
     $(document).ready(function($) {
         $("#save_btn").click(function() {
             $("#{{ opts.model_name }}_form").submit();
-        });        
+        });
     });
 })(django.jQuery);
 </script>
@@ -40,17 +40,8 @@
     <div class="{% if is_popup %}col-xs-12{% else %}col-lg-9{% endif %}">
         <div class="panel">
             <div class="panel-body" style="padding-left:35px;padding-right:35px">
-                <div class="pull-right" style="position:relative;top:-10px">
-                    {% block object-tools %}
-                    {% if change %}{% if not is_popup %}
-                    {% block object-tools-items %}                   
-                    {% endblock %}
-                    {% endif %}{% endif %}
-                    {% endblock %}
-                </div>
-            
-                <h2>{{ title }}</h2><br/>                    
-                    <div>
+                <h2 style="position:relative;top:-10px;">{{ title }}</h2><br/>
+                <div>
                         {% if is_popup %}<input type="hidden" name="{{ is_popup_var }}" value="1" />{% endif %}
                         {% if to_field %}<input type="hidden" name="{{ to_field_var }}" value="{{ to_field }}" />{% endif %}
                         {% if errors %}
@@ -59,7 +50,7 @@
                         </p>
                         {{ adminform.form.non_field_errors }}
                         {% endif %}
-                        
+
                         {% form form=adminform.form %}
                         <!--
                             {% block field_sets %}
@@ -67,21 +58,21 @@
                             {% include "admin/includes/fieldset.html" %}
                             {% endfor %}
                             {% endblock %}
-                            
+
                             {% block after_field_sets %}{% endblock %}
-                            
+
                             {% block inline_field_sets %}
                             {% for inline_admin_formset in inline_admin_formsets %}
                             {% include inline_admin_formset.opts.template %}
                             {% endfor %}
                             {% endblock %}
-                            
+
                             {% block after_related_objects %}{% endblock %}
-                            
+
                             {% block submit_buttons_bottom %}{% submit_row %}{% endblock %}
                           -->
                         {% endform %}
-                        
+
                         {% if adminform and add %}
                         <script type="text/javascript">
                           (function($) {
@@ -95,27 +86,27 @@
                         {# JavaScript for prepopulated fields #}
                         {% prepopulated_fields_js %}
                     </div>
-                
+
             </div>
             <div class="panel-footer">
                 <div class="pull-right">
-                    <button type="submit" name="_continue" 
+                    <button type="submit" name="_continue"
                      class="btn btn-default mdi-content-save">
                          {% trans "Save and continue editing" %}
-                    </button> 
+                    </button>
 
-                    <button type="submit" name="_addanother" 
+                    <button type="submit" name="_addanother"
                      class="btn btn-default mdi-content-save">
                          {% trans "Save and add another" %}
-                    </button> 
-                    
-                    <button type="submit" name="_save" 
+                    </button>
+
+                    <button type="submit" name="_save"
                      class="btn btn-primary mdi-content-save">
                          {% trans "Save" %}
-                    </button>                   
+                    </button>
                 </div>
                 <div class="clearfix"></div>
-            </div>            
+            </div>
         </div>
     </div>
     <div class="{% if is_popup %}hidden-lg{% else %}col-lg-3{% endif %}">
@@ -124,16 +115,16 @@
              <a href="bootstrap-elements.html" data-target="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
             <ul class="dropdown-menu">
                 <li>
-                    <button type="submit" name="_addanother" 
+                    <button type="submit" name="_addanother"
                      class="btn btn-default mdi-content-forward">
                          {% trans "Save and add another" %}
-                    </button> 
+                    </button>
                 </li>
                 <li>
-                    <button type="submit" name="_continue" 
+                    <button type="submit" name="_continue"
                      class="btn btn-default mdi-content-save">
                          {% trans "Save and continue" %}
-                    </button> 
+                    </button>
                 </li>
             </ul>
         </div>
@@ -142,7 +133,7 @@
             <div class="panel-body">
             {% if has_absolute_url %}
                 <a href="{{ absolute_url }}"
-                    class="btn btn-default btn-flat mdi-communication-call-made col-xs-12 addLink"              
+                    class="btn btn-default btn-flat mdi-communication-call-made col-xs-12 addLink"
                     alt="{% trans 'View on site' %}">
                     View on Site
                 </a>
@@ -150,13 +141,21 @@
             {% url opts|admin_urlname:'history' original.pk|admin_urlquote as history_url %}
             <a href="{% add_preserved_filters history_url %}"
                class="btn btn-default btn-flat mdi-action-history col-xs-12 addlink"
-               alt="">                        
+               alt="">
                 History
             </a>
+
+            {% block object-tools %}
+                {% if change %}{% if not is_popup %}
+                    {% block object-tools-items %}
+                    {% endblock %}
+                {% endif %}{% endif %}
+            {% endblock %}
+
             {% url opts|admin_urlname:'delete' original.pk|admin_urlquote as delete_url %}
             <a href="{% add_preserved_filters delete_url %}"
                class="btn btn-danger btn-flat mdi-action-delete col-xs-12 addlink"
-               alt="">                        
+               alt="">
                 Delete
             </a>
             </div>

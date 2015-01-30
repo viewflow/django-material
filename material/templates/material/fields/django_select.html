@@ -1,4 +1,4 @@
-{% load material_form material_form_internal %}
+{% load material_form material_form_internal debug_tags %}
 <div {% tagattrs %}
      class="{% part field group_class %}
             form-group
@@ -16,7 +16,15 @@
                 name="{{ bound_field.html_name }}"
                 id="id_{{ bound_field.html_name }}"{% endtagattrs %}>
             {% for value, choice in field.widget.choices %}
-            <option value="{{ value }}" {% if value|force_text == bound_field.value|force_text %}selected="selected"{% endif %}>{{ choice }}</option>
+            <option {% if value|force_text == bound_field.value|force_text %}selected="selected"{% endif %}
+                    {% if value == None or value == '' %}style="display:none"{% endif %}
+                    value="{{ value|default_if_none:"aa" }}" >
+                {% if value == None or value == '' %}
+                    {{ form_select_empty_label|default:choice }}
+                {% else %}
+                    {{ choice }}
+                {% endif %}
+            </option>
             {% endfor %}
         </select>
         {% endpart %}{% part field append %}{% endpart %}

@@ -25,20 +25,20 @@
     $(document).ready(function($) {
         {% if action_form %}{% if actions_on_top or actions_on_bottom %}
             $("tr input.action-select").actions();
-        {% endif %}{% endif %}        
-        
+        {% endif %}{% endif %}
+
         $("#changelist-search-button").click(function() {
             $("#changelist-search").submit();
         });
-        
+
         $(".admin_filter").change(function() {
 		    window.location.href = $(this).val();
 		});
-		
+
 		$(".date_hierarchy").change(function() {
 		    window.location.href = $(this).val();
 		});
-		
+
     });
 })(django.jQuery);
 </script>
@@ -70,17 +70,17 @@
             <div class="col-xs-12">
                 <div class="">
             {% block object-tools %}
-            {% if has_add_permission %}            
-                {% block object-tools-items %}                
+            {% if has_add_permission %}
+                {% block object-tools-items %}
                     {% url cl.opts|admin_urlname:'add' as add_url %}
                     <a href="{% add_preserved_filters add_url is_popup to_field %}"
                        class="btn btn-primary mdi-content-add col-xs-12 addlink"
-                       alt="">                        
+                       alt="">
                         {% blocktrans with cl.opts.verbose_name as name %}Add {{ name }}{% endblocktrans %}
                     </a>
                 {% endblock %}
             {% endif %}
-            {% endblock %}                   
+            {% endblock %}
                 </div>
             </div>
 
@@ -105,16 +105,45 @@
                     </div>
                 </div>
             </div>
+            <div class="col-xs-12">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        {% trans 'Actions' %}
+                    </div>
+                    <div class="panel-body">
+                        {% with form_label_class="sr-only" form_control_class="floating-label" form_with_placeholder=True %}
+                            {% with form_select_empty_label='Select action...' %}
+                                {% form form=action_form %}
+                                {% endform %}
+                            {% endwith %}
+                        {% endwith %}
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
     <div class="col-lg-9 col-lg-pull-3">
-       <form id="changelist-form" action="" method="post"{% if cl.formset.is_multipart %} enctype="multipart/form-data"{% endif %} novalidate>{% csrf_token %}
-       
-            {% if action_form and actions_on_top and cl.full_result_count %}
-                <div class="well">{% admin_actions %}</div>
-            {% endif %}
-                          
+        <div class="pull-right">
+            <div class="dropdown">
+                <button class="btn btn-default btn-flat btn-xs dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+                    <i class="glyphicon glyphicon-option-vertical"></i>
+                </button>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
+                </ul>
+            </div>
+        </div>
+        <form id="changelist-form" action="" method="post"{% if cl.formset.is_multipart %} enctype="multipart/form-data"{% endif %} novalidate>{% csrf_token %}
+            
+            <!--
+                {% if action_form and actions_on_top and cl.full_result_count %}
+                <div class="well">{# admin_actions #}</div>
+                {% endif %} -->
+            
             <div class="well">
                 {% if cl.formset.errors %}
                 <p class="errornote">
@@ -122,22 +151,22 @@
                 </p>
                 {{ cl.formset.non_form_errors }}
                 {% endif %}
-            
-                <div class="module{% if cl.has_filters %} filtered{% endif %}" id="changelist">                
+                
+                <div class="module{% if cl.has_filters %} filtered{% endif %}" id="changelist">
                     {% if cl.formset %}
                     <div>{{ cl.formset.management_form }}</div>
-                    {% endif %}                    
+                    {% endif %}
                     
-                    {% block result_list %}                        
-                        {% result_list cl %}                                            
-                    {% endblock %}                
-
-                    {% block pagination %}{% pagination cl %}{% endblock %}                
-                </div>s        
-            </div> <!-- /.well -->
+                    {% block result_list %}
+                    {% result_list cl %}
+                    {% endblock %}
+                    
+                    {% block pagination %}{% pagination cl %}{% endblock %}
+                </div>
+            </div>
             
             {% if action_form and actions_on_bottom and cl.full_result_count %}
-                <div class="well">{% admin_actions %}</div>
+            <div class="well">{% admin_actions %}</div>
             {% endif %}
             
         </form>
