@@ -49,15 +49,13 @@
 
 {% if not is_popup %}
 {% block breadcrumbs %}
-<div class="row">
-    <div class="col-md-12 col-lg-12 hidden-sm hidden-xs breadcrumbs">
+    <div class="col-md-12 col-lg-12 visible-lg breadcrumbs">
         <ul class="breadcrumb well">
             <li><a href="{% url 'admin:index' %}">{% trans 'Home' %}</a></li>
             <li><a href="{% url 'admin:app_list' app_label=cl.opts.app_label %}">{{ cl.opts.app_config.verbose_name }}</a></li>
             <li class="active">{{ cl.opts.verbose_name_plural|capfirst }}</li>
         </ul>
     </div>
-</div>
 {% endblock %}
 {% endif %}
 

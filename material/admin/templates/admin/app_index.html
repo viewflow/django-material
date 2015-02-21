@@ -2,17 +2,17 @@
 {% load i18n %}
 
 {% block bodyclass %}{{ block.super }} app-{{ app_label }}{% endblock %}
+{% block navclass %}{% endblock %}
 
 {% if not is_popup %}
 {% block breadcrumbs %}
-<div class="row">
-    <div class="col-md-12 col-lg-12 hidden-sm hidden-xs breadcrumbs">
-        <ul class="breadcrumb well">
-            <li><a href="{% url 'admin:index' %}">{% trans 'Home' %}</a></li>
-            {% for app in app_list %}
-            <li class="active">{{ app.name }}</li>
-            {% endfor %}
-    </div>
+<div class="container-fluid visible-lg breadcrumbs">
+    <ul class="breadcrumb well">
+        <li><a href="{% url 'admin:index' %}">{% trans 'Home' %}</a></li>
+        {% for app in app_list %}
+        <li class="active">{{ app.name }}</li>
+        {% endfor %}
+    </ul>
 </div>
 {% endblock %}
 {% endif %}

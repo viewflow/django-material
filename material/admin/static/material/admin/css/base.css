@@ -6,6 +6,24 @@
     margin-right: 0px; /* bootcards-desktop.css:6 */
 }
 
+/* 
+  Breadcrumbs 
+*/
+.breadcrumbs {
+    margin-top: -20px;
+    margin-left: 0px;
+    margin-right: 0px;
+    padding-left:0px;
+    padding-right:0px;
+}
+
+.breadcrumbs>.row {
+    margin-left: -15px;
+    margin-right: 0px;
+    padding-left:0px;
+    padding-right:0px;
+}
+
 /*
   Snackbar
 */
