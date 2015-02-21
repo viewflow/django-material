@@ -1,4 +1,12 @@
 /*
+  Fixes
+*/
+
+.navbar-nav.navbar-right:last-child {
+    margin-right: 0px; /* bootcards-desktop.css:6 */
+}
+
+/*
   Snackbar
 */
 .snackbar.alert-success {
