@@ -9,22 +9,16 @@ class LoginForm(forms.Form):
     keep_logged = forms.BooleanField(required=False, label="Keep me logged in")
 
     template = Template("""
-    {% with form_label_class="sr-only" form_control_class="floating-label" form_with_placeholder=True %}
     {% form %}
-        {% part form.email prepend %}
-            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-        {% endpart %}
-        {% part form.password prepend %}
-            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-        {% endpart %}
-        {% part form.keep_logged group_class %}form-group pull-right{% endpart %}
+        {% part form.email prefix %}<i class="mdi-communication-email prefix"></i>{% endpart %}
+        {% part form.password prefix %}<i class="mdi-action-lock prefix"></i>{% endpart %}
+        {% part form.keep_logged add_group_class %}right-align{% endpart %}
     {% endform %}
-    {% endwith %}
     """)
 
     buttons = Template("""
-        <button class="btn btn-primary pull-right" type="submit">Login</button>
-        <button class="btn btn-default pull-right">Register</button>
+        <button class="waves-effect waves-teal btn-flat">Register</button>
+        <button class="waves-effect waves-light btn" type="submit">Login</button>
     """)
 
     title = "Login form"

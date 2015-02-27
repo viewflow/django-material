@@ -1,19 +1,32 @@
 {% load static i18n %}
 {% get_current_language as LANGUAGE_CODE %}
 {% get_language_info for LANGUAGE_CODE as lang %}
-<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.2.1/js/material.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.2.1/js/ripples.min.js"></script>
-<script src="{% static 'material/js/jquery.datetimepicker.js' %}"></script>
-<script src="{% static 'material/js/snackbar.min.js' %}"></script>
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="{% static 'material/js/materialize.js' %}"></script>
 <script type="text/javascript">
-    $.material.init();
-    $('[data-form-control="date"]').each(function() {
-        var input = $(this);
-        input.datetimepicker({
-            format: input.data('date-format'),
-            timepicker:false,
-            lang: '{{ lang.code }}'});
+    $(function() {
+        if($('input[type=password]').length) {
+            /*
+               In chrome, there is no way to get to know is autofill
+               fills the password field until user is interacted. Assume
+               that it is
+            */
+            function autofix() {
+                $('input[type=password]').addClass('active').addClass('valid');
+                $('input[type=password]').next('label').addClass('active').addClass('valid');
+                $('input[type=password]').prev('i').addClass('active');
+                userInteracted();
+            }
+
+            function userInteracted() {
+                $('body').off('input propertychange', 'input[type=text]', autofix);
+                $('body').off('input propertychange', 'input[type=email]', autofix);
+                $('body,html').unbind("scroll mousedown DOMMouseScroll mousewheel keyup", userInteracted);
+            }
+
+            $('body').on('input propertychange', 'input[type=text]', autofix);
+            $('body').on('input propertychange', 'input[type=email]', autofix);
+            $("body,html").bind("scroll mousedown DOMMouseScroll mousewheel keyup", userInteracted);
+        }
     });
 </script>

@@ -9,28 +9,14 @@
     {% include 'material/includes/material_css.html' %}
 
     <style type="text/css">
-      .panel-heading h1 {
-          font-size: 22px;
-          padding-top: 15px;
-          padding-bottom: 15px;
-          padding-left: 15px;
-      }
-      form .panel-body {
-          padding:35px 45px 15px 45px;
-      }
-      .input-group-addon.prepend {
-          padding-left: 0;
-      }
-      .input-group-addon.append {
-          padding-right: 0;          
-      }
-      .has-error .input-group-addon{     
-         padding-top: 0;
+      html, body {
+          background: #eee;
+          height: 100%;
       }
     </style>
     {% block extrahead %}{% endblock %}
   </head>
-  <body>
+  <body class="valign-wrapper">
       <div class="{% block container_class %}container{% endblock %}">
           {% block content %}{% endblock %}
       </div>

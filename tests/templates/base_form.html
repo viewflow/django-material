@@ -1,22 +1,23 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="{% block formclass %}col-xs-12 col-sm-8 col-md-6 col-lg-5{% endblock %} center-block" style="float:none; margin-top:60px">
-    <div class="panel panel-primary">
-        <div class="panel-heading">
-            <h1 class="panel-title">{% block formtitle %}Form{% endblock %}</h1>
-        </div>
-        <form method="POST">
-            {% csrf_token %}
-            <div class="panel-body">
-                {% block formbody %}{% endblock %}
-            </div>
-            <div class="panel-footer">
-                <div class="btn-toolbar">
-                    {% block formbuttons %}<button class="btn btn-primary pull-right" type="submit">Submit</button>{% endblock %}
+<div class="row valign">
+<div class="{% block formclass %}col s12 m8 offset-m2 l6 offset-l3{% endblock %}">
+    <div class="card">
+        <div class="card-content">
+            <span class="card-title grey-text text-darken-2">{% block formtitle %}Form{% endblock %}</span>
+            <form method="POST">
+                {% csrf_token %}
+                <div class="panel-body">
+                    {% block formbody %}{% endblock %}
                 </div>
-            </div>
-        </form>
+                <div class="card-action">
+                    <div class="right">
+                        {% block formbuttons %}<button class="btn btn-primary right" type="submit">Submit</button>{% endblock %}
+                    </div>
+                </div>
+            </form>
     </div>
+</div>
 </div>
 {% endblock %}

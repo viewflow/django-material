@@ -1,5 +1,25 @@
 {% load material_form material_form_internal %}
 <div {% tagattrs %}
+     class="{% part field group_class %}checkbox-field col s12
+            {% if field.required%}required{% endif %}
+            {% if bound_field.errors %}has-error{% endif %}
+            {% part field add_group_class %}{% endpart %}
+            {% endpart %}"{% endtagattrs %}>
+    {% part field prefix %}{% endpart %}{% part field control %}
+    <input type="checkbox"
+           name="{{ bound_field.html_name }}"
+           id="id_{{ bound_field.html_name }}"
+           {% if bound_field.value %}checked{% endif %}>
+    {% endpart %}{% part field label %}
+    <label for="{{ bound_field.id_for_label }}" class="control-label {% part field add_label_class %}{% endpart %}">{{ bound_field.label }}</label>
+    {% endpart %}{% part field help_text %}
+    {% if field.help_text %}
+    <span class="help-block">{{ bound_field.help_text }}</span>
+    {% endif %}
+    {% endpart %}{{ hidden_initial }}
+</div>
+
+<!--div {% tagattrs %}
      class="{% part field group_class %}
         form-group
         {% if field.required%}required{% endif %}
@@ -25,4 +45,4 @@
         <span class="hint">{{ bound_field.help_text }}</span>
     {% endif %}
     {% endpart %}{{ hidden_initial }}
-</div>
+</div==>
