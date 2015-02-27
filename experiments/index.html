@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Django administration</title>
+        <link href="http://netdna.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+        <link href="materialize/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection">
+        <link href="admin.css" type="text/css" rel="stylesheet" media="screen,projection">
+    </head>
+    <body>
+        <header>
+            <ul id="dropdown_user_menu" class="dropdown-content">
+                <li><a href="#!">one</a></li>
+                <li><a href="#!">two</a></li>
+            </ul>
+            <nav class="top-nav">
+                    <a href="#" class="brand-logo">Admininstration</a>
+                    <a href="#" data-activates="nav-mobile" class="button-collapse full"><i class="mdi-navigation-menu"></i></a>
+                    <ul id="nav-mobile" class="side-nav fixed">
+                        <li class="logo">
+                            <a id="logo-container" href="http://materializecss.com/">
+                                <img class="responsive-img" src="logo.png">
+                            </a>
+                        </li>
+
+                        <li class="active"><a href="#!">Applications</a></li>
+                        <li><a href="#!">Dashboard</a></li>
+                        <li><a href="#!"><i class="mdi-content-add"></i> Add New Dashboard</a></li>
+                    </ul>
+            </nav>
+        </header>
+        <main>
+            <div class="row">
+                <div class="col s12 m6 l4">
+                    <div class="card">
+                        <div class="card-content">
+                            <span class="card-title black-text">Authentication and Authorization</span>
+                            <div class="row">
+                                <div class="col s12 m6 l4">
+                                    <a class="bootcards-summary-item green-text text-lighten-2" href="/admin/auth/group/" style="padding-top:35px">
+                                        <i class="fa fa-3x fa-users"></i> <h6 style="word-wrap: break-word;">Users</h6>
+                                    </a>
+                                </div>
+                                <div class="col s12 m6 l4">
+                                    <a class="bootcards-summary-item green-text text-lighten-2" href="/admin/auth/group/" style="padding-top:35px">
+                                        <i class="fa fa-3x fa-heartbeat "></i> <h6 style="word-wrap: break-word;">Groups</h6>
+                                    </a>
+                                </div>
+                                <div class="col s12 m6 l4">
+                                    <a class="bootcards-summary-item green-text text-lighten-2" href="/admin/auth/group/" style="padding-top:35px">
+                                        <i class="fa fa-3x fa-train"></i> <h6 style="word-wrap: break-word;">Groups</h6>
+                                    </a>
+                                </div>
+                                <div class="col s12 m6 l4">
+                                    <a class="bootcards-summary-item green-text text-lighten-2" href="/admin/auth/group/" style="padding-top:35px">
+                                        <i class="fa fa-3x fa-users"></i> <h6 style="word-wrap: break-word;">Users</h6>
+                                    </a>
+                                </div>
+                                <div class="col s12 m6 l4">
+                                    <a class="bootcards-summary-item green-text text-lighten-2" href="/admin/auth/group/" style="padding-top:35px">
+                                        <i class="fa fa-3x fa-heartbeat "></i> <h6 style="word-wrap: break-word;">Groups</h6>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col s12 m6 l4">
+                    <div class="card">
+                        <div class="card-content">
+                            <span class="card-title black-text">Weblog</span>
+                            <div class="row">
+                                <div class="col s12 m6 l4">
+                                    <a class="bootcards-summary-item green-text text-lighten-2" href="/admin/auth/group/" style="padding-top:35px">
+                                        <i class="fa fa-3x fa-users"></i> <h6 style="word-wrap: break-word;">Users</h6>
+                                    </a>
+                                </div>
+                                <div class="col s12 m6 l4">
+                                    <a class="bootcards-summary-item green-text text-lighten-2" href="/admin/auth/group/" style="padding-top:35px">
+                                        <i class="fa fa-3x fa-heartbeat "></i> <h6 style="word-wrap: break-word;">Groups</h6>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col s12 m6 l4">
+                    <div class="card">
+                        <div class="card-content">
+                            <span class="card-title black-text">Sites</span>
+                            <div class="row">
+                                <div class="col s12 m6 l4">
+                                    <a class="bootcards-summary-item green-text text-lighten-2" href="/admin/auth/group/" style="padding-top:35px">
+                                        <i class="fa fa-3x fa-users"></i> <h6 style="word-wrap: break-word;">Users</h6>
+                                    </a>
+                                </div>
+                                <div class="col s12 m6 l4">
+                                    <a class="bootcards-summary-item green-text text-lighten-2" href="/admin/auth/group/" style="padding-top:35px">
+                                        <i class="fa fa-3x fa-heartbeat "></i> <h6 style="word-wrap: break-word;">Groups</h6>
+                                    </a>
+                                </div>
+                                <div class="col s12 m6 l4">
+                                    <a class="bootcards-summary-item green-text text-lighten-2" href="/admin/auth/group/" style="padding-top:35px">
+                                        <i class="fa fa-3x fa-train"></i> <h6 style="word-wrap: break-word;">Tagged items</h6>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </main>
+        <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script src="materialize/js/materialize.js"></script>
+        <script type="text/javascript">
+          (function($){
+              $(function(){
+                   $('.dropdown-button').dropdown({hover: false});
+                   $(".button-collapse").sideNav();
+              });
+          })(jQuery);
+        </script>
+    </body>
+</html>

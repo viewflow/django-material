@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Django administration</title>
+        <link href="http://netdna.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+        <link href="materialize/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection">
+        <link href="admin.css" type="text/css" rel="stylesheet" media="screen,projection">
+    </head>
+    <body>
+        <header>
+            <ul id="dropdown_user_menu" class="dropdown-content">
+                <li><a href="#!">one</a></li>
+                <li><a href="#!">two</a></li>
+            </ul>
+            <nav class="top-nav">
+                    <a href="#" class="brand-logo">Change User</a>
+                    <a href="#" data-activates="nav-mobile" class="button-collapse full"><i class="mdi-navigation-menu"></i></a>
+                    <ul id="nav-mobile" class="side-nav fixed">
+                        <li class="logo">
+                            <a id="logo-container" href="http://materializecss.com/">
+                                <img class="responsive-img" src="logo.png">
+                            </a>
+                        </li>
+
+                        <li class="active"><a href="#!">Applications</a></li>
+                        <li><a href="#!">Dashboard</a></li>
+                        <li><a href="#!"><i class="mdi-content-add"></i> Add New Dashboard</a></li>
+                    </ul>
+            </nav>
+        </header>
+        <main>
+            <div class="container">
+            <div class="row">
+                <div class="col s12">
+                    <div class="card">
+                        <div class="card-content">
+                            <h4>Admin</h4>
+                            <div class="section">
+                                <div class="input-field">
+                                    <input id="first_name" type="text" class="validate">
+                                    <label for="first_name">Username</label>
+                                </div>
+                                <div class="input-field">
+                                    <input id="first_name" type="password" class="validate">
+                                    <label for="first_name">Password</label>
+                                </div>
+                            </div>
+                            <div class="section">
+                                <h5>Personal info</h5>
+
+                                <div class="input-field">
+                                    <input id="first_name" type="text" class="validate">
+                                    <label for="first_name">First Name</label>
+                                </div>
+                                <div class="input-field">
+                                    <input id="first_name" type="text" class="validate">
+                                    <label for="first_name">Last Name</label>
+                                </div>
+                                <div class="input-field">
+                                    <input id="first_name" type="text" class="validate">
+                                    <label for="first_name">Email</label>
+                                </div>
+                            </div>
+                            <div class="section">
+                                <h5>Permissions</h5>
+                                 <p class="checkbox">
+                                     <input type="checkbox" id="test5" />
+                                     <label for="test5">Active</label>
+                                     <span class="hint">Designates whether this user should be treated as active. Unselect this instead of deleting accounts.</span>
+                                 </p>
+                                 <p class="checkbox">
+                                     <input type="checkbox" id="test6" />
+                                     <label for="test6">Staff status</label>
+                                     <span class="hint">Designates whether the user can log into this admin site.</span>
+                                 </p>
+                                 <p class="checkbox">
+                                     <input type="checkbox" id="test7" />
+                                     <label for="test7">Superuser status</label>
+                                     <span class="hint">Designates that this user has all permissions without explicitly assigning them</span>
+                                 </p>
+
+                                 <div class="multiselect" style="padding-top:20px;padding-bottom:20px">
+                                     <label for="id_groups" class="control-label" style="font-weight: bold;color:#000;font-size: 14px">Groups</label>
+                                     <div class="selector row" style="padding-top: 10px">
+                                         <div class="selector-available col s6" style="width: calc(50% - 30px)">
+                                             <label>Available grouns</label>
+                                             <hr style="color: #eee; background-color: #eee; height: 1px;border:none"/>
+                                             <select class="filtered material-ignore" multiple="multiple" name="groups_old" id="id_groups_from" style="height:120px">
+                                                 <option value="2" title="kopkopkop">kopkopkop</option>
+                                             </select>
+                                         </div>
+                                         <div class="col s1" style="width:60px;padding-top:40px">
+                                             <ul class="selector-chooser" style="font-size:10px;">
+                                                 <li style="margin-bottom:5px">
+                                                     <a title="Choose" class="btn-floating btn-flat  green lighten-2 selector-add"><i class="mdi-navigation-chevron-left"></i></a>
+                                                 </li>
+                                                 <li>
+                                                     <a title="Remove" class="btn-floating btn-flat green lighten-2 selector-remove"><i class="mdi-navigation-chevron-right"></i></a>
+                                                 </li>
+                                             </ul>
+                                         </div>
+                                         <div class="selector-chosen col s6"  style="width: calc(50% - 30px)">
+                                             <label>Chosen groups</label>
+                                             <hr style="color: #eee; background-color: #eee; height: 1px;border:none"/>
+                                             <select id="id_groups_to" multiple="multiple" size="0" name="groups" class="filtered material-ignore" style="height: 120px;">
+                                             </select>
+                                         </div>
+                                     </div>
+                                 </div>
+
+                                 <div class="multiselect" style="padding-top:0px;padding-bottom:40px">
+                                     <label for="id_groups" class="control-label" style="font-weight: bold;color:#000;font-size: 14px">Permissions</label>
+                                     <div class="selector row" style="padding-top: 10px">
+                                         <div class="selector-available col s6" style="width: calc(50% - 30px)">
+                                             <label>Available permissions</label>
+                                             <hr style="color: #eee; background-color: #eee; height: 1px;border:none"/>
+                                             <select class="filtered material-ignore" multiple="multiple" name="groups_old" id="id_groups_from" style="height:120px">
+                                                 <option value="1" title="admin | log entry | Can add log entry">admin | log entry | Can add log entry</option><option value="2" title="admin | log entry | Can change log entry">admin | log entry | Can change log entry</option><option value="3" title="admin | log entry | Can delete log entry">admin | log entry | Can delete log entry</option><option value="7" title="auth | group | Can add group">auth | group | Can add group</option><option value="8" title="auth | group | Can change group">auth | group | Can change group</option><option value="9" title="auth | group | Can delete group">auth | group | Can delete group</option><option value="4" title="auth | permission | Can add permission">auth | permission | Can add permission</option><option value="5" title="auth | permission | Can change permission">auth | permission | Can change permission</option><option value="6" title="auth | permission | Can delete permission">auth | permission | Can delete permission</option><option value="50" title="auth | user | Can add author">auth | user | Can add author</option><option value="10" title="auth | user | Can add user">auth | user | Can add user</option><option value="51" title="auth | user | Can change author">auth | user | Can change author</option><option value="11" title="auth | user | Can change user">auth | user | Can change user</option><option value="52" title="auth | user | Can delete author">auth | user | Can delete author</option><option value="12" title="auth | user | Can delete user">auth | user | Can delete user</option><option value="13" title="contenttypes | content type | Can add content type">contenttypes | content type | Can add content type</option><option value="14" title="contenttypes | content type | Can change content type">contenttypes | content type | Can change content type</option><option value="15" title="contenttypes | content type | Can delete content type">contenttypes | content type | Can delete content type</option><option value="28" title="django_comments | comment | Can add comment">django_comments | comment | Can add comment</option><option value="31" title="django_comments | comment | Can moderate comments">django_comments | comment | Can moderate comments</option><option value="29" title="django_comments | comment | Can change comment">django_comments | comment | Can change comment</option><option value="30" title="django_comments | comment | Can delete comment">django_comments | comment | Can delete comment</option><option value="32" title="django_comments | comment flag | Can add comment flag">django_comments | comment flag | Can add comment flag</option><option value="33" title="django_comments | comment flag | Can change comment flag">django_comments | comment flag | Can change comment flag</option><option value="34" title="django_comments | comment flag | Can delete comment flag">django_comments | comment flag | Can delete comment flag</option><option value="19" title="flatpages | flat page | Can add flat page">flatpages | flat page | Can add flat page</option><option value="20" title="flatpages | flat page | Can change flat page">flatpages | flat page | Can change flat page</option><option value="21" title="flatpages | flat page | Can delete flat page">flatpages | flat page | Can delete flat page</option><option value="22" title="redirects | redirect | Can add redirect">redirects | redirect | Can add redirect</option><option value="23" title="redirects | redirect | Can change redirect">redirects | redirect | Can change redirect</option><option value="24" title="redirects | redirect | Can delete redirect">redirects | redirect | Can delete redirect</option><option value="16" title="sessions | session | Can add session">sessions | session | Can add session</option><option value="17" title="sessions | session | Can change session">sessions | session | Can change session</option><option value="18" title="sessions | session | Can delete session">sessions | session | Can delete session</option><option value="25" title="sites | site | Can add site">sites | site | Can add site</option><option value="26" title="sites | site | Can change site">sites | site | Can change site</option><option value="27" title="sites | site | Can delete site">sites | site | Can delete site</option><option value="35" title="tagging | tag | Can add tag">tagging | tag | Can add tag</option><option value="36" title="tagging | tag | Can change tag">tagging | tag | Can change tag</option><option value="37" title="tagging | tag | Can delete tag">tagging | tag | Can delete tag</option><option value="38" title="tagging | tagged item | Can add tagged item">tagging | tagged item | Can add tagged item</option><option value="39" title="tagging | tagged item | Can change tagged item">tagging | tagged item | Can change tagged item</option><option value="40" title="tagging | tagged item | Can delete tagged item">tagging | tagged item | Can delete tagged item</option><option value="47" title="zinnia | category | Can add category">zinnia | category | Can add category</option><option value="48" title="zinnia | category | Can change category">zinnia | category | Can change category</option><option value="49" title="zinnia | category | Can delete category">zinnia | category | Can delete category</option><option value="41" title="zinnia | entry | Can add entry">zinnia | entry | Can add entry</option><option value="46" title="zinnia | entry | Can change author(s)">zinnia | entry | Can change author(s)</option><option value="45" title="zinnia | entry | Can change status">zinnia | entry | Can change status</option><option value="44" title="zinnia | entry | Can view all entries">zinnia | entry | Can view all entries</option><option value="42" title="zinnia | entry | Can change entry">zinnia | entry | Can change entry</option><option value="43" title="zinnia | entry | Can delete entry">zinnia | entry | Can delete entry</option>
+                                             </select>
+                                         </div>
+                                         <div class="col s1" style="width:60px;padding-top:40px">
+                                             <ul class="selector-chooser" style="font-size:10px;">
+                                                 <li style="margin-bottom:5px">
+                                                     <a title="Choose" class="btn-floating btn-flat  green lighten-2 selector-add"><i class="mdi-navigation-chevron-left"></i></a>
+                                                 </li>
+                                                 <li>
+                                                     <a title="Remove" class="btn-floating btn-flat green lighten-2 selector-remove"><i class="mdi-navigation-chevron-right"></i></a>
+                                                 </li>
+                                             </ul>
+                                         </div>
+                                         <div class="selector-chosen col s6"  style="width: calc(50% - 30px)">
+                                             <label>Chosen permissions</label>
+                                             <hr style="color: #eee; background-color: #eee; height: 1px;border:none"/>
+                                             <select id="id_groups_to" multiple="multiple" size="0" name="groups" class="filtered material-ignore" style="height: 120px;">
+                                                 <option value="42" title="zinnia | entry | Can change entry">zinnia | entry | Can change entry</option><option value="43" title="zinnia | entry | Can delete entry">zinnia | entry | Can delete entry</option>
+                                             </select>
+                                         </div>
+                                     </div>
+                                 </div>
+
+                            </div>
+
+
+
+                            <div class="section">
+                                <h5>Important dates</h5>
+                                <label for="birthdate" class="">Last login</label>
+                                <input type="date" class="datepicker">
+                                <label for="birthdate" class="">Date joined</label>
+                                <input type="date" class="datepicker">
+                            </div>
+                        </div>
+                        <div class="card-action">
+                            <div class="col s12">
+                                <a href="#" class="waves-effect waves-light btn white-text right">Save</a>
+                                <a href="#" class="waves-effect waves-light btn red white-text right">Delete</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--div class="col s12 m4 l2">
+                    <div class="card">
+                        <div class="card-content">
+                            <span class="card-title black-text" style="margin-bottom:20px">Actions</span>
+                            <div class="row">
+                                <ul class="center-align">
+                                    <li>
+                                        <a href="/admin/auth/user/1/history/" class="btn btn-default btn-flat mdi-action-history col-xs-12 addlink" alt="">
+                                            History</a>
+                                    </li>
+                                    <li>
+                                        <a href="/admin/auth/user/1/delete/" class="btn btn-danger btn-flat mdi-action-delete col-xs-12 addlink" alt="">
+                                            Delete
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div-->
+            </div>
+            </div>
+        </main>
+        <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script src="materialize/js/materialize.js"></script>
+        <script type="text/javascript">
+          (function($){
+              $(function(){
+                  $('.dropdown-button').dropdown({hover: false});
+                  $(".button-collapse").sideNav();
+                  $('select').not('.disabled').not('.material-ignore').material_select();
+                  $('.datepicker').pickadate({
+                      selectMonths: true, // Creates a dropdown to control month
+                      selectYears: 15, // Creates a dropdown of 15 years to control year
+                      format: 'mm/dd/yyyy',
+                      formatSubmit: 'mm/dd/yyyy',
+                      hiddenName: true
+                  });
+              });
+          })(jQuery);
+        </script>
+    </body>
+</html>
