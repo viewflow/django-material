@@ -8,9 +8,7 @@
             <span class="card-title grey-text text-darken-2">{% block formtitle %}Form{% endblock %}</span>
             <form method="POST">
                 {% csrf_token %}
-                <div class="panel-body">
-                    {% block formbody %}{% endblock %}
-                </div>
+                {% block formbody %}{% endblock %}
                 <div class="card-action">
                     <div class="right">
                         {% block formbuttons %}<button class="btn btn-primary right" type="submit">Submit</button>{% endblock %}

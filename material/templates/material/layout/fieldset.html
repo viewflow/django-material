@@ -1,10 +1,10 @@
 {% load material_form_internal %}
-<fieldset>
+<div class="section">
 {% if parent.label %}
-<legend>{{ parent.label }}</legend>
+<h6>{{ parent.label }}</h6>
 {% endif %}
 
 {% for element in parent.elements %}
     {% form_render element %}
 {% endfor %}
-</fieldset>
+</div>

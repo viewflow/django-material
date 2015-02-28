@@ -1,7 +1,7 @@
 {% load material_form_internal %}
 <div class="row">
     {% for element, span in parent.container_12 %}
-    <div class="col-md-{{ span }} columns">
+    <div class="col m{{ span }}">
         {% form_render element %}
     </div>
     {% endfor %}

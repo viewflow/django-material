@@ -18,31 +18,3 @@
     {% endif %}
     {% endpart %}{{ hidden_initial }}
 </div>
-
-<!--div {% tagattrs %}
-     class="{% part field group_class %}
-        form-group
-        {% if field.required%}required{% endif %}
-        {% if bound_field.errors %}has-error{% endif %}
-        {% part field add_group_class %}{% endpart %}
-        {% endpart %}"{% endtagattrs %}>
-    {% part field prepend %}{% endpart %}{% part field control %}
-    <div class="checkbox">
-    <label for="{{ bound_field.id_for_label }}" class="control-label {% part field add_label_class %}{% endpart %}">
-    <input type="checkbox"
-           name="{{ bound_field.html_name }}"
-           id="id_{{ bound_field.html_name }}"
-           {% if bound_field.value %}checked{% endif %}>
-    {{ bound_field.label }}</label>
-    </div>
-    {% endpart %}{% part field append %}{% endpart %}
-    {% part field errors %}
-        {% if bound_field.errors %}
-            {% include  'material/field_errors.html' %}
-        {% endif %}
-    {% endpart %}{% part field help_text %}
-    {% if field.help_text %}
-        <span class="hint">{{ bound_field.help_text }}</span>
-    {% endif %}
-    {% endpart %}{{ hidden_initial }}
-</div==>

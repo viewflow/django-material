@@ -1,5 +1,5 @@
 from django.template import Template
-from material import Layout, Row
+from material import Layout, Row, Fieldset
 import tests.demo as forms
 
 
@@ -35,31 +35,22 @@ class RegistrationForm(forms.Form):
     receive_news = forms.BooleanField(required=False, label='I want to receive news and special offers')
     agree_toc = forms.BooleanField(required=True, label='I agree with the Terms and Conditions')
 
-    layout = Layout('username', 'email', 'password', 'password_confirm',
-                    Row('first_name', 'last_name'),
-                    'gender', 'receive_news', 'agree_toc')
+    layout = Layout('username', 'email',
+                    Row('password', 'password_confirm'),
+                    Fieldset('Pesonal details',
+                             Row('first_name', 'last_name'),
+                             'gender', 'receive_news', 'agree_toc'))
 
     template = Template("""
-    {% with form_label_class="sr-only" form_control_class="floating-label" form_with_placeholder=True %}
     {% form %}
-        {% part form.username prepend %}
-            <span class="input-group-addon prepend"><i class="glyphicon glyphicon-user"></i></span>
-        {% endpart %}
-        {% part form.email prepend %}
-            <span class="input-group-addon prepend"><i class="glyphicon glyphicon-inbox"></i></span>
-        {% endpart %}
-        {% part form.password prepend %}
-            <span class="input-group-addon prepend"><i class="glyphicon glyphicon-lock"></i></span>
-        {% endpart %}
-        {% part form.password_confirm prepend %}
-            <span class="input-group-addon prepend"><i class="glyphicon glyphicon-lock"></i></span>
-        {% endpart %}
+        {% part form.username prefix %}<i class="mdi-action-account-box prefix"></i>{% endpart %}
+        {% part form.email prefix %}<i class="mdi-communication-email prefix"></i>{% endpart %}
+        {% part form.password prefix %}<i class="mdi-action-lock-open prefix"></i>{% endpart %}
     {% endform %}
-    {% endwith %}
     """)
 
     buttons = Template("""
-        <button class="btn btn-primary pull-right" type="submit">Submit</button>
+        <button class="waves-effect waves-light btn" type="submit">Submit</button>
     """)
 
     title = "Registration form"
