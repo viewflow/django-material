@@ -23,13 +23,11 @@
     {% else %}
         <!-- Default form layout -->
         {% part form visible %}
-        <div class="row">
             {% for bound_field in form.visible_fields %}
                 {% part bound_field.field %}
                     {% form_render bound_field %}
                 {% endpart %}
             {% endfor %}
-        </div>
         {% endpart %}
 
         {% part 'inlines' %}

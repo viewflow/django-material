@@ -1,4 +1,5 @@
 {% load material_form material_form_internal %}
+<div class="row">
 <div {% tagattrs %}
      class="{% part field group_class %}checkbox-field col s12
             {% if field.required%}required{% endif %}
@@ -17,4 +18,5 @@
     <span class="help-block">{{ bound_field.help_text }}</span>
     {% endif %}
     {% endpart %}{{ hidden_initial }}
+</div>
 </div>

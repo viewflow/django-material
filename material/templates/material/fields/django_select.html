@@ -1,34 +1,23 @@
 {% load material_form material_form_internal debug_tags %}
+<div class="row">
 <div {% tagattrs %}
-     class="{% part field group_class %}
-            form-group
+     class="{% part field group_class %}select-field col s12
             {% if field.required%}required{% endif %}
             {% if bound_field.errors %}has-error{% endif %}
             {% part field add_group_class %}{% endpart %}
             {% endpart %}"{% endtagattrs %}>
-    {% part field label %}
-    <label for="{{ bound_field.id_for_label }}" class="control-label {% part field add_label_class %}{{ form_label_class }}{% endpart %}">{{ bound_field.label }}</label>
+    {% part field prefix %}{% endpart %} {% part field control %}
+    <select {% tagattrs %}
+            class="{% part field add_control_class %}{% endpart %}"
+            name="{{ bound_field.html_name }}"
+            id="id_{{ bound_field.html_name }}"{% endtagattrs %}>
+        {% for value, choice in field.widget.choices %}
+        <option {% if value|force_text == bound_field.value|force_text %}selected="selected"{% endif %}
+                {% if value == None or value == '' %}style="display:none"{% endif %}
+                value="{{ value|default_if_none:"aa" }}" >{% if value == None or value == '' %}{{ form_select_empty_label|default:choice }}{% else %}{{ choice }}{% endif %} </option>
+        {% endfor %}
+    </select>
     {% endpart %}
-    <div class="input-group" style="width:100%">
-        {% part field prepend %}{% endpart %}{% part field control %}
-        <select {% tagattrs %}
-                class="form-control {% part field add_control_class %}{% endpart %}"
-                name="{{ bound_field.html_name }}"
-                id="id_{{ bound_field.html_name }}"{% endtagattrs %}>
-            {% for value, choice in field.widget.choices %}
-            <option {% if value|force_text == bound_field.value|force_text %}selected="selected"{% endif %}
-                    {% if value == None or value == '' %}style="display:none"{% endif %}
-                    value="{{ value|default_if_none:"aa" }}" >
-                {% if value == None or value == '' %}
-                    {{ form_select_empty_label|default:choice }}
-                {% else %}
-                    {{ choice }}
-                {% endif %}
-            </option>
-            {% endfor %}
-        </select>
-        {% endpart %}{% part field append %}{% endpart %}
-    </div>
     {% part field errors %}
         {% if bound_field.errors %}
             {% include  'material/field_errors.html' %}
@@ -38,4 +27,5 @@
         <span class="help-block">{{ bound_field.help_text }}</span>
     {% endif %}
     {% endpart %}{{ hidden_initial }}
+</div>
 </div>

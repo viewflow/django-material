@@ -5,12 +5,16 @@
 <script src="{% static 'material/js/materialize.js' %}"></script>
 <script type="text/javascript">
     $(function() {
+        $('.dropdown-button').dropdown({hover: false});
+        $(".button-collapse").sideNav();
+        $('select').not('.disabled').material_select();
+
+        /*
+          In chrome, there is no way to get to know is autofill
+          fills the password field until user is interacted. Assume
+          that it is
+        */
         if($('input[type=password]').length) {
-            /*
-               In chrome, there is no way to get to know is autofill
-               fills the password field until user is interacted. Assume
-               that it is
-            */
             function autofix() {
                 $('input[type=password]').addClass('active').addClass('valid');
                 $('input[type=password]').next('label').addClass('active').addClass('valid');
