@@ -61,30 +61,20 @@ class ContactForm(forms.Form):
     email = forms.EmailField()
     subject = forms.CharField()
     message = forms.CharField(widget=forms.Textarea)
-    captcha = forms.CharField(label="Enter characters below")
     send_copy = forms.BooleanField(required=False,
                                    label="Send a copy to my e-mail address")
 
     template = Template("""
     {% form %}
-        {% part form.name append %}
-            <span class="input-group-addon append"><i class="glyphicon glyphicon-user"></i></span>
-        {% endpart %}
-        {% part form.email append %}
-            <span class="input-group-addon append"><i class="glyphicon glyphicon-envelope"></i></span>
-        {% endpart %}
-        {% part form.subject append %}
-            <span class="input-group-addon append"><i class="glyphicon glyphicon-tag"></i></span>
-        {% endpart %}
-        #}
+        {% part form.name prefix %}<i class="mdi-action-account-box prefix"></i>{% endpart %}
+        {% part form.email prefix %}<i class="mdi-communication-email prefix"></i>{% endpart %}
+        {% part form.subject prefix %}<i class="mdi-action-announcement prefix"></i>{% endpart %}
         {% part form.message rows %}4{% endpart %}
-        {% part form.captcha append %}
-            <span class="input-group-addon append">
-                <img height="28px" src="http://image.captchas.net?client=demo&random=RandomZufall">
-            </span>
-        {% endpart %}
+        {% part form.send_copy add_group_class %}right-align{% endpart %}
     {% endform %}
     """)
+
+    layout = Layout(Row('name', 'email'), 'subject', 'message', 'send_copy')
 
     buttons = Template("""
         <button class="btn btn-primary pull-right" type="submit">Send message</button>
@@ -92,6 +82,7 @@ class ContactForm(forms.Form):
 
     title = "Contact form"
 
+    
 
 class OrderForm(forms.Form):
     name = forms.CharField()
@@ -183,7 +174,7 @@ class CommentForm(forms.Form):
     captcha = forms.CharField(label="Enter characters below")
 
     layout = Layout(Row('name', 'email'),
-                     'website', 'comment', 'captcha')
+                    'website', 'comment', 'captcha')
 
     template = Template("""
     {% with form_label_class="sr-only" form_control_class="floating-label" form_with_placeholder=True %}
