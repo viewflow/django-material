@@ -2,20 +2,21 @@
 
 {% block content %}
 <div class="row valign">
-<div class="{% block formclass %}col s12 m8 offset-m2 l8 offset-l2{% endblock %}">
-    <div class="card">
-        <div class="card-content">
-            <span class="card-title grey-text text-darken-2">{% block formtitle %}Form{% endblock %}</span>
+    <div class="{% block formclass %}col s12 m8 offset-m2 l8 offset-l2{% endblock %}">
+        <div class="card">
             <form method="POST">
-                {% csrf_token %}
-                {% block formbody %}{% endblock %}
+                <div class="card-content">
+                    <span class="card-title grey-text text-darken-2">{% block formtitle %}Form{% endblock %}</span>
+                    {% csrf_token %}
+                    {% block formbody %}{% endblock %}
+                </div>
                 <div class="card-action">
                     <div class="right">
                         {% block formbuttons %}<button class="btn btn-primary right" type="submit">Submit</button>{% endblock %}
                     </div>
                 </div>
             </form>
+        </div>
     </div>
-</div>
 </div>
 {% endblock %}
