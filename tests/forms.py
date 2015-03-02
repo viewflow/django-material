@@ -69,7 +69,7 @@ class ContactForm(forms.Form):
         {% part form.name prefix %}<i class="mdi-action-account-box prefix"></i>{% endpart %}
         {% part form.email prefix %}<i class="mdi-communication-email prefix"></i>{% endpart %}
         {% part form.subject prefix %}<i class="mdi-action-announcement prefix"></i>{% endpart %}
-        {% part form.message rows %}4{% endpart %}
+        {% part form.message prefix %}<i class="mdi-communication-message prefix"></i>{% endpart %}
         {% part form.send_copy add_group_class %}right-align{% endpart %}
     {% endform %}
     """)
@@ -81,7 +81,6 @@ class ContactForm(forms.Form):
     """)
 
     title = "Contact form"
-
     
 
 class OrderForm(forms.Form):
