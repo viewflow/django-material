@@ -5,7 +5,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         
         <link href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootcards/1.0.0/css/bootcards-desktop.min.css">
         {% include 'material/includes/material_css.html' %}
         <link rel="stylesheet" type="text/css" href="{% block stylesheet %}{% static 'material/admin/css/base.css' %}{% endblock %}" />
         {% block extrastyle %}{% endblock %}
@@ -18,75 +17,33 @@
     </head>
     {% load i18n %}
     
-    <body class="{% if is_popup %}popup {% endif %}{% block bodyclass %}{% endblock %}">
-        
-        <!-- Container -->
-        <div id="container" class="{% block containerclass %}{% endblock %}">
-            
-            {% if not is_popup %}
-            <!-- Header -->
-            <nav id="header" class="navbar navbar-default navbar-fixed-top {% block navclass %}{% endblock %}">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#topbar">
-                        <i class="sr-only">Toggle navigation</i><i class="icon-bar"></i> <i class="icon-bar"></i><i class="icon-bar"></i>
-                    </button>
-                    {% block branding %}{% endblock %}
-                </div>
-                
-                <div id="topbar" class="navbar-collapse collapse navbar-responsive-collapse">
-                    {% if user.is_active and user.is_staff %}
-                    <ul id="user-tools" class="nav navbar-nav navbar-right">
-                        {% block nav-global %}{% endblock %}
-                        
-                        <li class="dropdown">
-                            <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i> {% firstof user.get_short_name user.get_username|title %} <b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                {% if user.has_usable_password %}
-                                <li><a href="{% url 'admin:password_change' %}"><i class="glyphicon glyphicon-lock"></i> {% trans 'Change password' %}</a></li>
-                                {% endif %}
-                                <li><a href="{% url 'admin:logout' %}"><i class="glyphicon glyphicon-log-out"></i> {% trans 'Log out' %}</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                    {% endif %}
-                </div>
-            </nav>
-            {% endif %}
-            <!-- END Header -->
+    <body>
+        {% if not is_popup %}
+        <header>
+            <nav id="header" class="nav-top">
+                <a href="#" class="brand-logo hide-on-med-and-down">Admininstration</a>
+                <a href="#" data-activates="nav-mobile" class="button-collapse full"><i class="mdi-navigation-menu"></i></a>
+                <ul id="nav-mobile" class="side-nav fixed">
+                    <li class="logo">
+                        <a id="logo-container" href="/admin">
+                            <img class="responsive-img" src="{% static 'material/admin/img/logo.png' %}">
+                        </a>
+                    </li>
 
-            {% if not is_popup %}
-            {% block breadcrumbs %}
-            <div class="container-fluid visible-lg breadcrumbs">
-                    <ul class="breadcrumb well">
-                        <li><a href="{% url 'admin:index' %}">{% trans 'Home' %}</a></li>
-                        {% if title %}<li>{{ title }}{% endif %}
-                    </ul>
-            </div>
+                    <li class="active"><a href="#!">Administration</a></li>
+                    <li class="logout"><a href="{% url 'admin:logout' %}"><i class="mdi-action-lock-open"></i> {% trans 'Log out' %}</a></li>
+                </ul>
+            </nav>
+        </header>
+        {% endif %}
+
+        <main>            
+            {% block content %}
+            {{ content }}
             {% endblock %}
-            {% endif %}
-                
-            
-            <div class="{% block contentclass %}container-fluid{% endblock %}">
-                <!-- Content -->
-                <div id="content" class="{% block coltype %}row{% endblock %}">
-                    <!-- {% block pretitle %}{% endblock %} -->
-                    <!-- {% block content_title %}{% if title %}<h1>{{ title }}</h1>{% endif %}{% endblock %} -->
-                    {% block content %}
-                    {% block object-tools %}{% endblock %}
-                    {{ content }}
-                    {% endblock %}
-                    {% block sidebar %}{% endblock %}
-                    <br class="clear" />
-                </div>
-                <!-- END Content -->
-            </div>
-            
-            {% block footer %}<div id="footer"></div>{% endblock %}
-        </div>
-        <!-- END Container -->
+        </main>
         
         {% include 'material/includes/material_js.html' %}
-        <script src="//cdnjs.cloudflare.com/ajax/libs/bootcards/1.0.0/js/bootcards.min.js"></script>
         {% block extrajs %}{% endblock %}
         
         {% block messages %}

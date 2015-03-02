@@ -1,14 +1,61 @@
 /*
-  Fixes
+    Common structure
 */
-
-.navbar-nav.navbar-right:last-child {
-    margin-right: 0px; /* bootcards-desktop.css:6 */
+body {
+    background: #eee;
 }
 
-/* 
+@media only screen and (min-width : 992px) {
+    .nav-top {
+        box-shadow: none;
+        height: 90px;
+        padding-left: 270px;
+    }
+    .nav-top .brand-logo {
+        line-height: 90px;
+        font-size: 2rem;
+    }
+}
+
+.nav-top ul.side-nav.fixed li.logo {
+    text-align: center;
+}
+
+.nav-top #logo-container {
+    height: 127px;
+    padding-top: 20px;
+    padding-bottom: 16px;
+}
+
+.nav-top #front-page-logo {
+    display: inline-block;
+    height: 100%;
+    pointer-events: none;
+}
+
+.nav-top .logout {
+    position: absolute;
+    bottom: 80px;
+    width: 240px;
+}
+
+
+@media only screen and (min-width : 992px) {
+    main {
+        padding-left: 240px;
+    }
+}
+
+
+
+/*
+
+.navbar-nav.navbar-right:last-child {
+    margin-right: 0px;
+}
+
   Breadcrumbs 
-*/
+
 .breadcrumbs {
     margin-top: -20px;
     margin-left: 0px;
@@ -24,9 +71,7 @@
     padding-right:0px;
 }
 
-/*
   Snackbar
-*/
 .snackbar.alert-success {
   background-color: #0f9d58;
 }
@@ -41,9 +86,8 @@
 }
 
 
-/*
    App list icons
-*/
+
 [class^=adm-app-], [class*=" adm-app-"] {
     speak: none;
     font-style: normal;
@@ -89,18 +133,14 @@
     content: "\e010";
 }
 
-
-/*
   Login form
-*/
+
 #login-form {
     margin-left: 1em;
     margin-right: 1em;
 }
 
-/* 
   Search
-*/
 
 #toolbar .form-control-wrapper {
     margin-left: 0px;
@@ -114,9 +154,8 @@
     text-decoration:none;
 }
 
-/*
   Actions
-*/
+
 .addlink {
     margin-top: 0px;
     padding: 20px;
@@ -146,9 +185,7 @@
 }
 
 
-/*
   Forms
-*/
 
 .form-group .checkbox label {
     font-weight: bold !important;
@@ -167,7 +204,7 @@
 }
 
 
-/* SELECTOR (DJANGO ADMIN FILTER INTERFACE) */
+SELECTOR (DJANGO ADMIN FILTER INTERFACE)
 
 .selector {
     width: 800px;
@@ -307,3 +344,4 @@ a.active.selector-clearall {
     background: url(../img/selector-icons.gif) left -237px no-repeat;
     cursor: pointer;
 }
+*/
