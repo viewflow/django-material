@@ -17,6 +17,12 @@ body {
     }
 }
 
+@media only screen and (max-width : 991px) {
+    .nav-top {
+        padding-left: 20px;
+    }
+}
+
 .nav-top ul.side-nav.fixed li.logo {
     text-align: center;
 }
@@ -64,6 +70,64 @@ body {
     margin-top: 10px;
     margin-bottom: 10px;
     margin-right: 0px;
+}
+
+
+.adm-app-default:before {
+    font-family: FontAwesome;
+    content: "\f233";
+}
+
+.adm-auth-group:before {
+    content: "\f0c0";
+}
+
+.adm-auth-user:before {
+    content: "\f007";
+}
+
+.adm-django_comments-comment:before {
+    content: "\f086";
+}
+
+.adm-flatpages-flatpage:before {
+    content: "\f0f6";
+}
+
+.adm-default-association:before {
+    content: "\f066";
+}
+
+.adm-default-nonce:before {
+    content: "\f084";
+}
+
+.adm-default-usersocialauth:before {
+    content: "\f13e";
+}
+
+.adm-redirects-redirect:before {
+    content: "\f07e";
+}
+
+.adm-sites-site:before {
+    content: "\f0c5";
+}
+
+.adm-tagging-taggeditem:before {
+    content: "\f187";
+}
+
+.adm-tagging-tag:before {
+    content: "\f02c";
+}
+
+.adm-zinnia-category:before {
+    content: "\f02d";
+}
+
+.adm-zinnia-entry:before {
+    content: "\f15c";
 }
 
 /*
