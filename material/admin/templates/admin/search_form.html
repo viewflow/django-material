@@ -1,24 +1,19 @@
 {% load i18n admin_static %}
 {% if cl.search_fields %}
-<div id="toolbar">
-    <h6>Search:</h6>
+<div class="row">
     <form id="changelist-search" action="" method="get">
-        <div class="input-group">
-            <input type="text" class="form-control" size="40" name="{{ search_var }}" value="{{ cl.query }}" id="searchbar" placeholder="Search {{ cl.opts.verbose_name_plural|capfirst }}"/>
-            <a href="#"  style="z-index:1000;position:absolute;right:10px;top:5px" id="changelist-search-button">
-                <i class="mdi-action-search"></i>
-            </a>           
+        <div class="input-field col s12">
+            <input type="text" name="{{ search_var }}" value="{{ cl.query }}" id="searchbar"/>
+            <label for="searchbar">Search {{ cl.opts.verbose_name_plural|capfirst }}</label>
+            <a href="#" id="changelist-search-button"><i class="mdi-action-search"></i></a>
+        {% if show_result_count %}
+        <small>{% blocktrans count counter=cl.result_count %}{{ counter }} result{% plural %}{{ counter }} results{% endblocktrans %} (<a href="?{% if cl.is_popup %}_popup=1{% endif %}">{% blocktrans with full_result_count=cl.full_result_count %}{{ full_result_count }} total{% endblocktrans %}</a>)</small>
+        {% endif %}
         </div>
 
-        {% if show_result_count %}
-        <span class="small quiet">{% blocktrans count counter=cl.result_count %}{{ counter }} result{% plural %}{{ counter }} results{% endblocktrans %} (<a href="?{% if cl.is_popup %}_popup=1{% endif %}">{% blocktrans with full_result_count=cl.full_result_count %}{{ full_result_count }} total{% endblocktrans %}</a>)</span>
-        {% endif %}
-            
         {% for pair in cl.params.items %}
         {% ifnotequal pair.0 search_var %}<input type="hidden" name="{{ pair.0 }}" value="{{ pair.1 }}"/>{% endifnotequal %}
         {% endfor %}
     </form>
-    <br/>
 </div>
-<script type="text/javascript">document.getElementById("searchbar").focus();</script>
 {% endif %}

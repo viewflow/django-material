@@ -1,10 +1,9 @@
 {% load i18n %}
-<h6>{% blocktrans with filter_title=title %} By {{ filter_title }} {% endblocktrans %}</h6>
-<select class="form-control admin_filter" placeholder="{% blocktrans with filter_title=title %} By {{ filter_title }} {% endblocktrans %}">
-    {% for choice in choices %}
-    <option value="{{ choice.query_string|iriencode }}"{% if choice.selected %} selected{% endif %}>
-        {{ choice.display }}
-    </option>
-    {% endfor %}
-</select>
-<br/>
+<div class="col s12">
+    <label>{% blocktrans with filter_title=title %} By {{ filter_title }} {% endblocktrans %}</label>
+    <select class="admin_filter" placeholder="{% blocktrans with filter_title=title %} By {{ filter_title }} {% endblocktrans %}">
+        {% for choice in choices %}
+        <option value="{{ choice.query_string|iriencode }}"{% if choice.selected %} selected{% endif %}>{{ choice.display }}</option>
+        {% endfor %}
+    </select>
+</div>

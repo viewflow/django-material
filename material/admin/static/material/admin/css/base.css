@@ -131,6 +131,20 @@ body {
 }
 
 /*
+    Change list page
+*/
+.filters a {
+    margin-right: 0;
+}
+
+.filters #changelist-search-button {
+    z-index:1000;
+    position:absolute;
+    right:15px;
+    top:15px;
+}
+
+/*
 
 .navbar-nav.navbar-right:last-child {
     margin-right: 0px;
