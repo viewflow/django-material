@@ -34,6 +34,7 @@ INSTALLED_APPS = (
     'django.contrib.redirects',
     'django.contrib.sites',
     'django_comments',
+    'social.apps.django_app.default',
     'mptt',
     'tagging',
     'zinnia'

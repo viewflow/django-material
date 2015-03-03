@@ -46,7 +46,25 @@ body {
     }
 }
 
+/*
+    App index page
+*/
+.app-item {
+    padding-left: 0px !important;
+}
 
+.app-item a{
+    background: #f5f5f5;
+    display: block;
+    border-radius: 4px;
+    padding: 35px 0px;
+    text-align: center;
+    position: relative;
+    height: 130px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: 0px;
+}
 
 /*
 
