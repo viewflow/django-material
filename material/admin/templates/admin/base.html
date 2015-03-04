@@ -32,7 +32,9 @@
                         </a>
                     </li>
 
+                    {% block breadcrumbs %}
                     <li class="active"><a href="/admin/">Admininstration</a></li>
+                    {% endblock %}
                     <li class="logout"><a href="{% url 'admin:logout' %}"><i class="mdi-action-lock-open"></i> {% trans 'Log out' %}</a></li>
                 </ul>
             </nav>
@@ -56,8 +58,7 @@
         <span class="snackbar_open" data-timeout=0 data-toggle=snackbar data-style="alert-{{ message.tags }}" data-content="{{ message|capfirst }}"></span>
         {% endfor %}
         <script type="text/javascript">
-            $(document).ready(function(){
-                $('#result_list').DataTable();
+            $(document).ready(function(){             
                 $(".snackbar_open").snackbar("show");
             });
         </script>

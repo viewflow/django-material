@@ -21,14 +21,9 @@
 
 {% if not is_popup %}
 {% block breadcrumbs %}
-<div class="container-fluid visible-lg breadcrumbs">
-    <ul class="breadcrumb well">
-        <li><a href="{% url 'admin:index' %}">{% trans 'Home' %}</a></li>
-        <li><a href="{% url 'admin:app_list' app_label=opts.app_label %}">{{ opts.app_config.verbose_name }}</a></li>
-        <li>{% if has_change_permission %}<a href="{% url opts|admin_urlname:'changelist' %}">{{ opts.verbose_name_plural|capfirst }}</a>{% else %}{{ opts.verbose_name_plural|capfirst }}{% endif %}</li>
-        <li class="active">{% if add %}{% trans 'Add' %} {{ opts.verbose_name }}{% else %}{{ original|truncatewords:"18" }}{% endif %}</li>
-    </ul>
-</div>
+<li><a href="{% url 'admin:index' %}">Admininstration</a></li>
+<li style="padding-left:20px"><a href="{% url opts|admin_urlname:'changelist' %}"><a href="{% url opts|admin_urlname:'changelist' %}"><i class="fa adm-app-default adm-{{ opts.app_label }}-{{ opts.object_name|lower }}"></i> &nbsp;&nbsp;{{ opts.verbose_name_plural|capfirst }}</a></li>
+<li style="padding-left:40px" class="active"><a href="{% url opts|admin_urlname:'changelist' %}"><a href="{% url opts|admin_urlname:'changelist' %}">{% if add %}{% trans 'Add' %} {{ opts.verbose_name }}{% else %}{% trans 'Change' %}{% endif %}</a></li>
 {% endblock %}
 {% endif %}
 
