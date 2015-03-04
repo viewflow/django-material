@@ -2,19 +2,25 @@
 {% load i18n %}
 
 <div class="row">
-    <div class="col-xs-12">
+    <div class="col s12">
         {% if pagination_required %}
-        <ul class="pagination" style="margin:0">
+        <ul class="pagination right" style="height:50px;margin-top:40px">
+            {% paginator_number cl 'prev' %}
+
             {% for i in page_range %}
-            <li>{% paginator_number cl i %}</li>
+            {% paginator_number cl i %}
             {% endfor %}
+
+            {% paginator_number cl 'next' %}
         </ul>
         {% endif %}
-        <div class="pull-right">
-            {{ cl.result_count }} {% ifequal cl.result_count 1 %}{{ cl.opts.verbose_name }}{% else %}{{ cl.opts.verbose_name_plural }}{% endifequal %}
-            {% if show_all_url %}&nbsp;&nbsp;<a href="{{ show_all_url }}" class="showall">{% trans 'Show all' %}</a>{% endif %}
+        <div class="col s12">
+            <div class="right">
+                <small>
+                    {{ cl.result_count }} {% ifequal cl.result_count 1 %}{{ cl.opts.verbose_name }}{% else %}{{ cl.opts.verbose_name_plural }}{% endifequal %}
+                    {% if show_all_url %}&nbsp;&nbsp;<a href="{{ show_all_url }}" class="showall">{% trans 'Show all' %}</a>{% endif %}
+                </small>
+            </div>
         </div>
     </div>
 </div>
-
-{% if cl.formset and cl.result_count %}<input type="submit" name="_save" class="default" value="{% trans 'Save' %}"/>{% endif %}

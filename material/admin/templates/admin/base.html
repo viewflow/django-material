@@ -23,7 +23,7 @@
         {% if not is_popup %}
         <header>
             <nav id="header" class="nav-top">
-                <a href="#" class="brand-logo hide-on-med-and-down">{% block brand-logo %}Admininstration{% endblock %}</a>
+                <a href="/" class="brand-logo hide-on-med-and-down">{% block brand-logo %}Admininstration{% endblock %}</a>
                 <a href="#" data-activates="nav-mobile" class="button-collapse full"><i class="mdi-navigation-menu"></i></a>
                 <ul id="nav-mobile" class="side-nav fixed">
                     <li class="logo">
@@ -32,7 +32,7 @@
                         </a>
                     </li>
 
-                    <li class="active"><a href="#">Admininstration</a></li>
+                    <li class="active"><a href="/admin/">Admininstration</a></li>
                     <li class="logout"><a href="{% url 'admin:logout' %}"><i class="mdi-action-lock-open"></i> {% trans 'Log out' %}</a></li>
                 </ul>
             </nav>

@@ -158,11 +158,12 @@ body {
     top: 18px;
     left: 4px;
     color: #81C784;
-    font-size: 16px;
+    color: orange;
+    font-size: 20px;
     background-color: #fff;
     border: none;
     box-shadow: none;
-    content: "\e6fd";
+    content: "\e89b";
     font-family: "Material-Design-Icons";
     speak: none;
     font-style: normal;
@@ -175,9 +176,9 @@ body {
 
 .results table.dataTable.dtr-inline.collapsed tbody tr.parent td:first-child:before, 
 .results table.dataTable.dtr-inline.collapsed tbody tr.parent th:first-child:before {
-    content: '\e712';
-    color: #E57373;
+    color: orange;
     background-color: #fff;
+    content: "\e89e";
 }
 
 .results table.collapsed td,
@@ -187,6 +188,15 @@ body {
 
 .results table.dataTable tr.child ul li {
     white-space: normal;
+}
+
+.results table a {
+    color: #039be5;
+    text-transform: none;
+}
+
+.card .pagination a {
+    margin-right: 0px;
 }
 
 @media only screen and (max-width : 600px) {

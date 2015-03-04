@@ -18,7 +18,20 @@ def paginator_number(cl, i):
     """
     Generates an individual page index link in a paginated list.
     """
-    if i == '.':
+    current_page = cl.paginator.page(cl.page_num+1)
+    if i == 'prev':
+        if current_page.has_previous():
+            return format_html('<li class="disabled"><a href="{}"><i class="mdi-navigation-chevron-left"></i></a></li>',
+                               cl.get_query_string({PAGE_VAR: current_page.previous_page_number()}))
+        else:
+            return format_html('<li class="disabled"><a href="#!"><i class="mdi-navigation-chevron-left"></i></a></li>')
+    elif i == 'next':
+        if current_page.has_next():
+            return format_html('<li class="disabled"><a href="{}"><i class="mdi-navigation-chevron-right"></i></a></li>',
+                               cl.get_query_string({PAGE_VAR: current_page.next_page_number()}))
+        else:
+            return format_html('<li class="disabled"><a href="#!"><i class="mdi-navigation-chevron-right"></i></a></li>')
+    elif i == '.':
         return '<li class="disabled"><a href="#" onclick="return false;">...</a></li>'
     elif i == cl.page_num:
         return format_html('<li class="active"><a href="{0}">{0}</a></li> ',
