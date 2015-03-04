@@ -17,7 +17,7 @@
     <label for="{{ bound_field.id_for_label }}" class="control-label {% part field add_label_class %}{{ form_label_class }}{% endpart %}">{{ bound_field.label }}</label>
     {% endpart %}{% part field help_text %}
     {% if field.help_text %}
-    <span class="help-block">{{ bound_field.help_text }}</span>
+    <small class="help-block">{{ bound_field.help_text }}</small>
     {% endif %}
     {% endpart %}{{ hidden_initial }}
 </div>

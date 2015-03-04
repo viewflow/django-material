@@ -1,6 +1,7 @@
 {% if show %}
-<h6>By {{ field_name }}:</h6>
-    <select class="form-control date_hierarchy">
+<div class="col s12">
+    <label>By {{ field_name }}:</label>
+    <select class="date_hierarchy">
         {% if current_filter %}
         <option value="">{{ current_filter }}</option>
         {% endif %}
@@ -11,4 +12,5 @@
     {% if back %}
     <small><a href="{{ back.link }}" class="">&lsaquo; {{ back.title }}</a></small>
     {% endif %}
+</div>
 {% endif %}

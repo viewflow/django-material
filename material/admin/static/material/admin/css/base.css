@@ -219,6 +219,35 @@ body {
 }
 
 /*
+   Change form
+*/
+.change-form .card-title {
+    font-size: 2.28rem;
+    line-height: 2.508rem;
+    margin: 1.14rem 0 0.912rem 0;
+    font-weight: 400;
+}
+
+.change-form .checkbox-field {
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.change-form .checkbox-field label {
+    font-weight: bold !important;
+    font-size: 14px !important;
+    color: rgba(0,0,0,.84) !important;
+}
+
+.change-form .checkbox-field .help-block {
+    padding-left: 35px;
+    font-size: 12px;
+    display: block;
+}
+
+
+
+/*
 
 .navbar-nav.navbar-right:last-child {
     margin-right: 0px;
