@@ -72,5 +72,15 @@
             <div class="card-action">&nbsp;</div>
         </div>
     </div>
+
+    {% if has_add_permission %}
+    {% url cl.opts|admin_urlname:'add' as add_url %}
+    <div class="fixed-action-btn">
+        <a class="btn-floating btn-large waves-effect waves-light red" href="{% add_preserved_filters add_url is_popup to_field %}">
+            <i class="large mdi-content-add"></i>
+        </a>
+    </div>
+    {% endif %}
+
 </div>
 {% endblock %}

@@ -199,10 +199,22 @@ body {
     margin-right: 0px;
 }
 
+@media only screen and (min-width : 601px) {
+    .fixed-action-btn {
+        bottom: 15px;
+        right: 45px;
+    }
+}
+
 @media only screen and (max-width : 600px) {
     .results {
         margin-left: -20px;
         margin-right: -20px;
+    }
+
+    .fixed-action-btn {
+        bottom: 0px;
+        right: 5px;
     }
 }
 
