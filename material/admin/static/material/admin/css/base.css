@@ -23,6 +23,15 @@ body {
     }
 }
 
+@media only screen and (max-width : 600px) {
+    main>.row>.col {
+        padding: 0;
+    }
+    main>.row>.col>.card {
+        margin-top: 0;
+    }
+}
+
 .nav-top ul.side-nav.fixed li.logo {
     text-align: center;
 }
@@ -142,6 +151,49 @@ body {
     position:absolute;
     right:15px;
     top:15px;
+}
+
+.results table.dataTable.dtr-inline.collapsed tbody td:first-child:before, 
+.results table.dataTable.dtr-inline.collapsed tbody th:first-child:before {
+    top: 18px;
+    left: 4px;
+    color: #81C784;
+    font-size: 16px;
+    background-color: #fff;
+    border: none;
+    box-shadow: none;
+    content: "\e6fd";
+    font-family: "Material-Design-Icons";
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale; 
+}
+
+.results table.dataTable.dtr-inline.collapsed tbody tr.parent td:first-child:before, 
+.results table.dataTable.dtr-inline.collapsed tbody tr.parent th:first-child:before {
+    content: '\e712';
+    color: #E57373;
+    background-color: #fff;
+}
+
+.results table.collapsed td,
+.results table.collapsed th {
+    vertical-align: top;
+}
+
+.results table.dataTable tr.child ul li {
+    white-space: normal;
+}
+
+@media only screen and (max-width : 600px) {
+    .results {
+        margin-left: -20px;
+        margin-right: -20px;
+    }
 }
 
 /*
