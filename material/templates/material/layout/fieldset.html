@@ -1,11 +1,8 @@
 {% load material_form_internal %}
 <div class="section">
-{% if parent.label %}
-<h6>{{ parent.label }}</h6>
-{% endif %}
+    <h5>{{ parent.label|default:"" }}</h5>
 
-{% for element in parent.elements %}
-    {% form_render element %}
-{% endfor %}
-<div class="clearfix"></div>
+    {% for element in parent.elements %}
+        {% form_render element %}
+    {% endfor %}
 </div>

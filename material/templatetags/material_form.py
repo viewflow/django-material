@@ -63,6 +63,9 @@ class FormNode(Node):
 
         # Take one of view.layout or form.layout
         layout = self.kwargs.get('layout')
+        if layout is not None:
+            layout = layout.resolve(context)
+
         if layout is None:
             if 'view' in context:
                 view = context['view']

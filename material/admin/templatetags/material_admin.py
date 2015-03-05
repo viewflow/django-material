@@ -10,7 +10,19 @@ from django.utils.text import capfirst
 from django.utils.translation import ugettext as _
 from django.template import Library
 
+from material import Layout, Fieldset
+
+
 register = Library()
+
+
+@register.assignment_tag
+def fieldset_layout(adminform):
+    sets = []
+    for fieldset in adminform:
+        sets.append(Fieldset(fieldset.name, *fieldset.fields))
+
+    return Layout(*sets)
 
 
 @register.simple_tag

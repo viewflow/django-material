@@ -1,5 +1,5 @@
 {% extends "admin/base_site.html" %}
-{% load i18n admin_urls admin_static admin_modify material_form %}
+{% load i18n admin_urls admin_static admin_modify material_form material_admin %}
 
 
 {% block brand-logo %}{{ title }}{% endblock %}
@@ -16,7 +16,7 @@
 
 {% block content %}
 <div class="row change-form">
-    <div class="col s12 m12 l10">
+    <div class="col s12 m12 l12">
         <form {% if has_file_field %}enctype="multipart/form-data" {% endif %}action="{{ form_url }}" method="post" id="{{ opts.model_name }}_form">
             <div class="card">
                 <div class="card-content">
@@ -31,8 +31,8 @@
                     {% if adminform.form.non_field_errors %}<small class="errornote">{{ adminform.form.non_field_errors }}</small>{% endif %}
                     {% endif %}
 
-                    <div class="section">
-                    {% form form=adminform.form %}
+                    {% fieldset_layout adminform as layout %}
+                    {% form form=adminform.form layout=layout %}
                         <!--
                             {% block field_sets %}
                             {% for fieldset in adminform %}
@@ -51,20 +51,19 @@
                             {% block after_related_objects %}{% endblock %}
                             
                             {% block submit_buttons_bottom %}{% submit_row %}{% endblock %}
-                          -->
+                        -->
                     {% endform %}
-                    </div>
                     {# JavaScript for prepopulated fields #}
                     {% prepopulated_fields_js %}
                 </div>
-            </div>
-            <div class="card-action">
-                <div class="col s12">
-                    <button type="submit" class="waves-effect waves-light btn white-text right">Save</button>
-                    <a href="#" class="waves-effect waves-light btn red white-text right">Delete</a>
+                <div class="card-action">
+                    <div class="col s12">
+                        <button type="submit" class="waves-effect waves-light btn white-text right">Save</button>
+                        <a href="#" class="waves-effect waves-light btn red white-text right">Delete</a>
+                    </div>
                 </div>
-            </div>
         </form>
+        </div>
     </div>
 </div>
 {% endblock %}

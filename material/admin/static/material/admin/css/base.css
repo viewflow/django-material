@@ -221,6 +221,15 @@ body {
 /*
    Change form
 */
+.change-form .card {
+    max-width: 1300px;
+}
+
+.change-form a {
+    color: #039be5;
+    text-transform: none;
+}
+
 .change-form .card-title {
     font-size: 2.28rem;
     line-height: 2.508rem;
@@ -240,17 +249,27 @@ body {
 }
 
 .change-form .checkbox-field .help-block {
+    padding-top: 5px;
     padding-left: 35px;
     font-size: 12px;
+    line-height: 16px;
     display: block;
 }
 
-.change-form a {
-    color: #039be5;
-    text-transform: none;
+.change-form .section {
+    padding-top: 0px;
+    padding-bottom: 0px;
 }
 
+.change-form .section .row  {
+    margin-left: -10px;
+}
 
+@media only screen and (min-width : 992px) {
+    .change-form .card .card-content {
+        padding: 30px 50px 50px 50px;
+    }
+}
 
 /*
 
