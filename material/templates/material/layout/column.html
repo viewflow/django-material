@@ -1,6 +1,6 @@
 {% load material_form_internal %}
 {% for element in parent.elements %}
     <div>
-         {% form_render element %}
+         {% render element %}{% endrender %}
     </div>
 {% endfor %}

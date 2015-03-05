@@ -2,7 +2,7 @@
 <div class="row">
     {% for element, span in parent.container_12 %}
     <div class="col s12 m{{ span }}">
-        {% form_render element %}
+        {% render element %}{% endrender %}
     </div>
     {% endfor %}
 </div>

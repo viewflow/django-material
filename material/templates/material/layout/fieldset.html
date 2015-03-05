@@ -3,6 +3,6 @@
     <h5>{{ parent.label|default:"" }}</h5>
 
     {% for element in parent.elements %}
-        {% form_render element %}
+        {% render element %}{% endrender %}
     {% endfor %}
 </div>
