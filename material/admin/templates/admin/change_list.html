@@ -6,7 +6,7 @@
 <script type="text/javascript">
 (function($) {
     $(document).ready(function($) {
-        $("#result_list").DataTable({
+        var table = $("#result_list").DataTable({
             "paging":     false,
             "ordering":   false,
             "info":       false,
@@ -14,6 +14,7 @@
             "bAutoWidth": false,
             "responsive": true
         });
+        new $.fn.dataTable.FixedHeader(table);
 
         $("#changelist-search-button").click(function() {
             $("#changelist-search").submit();

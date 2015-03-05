@@ -18,14 +18,14 @@
 
     {% if layout %}
         {% part form visible %}
-            {% form_render layout %}
+            {% render layout %}{% endrender %}
         {% endpart %}
     {% else %}
         <!-- Default form layout -->
         {% part form visible %}
             {% for bound_field in form.visible_fields %}
                 {% part bound_field.field %}
-                    {% form_render bound_field %}
+                    {% render bound_field %}{% endrender %}
                 {% endpart %}
             {% endfor %}
             <div class="clearfix">

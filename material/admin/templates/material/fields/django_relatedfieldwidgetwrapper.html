@@ -1,5 +1,15 @@
 {% load material_form material_form_internal %}
 
+{% render bound_field widget=field.widget.widget %}
+    {% part field append %}
+    <a href="%s%s" class="add-another" id="add_id_{{ bound_field.html_name }}" onclick="return showAddAnotherPopup(this);">
+        <i class="mdi-action-add"></i>
+    </a>
+    {% endpart %}
+{% endrender %} 
+{% endif %}
+
+<!--
 <div {% tagattrs %}
      class="{% part field group_class %}
             form-group
@@ -40,5 +50,4 @@
     	SelectFilter.init("id_{{ bound_field.html_name }}", "{{ bound_field.html_name }}", 0, "/static/admin/"); 
     });
 </script>  
-            
-
+-->            

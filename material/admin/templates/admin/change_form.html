@@ -59,7 +59,9 @@
                 <div class="card-action">
                     <div class="col s12">
                         <button type="submit" class="waves-effect waves-light btn white-text right">Save</button>
+                        {% if change %}
                         <a href="#" class="waves-effect waves-light btn red white-text right">Delete</a>
+                        {% endif %}
                     </div>
                 </div>
         </form>

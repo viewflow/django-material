@@ -23,7 +23,7 @@ class LayoutNode(object):
             template_name = context['template']
         return get_template("{}/{}".format(context['form_template_pack'], template_name))
 
-    def render(self, context):
+    def render(self, context, **options):
         context.push()
         try:
             for key, value in self.get_context_data(context).items():
@@ -135,14 +135,19 @@ class Span(object):
         self.span_columns = span_columns
         self.field_name = field_name
 
-    def render(self, context):
+    def render(self, context, **options):
         template_pack = context['form_template_pack']
         form = context['form']
         bound_field = form[self.field_name]
 
         try:
-            if 'template' in context:
-                template = select_template(["{}/{}".format(template_pack, context['template'])])
+            if 'template' in options:
+                template = select_template(["{}/{}".format(template_pack, options['template'])])
+            elif 'widget' in options:
+                widget_templates = [
+                    '{}/fields/{}_{}.html'.format(template_pack, cls.__module__.split('.', 1)[0], cls.__name__.lower())
+                    for cls in type(options['widget']).mro()[:-2]]
+                template = select_template(widget_templates)
             else:
                 template = _get_field_template(template_pack, bound_field.field)
         except TemplateDoesNotExist:

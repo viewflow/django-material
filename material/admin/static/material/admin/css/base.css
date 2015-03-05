@@ -152,12 +152,14 @@ body {
     right:15px;
     top:15px;
 }
+.fixedHeader th {
+    background: white;
+}
 
 .results table.dataTable.dtr-inline.collapsed tbody td:first-child:before, 
 .results table.dataTable.dtr-inline.collapsed tbody th:first-child:before {
     top: 18px;
     left: 4px;
-    color: #81C784;
     color: orange;
     font-size: 20px;
     background-color: #fff;
