@@ -208,6 +208,16 @@ body {
     }
 }
 
+@media only screen and (max-height : 400px) {
+    .fixed-action-btn {
+        display:none;
+    }
+    .fixedHeader {
+        display:none;
+    }
+}
+
+
 @media only screen and (max-width : 600px) {
     .results {
         margin-left: -20px;
