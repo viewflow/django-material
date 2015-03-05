@@ -1,6 +1,9 @@
 {% load material_form material_form_internal %}
 
 {% render bound_field widget=field.widget.widget %}
+    {% part field prefix %}
+        {{ field.widget.widget }}
+    {% endpart %}
     {% part field append %}
     <a href="%s%s" class="add-another" id="add_id_{{ bound_field.html_name }}" onclick="return showAddAnotherPopup(this);">
         <i class="mdi-action-add"></i>
