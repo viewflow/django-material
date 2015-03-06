@@ -37,7 +37,7 @@ window.SelectFilter = {
 
         // <div class="selector"> or <div class="selector stacked">
         var selector_div = quickElement('div', from_box.parentNode);
-        selector_div.className = is_stacked ? 'selector stacked' : 'selector';
+        selector_div.className = is_stacked ? 'selector stacked' : 'selector row';
 
         // <div class="selector-available">
         var selector_available = quickElement('div', selector_div);

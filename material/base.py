@@ -3,6 +3,7 @@ import warnings
 from functools import partial
 from django.template import TemplateDoesNotExist
 from django.template.loader import get_template, select_template
+from django.utils import six
 from django.utils.encoding import smart_text
 
 
@@ -38,7 +39,7 @@ class LayoutNode(object):
 def _convert_to_field(elements):
     result = []
     for element in elements:
-        if isinstance(element, str):
+        if isinstance(element, six.string_types):
             result.append(Field(element))
         else:
             result.append(element)
