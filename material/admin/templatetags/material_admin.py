@@ -10,7 +10,7 @@ from django.utils.text import capfirst
 from django.utils.translation import ugettext as _
 from django.template import Library
 
-from material import Layout, Fieldset
+from material import Layout, Fieldset, Row
 
 
 register = Library()
@@ -20,7 +20,14 @@ register = Library()
 def fieldset_layout(adminform):
     sets = []
     for fieldset in adminform:
-        sets.append(Fieldset(fieldset.name, *fieldset.fields))
+        fields = []
+        for field in fieldset.fields:
+            if isinstance(field, (list, tuple)):
+                fields.append(Row(*field))
+            else:
+                fields.append(field)
+
+        sets.append(Fieldset(fieldset.name, *fields))
 
     return Layout(*sets)
 
