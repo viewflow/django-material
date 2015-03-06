@@ -1,7 +1,6 @@
 {% load material_form material_form_internal %}
 
 {% render bound_field widget=field.widget.widget %}
-    {% part field add_group_class %}multiselect{% endpart %}
     {% part field label %}
     <h6 for="{{ bound_field.id_for_label }}" class="{% part field add_label_class %}{{ form_label_class }}{% endpart %}">
         {{ bound_field.label }}

@@ -2,6 +2,7 @@
 
 {% render bound_field template='fields/django_select.html' %}
     {% part field add_control_attr %}multiple{% endpart %}
+    {% part field add_group_class %}multiselect{% endpart %}
     {% part field add_control_class %}material-ignore{% endpart %}
     {% part field options %}
         {% for value, choice in field.widget.choices %}
