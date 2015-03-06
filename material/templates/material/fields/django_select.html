@@ -14,11 +14,13 @@
             name="{{ bound_field.html_name }}"
             id="id_{{ bound_field.html_name }}"
             {% part field add_control_attr %}{% endpart %}{% endtagattrs %}>
+        {% part field options %}
         {% for value, choice in field.widget.choices %}
         <option {% if value|force_text == bound_field.value|force_text %}selected="selected"{% endif %}
                 {% if value == None or value == '' %}style="display:none"{% endif %}
                 value="{{ value|default_if_none:"" }}" >{% if value == None or value == '' %}{{ form_select_empty_label|default:choice }}{% else %}{{ choice }}{% endif %} </option>
         {% endfor %}
+        {% endpart %}
     </select>
     {% endpart %}
     {% part field errors %}

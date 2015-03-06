@@ -97,3 +97,4 @@ TEMPLATE_DIRS = (
 # shortcut for in form templates
 from django.template.base import add_to_builtins
 add_to_builtins('material.templatetags.material_form')
+add_to_builtins('template_debug.templatetags.debug_tags')
