@@ -1,0 +1,6 @@
+{% load material_form material_form_internal %}
+
+{% render bound_field template='fields/django_select.html' %}
+    {% part field add_control_attr %}multiple{% endpart %}
+    {% part field add_control_class %}material-ignore{% endpart %}
+{% endrender %}

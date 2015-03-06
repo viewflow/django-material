@@ -7,9 +7,9 @@ body {
 
 @media only screen and (min-width : 992px) {
     .nav-top {
-        box-shadow: none;
         height: 90px;
         padding-left: 270px;
+
     }
     .nav-top .brand-logo {
         line-height: 90px;
@@ -24,11 +24,20 @@ body {
 }
 
 @media only screen and (max-width : 600px) {
+    .nav-top {
+        box-shadow: none;
+        -webkit-box-shadow: none;
+    }
+
     main>.row>.col {
         padding: 0;
     }
-    main>.row>.col>.card {
+    main>.row>.col>.card,
+    main>.row>.col>form>.card {
         margin-top: 0;
+        border-radius: 0 0 0 0;
+
+        -webkit-border-radius: 0 0 0 0;
     }
 }
 
@@ -275,6 +284,65 @@ body {
 
 .change-form .section .row  {
     margin-left: -10px;
+}
+
+.change-form .multiselect .selector-chooser {
+    text-align: center;
+}
+
+@media only screen and (min-width : 601px) {
+    .change-form .multiselect {
+        margin-bottom:40px;
+    }
+    .change-form .multiselect hr {
+        color: #eee;
+        background-color: #eee;
+        height: 1px;
+        border:none;
+    }
+
+    .change-form .multiselect .selector {
+        margin-top: 10px;
+    }
+
+    .change-form .multiselect .selector-available {
+        width: calc(50% - 30px)
+    }
+
+    .change-form .multiselect .selector-available select {
+        height: 120px;
+    }
+
+    .change-form .multiselect .selector-chooser {
+        width: 60px;
+        padding-top: 20px;
+    }
+
+    .change-form .multiselect .selector-chosen {
+        width: calc(50% - 30px)
+    }
+
+    .change-form .multiselect .selector-chosen select {
+        height: 120px;
+    }
+
+}
+
+@media only screen and (max-width : 600px) {
+    .change-form .multiselect .selector-available select {
+        height: 120px;
+    }
+    .change-form .multiselect .selector-chooser li {
+        display: inline;
+    }
+
+    .change-form .multiselect .selector-chooser .selector-add i {
+        transform: rotate(90deg);
+    }
+
+    .change-form .multiselect .selector-chooser .selector-remove i {
+        transform: rotate(90deg);
+    }
 }
 
 @media only screen and (min-width : 992px) {
