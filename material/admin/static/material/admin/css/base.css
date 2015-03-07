@@ -23,24 +23,6 @@ body {
     }
 }
 
-@media only screen and (max-width : 600px) {
-    .nav-top {
-        box-shadow: none;
-        -webkit-box-shadow: none;
-    }
-
-    main>.row>.col {
-        padding: 0;
-    }
-    main>.row>.col>.card,
-    main>.row>.col>form>.card {
-        margin-top: 0;
-        border-radius: 0 0 0 0;
-
-        -webkit-border-radius: 0 0 0 0;
-    }
-}
-
 .nav-top ul.side-nav.fixed li.logo {
     text-align: center;
 }
@@ -64,6 +46,32 @@ body {
 }
 
 
+@media only screen and (max-width : 600px) {
+    .nav-top {
+        box-shadow: none;
+        -webkit-box-shadow: none;
+    }
+
+    .card {
+        margin-bottom: 5px;
+    }
+
+    .card-content {
+        padding: 15px;
+    }
+
+    main>.row>.col {
+        padding: 0;
+    }
+    main>.row>.col>.card,
+    main>.row>.col>form>.card {
+        margin-top: 0;
+        border-radius: 0 0 0 0;
+
+        -webkit-border-radius: 0 0 0 0;
+    }
+}
+
 @media only screen and (min-width : 992px) {
     main {
         padding-left: 240px;
@@ -73,6 +81,10 @@ body {
 /*
     App index page
 */
+.app-list {
+    max-width: 1300px;
+}
+
 .app-item {
     padding-left: 0px !important;
 }
@@ -350,301 +362,3 @@ body {
         padding: 30px 50px 50px 50px;
     }
 }
-
-/*
-
-.navbar-nav.navbar-right:last-child {
-    margin-right: 0px;
-}
-
-  Breadcrumbs 
-
-.breadcrumbs {
-    margin-top: -20px;
-    margin-left: 0px;
-    margin-right: 0px;
-    padding-left:0px;
-    padding-right:0px;
-}
-
-.breadcrumbs>.row {
-    margin-left: -15px;
-    margin-right: 0px;
-    padding-left:0px;
-    padding-right:0px;
-}
-
-  Snackbar
-.snackbar.alert-success {
-  background-color: #0f9d58;
-}
-.snackbar.alert-info {
-  background-color: #03a9f4;
-}
-.snackbar.alert-warning {
-  background-color: #ff5722;
-}
-.snackbar.alert-error {
-  background-color: #f44336;
-}
-
-
-   App list icons
-
-[class^=adm-app-], [class*=" adm-app-"] {
-    speak: none;
-    font-style: normal;
-    font-weight: 400;
-    font-variant: normal;
-    text-transform: none;
-    line-height: 1;
-    font-size:45px;
-    position:relative;
-    top:10p;
-    max-width:50px;
-}
-
-.adm-app-default:before {
-    font-family: Material-Design-Icons;
-    content: "\e690";
-}
-
-.adm-app-auth:before {
-    font-family: Material-Design-Icons;
-    content: "\e605";
-}
-
-.adm-app-comments:before {
-    font-family: Material-Design-Icons;
-    content: "\e6de";
-}
-
-.adm-app-flatpages:before {
-    font-size:40px;
-    font-family: 'Glyphicons Halflings';
-    content: "\e043";
-}
-
-.adm-app-redirects:before {
-    font-family: Material-Design-Icons;
-    content: "\e6db";
-}
-
-.adm-app-sites:before {
-    font-size:40px;
-    font-family: 'Glyphicons Halflings';
-    content: "\e010";
-}
-
-  Login form
-
-#login-form {
-    margin-left: 1em;
-    margin-right: 1em;
-}
-
-  Search
-
-#toolbar .form-control-wrapper {
-    margin-left: 0px;
-}
-
-#changelist-search-button {
-    color:black;
-}
-
-#changelist-search-button:hover,#changelist-search-button:focus,#changelist-search-button:active {
-    text-decoration:none;
-}
-
-  Actions
-
-.addlink {
-    margin-top: 0px;
-    padding: 20px;
-    width:98%
-}
-
-.action_span {
-    padding-left: 20px;
-}
-
-.formbtn.btn-group {
-    width: 98%;
-    margin-top: 0px;
-}
-
-.formbtn.btn-group .dropdown-toggle {
-    padding: 15px 20px 15px 20px;
-}
-
-.formbtn.btn-group a:not(.dropdown-toggle) {
-    padding: 15px 20px 15px 60px;
-    width: calc(100% - 48px);
-}
-
-.formbtn .dropdown-menu {
-    width: 98%
-}
-
-
-  Forms
-
-.form-group .checkbox label {
-    font-weight: bold !important;
-    font-size: 14px !important;
-    color: rgba(0,0,0,.84) !important;
-}
-
-.form-group .hint {
-    padding-left: 45px;
-    padding-top: 20px;
-    font-size: 12px;
-}
-
-.has-error .input-group-addon{     
-    padding-top: 0;
-}
-
-
-SELECTOR (DJANGO ADMIN FILTER INTERFACE)
-
-.selector {
-    width: 800px;
-    float: left;
-}
-
-.selector select {
-    width: 360px;
-    height: 17.2em;
-}
-
-.selector-available, .selector-chosen {
-    float: left;
-    width: 360px;
-    text-align: center;
-    margin-bottom: 5px;
-}
-
-.selector-chosen select {
-    border-top: none;
-}
-
-.selector-available h2, .selector-chosen h2 {
-    font-size: 14px;
-    font-weight: bold;
-    border-bottom: 1px solid #ccc;  
-    text-align: left;
-}
-
-.selector .selector-filter {
-    background: white;
-    border: 1px solid #ccc;
-    border-width: 0 1px;
-    padding: 3px;
-    color: #999;
-    font-size: 10px;
-    margin: 0;
-    text-align: left;
-}
-
-.selector .selector-filter label,
-.inline-group .aligned .selector .selector-filter label {
-    width: 16px;
-    padding: 2px;
-}
-
-.selector .selector-available input {
-    width: 360px;
-}
-
-.selector ul.selector-chooser {
-    float: left;
-    width: 22px;
-    background-color: #eee;
-    border-radius: 10px;
-    margin: 10em 5px 0 5px;
-    padding: 0;
-}
-
-.selector-chooser li {
-    margin: 0;
-    padding: 3px;
-    list-style-type: none;
-}
-
-.selector select {
-    margin-bottom: 10px;
-    margin-top: 0;
-}
-
-.selector-add, .selector-remove {
-    width: 16px;
-    height: 16px;
-    display: block;
-    text-indent: -3000px;
-    overflow: hidden;
-}
-
-.selector-add {
-    background: url(../img/selector-icons.gif) 0 -161px no-repeat;
-    cursor: default;
-    margin-bottom: 2px;
-}
-
-.active.selector-add {
-    background: url(../img/selector-icons.gif) 0 -187px no-repeat;
-    cursor: pointer;
-}
-
-.selector-remove {
-    background: url(../img/selector-icons.gif) 0 -109px no-repeat;
-    cursor: default;
-}
-
-.active.selector-remove {
-    background: url(../img/selector-icons.gif) 0 -135px no-repeat;
-    cursor: pointer;
-}
-
-a.selector-chooseall, a.selector-clearall {
-    display: inline-block;
-    text-align: left;
-    margin-left: auto;
-    margin-right: auto;
-    font-weight: bold;
-    color: #666;
-}
-
-a.selector-chooseall {
-    padding: 3px 18px 3px 0;
-}
-
-a.selector-clearall {
-    padding: 3px 0 3px 18px;
-}
-
-a.active.selector-chooseall:hover, a.active.selector-clearall:hover {
-    color: #036;
-}
-
-a.selector-chooseall {
-    background: url(../img/selector-icons.gif) right -263px no-repeat;
-    cursor: default;
-}
-
-a.active.selector-chooseall {
-    background: url(../img/selector-icons.gif) right -289px no-repeat;
-    cursor: pointer;
-}
-
-a.selector-clearall {
-    background: url(../img/selector-icons.gif) left -211px no-repeat;
-    cursor: default;
-}
-
-a.active.selector-clearall {
-    background: url(../img/selector-icons.gif) left -237px no-repeat;
-    cursor: pointer;
-}
-*/
