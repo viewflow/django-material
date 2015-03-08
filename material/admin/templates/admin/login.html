@@ -1,77 +1,45 @@
 {% extends "admin/base_site.html" %}
 {% load i18n admin_static material_form %}
 
-{% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% static "admin/css/login.css" %}" />{% endblock %}
-
-{% block bodyclass %}{{ block.super }} login{% endblock %}
-
-{% block containerclass %}panel{% endblock %}
-
-{% block navclass %}{% endblock %}
-
-{% block contentclass %}container-fluid{% endblock %}
-
-{% block usertools %}{% endblock %}
-
-{% block nav-global %}{% endblock %}
-
-{% block content_title %}{% endblock %}
-
-{% block breadcrumbs %}{% endblock %}
-
 {% block content %}
-{% if form.errors and not form.non_field_errors %}
-<p class="errornote">
-{% if form.errors.items|length == 1 %}{% trans "Please correct the error below." %}{% else %}{% trans "Please correct the errors below." %}{% endif %}
-</p>
-{% endif %}
+<div class="row">
+    <div class="col s12 offset-m3 m6">
+        <div class="card">
+            <div class="card-content">
+                <span class="card-title black-text">{% trans 'Log in' %}</span>
 
-{% if form.non_field_errors %}
-{% for error in form.non_field_errors %}
-<p class="errornote">
-    {{ error }}
-</p>
-{% endfor %}
-{% endif %}
+                {% if form.errors and not form.non_field_errors %}
+                <p class="errornote">
+                    {% if form.errors.items|length == 1 %}{% trans "Please correct the error below." %}{% else %}{% trans "Please correct the errors below." %}{% endif %}
+                </p>
+                {% endif %}
+        
+                {% if form.non_field_errors %}
+                {% for error in form.non_field_errors %}
+                <p class="errornote">
+                    {{ error }}
+                </p>
+                {% endfor %}
+                {% endif %}
 
-<div id="content-main">
-<form action="{{ app_path }}" method="post" id="login-form">{% csrf_token %}
-    {% with form_label_class="sr-only" form_control_class="floating-label" form_with_placeholder=True %}
-    {% form %}
-        {% part form.username prepend %}<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>{% endpart %}
-        {% part form.password prepend %}<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>{% endpart %}
-    {% endform %}
-    {% endwith %}
-  {% url 'admin_password_reset' as password_reset_url %}
-  {% if password_reset_url %}
-  <div class="password-reset-link">
-    <a href="{{ password_reset_url }}">{% trans 'Forgotten your password or username?' %}</a>
-  </div>
-  {% endif %}
-  <div class="submit-row">
-      <button type="submit" class="btn btn-primary">{% trans 'Log in' %}</button>
-  </div>
-</form>
+                <form action="{{ app_path }}" method="post" id="login-form">{% csrf_token %}
+                    {% form %}
+                        {% part form.username prefix %}<i class="mdi-action-account-box prefix"></i>{% endpart %}
+                        {% part form.password prefix %}<i class="mdi-action-lock prefix"></i>{% endpart %}
+                    {% endform %}
 
+                    {% url 'admin_password_reset' as password_reset_url %}
+                    {% if password_reset_url %}
+                    <div class="password-reset-link">
+                        <a href="{{ password_reset_url }}">{% trans 'Forgotten your password or username?' %}</a>
+                    </div>
+                    {% endif %}
+                    <div class="card-action">
+                        <button type="submit" class="btn btn-primary right">{% trans 'Log in' %}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
-{% endblock %}
-
-{% block extrajs %}
-<script type="text/javascript">
-    $(function() {
-        function autofix() {
-            $('input[name=password]').removeClass('empty');
-            userInteracted();
-        }
-        function userInteracted() {
-            $('body').off('input propertychange', 'input[name=username]', autofix);
-            $('body,html').unbind("scroll mousedown DOMMouseScroll mousewheel keyup", userInteracted);
-        }
-        $('body').on('input propertychange', 'input[name=username]', autofix);
-        $("body,html").bind("scroll mousedown DOMMouseScroll mousewheel keyup", userInteracted);
-    });
-    /* for some strange reason, this breaks autofill fix work
-       document.getElementById('id_username').focus() 
-     */
-</script>
 {% endblock %}
