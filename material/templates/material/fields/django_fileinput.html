@@ -1,33 +1,27 @@
 {% load material_form material_form_internal %}
-<div {% tagattrs %}
-     class="{% part field group_class %}
-            form-group {{ form_group }}
-            {% if field.required%}required{% endif %}
-            {% if bound_field.errors %}has-error{% endif %}
-            {% part field add_group_class %}{% endpart %}
-            {% endpart %}"{% endtagattrs %}>
-    {% part field label %}
-    <label for="{{ bound_field.id_for_label }}" class="control-label {% part field add_label_class %}{{ form_label_class }}{% endpart %}">{{ bound_field.label }}</label>
-    {% endpart %}
-    <div class="input-group" style="width:100%">
-        {% part field prepend %}{% endpart %}{% part field control %}
-        <input type="text"
-               readonly=""
-               class="form-control {% part field add_control_class %}{{ form_control_class }}{% endpart %}"
-               {% if form_with_placeholder %}placeholder="{{ bound_field.label }}"{% endif %}>
+<div class="row">
+    <div {% tagattrs %}
+         class="{% part field group_class %}input-field file-field col s12
+                {% if field.required%}required{% endif %}
+                {% if bound_field.errors %}has-error{% endif %}
+                {% part field add_group_class %}{% endpart %}
+                {% endpart %}"{% endtagattrs %}>
+        {% part field prefix %}{% endpart %}{% part field control %}
         <input {% tagattrs %}
-               type="file"
+               type="text"
+               class="file-path validate {% part field add_control_class %}{{ form_control_class }}{% endpart %}"
                name="{{ bound_field.html_name }}"
+               {% if form_with_placeholder %}placeholder="{{ bound_field.label }}"{% endif %}
                id="id_{{ bound_field.html_name }}"{% endtagattrs %}{% if bound_field.value %} value="{{ bound_field.value }}"{% endif %}>
-        {% endpart %}{% part field append %}{% endpart %}
-    </div>
-    {% part field errors %}
-        {% if bound_field.errors %}
-            {% include  'material/field_errors.html' %}
+        {% endpart %}{% part field label %}
+        <div class="btn">
+            <span>File</span>
+            <input type="file" />
+        </div>
+        {% endpart %}{% part field help_text %}
+        {% if field.help_text %}
+        <small class="help-block">{{ bound_field.help_text }}</small>
         {% endif %}
-    {% endpart %}{% part field help_text %}
-    {% if field.help_text %}
-        <span class="help-block">{{ bound_field.help_text }}</span>
-    {% endif %}
-    {% endpart %}{{ hidden_initial }}
+        {% endpart %}{{ hidden_initial }}
+    </div>
 </div>

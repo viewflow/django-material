@@ -2318,7 +2318,7 @@ $(document).ready(function(){
     $('.file-field').each(function() {
       var path_input = $(this).find('input.file-path');
       $(this).find('input[type="file"]').change(function () {
-        path_input.val($(this).val());
+        path_input.val($(this)[0].files[0].name);
         path_input.trigger('change');
       });
     });

@@ -1,24 +1,24 @@
 {% load material_form material_form_internal %}
 <div class="row">
-<div {% tagattrs %}
-     class="{% part field group_class %}input-field col s12
-            {% if field.required%}required{% endif %}
-            {% if bound_field.errors %}has-error{% endif %}
-            {% part field add_group_class %}{% endpart %}
-            {% endpart %}"{% endtagattrs %}>
-    {% part field prefix %}{% endpart %}{% part field control %}
-    <input {% tagattrs %}
-           type="{{ field.widget.input_type }}"
-           class="validate {% part field add_control_class %}{{ form_control_class }}{% endpart %}"
-           name="{{ bound_field.html_name }}"
-           {% if form_with_placeholder %}placeholder="{{ bound_field.label }}"{% endif %}
-           id="id_{{ bound_field.html_name }}"{% endtagattrs %}{% if bound_field.value %} value="{{ bound_field.value }}"{% endif %}>
-    {% endpart %}{% part field label %}
-    <label for="{{ bound_field.id_for_label }}" class="control-label {% part field add_label_class %}{{ form_label_class }}{% endpart %}">{{ bound_field.label }}</label>
-    {% endpart %}{% part field help_text %}
-    {% if field.help_text %}
-    <small class="help-block">{{ bound_field.help_text }}</small>
-    {% endif %}
-    {% endpart %}{{ hidden_initial }}
-</div>
+    <div {% tagattrs %}
+         class="{% part field group_class %}input-field col s12
+                {% if field.required%}required{% endif %}
+                {% if bound_field.errors %}has-error{% endif %}
+                {% part field add_group_class %}{% endpart %}
+                {% endpart %}"{% endtagattrs %}>
+        {% part field prefix %}{% endpart %}{% part field control %}
+        <input {% tagattrs %}
+               type="{{ field.widget.input_type }}"
+               class="validate {% part field add_control_class %}{{ form_control_class }}{% endpart %}"
+               name="{{ bound_field.html_name }}"
+               {% if form_with_placeholder %}placeholder="{{ bound_field.label }}"{% endif %}
+               id="id_{{ bound_field.html_name }}"{% endtagattrs %}{% if bound_field.value %} value="{{ bound_field.value }}"{% endif %}>
+        {% endpart %}{% part field label %}
+        <label for="{{ bound_field.id_for_label }}" class="control-label {% part field add_label_class %}{{ form_label_class }}{% endpart %}">{{ bound_field.label }}</label>
+        {% endpart %}{% part field help_text %}
+        {% if field.help_text %}
+        <small class="help-block">{{ bound_field.help_text }}</small>
+        {% endif %}
+        {% endpart %}{{ hidden_initial }}
+    </div>
 </div>
