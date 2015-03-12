@@ -110,6 +110,7 @@ class OrderForm(forms.Form):
         {% part form.company prefix %}<i class="mdi-communication-business prefix"></i>{% endpart %}
         {% part form.email prefix %}<i class="mdi-communication-email prefix"></i>{% endpart %}
         {% part form.phone prefix %}<i class="mdi-communication-call prefix"></i>{% endpart %}
+
     {% endform %}
     """)
 
