@@ -2,12 +2,27 @@
 {% get_current_language as LANGUAGE_CODE %}
 {% get_language_info for LANGUAGE_CODE as lang %}
 <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="{% static 'material/js/jquery.datetimepicker.js' %}"></script>
 <script src="{% static 'material/js/materialize.js' %}"></script>
 <script type="text/javascript">
     $(function() {
         $('.dropdown-button').dropdown({hover: false});
         $(".button-collapse").sideNav();
         $('select').not('.disabled').not('.material-ignore').material_select();
+
+        $('[data-form-control="date"]').each(function() {
+            var input = $(this);
+            input.datetimepicker({format: input.data('date-format'), timepicker:false, mask:false});
+        });
+        $('[data-form-control="time"]').each(function() {
+            var input = $(this);
+            input.datetimepicker({format: input.data('date-format'), timepicker:true, mask:true});
+        });
+        $('[data-form-control="datetime"]').each(function() {
+            var input = $(this);
+            input.datetimepicker({format: input.data('date-format'), datepicker: false, timepicker:true, mask:true});
+        });
+
 
         /*
           In chrome, there is no way to get to know is autofill

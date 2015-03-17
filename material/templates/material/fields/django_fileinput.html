@@ -7,6 +7,10 @@
                 {% part field add_group_class %}{% endpart %}
                 {% endpart %}"{% endtagattrs %}>
         {% part field prefix %}{% endpart %}{% part field control %}
+        <div class="btn">
+            <span>File</span>
+            <input type="file" />
+        </div>
         <input {% tagattrs %}
                type="text"
                class="file-path validate {% part field add_control_class %}{{ form_control_class }}{% endpart %}"
@@ -14,10 +18,6 @@
                {% if form_with_placeholder %}placeholder="{{ bound_field.label }}"{% endif %}
                id="id_{{ bound_field.html_name }}"{% endtagattrs %}{% if bound_field.value %} value="{{ bound_field.value }}"{% endif %}>
         {% endpart %}{% part field label %}
-        <div class="btn">
-            <span>File</span>
-            <input type="file" />
-        </div>
         {% endpart %}{% part field help_text %}
         {% if field.help_text %}
         <small class="help-block">{{ bound_field.help_text }}</small>
