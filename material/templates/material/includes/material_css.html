@@ -28,13 +28,6 @@ select.material-ignore {
     background: #fff;
 }
 
-.help-block {
-    line-height: 12px;
-    position: relative;
-    top: -10px;
-    color: rgba(0, 0, 0, 0.6);
-}
-
 .select-wrapper {
     margin-top: 0px;
 }
@@ -46,6 +39,28 @@ select.material-ignore {
 .file-field input {
     margin-left: 100px;
     width: calc(100% - 100px);
+}
+
+.help-block {
+    line-height: 12px;
+    position: relative;
+    top: -10px;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.error {
+    line-height: 12px;
+    position: relative;
+    top: -10px;
+    color: #F44336;
+}
+
+.input-field .prefix ~ .errors .error {
+    margin-left: 3rem;
+}
+
+.input-field.has-error .prefix {
+    color: #F44336;
 }
 
 @media only screen and (max-width : 600px) {
