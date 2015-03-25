@@ -31,7 +31,7 @@ class RegistrationForm(forms.Form):
     password_confirm = forms.CharField(widget=forms.PasswordInput, label="Confirm password")
     first_name = forms.CharField(required=False)
     last_name = forms.CharField(required=False)
-    gender = forms.ChoiceField(choices=((None, 'Gender'), ('F', 'Female'), ('M', 'Male'), ('O', 'Other')))
+    gender = forms.ChoiceField(choices=((None, ''), ('F', 'Female'), ('M', 'Male'), ('O', 'Other')))
     receive_news = forms.BooleanField(required=False, label='I want to receive news and special offers')
     agree_toc = forms.BooleanField(required=True, label='I agree with the Terms and Conditions')
 
