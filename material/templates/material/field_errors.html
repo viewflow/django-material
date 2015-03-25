@@ -1,7 +1,5 @@
 {% if bound_field.errors %}
-<div class="errors">
-    {% for error in bound_field.errors %}
-        <small class="error">{{ error }}</small>
-    {% endfor %}
-</div>
+        <div class="errors">
+            {% for error in bound_field.errors %}<small class="error">{{ error }}</small>{% endfor %}
+        </div>
 {% endif %}

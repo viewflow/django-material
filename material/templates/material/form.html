@@ -8,35 +8,21 @@
         {% endfor %}
         </div>
     {% endif %}
-
-    <!-- Hidden fields -->
-    {% part form hidden %}
-        {% for hidden in form.hidden_fields %}
+    {% part form hidden %}{% for hidden in form.hidden_fields %}
             {{ hidden }}
-        {% endfor %}
-    {% endpart %}
-
-    {% if layout %}
-        {% part form visible %}
+    {% endfor %}{% endpart %}
+    {% if layout %}{% part form visible %}
             {% render layout %}{% endrender %}
-        {% endpart %}
-    {% else %}
-        <!-- Default form layout -->
+    {% endpart %}{% else %}
         {% part form visible %}
-            {% for bound_field in form.visible_fields %}
-                {% part bound_field.field %}
-                    {% render bound_field %}{% endrender %}
-                {% endpart %}
-            {% endfor %}
+            {% for bound_field in form.visible_fields %}{% part bound_field.field %}
+                {% render bound_field %}{% endrender %}
+            {% endpart %}{% endfor %}
             <div class="clearfix">
-        {% endpart %}
-
-        {% part 'inlines' %}
-            <!-- django-extra-view inlines -->
+        {% endpart %}{% part 'inlines' %}
             {% for inline in inlines %}
                 {{ inline }}
             {% endfor %}
         {% endpart %}
     {% endif %}
-
 {% endpart %}

@@ -14,23 +14,17 @@
                 name="{{ bound_field.html_name }}"
                 id="id_{{ bound_field.html_name }}"
                 {% part field add_control_attr %}{% endpart %}{% endtagattrs %}>
-            {% part field options %}
-            {% for value, choice in field.widget.choices %}
-            <option {% if value|force_text == bound_field.value|force_text %}selected="selected"{% endif %}
+            {% part field options %}{% for value, choice in field.widget.choices %}
+            <option {% tagattrs %}{% if value|force_text == bound_field.value|force_text %}selected="selected"{% endif %}
                     {% if value == None or value == '' %}disabled{% endif %}
-                    value="{{ value|default_if_none:"" }}">{% if value == None or value == '' %}{{ form_select_empty_label|default:choice }}{% else %}{{ choice }}{% endif %}</option>
-            {% endfor %}
-            {% endpart %}
+                    value="{{ value|default_if_none:"" }}"{% endtagattrs %}>{% if value == None or value == '' %}{{ form_select_empty_label|default:choice }}{% else %}{{ choice }}{% endif %}</option>
+            {% endfor %}{% endpart %}
         </select>
-        {% endpart %}
-        {% part field errors %}
+        {% endpart %}{% part field errors %}
         {% if bound_field.errors %}
-        {% include  'material/field_errors.html' %}
-        {% endif %}
-        {% endpart %}{% part field help_text %}
-        {% if field.help_text %}
-        <span class="help-block">{{ bound_field.help_text }}</span>
-        {% endif %}
-        {% endpart %}{{ hidden_initial }}
+            {% include  'material/field_errors.html' %}
+        {% endif %}{% endpart %}{% part field help_text %}{% if field.help_text %}
+            <span class="help-block">{{ bound_field.help_text }}</span>
+        {% endif %}{% endpart %}{{ hidden_initial }}
     </div>
 </div>
