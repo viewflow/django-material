@@ -10,7 +10,7 @@
         <label for="{{ bound_field.id_for_label }}" class="{% part field add_label_class %}{{ form_label_class }}{% endpart %}">{{ bound_field.label }}</label>
         {% endpart %}{% part field prefix %}{% endpart %} {% part field control %}
         <select {% tagattrs %}
-                class="{% part field add_control_class %}{% endpart %}"
+                class="{% if bound_field.errors %}invalid {% endif %}{% part field add_control_class %}{% endpart %}"
                 name="{{ bound_field.html_name }}"
                 id="id_{{ bound_field.html_name }}"
                 {% part field add_control_attr %}{% endpart %}{% endtagattrs %}>
