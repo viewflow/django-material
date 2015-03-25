@@ -36,7 +36,9 @@
                     {% block breadcrumbs %}
                     <li class="active"><a href="/admin/">Admininstration</a></li>
                     {% endblock %}
+                    {% if user.is_authenticated %}
                     <li class="logout"><a href="{% url 'admin:logout' %}"><i class="mdi-action-lock-open"></i> {% trans 'Log out' %}</a></li>
+                    {% endif %}
                 </ul>
             </nav>
         </header>
