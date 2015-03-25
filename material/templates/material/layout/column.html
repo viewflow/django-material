@@ -1,6 +1,6 @@
 {% load material_form_internal %}
 {% for element in parent.elements %}
-    <div>
-         {% render element %}{% endrender %}
+    <div {% if parent.column_id and element.field_name %}id="{{ parent.column_id }}_{{ element.field_name }}"{% endif %}>
+       {% render element %}{% endrender %}
     </div>
 {% endfor %}

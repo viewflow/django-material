@@ -1,6 +1,7 @@
 {% load material_form material_form_internal %}
 <div class="row">
     <div {% tagattrs %}
+         id="id_{{ bound_field.html_name }}_container"
          class="{% part field group_class %}input-field col s12
                 {% if field.required%}required{% endif %}
                 {% if bound_field.errors %}has-error{% endif %}

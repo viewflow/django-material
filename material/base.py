@@ -101,8 +101,9 @@ class Inline(LayoutNode):
 class Row(LayoutNode):
     template_name = 'layout/row.html'
 
-    def __init__(self, *elements):
+    def __init__(self, *elements, **kwargs):
         self.elements = _convert_to_field(elements)
+        self.row_id = kwargs.pop('row_id', None)
 
     def __getattr__(self, name):
         _, container_size = name.split('_')
@@ -127,6 +128,7 @@ class Column(LayoutNode):
     def __init__(self, *elements, **kwargs):
         self.elements = _convert_to_field(elements)
         self.span_columns = kwargs.pop('span_columns', 1)
+        self.column_id = kwargs.pop('column_id', None)
 
 
 class Span(object):

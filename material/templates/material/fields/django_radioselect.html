@@ -2,18 +2,24 @@
 <div class="row">
     <div {% tagattrs %}
          id="id_{{ bound_field.html_name }}_container"
-         class="{% part field group_class %}checkbox-field col s12
+         class="{% part field group_class %}radio-field col s12
                 {% if field.required%}required{% endif %}
                 {% if bound_field.errors %}has-error{% endif %}
                 {% part field add_group_class %}{% endpart %}
                 {% endpart %}"{% endtagattrs %}>
         {% part field prefix %}{% endpart %}{% part field control %}
-        <input type="checkbox"
-               name="{{ bound_field.html_name }}"
-               id="id_{{ bound_field.html_name }}"
-               {% if bound_field.value %}checked{% endif %}>
-        {% endpart %}{% part field label %}
-        <label for="{{ bound_field.id_for_label }}" class="control-label {% part field add_label_class %}{% endpart %}">{{ bound_field.label }}</label>
+        {% for value, choice in field.choices %}
+        <div class="radio">
+            <input {% tagattrs %}
+                   id="id_{{ bound_field.html_name }}_{{ forloop.counter0 }}"
+                   name="{{ bound_field.html_name }}"
+                   type="radio"
+                   value="{{ value }}"
+                   class="with-gap"
+                   {% if value == bound_field.value %}checked{% endif %}{% endtagattrs %}/>
+            <label for="id_{{ bound_field.html_name }}_{{ forloop.counter0 }}">{{ choice }}</label>
+        </div>
+        {% endfor %}
         {% endpart %}{% part field help_text %}
         {% if field.help_text %}
         <span class="help-block">{{ bound_field.help_text }}</span>
@@ -21,3 +27,4 @@
         {% endpart %}{{ hidden_initial }}
     </div>
 </div>
+
