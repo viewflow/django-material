@@ -222,6 +222,22 @@ body {
     margin-right: 0px;
 }
 
+.alert-info {
+    background-color: #0277bd;
+}
+
+.alert-success {
+    background-color: #43a047;
+}
+
+.alert-warning {
+    background-color: #ff8f00;
+}
+
+.alert-error {
+    background-color: ##d84315;
+}
+
 @media only screen and (min-width : 601px) {
     .fixed-action-btn {
         bottom: 15px;

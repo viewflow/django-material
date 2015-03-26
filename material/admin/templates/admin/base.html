@@ -3,7 +3,7 @@
     <head>
         <title>{% block title %}{% endblock %}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-        
+
         <link href="//netdna.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
         <!--link href="//cdn.datatables.net/1.10.5/css/jquery.dataTables.css" rel="stylesheet"-->
         <link href="//cdn.datatables.net/responsive/1.0.4/css/dataTables.responsive.css" rel="stylesheet">
@@ -19,7 +19,7 @@
         {% block blockbots %}<meta name="robots" content="NONE,NOARCHIVE" />{% endblock %}
     </head>
     {% load i18n %}
-    
+
     <body>
         {% if not is_popup %}
         <header>
@@ -44,7 +44,7 @@
         </header>
         {% endif %}
 
-        <main>            
+        <main>
             {% block content %}
             {{ content }}
             {% endblock %}
@@ -55,18 +55,17 @@
         <script src="//cdn.datatables.net/responsive/1.0.4/js/dataTables.responsive.js" type="text/javascript"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/datatables-fixedheader/2.1.1/dataTables.fixedHeader.js" type="text/javascript"></script>
         {% block extrajs %}{% endblock %}
-        
+
         {% block messages %}
         {% if messages %}
-        {% for message in messages %}
-        <span class="snackbar_open" data-timeout=0 data-toggle=snackbar data-style="alert-{{ message.tags }}" data-content="{{ message|capfirst }}"></span>
-        {% endfor %}
         <script type="text/javascript">
-            $(document).ready(function(){             
-                $(".snackbar_open").snackbar("show");
+            $(document).ready(function() {
+                {% for message in messages %}
+                toast('{{ message|capfirst }}', 10000, 'alert-{{ message.tags }}') 
+                {% endfor %}
             });
         </script>
         {% endif %}
-        {% endblock messages %}        
+        {% endblock messages %}
     </body>
 </html>
