@@ -16,11 +16,11 @@
         });
         $('[data-form-control="time"]').each(function() {
             var input = $(this);
-            input.datetimepicker({format: input.data('date-format'), timepicker:true, mask:true});
+            input.datetimepicker({format: input.data('date-format'), datepicker: false, timepicker:true, mask:false});
         });
         $('[data-form-control="datetime"]').each(function() {
             var input = $(this);
-            input.datetimepicker({format: input.data('date-format'), datepicker: false, timepicker:true, mask:true});
+            input.datetimepicker({format: input.data('date-format'), datepicker: true, timepicker:true, mask:false});
         });
 
 

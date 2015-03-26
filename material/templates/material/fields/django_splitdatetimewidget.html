@@ -1,0 +1,48 @@
+{% load material_form material_form_internal %}
+{% part field label %}
+{% endpart %}
+<div class="row" id="id_{{ bound_field.html_name }}_container">
+    <div class="col s12">
+        <label for="{{ bound_field.id_for_label }}" class="control-label {% part field add_label_class %}{{ form_label_class }}{% endpart %}">{{ bound_field.label }}</label>
+    </div>
+    <div {% tagattrs %}         
+         class="{% part field group_class %}input-field col s6 l3
+                {% if field.required%}required{% endif %}
+                {% if bound_field.errors %}has-error{% endif %}
+                {% part field add_group_class %}{% endpart %}
+                {% endpart %}"
+         style="margin-top:-7px"{% endtagattrs %}>
+        {% part field prefix %}{% endpart %}{% part field control %}
+        <i class="mdi-action-view-module prefix"></i>
+        <input {% tagattrs %}
+               type="text"
+               class="validate{% if bound_field.errors %} invalid{% endif %} {% part field add_control_class %}{{ form_control_class }}{% endpart %}"
+               name="{{ bound_field.html_name }}_0"
+               {% if form_with_placeholder %}placeholder="{{ bound_field.label }}"{% endif %}
+               id="id_{{ bound_field.html_name }}_0"
+               data-date-format="{{ field.fields.0|jquery_datepicker_format }}"
+               data-form-control="date"{% endtagattrs %}{% if bound_field.value %} value="{{ bound_field.value }}"{% endif %}>
+        {% endpart %}{% part field help_text %}
+        {% part field errors %}
+        {% if bound_field.errors %}
+            {% include  'material/field_errors.html' %}
+        {% endif %}
+        {% endpart %}{% if field.help_text %}
+        <small class="help-block">{{ bound_field.help_text }}</small>
+        {% endif %}
+        {% endpart %}{{ hidden_initial }}
+    </div>
+    <div class="input-field col s6 l3"
+         style="margin-top:-7px">
+        <i class="mdi-action-query-builder prefix"></i>
+        <input {% tagattrs %}
+               type="text"
+               class="validate{% if bound_field.errors %} invalid{% endif %} {% part field add_control_class %}{{ form_control_class }}{% endpart %}"
+               name="{{ bound_field.html_name }}_1"
+               {% if form_with_placeholder %}placeholder="{{ bound_field.label }}"{% endif %}
+               id="id_{{ bound_field.html_name }}_1"
+               data-date-format="{{ field.fields.1|jquery_datepicker_format }}"
+               data-form-control="time"{% endtagattrs %}{% if bound_field.value %} value="{{ bound_field.value }}"{% endif %}>
+    </div>
+</div>
+
