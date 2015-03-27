@@ -19,6 +19,8 @@ urlpatterns = [
         form_class=forms.CheckoutForm, success_url='/demo/checkout/', template_name="demo.html")),
     url(r'^demo/comment/$', generic.FormView.as_view(
         form_class=forms.CommentForm, success_url='/demo/comment/', template_name="demo.html")),
+    url(r'^demo/bank/$', generic.FormView.as_view(
+        form_class=forms.BankForm, success_url='/demo/bank/', template_name="demo.html")),
     url(r'^weblog/', include('zinnia.urls', namespace='zinnia')),
     url(r'^admin/', include(admin.site.urls)),
 ]

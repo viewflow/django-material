@@ -14,8 +14,10 @@
                {% if bound_field.value %}checked{% endif %}>
         {% endpart %}{% part field label %}
         <label for="{{ bound_field.id_for_label }}" class="control-label {% part field add_label_class %}{% endpart %}">{{ bound_field.label }}</label>
-        {% endpart %}{% part field help_text %}
-        {% if field.help_text %}
+        {% endpart %}{% part field help_text %}{% part field errors %}
+        {% if bound_field.errors %}
+            {% include  'material/field_errors.html' %}
+        {% endif %}{% endpart %}{% if field.help_text %}
         <span class="help-block">{{ bound_field.help_text }}</span>
         {% endif %}
         {% endpart %}{{ hidden_initial }}

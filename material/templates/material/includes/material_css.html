@@ -6,6 +6,18 @@ form  .row {
     margin-bottom: 0px;
 }
 
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+}
+
 .checkbox-field {
     line-height: 35px;
 }
@@ -70,11 +82,16 @@ select.material-ignore {
     box-shadow: 0 1px 0 0 #F44336;
 }
 
-.radio-field.inline {
+.radio-field {
+    paddign-bottom: 18px;
+}
+
+
+.radio-field .inline {
     margin-top: 10px;
 }
 
-.radio-field.inline .radio {
+.radio-field .inline .radio {
     display: inline;
     margin-right: 20px;
 }

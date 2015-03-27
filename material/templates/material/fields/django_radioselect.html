@@ -1,8 +1,11 @@
 {% load material_form material_form_internal %}
-<div class="row">
+<div class="row radio-field">
+    {% part field label %}<div class="col s12">
+        <label for="{{ bound_field.id_for_label }}" class="control-label {% part field add_label_class %}{{ form_label_class }}{% endpart %}">{{ bound_field.label }}</label>        
+    </div>{% endpart %}
     <div {% tagattrs %}
          id="id_{{ bound_field.html_name }}_container"
-         class="{% part field group_class %}radio-field col s12
+         class="{% part field group_class %}col s12
                 {% if field.required%}required{% endif %}
                 {% if bound_field.errors %}has-error{% endif %}
                 {% part field add_group_class %}{% endpart %}
@@ -20,8 +23,10 @@
             <label for="id_{{ bound_field.html_name }}_{{ forloop.counter0 }}">{{ choice }}</label>
         </div>
         {% endfor %}
-        {% endpart %}{% part field help_text %}
-        {% if field.help_text %}
+        {% endpart %}{% part field help_text %}{% part field errors %}
+        {% if bound_field.errors %}
+            {% include  'material/field_errors.html' %}
+        {% endif %}{% endpart %}{% if field.help_text %}
         <span class="help-block">{{ bound_field.help_text }}</span>
         {% endif %}
         {% endpart %}{{ hidden_initial }}

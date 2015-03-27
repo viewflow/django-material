@@ -1,6 +1,14 @@
 {% extends 'base_form.html' %}
 {% load material_form %}
 
+{% block extrahead %}
+<style type="text/css">
+    {{ form.css }}
+</style>
+{% endblock %}
+
+{% block formclass %}{{ form.blockclass|default:"col s12 m8 offset-m2 l8 offset-l2" }}{% endblock %}
+
 {% block formtitle %}{{ form.title }}{% endblock %}
 
 {% block formbody %}
