@@ -1,520 +1,300 @@
-{% extends 'base.html' %}
-
-{% block extrahead %}
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-{% endblock %}
-
-{% block container_class %}{% endblock %}
-
-
-{% block content %}
-<style type="text/css">
-body {
-    overflow-x: hidden;
-    background-color: white;
-}
-
-p {
-    font-size: 20px;
-}
-
-p.small {
-    font-size: 16px;
-}
-
-a,
-a:hover,
-a:focus,
-a:active,
-a.active {
-    outline: 0;
-    color: #18bc9c;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    text-transform: uppercase;
-    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
-    font-weight: 700;
-}
-
-hr.star-light,
-hr.star-primary {
-    margin: 25px auto 30px;
-    padding: 0;
-    max-width: 250px;
-    border: 0;
-    border-top: solid 5px;
-    text-align: center;
-}
-
-hr.star-light:after,
-hr.star-primary:after {
-    content: "\f005";
-    display: inline-block;
-    position: relative;
-    top: -.8em;
-    padding: 0 .25em;
-    font-family: FontAwesome;
-    font-size: 2em;
-}
-
-hr.star-light {
-    border-color: #fff;
-}
-
-hr.star-light:after {
-    color: #fff;
-    background-color: #18bc9c;
-}
-
-hr.star-primary {
-    border-color: #2c3e50;
-}
-
-hr.star-primary:after {
-    color: #2c3e50;
-    background-color: #fff;
-}
-
-.img-centered {
-    margin: 0 auto;
-}
-
-header {
-    text-align: center;
-    color: #fff;
-    background: #18bc9c;
-}
-
-header .container {
-    padding-top: 100px;
-    padding-bottom: 50px;
-}
-
-header img {
-    display: block;
-    margin: 0 auto 20px;
-}
-
-header .intro-text .name {
-    display: block;
-    text-transform: uppercase;
-    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
-    font-size: 2em;
-    font-weight: 700;
-}
-
-header .intro-text .skills {
-    font-size: 1.25em;
-    font-weight: 300;
-}
-
-@media(min-width:768px) {
-    header .container {
-        padding-top: 200px;
-        padding-bottom: 100px;
-    }
-
-    header .intro-text .name {
-        font-size: 4.75em;
-    }
-
-    header .intro-text .skills {
-        font-size: 1.75em;
-    }
-}
-
-@media(min-width:768px) {
-    .navbar-fixed-top {
-        padding: 25px 0;
-        -webkit-transition: padding .3s;
-        -moz-transition: padding .3s;
-        transition: padding .3s;
-    }
-
-    .navbar-fixed-top .navbar-brand {
-        font-size: 2em;
-        -webkit-transition: all .3s;
-        -moz-transition: all .3s;
-        transition: all .3s;
-    }
-
-    .navbar-fixed-top.navbar-shrink {
-        padding: 10px 0;
-    }
-
-    .navbar-fixed-top.navbar-shrink .navbar-brand {
-        font-size: 1.5em;
-    }
-}
-
-.navbar {
-    text-transform: uppercase;
-    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
-    font-weight: 700;
-}
-
-.navbar a:focus {
-    outline: 0;
-}
-
-.navbar .navbar-nav {
-    letter-spacing: 1px;
-}
-
-.navbar .navbar-nav li a:focus {
-    outline: 0;
-}
-
-.navbar-default,
-.navbar-inverse {
-    border: 0;
-}
-
-section {
-    padding: 100px 0;
-}
-
-section h2 {
-    margin: 0;
-    font-size: 3em;
-}
-
-section.success {
-    color: #fff;
-    background: #18bc9c;
-}
-
-@media(max-width:767px) {
-    section {
-        padding: 75px 0;
-    }
-
-    section.first {
-        padding-top: 75px;
-    }
-}
-
-#portfolio .portfolio-item {
-    right: 0;
-    margin: 0 0 15px;
-}
-
-#portfolio .portfolio-item .portfolio-link {
-    display: block;
-    position: relative;
-    margin: 0 auto;
-    max-width: 400px;
-}
-
-#portfolio .portfolio-item .portfolio-link .caption {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    background: rgba(24,188,156,.9);
-    -webkit-transition: all ease .5s;
-    -moz-transition: all ease .5s;
-    transition: all ease .5s;
-}
-
-#portfolio .portfolio-item .portfolio-link .caption:hover {
-    opacity: 1;
-}
-
-#portfolio .portfolio-item .portfolio-link .caption .caption-content {
-    position: absolute;
-    top: 50%;
-    width: 100%;
-    height: 20px;
-    margin-top: -12px;
-    text-align: center;
-    font-size: 20px;
-    color: #fff;
-}
-
-#portfolio .portfolio-item .portfolio-link .caption .caption-content i {
-    margin-top: -12px;
-}
-
-#portfolio .portfolio-item .portfolio-link .caption .caption-content h3,
-#portfolio .portfolio-item .portfolio-link .caption .caption-content h4 {
-    margin: 0;
-}
-
-#portfolio * {
-    z-index: 2;
-}
-
-@media(min-width:767px) {
-    #portfolio .portfolio-item {
-        margin: 0 0 30px;
-    }
-}
-
-.btn-outline {
-    margin-top: 15px;
-    border: solid 2px #fff;
-    font-size: 20px;
-    color: #fff;
-    background: 0 0;
-    transition: all .3s ease-in-out;
-}
-
-.btn-outline:hover,
-.btn-outline:focus,
-.btn-outline:active,
-.btn-outline.active {
-    border: solid 2px #fff;
-    color: #18bc9c;
-    background: #fff;
-}
-
-.floating-label-form-group {
-    position: relative;
-    margin-bottom: 0;
-    padding-bottom: .5em;
-    border-bottom: 1px solid #eee;
-}
-
-.floating-label-form-group input,
-.floating-label-form-group textarea {
-    z-index: 1;
-    position: relative;
-    padding-right: 0;
-    padding-left: 0;
-    border: 0;
-    border-radius: 0;
-    font-size: 1.5em;
-    background: 0 0;
-    box-shadow: none!important;
-    resize: none;
-}
-
-.floating-label-form-group label {
-    display: block;
-    z-index: 0;
-    position: relative;
-    top: 2em;
-    margin: 0;
-    font-size: .85em;
-    line-height: 1.764705882em;
-    vertical-align: middle;
-    vertical-align: baseline;
-    opacity: 0;
-    -webkit-transition: top .3s ease,opacity .3s ease;
-    -moz-transition: top .3s ease,opacity .3s ease;
-    -ms-transition: top .3s ease,opacity .3s ease;
-    transition: top .3s ease,opacity .3s ease;
-}
-
-.floating-label-form-group::not(:first-child) {
-    padding-left: 14px;
-    border-left: 1px solid #eee;
-}
-
-.floating-label-form-group-with-value label {
-    top: 0;
-    opacity: 1;
-}
-
-.floating-label-form-group-with-focus label {
-    color: #18bc9c;
-}
-
-form .row:first-child .floating-label-form-group {
-    border-top: 1px solid #eee;
-}
-
-footer {
-    color: #fff;
-}
-
-footer h3 {
-    margin-bottom: 30px;
-}
-
-footer .footer-above {
-    padding-top: 50px;
-    background-color: #2c3e50;
-}
-
-footer .footer-col {
-    margin-bottom: 50px;
-}
-
-footer .footer-below {
-    padding: 25px 0;
-    background-color: #233140;
-}
-
-.btn-social {
-    display: inline-block;
-    width: 50px;
-    height: 50px;
-    border: 2px solid #fff;
-    border-radius: 100%;
-    text-align: center;
-    font-size: 20px;
-    line-height: 45px;
-}
-
-.btn:focus,
-.btn:active,
-.btn.active {
-    outline: 0;
-}
-
-.scroll-top {
-    z-index: 1049;
-    position: fixed;
-    right: 2%;
-    bottom: 2%;
-    width: 50px;
-    height: 50px;
-}
-
-.scroll-top .btn {
-    width: 50px;
-    height: 50px;
-    border-radius: 100%;
-    font-size: 20px;
-    line-height: 28px;
-}
-
-.scroll-top .btn:focus {
-    outline: 0;
-}
-
-.portfolio-modal .modal-content {
-    padding: 100px 0;
-    min-height: 100%;
-    border: 0;
-    border-radius: 0;
-    text-align: center;
-    background-clip: border-box;
-    -webkit-box-shadow: none;
-    box-shadow: none;
-}
-
-.portfolio-modal .modal-content h2 {
-    margin: 0;
-    font-size: 3em;
-}
-
-.portfolio-modal .modal-content img {
-    margin-bottom: 30px;
-}
-
-.portfolio-modal .modal-content .item-details {
-    margin: 30px 0;
-}
-
-.portfolio-modal .close-modal {
-    position: absolute;
-    top: 25px;
-    right: 25px;
-    width: 75px;
-    height: 75px;
-    background-color: transparent;
-    cursor: pointer;
-}
-
-.portfolio-modal .close-modal:hover {
-    opacity: .3;
-}
-
-.portfolio-modal .close-modal .lr {
-    z-index: 1051;
-    width: 1px;
-    height: 75px;
-    margin-left: 35px;
-    background-color: #2c3e50;
-    -webkit-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    transform: rotate(45deg);
-}
-
-.portfolio-modal .close-modal .lr .rl {
-    z-index: 1052;
-    width: 1px;
-    height: 75px;
-    background-color: #2c3e50;
-    -webkit-transform: rotate(90deg);
-    -ms-transform: rotate(90deg);
-    transform: rotate(90deg);
-}
-
-.portfolio-modal .modal-backdrop {
-    display: none;
-    opacity: 0;
-}
-</style>
-<header>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="intro-text">
-                    <span class="name">Material Design</span>
-                    <hr class="star-light">
-                    <span class="skills">For Django Forms and Administration</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
-
-<section id="portfolio" class="white">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 text-center">
-                <h2>Features</h2>
-                <hr class="star-primary">
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="success" id="about">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 text-center">
-                <h2>Quick Start</h2>
-                <hr class="star-light">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-4 col-lg-offset-2">
-            </div>
-        </div>
-    </div>
-</section>
-
-<section id="demo">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 text-center">
-                <h2>Demo</h2>
-                <hr class="star-primary">
-            </div>
-        </div>
-    </div>
-</section>
-
-<footer class="text-center">
-    <div class="footer-below">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    Copyright © Your Website 2014
-                </div>
-            </div>
-        </div>
-    </div>
-</footer>
-{% endblock %}
+{% load static %}<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,
+    initial-scale=1">
+    <title>Material Design for Django Forms and Admin</title>
+
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" >
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/materialize/0.95.3/css/materialize.min.css">
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/idea.min.css">
+    <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/materialize/0.95.3/js/materialize.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/languages/python.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/languages/django.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function(){
+          $('.slider').slider({height:160+$(window).width()/6});
+          hljs.initHighlightingOnLoad();
+      });
+    </script>
+
+    <style type="text/css">
+      html, body { background: #e5e5e5; height: 100%; }
+
+      nav { 
+          height: 250px;
+          background-size: cover;
+          background-position: center; 
+      }
+
+      h1, h2, h3, h4, h5, h6 { 
+          font-weight: 300; 
+      }
+
+      main { 
+          margin-bottom: -150px; 
+      }
+
+      main .container {
+          position: relative; top: -200px;
+      }
+
+      .card-title {
+          font-size: 36px;
+      }
+
+      .card .card-action {
+          border-top: none;
+          padding-top: 10px;
+      }
+
+      .card a {
+          color: #1e88e5;
+      }
+
+      .hljs-string,
+      .hljs-keyword,
+      .hljs-tag .hljs-title,
+      .hljs-attribute,
+      .hljs-value {
+          font-weight: 300; 
+      }
+
+      .hljs-tag {
+          background: transparent;
+      }
+    </style>
+  </head>
+  <body>
+      <header>
+          <nav class="green darken-2">
+              <div class="nav-wrapper">
+                  <ul id="nav-mobile" class="right hide-on-med-and-down">
+                      <li><a target="_blank" href="https://github.com/viewflow/django-material"><i class="fa fa-github"></i></a></li>
+                      <li><a target="_blank" href="https://twitter.com/viewflow"><i class="fa fa-twitter"></i></a></li>
+                  </ul>
+              </div>
+          </nav>
+      </header>
+      <main>
+          <div class="container expand-on-small-only">
+               <div class="row">
+                   <div class="col s12">
+                       <div class="card">
+                            <div class="card-content">
+                                <div class="row" style="padding:50px">
+                                    <div class="col s3 l3 center-align">
+                                        <img src="{% static 'img/logo.png' %}" height="120px">
+                                    </div>
+                                    <div class="col s7 l5">
+                                        <span class="card-title
+                                        black-text">Django-material</span>
+                                        <h6>Material design for django forms and admin</h6>
+                                        <h6><a target="_blank" href="http://viewflow.io" style="text-transform:none;margin:0">viewflow.io</a></h6>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col s12 m10 offset-m1">
+                                        <div class="divider"></div>
+                                        <div class="section">
+                                            <h5>About</h5>
+                                        </div>
+                                        <div class="divider"></div>
+                                        <div class="section">
+                                            <h5>Installation</h5>
+django-material tested with Python 2.7/3.3, django 1.6/1.7
+
+<pre><code class="python">    $ pip install django-material </code></pre>
+
+And add it into INSTALLED_APPS settings
+
+<pre><code class="python">    INSTALLED_APPS = (
+        'material',
+        'material.admin',
+       ...
+    )
+</code></pre>
+<b>NOTE:</b> 'material.admin' must be added before 'django.contrib.admin'
+                                        </div>
+                                        <div class="divider"></div>
+                                        <div class="section">
+                                            <h5>Quick start</h5>
+Include material javascript and styles into your base template.
+
+<pre><code class="django">    {% templatetag openblock %} include 'material/includes/material_css.html' {% templatetag closeblock %}
+    {% templatetag openblock %} include 'material/includes/material_js.html' {% templatetag closeblock %}
+</code></pre>
+
+Load the `material_form` template tag library
+<pre><code class="django">     {% templatetag openblock %} load material_form {% templatetag closeblock %} </code></pre>
+
+And render your form with {% templatetag openblock %} form {% templatetag closeblock %} template tag
+<pre><code class="django">    &lt;form method="POST"&gt;
+        {% templatetag openblock %} csrf_token {% templatetag closeblock %}
+        {% templatetag openblock %} form form=form {% templatetag closeblock %}{% templatetag openblock %} endform {% templatetag closeblock %}
+        &lt;button type="submit" name="_submit" class="btn"&gt;Submit&lt;/button>
+    &lt;/form&gt;
+</code></pre>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                       </div>
+                   </div>
+                   <div class="col s12">
+                       <h4>Forms samples</h4>
+                   </div>
+                   <div class="col s12 m3">
+                       <div class="card">
+                           <div class="card-image">
+                               <a target="_blank" href="/demo/registration/">
+                                   <img src="{% static 'img/registration.png' %}">
+                               </a>
+                           </div>
+                           <div class="card-action right-align">
+                               <a href="#">Source</a>
+                           </div>
+                       </div>
+                   </div>
+                   <div class="col s12 m3">
+                       <div class="card">
+                           <div class="card-image">
+                               <a target="_blank" href="/demo/order/">
+                                   <img src="{% static 'img/order.png' %}">
+                               </a>
+                           </div>
+                           <div class="card-action right-align">
+                               <a href="#">Source</a>
+                           </div>
+                       </div>
+                   </div>
+                   <div class="col s12 m3">
+                       <div class="card">
+                           <div class="card-image">
+                               <a target="_blank" href="/demo/checkout/">
+                                   <img src="{% static 'img/checkout.png' %}">
+                               </a>
+                           </div>
+                           <div class="card-action right-align">
+                               <a href="#">Source</a>
+                           </div>
+                       </div>
+                   </div>
+                   <div class="col s12 m3">
+                       <div class="card">
+                           <div class="card-image">
+                               <a target="_blank" href="/demo/bank/">
+                                   <img src="{% static 'img/bank.png' %}">
+                               </a>
+                           </div>
+                           <div class="card-action right-align">
+                               <a href="#">Source</a>
+                           </div>
+                       </div>
+                   </div>
+                   <div class="col s12">
+                       <h4>Admininstration</h4>
+                   </div>
+                   <div class="col s12 admin">
+                           <div class="col s12 m12 l8 card grey lighten-4" style="padding: 0; padding-bottom: 25px; margin-top: 8px;   box-sizing: border-box;">
+                               <div class="slider">
+                                   <ul class="slides">
+                                       <li>
+                                           <a target="_blank" href="/admin/"><img class="responsive-img" src="{% static 'img/admin_main.png' %}"></a>
+                                       </li>
+                                       <li>
+                                           <a target="_blank" href="/admin/auth/user/"><img class="responsive-img" src="{% static 'img/admin_list.png ' %}"></a>
+                                       </li>
+                                       <li>
+                                           <a target="_blank" href="/admin/auth/user/1/"><img class="responsive-img" src="{% static 'img/admin_change.png' %}"></a>
+                                       </li>
+                                       <li>
+                                           <a target="_blank" href="/admin/login/"><img class="responsive-img" src="{% static 'img/admin_login.png' %}"></a>
+                                       </li>
+                                   </ul>
+                               </div>
+                           </div>
+                       <div class="row">
+
+                           <div class="col s12 m12 l4" style="padding-right:0">
+                               <div class="col s12 m6 l6">
+                                   <div class="card">
+                                       <div class="card-image">
+                                           <a target="_blank" href="/admin/">
+                                               <img src="{% static 'img/admin_main_mobile.png' %}">
+                                           </a>
+                                       </div>
+                                   </div>
+                               </div>
+                               <div class="col s12 m6 l6">
+                                   <div class="card">
+                                       <div class="card-image">
+                                           <a target="_blank" href="/admin/auth/user/">
+                                               <img src="{% static 'img/admin_list_mobile.png' %}">
+                                           </a>
+                                       </div>
+                                   </div>
+                               </div>
+                               <div class="col s12 m6 l6">
+                                   <div class="card">
+                                       <div class="card-image">
+                                           <a target="_blank" href="/admin/auth/user/1/">
+                                               <img src="{% static 'img/admin_change_mobile.png' %}">
+                                           </a>
+                                       </div>
+                                   </div>
+                               </div>
+                               <div class="col s12 m6 l6">
+                                   <div class="card">
+                                       <div class="card-image">
+                                           <a target="_blank" href="/admin/">
+                                               <img src="{% static 'img/admin_menu_mobile.png' %}">
+                                           </a>
+                                       </div>
+                                   </div>
+                               </div>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+          </div>
+      </main>
+      <footer class="page-footer green darken-4">
+          <div class="container">
+              <div class="row">
+                  <div class="col l6 s12">
+                      <h5 class="white-text">Footer Content</h5>
+                      <p class="grey-text text-lighten-4">You can use
+                      rows and columns here to organize your footer
+                      content.</p>
+                  </div>
+                  <div class="col l4 offset-l2 s12">
+                      <h5 class="white-text">Links</h5>
+                      <ul>
+                          <li><a class="grey-text text-lighten-3"
+                          href="#!">Link 1</a></li>
+                          <li><a class="grey-text text-lighten-3"
+                          href="#!">Link 2</a></li>
+                          <li><a class="grey-text text-lighten-3"
+                          href="#!">Link 3</a></li>
+                          <li><a class="grey-text text-lighten-3"
+                          href="#!">Link 4</a></li>
+                      </ul>
+                  </div>
+              </div>
+          </div>
+          <div class="footer-copyright">
+              <div class="container">
+                  © 2014 Copyright Text
+                  <a class="grey-text text-lighten-4 right"
+                  href="#!">More Links</a>
+              </div>
+          </div>
+      </footer>
+  </body>
+</html>

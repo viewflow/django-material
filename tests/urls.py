@@ -23,4 +23,5 @@ urlpatterns = [
         form_class=forms.BankForm, success_url='/demo/bank/', template_name="demo.html")),
     url(r'^weblog/', include('zinnia.urls', namespace='zinnia')),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^foundation/basic/', generic.RedirectView.as_view(url='/?cache=no'))
 ]
