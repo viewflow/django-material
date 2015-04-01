@@ -87,10 +87,10 @@
                        <div class="card">
                             <div class="card-content">
                                 <div class="row" style="padding:50px">
-                                    <div class="col s3 l3 center-align">
+                                    <div class="col s12 l3 center-align">
                                         <img src="{% static 'img/logo.png' %}" height="120px">
                                     </div>
-                                    <div class="col s7 l5">
+                                    <div class="col s12 l5">
                                         <span class="card-title
                                         black-text">Django-material</span>
                                         <h6>Material design for django forms and admin</h6>
@@ -101,12 +101,31 @@
                                     <div class="col s12 m10 offset-m1">
                                         <div class="divider"></div>
                                         <div class="section">
-                                            <h5>About</h5>
+                                            <h5>Features</h5>
+                                            <div class="row">
+                                                <div class="col m8">
+                                                <h5 style="line-height:50px">
+                                                    <ul style="margin:0">
+                                                        <li><i class="green-text mdi-action-done"></i> Strong python/html code separation</li>
+                                                        <li><i class="green-text mdi-action-done"></i> Easy redefinition of particular field rendering</li>
+                                                        <li><i class="green-text mdi-action-done"></i> Complex form layout support</li>
+                                                    </ul>
+                                                </h5>
+                                                </div>
+                                                <div class="col m4 center-align">
+                                                    <br/>
+                                                    <a target="_blank" href="/demo/login/">
+                                                        <img src="{% static 'img/canvas.png' %}" class="responsive-img">
+                                                    </a><br/><br/>
+                                                    <a href="#" class="align-right">Source</a>
+                                                </div>
+                                            </div>
+                                            
                                         </div>
                                         <div class="divider"></div>
                                         <div class="section">
-                                            <h5>Installation</h5>
-django-material tested with Python 2.7/3.3, django 1.6/1.7
+                                            <h5>Installation</h5><br/>
+                                            django-material tested with Python 2.7/3.3, django 1.6/1.7
 
 <pre><code class="python">    $ pip install django-material </code></pre>
 
@@ -122,7 +141,7 @@ And add it into INSTALLED_APPS settings
                                         </div>
                                         <div class="divider"></div>
                                         <div class="section">
-                                            <h5>Quick start</h5>
+                                            <h5>Quick start</h5><br/>
 Include material javascript and styles into your base template.
 
 <pre><code class="django">    {% templatetag openblock %} include 'material/includes/material_css.html' {% templatetag closeblock %}
@@ -140,6 +159,10 @@ And render your form with {% templatetag openblock %} form {% templatetag closeb
     &lt;/form&gt;
 </code></pre>
 
+                                        </div>
+                                        <div class="divider"></div>
+                                        <div class="section center-align">
+                                            <h5><br/>Read the full documentation at <a href="http://docs.viewflow.io/viewform_api.html" style="text-transform:none">http://docs.viewflow.io/</a><br/><br/></h5>
                                         </div>
                                     </div>
                                 </div>
@@ -268,7 +291,7 @@ And render your form with {% templatetag openblock %} form {% templatetag closeb
           <div class="container">
               <div class="row">
                   <div class="col l6 s12">
-                      <h5 class="white-text">Footer Content</h5>
+                      <h5 class="white-text">Hey, this is alpha software</h5>
                       <p class="grey-text text-lighten-4">You can use
                       rows and columns here to organize your footer
                       content.</p>
@@ -290,9 +313,9 @@ And render your form with {% templatetag openblock %} form {% templatetag closeb
           </div>
           <div class="footer-copyright">
               <div class="container">
-                  © 2014 Copyright Text
+                  © 2014 Mikhail Podgurskiy
                   <a class="grey-text text-lighten-4 right"
-                  href="#!">More Links</a>
+                  href="http://opensource.org/licenses/BSD-3-Clause">BSD License</a>
               </div>
           </div>
       </footer>
