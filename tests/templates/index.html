@@ -18,6 +18,7 @@
     <script type="text/javascript">
       $(document).ready(function(){
           $('.slider').slider({height:160+$(window).width()/6});
+           $('.scrollspy').scrollSpy();
           hljs.initHighlightingOnLoad();
       });
     </script>
@@ -67,6 +68,13 @@
       .hljs-tag {
           background: transparent;
       }
+
+      @media only screen and (max-width : 600px) {
+          .container.expand-on-small-only {
+              width: 100% !important;
+              padding: 0 0.8rem  !important;
+          }
+      }
     </style>
   </head>
   <body>
@@ -100,7 +108,7 @@
                                 <div class="row">
                                     <div class="col s12 m10 offset-m1">
                                         <div class="divider"></div>
-                                        <div class="section">
+                                        <div id="features" class="section scrollspy">
                                             <h5>Features</h5>
                                             <div class="row">
                                                 <div class="col m8">
@@ -123,7 +131,7 @@
                                             
                                         </div>
                                         <div class="divider"></div>
-                                        <div class="section">
+                                        <div  id="installation" class="section scrollspy">
                                             <h5>Installation</h5><br/>
                                             django-material tested with Python 2.7/3.3, django 1.6/1.7
 
@@ -140,7 +148,7 @@ And add it into INSTALLED_APPS settings
 <b>NOTE:</b> 'material.admin' must be added before 'django.contrib.admin'
                                         </div>
                                         <div class="divider"></div>
-                                        <div class="section">
+                                        <div id="quick_start" class="section scrollspy">
                                             <h5>Quick start</h5><br/>
 Include material javascript and styles into your base template.
 
@@ -161,7 +169,7 @@ And render your form with {% templatetag openblock %} form {% templatetag closeb
 
                                         </div>
                                         <div class="divider"></div>
-                                        <div class="section center-align">
+                                        <div  id="docs" class="section scrollspy center-align">
                                             <h5><br/>Read the full documentation at <a href="http://docs.viewflow.io/viewform_api.html" style="text-transform:none">http://docs.viewflow.io/</a><br/><br/></h5>
                                         </div>
                                     </div>
@@ -169,10 +177,11 @@ And render your form with {% templatetag openblock %} form {% templatetag closeb
                             </div>
                        </div>
                    </div>
+                   <div class="row col scrollspy" id="forms">
                    <div class="col s12">
                        <h4>Forms samples</h4>
                    </div>
-                   <div class="col s12 m3">
+                   <div id="forms2" class="col s12 m3 scrollspy">
                        <div class="card">
                            <div class="card-image">
                                <a target="_blank" href="/demo/registration/">
@@ -220,10 +229,11 @@ And render your form with {% templatetag openblock %} form {% templatetag closeb
                            </div>
                        </div>
                    </div>
+                   </div>
                    <div class="col s12">
                        <h4>Admininstration</h4>
                    </div>
-                   <div class="col s12 admin">
+                   <div id="admin" class="col s12 admin scrollspy">
                            <div class="col s12 m12 l8 card grey lighten-4" style="padding: 0; padding-bottom: 25px; margin-top: 8px;   box-sizing: border-box;">
                                <div class="slider">
                                    <ul class="slides">
@@ -319,5 +329,15 @@ And render your form with {% templatetag openblock %} form {% templatetag closeb
               </div>
           </div>
       </footer>
+
+      <ul class="section table-of-contents hide-on-med-and-down" style="position:fixed; top: 300px; left: 30px">
+        <li><a href="#features">Features</a></li>
+        <li><a href="#installation">Installation</a></li>
+        <li><a href="#quick_start">Quick Start</a></li>
+        <li><a href="#docs">Documentation</a></li>
+        <li><a href="#forms">Forms samples</a></li>
+        <li><a href="#admin">Admin</a></li>
+      </ul>
+
   </body>
 </html>
