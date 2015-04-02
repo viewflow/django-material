@@ -7,8 +7,9 @@ except IOError:
 
 setup(
     name='django-material',
-    version='0.1.0',
-    description='Template driven form rendering for django.',
+    version='0.2.0',
+    description='Material design for django forms and admin',
+    license='BSD',
     author='Mikhail Podgurskiy',
     author_email='kmmbvnr@gmail.com',
     url='http://github.com/viewflow/django-material',
@@ -24,7 +25,7 @@ setup(
         'Environment :: Web Environment',
         'Intended Audience :: Developers',
         'Intended Audience :: System Administrators',
-        'License :: Free for non-commercial use',
+        'License :: OSI Approved :: BSD License',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
         'Programming Language :: Python :: 2.7',
