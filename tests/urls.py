@@ -1,12 +1,25 @@
 from django.conf.urls import include, url
 from django.contrib import admin
 from django.views import generic
+from django.shortcuts import render
 
 from . import forms
 
 
+def index_view(request):
+    context = {
+        'login': forms.LoginForm(),
+        'registration': forms.RegistrationForm(),
+        'checkout': forms.CheckoutForm(),
+        'order': forms.OrderForm(),
+        'comment': forms.CommentForm(),
+        'bank': forms.BankForm()
+    }
+    return render(request, 'index.html', context)
+
+
 urlpatterns = [
-    url(r'^$', generic.TemplateView.as_view(template_name="index.html")),
+    url(r'^$', index_view),
     url(r'^demo/login/$', generic.FormView.as_view(
         form_class=forms.LoginForm, success_url='/demo/login/', template_name="demo.html")),
     url(r'^demo/registration/$', generic.FormView.as_view(

@@ -18,8 +18,10 @@
     <script type="text/javascript">
       $(document).ready(function(){
           $('.slider').slider({height:160+$(window).width()/6});
-           $('.scrollspy').scrollSpy();
+          $('.scrollspy').scrollSpy();
           hljs.initHighlightingOnLoad();
+          $('.modal-trigger').leanModal({dismissible: true, opacity: 0.2});
+          $('ul.tabs').tabs();
       });
     </script>
 
@@ -55,6 +57,26 @@
 
       .card a {
           color: #1e88e5;
+      }
+
+      .modal {
+          background-color: #fff
+      }
+
+      .modal .modal-footer {
+          background-color: #fff
+      }
+
+      .tabs .indicator {
+          background-color: #333;
+      }
+
+      .tabs li.tab a {
+          color: #333;
+      }
+
+      .tabs li.tab a:hover  {
+          color: #555;
       }
 
       .hljs-string,
@@ -125,7 +147,7 @@
                                                     <a target="_blank" href="/demo/login/">
                                                         <img src="{% static 'img/canvas.png' %}" class="responsive-img">
                                                     </a><br/><br/>
-                                                    <a href="#" class="align-right">Source</a>
+                                                    <a href="#login_form" class="modal-trigger align-right">Source</a>
                                                 </div>
                                             </div>
                                             
@@ -189,7 +211,8 @@ And render your form with {% templatetag openblock %} form {% templatetag closeb
                                </a>
                            </div>
                            <div class="card-action right-align">
-                               <a href="#">Source</a>
+                               <a href="#registration_form_code" class="modal-trigger align-right">Code</a>
+                               <a href="#registration_form_html" class="modal-trigger align-right">Template</a>
                            </div>
                        </div>
                    </div>
@@ -201,7 +224,8 @@ And render your form with {% templatetag openblock %} form {% templatetag closeb
                                </a>
                            </div>
                            <div class="card-action right-align">
-                               <a href="#">Source</a>
+                               <a href="#order_form_code" class="modal-trigger align-right">Code</a>
+                               <a href="#order_form_html" class="modal-trigger align-right">Template</a>
                            </div>
                        </div>
                    </div>
@@ -213,7 +237,8 @@ And render your form with {% templatetag openblock %} form {% templatetag closeb
                                </a>
                            </div>
                            <div class="card-action right-align">
-                               <a href="#">Source</a>
+                               <a href="#checkout_form_code" class="modal-trigger align-right">Code</a>
+                               <a href="#checkout_form_html" class="modal-trigger align-right">Template</a>
                            </div>
                        </div>
                    </div>
@@ -225,7 +250,8 @@ And render your form with {% templatetag openblock %} form {% templatetag closeb
                                </a>
                            </div>
                            <div class="card-action right-align">
-                               <a href="#">Source</a>
+                               <a href="#bank_form_code" class="modal-trigger align-right">Code</a>
+                               <a href="#bank_form_html" class="modal-trigger align-right">Template</a>
                            </div>
                        </div>
                    </div>
@@ -330,7 +356,7 @@ And render your form with {% templatetag openblock %} form {% templatetag closeb
           </div>
       </footer>
 
-      <ul class="section table-of-contents hide-on-med-and-down" style="position:fixed; top: 300px; left: 30px">
+      <ul id="content" class="section table-of-contents hide-on-med-and-down" style="position:fixed; top: 300px; left: 30px">
         <li><a href="#features">Features</a></li>
         <li><a href="#installation">Installation</a></li>
         <li><a href="#quick_start">Quick Start</a></li>
@@ -338,6 +364,154 @@ And render your form with {% templatetag openblock %} form {% templatetag closeb
         <li><a href="#forms">Forms samples</a></li>
         <li><a href="#admin">Admin</a></li>
       </ul>
+
+      <div id="login_form" class="modal">
+          <div class="modal-content">
+              <h4>Login Form</h4>
+              <div class="divider"></div>
+              <div class="section">
+                  <h5>Code</h5>
+                  <pre><code class="python">{{ login.source.rstrip|linebreaksbr }}</code></pre>
+              </div>
+              <div class="divider"></div>
+              <div class="section">
+                  <h5>Html</h5>
+                  <pre><code class="django">&lt;form method="POST" class="viewform"&gt;{% verbatim %}{% csrf_token %}{% endverbatim %}{{ login.template.origin.source.rstrip|linebreaksbr }}
+    &lt;button type="submit" name="_submit" class="btn btn-primary btn-lg"&gt;Submit&lt;/button&gt;
+&lt;/form&gt;
+                  </code></pre>
+              </div>
+              <div class="modal-footer">
+                  <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+              </div>
+          </div>
+      </div>
+
+      <div id="registration_form_code" class="modal">
+          <div class="modal-content">
+              <h4>Registration Form</h4>
+              <div class="divider"></div>
+              <div class="section">
+                  <h5>Code</h5>
+                  <pre><code class="python">{{ registration.source.rstrip|linebreaksbr }}</code></pre>
+              </div>
+              <div class="modal-footer">
+                  <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+              </div>
+          </div>
+      </div>
+
+      <div id="registration_form_html" class="modal">
+          <div class="modal-content">
+              <h4>Registration Form</h4>
+              <div class="divider"></div>
+              <div class="section">
+                  <h5>Template</h5>
+                  <pre><code class="django">&lt;form method="POST" class="viewform"&gt;{% verbatim %}{% csrf_token %}{% endverbatim %}{{ registration.template.origin.source.rstrip|linebreaksbr }}
+    &lt;button type="submit" name="_submit" class="btn btn-primary btn-lg"&gt;Submit&lt;/button&gt;
+&lt;/form&gt;
+                  </code></pre>
+              </div>
+              <div class="modal-footer">
+                  <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+              </div>
+          </div>
+      </div>
+
+      <div id="order_form_code" class="modal">
+          <div class="modal-content">
+              <h4>Order Form</h4>
+              <div class="divider"></div>
+              <div class="section">
+                  <h5>Code</h5>
+                  <pre><code class="python">{{ order.source.rstrip|linebreaksbr }}</code></pre>
+              </div>
+              <div class="modal-footer">
+                  <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+              </div>
+          </div>
+      </div>
+
+      <div id="order_form_html" class="modal">
+          <div class="modal-content">
+              <h4>Order Form</h4>
+              <div class="divider"></div>
+              <div class="section">
+                  <h5>Template</h5>
+                  <pre><code class="django">&lt;form method="POST" class="viewform"&gt;{% verbatim %}{% csrf_token %}{% endverbatim %}{{ order.template.origin.source.rstrip|linebreaksbr }}
+    &lt;button type="submit" name="_submit" class="btn btn-primary btn-lg"&gt;Submit&lt;/button&gt;
+&lt;/form&gt;
+                  </code></pre>
+              </div>
+              <div class="modal-footer">
+                  <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+              </div>
+          </div>
+      </div>
+
+      <div id="checkout_form_code" class="modal">
+          <div class="modal-content">
+              <h4>Checkout Form</h4>
+              <div class="divider"></div>
+              <div class="section">
+                  <h5>Code</h5>
+                  <pre><code class="python">{{ checkout.source.rstrip|linebreaksbr }}</code></pre>
+              </div>
+              <div class="modal-footer">
+                  <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+              </div>
+          </div>
+      </div>
+
+      <div id="checkout_form_html" class="modal">
+          <div class="modal-content">
+              <h4>Checkout Form</h4>
+              <div class="divider"></div>
+              <div class="section">
+                  <h5>Template</h5>
+                  <pre><code class="html">&lt;style type="text/css"&gt;{{ checkout.css.rstrip|linebreaksbr }}
+&lt;/style&gt;</code><code class="django">&lt;form method="POST" class="viewform"&gt;{% verbatim %}{% csrf_token %}{% endverbatim %}{{ checkout.template.origin.source.rstrip|linebreaksbr }}
+    &lt;button type="submit" name="_submit" class="btn btn-primary btn-lg"&gt;Submit&lt;/button&gt;
+&lt;/form&gt;
+                  </code></pre>
+              </div>
+              <div class="modal-footer">
+                  <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+              </div>
+          </div>
+      </div>
+
+      <div id="bank_form_code" class="modal">
+          <div class="modal-content">
+              <h4>Personal Bank Account Application Form</h4>
+              <div class="divider"></div>
+              <div class="section">
+                  <h5>Code</h5>
+                  <pre><code class="python">{{ bank.source.rstrip|linebreaksbr }}</code></pre>
+              </div>
+              <div class="modal-footer">
+                  <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+              </div>
+          </div>
+      </div>
+
+      <div id="bank_form_html" class="modal">
+          <div class="modal-content">
+              <h4>Personal Bank Account Application Form</h4>
+              <div class="divider"></div>
+              <div class="section">
+                  <h5>Template</h5>
+                  <pre><code class="html">&lt;style type="text/css"&gt;{{ bank.css.rstrip|linebreaksbr }}
+&lt;/style&gt;</code><code class="django">&lt;form method="POST" class="viewform"&gt;{% verbatim %}{% csrf_token %}{% endverbatim %}{{ bank.template.origin.source.rstrip|linebreaksbr }}
+    &lt;button type="submit" name="_submit" class="btn btn-primary btn-lg"&gt;Submit&lt;/button&gt;
+&lt;/form&gt;
+                  </code></pre>
+              </div>
+              <div class="modal-footer">
+                  <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+              </div>
+          </div>
+      </div>
 
   </body>
 </html>

@@ -151,9 +151,7 @@ class OrderForm(forms.Form):
                                         ('L', '$10000-$20000'), ('XL', 'More than $20000')))
     start_date = forms.DateField(label="Expected start date")
     finish_date = forms.DateField(label="Expected finish date")
-
     attachment = forms.FileField(label="Include some file...")
-
     message = forms.CharField(widget=forms.Textarea)
 
     layout = Layout('name', 'company', 'email', 'phone',
@@ -167,7 +165,6 @@ class OrderForm(forms.Form):
         {% part form.company prefix %}<i class="mdi-communication-business prefix"></i>{% endpart %}
         {% part form.email prefix %}<i class="mdi-communication-email prefix"></i>{% endpart %}
         {% part form.phone prefix %}<i class="mdi-communication-call prefix"></i>{% endpart %}
-
     {% endform %}
     """)
 
@@ -263,7 +260,7 @@ class CommentForm(forms.Form):
 class BankForm(forms.Form):
     branch_name = forms.CharField()
 
-    # Personal Details
+    """ Personal Details """
     person_title = forms.ChoiceField(choices=(('Mr', 'Mr.'), ('Mrs.', 'Mrs.'), ('Ms.', 'Ms.')), label='Title')
     full_name = forms.CharField()
     date_of_birth = forms.DateField()
@@ -274,7 +271,7 @@ class BankForm(forms.Form):
     existing_bank_account = forms.CharField()
     partner_name = forms.CharField(label='Name of father/spouse')
 
-    # Residential address
+    """ Residential address """
     flat_bulding = forms.CharField(label='Flat no. and bldg. name')
     road_no = forms.CharField(label='Road no./name')
     area_and_landmark = forms.CharField(label='Area and landmark')
@@ -284,7 +281,7 @@ class BankForm(forms.Form):
     fax = forms.CharField()
     pin_code = forms.CharField()
 
-    # Mailing Address
+    """ Mailing Address """
     mailing_company_details = forms.CharField(label="Company name and department/ Flat no. and bldg. name")
     mailing_road_no = forms.CharField(label='Road no./name')
     mailing_area_and_landmark = forms.CharField(label='Area and landmark')
@@ -296,12 +293,12 @@ class BankForm(forms.Form):
     mailing_pin_code = forms.CharField(label='Pin Code')
     mailing_email = forms.EmailField(label='E-mail')
 
-    # Details of Introduction by Existing Customer
+    """ Details of Introduction by Existing Customer """
     introducer_name = forms.CharField(label='Customer Name')
     introducer_account_no = forms.CharField(label='Account No.')
     introducer_signature = forms.CharField(label="Introducer's signature")
 
-    # Account Details
+    """ Account Details """
     account_type = forms.ChoiceField(
         choices=(('S', 'Savings'), ('C', 'Current'), ('F', 'Fixed deposits')),
         label='Choice of account',
@@ -312,7 +309,7 @@ class BankForm(forms.Form):
         widget=forms.RadioSelect)
     account_amount = forms.FloatField(label='Amount')
 
-    # Details of Fixed Deposit
+    """ Details of Fixed Deposit """
     deposit_type = forms.ChoiceField(
         choices=(('O', 'Ordinary'), ('C', 'Cumulative')),
         label='Types of deposit',
@@ -325,7 +322,7 @@ class BankForm(forms.Form):
     deposit_no = forms.CharField(label='No. of deposits')
     deposit_individual_amount = forms.FloatField(label='Individual Deposit Amount')
 
-    # Personal Details
+    """ Personal Details """
     occupation = forms.ChoiceField(
         choices=(('NE', 'Non-executive'), ('HW', 'Housewife'), ('RT', 'Retired'),
                  ('ST', 'Student'), ('OT', 'Other'), ('UN', 'Unemployed')),
@@ -344,14 +341,14 @@ class BankForm(forms.Form):
         widget=forms.RadioSelect)
     spouse_name = forms.CharField()
 
-    # Other existing bank accounts, if any
+    """ Other existing bank accounts, if any """
     other_account1 = forms.CharField(label='Name of the Bank / branch')
     other_account2 = forms.CharField(label='Name of the Bank / branch')
 
-    # Reason for Account opening
+    """ Reason for Account opening """
     reason = forms.CharField(label="Please specify", widget=forms.Textarea)
 
-    # Terms And Conditions
+    """ Terms And Conditions """
     terms_accepted = forms.BooleanField(
         label="I/We confirm having read and understood the account rules of The Banking Corporation Limited"
         " ('the Bank'), and hereby agree to be bound by the terms and conditions and amendments governing the"
