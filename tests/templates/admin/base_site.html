@@ -1,0 +1,20 @@
+{% extends "admin/base.html" %}
+
+{% block title %}{{ title }} | {{ site_title|default:_('Django site admin') }}{% endblock %}
+
+{% block branding %}
+<a id="branding" class="navbar-brand" href="{% url 'admin:index' %}">
+    <i class="glyphicon glyphicon-home"></i>&nbsp;&nbsp;
+    <span class="hidden-xs hidden-sm">{{ site_header|default:_('Django administration') }}</span>
+</a>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}
+
+{% block extrajs %}
+{% if user.is_anonymous %}
+<script type="text/javascript">
+toast('Use  admin:admin  to log into administration interface', 100000, 'alert-error');
+</script>
+{% endif %}
+{% endblock %}
