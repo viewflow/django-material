@@ -2,3 +2,5 @@
 *.pyc
 db*.sqlite3
 deploy
+dist/
+django_material.egg-info/
