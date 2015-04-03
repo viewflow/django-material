@@ -139,7 +139,7 @@ form fields list directly from layout object
 Changelog
 =========
 
-0.2.0 2014-11-05 - Alpha
+0.2.0 2015-04-03 - Alpha
 ------------------------
 * Switched to material design
 * Initial admin interface support
