@@ -75,6 +75,11 @@ class TagAttrsNode(Node):
 
 
 @register.filter
+def multiwidget_value(bound_field, pos):
+    return bound_field.field.widget.decompress(bound_field.value())[pos]
+
+
+@register.filter
 def jquery_datepicker_format(field):
     input_format = field.input_formats[0]
 
@@ -100,8 +105,8 @@ def jquery_datepicker_format(field):
 
 
 @register.filter
-def datepicker_value(bound_field):
-    return formats.localize_input(bound_field.value(), bound_field.field.input_formats[0])
+def datepicker_value(value, date_format):
+    return formats.localize_input(value, date_format)
 
 
 @register.filter('force_text')
