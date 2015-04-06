@@ -5,6 +5,10 @@
 <script src="{% static 'material/js/jquery.datetimepicker.js' %}"></script>
 <script src="{% static 'material/js/materialize.js' %}"></script>
 <script type="text/javascript">
+    if (navigator.appVersion.indexOf("Win")!=-1) {
+        document.write('<link rel="stylesheet" type="text/css" href="{% static 'material/css/robotofix.css' %}">');
+    }
+
     $(function() {
         $('.dropdown-button').dropdown({hover: false});
         $(".button-collapse").sideNav();
