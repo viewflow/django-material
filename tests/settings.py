@@ -29,6 +29,8 @@ INSTALLED_APPS = (
     'debug_toolbar',
     'template_debug',
     'autofixture',
+    # tests
+    'tests.integration',
     # test admin apps
     'django.contrib.flatpages',
     'django.contrib.redirects',
