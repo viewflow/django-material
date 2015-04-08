@@ -3,6 +3,9 @@ Django Material
 
 Material design for Django Forms and Admin. Template driven.
 
+.. image:: https://travis-ci.org/viewflow/django-material.svg
+    :target: https://travis-ci.org/viewflow/django-material
+
 Features
 ========
 

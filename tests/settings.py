@@ -20,7 +20,7 @@ ALLOWED_HOSTS = []
 DEMO_APPS = (
     'mptt',
     'tagging',
-    'zinnia'
+    'zinnia',
     'django_comments',
     'social.apps.django_app.default',
     'autofixture',
