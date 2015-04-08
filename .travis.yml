@@ -15,8 +15,3 @@ install:
 script:
     - tox -e $TOX_ENV -- python manage.py test tests.integration
     - tox -e $TOX_ENV -- python manage.py test tests.visual
-
-
-cache:
-    directories:
-        - .tox
