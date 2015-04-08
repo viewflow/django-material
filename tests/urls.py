@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.conf.urls import include, url
 from django.contrib import admin
 from django.views import generic
@@ -34,7 +35,10 @@ urlpatterns = [
         form_class=forms.CommentForm, success_url='/demo/comment/', template_name="demo.html")),
     url(r'^demo/bank/$', generic.FormView.as_view(
         form_class=forms.BankForm, success_url='/demo/bank/', template_name="demo.html")),
-    url(r'^weblog/', include('zinnia.urls', namespace='zinnia')),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^foundation/basic/', generic.RedirectView.as_view(url='/?cache=no'))
+    url(r'^foundation/basic/', generic.RedirectView.as_view(url='/?cache=no', permanent=False))
 ]
+
+
+if 'zinnia' in settings.INSTALLED_APPS:
+    urlpatterns += [url(r'^weblog/', include('zinnia.urls', namespace='zinnia'))]

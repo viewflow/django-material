@@ -18,7 +18,7 @@ class TestTextInput(WebTest):
         form = self.app.get(self.test_submit_valid_data_succeed.url).form
         self.assertIn('test_field', form.fields)
         form['test_field'] = 'TEST CONTENT'
-        response = json.loads(form.submit().body)
+        response = json.loads(form.submit().body.decode('utf-8'))
 
         self.assertIn('cleaned_data', response)
         self.assertIn('test_field', response['cleaned_data'])
@@ -27,17 +27,16 @@ class TestTextInput(WebTest):
     def test_missing_value_error_rendered(self):
         form = self.app.get(self.test_missing_value_error_rendered.url).form
         response = form.submit()
-        self.assertIn('This field is required.', response.body)
+        self.assertIn('This field is required.', response.body.decode('utf-8'))
 
     def test_prefix_rendered(self):
         response = self.app.get(self.test_prefix_rendered.url)
-        self.assertIn('PREFIX', response.body)
+        self.assertIn('<i class="mdi-communication-email prefix"></i>', response.body.decode('utf-8'))
 
     test_prefix_rendered.template = '''
         {% form %}
-             {% part form.test_field prefix %}PREFIX{% endpart %}
+             {% part form.test_field prefix %}<i class="mdi-communication-email prefix"></i>{% endpart %}
         {% endform %}
     '''
-
 
 urlpatterns = build_test_urls(TestTextInput)

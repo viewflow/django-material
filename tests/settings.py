@@ -1,4 +1,5 @@
 import os
+import sys
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 # Quick-start development settings - unsuitable for production
@@ -16,6 +17,14 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
+DEMO_APPS = (
+    'mptt',
+    'tagging',
+    'zinnia'
+    'django_comments',
+    'social.apps.django_app.default',
+    'autofixture',
+)
 
 INSTALLED_APPS = (
     'material',
@@ -28,19 +37,17 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'debug_toolbar',
     'template_debug',
-    'autofixture',
     # tests
     'tests.integration',
     # test admin apps
     'django.contrib.flatpages',
     'django.contrib.redirects',
     'django.contrib.sites',
-    'django_comments',
-    'social.apps.django_app.default',
-    'mptt',
-    'tagging',
-    'zinnia'
 )
+
+if 'test' not in sys.argv:
+    INSTALLED_APPS += DEMO_APPS
+
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -105,6 +112,8 @@ from django.template.base import add_to_builtins
 add_to_builtins('material.templatetags.material_form')
 add_to_builtins('template_debug.templatetags.debug_tags')
 
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'deploy/static')
 
 try:
     from deploy.local_settings import *  # NOQA
