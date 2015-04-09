@@ -12,12 +12,20 @@ def start_xvfb():
 
 
 @task
-def generate_baseline_screens():
+def generate_baseline_screens(toxenv='django17_py27'):
     start_xvfb()
-    local('DISPLAY=:99.0 NEEDLE_SAVE_BASELINE=1 tox -e django17_py27 -- python manage.py test tests.visual')
+    local('DISPLAY=:99.0 NEEDLE_SAVE_BASELINE=1 tox {} -- python manage.py test tests.visual'
+          .format('-e {}'.format(toxenv) if toxenv else ''))
 
 
 @task
-def test_visual():
+def test_visual(toxenv='django17_py27'):
     start_xvfb()
-    local('DISPLAY=:99.0 tox -e django17_py27 -- python manage.py test tests.visual')
+    local('DISPLAY=:99.0 tox {} -- python manage.py test tests.visual'
+          .format('-e {}'.format(toxenv) if toxenv else ''))
+
+
+@task
+def test_integration(toxenv='django17_py27'):
+    local('tox {} -- python manage.py test tests.integration'
+          .format('-e {}'.format(toxenv) if toxenv else ''))
