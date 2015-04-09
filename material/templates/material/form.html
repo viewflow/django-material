@@ -18,7 +18,6 @@
             {% for bound_field in form.visible_fields %}{% part bound_field.field %}
                 {% render bound_field %}{% endrender %}
             {% endpart %}{% endfor %}
-            <div class="clearfix">
         {% endpart %}{% part 'inlines' %}
             {% for inline in inlines %}
                 {{ inline }}

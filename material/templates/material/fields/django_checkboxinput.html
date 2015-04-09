@@ -8,10 +8,11 @@
                 {% part field add_group_class %}{% endpart %}
                 {% endpart %}"{% endtagattrs %}>
         {% part field prefix %}{% endpart %}{% part field control %}
-        <input type="checkbox"
+        <input {% tagattrs %}
+               type="checkbox"
                name="{{ bound_field.html_name }}"
                id="id_{{ bound_field.html_name }}"
-               {% if bound_field.value %}checked{% endif %}>
+               {% if bound_field.value %}checked{% endif %}{% endtagattrs %}>
         {% endpart %}{% part field label %}
         <label for="{{ bound_field.id_for_label }}" class="control-label {% part field add_label_class %}{% endpart %}">{{ bound_field.label }}</label>
         {% endpart %}{% part field help_text %}{% part field errors %}

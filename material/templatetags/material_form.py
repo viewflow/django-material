@@ -136,7 +136,7 @@ class FormPartNode(Node):
         _render_parts(context, children)
 
         # render own content
-        value = self.nodelist.render(context)
-        if not value.strip():
+        value = self.nodelist.render(context).strip()
+        if not value:
             return ''
         return value
