@@ -14,8 +14,8 @@ class TestTextInput(WebTest):
     default_form = TestForm
     urls = 'tests.integration.tests.test_textinput_field'
 
-    def test_submit_valid_data_succeed(self):
-        form = self.app.get(self.test_submit_valid_data_succeed.url).form
+    def test_default_usecase(self):
+        form = self.app.get(self.test_default_usecase.url).form
         self.assertIn('test_field', form.fields)
         form['test_field'] = 'TEST CONTENT'
         response = json.loads(form.submit().body.decode('utf-8'))
