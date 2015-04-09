@@ -18,8 +18,8 @@ class TestTextInput(WebTest):
     def test_default_usecase(self):
         page = self.app.get(self.test_default_usecase.url)
 
-        self.assertIn('id="id_test_field_container"', page.body)
-        self.assertIn('id="id_test_field"', page.body)
+        self.assertIn('id="id_test_field_container"', page.body.decode('utf-8'))
+        self.assertIn('id="id_test_field"', page.body.decode('utf-8'))
 
         form = page.form
         self.assertIn('test_field', form.fields)
@@ -43,13 +43,13 @@ class TestTextInput(WebTest):
         form['test_field'] = 'a'*21
         response = form.submit()
 
-        self.assertIn('value="{}"'.format('a'*21), response.body)
-        self.assertIn('Ensure this value has at most 20 characters', response.body)
+        self.assertIn('value="{}"'.format('a'*21), response.body.decode('utf-8'))
+        self.assertIn('Ensure this value has at most 20 characters', response.body.decode('utf-8'))
 
     def test_part_group_class(self):
         page = self.app.get(self.test_part_group_class.url)
 
-        self.assertIn('class="input-field col s12 yellow"', page.body)
+        self.assertIn('class="input-field col s12 yellow"', page.body.decode('utf-8'))
 
     test_part_group_class.template = '''
         {% form %}
@@ -60,7 +60,7 @@ class TestTextInput(WebTest):
     def test_part_add_group_class(self):
         page = self.app.get(self.test_part_add_group_class.url)
 
-        self.assertIn('class="input-field col s12 required deep-purple lighten-5"', page.body)
+        self.assertIn('class="input-field col s12 required deep-purple lighten-5"', page.body.decode('utf-8'))
 
     test_part_add_group_class.template = '''
         {% form %}
