@@ -22,7 +22,7 @@ class TestTextInputVisual(NeedleTestCase, StaticLiveServerTestCase):
         self.driver.get('%s%s' % (self.live_server_url, TestTextInput.test_render_with_value.url))
         self.driver.find_element_by_css_selector("input").send_keys('a'*21)
         self.driver.find_element_by_css_selector("button").send_keys(Keys.RETURN)
-        self.assertScreenshot('form', 'textinput_render_with_value', threshold=1)
+        self.assertScreenshot('form', 'textinput_render_with_value', threshold=50)
 
     def test_part_group_class(self):
         self.driver.get('%s%s' % (self.live_server_url, TestTextInput.test_part_group_class.url))
