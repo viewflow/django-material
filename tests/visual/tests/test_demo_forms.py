@@ -1,14 +1,13 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from needle.cases import NeedleTestCase
-from django.contrib.staticfiles.testing import StaticLiveServerTestCase
+from . import VisualTest
 
 
-class TestTextInputVisual(NeedleTestCase, StaticLiveServerTestCase):
+class TestTextInputVisual(VisualTest):
     def test_default_usecase(self):
         self.driver.get('%s/demo/login/' % self.live_server_url)
-        self.assertScreenshot('.card', 'form_login_default_usecase', threshold=1)
+        self.assertScreenshot('.card', 'form_login_default_usecase')
 
     def test_invalid_data(self):
         self.driver.get('%s/demo/login/' % self.live_server_url)
@@ -17,4 +16,4 @@ class TestTextInputVisual(NeedleTestCase, StaticLiveServerTestCase):
         self.driver.find_element_by_css_selector("label[for=id_keep_logged]").click()
 
         self.driver.find_element_by_css_selector("button[type=submit]").click()
-        self.assertScreenshot('.card', 'form_login_invalid_data', threshold=1)
+        self.assertScreenshot('.card', 'form_login_invalid_data')

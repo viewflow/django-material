@@ -1,11 +1,10 @@
-from needle.cases import NeedleTestCase
 from selenium.webdriver.common.keys import Keys
-from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 
 from tests.integration.tests.test_textinput_field import TestTextInput
+from . import VisualTest
 
 
-class TestTextInputVisual(NeedleTestCase, StaticLiveServerTestCase):
+class TestTextInputVisual(VisualTest):
     urls = TestTextInput.urls
 
     def test_test_default_usecase(self):
