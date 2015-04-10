@@ -22,7 +22,7 @@ class VisualTest(NeedleTestCase, StaticLiveServerTestCase):
             message.attach_file(output_file)
 
             settings.EMAIL_BACKEND = mail._original_email_backend
-            message.send(fail_sliently=True)
+            message.send(fail_silently=True)
             settings.EMAIL_BACKEND = 'django.core.mail.backends.locmem.EmailBackend'
 
             raise
