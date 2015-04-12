@@ -156,6 +156,7 @@ class TestCheckoutForm(WebTest):
         page = self.app.get('/demo/checkout/')
 
         form = page.form
+
         form['email'] = 'john'
         form['card_ccv2'] = 'john'
         form['card_exp_year'] = 'john'
@@ -268,6 +269,7 @@ class TestBankForm(WebTest):
         page = self.app.get('/demo/bank/')
 
         form = page.form
+
         form['date_of_birth'] = 'XXX'
         form['email'] = 'john'
 

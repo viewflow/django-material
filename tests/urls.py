@@ -18,7 +18,6 @@ def index_view(request):
     }
     return render(request, 'index.html', context)
 
-
 urlpatterns = [
     url(r'^$', index_view),
     url(r'^demo/login/$', generic.FormView.as_view(

@@ -1,13 +1,14 @@
 import json
 
 from django import forms
-from django.core.validators import MaxLengthValidator
 from django_webtest import WebTest
 from . import build_test_urls
 
 
 class TestForm(forms.Form):
-    test_field = forms.CharField(validators=[MaxLengthValidator(20)])
+    test_field = forms.CharField(
+        max_length=20,
+        widget=forms.TextInput(attrs={'data-test': 'Test Attr'}))
 
 
 class TestTextInput(WebTest):
@@ -20,6 +21,8 @@ class TestTextInput(WebTest):
 
         self.assertIn('id="id_test_field_container"', page.body.decode('utf-8'))
         self.assertIn('id="id_test_field"', page.body.decode('utf-8'))
+        self.assertIn('maxlength="20"', page.body.decode('utf-8'))
+        self.assertIn('data-test="Test Attr"', page.body.decode('utf-8'))
 
         form = page.form
         self.assertIn('test_field', form.fields)

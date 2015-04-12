@@ -28,6 +28,7 @@ def test_visual(toxenv='django17_py27', test=''):
 
 
 @task
-def test_integration(toxenv='django17_py27'):
-    local('tox {} -- python manage.py test tests.integration'
-          .format('-e {}'.format(toxenv) if toxenv else ''))
+def test_integration(toxenv='django17_py27', test=''):
+    local('tox {} -- python manage.py test tests.integration{}'
+          .format('-e {}'.format(toxenv) if toxenv else '',
+                  '.tests.{}'.format(test) if test else ''))

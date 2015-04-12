@@ -70,7 +70,11 @@ class TagAttrsNode(Node):
         parser.delete_first_token()
 
     def render(self, context):
+        """
+        Remove empty attributes and newlines
+        """
         value = self.nodelist.render(context)
+        value = re.sub('\w+=\"\s*\"', '', value)
         return re.sub('[\n ]+', ' ', value).strip()
 
 
