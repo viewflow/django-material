@@ -10,11 +10,13 @@
         {% part field prefix %}{% endpart %}{% part field control %}
         <input {% tagattrs %}
                type="checkbox"
+               class="{% if field.widget.attrs.class %}{{ field.widget.attrs.class }} {% endif %}{% if bound_field.errors %}invalid {% endif %}{% part field add_control_class %}{{ form_control_class }}{% endpart %}"
                name="{{ bound_field.html_name }}"
+               {% for name, value in field.widget.attrs.items %}{% if name != 'class' %}{{name}}="{{value}}" {% endif %}{% endfor %}
                id="id_{{ bound_field.html_name }}"
                {% if bound_field.value %}checked{% endif %}{% endtagattrs %}>
         {% endpart %}{% part field label %}
-        <label for="{{ bound_field.id_for_label }}" class="control-label {% part field add_label_class %}{% endpart %}">{{ bound_field.label }}</label>
+        <label for="{{ bound_field.id_for_label }}" class="{% part field add_label_class %}{% endpart %}">{{ bound_field.label }}</label>
         {% endpart %}{% part field help_text %}{% part field errors %}
         {% if bound_field.errors %}
             {% include  'material/field_errors.html' %}
