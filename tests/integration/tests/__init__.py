@@ -1,5 +1,5 @@
 import inspect
-from django.conf.urls import url, include
+from django.conf.urls import url
 from django.http import JsonResponse, HttpResponse
 from django.template import Context, Template
 from django.views.decorators.csrf import csrf_exempt
@@ -12,6 +12,7 @@ DEFAULT_TEMPLATE = """
 @csrf_exempt
 def test_view(request, form_cls, template_content):
     form = form_cls(request.POST or None)
+
     if request.method == 'POST' and form.is_valid():
         return JsonResponse({'cleaned_data': form.cleaned_data})
     else:
