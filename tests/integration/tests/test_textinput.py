@@ -5,16 +5,15 @@ from django_webtest import WebTest
 from . import build_test_urls
 
 
-class TestForm(forms.Form):
+class TextInputForm(forms.Form):
     test_field = forms.CharField(
         max_length=20,
         widget=forms.TextInput(attrs={'data-test': 'Test Attr'}))
 
 
 class TestTextInput(WebTest):
-    csrf_checks = False
-    default_form = TestForm
-    urls = 'tests.integration.tests.test_textinput_field'
+    default_form = TextInputForm
+    urls = 'tests.integration.tests.test_textinput'
 
     def test_default_usecase(self):
         page = self.app.get(self.test_default_usecase.url)

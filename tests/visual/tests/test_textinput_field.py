@@ -1,6 +1,6 @@
 from selenium.webdriver.common.keys import Keys
 
-from tests.integration.tests.test_textinput_field import TestTextInput
+from tests.integration.tests.test_textinput import TestTextInput
 from . import VisualTest
 
 
