@@ -7,6 +7,7 @@ from . import build_test_urls
 
 class TextInputForm(forms.Form):
     test_field = forms.CharField(
+        min_length=5,
         max_length=20,
         widget=forms.TextInput(attrs={'data-test': 'Test Attr'}))
 

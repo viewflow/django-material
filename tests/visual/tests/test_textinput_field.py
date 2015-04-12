@@ -4,7 +4,7 @@ from tests.integration.tests.test_textinput import TestTextInput
 from . import VisualTest
 
 
-class TestTextInputVisual(VisualTest):
+class Test(VisualTest):
     urls = TestTextInput.urls
 
     def test_test_default_usecase(self):
@@ -19,7 +19,7 @@ class TestTextInputVisual(VisualTest):
 
     def test_render_with_value(self):
         self.driver.get('%s%s' % (self.live_server_url, TestTextInput.test_render_with_value.url))
-        self.driver.find_element_by_css_selector("input").send_keys('a'*21)
+        self.driver.find_element_by_css_selector("input").send_keys('1234')
         self.driver.find_element_by_css_selector("button").send_keys(Keys.RETURN)
         self.assertScreenshot('form', 'textinput_render_with_value', threshold=1)
 
