@@ -1,20 +1,30 @@
 import inspect
+from json import JSONEncoder
 from django.conf.urls import url
 from django.http import JsonResponse, HttpResponse
 from django.template import Context, Template
 from django.views.decorators.csrf import csrf_exempt
+from django.utils import six
+
 
 DEFAULT_TEMPLATE = """
 {% form %}{% endform %}
 """
 
 
+class PythonObjectEncoder(JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, (list, dict, str, int, float, bool, type(None))) or isinstance(obj, six.string_types):
+            return JSONEncoder.default(self, obj)
+        return '{}'.format(type(obj).__name__)
+
+
 @csrf_exempt
 def test_view(request, form_cls, template_content):
-    form = form_cls(request.POST or None)
+    form = form_cls(request.POST or None, request.FILES or None)
 
     if request.method == 'POST' and form.is_valid():
-        return JsonResponse({'cleaned_data': form.cleaned_data})
+        return JsonResponse({'cleaned_data': form.cleaned_data}, encoder=PythonObjectEncoder)
     else:
         context = Context({'form': form})
 
@@ -30,7 +40,7 @@ def test_view(request, form_cls, template_content):
             </head>
             <body>
                 <div class="container expand-on-small-only">
-                    <form method="POST">
+                    <form method="POST" enctype="multipart/form-data">
                         {}
                         <button class="btn btn-primary" type="submit">Submit</button>
                     </form>

@@ -13,8 +13,6 @@ class Test(VisualTest):
 
     def test_invalid_value(self):
         self.driver.get('%s%s' % (self.live_server_url, TestBooleanInput.test_invalid_value.url))
-
-        self.driver.find_element_by_css_selector("#id_data_field_container label").click()
         self.driver.find_element_by_css_selector("button").send_keys(Keys.RETURN)
         self.assertScreenshot('form', 'booleaninput_missing_value_error', threshold=1)
 

@@ -5,57 +5,53 @@ from django_webtest import WebTest
 from . import build_test_urls
 
 
-class BooleanInputForm(forms.Form):
-    test_field = forms.BooleanField(
-        widget=forms.CheckboxInput(attrs={'data-test': 'Test Attr'}))
-    data_field = forms.BooleanField(required=False, widget=forms.HiddenInput, initial=True,
+class FileInputForm(forms.Form):
+    test_field = forms.FileField()
+    data_field = forms.BooleanField(required=False, widget=forms.HiddenInput,
                                     help_text='To produce non empty POST for empty test_field')
 
 
 class Test(WebTest):
-    default_form = BooleanInputForm
-    urls = 'tests.integration.tests.test_booleaninput'
+    default_form = FileInputForm
+    urls = 'tests.integration.tests.test_fileinput'
 
     def test_default_usecase(self):
         page = self.app.get(self.test_default_usecase.url)
 
         self.assertIn('id="id_test_field_container"', page.body.decode('utf-8'))
         self.assertIn('id="id_test_field"', page.body.decode('utf-8'))
-        self.assertIn('data-test="Test Attr"', page.body.decode('utf-8'))
 
         form = page.form
         self.assertIn('test_field', form.fields)
 
-        form['test_field'] = 1
-        response = json.loads(form.submit().body.decode('utf-8'))
+        response = form.submit(upload_files=[('test_field', __file__)])
+        response = json.loads(response.body.decode('utf-8'))
 
         self.assertIn('cleaned_data', response)
         self.assertIn('test_field', response['cleaned_data'])
-        self.assertEquals(True, response['cleaned_data']['test_field'])
+        self.assertEquals('InMemoryUploadedFile', response['cleaned_data']['test_field'])
 
     def test_invalid_value(self):
         form = self.app.get(self.test_invalid_value.url).form
+        form['data_field'] = '1'
         response = form.submit()
-        form['data_field'] = 1
-        response = form.submit()
-
         self.assertIn('This field is required.', response.body.decode('utf-8'))
 
     def test_part_group_class(self):
         page = self.app.get(self.test_part_group_class.url)
 
-        self.assertIn('class="checkbox-field col s12 yellow"', page.body.decode('utf-8'))
+        self.assertIn('class="input-field file-field col s12 required yellow"', page.body.decode('utf-8'))
 
     test_part_group_class.template = '''
         {% form %}
-             {% part form.test_field group_class %}checkbox-field col s12 yellow{% endpart %}
+             {% part form.test_field group_class %}input-field file-field col s12 required yellow{% endpart %}
         {% endform %}
     '''
 
     def test_part_add_group_class(self):
         page = self.app.get(self.test_part_add_group_class.url)
 
-        self.assertIn('class="checkbox-field col s12 required deep-purple lighten-5"', page.body.decode('utf-8'))
+        self.assertIn('class="input-field file-field col s12 required deep-purple lighten-5"', page.body.decode('utf-8'))
 
     test_part_add_group_class.template = '''
         {% form %}
@@ -65,21 +61,21 @@ class Test(WebTest):
 
     def test_part_prefix(self):
         response = self.app.get(self.test_part_prefix.url)
-        self.assertIn('<i class="mdi-communication-email prefix"></i>', response.body.decode('utf-8'))
+        self.assertIn('<span>DATA</span>', response.body.decode('utf-8'))
 
     test_part_prefix.template = '''
         {% form %}
-             {% part form.test_field prefix %}<i class="mdi-communication-email prefix"></i>{% endpart %}
+             {% part form.test_field prefix %}<span>DATA</span>{% endpart %}
         {% endform %}
     '''
 
     def test_part_add_control_class(self):
         response = self.app.get(self.test_part_add_control_class.url)
-        self.assertIn('class="filled-in"', response.body.decode('utf-8'))
+        self.assertIn('class="file-path orange"', response.body.decode('utf-8'))
 
     test_part_add_control_class.template = '''
         {% form %}
-             {% part form.test_field add_control_class %}filled-in{% endpart %}
+             {% part form.test_field add_control_class %}orange{% endpart %}
         {% endform %}
     '''
 

@@ -35,8 +35,8 @@
         */
         if($('input[type=password]').length) {
             function autofix() {
-                $('input[type=password]').addClass('active').addClass('valid');
-                $('input[type=password]').next('label').addClass('active').addClass('valid');
+                $('input[type=password]').addClass('active');
+                $('input[type=password]').next('label').addClass('active');
                 $('input[type=password]').prev('i').addClass('active');
                 userInteracted();
             }
