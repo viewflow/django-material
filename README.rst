@@ -141,6 +141,13 @@ form fields list directly from layout object
 
 Changelog
 =========
+0.2.1 - GIT VERSION
+
+* More consistent parts/variables names over widgets templates
+* Fixed file field submition and validation
+* Compact html output
+* Added ellipses on long labels overflow
+
 
 0.2.0 2015-04-03 - Alpha
 ------------------------
