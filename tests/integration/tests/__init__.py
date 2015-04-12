@@ -1,9 +1,10 @@
 import inspect
-from json import JSONEncoder
+from decimal import Decimal
 from django.conf.urls import url
 from django.http import JsonResponse, HttpResponse
 from django.template import Context, Template
 from django.views.decorators.csrf import csrf_exempt
+from django.core.serializers.json import DjangoJSONEncoder
 from django.utils import six
 
 
@@ -12,10 +13,10 @@ DEFAULT_TEMPLATE = """
 """
 
 
-class PythonObjectEncoder(JSONEncoder):
+class PythonObjectEncoder(DjangoJSONEncoder):
     def default(self, obj):
-        if isinstance(obj, (list, dict, str, int, float, bool, type(None))) or isinstance(obj, six.string_types):
-            return JSONEncoder.default(self, obj)
+        if isinstance(obj, (list, dict, str, int, float, bool, type(None), Decimal)) or isinstance(obj, six.string_types):
+            return DjangoJSONEncoder.default(self, obj)
         return '{}'.format(type(obj).__name__)
 
 

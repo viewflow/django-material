@@ -13,7 +13,7 @@
         </div>{% part field control %}
         <input {% tagattrs %}
                type="text"
-               class="file-path{% part field add_control_class %} {{ form_control_class }}{% endpart %}"
+               class="file-path {% part field add_control_class %}{{ form_control_class }}{% endpart %}"
                {% for name, value in field.widget.attrs.items %}{% if name != 'class' %}{{name}}="{{value}}" {% endif %}{% endfor %}
                id="id_{{ bound_field.html_name }}"{% endtagattrs %}>
         {% endpart %}{% part field label %}
