@@ -77,11 +77,11 @@ class Test(WebTest):
 
     def test_part_add_control_class(self):
         response = self.app.get(self.test_part_add_control_class.url)
-        self.assertIn('class="filled-in"', response.body.decode('utf-8'))
+        self.assertIn('class="orange"', response.body.decode('utf-8'))
 
     test_part_add_control_class.template = '''
         {% form %}
-             {% part form.test_field add_control_class %}filled-in{% endpart %}
+             {% part form.test_field add_control_class %}orange{% endpart %}
         {% endform %}
     '''
 
