@@ -1,4 +1,5 @@
 import inspect
+from datetime import date
 from decimal import Decimal
 from django.conf.urls import url
 from django.http import JsonResponse, HttpResponse
@@ -15,7 +16,7 @@ DEFAULT_TEMPLATE = """
 
 class PythonObjectEncoder(DjangoJSONEncoder):
     def default(self, obj):
-        if isinstance(obj, (list, dict, str, int, float, bool, type(None), Decimal)) or isinstance(obj, six.string_types):
+        if isinstance(obj, (date, list, dict, str, int, float, bool, type(None), Decimal)) or isinstance(obj, six.string_types):
             return DjangoJSONEncoder.default(self, obj)
         return '{}'.format(type(obj).__name__)
 
