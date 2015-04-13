@@ -66,6 +66,11 @@ ROOT_URLCONF = 'tests.urls'
 
 WSGI_APPLICATION = 'tests.wsgi.application'
 
+from django.conf import global_settings
+TEMPLATE_CONTEXT_PROCESSORS = global_settings.TEMPLATE_CONTEXT_PROCESSORS + (
+    'django.core.context_processors.request',
+)
+
 
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
