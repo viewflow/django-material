@@ -7,7 +7,7 @@ from . import VisualTest
 class TestLoginForm(VisualTest):
     def test_default_usecase(self):
         self.driver.get('%s/demo/login/' % self.live_server_url)
-        self.assertScreenshot('.card', 'form_login_default_usecase')
+        self.assertScreenshot('.card', 'form_login_default_usecase', threshold=10)
 
     def test_invalid_data(self):
         self.driver.get('%s/demo/login/' % self.live_server_url)
@@ -16,13 +16,13 @@ class TestLoginForm(VisualTest):
         self.driver.find_element_by_css_selector("label[for=id_keep_logged]").click()
 
         self.driver.find_element_by_css_selector("button[type=submit]").click()
-        self.assertScreenshot('.card', 'form_login_invalid_data')
+        self.assertScreenshot('.card', 'form_login_invalid_data', threshold=10)
 
 
 class TestRegistrationForm(VisualTest):
     def test_default_usecase(self):
         self.driver.get('%s/demo/registration/' % self.live_server_url)
-        self.assertScreenshot('.card', 'form_registration_default_usecase')
+        self.assertScreenshot('.card', 'form_registration_default_usecase', threshold=10)
 
     def test_invalid_data(self):
         self.driver.get('%s/demo/registration/' % self.live_server_url)
@@ -34,7 +34,7 @@ class TestRegistrationForm(VisualTest):
 class TestContactForm(VisualTest):
     def test_default_usecase(self):
         self.driver.get('%s/demo/contact/' % self.live_server_url)
-        self.assertScreenshot('.card', 'form_contact_default_usecase')
+        self.assertScreenshot('.card', 'form_contact_default_usecase', threshold=10)
 
     def test_invalid_data(self):
         self.driver.get('%s/demo/contact/' % self.live_server_url)
@@ -46,7 +46,7 @@ class TestContactForm(VisualTest):
 class TestOrderForm(VisualTest):
     def test_default_usecase(self):
         self.driver.get('%s/demo/order/' % self.live_server_url)
-        self.assertScreenshot('.card', 'form_order_default_usecase')
+        self.assertScreenshot('.card', 'form_order_default_usecase', threshold=10)
 
     def test_invalid_data(self):
         self.driver.get('%s/demo/order/' % self.live_server_url)
@@ -58,7 +58,7 @@ class TestOrderForm(VisualTest):
 class TestCheckoutForm(VisualTest):
     def test_default_usecase(self):
         self.driver.get('%s/demo/checkout/' % self.live_server_url)
-        self.assertScreenshot('.card', 'form_checkout_default_usecase')
+        self.assertScreenshot('.card', 'form_checkout_default_usecase', threshold=10)
 
     def test_invalid_data(self):
         self.driver.get('%s/demo/checkout/' % self.live_server_url)
@@ -70,7 +70,7 @@ class TestCheckoutForm(VisualTest):
 class TestCommentForm(VisualTest):
     def test_default_usecase(self):
         self.driver.get('%s/demo/comment/' % self.live_server_url)
-        self.assertScreenshot('.card', 'form_comment_default_usecase')
+        self.assertScreenshot('.card', 'form_comment_default_usecase', threshold=10)
 
     def test_invalid_data(self):
         self.driver.get('%s/demo/comment/' % self.live_server_url)
@@ -82,7 +82,7 @@ class TestCommentForm(VisualTest):
 class TestBankForm(VisualTest):
     def test_default_usecase(self):
         self.driver.get('%s/demo/bank/' % self.live_server_url)
-        self.assertScreenshot('.card', 'form_bank_default_usecase')
+        self.assertScreenshot('.card', 'form_bank_default_usecase', threshold=10)
 
     def test_invalid_data(self):
         self.driver.get('%s/demo/bank/' % self.live_server_url)

@@ -3,6 +3,6 @@ from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 
 
 class VisualTest(NeedleTestCase, StaticLiveServerTestCase):
-    def setUp(self):
-        super(VisualTest, self).setUp()
-        self.driver.set_window_size(1280, 1024)
+    engine_class = 'needle.engines.perceptualdiff_engine.Engine'
+    viewport_width = 1280
+    viewport_height = 1024
