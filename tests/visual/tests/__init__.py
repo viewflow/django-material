@@ -7,6 +7,5 @@ class VisualTest(NeedleTestCase, StaticLiveServerTestCase):
     viewport_width = 1280
     viewport_height = 1024
 
-    def assertScreenshot(self, element_or_selector, file, threshold=0.5):
+    def assertScreenshot(self, element_or_selector, file, threshold=0.05):
         super(VisualTest, self).assertScreenshot(element_or_selector, file, threshold=threshold)
-

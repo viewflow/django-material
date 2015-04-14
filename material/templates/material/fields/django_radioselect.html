@@ -1,7 +1,7 @@
 {% load material_form material_form_internal %}
 <div class="row radio-field">
     {% part field label %}<div class="col s12">
-        <label for="{{ bound_field.id_for_label }}" class="control-label {% part field add_label_class %}{{ form_label_class }}{% endpart %}">{{ bound_field.label }}</label>        
+        <label for="{{ bound_field.id_for_label }}" class="{% part field add_label_class %}{{ form_label_class }}{% endpart %}">{{ bound_field.label }}</label>
     </div>{% endpart %}
     <div {% tagattrs %}
          id="id_{{ bound_field.html_name }}_container"
@@ -12,24 +12,24 @@
                 {% endpart %}"{% endtagattrs %}>
         {% part field prefix %}{% endpart %}{% part field control %}
         {% for value, choice in field.choices %}
-        <div class="radio">
+        <div class="radio" id="id_{{ bound_field.html_name }}">
             <input {% tagattrs %}
                    id="id_{{ bound_field.html_name }}_{{ forloop.counter0 }}"
+                   class="{% if field.widget.attrs.class %}{{ field.widget.attrs.class }} {% endif %}{% if bound_field.errors %}invalid {% endif %}{% part field add_control_class %}{{ form_control_class|default:'with-gap' }}{% endpart %}"
                    name="{{ bound_field.html_name }}"
                    type="radio"
+                   {% for name, value in field.widget.attrs.items %}{% if name != 'class' %}{{name}}="{{value}}" {% endif %}{% endfor %}
                    value="{{ value }}"
-                   class="with-gap"
                    {% if value == bound_field.value %}checked{% endif %}{% endtagattrs %}/>
             <label for="id_{{ bound_field.html_name }}_{{ forloop.counter0 }}">{{ choice }}</label>
         </div>
         {% endfor %}
-        {% endpart %}{% part field help_text %}{% part field errors %}
+        {% endpart %}{% part field help_text %}{% if field.help_text %}
+        <span class="help-block">{{ bound_field.help_text }}</span>
+        {% endif %}{% part field errors %}
         {% if bound_field.errors %}
             {% include  'material/field_errors.html' %}
-        {% endif %}{% endpart %}{% if field.help_text %}
-        <span class="help-block">{{ bound_field.help_text }}</span>
-        {% endif %}
+        {% endif %}{% endpart %}
         {% endpart %}{{ hidden_initial }}
     </div>
 </div>
-
