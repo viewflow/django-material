@@ -11,8 +11,9 @@
         <label for="{{ bound_field.id_for_label }}" class="{% part field add_label_class %}{{ form_label_class }}{% endpart %}">{{ bound_field.label }}</label>
         {% endpart %}{% part field prefix %}{% endpart %} {% part field control %}
         <select {% tagattrs %}
-                class="{% if bound_field.errors %}invalid {% endif %}{% part field add_control_class %}{% endpart %}"
+                class="{% if field.widget.attrs.class %}{{ field.widget.attrs.class }} {% endif %}{% if bound_field.errors %}invalid {% endif %}{% part field add_control_class %}{{ form_control_class }}{% endpart %}"
                 name="{{ bound_field.html_name }}"
+                {% for name, value in field.widget.attrs.items %}{% if name != 'class' %}{{name}}="{{value}}" {% endif %}{% endfor %}
                 id="id_{{ bound_field.html_name }}"
                 {% part field add_control_attr %}{% endpart %}{% endtagattrs %}>
             {% part field options %}{% for value, choice in field.widget.choices %}
@@ -20,11 +21,11 @@
                     {% if value == None or value == '' %}disabled value{% else %}value="{{ value }}"{% endif %}
                     {% endtagattrs %}>{% if value == None or value == '' %}{{ form_select_empty_label|default:choice }}{% else %}{{ choice }}{% endif %}</option>{% endfor %}{% endpart %}
         </select>
-        {% endpart %}{% part field errors %}
+        {% endpart %}{% part field help_text %}{% if field.help_text %}
+            <span class="help-block">{{ bound_field.help_text }}</span>
+        {% endif %}{% endpart %}{% part field errors %}
         {% if bound_field.errors %}
             {% include  'material/field_errors.html' %}
-        {% endif %}{% endpart %}{% part field help_text %}{% if field.help_text %}
-            <span class="help-block">{{ bound_field.help_text }}</span>
         {% endif %}{% endpart %}{{ hidden_initial }}
     </div>
 </div>
