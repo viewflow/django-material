@@ -35,7 +35,7 @@
 {% block brand-logo %}{{ cl.opts.verbose_name_plural|title }}{% endblock %}
 
 {% block breadcrumbs %}
-<li><a href="/admin/">Admininstration</a></li>
+<li><a href="/admin/">Administration</a></li>
 <li style="padding-left:20px" class="active"><a href="{% url opts|admin_urlname:'changelist' %}"><a href="{% url opts|admin_urlname:'changelist' %}"><i class="fa adm-app-default adm-{{ opts.app_label }}-{{ opts.object_name|lower }}"></i> &nbsp;&nbsp;{{ opts.verbose_name_plural|capfirst }}</a></li>
 {% endblock %}
 
