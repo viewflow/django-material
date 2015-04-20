@@ -75,7 +75,7 @@ class Test(WebTest):
     def test_part_add_group_class(self):
         page = self.app.get(self.test_part_add_group_class.url)
 
-        self.assertIn('class="input-field col s6 l3 required deep-purple lighten-5"', page.body.decode('utf-8'))
+        self.assertIn('class="input-field col s6 required deep-purple lighten-5"', page.body.decode('utf-8'))
 
     test_part_add_group_class.template = '''
         {% form %}

@@ -6,7 +6,7 @@
         <label for="{{ bound_field.id_for_label }}" class="{% part field add_label_class %}{{ form_label_class }}{% endpart %}">{{ bound_field.label }}</label>
     </div>
     <div {% tagattrs %}         
-         class="{% part field group_class %}input-field col s6 l3
+         class="{% part field group_class %}input-field col s6
                 {% if field.required%}required{% endif %}
                 {% if bound_field.errors %}has-error{% endif %}
                 {% part field add_group_class %}{% endpart %}
@@ -32,7 +32,7 @@
         {% endif %}
         {% endpart %}{{ hidden_initial }}
     </div>
-    <div class="input-field col s6 l3"
+    <div class="input-field col s6"
          style="margin-top:-7px">
         <i class="mdi-action-query-builder prefix"></i>
         <input {% tagattrs %}

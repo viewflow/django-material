@@ -82,7 +82,7 @@ class TagAttrsNode(Node):
 def multiwidget_value(bound_field, pos):
     value = bound_field.value()
     if not isinstance(value, (list, tuple)):
-        value = bound_field.field.widget.decompress()
+        value = bound_field.field.widget.decompress(value)
     return value[pos]
 
 
