@@ -141,7 +141,9 @@ form fields list directly from layout object
 
 Changelog
 =========
-0.2.1 - 2015-04-20
+
+0.2.1 2015-04-20 - Alpha
+------------------------
 
 * Fixed SplitDateTime widget rendering with empty value
 * More consistent parts/variables names over widgets templates
