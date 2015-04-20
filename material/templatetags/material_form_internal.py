@@ -80,7 +80,10 @@ class TagAttrsNode(Node):
 
 @register.filter
 def multiwidget_value(bound_field, pos):
-    return bound_field.field.widget.decompress(bound_field.value())[pos]
+    value = bound_field.value()
+    if not isinstance(value, (list, tuple)):
+        value = bound_field.field.widget.decompress()
+    return value[pos]
 
 
 @register.filter

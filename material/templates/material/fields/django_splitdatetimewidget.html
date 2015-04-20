@@ -3,7 +3,7 @@
 {% endpart %}
 <div class="row" id="id_{{ bound_field.html_name }}_container">
     <div class="col s12">
-        <label for="{{ bound_field.id_for_label }}" class="control-label {% part field add_label_class %}{{ form_label_class }}{% endpart %}">{{ bound_field.label }}</label>
+        <label for="{{ bound_field.id_for_label }}" class="{% part field add_label_class %}{{ form_label_class }}{% endpart %}">{{ bound_field.label }}</label>
     </div>
     <div {% tagattrs %}         
          class="{% part field group_class %}input-field col s6 l3
@@ -16,7 +16,8 @@
         <i class="mdi-action-view-module prefix"></i>
         <input {% tagattrs %}
                type="text"
-               class="validate{% if bound_field.errors %} invalid{% endif %} {% part field add_control_class %}{{ form_control_class }}{% endpart %}"
+               class="{% if field.widget.attrs.class %}{{ field.widget.attrs.class }} {% endif %}{% if bound_field.errors %}invalid {% endif %}{% part field add_control_class %}{{ form_control_class }}{% endpart %}"
+               {% for name, value in field.widget.attrs.items %}{% if name != 'class' %}{{name}}="{{value}}" {% endif %}{% endfor %}
                name="{{ bound_field.html_name }}_0"
                id="id_{{ bound_field.html_name }}_0"
                data-date-format="{{ field.fields.0|jquery_datepicker_format }}"
@@ -36,7 +37,7 @@
         <i class="mdi-action-query-builder prefix"></i>
         <input {% tagattrs %}
                type="text"
-               class="validate{% if bound_field.errors %} invalid{% endif %} {% part field add_control_class %}{{ form_control_class }}{% endpart %}"
+               class="{% if bound_field.errors %} invalid{% endif %} {% part field add_control_class %}{{ form_control_class }}{% endpart %}"
                name="{{ bound_field.html_name }}_1"
                {% if form_with_placeholder %}placeholder="{{ bound_field.label }}"{% endif %}
                id="id_{{ bound_field.html_name }}_1"
