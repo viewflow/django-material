@@ -1,7 +1,7 @@
 from karenina import modules
 
 
-class Admin(modules.InstallableModule):
+class Admin(modules.Module):
     icon = "mdi-action-settings-applications"
     order = 1000
 
