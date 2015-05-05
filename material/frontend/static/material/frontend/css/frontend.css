@@ -1,0 +1,113 @@
+html, body {
+    height: 100%;
+}
+
+body {
+    background: #eee;
+}
+
+.page-title {
+    display:inline
+}
+
+.side-nav.fixed .logo {
+    height: 150px;
+}
+
+.side-nav.fixed .logo a {
+    margin-left: auto;
+    margin-right: auto;
+    display: table;
+}
+
+.side-nav.fixed .logo a img {
+    display: table-cell;
+}
+
+/* 
+   Sidebar menu 
+*/
+
+.no-padding {
+  padding: 0 !important;
+}
+
+ul.side-nav.fixed.module-menu {
+    overflow: hidden;
+}
+
+ul.side-nav.fixed.module-menu li a {
+  font-size: 13px;
+  line-height: 44px;
+  height: 44px;
+}
+
+ul.side-nav.module-menu .collapsible-body li.active, .side-nav.fixed .collapsible-body li.active {
+    background: #4CAF50;
+}
+
+ul.side-nav.module-menu .collapsible-body li a {
+  margin: 0 1rem 0 2rem;
+}
+
+ul.side-nav.module-menu .collapsible-body li .collapsible-body a {
+    margin-left: 60px;
+}
+
+ul.side-nav.module-menu li.active>a>span.badge {
+    color: #fff;
+}
+
+.side-nav.fixed .collapsible-body li.active.header {
+    background-color: #ddd;
+}
+
+.side-nav.fixed .collapsible-body li.active.header>a {
+    color: #444;
+}
+
+.side-nav.fixed .collapsible-body li.active a {
+    color: #444;
+}
+
+.side-nav.fixed .collapsible-body li.active>a {
+    color: #fff;
+}
+
+/*
+  Breadcrumbs
+*/
+.breadcrumbs div {
+    height: 48px;
+    padding-top:10px;
+}
+
+.breadcrumbs a {
+    color: white;
+    padding-left: 80px;
+    padding-right: 80px;
+    text-transform: uppercase;
+}
+
+/*
+  Responsible layout 
+*/
+@media only screen and (min-width : 992px) {
+    .nav-top {
+        height:80px;
+    }
+
+    main {
+        margin-left:240px;
+        height: calc(100% - 80px);
+    }
+
+    .page-title a{
+        padding-left: 270px;
+        font-size: 1.6rem;
+        font-weight: 300;
+        position: relative;
+        top: 5px;
+        text-transform: uppercase;
+    }
+}

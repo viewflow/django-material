@@ -11,8 +11,6 @@ SECRET_KEY = 'fn4_(9z4f8w+3!&(j2x88^ca0m0=s+aj$jp^^cf^3h740xhr3='
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-TEMPLATE_DEBUG = True
-
 ALLOWED_HOSTS = []
 
 
@@ -27,8 +25,12 @@ DEMO_APPS = (
 )
 
 INSTALLED_APPS = (
+    # material apps
     'material',
+    'material.frontend',
+    'easy_pjax',
     'material.admin',
+    # standard django apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -37,8 +39,10 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'debug_toolbar',
     'template_debug',
-    # tests
+    # test apps
     'tests.integration',
+    'tests.examples.accounting',
+    'tests.examples.sales',
     # test admin apps
     'django.contrib.flatpages',
     'django.contrib.redirects',
@@ -66,11 +70,25 @@ ROOT_URLCONF = 'tests.urls'
 
 WSGI_APPLICATION = 'tests.wsgi.application'
 
-from django.conf import global_settings
-TEMPLATE_CONTEXT_PROCESSORS = global_settings.TEMPLATE_CONTEXT_PROCESSORS + (
-    'django.core.context_processors.request',
-)
-
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [
+            os.path.join(BASE_DIR, 'tests', 'templates')
+        ],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+                'django.core.context_processors.request',
+                'material.frontend.context_processors.modules',
+            ],
+        },
+    },
+]
 
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
@@ -106,11 +124,6 @@ STATICFILES_DIRS = (
 )
 
 SESSION_ENGINE = "django.contrib.sessions.backends.signed_cookies"
-
-TEMPLATE_DIRS = (
-    os.path.join(BASE_DIR, 'tests/templates'),
-)
-
 
 # shortcut for in form templates
 from django.template.base import add_to_builtins

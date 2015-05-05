@@ -1,0 +1,5 @@
+{% extends 'material/frontend/base_site.html,material/frontend/base_pjax.html'|pjax:request %}
+
+{% block title %}{{ current_module.label }} - {{ block.super }}{% endblock %}
+
+{% block page_title %}<a href="{{ current_module.index_url }}">{{ current_module.label }}</a>{% endblock %}

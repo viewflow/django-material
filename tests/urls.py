@@ -3,6 +3,7 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from django.views import generic
 from django.shortcuts import render
+from material import frontend
 
 from . import forms
 
@@ -20,6 +21,8 @@ def index_view(request):
 
 urlpatterns = [
     url(r'^$', index_view),
+
+    # demo
     url(r'^demo/login/$', generic.FormView.as_view(
         form_class=forms.LoginForm, success_url='/demo/login/', template_name="demo.html")),
     url(r'^demo/registration/$', generic.FormView.as_view(
@@ -34,8 +37,14 @@ urlpatterns = [
         form_class=forms.CommentForm, success_url='/demo/comment/', template_name="demo.html")),
     url(r'^demo/bank/$', generic.FormView.as_view(
         form_class=forms.BankForm, success_url='/demo/bank/', template_name="demo.html")),
+    url(r'^foundation/basic/', generic.RedirectView.as_view(url='/?cache=no', permanent=False)),
+
+    # admin
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^foundation/basic/', generic.RedirectView.as_view(url='/?cache=no', permanent=False))
+
+    # frontend
+    url(r'^frontend/$', generic.RedirectView.as_view(url='/frontend/accounting/', permanent=False)),
+    url(r'^frontend/', include(frontend.default_registry.urls)),
 ]
 
 

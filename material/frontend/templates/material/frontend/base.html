@@ -1,0 +1,95 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+        <title>{% block title %}{% endblock %}</title>
+        {% block favicon %}<link href="{% static 'material/frontend/imgs/favicon.png' %}" rel="shortcut icon">{% endblock %}
+        {% block css %}
+        <link href="{% static 'material/css/materialize.css' %}" rel="stylesheet">
+        <link href="{% static 'material/frontend/css/frontend.css' %}" rel="stylesheet">
+        <link href="{% static 'material/frontend/css/font-awesome.css' %}" rel="stylesheet">
+        {% endblock %}
+
+        {% block js %}
+        <script src="{% static 'material/js/jquery-2.1.4.js' %}"></script>
+        <script src="{% static 'material/js/materialize.js' %}"></script>
+        <script src="{% static 'material/frontend/js/jquery.activeNavigation.js' %}"></script>
+        <script src="{% static 'material/frontend/js/jquery.pjax.js' %}"></script>
+        <script src="{% static 'material/frontend/js/frontend.js' %}"></script>
+        {% endblock %}
+
+        {% block extrahead %}{% endblock %}
+    </head>
+    <body>
+        {% if user.is_authenticated %}
+        <ul id="user-menu" class="dropdown-content">
+            <li><a href="#!">Profile</a></li>
+            <li><a href="#!">Logout</a></li>
+            {% block user_menu_extra %}{% endblock %}
+        </ul>
+        {% endif %}
+        <header>
+            <nav class="nav-top">
+                <a href="#" data-activates="nav-mobile" class="button-collapse full"><i class="mdi-navigation-menu"></i></a>
+
+                <div class="nav-wrapper">
+                    <div class="page-title hide-on-med-and-down">
+                        {% block page_title %}<a href="/">Viewflow</a>{% endblock %}
+                    </div>
+                    
+                    <ul class="right">
+                        {% if user.is_authenticated %}
+                        <li><a class="dropdown-button" href="#!" data-activates="user-menu">{{ user.get_full_name|default:user.username }}<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
+                        {% else %}
+                        <li><a href="/accounts/login" alt="Login"><i class="mdi-action-lock"></i></a>
+                        {% endif %}
+                    </ul>
+                </div>
+
+                <ul id="nav-mobile" class="side-nav fixed module-menu">
+                    <li class="logo valign-wrapper">
+                        <a href="/" class="no-navigation">{% block page_logo %}<img class="responsive-img" src="{% static 'material/frontend/imgs/logo.png' %}">{% endblock %}</a>
+                    </li>
+
+                    {% for module in modules %}
+                    {% if current_module == module and module.menu %}
+                    <li class="no-padding">
+                        <ul class="collapsible" data-collapsible="expandable">
+                            <li class="active">
+                                <a class="collapsible-header no-pjax"><i class="{{ module.icon }}"></i> {{ module.label|default:"" }}</a>
+                                <div class="collapsible-body" style="display: block;">
+                                    {% include module.menu %}
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                    {% else %}
+                    <li class="no-padding">
+                        <a class="collapsible-header no-pjax" href="{{ module.index_url }}"><i class="{{ module.icon }}"></i> {{ module.label|default:"" }}</a>
+                    </li>
+                    {% endif %}
+                    {% endfor %}
+                </ul>
+            </nav>
+        </header>
+        <main>
+            {% block main %}
+            {% block breadcrumbs %}
+            <div class="breadcrumbs">
+                <div class="green darken-2 white-text">
+                    {% block breadcrumbs_items %}
+                    {% endblock %}
+                </div>
+            </div>
+            {% endblock %}
+            {% block content %}
+            <div class="row">
+            </div>
+            {% endblock %}
+           {% endblock %}
+        </main>
+    </body>
+</html> 

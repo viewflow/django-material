@@ -1,7 +1,7 @@
-from karenina import modules
+from material.frontend import Module
 
 
-class Admin(modules.Module):
+class Admin(Module):
     icon = "mdi-action-settings-applications"
     order = 1000
 

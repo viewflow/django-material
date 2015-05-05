@@ -1,7 +1,5 @@
 language: python
 env:
-    - $TOX_ENV=django17_py27
-    - $TOX_ENV=django17_py33
     - $TOX_ENV=django18_py27
     - $TOX_ENV=django18_py33
 
