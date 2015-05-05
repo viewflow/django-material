@@ -6,7 +6,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
         <title>{% block title %}{% endblock %}</title>
-        {% block favicon %}<link href="{% static 'material/frontend/imgs/favicon.png' %}" rel="shortcut icon">{% endblock %}
+        {% block favicon %}<link href="{% static 'material/imgs/favicon.png' %}" rel="shortcut icon">{% endblock %}
         {% block css %}
         <link href="{% static 'material/css/materialize.css' %}" rel="stylesheet">
         <link href="{% static 'material/frontend/css/frontend.css' %}" rel="stylesheet">
@@ -51,7 +51,7 @@
 
                 <ul id="nav-mobile" class="side-nav fixed module-menu">
                     <li class="logo valign-wrapper">
-                        <a href="/" class="no-navigation">{% block page_logo %}<img class="responsive-img" src="{% static 'material/frontend/imgs/logo.png' %}">{% endblock %}</a>
+                        <a href="/" class="no-navigation">{% block page_logo %}<img class="responsive-img" src="{% static 'material/imgs/logo.png' %}">{% endblock %}</a>
                     </li>
 
                     {% for module in modules %}

@@ -43,7 +43,7 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
 
     # frontend
-    url(r'^frontend/$', generic.RedirectView.as_view(url='/frontend/accounting/', permanent=False)),
+    url(r'^frontend/$', generic.RedirectView.as_view(url='/frontend/accounting/', permanent=False), name="index"),
     url(r'^frontend/', include(frontend.default_registry.urls)),
 ]
 

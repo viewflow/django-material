@@ -6,10 +6,9 @@
 
 
 {% if not is_popup %}
-{% block breadcrumbs %}
-<li><a href="{% url 'admin:index' %}">Admininstration</a></li>
-<li style="padding-left:20px"><a href="{% url opts|admin_urlname:'changelist' %}"><a href="{% url opts|admin_urlname:'changelist' %}"><i class="fa adm-app-default adm-{{ opts.app_label }}-{{ opts.object_name|lower }}"></i> &nbsp;&nbsp;{{ opts.verbose_name_plural|capfirst }}</a></li>
-<li style="padding-left:40px" class="active"><a href="{% url opts|admin_urlname:'changelist' %}"><a href="{% url opts|admin_urlname:'changelist' %}">{% if add %}{% trans 'Add' %} {{ opts.verbose_name }}{% else %}{% trans 'Change' %}{% endif %}</a></li>
+{% block breadcrumbs_items %}
+<a href="{% url opts|admin_urlname:'changelist' %}"><i class="fa adm-app-default adm-{{ opts.app_label }}-{{ opts.object_name|lower }}"></i> &nbsp;&nbsp;{{ opts.verbose_name_plural|capfirst }}</a> &rang;
+<a href="{% url opts|admin_urlname:'changelist' %}">{% if add %}{% trans 'Add' %} {{ opts.verbose_name }}{% else %}{% trans 'Change' %}{% endif %}</a>
 {% endblock %}
 {% endif %}
 

@@ -3,6 +3,7 @@
     <head>
         <title>{% block title %}{% endblock %}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        {% block favicon %}<link href="{% static 'material/imgs/favicon.png' %}" rel="shortcut icon">{% endblock %}
 
         <link href="//netdna.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
         <!--link href="//cdn.datatables.net/1.10.5/css/jquery.dataTables.css" rel="stylesheet"-->
@@ -24,17 +25,16 @@
         {% if not is_popup %}
         <header>
             <nav id="header" class="nav-top">
-                <a href="/" class="brand-logo hide-on-med-and-down">{% block brand-logo %}Administration{% endblock %}</a>
+                <a href="/" class="page-title hide-on-med-and-down">{% block brand-logo %}Administration{% endblock %}</a>
                 <a href="#" data-activates="nav-mobile" class="button-collapse full"><i class="mdi-navigation-menu"></i></a>
-                <ul id="nav-mobile" class="side-nav fixed">
-                    <li class="logo">
-                        <a id="logo-container" href="/admin">
-                            <img class="responsive-img" src="{% static 'material/admin/img/logo.png' %}">
-                        </a>
+                <ul id="nav-mobile" class="side-nav fixed module-menu">
+                    <li class="logo valign-wrapper">
+                        <a href="/" class="no-navigation">{% block page_logo %}<img class="responsive-img" src="{% static 'material/imgs/logo.png' %}">{% endblock %}</a>
                     </li>
 
-                    {% block breadcrumbs %}
-                    <li class="active"><a href="/admin/">Administration</a></li>
+                    {% block breadcrumbs_left %}
+                    {% block back_link %}<li><a class="collapsible-header no-pjax" href="/"><i class="mdi-navigation-arrow-back"></i> Back to website</a></li>{% endblock %}
+                    <li class="active"><a class="collapsible-header no-pjax" href="/admin/"><i class="mdi-action-settings-applications"></i> Administration</a></li>
                     {% endblock %}
                     {% if user.is_authenticated %}
                     <li class="logout"><a href="{% url 'admin:logout' %}"><i class="mdi-action-lock-open"></i> {% trans 'Log out' %}</a></li>
@@ -45,6 +45,16 @@
         {% endif %}
 
         <main>
+            {% if not is_popup %}
+            {% block breadcrumbs %}
+            <div class="breadcrumbs">
+                <div class="green darken-2 white-text">
+                    {% block breadcrumbs_items %}
+                    {% endblock %}
+                </div>
+            </div>
+            {% endblock %}
+            {% endif %}
             {% block content %}
             {{ content }}
             {% endblock %}
