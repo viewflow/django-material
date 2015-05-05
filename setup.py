@@ -16,6 +16,7 @@ setup(
     keywords="django",
     packages=['material',
               'material.templatetags',
+              'material.frontend',
               'material.admin',
               'material.admin.templatetags'],
     include_package_data=True,
