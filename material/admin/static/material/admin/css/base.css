@@ -51,6 +51,12 @@ body {
     width: 240px;
 }
 
+.avatar {
+    height: 30px;
+    position: relative;
+    top: 15px;
+    margin-right: 10px; 
+}
 
 @media only screen and (max-width : 600px) {
     .nav-top {

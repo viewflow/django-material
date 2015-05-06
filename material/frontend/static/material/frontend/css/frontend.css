@@ -24,6 +24,13 @@ body {
     display: table-cell;
 }
 
+.avatar {
+    height: 30px;
+    position: relative;
+    top: 15px;
+    margin-right: 10px; 
+}
+
 /* 
    Sidebar menu 
 */

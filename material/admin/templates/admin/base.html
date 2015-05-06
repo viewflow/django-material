@@ -22,19 +22,38 @@
     {% load i18n %}
 
     <body>
+        {% if user.is_authenticated %}
+        <ul id="user-menu" class="dropdown-content">
+            <li><a href="/accounts/profile/">Profile</a></li>
+            <li><a href="/accounts/logout">Logout</a></li>
+            {% block user_menu_extra %}{% endblock %}
+        </ul>
+        {% endif %}
+
         {% if not is_popup %}
         <header>
             <nav id="header" class="nav-top">
-                <a href="/" class="page-title hide-on-med-and-down">{% block brand-logo %}Administration{% endblock %}</a>
-                <a href="#" data-activates="nav-mobile" class="button-collapse full"><i class="mdi-navigation-menu"></i></a>
+                <div class="nav-wrapper">
+                    <a href="/" class="page-title hide-on-med-and-down">{% block brand-logo %}Administration{% endblock %}</a>
+                    <a href="#" data-activates="nav-mobile" class="button-collapse full"><i class="mdi-navigation-menu"></i></a>
+
+                    <ul class="right">
+                        {% if user.is_authenticated %}
+                        <li><a class="dropdown-button" href="#!" data-activates="user-menu"><img class="avatar left mdi-img circle" src="{% static 'material/frontend/imgs/default_user.png' %}">{{ user.get_full_name|default:user.username }}<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
+                        {% else %}
+                        <li><a href="{% url 'login' %}" alt="Login"><i class="mdi-action-lock"></i></a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+
                 <ul id="nav-mobile" class="side-nav fixed module-menu">
                     <li class="logo valign-wrapper">
                         <a href="/" class="no-navigation">{% block page_logo %}<img class="responsive-img" src="{% static 'material/imgs/logo.png' %}">{% endblock %}</a>
                     </li>
 
                     {% block breadcrumbs_left %}
-                    {% block back_link %}<li><a class="collapsible-header no-pjax" href="/"><i class="mdi-navigation-arrow-back"></i> Back to website</a></li>{% endblock %}
-                    <li class="active"><a class="collapsible-header no-pjax" href="/admin/"><i class="mdi-action-settings-applications"></i> Administration</a></li>
+                    {% block back_link %}<li class="no-padding"><a class="collapsible-header no-pjax" href="/"><i class="mdi-navigation-arrow-back"></i> Back to website</a></li>{% endblock %}
+                    <li class="no-padding active"><a class="collapsible-header no-pjax" href="/admin/"><i class="mdi-action-settings-applications"></i> Administration</a></li>
                     {% endblock %}
                     {% if user.is_authenticated %}
                     <li class="logout"><a href="{% url 'admin:logout' %}"><i class="mdi-action-lock-open"></i> {% trans 'Log out' %}</a></li>
