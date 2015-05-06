@@ -3,7 +3,7 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from django.views import generic
 from django.shortcuts import render
-from material import frontend
+from material.frontend import urls as frontend_urls
 
 from . import forms
 
@@ -44,7 +44,7 @@ urlpatterns = [
 
     # frontend
     url(r'^frontend/$', generic.RedirectView.as_view(url='/frontend/accounting/', permanent=False), name="index"),
-    url(r'^frontend/', include(frontend.default_registry.urls)),
+    url(r'', include(frontend_urls)),
 ]
 
 
