@@ -1,0 +1,117 @@
+form  .row {
+    margin-bottom: 0px;
+}
+[class^="mdi-"], [class*="mdi-"] {
+    line-height: 45px;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+}
+
+.input-field label {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: calc(100% - 21px);
+  overflow: hidden;
+}
+
+.checkbox-field {
+    line-height: 35px;
+}
+
+.readonly-password-field {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: rgba(0, 0, 0, 0.3);
+}
+
+.readonly-password-field div {
+    margin-top: 10px;    
+    margin-bottom: 15px;    
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3); 
+}
+
+select.material-ignore {
+    display: block;
+    background: #fff;
+}
+
+.select-wrapper {
+    margin-top: 0px;
+}
+
+.select-wrapper input.select-dropdown {
+    margin-top: -7px;
+}
+
+.file-field .btn, .file-field .btn-large {
+    left: auto;
+}
+
+.file-field label {
+    margin-left: 100px;
+}
+
+.help-block {
+    line-height: 12px;
+    position: relative;
+    top: -10px;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.error {
+    line-height: 12px;
+    position: relative;
+    top: -10px;
+    color: #F44336;
+}
+
+.input-field .prefix ~ .errors .error {
+    margin-left: 3rem;
+}
+
+.input-field.has-error .prefix {
+    color: #F44336;
+}
+
+.select-field.has-error input {
+    border-bottom: 1px solid #F44336;
+    -webkit-box-shadow: 0 1px 0 0 #F44336;
+    -moz-box-shadow: 0 1px 0 0 #F44336;
+    box-shadow: 0 1px 0 0 #F44336;
+}
+
+.radio-field {
+    paddign-bottom: 18px;
+}
+
+
+.radio-field .inline {
+    margin-top: 10px;
+}
+
+.radio-field .inline .radio {
+    display: inline;
+    margin-right: 20px;
+}
+
+.radio-field .radio {
+    padding-top: 10px;
+}
+
+@media only screen and (max-width : 600px) {
+    .container.expand-on-small-only {
+        width: 100% !important;
+        padding: 0 0.8rem  !important;
+    }
+}
