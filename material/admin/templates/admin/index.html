@@ -1,6 +1,10 @@
 {% extends "admin/base_site.html" %}
 {% load i18n admin_static %}
 
+{% block breadcrumbs_items %}
+<a href="{% url 'admin:index' %}">All apps</a>
+{% endblock %}
+
 {% block content %}
 <div class="row">
     <div class="app-list">
