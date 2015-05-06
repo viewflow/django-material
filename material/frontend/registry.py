@@ -4,7 +4,7 @@ class Registry(object):
 
     def modules(self):
         return sorted([module for module in self._registry.values()],
-                      key=lambda module: module.order)
+                      key=lambda module: (module.order, module.slug))
 
     def installed_modules(self):
         return [module for module in self.modules()
