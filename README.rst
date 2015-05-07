@@ -10,18 +10,20 @@ Material design for Django Forms and Admin. Template driven.
    :alt: Join the chat at https://gitter.im/viewflow/django-material
    :target: https://gitter.im/viewflow/django-material?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
 
-Features
+Overview
 ========
 
-* Strong python/html code separation
-* Easy redefinition of particular fields rendering
-* Complex form layout support
+* [Forms](#forms) - new way to render django forms
+    - Strong python/html code separation
+    - Easy redefinition of particular fields rendering
+    - Complex form layout support
+* [Frontend](#frontend) - Quick starter template for modular ERP-like applications developent
+* [Admin](#admin) - Material-designed django admin
 
 Demo: http://forms.viewflow.io/
 
 .. image:: .screen.png
    :width: 400px
-
 
 Installation
 ============
@@ -30,21 +32,18 @@ django-material tested with Python 2.7/3.3, django 1.6/1.7::
 
     pip install django-material
 
-And add it into INSTALLED_APPS settings
+
+Forms
+=====
+
+Add `material` into INSTALLED_APPS settings 
 
 .. code-block:: python
 
     INSTALLED_APPS = (
          'material',
-         'material.admin',
          ...
     )
-
-*NOTE:* 'material.admin' must be added before 'django.contrib.admin'
-
-
-Quick start
-===========
 
 Include material javascript and styles into your base template.
 
@@ -70,7 +69,7 @@ And render your form with {% form %} template tag
     </form>
 
 Template tags
-=============
+-------------
 
 `django-material` forms processing is built around simple concept
 called *part*. `part` is like django template block, it has a default
@@ -100,7 +99,7 @@ completly override its rendering
 
 
 Layout
-======
+------
 
 Layout object is the way to specify relative fields placements and sizes.
 
@@ -129,7 +128,7 @@ Layouts rendering itself is specified in template.
 
 
 ModelForm Views
-===============
+---------------
 
 Material forms library provides  LayoutMixin for model form views, populates
 form fields list directly from layout object
@@ -143,8 +142,50 @@ form fields list directly from layout object
         layout = Layout(...)
 
 
+
+Frontend
+========
+
+Add `material.frontend` into INSTALLED_APPS settings 
+
+.. code-block:: python
+
+    INSTALLED_APPS = (
+         'material',
+         'material.admin',
+         ...
+    )
+
+
+**TODO**
+
+
+Admin
+======
+
+Add `material.admin` into INSTALLED_APPS settings 
+
+.. code-block:: python
+
+    INSTALLED_APPS = (
+         'material',
+         'material.admin',
+         ...
+    )
+
+*NOTE:* 'material.admin' must be added before 'django.contrib.admin'
+
+Admin support development is on initial stage. Only basic admin features are available.
+
+
 Changelog
 =========
+
+0.3.0 - GIT Version
+-------------------
+
+* Added frontend module
+
 
 0.2.1 2015-04-20 - Alpha
 ------------------------
