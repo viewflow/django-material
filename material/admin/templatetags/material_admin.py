@@ -1,8 +1,11 @@
 import datetime
 
+from django.apps import apps
 from django.contrib.admin.views.main import PAGE_VAR
+from django.contrib.admin import site
+from django.core.urlresolvers import reverse, NoReverseMatch
 from django.db import models
-from django.utils import formats
+from django.utils import formats, six
 from django.utils.dates import MONTHS
 from django.utils.html import format_html
 from django.utils.safestring import mark_safe
@@ -14,6 +17,59 @@ from material import Layout, Fieldset, Row
 
 
 register = Library()
+
+
+@register.assignment_tag
+def get_app_list(request):
+    app_dict = {}
+    user = request.user
+
+    for model, model_admin in site._registry.items():
+        app_label = model._meta.app_label
+        has_module_perms = user.has_module_perms(app_label)
+
+        if has_module_perms:
+            perms = model_admin.get_model_perms(request)
+
+            # Check whether user has any perm for this module.
+            # If so, add the module to the model_list.
+            if True in perms.values():
+                info = (app_label, model._meta.model_name)
+                model_dict = {
+                    'name': capfirst(model._meta.verbose_name_plural),
+                    'object_name': model._meta.object_name,
+                    'perms': perms,
+                }
+                if perms.get('change', False):
+                    try:
+                        model_dict['admin_url'] = reverse('admin:%s_%s_changelist' % info, current_app=site.name)
+                    except NoReverseMatch:
+                        pass
+                if app_label in app_dict:
+                    app_dict[app_label]['models'].append(model_dict)
+                else:
+                    app_name = apps.get_app_config(app_label).verbose_name
+                    if len(app_name) > 23:
+                        app_name = app_label.title()
+                    app_name = app_name.replace('_', ' ')
+
+                    app_dict[app_label] = {
+                        'name': app_name,
+                        'app_label': app_label,
+                        'app_url': reverse('admin:app_list', kwargs={'app_label': app_label}, current_app=site.name),
+                        'has_module_perms': has_module_perms,
+                        'models': [model_dict],
+                    }
+
+    # Sort the apps alphabetically.
+    app_list = list(six.itervalues(app_dict))
+    app_list.sort(key=lambda x: x['name'].lower())
+
+    # Sort the models alphabetically within each app.
+    for app in app_list:
+        app['models'].sort(key=lambda x: x['name'])
+
+    return app_list
 
 
 @register.assignment_tag
