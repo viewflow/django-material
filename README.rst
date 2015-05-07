@@ -13,12 +13,12 @@ Material design for Django Forms and Admin. Template driven.
 Overview
 ========
 
-* [Forms](#forms) - new way to render django forms
+* Forms_ - new way to render django forms
     - Strong python/html code separation
     - Easy redefinition of particular fields rendering
     - Complex form layout support
-* [Frontend](#frontend) - Quick starter template for modular ERP-like applications developent
-* [Admin](#admin) - Material-designed django admin
+* Frontend_ - Quick starter template for modular ERP-like applications developent
+* Admin_ - Material-designed django admin
 
 Demo: http://forms.viewflow.io/
 
