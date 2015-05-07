@@ -1,3 +1,4 @@
+===============
 Django Material
 ===============
 
@@ -72,7 +73,7 @@ And render your form with {% form %} template tag
     </form>
 
 Template tags
-`````````````
+-------------
 
 `django-material` forms processing is built around simple concept
 called *part*. `part` is like django template block, it has a default
@@ -144,7 +145,7 @@ form fields list directly from layout object
     class SampleView(LayoutMixin, generic.ModelFormView):
         layout = Layout(...)
 
-
+****
 
 Frontend
 ========
@@ -162,6 +163,7 @@ Add `material.frontend` into INSTALLED_APPS settings
 
 **TODO**
 
+****
 
 Admin
 ======
@@ -180,6 +182,7 @@ Add `material.admin` into INSTALLED_APPS settings
 
 Admin support development is on initial stage. Only basic admin features are available.
 
+****
 
 Changelog
 =========
