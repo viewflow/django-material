@@ -43,6 +43,8 @@ def get_app_list(request):
                 if perms.get('change', False):
                     try:
                         model_dict['admin_url'] = reverse('admin:%s_%s_changelist' % info, current_app=site.name)
+                        if request.path.startswith(model_dict['admin_url']):
+                            model_dict['active'] = True
                     except NoReverseMatch:
                         pass
                 if app_label in app_dict:
@@ -60,6 +62,9 @@ def get_app_list(request):
                         'has_module_perms': has_module_perms,
                         'models': [model_dict],
                     }
+
+                    if request.path.startswith(app_dict[app_label]['app_url']):
+                        app_dict[app_label]['active'] = True
 
     # Sort the apps alphabetically.
     app_list = list(six.itervalues(app_dict))

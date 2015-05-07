@@ -59,12 +59,12 @@
                             <ul class="collapsible" data-collapsible="accordion">
                                 {% get_app_list request as app_list %}
                                 {% for app in app_list %}
-                                <li class="header">
-                                    <a class="collapsible-header">{{ app.name|truncatechars:23 }}</a>
-                                    <div class="collapsible-body">
+                                <li class="header{% if app.active %} active{% endif %}">
+                                    <a class="collapsible-header{% if app.active %} active{% endif %}">{{ app.name|truncatechars:23 }}</a>
+                                    <div class="collapsible-body" {% if app.active %}style="display:block"{% endif %}>
                                         <ul>
                                             {% for model in app.models %}
-                                            <li>
+                                            <li class="{% if model.active %}active{% endif %}">
                                                 <a href="{{ model.admin_url }}">
                                                     <i class="fa adm-app-default adm-{{ app.app_label }}-{{ model.object_name|lower }}"></i> {{ model.name }}
                                                 </a>
@@ -103,10 +103,6 @@
         <script src="//cdn.datatables.net/1.10.5/js/jquery.dataTables.js" type="text/javascript"></script>
         <script src="//cdn.datatables.net/responsive/1.0.4/js/dataTables.responsive.js" type="text/javascript"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/datatables-fixedheader/2.1.1/dataTables.fixedHeader.js" type="text/javascript"></script>
-        <script src="{% static 'material/js/jquery.activeNavigation.js' %}"></script>
-        <script type="text/javascript">
-          $(document).activeNavigation("#nav-mobile");
-        </script>
         {% block extrajs %}{% endblock %}
 
         {% block messages %}
