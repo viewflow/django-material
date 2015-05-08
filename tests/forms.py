@@ -82,7 +82,7 @@ class LoginForm(forms.Form):
 
     def clean(self):
         cleaned_data = super(LoginForm, self).clean()
-        if cleaned_data['email'] == 'john@doe.com':
+        if cleaned_data.get('email') == 'john@doe.com':
             raise forms.ValidationError('John, come on. You are blocked.')
 
 
