@@ -18,7 +18,7 @@
                 {% part field add_control_attr %}{% endpart %}{% endtagattrs %}>
             {% part field options %}{% for value, choice in field.widget.choices %}
             <option {% tagattrs %}{% if value|force_text == bound_field.value|force_text %}selected="selected"{% endif %}
-                    {% if value == None or value == '' %}disabled value{% else %}value="{{ value }}"{% endif %}
+                    {% if value == None or value == '' %}value{% else %}value="{{ value }}"{% endif %}
                     {% endtagattrs %}>{% if value == None or value == '' %}{{ form_select_empty_label|default:choice }}{% else %}{{ choice }}{% endif %}</option>{% endfor %}{% endpart %}
         </select>
         {% endpart %}{% part field help_text %}{% if field.help_text %}
