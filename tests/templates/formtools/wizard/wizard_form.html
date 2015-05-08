@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load i18n material_form %}
+
+{% block extrahead %}
+{{ wizard.form.media }}
+{% endblock %}
+
+{% block content %}
+<div class="row valign">
+    <div class="{% block formclass %}col s12 m8 offset-m2 l8 offset-l2{% endblock %}">
+        <div class="card">
+            <form action="" method="post">{% csrf_token %}
+                <div class="card-content">
+                    <span class="card-title grey-text text-darken-2">Step {{ wizard.steps.step1 }} of {{ wizard.steps.count }}</span>
+                    {{ wizard.management_form }}
+
+                    {% if wizard.form.forms %}
+                        {{ wizard.form.management_form }}
+                        {% for form in wizard.form.forms %}
+                            {% form %}{% endform %}
+                        {% endfor %}
+                    {% else %}
+                        {% form form=wizard.form %}{% endform %}
+                    {% endif %}
+                </div>
+                <div class="card-action right-align">
+                    {% if wizard.steps.prev %}
+                    <button class="btn bnt-default" name="wizard_goto_step" type="submit" value="{{ wizard.steps.first }}">
+                        {% trans "first step" %}
+                    </button>
+                    <button class="btn" name="wizard_goto_step" type="submit" value="{{ wizard.steps.prev }}">
+                        <i class="mdi-navigation-arrow-back left"></i>
+                        {% trans "prev step" %}
+                    </button>
+                    {% endif %}
+                    <button class="btn" type="submit">
+                        {% trans "submit" %}
+                        <i class="mdi-navigation-arrow-forward right"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

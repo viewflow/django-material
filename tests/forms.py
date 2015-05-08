@@ -421,3 +421,12 @@ class BankForm(forms.Form):
     """
 
     blockclass = "col s12 m12 l9 offset-l1"
+
+
+class WizardForm1(forms.Form):
+    subject = forms.CharField(max_length=100)
+    sender = forms.EmailField()
+
+
+class WizardForm2(forms.Form):
+    message = forms.CharField(widget=forms.Textarea)
