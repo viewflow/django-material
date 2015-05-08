@@ -1,12 +1,11 @@
 {% load material_form material_form_internal %}
 {% part form %}
-    {% if form_show_non_field_errors and form.non_field_errors%}
-        <!-- Form errors -->
-        <div class="alert alert-danger alert-formerror">
+    {% if form.non_field_errors%}
+    <div>
         {% for error in form.non_field_errors %}
-            <small>{{ error }}</small>
+        <small class="error">{{ error }}</small>
         {% endfor %}
-        </div>
+    </div>
     {% endif %}
     {% part form hidden %}{% for hidden in form.hidden_fields %}
             {{ hidden }}

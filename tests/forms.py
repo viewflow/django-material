@@ -80,6 +80,11 @@ class LoginForm(forms.Form):
 
     title = "Login form"
 
+    def clean(self):
+        cleaned_data = super(LoginForm, self).clean()
+        if cleaned_data['email'] == 'john@doe.com':
+            raise forms.ValidationError('John, come on. You are blocked.')
+
 
 class RegistrationForm(forms.Form):
     username = forms.CharField()
