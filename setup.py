@@ -22,6 +22,9 @@ setup(
     include_package_data=True,
     zip_safe=False,
     platforms=['any'],
+    install_requires=[
+        'django-easy-pjax'
+    ],
     classifiers=[
         'Framework :: Django',
         'Development Status :: 3 - Alpha',
