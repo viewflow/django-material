@@ -1,4 +1,4 @@
-from . import default_registry
+from . import modules as modules_registry
 
 
 def modules(request):
@@ -14,6 +14,6 @@ def modules(request):
             module = module.user_module(request.user)
 
     return {
-        'modules': default_registry.available_modules(request.user),
+        'modules': modules_registry.available_modules(request.user),
         'current_module': module,
     }

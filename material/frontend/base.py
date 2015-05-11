@@ -6,23 +6,40 @@ from django.core.urlresolvers import reverse
 from django.template import TemplateDoesNotExist
 from django.template.loader import get_template
 from django.utils.functional import curry
+from django.utils.six import with_metaclass
 
-from .registry import default_registry
 from .urlconf import ModuleURLResolver
 
 
-class Module(object):
+class ModuleInstanceDescriptor(object):
+    def __init__(self):
+        self.flow_instance = None
+
+    def __get__(self, instance=None, owner=None):
+        if self.flow_instance is None:
+            self.flow_instance = owner()
+        return self.flow_instance
+
+
+class ModuleMetaClass(type):
+    def __new__(cls, class_name, bases, attrs):
+        new_class = super(ModuleMetaClass, cls).__new__(cls, class_name, bases, attrs)
+
+        # singleton instance
+        new_class.instance = ModuleInstanceDescriptor()
+
+        return new_class
+
+
+class Module(with_metaclass(ModuleMetaClass, object)):
     """
     Base class for website modules
     """
     order = 10
     icon = "mdi-action-receipt"
 
-    def __init__(self, register_to=None, app_name=None):
+    def __init__(self, app_name=None):
         self.app_name = app_name or self.slug
-        if register_to is None:
-            register_to = default_registry
-        register_to.register(self)
 
     @property
     def app_label(self):

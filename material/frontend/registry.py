@@ -32,4 +32,4 @@ class Registry(object):
             module.ready()
 
 
-default_registry = Registry()
+modules = Registry()
