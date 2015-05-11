@@ -88,7 +88,7 @@ def multiwidget_value(bound_field, pos):
 
 @register.filter
 def jquery_datepicker_format(field):
-    input_format = field.input_formats[0]
+    input_format = field.input_formats[2]
 
     # %a, %A, %z, %f %Z %j %U %W %c %x %X unsupported
 

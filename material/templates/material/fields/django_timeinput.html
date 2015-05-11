@@ -1,0 +1,33 @@
+{% load material_form material_form_internal %}
+<div class="row">
+    <div {% tagattrs %}
+         id="id_{{ bound_field.html_name }}_container"
+         class="{% part field group_class %}input-field col s12
+                {% if field.required%}required{% endif %}
+                {% if bound_field.errors %}has-error{% endif %}
+                {% part field add_group_class %}{% endpart %}
+                {% endpart %}"{% endtagattrs %}>
+        {% part field prefix %}{% endpart %}{% part field control %}
+        <input {% tagattrs %}
+               type="{{ field.widget.input_type }}"
+               class="{% if field.widget.attrs.class %}{{ field.widget.attrs.class }} {% endif %}{% if bound_field.errors %}invalid {% endif %}{% part field add_control_class %}{{ form_control_class }}{% endpart %}"
+               name="{{ bound_field.html_name }}"
+               {% for name, value in field.widget.attrs.items %}{% if name != 'class' %}{{name}}="{{value}}" {% endif %}{% endfor %}
+               id="id_{{ bound_field.html_name }}"
+               data-date-format="{{ field|jquery_datepicker_format }}"
+               autocomplete="false"
+               data-form-control="time"{% endtagattrs %}{% if bound_field.value %} value="{{ bound_field.value|datepicker_value:field.input_formats.2 }}"{% endif %}>
+        {% endpart %}{% part field label %}
+        <label {% tagattrs %}
+               for="{{ bound_field.id_for_label }}"
+               class="{% part field add_label_class %}{{ form_label_class }}{% endpart %}"
+               {% endtagattrs %}>{{ bound_field.label }}</label>
+        {% endpart %}{% part field help_text %}{% if field.help_text %}
+        <small class="help-block">{{ bound_field.help_text }}</small>
+        {% endif %}
+        {% endpart %}{% part field errors %}
+        {% if bound_field.errors %}
+            {% include  'material/field_errors.html' %}
+        {% endif %}{% endpart %}{{ hidden_initial }}
+    </div>
+</div>
