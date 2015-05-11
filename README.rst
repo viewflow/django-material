@@ -242,11 +242,15 @@ Admin support development is on initial stage. Only basic admin features are ava
 Changelog
 =========
 
-0.3.0 - GIT Version
--------------------
+0.3.0 2015-05-11 - Alpha
+------------------------
 
-* Added frontend module
-
+* Migrated to new version of materializecss framework
+* List all applications in admin navigation menu
+* Added breadcrumbs in admin
+* Custom material css and js cleanup
+* New Frontend template
+* Various widget rendering fixes (splitdatetime, empty selects)
 
 0.2.1 2015-04-20 - Alpha
 ------------------------

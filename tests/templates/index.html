@@ -149,14 +149,21 @@
                                     <div class="col s12 m10 offset-m1">
                                         <div class="divider"></div>
                                         <div id="features" class="section scrollspy">
-                                            <h5>Features</h5>
+                                            <h5>Overview</h5>
+                                            <h6>Material design with goodies</h6>
                                             <div class="row">
                                                 <div class="col m8">
                                                 <h5 style="line-height:50px">
                                                     <ul style="margin:0">
-                                                        <li><i class="green-text mdi-action-done"></i> Strong python/html code separation</li>
-                                                        <li><i class="green-text mdi-action-done"></i> Easy redefinition of particular field rendering</li>
-                                                        <li><i class="green-text mdi-action-done"></i> Complex form layout support</li>
+                                                        <li><a href="#forms" style="text-transform:none">Forms</a>&ndash; Easy way to render custom django forms
+                                                            <ul style="padding-left:20px;font-size:0.7em;line-height:30px">
+                                                                <li><i class="green-text mdi-action-done"></i> Strong python/html code separation</li>
+                                                                <li><i class="green-text mdi-action-done"></i> Easy redefinition of particular field rendering</li>
+                                                                <li><i class="green-text mdi-action-done"></i> Complex form layout support</li>
+                                                            </ul>
+                                                        </li>
+                                                        <li><a href="#frontend" style="text-transform:none">Frontend</a>&ndash; Quick starter template</li>
+                                                        <li><a href="#admin" style="text-transform:none">Admin</a>&ndash; Material-designed django admin</li>
                                                     </ul>
                                                 </h5>
                                                 </div>
@@ -177,10 +184,11 @@
 
 <pre><code class="python">    $ pip install django-material </code></pre>
 
-And add it into INSTALLED_APPS settings
+And add desired apps into INSTALLED_APPS settings
 
 <pre><code class="python">    INSTALLED_APPS = (
         'material',
+        'material.frontend',
         'material.admin',
        ...
     )
@@ -270,6 +278,61 @@ And render your form with {% templatetag openblock %} form {% templatetag closeb
                            <div class="card-action right-align">
                                <a href="#bank_form_code" class="modal-trigger align-right">Code</a>
                                <a href="#bank_form_html" class="modal-trigger align-right">Template</a>
+                           </div>
+                       </div>
+                   </div>
+                   </div>
+                   <div class="col s12">
+                       <div id="frontend" class="card scrollspy">
+                           <div class="card-content">
+                               <div class="row">
+                               <div class="col s8">
+                                   <h4>Frontend</h4>
+                                   <h6>Quick starter template for modular ERP-like applications developent</h6>
+                                   <h5>Quick start</h5><br/>
+                                   Add <i>material.frontend.context_processors.modules</i> into <i>context_processor</i> setting
+<pre><code class="python">TEMPLATES = [
+        {
+            ...
+            'OPTIONS': {
+                'context_processors': [
+                    ...
+                    'material.frontend.context_processors.modules',
+                ],
+            },
+        },
+]</code></pre>
+                               </div>
+                               <div class="col s4">
+                                   <img src="{% static 'img/frontend.png'%}" class="responsive-img" style="border:2px solid grey"/>
+                               </div>
+                               <div class="col s12">
+
+Add frontend urls into global urlconf module at urls.py
+
+<pre><code class="python">from material.frontend import urls as frontend_urls
+
+    urlpatterns = [
+        ...
+        url(r'^admin/', include(admin.site.urls)),
+        url(r'', include(frontend_urls)),
+]</code></pre>
+
+
+To create a new module make a `modules.py` file, inside app directory, with following content
+
+.. code-block:: python
+
+<pre><code class="python">from material.frontend import Module
+
+    class Sample(Module):
+        icon = 'mdi-image-compare'
+</code></pre>
+By default module expose a single view that renders html template from &lt;module_name&gt;/index.html file.
+<br/><br/>
+You can override `Module.get_urls()` method to provide module url config that would be automatically included into
+global urls.
+                               </div>
                            </div>
                        </div>
                    </div>
@@ -380,6 +443,7 @@ And render your form with {% templatetag openblock %} form {% templatetag closeb
         <li><a href="#quick_start">Quick Start</a></li>
         <li><a href="#docs">Documentation</a></li>
         <li><a href="#forms">Forms samples</a></li>
+        <li><a href="#frontend">Frontend Template</a></li>
         <li><a href="#admin">Admin</a></li>
       </ul>
 
