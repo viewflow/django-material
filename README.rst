@@ -150,18 +150,73 @@ form fields list directly from layout object
 Frontend
 ========
 
-Add `material.frontend` into INSTALLED_APPS settings 
+Frontend template assumes that your application contains a set of top level `modules`
+each one could restrict user access level and have own submenu.
+
+To quick start add `material.frontend` and `easy_pjax` into INSTALLED_APPS settings 
 
 .. code-block:: python
 
     INSTALLED_APPS = (
          'material',
-         'material.admin',
+         'material.frontend',
+         'easy_pjax'
          ...
     )
 
+Add `material.frontend.context_processors.modules` into `context_processor` setting
+        
+.. code-block:: python
 
-**TODO**
+    TEMPLATES = [
+        {
+            ...
+            'OPTIONS': {
+                'context_processors': [
+                    ...
+                    'material.frontend.context_processors.modules',
+                ],
+            },
+        },
+    ]
+
+
+Add frontend urls into global urlconf module at urls.py
+
+.. code-block:: python
+
+    from material.frontend import urls as frontend_urls
+
+    urlpatterns = [
+        ...
+        url(r'^admin/', include(admin.site.urls)),
+        url(r'', include(frontend_urls)),
+    ]
+
+
+To create a new module make a `modules.py` file, inside app directory, with following content
+
+.. code-block:: python
+
+    from material.frontend import Module
+
+    class Sample(Module):
+        icon = 'mdi-image-compare'
+
+By default module expose a single view that renders html template from <module_name>/index.html file.
+
+You can override `Module.get_urls()` method to provide module url config that would be automatically included into
+global urls.
+
+To provide custom module menu, just create a template `<module_name>/menu.html`.
+
+You can disable modules autodiscovery and explicitly list enabled modules in the `MODULES` setting
+
+.. code-block:: python
+
+    MODULES = (
+        'my_app.modules.Sample'
+    )
 
 ****
 
