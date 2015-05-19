@@ -237,18 +237,20 @@ Add `material.admin` into INSTALLED_APPS settings
 
 Ensure that `django.template.context_processors.request` in your template context processor settings list
 
-TEMPLATES = [
-    {
-        ...
-        'OPTIONS': {
-            'context_processors': [
-                ...
-                'django.template.context_processors.request',
-                ...
-            ],
+.. code-block:: python
+
+    TEMPLATES = [
+        {
+            ...
+            'OPTIONS': {
+                'context_processors': [
+                    ...
+                    'django.template.context_processors.request',
+                    ...
+                ],
+            },
         },
-    },
-]
+    ]
 
 Admin support development is on initial stage. Only basic admin features are available.
 
