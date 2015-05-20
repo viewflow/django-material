@@ -9,3 +9,4 @@ $('.collapsible').collapsible({
 
 $(".button-collapse").sideNav();
 $(".dropdown-button").dropdown();
+$('.modal-trigger').leanModal();
