@@ -1,4 +1,4 @@
-{% load material_form_internal %}
+{% load material_form material_form_internal %}
 
 <fieldset>
 {% if parent.label %}
@@ -24,12 +24,12 @@
                     {% for hidden in form.hidden_fields %}
                         {{ hidden }}
                     {% endfor %}
-                {% endvpart %}
+                {% endpart %}
                 {% part form visible %}
                 {% for bound_field in form.visible_fields %}
                 <td>
                     {% part bound_field.field %}
-                        {% viewfield bound_field %}
+                        {% render bound_field %}{% endrender %}
                     {% endpart %}
                 </td>
                 {% endfor %}
