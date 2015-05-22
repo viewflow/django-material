@@ -9,6 +9,8 @@
         {% block favicon %}<link href="{% static 'material/imgs/favicon.png' %}" rel="shortcut icon">{% endblock %}
         {% block css %}
         <link href="{% static 'material/css/materialize.css' %}" rel="stylesheet">
+        <link href="{% static 'material/css/jquery.datetimepicker.css ' %}" rel="stylesheet">
+        <link href="{% static 'material/css/forms.css ' %}" rel="stylesheet">
         <link href="{% static 'material/frontend/css/frontend.css' %}" rel="stylesheet">
         <link href="{% static 'material/frontend/css/font-awesome.css' %}" rel="stylesheet">
         {% endblock %}
@@ -16,8 +18,10 @@
         {% block js %}
         <script src="{% static 'material/js/jquery-2.1.4.js' %}"></script>
         <script src="{% static 'material/js/materialize.js' %}"></script>
+        <script src="{% static 'material/js/jquery.datetimepicker.js' %}"></script>
         <script src="{% static 'material/frontend/js/jquery.activeNavigation.js' %}"></script>
         <script src="{% static 'material/frontend/js/jquery.pjax.js' %}"></script>
+        <script src="{% static 'material/js/material_init.js' %}"></script>
         <script src="{% static 'material/frontend/js/frontend.js' %}"></script>
         {% endblock %}
 
