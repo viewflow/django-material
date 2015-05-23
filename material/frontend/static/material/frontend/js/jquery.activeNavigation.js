@@ -1,11 +1,27 @@
 (function( $ ) {
+    function getUrlParameter(sParam)
+    {
+        var sPageURL = window.location.search.substring(1);
+        var sURLVariables = sPageURL.split('&');
+        for (var i = 0; i < sURLVariables.length; i++)
+        {
+            var sParameterName = sURLVariables[i].split('=');
+            if (sParameterName[0] == sParam)
+            {
+                return sParameterName[1];
+            }
+        }
+    }
+
     $.fn.activeNavigation = function(selector) {
-        var pathname = window.location.pathname
-        var hrefs = []
-        $(selector).find("a:not(.no-navigation)").each(function(){
-            if (pathname.indexOf($(this).attr("href")) > -1) 
+        var pathname = getUrlParameter('category') || window.location.pathname;
+
+        var hrefs = [];
+        $(selector).find("a:not(.no-navigation)").each(function() {
+            if (pathname.indexOf($(this).attr("href")) > -1)
                 hrefs.push($(this));
         })
+
         if (hrefs.length) {
             hrefs.sort(function(a,b){
                 return a.attr("href").length < b.attr("href").length;
@@ -16,7 +32,6 @@
             hrefs[0].closest('div').closest('li').addClass('active');
             hrefs[0].parents('li').addClass('active');
             hrefs[0].closest('li.header').find('.collapsible-header').addClass("active");
-            //hrefs[0].closest('li.header').find('.collapsible-header').closest('li').addClass("active");
             hrefs[0].closest('li.header').find('.collapsible-body').css("display", "block");
         }
     };
