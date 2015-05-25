@@ -14,7 +14,7 @@
     }
 
     $.fn.activeNavigation = function(selector) {
-        var pathname = getUrlParameter('category') || window.location.pathname;
+        var pathname = getUrlParameter('back') || window.location.pathname;
 
         var hrefs = [];
         $(selector).find("a:not(.no-navigation)").each(function() {
