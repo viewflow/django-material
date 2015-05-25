@@ -181,6 +181,17 @@ Add `material.frontend.context_processors.modules` into `context_processor` sett
     ]
 
 
+Add 'material.frontend.middleware.SmoothNavigationMiddleware' to `MIDDLEWARE_CLASSES`
+
+.. code-block:: python
+
+    MIDDLEWARE_CLASSES = (
+        ...
+        'material.frontend.middleware.SmoothNavigationMiddleware',
+        ...
+    )
+
+
 Add frontend urls into global urlconf module at urls.py
 
 .. code-block:: python
