@@ -110,7 +110,7 @@
         <script type="text/javascript">
             $(document).ready(function() {
                 {% for message in messages %}
-                toast('{{ message|capfirst }}', 10000, 'alert-{{ message.tags }}') 
+                Materialize.toast('{{ message|capfirst }}', 10000, 'alert-{{ message.tags }}') 
                 {% endfor %}
             });
         </script>
