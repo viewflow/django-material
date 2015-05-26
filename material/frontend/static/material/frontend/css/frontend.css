@@ -109,14 +109,13 @@ ul.side-nav.module-menu li.active>a>span.badge {
 }
 
 .alert-error {
-    background-color: #d84315;
+    background-color: #bf360c;
 }
 
 .toast a {
     padding-left: 5px;
     padding-right: 5px;
     color: wheat;
-    text-decoration: underline;
 }
 
 /*
