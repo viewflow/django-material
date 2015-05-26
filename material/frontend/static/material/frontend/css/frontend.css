@@ -119,6 +119,8 @@ ul.side-nav.module-menu li.active>a>span.badge {
 .toast a {
     padding-left: 5px;
     padding-right: 5px;
+    color: wheat;
+    text-decoration: underline;
 }
 
 /*
