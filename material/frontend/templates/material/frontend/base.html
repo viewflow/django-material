@@ -25,16 +25,6 @@
         <script src="{% static 'material/frontend/js/frontend.js' %}"></script>
         {% endblock %}
 
-        {% if messages %}
-        <script type="text/javascript">
-            $(document).ready(function() {
-                {% for message in messages %}
-                    Materialize.toast('{{ message|capfirst }}', 100000, 'alert-{{ message.tags }}') 
-                {% endfor %}
-            });
-        </script>
-{% endif %}
-
         {% block extrahead %}{% endblock %}
     </head>
     <body>
@@ -103,7 +93,19 @@
             <div class="row">
             </div>
             {% endblock %}
-           {% endblock %}
+            {% endblock %}
+
+            {% block messages %}
+            {% if messages %}
+            <script type="text/javascript">
+                $(document).ready(function() {
+                    {% for message in messages %}
+                        Materialize.toast('{{ message|capfirst }}', 10000, 'alert-{{ message.tags }}') 
+                    {% endfor %}
+                });
+            </script>
+            {% endif %}
+            {% endblock %}
         </main>
     </body>
 </html> 
