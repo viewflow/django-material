@@ -32,7 +32,7 @@ Demo: http://forms.viewflow.io/
 Installation
 ============
 
-django-material tested with Python 2.7/3.3, django 1.6/1.7::
+django-material tested with Python 2.7/3.3, django 1.8::
 
     pip install django-material
 
