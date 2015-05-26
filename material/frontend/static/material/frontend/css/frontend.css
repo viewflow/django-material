@@ -104,10 +104,6 @@ ul.side-nav.module-menu li.active>a>span.badge {
     background-color: #0277bd;
 }
 
-.alert-success {
-    background-color: #43a047;
-}
-
 .alert-warning {
     background-color: #ff8f00;
 }
