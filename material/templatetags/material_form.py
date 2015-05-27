@@ -106,13 +106,22 @@ class FormPartNode(Node):
     def __init__(self, parser, token):
         bits = token.split_contents()
 
-        if len(bits) > 3:
+        if len(bits) > 5:
             raise TemplateSyntaxError(
-                "%r accepts at most 2 arguments (part_id, section), got: {}" %
-                (bits[0], bits[1:]))
+                "%r accepts at most 4 arguments (part_id, section, asvar, varname), got: {}" %
+                (bits[0], ','.join(bits[1:])))
 
         self.part_id = Variable(bits[1])
-        self.section = bits[2] if len(bits) == 3 else None
+        self.section = bits[2] if len(bits) >= 3 else None
+
+        self.varname = None
+        if len(bits) > 3:
+            if bits[3] != 'asvar':
+                raise TemplateSyntaxError('Forth argument should be asvar, got {}', format(bits[3]))
+            if len(bits) < 4:
+                raise TemplateSyntaxError('Variable name not provided')
+            else:
+                self.varname = Variable(bits[4])
 
         self.nodelist = parser.parse(('end{}'.format(bits[0]),))
         parser.delete_first_token()
@@ -129,7 +138,11 @@ class FormPartNode(Node):
 
         if self.section in parts[part]:
             # already rendered
-            return parts[part][self.section]
+            if self.varname is not None:
+                context[self.varname.resolve(context)] = parts[part][self.section]
+                return ""
+            else:
+                return parts[part][self.section]
 
         # child parts
         children = (node for node in self.nodelist if isinstance(node, FormPartNode))
@@ -137,6 +150,10 @@ class FormPartNode(Node):
 
         # render own content
         value = self.nodelist.render(context).strip()
-        if not value:
+        if self.varname is not None:
+            context[self.varname.resolve(context)] = value
             return ''
-        return value
+        else:
+            if not value:
+                return ''
+            return value

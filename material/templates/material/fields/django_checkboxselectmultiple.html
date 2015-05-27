@@ -1,4 +1,5 @@
 {% load material_form material_form_internal %}
+{% part field columns asvar 'columns' %}1{% endpart %}
 <div class="row checkbox-field">
     {% part field label %}<div class="col s12">
         <label for="{{ bound_field.id_for_label }}" class="{% part field add_label_class %}{{ form_label_class }}{% endpart %}">{{ bound_field.label }}</label>
@@ -11,19 +12,25 @@
                 {% part field add_group_class %}{% endpart %}
                 {% endpart %}"{% endtagattrs %}>
         {% part field prefix %}{% endpart %}{% part field control %}
-        {% for value, choice in field.choices %}
-        <div class="checkbox" id="id_{{ bound_field.html_name }}">
-            <input {% tagattrs %}
-                   id="id_{{ bound_field.html_name }}_{{ forloop.counter0 }}"
-                   class="{% if field.widget.attrs.class %}{{ field.widget.attrs.class }} {% endif %}{% if bound_field.errors %}invalid {% endif %}{% part field add_control_class %}{{ form_control_class|default:'with-gap' }}{% endpart %}"
-                   name="{{ bound_field.html_name }}"
-                   type="checkbox"
-                   {% for name, value in field.widget.attrs.items %}{% if name != 'class' %}{{name}}="{{value}}" {% endif %}{% endfor %}
-                   value="{{ value }}"
-                   {% if value == bound_field.value %}checked{% endif %}{% endtagattrs %}/>
-            <label for="id_{{ bound_field.html_name }}_{{ forloop.counter0 }}">{{ choice }}</label>
-        </div>
+        <div class="row">
+            {% for col_span, choices in field.choices|split_choices_by_columns:columns %}
+            <div class="col l{{ col_span }}">
+                {% for value, position, choice in choices %}
+                <div class="checkbox" id="id_{{ bound_field.html_name }}">
+                    <input {% tagattrs %}
+                           id="id_{{ bound_field.html_name }}_{{ position }}"
+                           class="{% if field.widget.attrs.class %}{{ field.widget.attrs.class }} {% endif %}{% if bound_field.errors %}invalid {% endif %}{% part field add_control_class %}{{ form_control_class|default:'with-gap' }}{% endpart %}"
+                           name="{{ bound_field.html_name }}"
+                           type="checkbox"
+                           {% for name, value in field.widget.attrs.items %}{% if name != 'class' %}{{name}}="{{value}}" {% endif %}{% endfor %}
+                           value="{{ value }}"
+                           {% if value == bound_field.value %}checked{% endif %}{% endtagattrs %}/>
+                    <label for="id_{{ bound_field.html_name }}_{{ position }}">{{ choice }}</label>
+                </div>
+                {% endfor %}
+            </div>
         {% endfor %}
+        </div>
         {% endpart %}{% part field help_text %}{% if field.help_text %}
         <span class="help-block">{{ bound_field.help_text }}</span>
         {% endif %}{% part field errors %}

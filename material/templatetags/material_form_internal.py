@@ -1,3 +1,6 @@
+from __future__ import division
+
+import math
 import re
 from django.forms.forms import BoundField
 from django.template.base import Library, Node, TemplateSyntaxError, Variable, token_kwargs
@@ -119,3 +122,12 @@ def datepicker_value(value, date_format):
 @register.filter('force_text')
 def force_text_impl(value):
     return force_text(value)
+
+
+@register.filter
+def split_choices_by_columns(choices, columns):
+    columns = int(columns)
+    col_span = 12 // columns
+    per_column = int(math.ceil(len(choices)/columns))
+    choices = [(choice[0], i, choice[1]) for i, choice in enumerate(choices)]
+    return [(col_span, choices[i:i + per_column]) for i in range(0, len(choices), per_column)]

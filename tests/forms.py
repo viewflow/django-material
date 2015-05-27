@@ -555,7 +555,10 @@ class HospitalRegistrationForm(forms.Form):
     {% form %}
         {% part form.procedural_questions label %}{% endpart %}
         {% part form.cardiovascular_risks label %}{% endpart %}
+        {% part form.cardiovascular_risks columns %}2{% endpart %}
         {% part form.apnia_risks label %}{% endpart %}
+        {% part form.apnia_risks columns %}2{% endpart %}
+
     {% endform %}
     """)
 
