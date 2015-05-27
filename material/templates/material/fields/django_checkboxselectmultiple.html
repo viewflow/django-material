@@ -24,7 +24,7 @@
                            type="checkbox"
                            {% for name, value in field.widget.attrs.items %}{% if name != 'class' %}{{name}}="{{value}}" {% endif %}{% endfor %}
                            value="{{ value }}"
-                           {% if value == bound_field.value %}checked{% endif %}{% endtagattrs %}/>
+                           {% if value in bound_field.value %}checked{% endif %}{% endtagattrs %}/>
                     <label for="id_{{ bound_field.html_name }}_{{ position }}">{{ choice }}</label>
                 </div>
                 {% endfor %}
