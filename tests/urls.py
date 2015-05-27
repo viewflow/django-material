@@ -49,6 +49,8 @@ urlpatterns = [
     url(r'^demo/bank/$', generic.FormView.as_view(
         form_class=forms.BankForm, success_url='/demo/bank/', template_name="demo.html")),
     url(r'^demo/wizard/$', Wizard.as_view()),
+    url(r'^demo/hospital/$', generic.FormView.as_view(
+        form_class=forms.HospitalRegistrationForm, success_url='/demo/hospital/', template_name="demo.html")),
     url(r'^foundation/basic/', generic.RedirectView.as_view(url='/?cache=no', permanent=False)),
 
     # admin

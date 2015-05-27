@@ -1,5 +1,9 @@
+import datetime
+
 from django.template import Template
+from django.forms.formsets import formset_factory
 from material import Layout, Row, Column, Fieldset, Span2, Span3, Span5, Span6, Span10
+from material.fields import FormSetField
 import tests.demo as forms
 
 
@@ -57,6 +61,76 @@ COUNTRY_CHOICES = (
     (226, 'Uzbekistan'), (227, 'Vanuatu'), (228, 'Vatican City State (Holy See)'), (229, 'Venezuela'), (230, 'Viet Nam'),
     (231, 'Virgin Islands (British)'), (232, 'Virgin Islands (U.S.)'), (233, 'Wallis and Futuna Islands'),
     (234, 'Western Sahara'), (235, 'Yemen'), (238, 'Zambia'), (239, 'Zimbabwe'),
+)
+
+QUESTION_CHOICES = (
+    ('X01', 'I have a history of problems with anesthesia'),
+    ('X02', 'I smoke'),
+    ('X03', 'I have been addicted to recreational drugs'),
+    ('X04', 'I weak  eye contact lenses or glasses'),
+    ('X05', 'I have an implantable devise'),
+    ('X06', 'Blood has been donated for this procedure by a family member'),
+    ('X07', 'I consume alcohol on a regular basis'),
+    ('X08', 'I have teeth and mouth considerations such as loose teeth, caps, bridework, banding, and dentures'),
+    ('X09', 'I have a vascular access devise'),
+)
+
+CARDIOVASCULAR_RISK_CHOICES = (
+    ('R01', 'Heart Attack'),
+    ('R02', 'Angina'),
+    ('R03', 'Congestive Heart Failure'),
+    ('R04', 'Previous heart surgery'),
+    ('R05', 'Heart Murmur'),
+    ('R06', 'Mitral Valve Prolapse'),
+    ('R07', 'Internal Defibrillator'),
+    ('R08', 'Paralysis'),
+    ('R09', 'Kidney Disease'),
+    ('R10', 'High Blood Pressure'),
+    ('R11', 'Fast or irregular heat beats'),
+    ('R12', 'Previous Angiosplasy'),
+    ('R13', 'Valvular Heart Disorder'),
+    ('R14', 'Aortic Stenosis'),
+    ('R15', 'Pacemaker'),
+    ('R16', 'Stroke'),
+    ('R17', 'Insulin Dependent Diabetes'),
+    ('R18', 'Shortness of Breath'),
+)
+
+APNIA_RISK_CHOICES = (
+    ('A01', 'Loud Snoring'),
+    ('A02', 'Choking while asleep'),
+    ('A03', 'Emphysema'),
+    ('A04', 'Pheumonia'),
+    ('A05', 'Bleeding Disorder'),
+    ('A06', 'Aids or HIV'),
+    ('A07', 'Jaundice'),
+    ('A08', 'Seizure Disorder'),
+    ('A09', 'Thyroid Trouble'),
+    ('A10', 'Joint Replacement'),
+    ('A11', 'Prostate problems'),
+    ('A12', 'Downs Syndrome'),
+    ('A13', 'Excessive Daytime Sleepiness'),
+    ('A14', 'Diagnsed Sleep Apnea'),
+    ('A15', 'Asthma'),
+    ('A16', 'TB'),
+    ('A17', 'Bruise Easy'),
+    ('A18', 'Hepatits'),
+    ('A19', 'Hiatal Hernia'),
+    ('A20', 'Migraine Headaches'),
+    ('A21', 'TMJ (temporomand joint problem)'),
+    ('A22', 'Kidney Problems'),
+    ('A23', 'Steroid Use'),
+    ('A24', 'Witnessed Grasping'),
+    ('A25', 'Bronchitis'),
+    ('A26', 'Wheezing'),
+    ('A27', 'Cystic Fibrosis'),
+    ('A28', 'Anemia'),
+    ('A29', 'Liver Desease'),
+    ('A30', 'Reflus'),
+    ('A31', 'Cancer'),
+    ('A32', 'Athritis'),
+    ('A33', 'Bladder Problems'),
+    ('A34', 'Cortisone Use'),
 )
 
 
@@ -435,3 +509,63 @@ class WizardForm1(forms.Form):
 
 class WizardForm2(forms.Form):
     message = forms.CharField(widget=forms.Textarea)
+
+
+class HospitalRegistrationForm(forms.Form):
+    class EmergencyContractForm(forms.Form):
+        name = forms.CharField()
+        relationship = forms.CharField()
+        daytime_phone = forms.CharField()
+        evening_phone = forms.CharField(required=False)
+
+    registration_date = forms.DateField(initial=datetime.date.today)
+    full_name = forms.CharField()
+    birth_date = forms.DateField()
+    height = forms.IntegerField(help_text='cm')
+    weight = forms.IntegerField(help_text='kg')
+    primary_care_physician = forms.CharField()
+    date_of_last_appointment = forms.DateField()
+    home_phone = forms.CharField()
+    work_phone = forms.CharField(required=False)
+
+    procedural_questions = forms.MultipleChoiceField(
+        widget=forms.CheckboxSelectMultiple, required=False,
+        choices=QUESTION_CHOICES)
+
+    cardiovascular_risks = forms.MultipleChoiceField(
+        widget=forms.CheckboxSelectMultiple, required=False,
+        choices=CARDIOVASCULAR_RISK_CHOICES)
+
+    apnia_risks = forms.MultipleChoiceField(
+        widget=forms.CheckboxSelectMultiple, required=False,
+        choices=APNIA_RISK_CHOICES)
+
+    emergency_numbers = FormSetField(formset_factory(EmergencyContractForm, extra=2))
+
+    layout = Layout(Row(Column('full_name', 'birth_date',
+                               Row('height', 'weight'), span_columns=3), 'registration_date'),
+                    Row(Span3('primary_care_physician'), 'date_of_last_appointment'),
+                    Row('home_phone', 'work_phone'),
+                    Fieldset('Procedural Questions', 'procedural_questions'),
+                    Fieldset('Clinical Predictores of Cardiovascular Risk', 'cardiovascular_risks'),
+                    Fieldset('Clinical Predictors of slepp Apnia Risr', 'apnia_risks'),
+                    Fieldset('Emergence Numbers', 'emergency_numbers'))
+
+    template = Template("""
+    {% form %}
+    {% endform %}
+    """)
+
+    buttons = Template("""
+        <button class="btn btn-primary pull-right" type="submit">Registration</button>
+    """)
+
+    title = "Hospital registration forms"
+
+    css = """
+    .section h5 {
+        font-size: 1.2rem;
+        padding-bottom: 0.2rem;
+        border-bottom: 3px solid black;
+    }
+    """
