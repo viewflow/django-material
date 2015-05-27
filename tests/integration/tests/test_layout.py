@@ -24,7 +24,7 @@ class Test(WebTest):
         Issue #19
         """
         response = self.app.get(self.test_field_part_override.url)
-        self.assertIn('NO FIELD', response.content)
+        self.assertIn('NO FIELD', response.content.decode('utf-8'))
 
     test_field_part_override.template = """
         {% form %}
