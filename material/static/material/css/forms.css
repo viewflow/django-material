@@ -109,6 +109,10 @@ select.material-ignore {
     padding-top: 10px;
 }
 
+.checkbox-field .checkbox {
+    padding-top: 10px;
+}
+
 @media only screen and (max-width : 600px) {
     .container.expand-on-small-only {
         width: 100% !important;

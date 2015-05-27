@@ -548,11 +548,14 @@ class HospitalRegistrationForm(forms.Form):
                     Row('home_phone', 'work_phone'),
                     Fieldset('Procedural Questions', 'procedural_questions'),
                     Fieldset('Clinical Predictores of Cardiovascular Risk', 'cardiovascular_risks'),
-                    Fieldset('Clinical Predictors of slepp Apnia Risr', 'apnia_risks'),
+                    Fieldset('Clinical Predictors of sleep Apnia Risk', 'apnia_risks'),
                     Fieldset('Emergence Numbers', 'emergency_numbers'))
 
     template = Template("""
     {% form %}
+        {% part form.procedural_questions label %}{% endpart %}
+        {% part form.cardiovascular_risks label %}{% endpart %}
+        {% part form.apnia_risks label %}{% endpart %}
     {% endform %}
     """)
 
@@ -560,7 +563,7 @@ class HospitalRegistrationForm(forms.Form):
         <button class="btn btn-primary pull-right" type="submit">Registration</button>
     """)
 
-    title = "Hospital registration forms"
+    title = "Hospital registration form"
 
     css = """
     .section h5 {
