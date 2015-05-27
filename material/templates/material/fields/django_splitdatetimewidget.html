@@ -1,5 +1,5 @@
 {% load material_form material_form_internal %}
-{% part field label %}
+{% part bound_field.field %}{% part field label %}
 {% endpart %}
 <div class="row" id="id_{{ bound_field.html_name }}_container">
     <div class="col s12">
@@ -44,5 +44,5 @@
                data-date-format="{{ field.fields.1|jquery_datepicker_format }}"
                data-form-control="time"{% endtagattrs %}{% if bound_field.value %} value="{{ bound_field|multiwidget_value:1|datepicker_value:field.fields.1.input_formats.0 }}"{% endif %}>
     </div>
-</div>
+</div>{% endpart %}
 
