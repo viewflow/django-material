@@ -24,6 +24,10 @@ input[type=number] {
   overflow: hidden;
 }
 
+.input-field .prefix ~ label {
+  width: calc(100% - 21px - 3rem);
+}
+
 .checkbox-field {
     line-height: 35px;
 }

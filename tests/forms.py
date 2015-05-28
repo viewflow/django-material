@@ -553,11 +553,16 @@ class HospitalRegistrationForm(forms.Form):
 
     template = Template("""
     {% form %}
+        {% part form.registration_date prefix %}<i class="mdi-editor-insert-invitation prefix"></i>{% endpart %}
+        {% part form.date_of_last_appointment prefix %}<i class="mdi-editor-insert-invitation prefix"></i>{% endpart %}
+        {% part form.primary_care_physician prefix %}<i class="mdi-action-face-unlock prefix"></i>{% endpart %}
+        {% part form.home_phone prefix %}<i class="mdi-communication-call prefix"></i>{% endpart %}
+        {% part form.work_phone prefix %}<i class="mdi-communication-call prefix"></i>{% endpart %}
         {% part form.procedural_questions label %}{% endpart %}
         {% part form.cardiovascular_risks label %}{% endpart %}
         {% part form.cardiovascular_risks columns %}2{% endpart %}
         {% part form.apnia_risks label %}{% endpart %}
-        {% part form.apnia_risks columns %}2{% endpart %}
+        {% part form.apnia_risks columns %}3{% endpart %}
 
     {% endform %}
     """)
@@ -575,3 +580,5 @@ class HospitalRegistrationForm(forms.Form):
         border-bottom: 3px solid black;
     }
     """
+
+    blockclass = "col s12 m12 l9 offset-l1"
