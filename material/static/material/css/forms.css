@@ -117,6 +117,10 @@ select.material-ignore {
     padding-top: 10px;
 }
 
+.fieldset-field td {
+    vertical-align: top;
+}
+
 @media only screen and (max-width : 600px) {
     .container.expand-on-small-only {
         width: 100% !important;

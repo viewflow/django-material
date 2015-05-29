@@ -8,6 +8,7 @@ from django.utils import formats
 from django.utils.encoding import force_text
 
 from ..base import Field
+from ..fields import FormSetField
 from .material_form import FormPartNode, _render_parts
 
 
@@ -131,3 +132,14 @@ def split_choices_by_columns(choices, columns):
     per_column = int(math.ceil(len(choices)/columns))
     choices = [(choice[0], i, choice[1]) for i, choice in enumerate(choices)]
     return [(col_span, choices[i:i + per_column]) for i in range(0, len(choices), per_column)]
+
+
+@register.filter
+def formset_value(bound_field):
+    if not isinstance(bound_field.field, FormSetField):
+        raise TemplateSyntaxError('{} field should be FormSetField, got {}'.format(bound_field.name, bound_field.field))
+
+    value = bound_field.value()
+    if value is None:
+        value = bound_field.field.widget.get_formset(bound_field.name)
+    return value

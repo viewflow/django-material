@@ -1,0 +1,41 @@
+{% load material_form material_form_internal %}
+{% part bound_field.field %}{% with formset=bound_field|formset_value %}<div class="row">
+    <div {% tagattrs %}
+         id="id_{{ bound_field.html_name }}_container"
+         class="{% part field group_class %}fieldset-field col s12
+                {% if field.required%}required{% endif %}
+                {% if bound_field.errors %}has-error{% endif %}
+                {% part field add_group_class %}{% endpart %}
+                {% endpart %}"{% endtagattrs %}>
+        {% part field label %}
+        <label {% tagattrs %}
+               for="{{ bound_field.id_for_label }}"
+               class="{% part field add_label_class %}{{ form_label_class }}{% endpart %}"
+               {% endtagattrs %}>{{ bound_field.label }}</label>
+        {% endpart %}{% part field prefix %}{% endpart %}{% part field control %}
+        <table class="table responsive-table">
+            <tbody>
+            {% for form in formset.forms %}
+            <tr data-formset-form>
+                {% part form hidden %}
+                    {% for hidden in form.hidden_fields %}
+                        {{ hidden }}
+                    {% endfor %}
+                {% endpart %}
+                {% part form visible %}
+                {% for bound_field in form.visible_fields %}
+                <td>
+                    {% part bound_field.field %}
+                        {% render bound_field %}{% endrender %}
+                    {% endpart %}
+                </td>
+                {% endfor %}
+                {% endpart %}
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        {{ formset.management_form }}
+        {% endpart %}
+    </div>
+</div>{% endwith %}{% endpart %}

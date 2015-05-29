@@ -7,6 +7,9 @@ class FormSetWidget(forms.Widget):
             value = self.attrs['formset_cls'](prefix=name)
         return '<table>{}</table>'.format(value)
 
+    def get_formset(self, name):
+        return self.attrs['formset_cls'](prefix=name)
+
     def value_from_datadict(self, data, files, name):
         return self.attrs['formset_cls'](data or None, files or None, prefix=name)
 
