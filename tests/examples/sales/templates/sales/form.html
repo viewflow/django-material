@@ -1,0 +1,22 @@
+{% extends 'sales/base_module.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col s12 m6 l8">
+        <form role="form" method="POST">
+            <div class="card form-card">
+                <div class="card-content">
+                    <div class="card-title black-text">{{ view.title }}</div>
+                    {% csrf_token %}
+                    {% form form=form layout=view.layout %}{% endform %}
+                </div>
+                <div class="card-action row">
+                    <div class="col s12 right-align">
+                        <button class="btn" type="submit">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

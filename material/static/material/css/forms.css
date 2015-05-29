@@ -17,6 +17,14 @@ input[type=number] {
     -webkit-appearance: none;
 }
 
+.card.form-card .section h5 {
+    font-size: 1.2rem;
+    padding-bottom: 0.2rem;
+    border-bottom: 3px solid black;
+    margin-left: 23px;
+    margin-right: 23px;
+}
+
 .input-field label {
   white-space: nowrap;
   text-overflow: ellipsis;

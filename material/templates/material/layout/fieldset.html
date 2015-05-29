@@ -1,4 +1,4 @@
 {% load material_form_internal %}
-<div class="section"><h5>{{ parent.label|default:"" }}</h5>
+<div class="section row"><h5>{{ parent.label|default:"" }}</h5>
 {% for element in parent.elements %}{% render element %}{% endrender %}{% endfor %}
 </div>

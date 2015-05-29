@@ -1,6 +1,8 @@
 from django.conf.urls import url
 from material.frontend import Module
 
+from . import views
+
 
 class Sales(Module):
     icon = "mdi-communication-quick-contacts-dialer"
@@ -15,4 +17,6 @@ class Sales(Module):
                 name="leads"),
             url('^opportunities/$', generic.TemplateView.as_view(template_name="{}/index.html".format(self.app_label)),
                 name="opportunities"),
+            url('^shipment/new/$', views.NewShipmentView.as_view(template_name="{}/form.html".format(self.app_label)),
+                name="shipment_new"),
         ]

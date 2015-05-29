@@ -17,7 +17,7 @@
         {% endpart %}{% part field label %}
         <label {% tagattrs %}
                for="{{ bound_field.id_for_label }}"
-               class="{% part field add_label_class %}{{ form_label_class }}{% endpart %}"
+               class="{% part field add_label_class %}{{ form_label_class }}{% endpart %}{% if bound_field.value %} active{% endif %}"
                {% endtagattrs %}>{{ bound_field.label }}</label>
         {% endpart %}{% part field help_text %}{% if field.help_text %}
         <small class="help-block">{{ bound_field.help_text }}</small>
