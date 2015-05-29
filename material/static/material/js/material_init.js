@@ -19,7 +19,9 @@ $(function() {
         var input = $(this);
         input.datetimepicker({format: input.data('date-format'), datepicker: true, timepicker:true, mask:false});
     });
-
+    $('.formset-field').formset({
+        animateForms: true
+    });
 
     /*
       In chrome, there is no way to get to know is autofill

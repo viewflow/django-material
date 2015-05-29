@@ -540,7 +540,7 @@ class HospitalRegistrationForm(forms.Form):
         widget=forms.CheckboxSelectMultiple, required=False,
         choices=APNIA_RISK_CHOICES)
 
-    emergency_numbers = FormSetField(formset_factory(EmergencyContractForm, extra=2))
+    emergency_numbers = FormSetField(formset_factory(EmergencyContractForm, extra=2, can_delete=True))
 
     layout = Layout(Row(Column('full_name', 'birth_date',
                                Row('height', 'weight'), span_columns=3), 'registration_date'),
@@ -563,6 +563,7 @@ class HospitalRegistrationForm(forms.Form):
         {% part form.cardiovascular_risks columns %}2{% endpart %}
         {% part form.apnia_risks label %}{% endpart %}
         {% part form.apnia_risks columns %}3{% endpart %}
+        {% part form.emergency_numbers label %}{% endpart %}
 
     {% endform %}
     """)
