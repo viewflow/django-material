@@ -1,7 +1,7 @@
 {% load material_form material_form_internal %}
 <div class="section row">
-    {% part inline label %}{% if parent.label %}<h5>{{ parent.label|default:"" }}</h5>{% endif %}{% endpart %}
     <div class="formset-field col s12" data-formset-prefix="{{ inline.prefix }}">
+    {% part inline label %}{% if parent.label %}<h5>{{ parent.label|default:"" }}</h5>{% endif %}{% endpart %}
         <script type="form-template" data-formset-empty-form>
             <tr data-formset-form>
                 {% with form=inline.empty_form %}
