@@ -269,6 +269,14 @@ Admin support development is on initial stage. Only basic admin features are ava
 
 Changelog
 =========
+0.4.0 2015-05-29 - Alpha
+
+* Forms - CheckboxSelectMultiple widgets with multi-column layout support
+* Forms - TimeiInput widget support (thnks @Morozzzko)
+* Forms - Dynamic formsets support 
+* Admin - fix user change password form
+* Frontend - support for smooth navigation back to initial page
+
 
 0.3.0 2015-05-11 - Alpha
 ------------------------
