@@ -87,6 +87,7 @@ TEMPLATES = [
                 'django.core.context_processors.request',
                 'material.frontend.context_processors.modules',
             ],
+            'debug': True,
         },
     },
 ]
