@@ -108,5 +108,14 @@
             {% endif %}
             {% endblock %}
         </main>
+        {% block load_indicator %}
+        <div id="load_indicator" class="preloader-wrapper big active" style="position:absolute;left:45%;top:45%;display:none">
+            <div class="spinner-layer spinner-blue-only">
+                <div class="circle-clipper left"><div class="circle"></div></div>
+                <div class="gap-patch"><div class="circle"></div></div>
+                <div class="circle-clipper right"><div class="circle"></div></div>
+            </div>
+        </div>
+        {% endblock %}
     </body>
 </html> 
