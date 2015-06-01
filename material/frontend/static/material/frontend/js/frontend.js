@@ -1,4 +1,8 @@
 $(document).pjax('a:not(.no-pjax)', 'main');
+$(document).on('submit', 'form[data-pjax-get]', function(event) {
+    event.preventDefault()
+    $.pjax({'container': 'main', 'url' :this.action + '?' + $(this).serialize()});
+})
 $(document)
   .on('pjax:start', function() { $('#load_indicator').fadeIn(200); })
   .on('pjax:end',   function() { $('#load_indicator').fadeOut(200); })
