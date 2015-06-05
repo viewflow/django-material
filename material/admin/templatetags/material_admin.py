@@ -83,6 +83,8 @@ def fieldset_layout(adminform):
     for fieldset in adminform:
         fields = []
         for field in fieldset.fields:
+            if field in adminform.readonly_fields:
+                continue
             if isinstance(field, (list, tuple)):
                 fields.append(Row(*field))
             else:
