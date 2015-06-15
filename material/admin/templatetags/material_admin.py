@@ -14,7 +14,7 @@ from django.utils.translation import ugettext as _
 from django.template import Library
 
 from material import Layout, Fieldset, Row
-
+from ..base import AdminReadonlyField
 
 register = Library()
 
@@ -80,15 +80,32 @@ def get_app_list(request):
 @register.assignment_tag
 def fieldset_layout(adminform):
     sets = []
+
     for fieldset in adminform:
         fields = []
-        for field in fieldset.fields:
-            if isinstance(field, (list, tuple)):
-                fields.append(Row(*field))
-            else:
-                fields.append(field)
 
-        sets.append(Fieldset(fieldset.name, *fields))
+        for line in fieldset:
+            line_fields = []
+
+            for fieldset_field in line:
+                field = None
+
+                if getattr(fieldset_field, 'is_readonly', False):
+                    field = AdminReadonlyField(fieldset_field)
+                else:
+                    field = fieldset_field.field.name
+
+                line_fields.append(field)
+
+            if len(line_fields) == 1:
+                fields.append(line_fields[0])
+            else:
+                fields.append(Row(*line_fields))
+
+        if fieldset.name:
+            sets.append(Fieldset(fieldset.name, *fields))
+        else:
+            sets += fields
 
     return Layout(*sets)
 

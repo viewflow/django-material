@@ -1,0 +1,9 @@
+<div class="row">
+    <div class="input-field col s12">
+        <input disabled="" value="{{ fieldset_field.contents }}" id="disabled" type="text" class="validate">
+        <label for="disabled" class="active">{{ fieldset_field.field.label|title }}</label>
+        {% if fieldset_field.field.help_text %}
+        <small class="help-block">{{ fieldset_field.field.help_text }}</small>
+        {% endif %}
+    </div>
+</div>
