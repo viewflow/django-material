@@ -46,6 +46,7 @@
                     </div>
                     
                     <ul class="right">
+                        {% block top_menu_extra %}{% endblock %}
                         {% if user.is_authenticated %}
                         <li><a class="dropdown-button" href="#!" data-activates="user-menu"><img class="avatar left mdi-img circle" src="{% static 'material/frontend/imgs/default_user.png' %}">{{ user.get_full_name|default:user.username }}<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
                         {% else %}
