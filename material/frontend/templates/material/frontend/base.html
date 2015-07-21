@@ -31,8 +31,8 @@
     <body>
         {% if user.is_authenticated %}
         <ul id="user-menu" class="dropdown-content">
-            <li><a href="#!">Profile</a></li>
-            <li><a href="#!">Logout</a></li>
+            <li><a href="#!">{% trans "Profile" %}</a></li>
+            <li><a href="#!">{% trans "Logout" %}</a></li>
             {% block user_menu_extra %}{% endblock %}
         </ul>
         {% endif %}
@@ -42,7 +42,7 @@
 
                 <div class="nav-wrapper">
                     <div class="page-title hide-on-med-and-down">
-                        {% block page_title %}<a href="/">Viewflow</a>{% endblock %}
+                        {% block page_title %}<a href="/">{% trans "Viewflow" %}</a>{% endblock %}
                     </div>
                     
                     <ul class="right">
