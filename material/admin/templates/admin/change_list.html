@@ -35,7 +35,7 @@
 {% block brand-logo %}{{ cl.opts.verbose_name_plural|title }}{% endblock %}
 
 {% block breadcrumbs_items %}
-<a href="{% url 'admin:index' %}">All apps</a> &rang;
+<a href="{% url 'admin:index' %}">{% trans 'All apps' %}</a> &rang;
 <a href="{% url opts|admin_urlname:'changelist' %}"><i class="fa adm-app-default adm-{{ opts.app_label }}-{{ opts.object_name|lower }}"></i> &nbsp;&nbsp;{{ opts.verbose_name_plural|capfirst }}</a>
 {% endblock %}
 
@@ -56,7 +56,7 @@
     <div class="col s12 m4 l3">
         <div class="card filters">
             <div class="card-content">
-                <span class="card-title black-text" style="margin-bottom:20px">Filters</span>
+                <span class="card-title black-text" style="margin-bottom:20px">{% trans 'Filters' %}</span>
                 {% block search %}{% search_form cl %}{% endblock %}
 
                 {% block filters %}
