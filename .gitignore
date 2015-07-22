@@ -1,7 +1,9 @@
 .tox
+*.idea
 *.pyc
 db*.sqlite3
 deploy
+build/
 dist/
 django_material.egg-info/
 tests/visual/screenshots_test/

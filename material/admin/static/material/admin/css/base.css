@@ -99,7 +99,7 @@ body {
 }
 
 ul.side-nav.fixed.module-menu {
-    overflow: hidden;
+    overflow:scroll;
 }
 
 ul.side-nav.fixed.module-menu li a {
@@ -138,6 +138,10 @@ ul.side-nav.module-menu li.active>a>span.badge {
 
 .side-nav.fixed .collapsible-body li.active>a {
     color: #fff;
+}
+
+::-webkit-scrollbar {
+    display: none;
 }
 
 /*
@@ -243,12 +247,14 @@ ul.side-nav.module-menu li.active>a>span.badge {
 .filters a {
     margin-right: 0;
 }
-
+.filters.card {
+    overflow:initial;
+}
 .filters #changelist-search-button {
     z-index:1000;
     position:absolute;
     right:15px;
-    top:15px;
+    top:0px;
 }
 .fixedHeader th {
     background: white;
