@@ -421,7 +421,8 @@ ul.side-nav.module-menu li.active>a>span.badge {
     }
 
     .change-form .multiselect .selector-available {
-        width: calc(50% - 30px)
+        width: calc(50% - 30px);
+        width: -moz-calc(50% - 30px)
     }
 
     .change-form .multiselect .selector-available select {
@@ -434,7 +435,8 @@ ul.side-nav.module-menu li.active>a>span.badge {
     }
 
     .change-form .multiselect .selector-chosen {
-        width: calc(50% - 30px)
+        width: calc(50% - 30px);
+        width: -moz-calc(50% - 30px)
     }
 
     .change-form .multiselect .selector-chosen select {
