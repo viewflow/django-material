@@ -1,9 +1,10 @@
 import datetime
+from importlib import import_module
 
 from django.apps import apps
 from django.contrib.admin.views.main import PAGE_VAR
-from django.contrib.admin import site
 from django.core.urlresolvers import reverse, NoReverseMatch
+from django.conf import settings
 from django.db import models
 from django.utils import formats, six
 from django.utils.dates import MONTHS
@@ -17,6 +18,20 @@ from material import Layout, Fieldset, Row
 from ..base import AdminReadonlyField
 
 register = Library()
+
+
+def get_admin_site():
+    site_module = getattr(
+        settings,
+        'MATERIAL_ADMIN_SITE',
+        'django.contrib.admin.site'
+    )
+    mod, inst = site_module.rsplit('.', 1)
+    mod = import_module(mod)
+    return getattr(mod, inst)
+
+
+site = get_admin_site()
 
 
 @register.assignment_tag

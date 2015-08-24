@@ -263,6 +263,12 @@ Ensure that `django.template.context_processors.request` in your template contex
         },
     ]
 
+You can provide a custom admin site module in the `MATERIAL_ADMIN_SITE` setting
+
+.. code-block:: python
+
+    MATERIAL_ADMIN_SITE = 'mymodule.admin.admin_site'
+
 Admin support development is on initial stage. Only basic admin features are available.
 
 ****
