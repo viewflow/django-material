@@ -49,13 +49,7 @@
                             {% endblock %}
                             
                             {% block after_field_sets %}{% endblock %}
-                            
-                            {% block inline_field_sets %}
-                            {% for inline_admin_formset in inline_admin_formsets %}
-                            {% include inline_admin_formset.opts.template %}
-                            {% endfor %}
-                            {% endblock %}
-                            
+
                             {% block after_related_objects %}{% endblock %}
                             
                             {% block submit_buttons_bottom %}{% submit_row %}{% endblock %}
@@ -64,6 +58,12 @@
                     {# JavaScript for prepopulated fields #}
                     {% prepopulated_fields_js %}
                 </div>
+
+                {% block inline_field_sets %}
+                {% for inline_admin_formset in inline_admin_formsets %}
+                {% include inline_admin_formset.opts.template %}
+                {% endfor %}
+                {% endblock %}
                 <div class="card-action">
                     <div class="right-align">
                         {% submit_row %}

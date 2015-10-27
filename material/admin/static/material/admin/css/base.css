@@ -71,6 +71,10 @@ body {
     .card-content {
         padding: 15px;
     }
+    
+    .card-section {
+        padding: 5px 15px;
+    }
 
     main>.row>.col {
         padding: 0;
@@ -405,6 +409,23 @@ ul.side-nav.module-menu li.active>a>span.badge {
     color: #F44336;
 }
 
+.change-form .card-section {
+    background-color: #F4F4F4;
+    border-top: 1px solid rgba(160, 160, 160, 0.2);
+}
+
+.change-form .card-section fieldset {
+    border-width: 0px;
+}
+
+.change-form fieldset .empty-form {
+    display: none;
+}
+
+.change-form fieldset .select-wrapper input.select-dropdown {
+    margin-top: 0;
+}
+
 @media only screen and (min-width : 601px) {
     .change-form .multiselect {
         margin-bottom:40px;
@@ -465,5 +486,8 @@ ul.side-nav.module-menu li.active>a>span.badge {
 @media only screen and (min-width : 992px) {
     .change-form .card .card-content {
         padding: 30px 50px 50px 50px;
+    }
+    .change-form .card .card-section {
+        padding: 10px 50px 10px 50px;
     }
 }
