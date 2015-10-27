@@ -1,13 +1,8 @@
 {% load material_form material_form_internal %}
 
-{% render bound_field widget=field.widget.widget %}
-    {% part field label %}
-    <h6 for="{{ bound_field.id_for_label }}" class="{% part field add_label_class %}{{ form_label_class }}{% endpart %}">
-        {{ bound_field.label }}
-        <a href="%s%s" class="add-another" id="add_id_{{ bound_field.html_name }}" onclick="return showAddAnotherPopup(this);">
-            <i class="mdi-content-add"></i>
-        </a>
-    </h6>
-    {% endpart %}
-    {% part field help_text %}{% endpart%}
-{% endrender %}
+<div class="row">
+<label for="{{ bound_field.id_for_label }}" class="col s12 {% part field add_label_class %}{{ form_label_class }}{% endpart %}">
+    {{ bound_field.label }}
+</label>
+{{ bound_field }}
+</div>

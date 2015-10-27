@@ -1,0 +1,29 @@
+{% load i18n admin_static %}
+<div class="related-widget-wrapper">
+    <div class="col s10">
+        {{ widget }}
+    </div>
+    {% block links %}
+        {% if can_change_related %}
+        <a class="related-widget-wrapper-link change-related" id="change_id_{{ name }}"
+            data-href-template="{{ change_related_template_url }}?{{ url_params }}"
+            title="{% blocktrans %}Change selected {{ model }}{% endblocktrans %}">
+            <i class="mdi-editor-mode-edit"></i>
+        </a>
+        {% endif %}
+        {% if can_add_related %}
+        <a class="related-widget-wrapper-link add-related" id="add_id_{{ name }}"
+            href="{{ add_related_url }}?{{ url_params }}"
+            title="{% blocktrans %}Add another {{ model }}{% endblocktrans %}">
+            <i class="mdi-content-add"></i>
+        </a>
+        {% endif %}
+        {% if can_delete_related %}
+        <a class="related-widget-wrapper-link delete-related" id="delete_id_{{ name }}"
+            data-href-template="{{ delete_related_template_url }}?{{ url_params }}"
+            title="{% blocktrans %}Delete selected {{ model }}{% endblocktrans %}">
+            <i class="mdi-action-delete"></i>
+        </a>
+        {% endif %}
+    {% endblock %}
+</div>
