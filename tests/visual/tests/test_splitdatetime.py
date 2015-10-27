@@ -9,7 +9,7 @@ class Test(VisualTest):
 
     def test_test_default_usecase(self):
         self.driver.get('%s%s' % (self.live_server_url, TestSplitDateTime.test_default_usecase.url))
-        self.assertScreenshot('form', 'splitdatetime_default_usecase', threshold=1)
+        self.assertScreenshot('form', 'splitdatetime_default_usecase')
 
     def test_missing_value_error(self):
         self.driver.get('%s%s' % (self.live_server_url, TestSplitDateTime.test_missing_value_error.url))

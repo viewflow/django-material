@@ -46,4 +46,4 @@ class Test(VisualTest):
 
     def test_part_errors(self):
         self.driver.get('%s%s' % (self.live_server_url, TestDateInput.test_part_errors.url))
-        self.assertScreenshot('form', 'dateinput_part_errors', threshold=0.5)
+        self.assertScreenshot('form', 'dateinput_part_errors')
