@@ -1,4 +1,5 @@
-{% load admin_static material_admin %}{% load firstof from future %}<!DOCTYPE html>
+{% load admin_static material_admin i18n %}{% load firstof from future %}<!DOCTYPE html>
+{% get_current_language as LANGUAGE_CODE %}
 <html lang="{{ LANGUAGE_CODE|default:"en-us" }}">
     <head>
         <title>{% block title %}{% endblock %}</title>
@@ -19,7 +20,6 @@
         {% block extrahead %}{% endblock %}
         {% block blockbots %}<meta name="robots" content="NONE,NOARCHIVE" />{% endblock %}
     </head>
-    {% load i18n %}
 
     <body>
         {% if user.is_authenticated %}
