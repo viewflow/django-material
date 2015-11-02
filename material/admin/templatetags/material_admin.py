@@ -15,7 +15,9 @@ from django.utils.translation import ugettext as _
 from django.template import Library
 
 from material import Layout, Fieldset, Row
+from material.compat import simple_tag
 from ..base import AdminReadonlyField
+
 
 register = Library()
 
@@ -238,3 +240,53 @@ def date_hierarchy(cl):
                     'title': str(year.year),
                 } for year in years]
             }
+
+
+def admin_related_field_urls(bound_field):
+    """
+    Construct add/remove/change links for admin related field.
+
+    Usage:
+
+        {% admin_related_field_urls bound_field as bound_field_urls %}
+    """
+    from django.contrib.admin.views.main import IS_POPUP_VAR, TO_FIELD_VAR
+
+    rel_widget = bound_field.field.widget
+    rel_opts = rel_widget.rel.model._meta
+    info = (rel_opts.app_label, rel_opts.model_name)
+    rel_widget.widget.choices = rel_widget.choices
+    url_params = '&'.join("%s=%s" % param for param in [
+        (TO_FIELD_VAR, rel_widget.rel.get_related_field().name),
+        (IS_POPUP_VAR, 1),
+    ])
+
+    context = {
+        'widget': rel_widget.widget.render(bound_field.name, bound_field.value()),
+        'name': bound_field.name,
+        'url_params': url_params,
+        'model': rel_opts.verbose_name,
+    }
+    if rel_widget.can_change_related:
+        change_related_template_url = rel_widget.get_related_url(info, 'change', '__fk__')
+        context.update(
+            can_change_related=True,
+            change_related_template_url=change_related_template_url,
+        )
+    if rel_widget.can_add_related:
+        add_related_url = rel_widget.get_related_url(info, 'add')
+        context.update(
+            can_add_related=True,
+            add_related_url=add_related_url,
+        )
+    if rel_widget.can_delete_related:
+        delete_related_template_url = rel_widget.get_related_url(info, 'delete', '__fk__')
+        context.update(
+            can_delete_related=True,
+            delete_related_template_url=delete_related_template_url,
+        )
+
+    return context
+
+
+simple_tag(register, admin_related_field_urls)

@@ -1,13 +1,38 @@
-{% load material_form material_form_internal %}
+{% load material_form material_form_internal material_admin i18n %}
 
+{% admin_related_field_urls bound_field as bound_field_urls %}
+
+<div class="related-widget-wrapper">
 {% render bound_field widget=field.widget.widget %}
     {% part field label %}
     <h6 for="{{ bound_field.id_for_label }}" class="{% part field add_label_class %}{{ form_label_class }}{% endpart %}">
         {{ bound_field.label }}
-        <a href="%s%s" class="add-another" id="add_id_{{ bound_field.html_name }}" onclick="return showAddAnotherPopup(this);">
+        {% if bound_field_urls.can_change_related %}
+        <a class="related-widget-wrapper-link change-related"
+           data-href-template="{{ bound_field_urls.change_related_template_url }}?{{ bound_field_urls.url_params }}"
+           id="change_id_{{ bound_field.html_name }}"
+           title="{% blocktrans %}Change selected {{ bound_field_urls.model }}{% endblocktrans %}">
             <i class="mdi-content-add"></i>
         </a>
+        {% endif %}
+        {% if bound_field_urls.can_add_related %}
+        <a class="related-widget-wrapper-link add-related"
+           href="{{ bound_field_urls.add_related_url }}?{{ bound_field_urls.url_params }}"
+           id="add_id_{{ bound_field.html_name }}"
+           title="{% blocktrans %}Add another {{ bound_field_urls.model }}{% endblocktrans %}">
+            <i class="mdi-content-create"></i>
+        </a>
+        {% endif %}
+        {% if bound_field_urls.can_delete_related %}
+        <a class="related-widget-wrapper-link delete-related"
+           data-href-template="{{ bound_field_urls.delete_related_template_url }}?{{ bound_field_urls.url_params }}"
+           id="add_id_{{ bound_field.html_name }}"
+           title="{% blocktrans %}Delete selected {{ bound_field_urls.model }}{% endblocktrans %}">
+            <i class="mdi-content-remove"></i>
+        </a>
+        {% endif %}
     </h6>
     {% endpart %}
     {% part field help_text %}{% endpart%}
 {% endrender %}
+</div>
