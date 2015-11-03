@@ -5,29 +5,31 @@
 {% block extrajs %}
 <script type="text/javascript">
 (function($) {
-    $(document).ready(function($) {
-        var table = $("#result_list").DataTable({
-            "paging":     false,
-            "ordering":   false,
-            "info":       false,
-            "bFilter":    false,
-            "bAutoWidth": false,
+  $(document).ready(function($) {
+    if ($('#result_list').length != 0) {
+      var table = $("#result_list").DataTable({
+        "paging":     false,
+        "ordering":   false,
+        "info":       false,
+        "bFilter":    false,
+        "bAutoWidth": false,
             "responsive": true
-        });
-        new $.fn.dataTable.FixedHeader(table);
+      });
+      new $.fn.dataTable.FixedHeader(table);
+    }
 
-        $("#changelist-search-button").click(function() {
-            $("#changelist-search").submit();
-        });
-
-        $(".admin_filter").change(function() {
-		    window.location.href = $(this).val();
-		});
-
-		$(".date_hierarchy").change(function() {
-		    window.location.href = $(this).val();
-		});
+    $("#changelist-search-button").click(function() {
+      $("#changelist-search").submit();
     });
+
+    $(".admin_filter").change(function() {
+      window.location.href = $(this).val();
+    });
+
+    $(".date_hierarchy").change(function() {
+      window.location.href = $(this).val();
+    });
+  });
 })(jQuery);
 </script>
 {% endblock %}
