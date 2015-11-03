@@ -16,8 +16,11 @@ $(function($) {
     }
   }
 
-  var container = $(document);
-  container.on('change', '.related-widget-wrapper select', updateLinks);
+  var container = jQuery(document);
+  container.on('change', 'select', function() {
+    $(this).parents('.related-widget-wrapper').each(updateLinks);
+  });
+
   container.find('.related-widget-wrapper').each(updateLinks);
 
   container.on('click', '.related-widget-wrapper-link', function(event){
