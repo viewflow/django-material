@@ -13,10 +13,15 @@
         <link rel="stylesheet" type="text/css" href="{% block stylesheet %}{% static 'material/admin/css/base.css' %}{% endblock %}" />
         {% block extrastyle %}{% endblock %}
 
+        <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script>
+            // Use same django for material and django admin
+            var django = django || {};
+            django.jQuery = jQuery.noConflict(true);
+        </script>
         <script type="text/javascript">window.__admin_media_prefix__ = "{% filter escapejs %}{% static "admin/" %}{% endfilter %}";</script>
         <script type="text/javascript">window.__admin_utc_offset__ = "{% filter escapejs %}{% now "Z" %}{% endfilter %}";</script>
         <script type="text/javascript" src="{% url 'admin:jsi18n' %}"></script>
-        <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
         {{ media.js }}
         {% block extrahead %}{% endblock %}
         {% block blockbots %}<meta name="robots" content="NONE,NOARCHIVE" />{% endblock %}

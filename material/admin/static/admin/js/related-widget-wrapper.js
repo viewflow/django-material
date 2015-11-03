@@ -16,11 +16,10 @@ $(function($) {
     }
   }
 
-  var container = jQuery(document);
+  var container = $(document);
   container.on('change', 'select', function() {
     $(this).parents('.related-widget-wrapper').each(updateLinks);
   });
-
   container.find('.related-widget-wrapper').each(updateLinks);
 
   container.on('click', '.related-widget-wrapper-link', function(event){
@@ -28,5 +27,10 @@ $(function($) {
       showRelatedObjectPopup(this);
     }
     event.preventDefault();
+  });
+
+  // Update dropdown on Add/Change popup close
+  container.on('change', '.related-widget-wrapper select', function() {
+    $(this).material_select();
   });
 });
