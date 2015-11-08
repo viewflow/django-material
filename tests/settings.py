@@ -70,10 +70,24 @@ TEMPLATES = [
                 'django.core.context_processors.request',
                 'material.frontend.context_processors.modules',
             ],
+            'buildins': [
+                'material.templatetags.material_form',
+                'template_debug.templatetags.debug_tags'
+            ],
             'debug': True,
         },
     },
 ]
+
+try:
+    # shortcut for in form templates
+    from django.template.base import add_to_builtins
+    add_to_builtins('material.templatetags.material_form')
+    add_to_builtins('template_debug.templatetags.debug_tags')
+except ImportError:
+    """
+    Django 1.9. Added in templates options
+    """
 
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
@@ -121,11 +135,6 @@ STATICFILES_DIRS = (
 )
 
 SESSION_ENGINE = "django.contrib.sessions.backends.signed_cookies"
-
-# shortcut for in form templates
-from django.template.base import add_to_builtins
-add_to_builtins('material.templatetags.material_form')
-add_to_builtins('template_debug.templatetags.debug_tags')
 
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'deploy/static')
