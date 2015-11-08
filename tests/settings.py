@@ -13,23 +13,13 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
-# Application definition
-DEMO_APPS = (
-    'mptt',
-    'tagging',
-    'zinnia',
-    'django_comments',
-    'social.apps.django_app.default',
-    'autofixture',
-)
-
 INSTALLED_APPS = (
     # material apps
     'material',
     'material.frontend',
     'easy_pjax',
     'material.admin',
+
     # standard django apps
     'django.contrib.admin',
     'django.contrib.auth',
@@ -39,18 +29,11 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'debug_toolbar',
     'template_debug',
-    # test apps
-    'tests.integration',
-    'tests.examples.accounting',
-    'tests.examples.sales',
-    # test admin apps
-    'django.contrib.flatpages',
-    'django.contrib.redirects',
-    'django.contrib.sites',
-)
 
-if 'test' not in sys.argv:
-    INSTALLED_APPS += DEMO_APPS
+    # test apps
+    'tests',
+    'demo',
+)
 
 
 MIDDLEWARE_CLASSES = (
@@ -102,6 +85,18 @@ DATABASES = {
     }
 }
 
+
+class DisableMigrations(object):
+
+    def __contains__(self, item):
+        return True
+
+    def __getitem__(self, item):
+        return "notmigrations"
+
+MIGRATION_MODULES = DisableMigrations()
+
+
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
 
@@ -134,15 +129,3 @@ add_to_builtins('template_debug.templatetags.debug_tags')
 
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'deploy/static')
-
-EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = os.environ.get('EMAIL')
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASSWORD')
-EMAIL_PORT = 587
-
-
-try:
-    from deploy.local_settings import *  # NOQA
-except ImportError:
-    pass
