@@ -70,10 +70,6 @@ TEMPLATES = [
                 'django.core.context_processors.request',
                 'material.frontend.context_processors.modules',
             ],
-            'buildins': [
-                'material.templatetags.material_form',
-                'template_debug.templatetags.debug_tags'
-            ],
             'debug': True,
         },
     },
@@ -86,8 +82,12 @@ try:
     add_to_builtins('template_debug.templatetags.debug_tags')
 except ImportError:
     """
-    Django 1.9. Added in templates options
+    Django 1.9.
     """
+    TEMPLATES[0]['OPTIONS']['buidins'] = [
+        'material.templatetags.material_form',
+        'template_debug.templatetags.debug_tags'
+    ]
 
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
