@@ -1,6 +1,7 @@
 {% load i18n static %}
+{% get_current_language as LANGUAGE_CODE %}
 <!DOCTYPE html>
-<html lang="en" style="background-color:#eee">
+<html lang="{{ LANGUAGE_CODE|default:"en-us" }}" style="background-color:#eee">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
