@@ -19,4 +19,3 @@ class ShipmentItem(models.Model):
     shipment = models.ForeignKey(Shipment)
     name = models.CharField(max_length=250)
     quantity = models.IntegerField(default=1)
-

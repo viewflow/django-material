@@ -39,7 +39,7 @@
                     </div>
                     {% endif %}
 
-                    {% fieldset_layout adminform as layout %}
+                    {% fieldset_layout adminform inline_admin_formsets as layout %}
                     {% form form=adminform.form layout=layout %}
                         <!--
                             {% block field_sets %}
