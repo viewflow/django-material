@@ -31,6 +31,6 @@ $(function($) {
 
   // Update dropdown on Add/Change popup close
   container.on('change', '.related-widget-wrapper select', function() {
-    $(this).material_select();
+    $(this).not('.disabled').not('.material-ignore').material_select();
   });
 });
