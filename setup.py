@@ -23,7 +23,6 @@ setup(
     zip_safe=False,
     platforms=['any'],
     install_requires=[
-        'django-easy-pjax'
     ],
     classifiers=[
         'Framework :: Django',

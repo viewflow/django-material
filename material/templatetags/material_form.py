@@ -2,9 +2,9 @@ import os
 from collections import defaultdict
 
 from django.forms.forms import BoundField
+from django.template import Library
 from django.template.base import (
-    TemplateSyntaxError, Library,
-    Node, Variable, token_kwargs)
+    TemplateSyntaxError, Node, Variable, token_kwargs)
 from django.template.loader import get_template
 from django.template.loader_tags import IncludeNode
 

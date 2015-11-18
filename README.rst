@@ -153,44 +153,15 @@ Frontend
 Frontend template assumes that your application contains a set of top level `modules`
 each one could restrict user access level and have own submenu.
 
-To quick start add `material.frontend` and `easy_pjax` into INSTALLED_APPS settings 
+To quick start add `material.frontend` into INSTALLED_APPS settings 
 
 .. code-block:: python
 
     INSTALLED_APPS = (
          'material',
          'material.frontend',
-         'easy_pjax'
          ...
     )
-
-Add `material.frontend.context_processors.modules` into `context_processor` setting
-        
-.. code-block:: python
-
-    TEMPLATES = [
-        {
-            ...
-            'OPTIONS': {
-                'context_processors': [
-                    ...
-                    'material.frontend.context_processors.modules',
-                ],
-            },
-        },
-    ]
-
-
-Add 'material.frontend.middleware.SmoothNavigationMiddleware' to `MIDDLEWARE_CLASSES`
-
-.. code-block:: python
-
-    MIDDLEWARE_CLASSES = (
-        ...
-        'material.frontend.middleware.SmoothNavigationMiddleware',
-        ...
-    )
-
 
 Add frontend urls into global urlconf module at urls.py
 
@@ -204,6 +175,8 @@ Add frontend urls into global urlconf module at urls.py
         url(r'', include(frontend_urls)),
     ]
 
+The fronend module perform all required settings modification (add middleware, context_processors and template tags),
+automagically till `MATERIAL_FRONTEND_AUTOREGISTER` settings set to False.
 
 To create a new module make a `modules.py` file, inside app directory, with following content
 

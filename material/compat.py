@@ -12,7 +12,8 @@ __all__ = ['simple_tag']
 
 
 try:
-    from django.template.library import simple_tag  # NOQA
+    from django.template.library import Library  # NOQA
+    simple_tag = Library.simple_tag
 except ImportError:
     # django 1.8
     from django.template import Node

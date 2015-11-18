@@ -17,7 +17,6 @@ INSTALLED_APPS = (
     # material apps
     'material',
     'material.frontend',
-    'easy_pjax',
     'material.admin',
 
     # standard django apps
@@ -45,7 +44,6 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'material.frontend.middleware.SmoothNavigationMiddleware',
 )
 
 SITE_ID = 1
@@ -68,7 +66,6 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.core.context_processors.request',
-                'material.frontend.context_processors.modules',
             ],
             'debug': True,
         },
