@@ -40,9 +40,8 @@ INSTALLED_APPS = (
     'debug_toolbar',
     'template_debug',
     # test apps
-    'tests.integration',
-    'tests.examples.accounting',
-    'tests.examples.sales',
+    'demo.examples.accounting',
+    'demo.examples.sales',
     # test admin apps
     'django.contrib.flatpages',
     'django.contrib.redirects',
@@ -67,15 +66,15 @@ MIDDLEWARE_CLASSES = (
 
 SITE_ID = 1
 
-ROOT_URLCONF = 'tests.urls'
+ROOT_URLCONF = 'demo.urls'
 
-WSGI_APPLICATION = 'tests.wsgi.application'
+WSGI_APPLICATION = 'demo.wsgi.application'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(BASE_DIR, 'tests', 'templates')
+            os.path.join(BASE_DIR, 'demo', 'templates')
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -122,7 +121,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, "tests/static"),
+    os.path.join(BASE_DIR, "demo", "static"),
 )
 
 SESSION_ENGINE = "django.contrib.sessions.backends.signed_cookies"
@@ -133,7 +132,7 @@ add_to_builtins('material.templatetags.material_form')
 add_to_builtins('template_debug.templatetags.debug_tags')
 
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'deploy/static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'deploy', 'static')
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'

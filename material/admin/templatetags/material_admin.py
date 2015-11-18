@@ -16,7 +16,7 @@ from django.template import Library
 
 from material import Layout, Fieldset, Row
 from material.compat import simple_tag
-from ..base import AdminReadonlyField
+from ..base import AdminReadonlyField, TabularInline
 
 
 register = Library()
@@ -95,7 +95,7 @@ def get_app_list(request):
 
 
 @register.assignment_tag
-def fieldset_layout(adminform):
+def fieldset_layout(adminform, inline_admin_formsets):
     sets = []
 
     for fieldset in adminform:
@@ -123,6 +123,9 @@ def fieldset_layout(adminform):
             sets.append(Fieldset(fieldset.name, *fields))
         else:
             sets += fields
+
+        for inline in inline_admin_formsets:
+            sets.append(TabularInline(inline))
 
     return Layout(*sets)
 
