@@ -2,6 +2,7 @@ language: python
 env:
   - $TOX_ENV=django18_py27
   - $TOX_ENV=django18_py34
+  - $TOX_ENV=django19_py34
 
 before_install:
   - sudo apt-get install -qq perceptualdiff
