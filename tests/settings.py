@@ -81,7 +81,7 @@ except ImportError:
     """
     Django 1.9.
     """
-    TEMPLATES[0]['OPTIONS']['buidins'] = [
+    TEMPLATES[0]['OPTIONS']['builtins'] = [
         'material.templatetags.material_form',
         'template_debug.templatetags.debug_tags'
     ]
