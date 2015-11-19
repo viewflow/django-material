@@ -98,7 +98,7 @@ class FormNode(Node):
                 children = (node for node in included.nodelist if isinstance(node, FormPartNode))
                 _render_parts(context, children)
 
-            return template.render(context)
+            return template.render(context.flatten())
 
 
 @register.tag('part')

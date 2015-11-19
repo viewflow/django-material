@@ -31,7 +31,7 @@ class LayoutNode(object):
                 context[key] = value
 
             template = self.get_template(context)
-            return template.render(context)
+            return template.render(context.flatten())
         finally:
             context.pop()
 
@@ -169,7 +169,7 @@ class Span(object):
                 context['bound_field'] = bound_field
                 context['field'] = bound_field.field
                 context['hidden_initial'] = hidden_initial
-                return template.render(context)
+                return template.render(context.flatten())
             finally:
                 context.pop()
 

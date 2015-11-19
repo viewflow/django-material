@@ -1,12 +1,12 @@
 from selenium.webdriver.common.keys import Keys
 
+from django.test.utils import override_settings
 from .. import test_widget_splitdatetime as test
 from . import VisualTest
 
 
+@override_settings(ROOT_URLCONF='tests.test_widget_splitdatetime')
 class Test(VisualTest):
-    urls = test.Test.urls
-
     def test_test_default_usecase(self):
         self.driver.get('%s%s' % (self.live_server_url, test.Test.test_default_usecase.url))
         self.assertScreenshot('form', 'splitdatetime_default_usecase')

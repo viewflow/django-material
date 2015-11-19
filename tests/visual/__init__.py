@@ -14,14 +14,17 @@ class VisualTest(NeedleTestCase, StaticLiveServerTestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.display = Display(visible=0, size=(cls.viewport_width, cls.viewport_height))
-        cls.display.start()
+        cls.display = None
+        if 'NODISPLAY' not in os.environ:
+            cls.display = Display(visible=0, size=(cls.viewport_width, cls.viewport_height))
+            cls.display.start()
         super(VisualTest, cls).setUpClass()
 
     @classmethod
     def tearDownClass(cls):
         super(VisualTest, cls).tearDownClass()
-        cls.display.stop()
+        if cls.display is not None:
+            cls.display.stop()
 
     def assertScreenshot(self, element_or_selector, file, threshold=0.05):
         super(VisualTest, self).assertScreenshot(element_or_selector, file, threshold=threshold)

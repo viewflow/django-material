@@ -1,12 +1,12 @@
 from django.conf.urls import url
 from django.views import generic
+from django.test.utils import override_settings
 from django_webtest import WebTest
 from .. import forms
 
 
+@override_settings(ROOT_URLCONF=__name__)
 class Test(WebTest):
-    urls = __name__
-
     def test_default_usecase(self):
         page = self.app.get('/demo/registration/')
 

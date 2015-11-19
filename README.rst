@@ -32,7 +32,7 @@ Demo: http://forms.viewflow.io/
 Installation
 ============
 
-django-material tested with Python 2.7/3.3, django 1.8::
+django-material tested with Python 2.7/3.4, django 1.8, django 1.9::
 
     pip install django-material
 
@@ -248,7 +248,23 @@ Admin support development is on initial stage. Only basic admin features are ava
 
 Changelog
 =========
+
+0.5.0 2015-11-19 - Alpha
+------------------------
+
+* Django 1.9 support
+* Forms - Add latest materializecss
+* Admin - Support for Readonly widget
+* Admin - Custom admin site support
+* Admin - Proper lang_code for html
+* Admin - Tabular inlines formset support
+* Admin - Fk and Many2Many fields support
+* Frontend - Integrate django-easy-pjax into the app
+* Frontend - Cancel animation as soon as page loaded
+
+
 0.4.0 2015-05-29 - Alpha
+------------------------
 
 * Forms - CheckboxSelectMultiple widgets with multi-column layout support
 * Forms - TimeiInput widget support (thnks @Morozzzko)

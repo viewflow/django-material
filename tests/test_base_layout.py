@@ -1,4 +1,5 @@
 from django import forms
+from django.test.utils import override_settings
 from django_webtest import WebTest
 from material import Layout, Row, Column
 from . import build_test_urls
@@ -15,9 +16,9 @@ class LayoutForm(forms.Form):
                     Row('test_field3', Column('test_field4', 'test_field5')))
 
 
+@override_settings(ROOT_URLCONF=__name__)
 class Test(WebTest):
     default_form = LayoutForm
-    urls = __name__
 
     def test_field_part_override(self):
         """

@@ -1,6 +1,7 @@
 import json
 
 from django import forms
+from django.test.utils import override_settings
 from django_webtest import WebTest
 from . import build_test_urls
 
@@ -12,9 +13,9 @@ class BooleanInputForm(forms.Form):
                                     help_text='To produce non empty POST for empty test_field')
 
 
+@override_settings(ROOT_URLCONF=__name__)
 class Test(WebTest):
     default_form = BooleanInputForm
-    urls = __name__
 
     def test_default_usecase(self):
         page = self.app.get(self.test_default_usecase.url)
