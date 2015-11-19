@@ -18,6 +18,7 @@
             // Use same django for material and django admin
             var django = django || {};
             django.jQuery = jQuery.noConflict(true);
+            window.jQuery = window.$ = django.jQuery
         </script>
         <script type="text/javascript">window.__admin_media_prefix__ = "{% filter escapejs %}{% static "admin/" %}{% endfilter %}";</script>
         <script type="text/javascript">window.__admin_utc_offset__ = "{% filter escapejs %}{% now "Z" %}{% endfilter %}";</script>

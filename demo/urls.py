@@ -16,7 +16,8 @@ def index_view(request):
         'checkout': forms.CheckoutForm(),
         'order': forms.OrderForm(),
         'comment': forms.CommentForm(),
-        'bank': forms.BankForm()
+        'bank': forms.BankForm(),
+        'hospital': forms.HospitalRegistrationForm(),
     }
     return render(request, 'index.html', context)
 

@@ -131,6 +131,7 @@ add_to_builtins('template_debug.templatetags.debug_tags')
 
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'deploy', 'static')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'deploy', 'media')
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'

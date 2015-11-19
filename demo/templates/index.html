@@ -159,6 +159,7 @@
                                                             <ul style="padding-left:20px;font-size:0.7em;line-height:30px">
                                                                 <li><i class="green-text mdi-action-done"></i> Strong python/html code separation</li>
                                                                 <li><i class="green-text mdi-action-done"></i> Easy redefinition of particular field rendering</li>
+                                                                <li><i class="green-text mdi-action-done"></i> Dynamic <a style="text-transform:none;margin-right:0px" href="/demo/hospital/">formset</a> out of the <a href="#hospital_form_code" style="text-transform:none;margin-right:0px" class="modal-trigger align-right">box</a></li>
                                                                 <li><i class="green-text mdi-action-done"></i> Complex form layout support</li>
                                                             </ul>
                                                         </li>
@@ -588,6 +589,20 @@ global urls.
     &lt;button type="submit" name="_submit" class="btn btn-primary btn-lg"&gt;Submit&lt;/button&gt;
 &lt;/form&gt;
                   </code></pre>
+              </div>
+              <div class="modal-footer">
+                  <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+              </div>
+          </div>
+      </div>
+
+      <div id="hospital_form_code" class="modal">
+          <div class="modal-content">
+              <h4>Hospital Registration Form</h4>
+              <div class="divider"></div>
+              <div class="section">
+                  <h5>Code</h5>
+                  <pre><code class="python">{{ hospital.source.rstrip|linebreaksbr }}</code></pre>
               </div>
               <div class="modal-footer">
                   <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>

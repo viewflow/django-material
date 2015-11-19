@@ -39,30 +39,12 @@
                     </div>
                     {% endif %}
 
-                    {% fieldset_layout adminform inline_admin_formsets as layout %}
-                    {% form form=adminform.form layout=layout %}
-                        <!--
-                            {% block field_sets %}
-                            {% for fieldset in adminform %}
-                            {% include "admin/includes/fieldset.html" %}
-                            {% endfor %}
-                            {% endblock %}
-
-                            {% block after_field_sets %}{% endblock %}
-
-                            {% block inline_field_sets %}
-                            {% for inline_admin_formset in inline_admin_formsets %}
-                            {% include inline_admin_formset.opts.template %}
-                            {% endfor %}
-                            {% endblock %}
-
-                            {% block after_related_objects %}{% endblock %}
-
-                            {% block submit_buttons_bottom %}{% submit_row %}{% endblock %}
-                        -->
-                    {% endform %}
-                    {# JavaScript for prepopulated fields #}
-                    {% prepopulated_fields_js %}
+                    {% block change_form %}
+                        {% fieldset_layout adminform inline_admin_formsets as layout %}
+                        {% form form=adminform.form layout=layout %}{% endform %}
+                        {% prepopulated_fields_js %}
+                    {% endblock %}
+                    {% block after_related_objects %}{% endblock %}
                 </div>
                 <div class="card-action">
                     <div class="right-align">
