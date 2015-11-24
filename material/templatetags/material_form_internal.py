@@ -3,7 +3,8 @@ from __future__ import division
 import math
 import re
 from django.forms.forms import BoundField
-from django.template.base import Library, Node, TemplateSyntaxError, Variable, token_kwargs
+from django.template import Library
+from django.template.base import Node, TemplateSyntaxError, Variable, token_kwargs
 from django.utils import formats
 from django.utils.encoding import force_text
 

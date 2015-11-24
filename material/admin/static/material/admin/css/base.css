@@ -401,6 +401,14 @@ ul.side-nav.module-menu li.active>a>span.badge {
     text-align: center;
 }
 
+.change-form .related-widget-wrapper-link {
+    opacity: 0.3;
+}
+
+.change-form .related-widget-wrapper-link:link {
+    opacity: 1;
+}
+
 .errornote {
     color: #F44336;
 }
@@ -467,3 +475,4 @@ ul.side-nav.module-menu li.active>a>span.badge {
         padding: 30px 50px 50px 50px;
     }
 }
+

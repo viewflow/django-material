@@ -7,7 +7,7 @@ except IOError:
 
 setup(
     name='django-material',
-    version='0.4.1',
+    version='0.5.1',
     description='Material design for django forms and admin',
     license='BSD',
     author='Mikhail Podgurskiy',
@@ -17,13 +17,13 @@ setup(
     packages=['material',
               'material.templatetags',
               'material.frontend',
+              'material.frontend.templatetags',
               'material.admin',
               'material.admin.templatetags'],
     include_package_data=True,
     zip_safe=False,
     platforms=['any'],
     install_requires=[
-        'django-easy-pjax'
     ],
     classifiers=[
         'Framework :: Django',

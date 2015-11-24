@@ -13,6 +13,13 @@
         <link rel="stylesheet" type="text/css" href="{% block stylesheet %}{% static 'material/admin/css/base.css' %}{% endblock %}" />
         {% block extrastyle %}{% endblock %}
 
+        <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script>
+            // Use same django for material and django admin
+            var django = django || {};
+            django.jQuery = jQuery.noConflict(true);
+            window.jQuery = window.$ = django.jQuery
+        </script>
         <script type="text/javascript">window.__admin_media_prefix__ = "{% filter escapejs %}{% static "admin/" %}{% endfilter %}";</script>
         <script type="text/javascript">window.__admin_utc_offset__ = "{% filter escapejs %}{% now "Z" %}{% endfilter %}";</script>
         <script type="text/javascript" src="{% url 'admin:jsi18n' %}"></script>
@@ -34,7 +41,7 @@
 
         {% if not is_popup %}
         <header>
-            <nav id="header" class="nav-top">
+            <nav id="header" class="nav-top green">
                 <div class="nav-wrapper">
                     <a href="/" class="page-title hide-on-med-and-down">{% block brand-logo %}{% trans 'Administration' %}{% endblock %}</a>
                     <a href="#" data-activates="nav-mobile" class="button-collapse full"><i class="mdi-navigation-menu"></i></a>

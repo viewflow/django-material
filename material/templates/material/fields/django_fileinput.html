@@ -1,4 +1,4 @@
-{% load material_form material_form_internal %}
+{% load material_form material_form_internal i18n %}
 {% part bound_field.field %}<div class="row">
     <div {% tagattrs %}
          id="id_{{ bound_field.html_name }}_container"
@@ -8,7 +8,7 @@
                 {% part field add_group_class %}{% endpart %}
                 {% endpart %}"{% endtagattrs %}>
         <div class="btn">
-            {% part field prefix %}<span>File</span>{% endpart %}
+            {% part field prefix %}<span>{% trans 'File' %}</span>{% endpart %}
             <input type="file" name="{{ bound_field.html_name }}"/>
         </div>{% part field control %}
         <input {% tagattrs %}

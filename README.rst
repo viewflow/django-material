@@ -32,7 +32,7 @@ Demo: http://forms.viewflow.io/
 Installation
 ============
 
-django-material tested with Python 2.7/3.3, django 1.8::
+django-material tested with Python 2.7/3.4, django 1.8, django 1.9::
 
     pip install django-material
 
@@ -153,44 +153,15 @@ Frontend
 Frontend template assumes that your application contains a set of top level `modules`
 each one could restrict user access level and have own submenu.
 
-To quick start add `material.frontend` and `easy_pjax` into INSTALLED_APPS settings 
+To quick start add `material.frontend` into INSTALLED_APPS settings 
 
 .. code-block:: python
 
     INSTALLED_APPS = (
          'material',
          'material.frontend',
-         'easy_pjax'
          ...
     )
-
-Add `material.frontend.context_processors.modules` into `context_processor` setting
-        
-.. code-block:: python
-
-    TEMPLATES = [
-        {
-            ...
-            'OPTIONS': {
-                'context_processors': [
-                    ...
-                    'material.frontend.context_processors.modules',
-                ],
-            },
-        },
-    ]
-
-
-Add 'material.frontend.middleware.SmoothNavigationMiddleware' to `MIDDLEWARE_CLASSES`
-
-.. code-block:: python
-
-    MIDDLEWARE_CLASSES = (
-        ...
-        'material.frontend.middleware.SmoothNavigationMiddleware',
-        ...
-    )
-
 
 Add frontend urls into global urlconf module at urls.py
 
@@ -204,6 +175,8 @@ Add frontend urls into global urlconf module at urls.py
         url(r'', include(frontend_urls)),
     ]
 
+The fronend module perform all required settings modification (add middleware, context_processors and template tags),
+automagically till `MATERIAL_FRONTEND_AUTOREGISTER` settings set to False.
 
 To create a new module make a `modules.py` file, inside app directory, with following content
 
@@ -275,7 +248,23 @@ Admin support development is on initial stage. Only basic admin features are ava
 
 Changelog
 =========
+
+0.5.0 2015-11-19 - Alpha
+------------------------
+
+* Django 1.9 support
+* Forms - Add latest materializecss
+* Admin - Support for Readonly widget
+* Admin - Custom admin site support
+* Admin - Proper lang_code for html
+* Admin - Tabular inlines formset support
+* Admin - Fk and Many2Many fields support
+* Frontend - Integrate django-easy-pjax into the app
+* Frontend - Cancel animation as soon as page loaded
+
+
 0.4.0 2015-05-29 - Alpha
+------------------------
 
 * Forms - CheckboxSelectMultiple widgets with multi-column layout support
 * Forms - TimeiInput widget support (thnks @Morozzzko)

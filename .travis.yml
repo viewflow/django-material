@@ -1,14 +1,14 @@
 language: python
 env:
-    - $TOX_ENV=django18_py27
-    - $TOX_ENV=django18_py33
+  - $TOX_ENV=django18_py27
+  - $TOX_ENV=django18_py34
+  - $TOX_ENV=django19_py34
 
 before_install:
-  - "export DISPLAY=:99.0"
-  - "/sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -ac -screen 0 1280x1024x24"
+  - sudo apt-get install -qq perceptualdiff
 
 install:
-    - pip install tox
+  - pip install tox
 
 script:
-    - tox -e $TOX_ENV -- python manage.py test tests.integration
+  - tox -e $TOX_ENV -- python manage.py test

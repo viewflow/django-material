@@ -2,9 +2,9 @@ import os
 from collections import defaultdict
 
 from django.forms.forms import BoundField
+from django.template import Library
 from django.template.base import (
-    TemplateSyntaxError, Library,
-    Node, Variable, token_kwargs)
+    TemplateSyntaxError, Node, Variable, token_kwargs)
 from django.template.loader import get_template
 from django.template.loader_tags import IncludeNode
 
@@ -98,7 +98,7 @@ class FormNode(Node):
                 children = (node for node in included.nodelist if isinstance(node, FormPartNode))
                 _render_parts(context, children)
 
-            return template.render(context)
+            return template.render(context.flatten())
 
 
 @register.tag('part')

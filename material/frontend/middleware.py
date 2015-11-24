@@ -1,4 +1,4 @@
-from django.http import HttpResponseRedirect
+from django.http import QueryDict, HttpResponseRedirect
 
 try:
     from urllib.parse import urlencode, parse_qs, urlsplit, urlunsplit
@@ -25,3 +25,16 @@ class SmoothNavigationMiddleware(object):
                 response['location'] = urlunsplit((scheme, netloc, path, new_query_string, fragment))
 
         return response
+
+
+class UnpjaxMiddleware(object):
+    """
+    Removes the `_pjax` parameter from query string
+    """
+
+    def process_request(self, request):
+        if "_pjax" in request.META.get("QUERY_STRING", ""):
+            qs = QueryDict(request.META.get("QUERY_STRING", ""),
+                           encoding=request.encoding, mutable=True)
+            qs.pop("_pjax", None)
+            request.META["QUERY_STRING"] = qs.urlencode()
