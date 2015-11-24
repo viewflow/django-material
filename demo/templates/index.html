@@ -291,24 +291,6 @@ And render your form with {% templatetag openblock %} form {% templatetag closeb
                                    <h4>Frontend</h4>
                                    <h6>Quick starter template for modular ERP-like applications developent</h6>
                                    <h5>Quick start</h5><br/>
-                                   Add <i>material.frontend.context_processors.modules</i> into <i>context_processor</i> setting
-<pre><code class="python">TEMPLATES = [
-        {
-            ...
-            'OPTIONS': {
-                'context_processors': [
-                    ...
-                    'material.frontend.context_processors.modules',
-                ],
-            },
-        },
-]</code></pre>
-                               </div>
-                               <div class="col s4">
-                                   <img src="{% static 'img/frontend.png'%}" class="responsive-img" style="border:2px solid grey"/>
-                               </div>
-                               <div class="col s12">
-
 Add frontend urls into global urlconf module at urls.py
 
 <pre><code class="python">from material.frontend import urls as frontend_urls
@@ -319,7 +301,11 @@ Add frontend urls into global urlconf module at urls.py
         url(r'', include(frontend_urls)),
 ]</code></pre>
 
-
+                               </div>
+                               <div class="col s4">
+                                   <img src="{% static 'img/frontend.png'%}" class="responsive-img" style="border:2px solid grey"/>
+                               </div>
+                               <div class="col s12">
 To create a new module make a `modules.py` file, inside app directory, with following content
 
 .. code-block:: python
