@@ -129,6 +129,7 @@ ul.side-nav.module-menu li.active>a>span.badge {
 
 .side-nav.fixed .collapsible-body li.active.header {
     background-color: #ddd;
+    border-bottom: 1px solid #eee;
 }
 
 .side-nav.fixed .collapsible-body li.active.header>a {
@@ -157,8 +158,8 @@ ul.side-nav.module-menu li.active>a>span.badge {
 
 .breadcrumbs a {
     color: white;
-    padding-left: 40px;
-    padding-right: 40px;
+    padding-left: 20px;
+    padding-right: 20px;
     text-transform: uppercase;
 }
 
