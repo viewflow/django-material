@@ -10,18 +10,16 @@
         <div class="btn">
             {% part field prefix %}<span>{% trans 'File' %}</span>{% endpart %}
             <input type="file" name="{{ bound_field.html_name }}"/>
-        </div>{% part field control %}
-        <input {% tagattrs %}
-               type="text"
-               class="file-path {% part field add_control_class %}{{ form_control_class }}{% endpart %}"
-               {% for name, value in field.widget.attrs.items %}{% if name != 'class' %}{{name}}="{{value}}" {% endif %}{% endfor %}
-               id="id_{{ bound_field.html_name }}"{% endtagattrs %}>
-        {% endpart %}{% part field label %}
-        <label {% tagattrs %}
-               for="{{ bound_field.id_for_label }}"
-               class="{% part field add_label_class %}{{ form_label_class }}{% endpart %}"
-               {% endtagattrs %}>{{ bound_field.label }}</label>
-        {% endpart %}{% part field help_text %}
+        </div>
+        {% part field control %}<div class="file-path-wrapper">
+            <input {% tagattrs %}
+                   type="text"
+                   class="file-path {% part field add_control_class %}{{ form_control_class }}{% endpart %}"
+                   {% for name, value in field.widget.attrs.items %}{% if name != 'class' %}{{name}}="{{value}}" {% endif %}{% endfor %}
+                   id="id_{{ bound_field.html_name }}"{% endtagattrs %}
+                   {% part field label %}placeholder="{{ bound_field.label }}"{% endpart %}>
+        </div>{% endpart %}
+        {% part field help_text %}
         {% if field.help_text %}
         <small class="help-block">{{ bound_field.help_text }}</small>
         {% endif %}
