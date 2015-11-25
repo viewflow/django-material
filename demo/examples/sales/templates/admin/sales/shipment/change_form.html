@@ -1,0 +1,12 @@
+{% extends 'admin/change_form.html' %}
+{% load admin_modify material_form material_admin %}
+
+{% block change_form %}
+    {% fieldset_layout adminform inline_admin_formsets as layout %}
+    {% form form=adminform.form layout=layout %}
+        {% part form.first_name prefix %}<i class="mdi-action-account-box prefix"></i>{% endpart %}
+        {% part form.email prefix %}<i class="mdi-communication-email prefix"></i>{% endpart %}
+        {% part form.phone prefix %}<i class="mdi-communication-call prefix"></i>{% endpart %}
+    {% endform %}
+    {% prepopulated_fields_js %}
+{% endblock %}
