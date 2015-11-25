@@ -96,6 +96,16 @@ def get_app_list(request):
 
 @register.assignment_tag
 def fieldset_layout(adminform, inline_admin_formsets):
+    layout = getattr(adminform.model_admin, 'layout', None)
+    if layout is not None:
+        for element in layout.elements:
+            # TODO Ugly hack to substitute inline classes to instances
+            if isinstance(element, TabularInline) and isinstance(element.inline, type):
+                for inline in inline_admin_formsets:
+                    if inline.formset.model == element.inline.model:
+                        element.inline = inline
+        return layout
+
     sets = []
 
     for fieldset in adminform:
@@ -124,8 +134,8 @@ def fieldset_layout(adminform, inline_admin_formsets):
         else:
             sets += fields
 
-        for inline in inline_admin_formsets:
-            sets.append(TabularInline(inline))
+    for inline in inline_admin_formsets:
+        sets.append(TabularInline(inline))
 
     return Layout(*sets)
 
