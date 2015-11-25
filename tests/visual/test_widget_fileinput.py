@@ -37,10 +37,6 @@ class Test(VisualTest):
         self.driver.get('%s%s' % (self.live_server_url, test.Test.test_part_label.url))
         self.assertScreenshot('form', 'fileinput_part_label')
 
-    def test_part_add_label_class(self):
-        self.driver.get('%s%s' % (self.live_server_url, test.Test.test_part_add_label_class.url))
-        self.assertScreenshot('form', 'fileinput_part_add_label_class')
-
     def test_part_help_text(self):
         self.driver.get('%s%s' % (self.live_server_url, test.Test.test_part_help_text.url))
         self.assertScreenshot('form', 'fileinput_part_help_text')

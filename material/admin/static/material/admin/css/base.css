@@ -367,10 +367,10 @@ ul.side-nav.module-menu li.active>a>span.badge {
 }
 
 .change-form .card-title {
-    font-size: 2.28rem;
-    line-height: 2.508rem;
-    margin: 1.14rem 0 0.912rem 0;
-    font-weight: 400;
+    font-size: 2rem;
+    font-weight: 200;
+    margin-bottom: 30px;
+    margin-top: 0px;
 }
 
 .change-form .checkbox-field {
@@ -395,6 +395,17 @@ ul.side-nav.module-menu li.active>a>span.badge {
 .change-form .section {
     padding-top: 0px;
     padding-bottom: 0px;
+}
+
+.change-form .section h5,
+.change-form .formset-field h5 {
+    border-bottom: 2px solid #555;
+    padding-bottom: 0.5rem;
+}
+
+.change-form .formset-field table {
+    margin-left: -15px;
+    margin-right: -15px;
 }
 
 .change-form .section .row  {
@@ -473,10 +484,3 @@ ul.side-nav.module-menu li.active>a>span.badge {
         transform: rotate(90deg);
     }
 }
-
-@media only screen and (min-width : 992px) {
-    .change-form .card .card-content {
-        padding: 30px 50px 50px 50px;
-    }
-}
-

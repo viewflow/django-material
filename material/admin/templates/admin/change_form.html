@@ -23,7 +23,11 @@
                     {% csrf_token %}
                     {% if is_popup %}<input type="hidden" name="{{ is_popup_var }}" value="1" />{% endif %}
                     {% if to_field %}<input type="hidden" name="{{ to_field_var }}" value="{{ to_field }}" />{% endif %}
-                    <span class="card-title black-text">{% if add %}{% trans 'New' %} {{ opts.verbose_name }}{% else %}{{ adminform.form.instance|title }}{% endif %}</span>
+                    <div class="row">
+                        <div class="col s12">
+                            <h4 class="card-title black-text">{% if add %}{% trans 'New' %} {{ opts.verbose_name }}{% else %}{{ adminform.form.instance|title }}{% endif %}</h4>
+                        </div>
+                    </div>
                     {% if errors %}
                     <div class="row">
                         <div>

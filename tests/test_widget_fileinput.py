@@ -90,16 +90,6 @@ class Test(WebTest):
         {% endform %}
     '''
 
-    def test_part_add_label_class(self):
-        response = self.app.get(self.test_part_add_label_class.url)
-        self.assertIn('<label for="id_test_field" class="green-text">Test field</label>', response.body.decode('utf-8'))
-
-    test_part_add_label_class.template = '''
-        {% form %}
-             {% part form.test_field add_label_class %}green-text{% endpart %}
-        {% endform %}
-    '''
-
     def test_part_help_text(self):
         response = self.app.get(self.test_part_help_text.url)
         self.assertIn('<small class="help-block">My help</small>', response.body.decode('utf-8'))
