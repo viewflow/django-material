@@ -106,6 +106,9 @@ ul.side-nav.fixed.module-menu li a {
   font-size: 13px;
   line-height: 44px;
   height: 44px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 ul.side-nav.module-menu .collapsible-body li.active, .side-nav.fixed .collapsible-body li.active {
@@ -117,7 +120,7 @@ ul.side-nav.module-menu .collapsible-body li a {
 }
 
 ul.side-nav.module-menu .collapsible-body li .collapsible-body a {
-    margin-left: 60px;
+    margin-left: 30px;
 }
 
 ul.side-nav.module-menu li.active>a>span.badge {
