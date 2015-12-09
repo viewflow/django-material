@@ -55,7 +55,7 @@ body {
     height: 30px;
     position: relative;
     top: 15px;
-    margin-right: 10px; 
+    margin-right: 10px;
 }
 
 @media only screen and (max-width : 600px) {
@@ -264,7 +264,7 @@ ul.side-nav.module-menu li.active>a>span.badge {
     background: white;
 }
 
-.results table.dataTable.dtr-inline.collapsed tbody td:first-child:before, 
+.results table.dataTable.dtr-inline.collapsed tbody td:first-child:before,
 .results table.dataTable.dtr-inline.collapsed tbody th:first-child:before {
     top: 18px;
     left: 4px;
@@ -281,10 +281,10 @@ ul.side-nav.module-menu li.active>a>span.badge {
     font-variant: normal;
     text-transform: none;
     -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale; 
+    -moz-osx-font-smoothing: grayscale;
 }
 
-.results table.dataTable.dtr-inline.collapsed tbody tr.parent td:first-child:before, 
+.results table.dataTable.dtr-inline.collapsed tbody tr.parent td:first-child:before,
 .results table.dataTable.dtr-inline.collapsed tbody tr.parent th:first-child:before {
     color: orange;
     background-color: #fff;
@@ -357,16 +357,12 @@ ul.side-nav.module-menu li.active>a>span.badge {
 /*
    Change form
 */
-.change-form .card {
-    max-width: 1300px;
-}
-
 .change-form a {
     color: #039be5;
     text-transform: none;
 }
 
-.change-form .card-title {
+.change-form .form-title {
     font-size: 2rem;
     font-weight: 200;
     margin-bottom: 30px;
@@ -414,6 +410,10 @@ ul.side-nav.module-menu li.active>a>span.badge {
 
 .change-form .multiselect .selector-chooser {
     text-align: center;
+}
+
+.change-form .multiselect .selector-chooser li {
+    margin-bottom: 5px;
 }
 
 .change-form .related-widget-wrapper-link {
