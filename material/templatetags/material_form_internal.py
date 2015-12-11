@@ -2,6 +2,7 @@ from __future__ import division
 
 import math
 import re
+
 from django.forms.forms import BoundField
 from django.template import Library
 from django.template.base import Node, TemplateSyntaxError, Variable, token_kwargs
@@ -10,6 +11,7 @@ from django.utils.encoding import force_text
 
 from ..base import Field
 from ..fields import FormSetField
+from ..widgets import SelectDateWidget
 from .material_form import FormPartNode, _render_parts
 
 
@@ -144,3 +146,18 @@ def formset_value(bound_field):
     if value is None:
         value = bound_field.field.widget.get_formset(bound_field.name)
     return value
+
+
+@register.filter
+def select_date_widget_wrapper(bound_field):
+    class Wrapper(object):
+        def __init__(self, bound_field):
+            self.bound_field = bound_field
+
+        @property
+        def selects(self):
+            widget = SelectDateWidget(self.bound_field.field.widget)
+            for data in widget.selects_data(self.bound_field.value()):
+                yield data
+
+    return Wrapper(bound_field)
