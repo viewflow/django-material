@@ -22,7 +22,7 @@
                     {% endtagattrs %}>{% if value == None or value == '' %}{{ form_select_empty_label|default:choice }}{% else %}{{ choice }}{% endif %}</option>{% endfor %}{% endpart %}
         </select>
         {% endpart %}{% part field help_text %}{% if field.help_text %}
-            <span class="help-block">{{ bound_field.help_text }}</span>
+            <small class="help-block">{{ bound_field.help_text }}</small>
         {% endif %}{% endpart %}{% part field errors %}
         {% if bound_field.errors %}
             {% include  'material/field_errors.html' %}
