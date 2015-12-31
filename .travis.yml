@@ -1,4 +1,5 @@
 language: python
+sudo: true
 env:
   - $TOX_ENV=django18_py27
   - $TOX_ENV=django18_py34
