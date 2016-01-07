@@ -32,6 +32,7 @@ def test_view(request, form_cls, template_content):
 
         template = Template('''
             {{% load material_form %}}
+            <!DOCTYPE html>
             <html lang="en">
             <head>
                 <meta charset="utf-8">

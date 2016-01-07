@@ -43,6 +43,26 @@ input[type=number] {
     line-height: 35px;
 }
 
+.checkbox-field .prefix {
+    position: relative;
+    top: 5px;
+    width: 2.5rem;
+    font-size: 2rem;
+}  
+
+.checkbox-field label {
+    font-size: 14px;
+    color: rgba(0,0,0,.84);
+}
+
+.checkbox-field .help-block {
+    padding-top: 5px;
+    padding-left: 35px;
+    font-size: 12px;
+    line-height: 16px;
+    display: block;
+}
+
 .readonly-password-field {
     margin-top: 10px;
     margin-bottom: 10px;
