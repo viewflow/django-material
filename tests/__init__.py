@@ -41,7 +41,7 @@ def test_view(request, form_cls, template_content):
                 {{% include 'material/includes/material_css.html' %}}
             </head>
             <body>
-                <div class="container expand-on-small-only">
+                <div class="container expand-on-small-only" style="width:500px">
                     <form method="POST" enctype="multipart/form-data">
                         {}
                         <button class="" type="submit">Submit</button>

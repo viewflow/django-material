@@ -21,6 +21,10 @@ class VisualTest(NeedleTestCase, StaticLiveServerTestCase):
         super(VisualTest, cls).setUpClass()
 
     @classmethod
+    def set_viewport_size(cls, width, height):
+        cls.driver.set_window_size(width, height)
+
+    @classmethod
     def tearDownClass(cls):
         super(VisualTest, cls).tearDownClass()
         if cls.display is not None:

@@ -28,10 +28,10 @@ class Test(VisualTest):
         self.driver.get('%s%s' % (self.live_server_url, test.Test.test_part_prefix.url))
         self.assertScreenshot('form', 'fileinput_part_prefix')
 
-    def test_part_add_control_class(self):
-        self.driver.get('%s%s' % (self.live_server_url, test.Test.test_part_add_control_class.url))
-        self.driver.find_element_by_css_selector("#id_test_field_container label").click()
-        self.assertScreenshot('form', 'fileinput_part_add_control_class')
+    # def test_part_add_control_class(self):
+    #     self.driver.get('%s%s' % (self.live_server_url, test.Test.test_part_add_control_class.url))
+    #     self.driver.find_element_by_css_selector("#id_test_field_container label").click()
+    #     self.assertScreenshot('form', 'fileinput_part_add_control_class')
 
     def test_part_label(self):
         self.driver.get('%s%s' % (self.live_server_url, test.Test.test_part_label.url))

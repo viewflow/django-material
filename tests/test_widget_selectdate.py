@@ -37,14 +37,14 @@ class Test(WebTest):
         self.assertIn('test_field_month', form.fields)
         self.assertIn('test_field_day', form.fields)
 
-        form['test_field_year'] = '2015'
+        form['test_field_year'] = '2017'
         form['test_field_month'] = '1'
         form['test_field_day'] = '13'
         response = json.loads(form.submit().body.decode('utf-8'))
 
         self.assertIn('cleaned_data', response)
         self.assertIn('test_field', response['cleaned_data'])
-        self.assertEquals('2015-01-13', response['cleaned_data']['test_field'])
+        self.assertEquals('2017-01-13', response['cleaned_data']['test_field'])
 
 
 urlpatterns = build_test_urls(Test)
