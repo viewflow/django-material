@@ -126,6 +126,24 @@ select.material-ignore {
     box-shadow: 0 1px 0 0 #F44336;
 }
 
+.select-field .prefix {
+    position: absolute;
+    width: 3rem;
+    font-size: 2rem;
+    margin-top: 14px;
+    transition: color .2s;
+}
+
+.select-field .prefix ~ label {
+    margin-left: 3rem;
+}
+
+.select-field .prefix ~ .select-wrapper input {
+    margin-left: 3rem;
+    width: 92%;
+    width: calc(100% - 3rem);
+}
+
 .radio-field {
     paddign-bottom: 18px;
 }

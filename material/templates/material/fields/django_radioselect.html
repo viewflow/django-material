@@ -6,7 +6,7 @@
     </div>
     <div {% tagattrs %}
          id="id_{{ bound_field.html_name }}_container"
-         class="{% part field group_class %}col s12
+         class="{% part field group_class %}select-field col s12
                 {% if field.required%}required{% endif %}
                 {% if bound_field.errors %}has-error{% endif %}
                 {% part field add_group_class %}{% endpart %}

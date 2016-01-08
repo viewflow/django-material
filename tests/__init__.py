@@ -16,7 +16,8 @@ DEFAULT_TEMPLATE = """
 
 class PythonObjectEncoder(DjangoJSONEncoder):
     def default(self, obj):
-        if isinstance(obj, (date, list, dict, str, int, float, bool, type(None), Decimal)) or isinstance(obj, six.string_types):
+        if (isinstance(obj, (date, list, dict, str, int, float, bool, type(None), Decimal)) or
+                isinstance(obj, six.string_types)):
             return DjangoJSONEncoder.default(self, obj)
         return '{}'.format(type(obj).__name__)
 
@@ -31,7 +32,7 @@ def test_view(request, form_cls, template_content):
         context = Context({'form': form})
 
         template = Template('''
-            {{% load material_form %}}
+            {{% load static material_form %}}
             <!DOCTYPE html>
             <html lang="en">
             <head>
@@ -48,6 +49,7 @@ def test_view(request, form_cls, template_content):
                         <button class="" type="submit">Submit</button>
                     </form>
                 </div>
+                <script src="{{% static 'material/admin/js/jquery-2.1.4.min.js' %}}" type="text/javascript"></script>
                 {{% include 'material/includes/material_js.html' %}}
             </body>
             </html>
