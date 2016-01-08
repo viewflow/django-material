@@ -1,8 +1,9 @@
 {% load material_form material_form_internal %}
 {% part bound_field.field %}<div class="row radio-field">
-    {% part field label %}<div class="col s12">
-        <label for="{{ bound_field.id_for_label }}" class="{% part field add_label_class %}{{ form_label_class }}{% endpart %}">{{ bound_field.label }}</label>
-    </div>{% endpart %}
+    <div class="col s12">
+    {% part field prefix %}{% endpart %}
+    {% part field label %}<label for="{{ bound_field.id_for_label }}" class="{% part field add_label_class %}{{ form_label_class }}{% endpart %}">{{ bound_field.label }}</label>{% endpart %}
+    </div>
     <div {% tagattrs %}
          id="id_{{ bound_field.html_name }}_container"
          class="{% part field group_class %}col s12
@@ -10,7 +11,7 @@
                 {% if bound_field.errors %}has-error{% endif %}
                 {% part field add_group_class %}{% endpart %}
                 {% endpart %}"{% endtagattrs %}>
-        {% part field prefix %}{% endpart %}{% part field control %}
+        {% part field control %}
         {% for value, choice in field.choices %}
         <div class="radio" id="id_{{ bound_field.html_name }}">
             <input {% tagattrs %}
@@ -21,7 +22,7 @@
                    {% for name, value in field.widget.attrs.items %}{% if name != 'class' %}{{name}}="{{value}}" {% endif %}{% endfor %}
                    value="{{ value }}"
                    {% if value == bound_field.value %}checked{% endif %}{% endtagattrs %}/>
-            <label for="id_{{ bound_field.html_name }}_{{ forloop.counter0 }}">{{ choice }}</label>
+            <label for="id_{{ bound_field.html_name }}_{{ forloop.counter0 }}" class="item-label">{{ choice }}</label>
         </div>
         {% endfor %}
         {% endpart %}{% part field help_text %}{% if field.help_text %}

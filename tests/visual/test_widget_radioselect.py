@@ -43,7 +43,7 @@ class Test(VisualTest):
         self.assertScreenshot('form', 'radioselect_part_add_label_class')
 
     def test_part_help_text(self):
-        self.driver.get('%s%s' % (self.live_server_url, test.Test.test_part_help_text.url))
+        self.driver.get('%s%s' % (self.live_server_url, test.Test.test_part_help_text.url))        
         self.assertScreenshot('form', 'radioselect_part_help_text')
 
     def test_part_errors(self):

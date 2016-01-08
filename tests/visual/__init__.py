@@ -30,5 +30,5 @@ class VisualTest(NeedleTestCase, StaticLiveServerTestCase):
         if cls.display is not None:
             cls.display.stop()
 
-    def assertScreenshot(self, element_or_selector, file, threshold=0.05):
+    def assertScreenshot(self, element_or_selector, file, threshold=0.02):
         super(VisualTest, self).assertScreenshot(element_or_selector, file, threshold=threshold)

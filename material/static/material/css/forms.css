@@ -130,6 +130,27 @@ select.material-ignore {
     paddign-bottom: 18px;
 }
 
+.radio-field label.item-label {
+    font-size: 14px;
+    color: rgba(0,0,0,.84);
+}
+
+.radio-field .prefix ~ label {
+  width: calc(100% - 21px - 3rem);
+}
+
+.radio-field .prefix {
+    position: relative;
+    top: 5px;
+    width: 2.5rem;
+    font-size: 2rem;
+}  
+
+.radio-field .error,
+.radio-field .help-block {
+    top: 0px;
+    left: 5px;
+}
 
 .radio-field .inline {
     margin-top: 10px;
