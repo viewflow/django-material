@@ -3,8 +3,10 @@
 {% render bound_field template='fields/django_select.html' %}
     {% part field add_control_attr %}multiple{% endpart %}
     {% part field add_group_class %}multiselect{% endpart %}
-    {% part field add_control_class %}material-ignore{% endpart %}
     {% part field options %}
+        {% if not field|have_default_choice %}
+             <option value="" disabled selected>Choose your option</option>
+        {% endif %}
         {% for value, choice in field.widget.choices %}
         <option {% if value in bound_field.value %}selected="selected"{% endif %}
                 {% if value == None or value == '' %}style="display:none"{% endif %}

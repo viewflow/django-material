@@ -94,6 +94,11 @@ def multiwidget_value(bound_field, pos):
 
 
 @register.filter
+def have_default_choice(field):
+    return [choice for choice, _ in field.widget.choices if choice is None or choice == ""]
+
+
+@register.filter
 def jquery_datepicker_format(field):
     input_format = field.input_formats[0]
 

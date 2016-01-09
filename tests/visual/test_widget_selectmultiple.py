@@ -7,13 +7,14 @@ from . import VisualTest
 
 @override_settings(ROOT_URLCONF='tests.test_widget_selectmultiple')
 class Test(VisualTest):
-    def test_test_default_usecase(self):
+    def test_default_usecase(self):
         self.driver.get('%s%s' % (self.live_server_url, test.Test.test_default_usecase.url))
         self.assertScreenshot('form', 'selectmultiple_default_usecase')
 
     def test_missing_value_error(self):
         self.driver.get('%s%s' % (self.live_server_url, test.Test.test_missing_value_error.url))
-        self.driver.find_element_by_css_selector("button").send_keys(Keys.RETURN)
+        self.driver.find_element_by_css_selector("button").send_keys(Keys.RETURN)        
+        import ipdb; ipdb.set_trace()
         self.assertScreenshot('form', 'selectmultiple_missing_value_error')
 
     def test_part_group_class(self):
