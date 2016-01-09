@@ -1,6 +1,17 @@
 {% load material_form material_form_internal %}
 
-{% include 'material/fields/django_selectmultiple.html' %}
+{% render bound_field template='fields/django_select.html' %}
+    {% part field add_control_attr %}multiple{% endpart %}
+    {% part field add_group_class %}multiselect{% endpart %}
+    {% part field add_control_class %}material-ignore{% endpart %}
+    {% part field options %}
+        {% for value, choice in field.widget.choices %}
+        <option {% if value in bound_field.value %}selected="selected"{% endif %}
+                {% if value == None or value == '' %}style="display:none"{% endif %}
+                value="{{ value|default_if_none:"" }}" >{% if value == None or value == '' %}{{ form_select_empty_label|default:choice }}{% else %}{{ choice }}{% endif %} </option>
+        {% endfor %}
+    {% endpart %}
+{% endrender %}
 
 <script type="text/javascript">
 if(! /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
