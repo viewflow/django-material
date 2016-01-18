@@ -133,6 +133,17 @@ def force_text_impl(value):
     return force_text(value)
 
 
+@register.filter('elements_to_text')
+def force_elements_to_text(value):
+    if isinstance(value, list):
+        new_list = []
+        for e in value:
+            new_list.append(force_text(e))
+        return new_list
+    else:
+        return force_text(value)
+
+
 @register.filter
 def split_choices_by_columns(choices, columns):
     columns = int(columns)

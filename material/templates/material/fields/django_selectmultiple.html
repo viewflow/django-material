@@ -8,7 +8,7 @@
              <option value="" disabled selected>Choose your option</option>
         {% endif %}
         {% for value, choice in field.widget.choices %}
-        <option {% if value|force_text in bound_field.value %}selected="selected"{% endif %}
+        <option {% if value|force_text in bound_field.value|elements_to_text %}selected="selected"{% endif %}
                 {% if value == None or value == '' %}style="display:none"{% endif %}
                 value="{{ value|default_if_none:"" }}" >{% if value == None or value == '' %}{{ form_select_empty_label|default:choice }}{% else %}{{ choice }}{% endif %} </option>
         {% endfor %}
