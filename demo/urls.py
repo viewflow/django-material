@@ -6,7 +6,7 @@ from django.shortcuts import render
 from formtools.wizard.views import SessionWizardView
 from material.frontend import urls as frontend_urls
 
-from . import forms
+from . import forms, widget_forms
 
 
 def index_view(request):
@@ -31,6 +31,14 @@ class Wizard(SessionWizardView):
         })
 
 
+class WidgetFormView(generic.FormView):
+    template_name = 'widgets_demo.html'
+
+    def form_valid(self, form):
+        return self.render_to_response(
+            self.get_context_data(form=form))
+
+
 urlpatterns = [
     url(r'^$', index_view),
 
@@ -53,6 +61,11 @@ urlpatterns = [
     url(r'^demo/hospital/$', generic.FormView.as_view(
         form_class=forms.HospitalRegistrationForm, success_url='/demo/hospital/', template_name="demo.html")),
     url(r'^foundation/basic/', generic.RedirectView.as_view(url='/?cache=no', permanent=False)),
+
+    # widget test
+    url(r'^demo/widget/boolean/$', WidgetFormView.as_view(form_class=widget_forms.BooleanFieldForm)),
+    url(r'^demo/widget/char/$', WidgetFormView.as_view(form_class=widget_forms.CharFieldForm)),
+    url(r'^demo/widget/choice/$', WidgetFormView.as_view(form_class=widget_forms.ChoiceFieldForm)),
 
     # admin
     url(r'^admin/', include(admin.site.urls)),
