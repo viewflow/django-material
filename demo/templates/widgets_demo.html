@@ -1,0 +1,23 @@
+{% extends 'base_form.html' %}
+{% load material_form %}
+
+{% block formtitle %}{{ view.form_class.description|default:"Widgets demo" }}{% endblock %}
+
+{% block formbody %}
+{% form %}{% endform %}
+{% endblock %}
+
+{% block result %}
+{% if form.cleaned_data %}
+<div class="row valign">
+    <div class="col s12 m8 offset-m2 l8 offset-l2">
+        <div class="card">
+            <div class="card-content">
+                <span class="card-title grey-text text-darken-2">Cleaned Data</span>
+                <pre>{{ form.cleaned_data }}</pre>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
