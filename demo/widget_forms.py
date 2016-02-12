@@ -6,10 +6,13 @@ from decimal import Decimal
 from django import forms
 from django.contrib.auth.models import Permission
 from django.core.files import File
+from django.forms.extras.widgets import SelectDateWidget
 from django.utils import timezone
 
 import demo
 
+
+# Core django fields
 
 class BooleanFieldForm(forms.Form):
     description = "BooleanField options"
@@ -231,3 +234,96 @@ class ModelMultipleChoiceFieldForm(forms.Form):
                                             initial=Permission.objects.first)
     field4 = forms.ModelMultipleChoiceField(help_text='to_field_name=codename', queryset=Permission.objects.all(),
                                             to_field_name='name')
+
+
+# Core django non-default widgets
+
+
+class PasswordInputForm(forms.Form):
+    description = "PasswordInput options"
+
+    field1 = forms.CharField(help_text='default', widget=forms.PasswordInput)
+    field2 = forms.CharField(help_text='initial value', widget=forms.PasswordInput,
+                             initial="Initial value")
+    field3 = forms.CharField(help_text='length between 5-10', widget=forms.PasswordInput,
+                             min_length=5, max_length=10)
+    field4 = forms.CharField(help_text='render value',
+                             widget=forms.PasswordInput(render_value=True))
+
+
+class HiddenInputForm(forms.Form):
+    description = "HiddenInput options"
+
+    field1 = forms.CharField(help_text='default', initial="hello!", widget=forms.HiddenInput)
+
+
+class TextareaForm(forms.Form):
+    description = "Textarea options"
+
+    field1 = forms.CharField(help_text='default', widget=forms.Textarea)
+    field2 = forms.CharField(help_text='initial value', widget=forms.Textarea,
+                             initial="Initial value")
+    field3 = forms.CharField(help_text='length between 10-100', widget=forms.Textarea,
+                             min_length=10, max_length=100)
+
+
+class RadioSelectForm(forms.Form):
+    description = "RadioSelect options"
+
+    description = "ChoiceField options"
+    CHOICES = (
+        (1, 'Apple'),
+        (2, 'Orange'),
+        (3, 'Watermeloun'))
+
+    field1 = forms.ChoiceField(
+        help_text='default', choices=CHOICES, widget=forms.RadioSelect)
+    field2 = forms.ChoiceField(
+        help_text='initial value', choices=CHOICES, widget=forms.RadioSelect, initial=2)
+    field3 = forms.TypedChoiceField(
+        help_text='cource to int', choices=CHOICES, widget=forms.RadioSelect, coerce=int)
+
+
+class CheckboxSelectMultipleForm(forms.Form):
+    description = "CheckboxSelectMultiple options"
+
+    description = "MultipleChoiceField options"
+    CHOICES = (
+        (1, 'Apple'),
+        (2, 'Orange'),
+        (3, 'Watermeloun'))
+
+    field1 = forms.MultipleChoiceField(
+        help_text='default', choices=CHOICES, widget=forms.CheckboxSelectMultiple)
+    field2 = forms.MultipleChoiceField(
+        help_text='initial value', choices=CHOICES, widget=forms.CheckboxSelectMultiple, initial=[2, 3])
+    field3 = forms.TypedMultipleChoiceField(
+        help_text='cource to int', choices=CHOICES, widget=forms.CheckboxSelectMultiple, coerce=int)
+
+
+class FileInputForm(forms.Form):
+    description = "FileInput options"
+
+    field1 = forms.FileField(
+        help_text='default', widget=forms.FileInput)
+    field2 = forms.FileField(
+        help_text='initial value', widget=forms.FileInput, initial=File(open(__file__), 'sample.py'))
+
+
+class SplitHiddenDateTimeWidgetForm(forms.Form):
+    description = "SplitHiddenDateTimeWidget options"
+
+    field1 = forms.DateTimeField(
+        help_text='initial value', widget=forms.SplitHiddenDateTimeWidget, initial=timezone.now)
+
+
+class SelectDateWidgetForm(forms.Form):
+    description = "SelectDateWidget options"
+
+    field1 = forms.DateField(
+        help_text='default', widget=SelectDateWidget)
+    field2 = forms.DateField(
+        help_text='initial value', widget=SelectDateWidget, initial=timezone.now)
+    field3 = forms.DateField(
+        help_text='custom empty label', widget=SelectDateWidget(
+            empty_label=("Choose Year", "Choose Month", "Choose Day")))

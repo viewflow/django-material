@@ -1,5 +1,5 @@
 {% extends 'base_form.html' %}
-{% load material_form %}
+{% load static material_form %}
 
 {% block formtitle %}{{ view.form_class.description|default:"Widgets demo" }}{% endblock %}
 
@@ -20,4 +20,44 @@
     </div>
 </div>
 {% endif %}
+{% endblock %}
+
+{% block sidebar %}
+<a class="dropdown-button btn-floating btn-large waves-effect waves-light green" href='#' data-activates="dropdown1" style="position:absolute;right:30px; bottom: 30px"><i class="mdi-action-view-headline"></i></a>
+
+<ul id="dropdown1" class="dropdown-content">
+    <li><a href="/demo/widget/boolean/">BooleanField</a></li>
+    <li><a href="/demo/widget/char/">CharField</a></li>
+    <li><a href="/demo/widget/choice/">ChoiceField</a></li>
+    <li><a href="/demo/widget/date/">DateField</a></li>
+    <li><a href="/demo/widget/datetime/">DateTimeField</a></li>
+    <li><a href="/demo/widget/decimal/">DecimalField</a></li>
+    <li><a href="/demo/widget/duration/">DurationField</a></li>
+    <li><a href="/demo/widget/email/">EmailField</a></li>
+    <li><a href="/demo/widget/file/">FileField</a></li>
+    <li><a href="/demo/widget/filepath/">FilePathField</a></li>
+    <li><a href="/demo/widget/float/">FloatField</a></li>
+    <li><a href="/demo/widget/image/">ImageField</a></li>
+    <li><a href="/demo/widget/integer/">IntegerField</a></li>
+    <li><a href="/demo/widget/ipaddress/">GenericIPAddressField</a></li>
+    <li><a href="/demo/widget/multiplechoice/">MultipleChoiceField</a></li>
+    <li><a href="/demo/widget/nullbolean/">NullBooleanField</a></li>
+    <li><a href="/demo/widget/regex/">RegexField</a></li>
+    <li><a href="/demo/widget/slug/">SlugField</a></li>
+    <li><a href="/demo/widget/time/">TimeField</a></li>
+    <li><a href="/demo/widget/url/">URLField</a></li>
+    <li><a href="/demo/widget/uuid/">UUIDF</a></li>
+    <li><a href="/demo/widget/combo/">ComboField</a></li>
+    <li><a href="/demo/widget/splitdatetime/">SplitDateTimeField</a></li>
+    <li><a href="/demo/widget/modelchoice/">ModelChoiceField</a></li>
+    <li><a href="/demo/widget/modelmultichoice/">ModelMultipleChoiceField</a></li>
+    <li><a href="/demo/widget/password/">PasswordInput</a></li>
+    <li><a href="/demo/widget/hidden/">HiddenInput</a></li>
+    <li><a href="/demo/widget/textarea/">Textarea</a></li>
+    <li><a href="/demo/widget/radioselect/">RadioSelect</a></li>
+    <li><a href="/demo/widget/checkboxmultiple/">CheckboxSelectMult</a></li>
+    <li><a href="/demo/widget/fileinput/">FileInput</a></li>
+    <li><a href="/demo/widget/splithiddendatetime/">SplitHiddenDateTimeWidget</a></li>
+    <li><a href="/demo/widget/selectdate/">SelectDateWidget</a></li>
+  </ul>
 {% endblock %}

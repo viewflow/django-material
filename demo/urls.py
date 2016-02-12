@@ -89,6 +89,17 @@ urlpatterns = [
     url(r'^demo/widget/modelchoice/$', WidgetFormView.as_view(form_class=widget_forms.ModelChoiceFieldForm)),
     url(r'^demo/widget/modelmultichoice/$', WidgetFormView.as_view(form_class=widget_forms.ModelMultipleChoiceFieldForm)),
 
+    url(r'^demo/widget/password/$', WidgetFormView.as_view(form_class=widget_forms.PasswordInputForm)),
+    url(r'^demo/widget/hidden/$', WidgetFormView.as_view(form_class=widget_forms.HiddenInputForm)),
+    url(r'^demo/widget/textarea/$', WidgetFormView.as_view(form_class=widget_forms.TextareaForm)),
+    url(r'^demo/widget/radioselect/$', WidgetFormView.as_view(form_class=widget_forms.RadioSelectForm)),
+    url(r'^demo/widget/checkboxmultiple/$', WidgetFormView.as_view(
+        form_class=widget_forms.CheckboxSelectMultipleForm)),
+    url(r'^demo/widget/fileinput/$', WidgetFormView.as_view(form_class=widget_forms.FileInputForm)),
+    url(r'^demo/widget/splithiddendatetime/$', WidgetFormView.as_view(
+        form_class=widget_forms.SplitHiddenDateTimeWidgetForm)),
+    url(r'^demo/widget/selectdate/$', WidgetFormView.as_view(form_class=widget_forms.SelectDateWidgetForm)),
+
     # admin
     url(r'^admin/', include(admin.site.urls)),
 

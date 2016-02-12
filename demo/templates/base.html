@@ -17,11 +17,13 @@
     {% block extrahead %}{% endblock %}
   </head>
   <body class="valign-wrapper2">
+      {% block sidebar %}{% endblock %}
       <div class="{% block container_class %}container expand-on-small-only{% endblock %}">
           {% block content %}{% endblock %}
       </div>
 
       <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
       {% include 'material/includes/material_js.html' %}
+      {% block extrajs %}{% endblock %}
   </body>
 </html>
