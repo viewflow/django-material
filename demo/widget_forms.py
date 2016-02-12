@@ -3,13 +3,13 @@ import os.path
 from datetime import timedelta
 from decimal import Decimal
 
-from django import forms
 from django.contrib.auth.models import Permission
 from django.core.files import File
 from django.forms.extras.widgets import SelectDateWidget
+from django.template import Template
 from django.utils import timezone
 
-import demo
+from . import demo as forms
 
 
 # Core django fields
@@ -27,6 +27,13 @@ class CharFieldForm(forms.Form):
     field1 = forms.CharField(help_text='default')
     field2 = forms.CharField(help_text='initial value', initial="Initial value")
     field3 = forms.CharField(help_text='length between 5-10', min_length=5, max_length=10)
+    field4 = forms.CharField(help_text='prefix')
+
+    template = Template("""
+    {% form %}
+        {% part form.field4 prefix %}<i class="mdi-editor-insert-invitation prefix"></i>{% endpart %}
+    {% endform %}
+    """)
 
 
 class ChoiceFieldForm(forms.Form):
@@ -42,6 +49,13 @@ class ChoiceFieldForm(forms.Form):
     field2 = forms.ChoiceField(help_text='initial value', choices=CHOICES, initial=2)
     field3 = forms.ChoiceField(help_text='long choices list', choices=LONG_CHOICES)
     field4 = forms.TypedChoiceField(help_text='cource to int', coerce=int, choices=CHOICES)
+    field5 = forms.ChoiceField(help_text='prefix', choices=CHOICES)
+
+    template = Template("""
+    {% form %}
+        {% part form.field5 prefix %}<i class="mdi-editor-insert-invitation prefix"></i>{% endpart %}
+    {% endform %}
+    """)
 
 
 class DateFieldForm(forms.Form):
@@ -50,6 +64,13 @@ class DateFieldForm(forms.Form):
     field1 = forms.DateField(help_text='default')
     field2 = forms.DateField(help_text='initial value', initial=timezone.now)
     field3 = forms.DateField(help_text='custom input format', input_formats=['%d %b, %Y'])
+    field4 = forms.DateField(help_text='prefix')
+
+    template = Template("""
+    {% form %}
+        {% part form.field4 prefix %}<i class="mdi-editor-insert-invitation prefix"></i>{% endpart %}
+    {% endform %}
+    """)
 
 
 class DateTimeFieldForm(forms.Form):
@@ -58,6 +79,13 @@ class DateTimeFieldForm(forms.Form):
     field1 = forms.DateTimeField(help_text='default')
     field2 = forms.DateTimeField(help_text='initial value', initial=timezone.now)
     field3 = forms.DateTimeField(help_text='custom input format', input_formats=['%d %b, %Y %H:%M'])
+    field4 = forms.DateTimeField(help_text='prefix')
+
+    template = Template("""
+    {% form %}
+        {% part form.field4 prefix %}<i class="mdi-editor-insert-invitation prefix"></i>{% endpart %}
+    {% endform %}
+    """)
 
 
 class DecimalFieldForm(forms.Form):
@@ -67,6 +95,13 @@ class DecimalFieldForm(forms.Form):
     field2 = forms.DecimalField(help_text='initial value', initial=Decimal(3.141592))
     field3 = forms.DecimalField(help_text='value between 5-10', min_value=5, max_value=10)
     field4 = forms.DecimalField(help_text='digits restriction 99.999', max_digits=5, decimal_places=3)
+    field5 = forms.DecimalField(help_text='prefix')
+
+    template = Template("""
+    {% form %}
+        {% part form.field5 prefix %}<i class="mdi-editor-insert-invitation prefix"></i>{% endpart %}
+    {% endform %}
+    """)
 
 
 class DurationFieldForm(forms.Form):
@@ -74,6 +109,13 @@ class DurationFieldForm(forms.Form):
 
     field1 = forms.DurationField(help_text='default')
     field2 = forms.DecimalField(help_text='initial value', initial=timedelta(minutes=1, seconds=12))
+    field3 = forms.DurationField(help_text='prefix')
+
+    template = Template("""
+    {% form %}
+        {% part form.field3 prefix %}<i class="mdi-editor-insert-invitation prefix"></i>{% endpart %}
+    {% endform %}
+    """)
 
 
 class EmailFieldForm(forms.Form):
@@ -82,6 +124,13 @@ class EmailFieldForm(forms.Form):
     field1 = forms.EmailField(help_text='default')
     field2 = forms.EmailField(help_text='initial value', initial='john@doe.com')
     field3 = forms.EmailField(help_text='length between 10-20', min_length=10, max_length=20)
+    field4 = forms.EmailField(help_text='prefix')
+
+    template = Template("""
+    {% form %}
+        {% part form.field4 prefix %}<i class="mdi-editor-insert-invitation prefix"></i>{% endpart %}
+    {% endform %}
+    """)
 
 
 class FileFieldForm(forms.Form):
@@ -97,8 +146,16 @@ class FilePathFieldForm(forms.Form):
     field1 = forms.FilePathField(help_text='default', path=os.path.dirname(__file__))
     field2 = forms.FilePathField(help_text='initial value', path=os.path.dirname(__file__),
                                  initial=__file__, match='^.*\.py$')
-    field3 = forms.FilePathField(help_text='recursive directories', path=os.path.dirname(demo.__file__),
+    field3 = forms.FilePathField(help_text='recursive directories', path=os.path.dirname(forms.__file__),
                                  recursive=True, allow_folders=True, allow_files=False, match='templates')
+
+    field4 = forms.FilePathField(help_text='prefix', path=os.path.dirname(__file__), required=False)
+
+    template = Template("""
+    {% form %}
+        {% part form.field4 prefix %}<i class="mdi-editor-insert-invitation prefix"></i>{% endpart %}
+    {% endform %}
+    """)
 
 
 class FloatFieldForm(forms.Form):
@@ -107,6 +164,13 @@ class FloatFieldForm(forms.Form):
     field1 = forms.FloatField(help_text='default')
     field2 = forms.FloatField(help_text='initial value', initial=2.718282)
     field3 = forms.FloatField(help_text='value between 5-10', min_value=5, max_value=10)
+    field4 = forms.FloatField(help_text='prefix')
+
+    template = Template("""
+    {% form %}
+        {% part form.field4 prefix %}<i class="mdi-editor-insert-invitation prefix"></i>{% endpart %}
+    {% endform %}
+    """)
 
 
 class ImageFieldForm(forms.Form):
@@ -114,7 +178,7 @@ class ImageFieldForm(forms.Form):
 
     field1 = forms.ImageField(help_text='default')
     field2 = forms.ImageField(help_text='initial value',
-                              initial=File(open(os.path.join(os.path.dirname(demo.__file__),
+                              initial=File(open(os.path.join(os.path.dirname(forms.__file__),
                                                              'static', 'img', 'logo.png')), 'logo.png'))
 
 
@@ -124,6 +188,13 @@ class IntegerFieldForm(forms.Form):
     field1 = forms.IntegerField(help_text='default')
     field2 = forms.IntegerField(help_text='initial value', initial=42)
     field3 = forms.IntegerField(help_text='value between 5-10', min_value=5, max_value=10)
+    field4 = forms.IntegerField(help_text='prefix')
+
+    template = Template("""
+    {% form %}
+        {% part form.field4 prefix %}<i class="mdi-editor-insert-invitation prefix"></i>{% endpart %}
+    {% endform %}
+    """)
 
 
 class GenericIPAddressFieldForm(forms.Form):
@@ -134,6 +205,13 @@ class GenericIPAddressFieldForm(forms.Form):
                                          unpack_ipv4=True)
     field3 = forms.GenericIPAddressField(help_text='IPv4 only', protocol='IPv4')
     field4 = forms.GenericIPAddressField(help_text='IPv6 only', protocol='IPv6')
+    field5 = forms.GenericIPAddressField(help_text='prefix')
+
+    template = Template("""
+    {% form %}
+        {% part form.field5 prefix %}<i class="mdi-editor-insert-invitation prefix"></i>{% endpart %}
+    {% endform %}
+    """)
 
 
 class MultipleChoiceFieldForm(forms.Form):
@@ -149,6 +227,13 @@ class MultipleChoiceFieldForm(forms.Form):
     field2 = forms.MultipleChoiceField(help_text='initial value', choices=CHOICES, initial=[2, 3])
     field3 = forms.MultipleChoiceField(help_text='long choices list', choices=LONG_CHOICES)
     field4 = forms.TypedMultipleChoiceField(help_text='cource to int', coerce=int, choices=CHOICES)
+    field5 = forms.MultipleChoiceField(help_text='default', choices=CHOICES)
+
+    template = Template("""
+    {% form %}
+        {% part form.field5 prefix %}<i class="mdi-editor-insert-invitation prefix"></i>{% endpart %}
+    {% endform %}
+    """)
 
 
 class NullBooleanFieldForm(forms.Form):
@@ -164,6 +249,13 @@ class RegexFieldForm(forms.Form):
     field1 = forms.RegexField(help_text='default [regex=.*]', regex='.*')
     field2 = forms.RegexField(help_text='initial value [regex=test\d]', initial='test1', regex='test\d')
     field3 = forms.RegexField(help_text='length between 5-10 [regex=.*]', regex='.*', min_length=5, max_length=10)
+    field4 = forms.RegexField(help_text='prefix [regex=.*]', regex='.*')
+
+    template = Template("""
+    {% form %}
+        {% part form.field4 prefix %}<i class="mdi-editor-insert-invitation prefix"></i>{% endpart %}
+    {% endform %}
+    """)
 
 
 class SlugFieldForm(forms.Form):
@@ -171,6 +263,13 @@ class SlugFieldForm(forms.Form):
 
     field1 = forms.SlugField(help_text='default')
     field2 = forms.SlugField(help_text='initial value', initial="initial_value")
+    field3 = forms.SlugField(help_text='prefix')
+
+    template = Template("""
+    {% form %}
+        {% part form.field3 prefix %}<i class="mdi-editor-insert-invitation prefix"></i>{% endpart %}
+    {% endform %}
+    """)
 
 
 class TimeFieldForm(forms.Form):
@@ -179,6 +278,13 @@ class TimeFieldForm(forms.Form):
     field1 = forms.TimeField(help_text='default')
     field2 = forms.TimeField(help_text='initial value', initial=timezone.now)
     field3 = forms.TimeField(help_text='custom input format', input_formats=['%H:%M:%S'])
+    field4 = forms.TimeField(help_text='prefix')
+
+    template = Template("""
+    {% form %}
+        {% part form.field4 prefix %}<i class="mdi-editor-insert-invitation prefix"></i>{% endpart %}
+    {% endform %}
+    """)
 
 
 class URLFieldForm(forms.Form):
@@ -187,6 +293,13 @@ class URLFieldForm(forms.Form):
     field1 = forms.URLField(help_text='default')
     field2 = forms.URLField(help_text='initial value', initial="http://viewflow.io")
     field3 = forms.URLField(help_text='length between 10-100', min_length=10, max_length=100)
+    field4 = forms.URLField(help_text='prefix')
+
+    template = Template("""
+    {% form %}
+        {% part form.field4 prefix %}<i class="mdi-editor-insert-invitation prefix"></i>{% endpart %}
+    {% endform %}
+    """)
 
 
 class UUIDField(forms.Form):
@@ -194,6 +307,13 @@ class UUIDField(forms.Form):
 
     field1 = forms.UUIDField(help_text='default')
     field2 = forms.UUIDField(help_text='initial value', initial=uuid.uuid4())
+    field3 = forms.UUIDField(help_text='prefix')
+
+    template = Template("""
+    {% form %}
+        {% part form.field3 prefix %}<i class="mdi-editor-insert-invitation prefix"></i>{% endpart %}
+    {% endform %}
+    """)
 
 
 class ComboFieldForm(forms.Form):
@@ -224,16 +344,30 @@ class ModelChoiceFieldForm(forms.Form):
                                     empty_label="(Nothing)")
     field4 = forms.ModelChoiceField(help_text='to_field_name=codename', queryset=Permission.objects.all(),
                                     to_field_name='codename')
+    field5 = forms.ModelChoiceField(help_text='prefix', queryset=Permission.objects.all())
+
+    template = Template("""
+    {% form %}
+        {% part form.field5 prefix %}<i class="mdi-editor-insert-invitation prefix"></i>{% endpart %}
+    {% endform %}
+    """)
 
 
 class ModelMultipleChoiceFieldForm(forms.Form):
     description = "ModelMultipleChoiceField options"
 
-    field1 = forms.ModelMultipleChoiceField(queryset=Permission.objects.all())
+    field1 = forms.ModelMultipleChoiceField(help_text='default', queryset=Permission.objects.all())
     field2 = forms.ModelMultipleChoiceField(help_text='initial value', queryset=Permission.objects.all(),
                                             initial=Permission.objects.first)
-    field4 = forms.ModelMultipleChoiceField(help_text='to_field_name=codename', queryset=Permission.objects.all(),
+    field3 = forms.ModelMultipleChoiceField(help_text='to_field_name=codename', queryset=Permission.objects.all(),
                                             to_field_name='name')
+    field4 = forms.ModelMultipleChoiceField(help_text='prefix', queryset=Permission.objects.all())
+
+    template = Template("""
+    {% form %}
+        {% part form.field4 prefix %}<i class="mdi-editor-insert-invitation prefix"></i>{% endpart %}
+    {% endform %}
+    """)
 
 
 # Core django non-default widgets
@@ -249,6 +383,13 @@ class PasswordInputForm(forms.Form):
                              min_length=5, max_length=10)
     field4 = forms.CharField(help_text='render value',
                              widget=forms.PasswordInput(render_value=True))
+    field5 = forms.CharField(help_text='prefix', widget=forms.PasswordInput)
+
+    template = Template("""
+    {% form %}
+        {% part form.field5 prefix %}<i class="mdi-editor-insert-invitation prefix"></i>{% endpart %}
+    {% endform %}
+    """)
 
 
 class HiddenInputForm(forms.Form):
@@ -265,6 +406,13 @@ class TextareaForm(forms.Form):
                              initial="Initial value")
     field3 = forms.CharField(help_text='length between 10-100', widget=forms.Textarea,
                              min_length=10, max_length=100)
+    field4 = forms.CharField(help_text='prefix', widget=forms.Textarea)
+
+    template = Template("""
+    {% form %}
+        {% part form.field4 prefix %}<i class="mdi-editor-insert-invitation prefix"></i>{% endpart %}
+    {% endform %}
+    """)
 
 
 class RadioSelectForm(forms.Form):

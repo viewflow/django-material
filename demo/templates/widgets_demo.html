@@ -4,7 +4,11 @@
 {% block formtitle %}{{ view.form_class.description|default:"Widgets demo" }}{% endblock %}
 
 {% block formbody %}
-{% form %}{% endform %}
+{% if form.template %}
+    {% include form.template %}
+{% else %}
+    {% form %}{% endform %}
+{% endif %}
 {% endblock %}
 
 {% block result %}
@@ -21,6 +25,35 @@
 </div>
 {% endif %}
 {% endblock %}
+
+{% block actions %}
+<div class="left">
+    <a href="#form_source" class="modal-trigger align-right blue-text">Source</a>
+</div>
+<div class="right-align">
+    <button class="btn btn-primary" type="submit">Submit</button>
+</div>
+<div id="form_source" class="modal">
+    <div class="modal-content">
+        <div class="section">
+            <h5>Code</h5>
+            <pre><code class="python">{{ form.source.rstrip|linebreaksbr }}</code></pre>
+        </div>
+        <div class="divider"></div>
+        <div class="section">
+            <h5>Html</h5>
+            <pre><code class="django">&lt;form method="POST" class="viewform"&gt;{% verbatim %}{% csrf_token %}{% endverbatim %}{% if form.template %}{{ form.template.origin.source.rstrip|linebreaksbr }}{% else %}{% templatetag openblock %} form {% templatetag closeblock %}{% templatetag openblock %} endform {% templatetag closeblock %}{% endif %}
+    &lt;button type="submit" name="_submit" class="btn btn-primary btn-lg"&gt;Submit&lt;/button&gt;
+&lt;/form&gt;
+            </code></pre>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
 
 {% block sidebar %}
 <a class="dropdown-button btn-floating btn-large waves-effect waves-light green" href='#' data-activates="dropdown1" style="position:absolute;right:30px; bottom: 30px"><i class="mdi-action-view-headline"></i></a>
@@ -60,4 +93,10 @@
     <li><a href="/demo/widget/splithiddendatetime/">SplitHiddenDateTimeWidget</a></li>
     <li><a href="/demo/widget/selectdate/">SelectDateWidget</a></li>
   </ul>
+{% endblock %}
+
+{% block extrajs %}
+<script type="text/javascript">
+  $('.modal-trigger').leanModal({dismissible: true, opacity: 0.2});
+</script>
 {% endblock %}

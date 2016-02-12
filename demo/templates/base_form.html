@@ -22,9 +22,11 @@
                     {% block formbody %}{% endblock %}
                 </div>
                 <div class="card-action">
+                    {% block actions %}
                     <div class="right-align">
                         {% block formbuttons %}<button class="btn btn-primary" type="submit">Submit</button>{% endblock %}
                     </div>
+                    {% endblock %}
                 </div>
             </form>
         </div>
