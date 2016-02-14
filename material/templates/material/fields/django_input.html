@@ -1,4 +1,4 @@
-{% load material_form material_form_internal %}
+{% load material_form material_form_internal l10n %}
 {% part bound_field.field %}<div class="row">
     <div {% tagattrs %}
          id="id_{{ bound_field.html_name }}_container"
@@ -13,7 +13,7 @@
                class="{% if field.widget.attrs.class %}{{ field.widget.attrs.class }} {% endif %}{% if bound_field.errors %}invalid {% endif %}{% part field add_control_class %}{{ form_control_class }}{% endpart %}"
                name="{{ bound_field.html_name }}"
                {% for name, value in field.widget.attrs.items %}{% if name != 'class' %}{{name}}="{{value}}" {% endif %}{% endfor %}
-               id="id_{{ bound_field.html_name }}"{% endtagattrs %}{% if bound_field.value %} value="{{ bound_field.value }}"{% endif %}>
+               id="id_{{ bound_field.html_name }}"{% endtagattrs %}{% if bound_field.value %} value="{{ bound_field.value|unlocalize }}"{% endif %}>
         {% endpart %}{% part field label %}
         <label {% tagattrs %}
                for="{{ bound_field.id_for_label }}"

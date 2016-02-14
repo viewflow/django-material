@@ -92,7 +92,7 @@ class DecimalFieldForm(forms.Form):
     description = "DecimalField options"
 
     field1 = forms.DecimalField(help_text='default')
-    field2 = forms.DecimalField(help_text='initial value', initial=Decimal(3.141592))
+    field2 = forms.DecimalField(help_text='initial value', initial=Decimal('3.141592'))
     field3 = forms.DecimalField(help_text='value between 5-10', min_value=5, max_value=10)
     field4 = forms.DecimalField(help_text='digits restriction 99.999', max_digits=5, decimal_places=3)
     field5 = forms.DecimalField(help_text='prefix')
