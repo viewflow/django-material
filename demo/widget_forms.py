@@ -108,7 +108,7 @@ class DurationFieldForm(forms.Form):
     description = "DurationField options"
 
     field1 = forms.DurationField(help_text='default')
-    field2 = forms.DecimalField(help_text='initial value', initial=timedelta(minutes=1, seconds=12))
+    field2 = forms.DurationField(help_text='initial value', initial=timedelta(minutes=1, seconds=12))
     field3 = forms.DurationField(help_text='prefix')
 
     template = Template("""
