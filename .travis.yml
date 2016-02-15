@@ -1,16 +1,13 @@
 language: python
-sudo: true
-dist: trusty
-env:
-  - $TOX_ENV=django18_py27
-  - $TOX_ENV=django18_py34
-  - $TOX_ENV=django19_py34
+sudo: false
 
-# before_install:
-#  - sudo apt-get install -qq perceptualdiff
+python:
+  - 2.7
+  - 3.4
+  - 3.5
 
 install:
-  - pip install tox
+    - pip install tox
 
 script:
-  - tox -e $TOX_ENV -- python manage.py test
+    - tox --skip-missing-interpreters
