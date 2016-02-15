@@ -1,5 +1,7 @@
 import os
 import sys
+import django
+
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 # Quick-start development settings - unsuitable for production
@@ -95,7 +97,7 @@ TEMPLATES = [
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': os.path.join(BASE_DIR, 'db{}{}.sqlite3'.format(*django.VERSION[:2])),
     }
 }
 
@@ -125,10 +127,19 @@ STATICFILES_DIRS = (
 SESSION_ENGINE = "django.contrib.sessions.backends.signed_cookies"
 
 # shortcut for in form templates
-from django.template.base import add_to_builtins
-add_to_builtins('material.templatetags.material_form')
-add_to_builtins('template_debug.templatetags.debug_tags')
-
+try:
+    # shortcut for in form templates
+    from django.template.base import add_to_builtins
+    add_to_builtins('material.templatetags.material_form')
+    add_to_builtins('template_debug.templatetags.debug_tags')
+except ImportError:
+    """
+    Django 1.9.
+    """
+    TEMPLATES[0]['OPTIONS']['builtins'] = [
+        'material.templatetags.material_form',
+        'template_debug.templatetags.debug_tags'
+    ]
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'deploy', 'static')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'deploy', 'media')
