@@ -7,7 +7,7 @@ python:
   - 3.5
 
 install:
-    - pip install tox
+  - pip install tox
 
 script:
-    - tox --skip-missing-interpreters
+  - tox --skip-missing-interpreters
