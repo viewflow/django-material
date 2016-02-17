@@ -8,8 +8,21 @@ from django.core.files import File
 from django.forms.extras.widgets import SelectDateWidget
 from django.template import Template
 from django.utils import timezone
+from django.utils.encoding import python_2_unicode_compatible
 
 from . import demo as forms
+
+
+@python_2_unicode_compatible
+class FakeFieldFile(object):
+    """
+    Quacks like a FieldFile (has a .url and unicode representation), but
+    doesn't require us to care about storages etc.
+    """
+    url = 'something.py'
+
+    def __str__(self):
+        return self.url
 
 
 # Core django fields
@@ -137,7 +150,8 @@ class FileFieldForm(forms.Form):
     description = "FileField options"
 
     field1 = forms.FileField(help_text='default')
-    field2 = forms.FileField(help_text='initial value', initial=File(open(__file__), 'sample.py'))
+    field2 = forms.FileField(help_text='initial value', initial=FakeFieldFile())
+    field3 = forms.FileField(help_text='optional', required=False, initial=FakeFieldFile())
 
 
 class FilePathFieldForm(forms.Form):
@@ -455,7 +469,7 @@ class FileInputForm(forms.Form):
     field1 = forms.FileField(
         help_text='default', widget=forms.FileInput)
     field2 = forms.FileField(
-        help_text='initial value', widget=forms.FileInput, initial=File(open(__file__), 'sample.py'))
+        help_text='initial value', widget=forms.FileInput, initial=FakeFieldFile())
 
 
 class SplitHiddenDateTimeWidgetForm(forms.Form):

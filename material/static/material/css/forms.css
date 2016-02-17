@@ -93,8 +93,13 @@ select.material-ignore {
     left: auto;
 }
 
-.file-field label {
-    margin-left: 100px;
+.file-field-clear {
+    float:right;
+}
+
+.file-field-clear label {
+    margin-right:25px;
+    width: auto;
 }
 
 .help-block {

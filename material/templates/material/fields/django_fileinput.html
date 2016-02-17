@@ -11,13 +11,16 @@
             {% part field prefix %}<span>{% trans 'File' %}</span>{% endpart %}
             <input type="file" name="{{ bound_field.html_name }}"/>
         </div>
+        {% part field suffix %}{% endpart %}
         {% part field control %}<div class="file-path-wrapper">
             <input {% tagattrs %}
                    type="text"
                    class="file-path {% part field add_control_class %}{{ form_control_class }}{% endpart %}"
                    {% for name, value in field.widget.attrs.items %}{% if name != 'class' %}{{name}}="{{value}}" {% endif %}{% endfor %}
-                   id="id_{{ bound_field.html_name }}"{% endtagattrs %}
-                   {% part field label %}placeholder="{{ bound_field.label }}"{% endpart %}>
+                   id="id_{{ bound_field.html_name }}"
+                   {% part field label %}placeholder="{{ bound_field.label }}"{% endpart %}
+                   {% if bound_field.value|is_initial_file %}value="{{ bound_field.value }}"{% endif %}
+                   {% endtagattrs %}>
         </div>{% endpart %}
         {% part field help_text %}
         {% if field.help_text %}

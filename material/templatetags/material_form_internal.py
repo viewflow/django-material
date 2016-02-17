@@ -166,3 +166,8 @@ def select_date_widget_wrapper(bound_field):
                 yield data
 
     return Wrapper(bound_field)
+
+
+@register.filter
+def is_initial_file(value):
+    return bool(value and getattr(value, 'url', False))
