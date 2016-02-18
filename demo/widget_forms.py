@@ -56,17 +56,23 @@ class ChoiceFieldForm(forms.Form):
         (1, 'Apple'),
         (2, 'Orange'),
         (3, 'Watermeloun'))
+    GROUPED_CHOICES = (
+        (None, [(7, 'Mikhail')]),
+        ('Team 1', [(1, 'Joe'), (2, 'Bob'), (3, 'Marie')]),
+        ('Team 2', [(4, 'Anatoliy'), (5, 'Svetlana'), (6, 'Olga')]),
+    )
     LONG_CHOICES = ((n, n) for n in range(100))
 
     field1 = forms.ChoiceField(help_text='default', choices=CHOICES)
     field2 = forms.ChoiceField(help_text='initial value', choices=CHOICES, initial=2)
-    field3 = forms.ChoiceField(help_text='long choices list', choices=LONG_CHOICES)
-    field4 = forms.TypedChoiceField(help_text='cource to int', coerce=int, choices=CHOICES)
-    field5 = forms.ChoiceField(help_text='prefix', choices=CHOICES)
+    field3 = forms.ChoiceField(help_text='groups', choices=GROUPED_CHOICES)
+    field4 = forms.ChoiceField(help_text='long choices list', choices=LONG_CHOICES)
+    field5 = forms.TypedChoiceField(help_text='cource to int', coerce=int, choices=CHOICES)
+    field6 = forms.ChoiceField(help_text='prefix', choices=CHOICES)
 
     template = Template("""
     {% form %}
-        {% part form.field5 prefix %}<i class="mdi-editor-insert-invitation prefix"></i>{% endpart %}
+        {% part form.field6 prefix %}<i class="mdi-editor-insert-invitation prefix"></i>{% endpart %}
     {% endform %}
     """)
 

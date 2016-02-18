@@ -7,10 +7,11 @@
         {% if not field|have_default_choice %}
              <option value="" disabled selected>Choose your option</option>
         {% endif %}
-        {% for value, choice in field.widget.choices %}
-        <option {% if value|force_text in bound_field.value %}selected="selected"{% endif %}
-                {% if value == None or value == '' %}style="display:none"{% endif %}
-                value="{{ value|default_if_none:"" }}" >{% if value == None or value == '' %}{{ form_select_empty_label|default:choice }}{% else %}{{ choice }}{% endif %} </option>
-        {% endfor %}
+        {% for group, items in bound_field|select_options %}
+            {% if group %}<optgroup label="{{ group }}">{% endif %}{% for choice, value, selected in items %}<option {% tagattrs %}
+                {% if selected %}selected="selected"{% endif %}
+                {% if value == None or value == '' %}disabled{% else %}value="{{ value }}"{% endif %}
+                {% endtagattrs %}>{% if value == None or value == '' %}{{ form_select_empty_label|default:choice }}{% else %}{{ choice }}{% endif %}</option>
+        {% endfor %}{% if group %}</optgroup>{% endif %}{% endfor %}
     {% endpart %}
 {% endrender %}

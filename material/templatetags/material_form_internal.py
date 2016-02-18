@@ -2,6 +2,7 @@ from __future__ import division
 
 import math
 import re
+from collections import OrderedDict
 
 from django.forms.forms import BoundField
 from django.template import Library
@@ -180,3 +181,36 @@ def is_null_boolean_selected(bound_field, value):
     except KeyError:
         current_value = '1'
     return value == current_value
+
+
+@register.filter
+def select_options(bound_field):
+    """
+    Returns list of (group_name, option_label, option_value, selected).
+
+    If group_name is None - option is not belongs to group
+    """
+    selected = bound_field.value()
+    if not isinstance(selected, (list, tuple)):
+        selected = [selected]
+    selected = set(force_text(v) for v in selected)
+
+    groups = OrderedDict()
+    for option_value, option_label in bound_field.field.widget.choices:
+        if isinstance(option_label, (list, tuple)):
+            if option_value not in groups:
+                groups[option_value] = []
+            for value, label in option_label:
+                if value is None:
+                    value = ''
+                value = force_text(value)
+                groups[option_value].append((label, value, value in selected))
+        else:
+            if None not in groups:
+                groups[None] = []
+            if option_value is None:
+                option_value = ''
+            value = force_text(option_value)
+            groups[None].append((option_label, option_value, value in selected))
+
+    return groups.items()
