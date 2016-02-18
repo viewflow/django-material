@@ -1,0 +1,8 @@
+{% load material_form material_form_internal i18n %}
+
+{% render bound_field template='fields/django_select.html' %}
+    {% part field options %}{% for value, choice in field.widget.choices %}
+    <option {% tagattrs %}{% if bound_field|is_null_boolean_selected:value %}selected="selected"{% endif %}
+                    {% if value == None or value == '' %}value{% else %}value="{{ value }}"{% endif %}
+                    {% endtagattrs %}>{% if value == None or value == '' %}{{ form_select_empty_label|default:choice }}{% else %}{{ choice }}{% endif %}</option>{% endfor %}{% endpart %}
+{% endrender %}

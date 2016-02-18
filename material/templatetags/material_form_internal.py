@@ -171,3 +171,12 @@ def select_date_widget_wrapper(bound_field):
 @register.filter
 def is_initial_file(value):
     return bool(value and getattr(value, 'url', False))
+
+
+@register.filter
+def is_null_boolean_selected(bound_field, value):
+    try:
+        current_value = {True: '2', False: '3', '2': '2', '3': '3'}[bound_field.value()]
+    except KeyError:
+        current_value = '1'
+    return value == current_value
