@@ -20,15 +20,14 @@
            for="{{ bound_field.id_for_label }}"
            class="{% part field add_label_class %}{{ form_label_class }}{% endpart %}"
            {% endtagattrs %}>{{ bound_field.label }}</label>
-    {% endpart %}
-    {% part field errors %}
+    {% endpart %}{% part field help_text %}
+    {% if field.help_text %}
+        <small class="help-block">{{ bound_field.help_text }}</small>
+    {% endif %}
+    {% endpart %}{% part field errors %}
         {% if bound_field.errors %}
             {% include  'material/field_errors.html' %}
         {% endif %}
-    {% endpart %}{% part field help_text %}
-    {% if not field.help_text %}
-        <small class="help-block">{{ bound_field.help_text }}</small>
-    {% endif %}
     {% endpart %}{{ hidden_initial }}
 </div>
 </div>{% endpart %}

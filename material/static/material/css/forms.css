@@ -39,6 +39,10 @@ input[type=number] {
   width: calc(100% - 21px - 3rem);
 }
 
+textarea.materialize-textarea {
+    padding-top: 0.6rem;
+}
+
 .checkbox-field {
     line-height: 35px;
 }
