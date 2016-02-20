@@ -3,7 +3,7 @@ import os.path
 from datetime import timedelta
 from decimal import Decimal
 
-from django.contrib.auth.models import Permission, User
+from django.contrib.auth.models import Permission
 from django.core.files import File
 from django.forms.extras.widgets import SelectDateWidget
 from django.template import Template
@@ -471,6 +471,17 @@ class CheckboxSelectMultipleForm(forms.Form):
         help_text='initial value', choices=CHOICES, widget=forms.CheckboxSelectMultiple, initial=[2, 3])
     field3 = forms.TypedMultipleChoiceField(
         help_text='cource to int', choices=CHOICES, widget=forms.CheckboxSelectMultiple, coerce=int)
+    field4 = forms.ModelMultipleChoiceField(
+        help_text='model multichoice with to_field_name=codename, 2 columns',
+        widget=forms.CheckboxSelectMultiple,
+        queryset=Permission.objects.filter(content_type__app_label__in=['auth', 'frontend']),
+        to_field_name='codename')
+
+    template = Template("""
+    {% form %}
+        {% part form.field4 columns %}2{% endpart %}
+    {% endform %}
+    """)
 
 
 class FileInputForm(forms.Form):

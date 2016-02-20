@@ -13,9 +13,9 @@
                 {% endpart %}"{% endtagattrs %}>
         {% part field prefix %}{% endpart %}{% part field control %}
         <div class="row">
-            {% for col_span, choices in field.choices|split_choices_by_columns:columns %}
+            {% for group, items in bound_field|select_options %}{% for col_span, choices in items|split_choices_by_columns:columns %}
             <div class="col l{{ col_span }}">
-                {% for value, position, choice in choices %}
+                {% for choice, value, selected, position in choices %}
                 <div class="checkbox" id="id_{{ bound_field.html_name }}">
                     <input {% tagattrs %}
                            id="id_{{ bound_field.html_name }}_{{ position }}"
@@ -24,12 +24,12 @@
                            type="checkbox"
                            {% for name, value in field.widget.attrs.items %}{% if name != 'class' %}{{name}}="{{value}}" {% endif %}{% endfor %}
                            value="{{ value }}"
-                           {% if value in bound_field.value %}checked{% endif %}{% endtagattrs %}/>
+                           {% if selected %}checked{% endif %}{% endtagattrs %}/>
                     <label for="id_{{ bound_field.html_name }}_{{ position }}">{{ choice }}</label>
                 </div>
                 {% endfor %}
             </div>
-        {% endfor %}
+        {% endfor %}{% endfor %}
         </div>
         {% endpart %}{% part field help_text %}{% if field.help_text %}
         <small class="help-block">{{ bound_field.help_text }}</small>

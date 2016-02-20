@@ -139,7 +139,7 @@ def split_choices_by_columns(choices, columns):
     columns = int(columns)
     col_span = 12 // columns
     per_column = int(math.ceil(len(choices)/columns))
-    choices = [(choice[0], i, choice[1]) for i, choice in enumerate(choices)]
+    choices = [tuple(choice) + (i,) for i, choice in enumerate(choices)]
     return [(col_span, choices[i:i + per_column]) for i in range(0, len(choices), per_column)]
 
 
