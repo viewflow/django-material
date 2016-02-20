@@ -1,8 +1,7 @@
 {% load material_form material_form_internal %}
 {% part bound_field.field %}<div class="row radio-field">
     <div class="col s12">
-    {% part field prefix %}{% endpart %}
-    {% part field label %}<label for="{{ bound_field.id_for_label }}" class="{% part field add_label_class %}{{ form_label_class }}{% endpart %}">{{ bound_field.label }}</label>{% endpart %}
+        {% part field prefix %}{% endpart %}{% part field label %}<label for="{{ bound_field.id_for_label }}" class="{% part field add_label_class %}{{ form_label_class }}{% endpart %}">{{ bound_field.label }}</label>{% endpart %}
     </div>
     <div {% tagattrs %}
          id="id_{{ bound_field.html_name }}_container"
@@ -12,8 +11,7 @@
                 {% part field add_group_class %}{% endpart %}
                 {% endpart %}"{% endtagattrs %}>
         {% part field control %}
-        {% for value, choice in field.choices %}
-        <div class="radio" id="id_{{ bound_field.html_name }}">
+        {% for group, items in bound_field|select_options %}{% for choice, value, selected in items %}<div class="radio" id="id_{{ bound_field.html_name }}">
             <input {% tagattrs %}
                    id="id_{{ bound_field.html_name }}_{{ forloop.counter0 }}"
                    class="{% if field.widget.attrs.class %}{{ field.widget.attrs.class }} {% endif %}{% if bound_field.errors %}invalid {% endif %}{% part field add_control_class %}{{ form_control_class|default:'with-gap' }}{% endpart %}"
@@ -21,11 +19,10 @@
                    type="radio"
                    {% for name, value in field.widget.attrs.items %}{% if name != 'class' %}{{name}}="{{value}}" {% endif %}{% endfor %}
                    value="{{ value }}"
-                   {% if value == bound_field.value %}checked{% endif %}{% endtagattrs %}/>
+                   {% if selected %}checked{% endif %}{% endtagattrs %}/>
             <label for="id_{{ bound_field.html_name }}_{{ forloop.counter0 }}" class="item-label">{{ choice }}</label>
         </div>
-        {% endfor %}
-        {% endpart %}{% part field help_text %}{% if field.help_text %}
+        {% endfor %}{% endfor %}{% endpart %}{% part field help_text %}{% if field.help_text %}
         <small class="help-block">{{ bound_field.help_text }}</small>
         {% endif %}{% part field errors %}
         {% if bound_field.errors %}

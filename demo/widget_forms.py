@@ -3,7 +3,7 @@ import os.path
 from datetime import timedelta
 from decimal import Decimal
 
-from django.contrib.auth.models import Permission
+from django.contrib.auth.models import Permission, User
 from django.core.files import File
 from django.forms.extras.widgets import SelectDateWidget
 from django.template import Template
@@ -450,6 +450,10 @@ class RadioSelectForm(forms.Form):
         help_text='initial value', choices=CHOICES, widget=forms.RadioSelect, initial=2)
     field3 = forms.TypedChoiceField(
         help_text='cource to int', choices=CHOICES, widget=forms.RadioSelect, coerce=int)
+    field4 = forms.ModelChoiceField(
+        help_text='model choice radioselect with to_field_name=codename',  widget=forms.RadioSelect,
+        queryset=Permission.objects.filter(content_type__app_label='frontend'),
+        to_field_name='codename', empty_label=None)
 
 
 class CheckboxSelectMultipleForm(forms.Form):
