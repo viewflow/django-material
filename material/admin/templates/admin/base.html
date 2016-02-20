@@ -55,26 +55,25 @@
 
                 <ul id="nav-mobile" class="side-nav fixed module-menu">
                     <li class="logo valign-wrapper">
-                        <a href="/" class="no-navigation">{% block page_logo %}<img class="responsive-img" src="{% static 'material/imgs/logo.png' %}">{% endblock %}</a>
+                        <a href="{% url 'admin:index' %}" class="no-navigation">
+                            {% block branding %}{% endblock %}
+                        </a>
                     </li>
 
                     {% block breadcrumbs_left %}
                     {% block back_link %}<li class="no-padding"><a class="collapsible-header no-pjax" href="/"><i class="mdi-navigation-arrow-back"></i>{% trans 'Back to website' %}</a></li>{% endblock %}
                     <li class="no-padding active">
-                        <a class="collapsible-header active no-pjax" href="/admin/"><i class="mdi-action-settings-applications"></i>{% trans 'Administration' %}</a>
                         <div class="collapsible-body" style="display:block">
                             <ul class="collapsible" data-collapsible="accordion">
                                 {% get_app_list request as app_list %}
                                 {% for app in app_list %}
                                 <li class="header{% if app.active %} active{% endif %}">
-                                    <a class="collapsible-header{% if app.active %} active{% endif %}">{{ app.name|truncatechars:23 }}</a>
+                                    <a class="collapsible-header{% if app.active %} active{% endif %}"><i class="mdi-action-settings-applications"></i> {{ app.name|truncatechars:23 }}</a>
                                     <div class="collapsible-body" {% if app.active %}style="display:block"{% endif %}>
                                         <ul>
                                             {% for model in app.models %}
                                             <li class="{% if model.active %}active{% endif %}">
-                                                <a href="{{ model.admin_url }}">
-                                                    <i class="fa adm-app-default adm-{{ app.app_label }}-{{ model.object_name|lower }}"></i> {{ model.name }}
-                                                </a>
+                                                <a href="{{ model.admin_url }}">{{ model.name }}</a>
                                             </li>
                                             {% endfor %}
                                         </ul>
