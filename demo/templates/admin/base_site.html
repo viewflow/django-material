@@ -1,7 +1,7 @@
 {% extends "admin/base.html" %}
 
 {% block title %}{{ title }} | {{ site_title|default:_('Django site admin') }}{% endblock %}
-{% block branding %}{{ site_header|default:_('Django administration') }}{% endblock %}
+{% block branding %}<i class="mdi-action-settings-applications" style="font-size:80px"></i>{% endblock %}
 {% block nav-global %}{% endblock %}
 
 {% block extrajs %}

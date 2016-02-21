@@ -20,6 +20,7 @@ nav img[class*="mdi-"] {
 
 .side-nav.fixed .logo {
     height: 150px;
+    background-color: #388E3C;
 }
 
 .side-nav.fixed .logo a {
