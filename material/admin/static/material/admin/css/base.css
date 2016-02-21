@@ -372,9 +372,9 @@ ul.side-nav.module-menu li.active>a>span.badge {
 }
 
 .change-form .form-title {
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: 200;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
     margin-top: 0px;
 }
 
@@ -404,6 +404,7 @@ ul.side-nav.module-menu li.active>a>span.badge {
 
 .change-form .section h5,
 .change-form .formset-field h5 {
+    font-size: 1.2rem;
     border-bottom: 2px solid #555;
     padding-bottom: 0.5rem;
 }

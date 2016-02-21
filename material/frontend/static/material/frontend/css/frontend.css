@@ -6,6 +6,14 @@ body {
     background: #eee;
 }
 
+nav ul a:hover {
+  background-color: rgba(0, 0, 0, 0);
+}
+
+nav img[class*="mdi-"] {
+    height: 35px;
+}
+
 .page-title {
     display:inline
 }
@@ -43,26 +51,25 @@ body {
   padding: 0 !important;
 }
 
-ul.side-nav.fixed.module-menu {
-    overflow: hidden;
-}
-
 ul.side-nav.fixed.module-menu li a {
   font-size: 13px;
   line-height: 44px;
   height: 44px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 ul.side-nav.module-menu .collapsible-body li.active, .side-nav.fixed .collapsible-body li.active {
     background: #4CAF50;
 }
 
-ul.side-nav.module-menu .collapsible-body li a {
-  margin: 0 1rem 0 2rem;
+ul.side-nav.module-menu li a {
+    margin-left: 0;
 }
 
 ul.side-nav.module-menu .collapsible-body li .collapsible-body a {
-    margin-left: 60px;
+    margin-left: 45px;
 }
 
 ul.side-nav.module-menu li.active>a>span.badge {
@@ -70,11 +77,12 @@ ul.side-nav.module-menu li.active>a>span.badge {
 }
 
 .side-nav.fixed .collapsible-body li.active.header {
-    background-color: #ddd;
+    background-color: #388E3C;
+    border-bottom: 1px solid #eee;
 }
 
 .side-nav.fixed .collapsible-body li.active.header>a {
-    color: #444;
+    color: #fff;
 }
 
 .side-nav.fixed .collapsible-body li.active a {
@@ -95,8 +103,8 @@ ul.side-nav.module-menu li.active>a>span.badge {
 
 .breadcrumbs a {
     color: white;
-    padding-left: 40px;
-    padding-right: 40px;
+    padding-left: 20px;
+    padding-right: 20px;
     text-transform: uppercase;
 }
 

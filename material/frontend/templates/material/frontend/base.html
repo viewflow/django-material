@@ -57,21 +57,23 @@
                 </div>
 
                 <ul id="nav-mobile" class="side-nav fixed module-menu">
-                    <li class="logo valign-wrapper">
+                    <li class="logo valign-wrapper" style="background:url({% static 'material/imgs/background.png' %})">
                         <a href="/" class="no-navigation">{% block page_logo %}<img class="responsive-img" src="{% static 'material/imgs/logo.png' %}">{% endblock %}</a>
                     </li>
 
                     {% for module in modules %}
                     {% if current_module == module and module.menu %}
                     <li class="no-padding">
-                        <ul class="collapsible" data-collapsible="expandable">
-                            <li class="active">
-                                <a class="collapsible-header no-pjax"><i class="{{ module.icon }}"></i> {{ module.label|default:"" }}</a>
-                                <div class="collapsible-body" style="display: block;">
-                                    {% include module.menu %}
-                                </div>
-                            </li>
-                        </ul>
+                        <div class="collapsible-body" style="display:block">
+                            <ul class="collapsible" data-collapsible="expandable">
+                                <li class="header active">
+                                    <a class="collapsible-header no-pjax"><i class="{{ module.icon }}"></i> {{ module.label|default:"" }}</a>
+                                    <div class="collapsible-body" style="display: block;">
+                                        {% include module.menu %}
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
                     </li>
                     {% else %}
                     <li class="no-padding">
