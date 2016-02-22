@@ -58,12 +58,14 @@
         {% endfor %}
         {% endwith %}
         
+        <div class="col s12">
         {% part field help_text %}{% if field.help_text %}
-        <span class="help-block">{{ bound_field.help_text }}</span>
+        <small class="help-block">{{ bound_field.help_text }}</small>
         {% endif %}{% endpart %}{% part field errors %}
         {% if bound_field.errors %}
         {% include  'material/field_errors.html' %}
         {% endif %}{% endpart %}{{ hidden_initial }}
         {% endpart %}
+        </div>
     </div>
 </div>

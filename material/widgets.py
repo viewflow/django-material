@@ -32,7 +32,7 @@ class SelectDateWidget(Widget):
             if isinstance(value, six.string_types):
                 if settings.USE_L10N:
                     try:
-                        input_format = format.get_format('DATE_INPUT_FORMATS')[0]
+                        input_format = formats.get_format('DATE_INPUT_FORMATS')[0]
                         v = datetime.datetime.strptime(force_str(value), input_format)
                         year_val, month_val, day_val = v.year, v.month, v.day
                     except ValueError:
