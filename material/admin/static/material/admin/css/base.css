@@ -282,7 +282,7 @@ ul.side-nav.module-menu li.active>a>span.badge {
     background-color: #fff;
     border: none;
     box-shadow: none;
-    content: "\e89b";
+    content: "\e7c3";
     font-family: "Material-Design-Icons";
     speak: none;
     font-style: normal;
@@ -297,7 +297,7 @@ ul.side-nav.module-menu li.active>a>span.badge {
 .results table.dataTable.dtr-inline.collapsed tbody tr.parent th:first-child:before {
     color: orange;
     background-color: #fff;
-    content: "\e89e";
+    content: "\e7c1";
 }
 
 .results table.collapsed td,

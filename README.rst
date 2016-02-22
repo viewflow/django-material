@@ -58,7 +58,7 @@ Include material javascript and styles along with jQuery into your base template
 .. code-block:: html
 
     {% include 'material/includes/material_css.html' %}
-    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="{% static 'material/js/jquery-2.2.0.js' %}"></script>
     {% include 'material/includes/material_js.html' %}
 
 Load the `material_form` template tag library
