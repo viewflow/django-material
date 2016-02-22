@@ -297,7 +297,7 @@ class TimeFieldForm(forms.Form):
 
     field1 = forms.TimeField(help_text='default')
     field2 = forms.TimeField(help_text='initial value', initial=timezone.now)
-    field3 = forms.TimeField(help_text='custom input format', input_formats=['%H:%M:%S'])
+    field3 = forms.TimeField(help_text='custom input format', input_formats=['%H:%M'])
     field4 = forms.TimeField(help_text='prefix')
 
     template = Template("""

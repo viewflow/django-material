@@ -16,7 +16,7 @@
                id="id_{{ bound_field.html_name }}"
                data-date-format="{{ field|jquery_datepicker_format }}"
                autocomplete="false"
-               data-form-control="time"{% endtagattrs %}{% if bound_field.value %} value="{{ bound_field.value|datepicker_value:field.input_formats.2 }}"{% endif %}>
+               data-form-control="time"{% endtagattrs %}{% if bound_field.value %} value="{{ bound_field.value|datepicker_value:field.input_formats.0 }}"{% endif %}>
         {% endpart %}{% part field label %}
         <label {% tagattrs %}
                for="{{ bound_field.id_for_label }}"

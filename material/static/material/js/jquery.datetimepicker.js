@@ -1348,6 +1348,7 @@
 					}
 					currentTime.setHours($this.data('hour'));
 					currentTime.setMinutes($this.data('minute'));
+					currentTime.setSeconds(0);
 					datetimepicker.trigger('select.xdsoft', [currentTime]);
 
 					datetimepicker.data('input').val(_xdsoft_datetime.str());
