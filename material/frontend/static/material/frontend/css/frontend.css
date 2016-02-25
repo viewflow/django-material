@@ -14,6 +14,11 @@ nav img[class*="mdi-"] {
     height: 35px;
 }
 
+nav ul a span.badge {
+    position: absolute;
+    line-height: 44px;
+}
+
 .page-title {
     display:inline
 }
@@ -73,6 +78,10 @@ ul.side-nav.module-menu .collapsible-body li .collapsible-body a {
     margin-left: 45px;
 }
 
+ul.side-nav.module-menu .collapsible-body .collapsible-body .collapsible-body a {
+    margin-left: 70px;
+}
+
 ul.side-nav.module-menu li.active>a>span.badge {
     color: #fff;
 }
@@ -82,9 +91,14 @@ ul.side-nav.module-menu li.active>a>span.badge {
     border-bottom: 1px solid #eee;
 }
 
-.side-nav.fixed .collapsible-body li.active.header>a {
-    color: #fff;
+.side-nav.fixed .collapsible-body .collapsible-body li.active.header {
+    background-color: #DDD;
 }
+
+.side-nav.fixed .collapsible-body .collapsible-body .collapsible-body li.active {
+    background-color: #4CAF50;
+}
+
 
 .side-nav.fixed .collapsible-body li.active a {
     color: #444;
@@ -92,6 +106,10 @@ ul.side-nav.module-menu li.active>a>span.badge {
 
 .side-nav.fixed .collapsible-body li.active>a {
     color: #fff;
+}
+
+.side-nav.fixed .collapsible-body .collapsible-body li.header.active>a {
+    color: #333;
 }
 
 /*

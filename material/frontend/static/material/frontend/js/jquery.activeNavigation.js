@@ -31,8 +31,8 @@
             hrefs[0].closest('li').addClass("active");
             hrefs[0].closest('div').closest('li').addClass('active');
             hrefs[0].parents('li').addClass('active');
-            hrefs[0].closest('li.header').find('.collapsible-header').addClass("active");
-            hrefs[0].closest('li.header').find('.collapsible-body').css("display", "block");
+            hrefs[0].closest('li.header').find('.collapsible-header:first').addClass("active");
+            hrefs[0].closest('li.header').find('.collapsible-body:first').css("display", "block");
         }
     };
 })(jQuery);
