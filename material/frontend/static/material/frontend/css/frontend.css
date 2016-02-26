@@ -19,6 +19,10 @@ nav ul a span.badge {
     line-height: 44px;
 }
 
+th {
+    font-weight: 300;
+}
+
 .page-title {
     display:inline
 }

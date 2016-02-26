@@ -5,6 +5,10 @@ body {
     background: #eee;
 }
 
+th {
+    font-weight: 300;
+}
+
 .page-title {
     display:inline
 }
