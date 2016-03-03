@@ -118,6 +118,34 @@ urlpatterns = [
     # admin widgets test
     url(r'^demo/widget/admin/filteredselectmultiple/$', AdminFormView.as_view(
         form_class=admin_forms.FilteredSelectMultipleForm)),
+    url(r'^demo/widget/admin/admindatewidget/$', AdminFormView.as_view(
+        form_class=admin_forms.AdminDateWidgetForm)),
+    url(r'^demo/widget/admin/admintimewidget/$', AdminFormView.as_view(
+        form_class=admin_forms.AdminTimeWidgetForm)),
+    url(r'^demo/widget/admin/adminsplitdatetime/$', AdminFormView.as_view(
+        form_class=admin_forms.AdminSplitDateTimeForm)),
+    url(r'^demo/widget/admin/adminradioselect/$', AdminFormView.as_view(
+        form_class=admin_forms.AdminRadioSelectForm)),
+    url(r'^demo/widget/admin/adminfilewidget/$', AdminFormView.as_view(
+        form_class=admin_forms.AdminFileWidgetForm)),
+    url(r'^demo/widget/admin/foreignkeyrawidwidget/$', AdminFormView.as_view(
+        form_class=admin_forms.ForeignKeyRawIdWidgetForm)),
+    url(r'^demo/widget/admin/manytomanyrawidwidget/$', AdminFormView.as_view(
+        form_class=admin_forms.ManyToManyRawIdWidgetForm)),
+    url(r'^demo/widget/admin/relatedfieldwidgetwrapper/$', AdminFormView.as_view(
+        form_class=admin_forms.RelatedFieldWidgetWrapperForm)),
+    url(r'^demo/widget/admin/admintextareawidget/$', AdminFormView.as_view(
+        form_class=admin_forms.AdminTextareaWidgetForm)),
+    url(r'^demo/widget/admin/admintextinputwidget/$', AdminFormView.as_view(
+        form_class=admin_forms.AdminTextInputWidgetForm)),
+    url(r'^demo/widget/admin/adminemailfield/$', AdminFormView.as_view(
+        form_class=admin_forms.AdminEmailFieldForm)),
+    url(r'^demo/widget/admin/adminurlfieldwidget/$', AdminFormView.as_view(
+        form_class=admin_forms.AdminURLFieldWidgetForm)),
+    url(r'^demo/widget/admin/adminintegerfieldwidget/$', AdminFormView.as_view(
+        form_class=admin_forms.AdminIntegerFieldWidgetForm)),
+    url(r'^demo/widget/admin/adminbigintegerfieldwidget/$', AdminFormView.as_view(
+        form_class=admin_forms.AdminBigIntegerFieldWidgetForm)),
 
     # admin
     url(r'^admin/', include(admin.site.urls)),
