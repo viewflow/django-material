@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Material Design for Django Forms and Admin</title>
 
+    {% block head %}
     {% include 'material/includes/material_css.html' %}
 
     <style type="text/css">
@@ -15,15 +16,17 @@
       }
     </style>
     {% block extrahead %}{% endblock %}
+    {% endblock %}
   </head>
   <body class="valign-wrapper2">
       {% block sidebar %}{% endblock %}
       <div class="{% block container_class %}container expand-on-small-only{% endblock %}">
           {% block content %}{% endblock %}
       </div>
-
+      {% block js %}
       <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
       {% include 'material/includes/material_js.html' %}
       {% block extrajs %}{% endblock %}
+      {% endblock %}
   </body>
 </html>

@@ -437,8 +437,6 @@ class TextareaForm(forms.Form):
 
 class RadioSelectForm(forms.Form):
     description = "RadioSelect options"
-
-    description = "ChoiceField options"
     CHOICES = (
         (1, 'Apple'),
         (2, 'Orange'),
@@ -458,8 +456,6 @@ class RadioSelectForm(forms.Form):
 
 class CheckboxSelectMultipleForm(forms.Form):
     description = "CheckboxSelectMultiple options"
-
-    description = "MultipleChoiceField options"
     CHOICES = (
         (1, 'Apple'),
         (2, 'Orange'),

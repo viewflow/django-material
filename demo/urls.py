@@ -1,12 +1,14 @@
 from django.conf import settings
 from django.conf.urls import include, url
 from django.contrib import admin
-from django.views import generic
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
+from django.views import generic
+
 from formtools.wizard.views import SessionWizardView
 from material.frontend import urls as frontend_urls
 
-from . import forms, widget_forms
+from . import forms, widget_forms, admin_forms
 
 
 def index_view(request):
@@ -39,6 +41,18 @@ class WidgetFormView(generic.FormView):
             self.get_context_data(form=form))
 
 
+class AdminFormView(generic.FormView):
+    template_name = 'admin_demo.html'
+
+    @classmethod
+    def as_view(cls, *args, **kwargs):
+        return login_required(super(AdminFormView, cls).as_view(*args, **kwargs))
+
+    def form_valid(self, form):
+        return self.render_to_response(
+            self.get_context_data(form=form))
+
+
 urlpatterns = [
     url(r'^$', index_view),
 
@@ -62,7 +76,7 @@ urlpatterns = [
         form_class=forms.HospitalRegistrationForm, success_url='/demo/hospital/', template_name="demo.html")),
     url(r'^foundation/basic/', generic.RedirectView.as_view(url='/?cache=no', permanent=False)),
 
-    # widget test
+    # core widgets test
     url(r'^demo/widget/$', generic.RedirectView.as_view(url='/demo/widget/boolean/', permanent=False)),
     url(r'^demo/widget/boolean/$', WidgetFormView.as_view(form_class=widget_forms.BooleanFieldForm)),
     url(r'^demo/widget/char/$', WidgetFormView.as_view(form_class=widget_forms.CharFieldForm)),
@@ -100,6 +114,10 @@ urlpatterns = [
     url(r'^demo/widget/splithiddendatetime/$', WidgetFormView.as_view(
         form_class=widget_forms.SplitHiddenDateTimeWidgetForm)),
     url(r'^demo/widget/selectdate/$', WidgetFormView.as_view(form_class=widget_forms.SelectDateWidgetForm)),
+
+    # admin widgets test
+    url(r'^demo/widget/admin/filteredselectmultiple/$', AdminFormView.as_view(
+        form_class=admin_forms.FilteredSelectMultipleForm)),
 
     # admin
     url(r'^admin/', include(admin.site.urls)),

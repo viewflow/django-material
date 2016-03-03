@@ -1,0 +1,86 @@
+{% extends 'base_form.html' %}
+{% load static material_form %}
+
+{% block formtitle %}{{ view.form_class.description|default:"Widgets demo" }}{% endblock %}
+
+{% block head %}
+{% include 'admin/includes/material_css.html' %}
+<script src="{% static 'material/js/jquery-2.2.0.js' %}"></script>
+<script>
+    // Use same django for material and django admin
+    var django = django || {};
+    django.jQuery = jQuery.noConflict(true);
+    window.jQuery = window.$ = django.jQuery
+</script>
+<script type="text/javascript" src="{% url 'admin:jsi18n' %}"></script>
+{{ form.media }}
+{% endblock %}
+
+
+{% block js %}
+{% include 'admin/includes/material_js.html' %}
+<script type="text/javascript">
+  $('.modal-trigger').leanModal({dismissible: true, opacity: 0.2});
+</script>
+{% endblock %}
+
+
+{% block formbody %}
+{% if form.template %}
+    {% include form.template %}
+{% else %}
+    {% form %}{% endform %}
+{% endif %}
+{% endblock %}
+
+{% block result %}
+{% if form.cleaned_data %}
+<div class="row valign">
+    <div class="col s12 m8 offset-m2 l8 offset-l2">
+        <div class="card">
+            <div class="card-content">
+                <span class="card-title grey-text text-darken-2">Cleaned Data</span>
+                <pre>{{ form.cleaned_data }}</pre>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block actions %}
+<div class="left">
+    <a href="#form_source" class="modal-trigger align-right blue-text">Source</a>
+</div>
+<div class="right-align">
+    <button class="btn btn-primary" type="submit">Submit</button>
+</div>
+<div id="form_source" class="modal">
+    <div class="modal-content">
+        <div class="section">
+            <h5>Code</h5>
+            <pre><code class="python">{{ form.source.rstrip|linebreaksbr }}</code></pre>
+        </div>
+        <div class="divider"></div>
+        <div class="section">
+            <h5>Html</h5>
+            <pre><code class="django">&lt;form method="POST" class="viewform"&gt;{% verbatim %}{% csrf_token %}{% endverbatim %}{% if form.template %}{{ form.template.origin.source.rstrip|linebreaksbr }}{% else %}{% templatetag openblock %} form {% templatetag closeblock %}{% templatetag openblock %} endform {% templatetag closeblock %}{% endif %}
+    &lt;button type="submit" name="_submit" class="btn btn-primary btn-lg"&gt;Submit&lt;/button&gt;
+&lt;/form&gt;
+            </code></pre>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block sidebar %}
+<a class="hide-on-small-only dropdown-button btn-floating btn-large waves-effect waves-light green" href='#' data-activates="dropdown1" style="position:absolute;right:30px; top: 30px"><i class="mdi-action-view-headline"></i></a>
+
+<ul id="dropdown1" class="dropdown-content">
+    <li><a href="/demo/widget/admin/filteredselectmultiple/">FilteredSelectMultiple</a></li>
+  </ul>
+{% endblock %}
