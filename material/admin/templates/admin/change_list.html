@@ -38,7 +38,7 @@
 
 {% block breadcrumbs_items %}
 <a href="{% url 'admin:index' %}">{% trans 'All apps' %}</a> &rang;
-<a href="{% url opts|admin_urlname:'changelist' %}"><i class="fa adm-app-default adm-{{ opts.app_label }}-{{ opts.object_name|lower }}"></i> &nbsp;&nbsp;{{ opts.verbose_name_plural|capfirst }}</a>
+<a href="{% url opts|admin_urlname:'changelist' %}"><i class="zmdi adm-app-default adm-{{ opts.app_label }}-{{ opts.object_name|lower }}"></i> &nbsp;&nbsp;{{ opts.verbose_name_plural|capfirst }}</a>
 {% endblock %}
 
 

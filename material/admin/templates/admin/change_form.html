@@ -8,7 +8,7 @@
 {% if not is_popup %}
 {% block breadcrumbs_items %}
 <a href="{% url 'admin:index' %}">{% trans 'All apps' %}</a> &rang;
-<a href="{% url opts|admin_urlname:'changelist' %}"><i class="fa adm-app-default adm-{{ opts.app_label }}-{{ opts.object_name|lower }}"></i> &nbsp;&nbsp;{{ opts.verbose_name_plural|capfirst }}</a> &rang;
+<a href="{% url opts|admin_urlname:'changelist' %}"><i class="zmdi adm-app-default adm-{{ opts.app_label }}-{{ opts.object_name|lower }}"></i> &nbsp;&nbsp;{{ opts.verbose_name_plural|capfirst }}</a> &rang;
 <a href="{% url opts|admin_urlname:'changelist' %}">{% if add %}{% trans 'Add' %} {{ opts.verbose_name }}{% else %}{% trans 'Change' %}{% endif %}</a>
 {% endblock %}
 {% endif %}

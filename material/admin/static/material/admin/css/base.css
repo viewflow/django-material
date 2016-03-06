@@ -202,60 +202,59 @@ ul.side-nav.module-menu li.active>a>span.badge {
 
 
 .adm-app-default:before {
-    font-family: FontAwesome;
-    content: "\f233";
+    content: "\f1b4";
 }
 
 .adm-auth-group:before {
-    content: "\f0c0";
+    content: "\f209";
 }
 
 .adm-auth-user:before {
-    content: "\f007";
+    content: "\f207";
 }
 
 .adm-django_comments-comment:before {
-    content: "\f086";
+    content: "\f266";
 }
 
 .adm-flatpages-flatpage:before {
-    content: "\f0f6";
+    content: "\f323";
 }
 
 .adm-default-association:before {
-    content: "\f066";
+    content: "\f30d";
 }
 
 .adm-default-nonce:before {
-    content: "\f084";
+    content: "\f183";
 }
 
 .adm-default-usersocialauth:before {
-    content: "\f13e";
+    content: "\f35b";
 }
 
 .adm-redirects-redirect:before {
-    content: "\f07e";
+    content: "\f30d";
 }
 
 .adm-sites-site:before {
-    content: "\f0c5";
+    content: "\f31a";
 }
 
 .adm-tagging-taggeditem:before {
-    content: "\f187";
+    content: "\f188";
 }
 
 .adm-tagging-tag:before {
-    content: "\f02c";
+    content: "\f187";
 }
 
 .adm-zinnia-category:before {
-    content: "\f02d";
+    content: "\f222";
 }
 
 .adm-zinnia-entry:before {
-    content: "\f15c";
+    content: "\f223";
 }
 
 /*
