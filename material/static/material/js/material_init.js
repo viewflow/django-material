@@ -3,7 +3,7 @@ if (navigator.appVersion.indexOf('Win') != -1) {
 }
 
 $(document).on('ready pjax:complete', function() {
-    $('.dropdown-button').dropdown({hover: false, constrain_width: false});
+    $('.dropdown-button').dropdown({hover: false, constrain_width: true});
     $('.button-collapse').sideNav();
     $('select').not('.disabled').not('.material-ignore').material_select();
 
