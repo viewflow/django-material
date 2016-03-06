@@ -515,7 +515,9 @@ class WizardForm2(forms.Form):
 class HospitalRegistrationForm(forms.Form):
     class EmergencyContractForm(forms.Form):
         name = forms.CharField()
-        relationship = forms.CharField()
+        relationship = forms.ChoiceField(choices=(
+            ('SPS', 'Spouse'), ('PRT', 'Partner'),
+            ('FRD', 'Friend'), ('CLG', 'Colleague')))
         daytime_phone = forms.CharField()
         evening_phone = forms.CharField(required=False)
 
@@ -541,7 +543,7 @@ class HospitalRegistrationForm(forms.Form):
         widget=forms.CheckboxSelectMultiple, required=False,
         choices=APNIA_RISK_CHOICES)
 
-    emergency_numbers = FormSetField(formset_factory(EmergencyContractForm, extra=2, can_delete=True))
+    emergency_contacts = FormSetField(formset_factory(EmergencyContractForm, extra=2, can_delete=True))
 
     layout = Layout(Row(Column('full_name', 'birth_date',
                                Row('height', 'weight'), span_columns=3), 'registration_date'),
@@ -550,7 +552,7 @@ class HospitalRegistrationForm(forms.Form):
                     Fieldset('Procedural Questions', 'procedural_questions'),
                     Fieldset('Clinical Predictores of Cardiovascular Risk', 'cardiovascular_risks'),
                     Fieldset('Clinical Predictors of sleep Apnia Risk', 'apnia_risks'),
-                    Fieldset('Emergence Numbers', 'emergency_numbers'))
+                    Fieldset('Emergence Numbers', 'emergency_contacts'))
 
     template = Template("""
     {% form %}
@@ -564,7 +566,7 @@ class HospitalRegistrationForm(forms.Form):
         {% part form.cardiovascular_risks columns %}2{% endpart %}
         {% part form.apnia_risks label %}{% endpart %}
         {% part form.apnia_risks columns %}3{% endpart %}
-        {% part form.emergency_numbers label %}{% endpart %}
+        {% part form.emergency_contacts label %}{% endpart %}
 
     {% endform %}
     """)

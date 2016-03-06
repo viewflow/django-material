@@ -3,26 +3,31 @@ if (navigator.appVersion.indexOf('Win') != -1) {
 }
 
 $(document).on('ready pjax:complete', function() {
-    $('.dropdown-button').dropdown({hover: false, constrain_width: true});
-    $('.button-collapse').sideNav();
-    $('select').not('.disabled').not('.material-ignore').material_select();
+    function material_init($container) {
+        $container.find('.dropdown-button.constrain_width').dropdown({hover: false, constrain_width: true});
+        $container.find('.dropdown-button').not('.constrain_width').dropdown({hover: false, constrain_width: false});
+        $container.find('.button-collapse').sideNav();
+        $container.find('select').not('.disabled').not('.material-ignore').material_select();
 
-    $('[data-form-control="date"]').each(function() {
-        var input = $(this);
-        input.datetimepicker({format: input.data('date-format'), timepicker:false, mask:false, scrollInput:false});
-    });
-    $('[data-form-control="time"]').each(function() {
-        var input = $(this);
-        input.datetimepicker({format: input.data('date-format'), datepicker: false, timepicker:true, mask:false, scrollInput:false});
-    });
-    $('[data-form-control="datetime"]').each(function() {
-        var input = $(this);
-        input.datetimepicker({format: input.data('date-format'), datepicker: true, timepicker:true, mask:false, scrollInput:false});
-    });
+        $container.find('[data-form-control="date"]').each(function() {
+            var input = $(this);
+            input.datetimepicker({format: input.data('date-format'), timepicker:false, mask:false, scrollInput:false});
+        });
+        $container.find('[data-form-control="time"]').each(function() {
+            var input = $(this);
+            input.datetimepicker({format: input.data('date-format'), datepicker: false, timepicker:true, mask:false, scrollInput:false});
+        });
+        $container.find('[data-form-control="datetime"]').each(function() {
+            var input = $(this);
+            input.datetimepicker({format: input.data('date-format'), datepicker: true, timepicker:true, mask:false, scrollInput:false});
+        });
+    }
     $('.formset-field').formset({
-        animateForms: true
+        animateForms: true,
+        newFormCallback: material_init
     });
 
+    material_init($(document));
     /*
       In chrome, there is no way to get to know is autofill
       fills the password field until user is interacted. Assume

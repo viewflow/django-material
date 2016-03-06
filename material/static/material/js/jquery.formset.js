@@ -76,7 +76,8 @@
         add: '[data-formset-add]',
         deleteButton: '[data-formset-delete-button]',
         hasMaxFormsClass: 'has-max-forms',
-        animateForms: false
+        animateForms: false,
+        newFormCallback: false
     };
 
     Formset.prototype.addForm = function() {
@@ -97,7 +98,9 @@
 
         var $newForm = $newFormFragment.filter(this.opts.form);
         this.bindForm($newForm, newIndex);
-
+        if(this.opts.newFormCallback) {
+            this.opts.newFormCallback($newForm);
+        }
         return $newForm;
     };
 
