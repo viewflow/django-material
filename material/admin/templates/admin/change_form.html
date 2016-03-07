@@ -56,8 +56,9 @@
                     </div>
                 </div>
         </form>
-        </div>        
+        </div>
     </div>
+    {% if not is_popup %}
     <div class="col s12 m12 l3">
         <div class="card">
             <div class="card-content">
@@ -78,5 +79,6 @@
             </div>
         </div>
     </div>
+    {% endif %}
 </div>
 {% endblock %}

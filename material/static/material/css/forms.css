@@ -28,6 +28,11 @@ input[type=number] {
     margin: 0 0.75rem;
 }
 
+.card.data-card .card-content {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
 .input-field label {
   white-space: nowrap;
   text-overflow: ellipsis;
