@@ -157,10 +157,6 @@ ul.side-nav.module-menu li.active>a>span.badge {
     color: #fff;
 }
 
-::-webkit-scrollbar {
-    display: none;
-}
-
 /*
   Breadcrumbs
 */
