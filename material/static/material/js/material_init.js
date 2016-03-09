@@ -1,7 +1,3 @@
-if (navigator.appVersion.indexOf('Win') != -1) {
-    document.write('<link rel="stylesheet" type="text/css" href="{% static "material/css/robotofix.css" %}">');
-}
-
 $(document).on('ready pjax:complete', function() {
     function material_init($container) {
         $container.find('.dropdown-button.constrain_width').dropdown({hover: false, constrain_width: true});
