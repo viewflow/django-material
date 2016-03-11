@@ -1,6 +1,5 @@
 from django.conf import settings
 from django.conf.urls import include, url
-from django.contrib import admin
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.views import generic
@@ -146,9 +145,6 @@ urlpatterns = [
         form_class=admin_forms.AdminIntegerFieldWidgetForm)),
     url(r'^demo/widget/admin/adminbigintegerfieldwidget/$', AdminFormView.as_view(
         form_class=admin_forms.AdminBigIntegerFieldWidgetForm)),
-
-    # admin
-    url(r'^admin/', include(admin.site.urls)),
 
     # frontend
     url(r'^frontend/$', generic.RedirectView.as_view(url='/frontend/accounting/', permanent=False), name="index"),

@@ -9,9 +9,7 @@ def modules(request):
     module = None
 
     if request.resolver_match:
-        module = request.resolver_match.kwargs.get('module', None)
-        if module:
-            module = module.user_module(request.user)
+        module = getattr(request.resolver_match.url_name, 'module', None)
 
     return {
         'modules': modules_registry.available_modules(request.user),

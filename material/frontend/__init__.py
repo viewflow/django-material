@@ -1,11 +1,10 @@
 from django.conf import settings
 
-from .base import Module, InstallableModule  # NOQA
 from .urlconf import ModuleURLResolver  # NOQA
 from .registry import modules  # NOQA
 
 
-default_app_config = 'material.frontend.apps.ModulesDiscoverConfig'
+default_app_config = 'material.frontend.apps.MaterialForntendConfig'
 
 
 if getattr(settings, 'MATERIAL_FRONTEND_AUTOREGISTER', True):
@@ -44,4 +43,3 @@ if getattr(settings, 'MATERIAL_FRONTEND_AUTOREGISTER', True):
                 engine['OPTIONS']['context_processors'] = []
             if 'material.frontend.context_processors.modules' not in engine['OPTIONS']['context_processors']:
                 engine['OPTIONS']['context_processors'].append('material.frontend.context_processors.modules')
-                

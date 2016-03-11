@@ -1,6 +1,10 @@
 from django.core.urlresolvers import RegexURLResolver, Resolver404
 
 
+class ModuleMatchName(str):
+    pass
+
+
 class ModuleURLResolver(RegexURLResolver):
     def __init__(self, *args, **kwargs):
         self._module = kwargs.pop('module')
@@ -12,6 +16,7 @@ class ModuleURLResolver(RegexURLResolver):
         if result and not getattr(self._module, 'installed', True):
             raise Resolver404({'message': 'Module not installed'})
 
-        result.kwargs['module'] = self._module
+        result.url_name = ModuleMatchName(result.url_name)
+        result.url_name.module = self._module
 
         return result

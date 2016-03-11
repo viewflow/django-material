@@ -30,6 +30,8 @@ th {
 .side-nav.fixed .logo {
     height: 150px;
     background-color: #388E3C;
+    background-color: #4CAF50;
+    background-color: #2e7d32;
 }
 
 .side-nav.fixed .logo a {

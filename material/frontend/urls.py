@@ -4,5 +4,5 @@ from . import modules
 
 urlpatterns = [
     url(r'^accounts/', include('django.contrib.auth.urls')),
-    url(r'^', include(modules.urls)),
+    url(r'', include(modules.urls)),
 ]

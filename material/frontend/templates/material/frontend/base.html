@@ -58,12 +58,12 @@
                     </li>
 
                     {% for module in modules %}
-                    {% if current_module == module and module.menu %}
+                    {% if current_module == module %}
                     <li class="no-padding">
                         <div class="collapsible-body" style="display:block">
                             <ul class="collapsible" data-collapsible="expandable">
                                 <li class="header active">
-                                    <a class="collapsible-header no-pjax"><i class="{{ module.icon }}"></i> {{ module.label|default:"" }}</a>
+                                    <a class="collapsible-header no-pjax">{{ module.icon|safe|default:" " }}{{ module.verbose_name|default:"" }}</a>
                                     <div class="collapsible-body" style="display: block;">
                                         {% include module.menu %}
                                     </div>
@@ -73,7 +73,7 @@
                     </li>
                     {% else %}
                     <li class="no-padding">
-                        <a class="collapsible-header no-pjax" href="{{ module.index_url }}"><i class="{{ module.icon }}"></i> {{ module.label|default:"" }}</a>
+                        <a class="collapsible-header no-pjax" href="{{ module.index_url }}">{{ module.icon|safe|default:" " }} {{ module.verbose_name|default:"" }}</a>
                     </li>
                     {% endif %}
                     {% endfor %}

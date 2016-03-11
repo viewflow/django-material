@@ -4,7 +4,7 @@ class Registry(object):
 
     def modules(self):
         return sorted([module for module in self._registry.values()],
-                      key=lambda module: (module.order, module.slug))
+                      key=lambda module: (module.order, module.label))
 
     def installed_modules(self):
         return [module for module in self.modules()
@@ -14,11 +14,11 @@ class Registry(object):
         return [module for module in self.installed_modules()
                 if module.has_perm(user)]
 
-    def get_module(self, module_slug):
-        return self._registry.get(module_slug, None)
+    def get_module(self, module_label):
+        return self._registry.get(module_label, None)
 
     def register(self, module):
-        self._registry[module.slug] = module
+        self._registry[module.label] = module
 
     @property
     def urls(self):
@@ -26,10 +26,6 @@ class Registry(object):
         for module in self.modules():
             patterns.append(module.urls)
         return patterns
-
-    def ready(self):
-        for module in self.modules():
-            module.ready()
 
 
 modules = Registry()

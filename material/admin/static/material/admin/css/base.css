@@ -16,6 +16,7 @@ th {
 .side-nav.fixed .logo {
     height: 150px;
     background-color: #388E3C;
+    background-color: #2e7d32;
 }
 
 .side-nav.fixed.module-menu li.logo a {

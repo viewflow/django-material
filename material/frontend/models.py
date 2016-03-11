@@ -6,23 +6,24 @@ from django.db.models.signals import post_save
 
 class ModuleManager(models.Manager):
     def installed(self, module):
+        """
+        By default, all modules considered installed
+        """
         installed_cache = cache.get('material.modules.installed')
         if not installed_cache:
-            installed_cache = [mod.slug for mod in self.get_queryset().filter(installed=True)]
+            installed_cache = [mod.label for mod in self.get_queryset().filter(installed=True)]
             cache.set('material.modules.installed', installed_cache, 60*60*24)
         return module in installed_cache
 
 
 class Module(models.Model):
-    slug = models.SlugField()
-    installed = models.BooleanField(default=False)
+    label = models.SlugField()
+    installed = models.BooleanField(default=True)
 
     objects = ModuleManager()
 
-    class Meta:
-        permissions = (
-            ('can_configure', 'Can install/uninstall modules'),
-        )
+    def __str__(self):
+        return self.label
 
 
 @receiver(post_save, sender=Module)
