@@ -204,7 +204,7 @@ To create a new module add `ModuleMixin` to your `AppConfig` definision in `apps
         icon = '<i class="mdi-communication-quick-contacts-dialer"></i>'
 
 The application have to have <app_module>/urls.py file, with
-a single no-parametrized url with name='index', ex::
+a single no-parametrized url with name='index', ex
 
 .. code-block:: python
 
@@ -215,7 +215,7 @@ a single no-parametrized url with name='index', ex::
 All AppConfigs urls will be included into material.frontend.urls automatically under /<app_label>/ prefix
 The AppConfig.label, used for the urls namespace.
 
-The menu.html sample::
+The menu.html sample
 
 .. code-block:: html
 

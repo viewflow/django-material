@@ -1,3 +1,18 @@
+0.7.0 2016-03-13 - Alpha
+------------------------
+
+The last alpha release.
+
+* Forms - Fix controls in new forms in formsets
+* Forms - New way to append or override widget attrs in template
+* Forms - Removed `group_class`, `add_group_class`, `add_label_class` redifinable parts
+* Admin - Match table styles to google guidelines.
+* Admin - Start to work on admin widget support improvements http://forms.viewflow.io/demo/widget/admin/
+* Admin - Fix scrollbar
+* Frontend - Switch from fontawesome to material-design-iconic font
+* Frontend - Fix broken links on user navigation menu
+* Frontend - Modules are refactored to AppConfig mixins
+
 0.6.0 2015-11-19 - Alpha
 ------------------------
 
