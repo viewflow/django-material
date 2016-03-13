@@ -247,7 +247,7 @@ class MultipleChoiceFieldForm(forms.Form):
     field2 = forms.MultipleChoiceField(help_text='initial value', choices=CHOICES, initial=[2, 3])
     field3 = forms.MultipleChoiceField(help_text='long choices list', choices=LONG_CHOICES)
     field4 = forms.TypedMultipleChoiceField(help_text='cource to int', coerce=int, choices=CHOICES)
-    field5 = forms.MultipleChoiceField(help_text='default', choices=CHOICES)
+    field5 = forms.MultipleChoiceField(help_text='prefix', choices=CHOICES)
 
     template = Template("""
     {% form %}

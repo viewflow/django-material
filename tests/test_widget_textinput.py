@@ -88,7 +88,7 @@ class Test(WebTest):
 
     test_part_add_control_class.template = '''
         {% form %}
-             {% attr form.test_field 'widget' class override %}orange{% endattr %}
+             {% attr form.test_field 'widget' class append %}orange{% endattr %}
         {% endform %}
     '''
 

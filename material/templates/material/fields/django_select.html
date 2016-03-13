@@ -1,28 +1,27 @@
 {% load material_form material_form_internal %}
 {% part bound_field.field %}<div class="row">
-    <div {% tagattrs %}
-         id="id_{{ bound_field.html_name }}_container"
-         class="{% part field group_class %}select-field col s12
-                {% if field.required%}required{% endif %}
-                {% if bound_field.errors %}has-error{% endif %}
-                {% part field add_group_class %}{% endpart %}
-                {% endpart %}"{% endtagattrs %}>
-        {% part field prefix %}{% endpart %}
-        {% part field label %}<label for="{{ bound_field.id_for_label }}" class="{% part field add_label_class %}{{ form_label_class }}{% endpart %}">{{ bound_field.label }}</label>{% endpart %}{% part field control %}
-        <select {% tagattrs %}
-                class="{% if field.widget.attrs.class %}{{ field.widget.attrs.class }} {% endif %}{% if bound_field.errors %}invalid {% endif %}{% part field add_control_class %}{{ form_control_class }}{% endpart %}"
-                name="{{ bound_field.html_name }}"
-                {% for name, value in field.widget.attrs.items %}{% if name != 'class' %}{{name}}="{{value}}" {% endif %}{% endfor %}
-                id="id_{{ bound_field.html_name }}"
-                {% part field add_control_attr %}{% endpart %}{% endtagattrs %}>
+    <div{% attrs bound_field 'group' %}
+        id="id_{{ bound_field.html_name }}_container"
+        class="select-field col s12{% if field.required %} required{% endif %}{% if bound_field.errors %} has-error{% endif %}"
+    {% endattrs %}>
+        {% part field prefix %}{% endpart %}{% part field label %}
+        <label{% attrs bound_field 'label' %}
+            for="{{ bound_field.id_for_label }}"
+        {% endattrs %}>{{ bound_field.label }}</label>
+        {% endpart %}
+        {% part field control %}
+        <select{% attrs bound_field 'widget' default field.widget.attrs %}
+            id="id_{{ bound_field.html_name }}"
+            name="{{ bound_field.html_name }}"
+            {% if bound_field.errors %}class="invalid"{% endif %}
+        {% endattrs %}>
             {% part field options %}{% for group, items in bound_field|select_options %}
-            {% if group %}<optgroup label="{{ group }}">{% endif %}{% for choice, value, selected in items %}<option {% tagattrs %}
-                {% if selected %}selected="selected"{% endif %}
-                {% if value == None or value == '' %}value{% else %}value="{{ value }}"{% endif %}
-                {% endtagattrs %}>{% if value == None or value == '' %}{{ form_select_empty_label|default:choice }}{% else %}{{ choice }}{% endif %}</option>
-            {% endfor %}{% if group %}</optgroup>{% endif %}{% endfor %}{% endpart %}
+            {% if group %}<optgroup label="{{ group }}">{% endif %}{% for choice, value, selected in items %}
+            <option {% if value == None or value == '' %}value{% else %}value="{{ value }}"{% endif %}{% if selected %} selected="selected"{% endif %}>{% if value == None or value == '' %}{{ form_select_empty_label|default:choice }}{% else %}{{ choice }}{% endif %}</option>{% endfor %}
+            {% if group %}</optgroup>{% endif %}{% endfor %}{% endpart %}
         </select>
-        {% endpart %}{% part field help_text %}{% if field.help_text %}
+        {% endpart %}
+        {% part field help_text %}{% if field.help_text %}
             <small class="help-block">{{ bound_field.help_text }}</small>
         {% endif %}{% endpart %}{% part field errors %}
         {% if bound_field.errors %}

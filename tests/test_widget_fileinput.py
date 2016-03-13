@@ -41,11 +41,11 @@ class Test(WebTest):
     def test_part_group_class(self):
         page = self.app.get(self.test_part_group_class.url)
 
-        self.assertIn('class="input-field file-field col s12 required yellow"', page.body.decode('utf-8'))
+        self.assertIn('class="yellow required input-field file-field col s12"', page.body.decode('utf-8'))
 
     test_part_group_class.template = '''
         {% form %}
-             {% part form.test_field group_class %}input-field file-field col s12 required yellow{% endpart %}
+             {% attr form.test_field 'group' class override %}yellow required input-field file-field col s12{% endattr %}
         {% endform %}
     '''
 
@@ -56,7 +56,7 @@ class Test(WebTest):
 
     test_part_add_group_class.template = '''
         {% form %}
-             {% part form.test_field add_group_class %}deep-purple lighten-5{% endpart %}
+             {% attr form.test_field 'group' class append %}deep-purple lighten-5{% endattr %}
         {% endform %}
     '''
 
@@ -76,15 +76,15 @@ class Test(WebTest):
 
     test_part_add_control_class.template = '''
         {% form %}
-             {% part form.test_field add_control_class %}orange{% endpart %}
+             {% attr form.test_field 'widget' class append %}orange{% endattr %}
         {% endform %}
     '''
 
-    def test_part_label(self):
+    def _test_part_label(self):  # TODO Label for file inputs
         response = self.app.get(self.test_part_label.url)
         self.assertIn('<label for="id_test_field">My label</label>', response.body.decode('utf-8'))
 
-    test_part_label.template = '''
+    _test_part_label.template = '''
         {% form %}
              {% part form.test_field label %}<label for="id_test_field">My label</label>{% endpart %}
         {% endform %}

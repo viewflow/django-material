@@ -1,26 +1,21 @@
 {% load material_form material_form_internal i18n %}
 {% part bound_field.field %}<div class="row">
-    <div {% tagattrs %}
-         id="id_{{ bound_field.html_name }}_container"
-         class="{% part field group_class %}input-field file-field col s12
-                {% if field.required%}required{% endif %}
-                {% if bound_field.errors %}has-error{% endif %}
-                {% part field add_group_class %}{% endpart %}
-                {% endpart %}"{% endtagattrs %}>
+    <div{% attrs bound_field 'group' %}
+        id="id_{{ bound_field.html_name }}_container"
+        class="input-field file-field col s12{% if field.required %} required{% endif %}{% if bound_field.errors %} has-error{% endif %}"
+   {% endattrs %}>
         <div class="btn">
             {% part field prefix %}<span>{% trans 'File' %}</span>{% endpart %}
             <input type="file" name="{{ bound_field.html_name }}"/>
         </div>
-        {% part field suffix %}{% endpart %}
-        {% part field control %}<div class="file-path-wrapper">
-            <input {% tagattrs %}
-                   type="text"
-                   class="file-path {% part field add_control_class %}{{ form_control_class }}{% endpart %}"
-                   {% for name, value in field.widget.attrs.items %}{% if name != 'class' %}{{name}}="{{value}}" {% endif %}{% endfor %}
-                   id="id_{{ bound_field.html_name }}"
-                   {% part field label %}placeholder="{{ bound_field.label }}"{% endpart %}
-                   {% if bound_field.value|is_initial_file %}value="{{ bound_field.value }}"{% endif %}
-                   {% endtagattrs %}>
+        {% part field suffix %}{% endpart %}{% part field control %}<div class="file-path-wrapper">
+            <input{% attrs bound_field 'widget' default field.widget.attrs %}
+                id="id_{{ bound_field.html_name }}"
+                type="text"
+                class="file-path"
+                placeholder="{{ bound_field.label }}"
+                {% if bound_field.value|is_initial_file %}value="{{ bound_field.value }}"{% endif %}
+            {% endattrs %}>
         </div>{% endpart %}
         {% part field help_text %}
         {% if field.help_text %}

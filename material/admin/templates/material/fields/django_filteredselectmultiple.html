@@ -1,9 +1,9 @@
 {% load material_form material_form_internal %}
 
 {% render bound_field template='fields/django_select.html' %}
-    {% part field add_control_attr %}multiple{% endpart %}
-    {% part field add_group_class %}multiselect{% endpart %}
-    {% part field add_control_class %}material-ignore{% endpart %}
+    {% attr field 'widget' multiple %}True{% endattr %}
+    {% attr field 'widget' class append %}material-ignore{% endattr %}
+    {% attr field 'group' class append %}multiselect{% endattr %}
     {% part field options %}
         {% for value, choice in field.widget.choices %}
         <option {% if value in bound_field.value %}selected="selected"{% endif %}

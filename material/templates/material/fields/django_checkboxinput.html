@@ -1,23 +1,21 @@
 {% load material_form material_form_internal %}
 {% part bound_field.field %}<div class="row">
-    <div {% tagattrs %}
-         id="id_{{ bound_field.html_name }}_container"
-         class="{% part field group_class %}checkbox-field col s12
-                {% if field.required%}required{% endif %}
-                {% if bound_field.errors %}has-error{% endif %}
-                {% part field add_group_class %}{% endpart %}
-                {% endpart %}"{% endtagattrs %}>
+    <div{% attrs bound_field 'group' %}
+        id="id_{{ bound_field.html_name }}_container"
+        class="checkbox-field col s12{% if field.required %} required{% endif %}{% if bound_field.errors %} has-error{% endif %}"
+    {% endattrs %}>
         {% part field prefix %}{% endpart %}{% part field control %}
-        <input {% tagattrs %}
-               type="checkbox"
-               class="{% if field.widget.attrs.class %}{{ field.widget.attrs.class }} {% endif %}{% if bound_field.errors %}invalid {% endif %}{% part field add_control_class %}{{ form_control_class }}{% endpart %}"
-               name="{{ bound_field.html_name }}"
-               {% for name, value in field.widget.attrs.items %}{% if name != 'class' %}{{name}}="{{value}}" {% endif %}{% endfor %}
-               id="id_{{ bound_field.html_name }}"
-               {% if bound_field.value %}checked{% endif %}{% endtagattrs %}>
-        {% endpart %}{% part field label %}
-        <label for="{{ bound_field.id_for_label }}" class="{% part field add_label_class %}{% endpart %}">{{ bound_field.label }}</label>
-        {% endpart %}{% part field help_text %}{% part field errors %}
+        <input{% attrs bound_field 'widget' default field.widget.attrs %}
+            id="id_{{ bound_field.html_name }}"
+            name="{{ bound_field.html_name }}"
+            type="checkbox"
+            {% if bound_field.errors %}class="invalid"{% endif %}
+            {% if bound_field.value %}checked{% endif %}
+        {% endattrs %}>{% endpart %}{% part field label %}
+        <label{% attrs bound_field 'label' %}
+            for="{{ bound_field.id_for_label }}"
+        {% endattrs %}>{{ bound_field.label }}</label>{% endpart %}
+        {% part field help_text %}{% part field errors %}
         {% if bound_field.errors %}
             {% include  'material/field_errors.html' %}
         {% endif %}{% endpart %}{% if field.help_text %}

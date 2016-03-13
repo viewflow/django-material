@@ -9,58 +9,35 @@
         {% part field prefix %}{% endpart %}
         {% part field control %}
         {% with bound_field|select_date_widget_wrapper as wrapper %}
-        {% for select in wrapper.selects %}
-        {% if select.type == "day" %}
-        <div class="col s2">
-            <select {% tagattrs %}
-                    class="{% if bound_field.errors %}invalid{% endif %}"
-                    name="{{ bound_field.html_name }}_day"
-                    id="id_{{ bound_field.html_name }}_day"
-                    {% endtagattrs %}>
-                {% for value, choice in select.choices %}
-                <option {% tagattrs %}{% if value|force_text == select.value|force_text %}selected="selected"{% endif %}
-                        {% if value == None or value == '' %}value{% else %}value="{{ value }}"{% endif %}
-                        {% endtagattrs %}>{% if value == None or value == '' %}{{ form_select_empty_label|default:choice }}{% else %}{{ choice }}{% endif %}</option>
-                {% endfor %}
+        {% for select in wrapper.selects %}{% if select.type == "day" %}<div class="col s2">
+            <select{% attrs bound_field 'widget_day' %}
+                id="id_{{ bound_field.html_name }}_day"
+                name="{{ bound_field.html_name }}_day"
+                {% if bound_field.errors %}class="invalid"{% endif %}
+            {% endattrs %}>{% for value, choice in select.choices %}
+                <option {% if value == None or value == '' %}value{% else %}value="{{ value }}"{% endif %}{% if value|force_text == select.value|force_text %} selected="selected"{% endif %}>{% if value == None or value == '' %}{{ form_select_empty_label|default:choice }}{% else %}{{ choice }}{% endif %}</option>{% endfor %}
             </select>
-        </div>
-        {% endif %}
-        {% if select.type == "month" %}
-        <div class="col s6">
-            <select {% tagattrs %}
-                    class="{% if bound_field.errors %}invalid{% endif %}"
-                    name="{{ bound_field.html_name }}_month"
-                    id="id_{{ bound_field.html_name }}_month"
-                    {% endtagattrs %}>
-                {% for value, choice in select.choices %}
-                <option {% tagattrs %}{% if value|force_text == select.value|force_text %}selected="selected"{% endif %}
-                        {% if value == None or value == '' %}value{% else %}value="{{ value }}"{% endif %}
-                        {% endtagattrs %}>{% if value == None or value == '' %}{{ form_select_empty_label|default:choice }}{% else %}{{ choice }}{% endif %}</option>
-                {% endfor %}
+        </div>{% endif %}{% if select.type == "month" %}<div class="col s6">
+            <select{% attrs bound_field 'widget_month' %}
+                id="id_{{ bound_field.html_name }}_month"
+                name="{{ bound_field.html_name }}_month"
+                {% if bound_field.errors %}class="invalid"{% endif %}
+            {% endattrs %}> {% for value, choice in select.choices %}
+                <option {% if value == None or value == '' %}value{% else %}value="{{ value }}"{% endif %}{% if value|force_text == select.value|force_text %} selected="selected"{% endif %}>{% if value == None or value == '' %}{{ form_select_empty_label|default:choice }}{% else %}{{ choice }}{% endif %}</option> {% endfor %}
             </select>       
-        </div>
-        {% endif %}
-        {% if select.type == "year" %}
-        <div class="col s4">
-            <select {% tagattrs %}
-                    class="{% if bound_field.errors %}invalid{% endif %}"
-                    name="{{ bound_field.html_name }}_year"
-                    id="id_{{ bound_field.html_name }}_year"
-                    {% endtagattrs %}>
-                {% for value, choice in select.choices %}
-                <option {% tagattrs %}{% if value|force_text == select.value|force_text %}selected="selected"{% endif %}
-                        {% if value == None or value == '' %}value{% else %}value="{{ value }}"{% endif %}
-                        {% endtagattrs %}>{% if value == None or value == '' %}{{ form_select_empty_label|default:choice }}{% else %}{{ choice }}{% endif %}</option>
-                {% endfor %}
+        </div> {% endif %}{% if select.type == "year" %}<div class="col s4">
+            <select{% attrs bound_field 'widget_year' %}
+                id="id_{{ bound_field.html_name }}_year"
+                name="{{ bound_field.html_name }}_year"
+                {% if bound_field.errors %}class="invalid"{% endif %}
+                      {% endattrs %}>{% for value, choice in select.choices %}
+                <option {% if value == None or value == '' %}value{% else %}value="{{ value }}"{% endif %}{% if value|force_text == select.value|force_text %} selected="selected"{% endif %}>{% if value == None or value == '' %}{{ form_select_empty_label|default:choice }}{% else %}{{ choice }}{% endif %}</option>{% endfor %}
             </select>
-        </div>
-        {% endif %}
-        {% endfor %}
-        {% endwith %}
-        
+        </div>{% endif %}
+        {% endfor %}{% endwith %}        
         <div class="col s12">
         {% part field help_text %}{% if field.help_text %}
-        <small class="help-block">{{ bound_field.help_text }}</small>
+            <small class="help-block">{{ bound_field.help_text }}</small>
         {% endif %}{% endpart %}{% part field errors %}
         {% if bound_field.errors %}
         {% include  'material/field_errors.html' %}

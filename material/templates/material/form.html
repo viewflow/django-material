@@ -14,9 +14,7 @@
             {% render layout %}{% endrender %}
     {% endpart %}{% else %}
         {% part form visible %}
-            {% for bound_field in form.visible_fields %}
-                {% render bound_field %}{% endrender %}
-            {% endfor %}
+            {% for bound_field in form.visible_fields %}{% render bound_field %}{% endrender %} {% endfor %}
         {% endpart %}{% part 'inlines' %}
             {% for inline in inlines %}
                 {{ inline }}

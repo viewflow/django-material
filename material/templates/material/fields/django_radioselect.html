@@ -3,24 +3,24 @@
     <div class="col s12">
         {% part field prefix %}{% endpart %}{% part field label %}<label for="{{ bound_field.id_for_label }}" class="{% part field add_label_class %}{{ form_label_class }}{% endpart %}">{{ bound_field.label }}</label>{% endpart %}
     </div>
-    <div {% tagattrs %}
-         id="id_{{ bound_field.html_name }}_container"
-         class="{% part field group_class %}col s12
-                {% if field.required%}required{% endif %}
-                {% if bound_field.errors %}has-error{% endif %}
-                {% part field add_group_class %}{% endpart %}
-                {% endpart %}"{% endtagattrs %}>
+    <div{% attrs bound_field 'group' %}
+        id="id_{{ bound_field.html_name }}_container"
+        class="col s12{% if field.required %} required{% endif %}{% if bound_field.errors %} has-error{% endif %}"
+    {% endattrs %}>
         {% part field control %}
         {% for group, items in bound_field|select_options %}{% for choice, value, selected in items %}<div class="radio" id="id_{{ bound_field.html_name }}">
-            <input {% tagattrs %}
-                   id="id_{{ bound_field.html_name }}_{{ forloop.counter0 }}"
-                   class="{% if field.widget.attrs.class %}{{ field.widget.attrs.class }} {% endif %}{% if bound_field.errors %}invalid {% endif %}{% part field add_control_class %}{{ form_control_class|default:'with-gap' }}{% endpart %}"
-                   name="{{ bound_field.html_name }}"
-                   type="radio"
-                   {% for name, value in field.widget.attrs.items %}{% if name != 'class' %}{{name}}="{{value}}" {% endif %}{% endfor %}
-                   value="{{ value }}"
-                   {% if selected %}checked{% endif %}{% endtagattrs %}/>
-            <label for="id_{{ bound_field.html_name }}_{{ forloop.counter0 }}" class="item-label">{{ choice }}</label>
+            <input{% attrs bound_field 'widget' default field.widget.attrs %}
+                id="id_{{ bound_field.html_name }}_{{ forloop.counter0 }}"
+                name="{{ bound_field.html_name }}"
+                type="radio"
+                class="with-gap{% if bound_field.errors %} invalid{% endif %}"
+                value="{{ value }}"
+                {% if selected %}checked{% endif %}
+            {% endattrs %}/>
+            <label{% attrs bound_field 'label' %}
+                     for="id_{{ bound_field.html_name }}_{{ forloop.counter0 }}"
+                     class="item-label"
+            {% endattrs %}>{{ choice }}</label>
         </div>
         {% endfor %}{% endfor %}{% endpart %}{% part field help_text %}{% if field.help_text %}
         <small class="help-block">{{ bound_field.help_text }}</small>

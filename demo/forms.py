@@ -144,7 +144,7 @@ class LoginForm(forms.Form):
     {% form %}
         {% part form.email prefix %}<i class="mdi-communication-email prefix"></i>{% endpart %}
         {% part form.password prefix %}<i class="mdi-action-lock prefix"></i>{% endpart %}
-        {% part form.keep_logged add_group_class %}right-align{% endpart %}
+        {% attr form.keep_logged 'group' class append %}right-align{% endattr %}
     {% endform %}
     """)
 
@@ -207,7 +207,7 @@ class ContactForm(forms.Form):
         {% part form.email prefix %}<i class="mdi-communication-email prefix"></i>{% endpart %}
         {% part form.subject prefix %}<i class="mdi-action-announcement prefix"></i>{% endpart %}
         {% part form.message prefix %}<i class="mdi-communication-message prefix"></i>{% endpart %}
-        {% part form.send_copy add_group_class %}right-align{% endpart %}
+        {% attr form.send_copy 'group' class append %}right-align{% endattr %}
     {% endform %}
     """)
 
@@ -478,11 +478,11 @@ class BankForm(forms.Form):
 
     template = Template("""
     {% form %}
-        {% part form.account_type add_group_class %}inline{% endpart %}
-        {% part form.account_mode add_group_class %}inline{% endpart %}
-        {% part form.deposit_type add_group_class %}inline{% endpart %}
-        {% part form.deposit_mode add_group_class %}inline{% endpart %}
-        {% part form.martial_status add_group_class %}inline{% endpart %}
+        {% attr form.account_type 'group' class append %}inline{% endattr %}
+        {% attr form.account_mode 'group' class append %}inline{% endattr %}
+        {% attr form.deposit_type 'group' class append %}inline{% endattr %}
+        {% attr form.deposit_mode 'group' class append %}inline{% endattr %}
+        {% attr form.martial_status 'group' class append %}inline{% endattr %}
     {% endform %}
     """)
 

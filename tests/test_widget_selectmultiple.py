@@ -47,22 +47,22 @@ class Test(WebTest):
     def test_part_group_class(self):
         page = self.app.get(self.test_part_group_class.url)
 
-        self.assertIn('class="selectmultiple-field col s12 yellow"', page.body.decode('utf-8'))
+        self.assertIn('class="yellow required selectmultiple-field col s12"', page.body.decode('utf-8'))
 
     test_part_group_class.template = '''
         {% form %}
-             {% part form.test_field group_class %}selectmultiple-field col s12 yellow{% endpart %}
+             {% attr form.test_field 'group' class override %}yellow required selectmultiple-field col s12{% endattr %}
         {% endform %}
     '''
 
     def test_part_add_group_class(self):
         page = self.app.get(self.test_part_add_group_class.url)
 
-        self.assertIn('class="select-field col s12 required orange"', page.body.decode('utf-8'))
+        self.assertIn('class="select-field col s12 required orange multiselect"', page.body.decode('utf-8'))
 
     test_part_add_group_class.template = '''
         {% form %}
-             {% part form.test_field add_group_class %}orange{% endpart %}
+             {% attr form.test_field 'group' class append %}orange{% endattr %}
         {% endform %}
     '''
 
@@ -82,7 +82,7 @@ class Test(WebTest):
 
     test_part_add_control_class.template = '''
         {% form %}
-             {% part form.test_field add_control_class %}orange{% endpart %}
+             {% attr form.test_field 'widget' class append %}orange{% endattr %}
         {% endform %}
     '''
 
@@ -98,11 +98,11 @@ class Test(WebTest):
 
     def test_part_add_label_class(self):
         response = self.app.get(self.test_part_add_label_class.url)
-        self.assertIn('<label for="id_test_field" class="green-text">Test field</label>', response.body.decode('utf-8'))
+        self.assertIn('class="green-text"', response.body.decode('utf-8'))
 
     test_part_add_label_class.template = '''
         {% form %}
-             {% part form.test_field add_label_class %}green-text{% endpart %}
+             {% attr form.test_field 'label' class append %}green-text{% endattr %}
         {% endform %}
     '''
 

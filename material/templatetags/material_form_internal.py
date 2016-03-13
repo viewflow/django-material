@@ -13,7 +13,7 @@ from django.utils.encoding import force_text
 from ..base import Field
 from ..fields import FormSetField
 from ..widgets import SelectDateWidget
-from .material_form import FormPartNode, _render_parts
+from .material_form import FormPartNode, WidgetAttrNode, _render_parts
 
 
 register = Library()
@@ -60,6 +60,10 @@ class FormRenderNode(Node):
         children = (node for node in self.nodelist if isinstance(node, FormPartNode))
         _render_parts(context, children)
 
+        attrs = (node for node in self.nodelist if isinstance(node, WidgetAttrNode))
+        for attr in attrs:
+            attr.render(context)
+
         # render element
         if isinstance(element, BoundField):
             return Field(element.name).render(context, **options)
@@ -68,22 +72,6 @@ class FormRenderNode(Node):
                 return element.render(context, **options)
         else:
             raise TemplateSyntaxError("form_render can't render %r" % (element, ))
-
-
-@register.tag('tagattrs')
-class TagAttrsNode(Node):
-    def __init__(self, parser, token):
-        bits = token.split_contents()
-        self.nodelist = parser.parse(('end{}'.format(bits[0]),))
-        parser.delete_first_token()
-
-    def render(self, context):
-        """
-        Remove empty attributes and newlines
-        """
-        value = self.nodelist.render(context)
-        value = re.sub('\w+=\"\s*\"', '', value)
-        return re.sub('[\n ]+', ' ', value).strip()
 
 
 @register.filter

@@ -13,7 +13,7 @@ from django.template.loader_tags import IncludeNode
 
 register = Library()
 
-ATTRS_RE = re.compile(r'(?P<attr>\w+)(\s*=\s*[\'"](?P<val>.*)[\'"])?')
+ATTRS_RE = re.compile(r'(?P<attr>[-\w]+)(\s*=\s*[\'"](?P<val>.*)[\'"])?')
 
 
 def _render_parts(context, parts_list):
@@ -299,5 +299,5 @@ class WidgetAttrNode(Node):
             attrs[self.attr] = (value, self.action)
         else:
             old_value, old_action = attrs[self.attr]
-            if self.old_action != 'override':
+            if old_action != 'override':
                 attrs[self.attr] = ('{} {}'.format(old_value, value), self.action)

@@ -1,17 +1,14 @@
 {% load material_form material_form_internal %}
 {% part bound_field.field %}{% with formset=bound_field|formset_value %}<div class="row">
-    <div {% tagattrs %}
-         id="id_{{ bound_field.html_name }}_container"
-         class="{% part field group_class %}formset-field col s12
-                {% if field.required%}required{% endif %}
-                {% if bound_field.errors %}has-error{% endif %}
-                {% part field add_group_class %}{% endpart %}
-                {% endpart %}" data-formset-prefix="{{ formset.prefix }}"{% endtagattrs %}>
+    <div{% attrs bound_field 'group' %}
+        id="id_{{ bound_field.html_name }}_container"
+           class="formset-field col s12{% if field.required %} required{% endif %}{% if bound_field.errors %} has-error{% endif %}"
+           data-formset-prefix="{{ formset.prefix }}"
+    {% endattrs %}>
         {% part field label %}
-        <label {% tagattrs %}
-               for="{{ bound_field.id_for_label }}"
-               class="{% part field add_label_class %}{{ form_label_class }}{% endpart %}"
-               {% endtagattrs %}>{{ bound_field.label }}</label>
+        <label{% attrs bound_field 'label' %}
+            for="{{ bound_field.id_for_label }}"
+        {% endattrs %}>{{ bound_field.label }}</label>
         {% endpart %}{% part field prefix %}{% endpart %}{% part field control %}
         <script type="form-template" data-formset-empty-form>
             <tr data-formset-form>
