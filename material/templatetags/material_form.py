@@ -1,6 +1,8 @@
 import os
+import re
 from collections import defaultdict
 
+from django.forms.utils import flatatt
 from django.forms.forms import BoundField
 from django.template import Library
 from django.template.base import (
@@ -10,6 +12,8 @@ from django.template.loader_tags import IncludeNode
 
 
 register = Library()
+
+ATTRS_RE = re.compile(r'(?P<attr>\w+)(\s*=\s*[\'"](?P<val>.*)[\'"])?')
 
 
 def _render_parts(context, parts_list):
@@ -80,16 +84,22 @@ class FormNode(Node):
 
         # Render form and parts
         parts = defaultdict(dict)  # part -> section -> value
+        attrs = defaultdict(dict)  # field -> section -> atts
 
         with context.push(
                 form=form,
                 layout=layout,
                 form_template_pack=os.path.dirname(template_name),
-                form_parts=parts):
+                form_parts=parts,
+                form_widget_attrs=attrs):
 
             # direct children
             children = (node for node in self.nodelist if isinstance(node, FormPartNode))
             _render_parts(context, children)
+
+            attrs = (node for node in self.nodelist if isinstance(node, WidgetAttrNode))
+            for attr in attrs:
+                attr.render(context)
 
             # include
             children = (node for node in self.nodelist if isinstance(node, IncludeNode))
@@ -98,11 +108,18 @@ class FormNode(Node):
                 children = (node for node in included.nodelist if isinstance(node, FormPartNode))
                 _render_parts(context, children)
 
+                attrs = (node for node in self.nodelist if isinstance(node, WidgetAttrNode))
+                for attr in attrs:
+                    attr.render(context)
+
             return template.render(context.flatten())
 
 
 @register.tag('part')
 class FormPartNode(Node):
+    """
+    Named piece of HTML layout.
+    """
     def __init__(self, parser, token):
         bits = token.split_contents()
 
@@ -157,3 +174,130 @@ class FormPartNode(Node):
             if not value:
                 return ''
             return value
+
+
+@register.tag('attrs')
+class WidgetAttrsNode(Node):
+    """
+    Renders attrs for the html tag.
+
+    <input{% attrs boundfield 'widget' default field.widget.attrs %}
+        id="id_{{ bound_field.name }}"
+        class="{% if bound_field.errors %}invalid{% endif %}"
+    {% endattrs %}>
+    """
+    def __init__(self, parser, token):
+        bits = token.split_contents()
+
+        if len(bits) < 3:
+            raise TemplateSyntaxError(
+                "%r accepts at least 2 arguments (bound_field, 'groupname'), got: {}" %
+                (bits[0], ','.join(bits[1:])))
+
+        if len(bits) > 5:
+            raise TemplateSyntaxError(
+                "%r accepts at mast 4 arguments (bound_field, 'groupname' default attrs_dict ), got: {}" %
+                (bits[0], ','.join(bits[1:])))
+
+        if len(bits) > 3 and bits[3] != 'default':
+            raise TemplateSyntaxError(
+                "%r 3d argument should be 'default' (bound_field, 'groupname' default attrs_dict ), got: {}" %
+                (bits[0], ','.join(bits[1:])))
+
+        self.field = Variable(bits[1])
+        self.group = Variable(bits[2])
+        self.widget_attrs = Variable(bits[4]) if len(bits) >= 5 else None
+        self.nodelist = parser.parse(('end{}'.format(bits[0]),))
+        parser.delete_first_token()
+
+    def resolve_field(self, context):
+        field = self.field.resolve(context)
+        if isinstance(field, BoundField):
+            field = field.field
+        return field
+
+    def render(self, context):
+        field = self.resolve_field(context)
+        group = self.group.resolve(context)
+        form_widget_attrs = context['form_widget_attrs']
+
+        override = {}
+        if group in form_widget_attrs[field]:
+            override = form_widget_attrs[field][group]
+
+        build_in_attrs, tag_content = {}, self.nodelist.render(context)
+        for attr, _, value in ATTRS_RE.findall(tag_content):
+            build_in_attrs[attr] = value if value != '' else True
+
+        widget_attrs = {}
+        if self.widget_attrs is not None:
+            widget_attrs = self.widget_attrs.resolve(context)
+
+        result = build_in_attrs.copy()
+        result.update(widget_attrs)
+        for attr, (value, action) in override.items():
+            if action == 'override':
+                result[attr] = value
+            elif action == 'append':
+                if attr in result:
+                    result[attr] += " " + value
+                else:
+                    result[attr] = value
+
+        return flatatt(result)
+
+
+@register.tag('attr')
+class WidgetAttrNode(Node):
+    """
+    {% attr form.email 'widget' 'data-validate' %}email{% endattr %}
+    {% attr form.email 'widget' 'class' append %}green{%  endattr %}
+    {% attr form.email 'widget' 'required' %}True{%  endattr %}
+    """
+    def __init__(self, parser, token):
+        bits = token.split_contents()
+
+        if len(bits) < 4:
+            raise TemplateSyntaxError(
+                "{} accepts at least 3 arguments (bound_field, 'groupname' 'attr_name'), got: {}".format(
+                    (bits[0], ','.join(bits[1:]))))
+
+        if len(bits) > 5:
+            raise TemplateSyntaxError(
+                "{} accepts at mast 4 arguments (bound_field, 'groupname' 'attr_name' action ), got: {}".format(
+                    (bits[0], ','.join(bits[1:]))))
+
+        if len(bits) >= 5 and bits[4] not in ['append', 'override']:
+            raise TemplateSyntaxError(
+                "{} unknown action {}  should be 'append' of 'override'".format(
+                    (bits[0], ','.join(bits[4]))))
+
+        self.field = Variable(bits[1])
+        self.group = Variable(bits[2])
+        self.attr = bits[3]
+        self.action = bits[4] if len(bits) >= 5 else 'override'
+        self.nodelist = parser.parse(('end{}'.format(bits[0]),))
+        parser.delete_first_token()
+
+    def resolve_field(self, context):
+        field = self.field.resolve(context)
+        if isinstance(field, BoundField):
+            field = field.field
+        return field
+
+    def render(self, context):
+        field = self.resolve_field(context)
+        group = self.group.resolve(context)
+        form_widget_attrs = context['form_widget_attrs']
+        value = self.nodelist.render(context)
+
+        if group not in form_widget_attrs[field]:
+            form_widget_attrs[field][group] = {}
+        attrs = form_widget_attrs[field][group]
+
+        if self.attr not in attrs or self.action == 'override':
+            attrs[self.attr] = (value, self.action)
+        else:
+            old_value, old_action = attrs[self.attr]
+            if self.old_action != 'override':
+                attrs[self.attr] = ('{} {}'.format(old_value, value), self.action)
