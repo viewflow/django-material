@@ -17,6 +17,7 @@ setup(
     packages=['material',
               'material.templatetags',
               'material.frontend',
+              'material.frontend.migrations',
               'material.frontend.templatetags',
               'material.admin',
               'material.admin.templatetags'],
