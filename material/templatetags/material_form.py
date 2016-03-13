@@ -234,7 +234,11 @@ class WidgetAttrsNode(Node):
             widget_attrs = self.widget_attrs.resolve(context)
 
         result = build_in_attrs.copy()
+
+        if 'class' in result and 'class' in widget_attrs:
+            result['class'] += ' ' + widget_attrs.pop('class')
         result.update(widget_attrs)
+
         for attr, (value, action) in override.items():
             if action == 'override':
                 result[attr] = value
