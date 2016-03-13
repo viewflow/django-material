@@ -13,8 +13,7 @@ class Test(VisualTest):
 
     def test_missing_value_error(self):
         self.driver.get('%s%s' % (self.live_server_url, test.Test.test_missing_value_error.url))
-        self.driver.find_element_by_css_selector("button").send_keys(Keys.RETURN)        
-        import ipdb; ipdb.set_trace()
+        self.driver.find_element_by_css_selector("button").send_keys(Keys.RETURN)
         self.assertScreenshot('form', 'selectmultiple_missing_value_error')
 
     def test_part_group_class(self):
