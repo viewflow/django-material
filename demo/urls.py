@@ -115,6 +115,8 @@ urlpatterns = [
     url(r'^demo/widget/selectdate/$', WidgetFormView.as_view(form_class=widget_forms.SelectDateWidgetForm)),
 
     # admin widgets test
+    url(r'^demo/widget/admin/$', generic.RedirectView.as_view(
+        url='/demo/widget/admin/filteredselectmultiple/', permanent=False)),
     url(r'^demo/widget/admin/filteredselectmultiple/$', AdminFormView.as_view(
         form_class=admin_forms.FilteredSelectMultipleForm)),
     url(r'^demo/widget/admin/admindatewidget/$', AdminFormView.as_view(

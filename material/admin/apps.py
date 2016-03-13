@@ -3,11 +3,11 @@ from django.contrib import admin
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
 
-from ..frontend.apps import FrontendAppMixin
+from ..frontend.apps import ModuleMixin
 from ..frontend.urlconf import ModuleURLResolver
 
 
-class MaterialAdminConfig(FrontendAppMixin, AppConfig):
+class MaterialAdminConfig(ModuleMixin, AppConfig):
     name = 'material.admin'
     label = "material_admin"
 

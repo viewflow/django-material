@@ -4,7 +4,7 @@ from .urlconf import ModuleURLResolver  # NOQA
 from .registry import modules  # NOQA
 
 
-default_app_config = 'material.frontend.apps.MaterialForntendConfig'
+default_app_config = 'material.frontend.apps.MaterialFrontendConfig'
 
 
 if getattr(settings, 'MATERIAL_FRONTEND_AUTOREGISTER', True):

@@ -9,7 +9,7 @@ Material design for Django Forms and Admin. Template driven.
 
 .. image:: https://travis-ci.org/viewflow/django-material.svg
     :target: https://travis-ci.org/viewflow/django-material
-    
+
 .. image:: https://badges.gitter.im/Join%20Chat.svg
    :alt: Join the chat at https://gitter.im/viewflow/django-material
    :target: https://gitter.im/viewflow/django-material?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
@@ -18,13 +18,13 @@ Material design for Django Forms and Admin. Template driven.
 Overview
 ========
 
-- Forms_ - new way to render django forms
+- Forms_ - New way to render django forms
 
   * Strong python/html code separation
   * Easy redefinition of particular fields rendering
   * Complex form layout support
 
-- Frontend_ - Quick starter template for modular ERP-like applications developent
+- Frontend_ - Quick starter template for modular applications development
 
 - Admin_ - Material-designed django admin
 
@@ -36,7 +36,7 @@ Demo: http://forms.viewflow.io/
 Installation
 ============
 
-django-material tested with Python 2.7/3.4, django 1.8, django 1.9::
+django-material tested with Python 2.7/3.4/3.5, django 1.8, django 1.9::
 
     pip install django-material
 
@@ -44,7 +44,7 @@ django-material tested with Python 2.7/3.4, django 1.8, django 1.9::
 Forms
 =====
 
-Add `material` into INSTALLED_APPS settings 
+Add `material` into INSTALLED_APPS settings
 
 .. code-block:: python
 
@@ -98,9 +98,20 @@ Here is the example of rendering form with but prefix email field with email ico
         <button type="submit" name="_submit" class="btn">Submit</button>
     </form>
 
-There is a lot of other parts declared in default templates. See
-template code for details.  If your widget is so special, you can
-completly override its rendering 
+You can append value to of some tags attribute or completly override the attribute content.
+
+.. code-block:: html
+
+   {% form %}
+       {% attr form.email 'group' class append %}yellow{% endattr %}
+       {% attr form.email 'label' class append %}big{% endattr %}
+       {% attr form.email 'widget' data-validate %}email{% endattr %} <!-- by default value would be overriden -->
+       {% attr form.email 'widget' placeholder override %}{% endattr %}
+   {% endform %}
+
+There is a lot of other parts and attribute groups declared in default
+templates. See template code for details.  If your widget is so
+special, you can completly override its rendering
 
 .. code-block:: html
 
@@ -158,7 +169,7 @@ Frontend
 Frontend template assumes that your application contains a set of top level `modules`
 each one could restrict user access level and have own submenu.
 
-To quick start add `material.frontend` into INSTALLED_APPS settings 
+To quick start add `material.frontend` into INSTALLED_APPS settings
 
 .. code-block:: python
 
@@ -176,43 +187,50 @@ Add frontend urls into global urlconf module at urls.py
 
     urlpatterns = [
         ...
-        url(r'^admin/', include(admin.site.urls)),
         url(r'', include(frontend_urls)),
     ]
 
 The fronend module perform all required settings modification (add middleware, context_processors and template tags),
 automagically till `MATERIAL_FRONTEND_AUTOREGISTER` settings set to False.
 
-To create a new module make a `modules.py` file, inside app directory, with following content
+To create a new module add `ModuleMixin` to your `AppConfig` definision in `apps.py`
 
 .. code-block:: python
 
-    from material.frontend import Module
+    from material.frontend.apps import ModuleMixin
 
-    class Sample(Module):
-        icon = 'mdi-image-compare'
+    class Sales(ModuleMixin, AppConfig):
+        name = 'sales'
+        icon = '<i class="mdi-communication-quick-contacts-dialer"></i>'
 
-By default module expose a single view that renders html template from <module_name>/index.html file.
-
-You can override `Module.get_urls()` method to provide module url config that would be automatically included into
-global urls.
-
-To provide custom module menu, just create a template `<module_name>/menu.html`.
-
-You can disable modules autodiscovery and explicitly list enabled modules in the `MODULES` setting
+The application have to have <app_module>/urls.py file, with
+a single no-parametrized url with name='index', ex::
 
 .. code-block:: python
 
-    MODULES = (
-        'my_app.modules.Sample'
-    )
+    urlpatterns = [
+            url('^$', generic.TemplateView.as_view(template_name="sales/index.html"), name="index"),
+    ]
+
+All AppConfigs urls will be included into material.frontend.urls automatically under /<app_label>/ prefix
+The AppConfig.label, used for the urls namespace.
+
+The menu.html sample::
+
+.. code-block:: html
+
+        <ul>
+            <li><a href="{% url 'sales:index' %}">Dashboard</a></li>
+            <li><a href="{% url 'sales:customers' %}">Customers</a></li>
+            {% if perms.sales.can_add_lead %}<li><a href="{% url 'sales:leads' %}">Leads</a></li>{% endif %}
+        </ul>
 
 ****
 
 Admin
 ======
 
-Add `material.admin` into INSTALLED_APPS settings 
+Add `material.admin` into INSTALLED_APPS settings
 
 .. code-block:: python
 
@@ -247,23 +265,24 @@ You can provide a custom admin site module in the `MATERIAL_ADMIN_SITE` setting
 
     MATERIAL_ADMIN_SITE = 'mymodule.admin.admin_site'
 
-Admin support development is on initial stage. Only basic admin features are available.
+**Admin support development is on initial stage. Only basic admin features are available.**
 
 ****
 
 Changelog
 =========
 
-0.6.0 2016-02-22 - Alpha
+0.7.0 2016-03-13 - Alpha
 ------------------------
 
-* First release with full django stardard widgets support
-* Forms - New per-widget demos on http://forms.viewflow.io/demo/widget/
-* Forms - Many widget behaviour fixes (DecimalInput, Select, MultiSelect, RadioInput)
-* Forms - Disable change datetime on mouse wheel
-* Admin - Style fixes and improvements
-* Admin - Custom form layouts support (ex: http://forms.viewflow.io/admin/sales/shipment/add/)
-* Admin - Admin css/js files moded to separate templates. Fix static files issue with CDN
-* Admin - Move All js/css dependencies inside the package. Meke it intranet app fiendly.
-* Frontend - Style fixes and improvements
-* Frontend - Fix load indicator on pjax back
+The last alpha release.
+
+* Forms - Fix controls in new forms in formsets
+* Forms - New way to append or override widget attrs in template
+* Forms - Removed `group_class`, `add_group_class`, `add_label_class` redifinable parts
+* Admin - Match table styles to google guidelines.
+* Admin - Start to work on admin widget support improvements http://forms.viewflow.io/demo/widget/admin/
+* Admin - Fix scrollbar
+* Frontend - Switch from fontawesome to material-design-iconic font
+* Frontend - Fix broken links on user navigation menu
+* Frontend - Modules are refactored to AppConfig mixins

@@ -6,16 +6,15 @@ from django.core.urlresolvers import reverse
 from django.db.models.signals import post_migrate
 from django.template import Template, TemplateDoesNotExist
 from django.template.loader import get_template
-from django.utils.functional import curry
 from django.utils.module_loading import module_has_submodule
 
 from .registry import modules as modules_registry
 from .urlconf import ModuleURLResolver
 
 
-class FrontendAppMixin(object):
+class ModuleMixin(object):
     """
-    Extension for the django AppConfig.
+    Extension for the django AppConfig. Makes django app pluggable at runtime.
 
     - Application level user permission access
     - Runtime app installation/deinstallation
@@ -93,13 +92,13 @@ class FrontendAppMixin(object):
             return Template('')
 
 
-class MaterialForntendConfig(AppConfig):
+class MaterialFrontendConfig(AppConfig):
     name = 'material.frontend'
     verbose_name = 'Site Modules'
 
     def ready(self):
         for app_config in apps.get_app_configs():
-            if isinstance(app_config, FrontendAppMixin):
+            if isinstance(app_config, ModuleMixin):
                 modules_registry.register(app_config)
         post_migrate.connect(update_modules, sender=self)
 
