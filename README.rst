@@ -225,6 +225,10 @@ The menu.html sample
             {% if perms.sales.can_add_lead %}<li><a href="{% url 'sales:leads' %}">Leads</a></li>{% endif %}
         </ul>
 
+After you create a new module, you need to run `./manage.py migrate`.
+
+You can manage module installed state on the django admin page - `/admin/frontend/module/`
+
 ****
 
 Admin
