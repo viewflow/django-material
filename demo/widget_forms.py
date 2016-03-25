@@ -209,6 +209,8 @@ class IntegerFieldForm(forms.Form):
     field2 = forms.IntegerField(help_text='initial value', initial=42)
     field3 = forms.IntegerField(help_text='value between 5-10', min_value=5, max_value=10)
     field4 = forms.IntegerField(help_text='prefix')
+    field5 = forms.IntegerField(
+        help_text="range", widget=forms.NumberInput(attrs={'type': 'range', 'min': '0', 'max': '100'}))
 
     template = Template("""
     {% form %}
