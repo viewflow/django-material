@@ -21,3 +21,6 @@ class MaterialAdminConfig(ModuleMixin, AppConfig):
 
     def index_url(self):
         return reverse('admin:index'.format(self.label))
+
+    def has_perm(self, user):
+        return user.is_staff
