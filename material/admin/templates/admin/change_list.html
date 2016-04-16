@@ -44,7 +44,7 @@
 
 {% block content %}
 <div class="row">
-    <div class="col s12 m8 l9">
+    <div class="col s12 {% if cl.date_hierarchy or cl.list_filter or cl.search_fields %}m8 l9{% else %}m12 l12{% endif %}">
         <div class="card data-card">
             <div class="card-content">
                 {% block result_list %}
@@ -55,6 +55,7 @@
             </div>
         </div>
     </div>
+    {% if cl.date_hierarchy or cl.list_filter or cl.search_fields %}
     <div class="col s12 m4 l3">
         <div class="card filters">
             <div class="card-content">
@@ -75,6 +76,7 @@
             <div class="card-action">&nbsp;</div>
         </div>
     </div>
+    {% endif %}
 
     {% if has_add_permission %}
     {% url cl.opts|admin_urlname:'add' as add_url %}
