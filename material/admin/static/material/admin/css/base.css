@@ -257,6 +257,12 @@ ul.side-nav.module-menu li.active>a>span.badge {
 /*
     Change list page
 */
+
+.filter-toggle {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
 .filters a {
     margin-right: 0;
 }
