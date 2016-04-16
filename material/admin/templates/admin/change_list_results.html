@@ -8,7 +8,17 @@
                 {% for header in result_headers %}
                 {% if 'action-checkbox' not in header.class_attrib %}
                 <th scope="col" {{ header.class_attrib }}>
-                    {{ header.text|capfirst }}
+                    {% if header.sortable %}
+                        {% if header.sort_priority == 0 %}
+                            <a href="{{ header.url_primary }}">{{ header.text|capfirst }}</a>
+                        {% elif header.ascending %}
+                            <a href="{{ header.url_primary }}" title="{% trans "Toggle sorting" %}">{{ header.text|capfirst }}</a>&nbsp;∧
+                        {% else %}
+                            <a href="{{ header.url_remove }}" title="{% trans "Remove from sorting" %}">{{ header.text|capfirst }}</a>&nbsp;∨
+                        {% endif %}
+                    {% else %}
+                        <span>{{ header.text|capfirst }}</span>
+                    {% endif %}
                 </th>{% endif %}{% endfor %}
             </tr>
         </thead>
