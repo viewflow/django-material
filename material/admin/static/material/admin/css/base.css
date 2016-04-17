@@ -273,6 +273,18 @@ ul.side-nav.module-menu li.active>a>span.badge {
     background: white;
 }
 
+.results table tr td:first-child {
+    width: 50px;
+}
+
+.results thead th {
+    white-space: nowrap;
+}
+
+.results thead .zmdi {
+    line-height: 15px;
+}
+
 .results table.dataTable.dtr-inline.collapsed tbody td:first-child:before,
 .results table.dataTable.dtr-inline.collapsed tbody th:first-child:before {
     top: 18px;
@@ -352,11 +364,6 @@ ul.side-nav.module-menu li.active>a>span.badge {
 
 
 @media only screen and (max-width : 600px) {
-    .results {
-        margin-left: -20px;
-        margin-right: -20px;
-    }
-
     .fixed-action-btn {
         bottom: 0px;
         right: 5px;
