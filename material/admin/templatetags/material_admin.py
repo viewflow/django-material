@@ -159,7 +159,7 @@ def paginator_number(cl, i):
         else:
             return format_html('<li class="disabled"><a href="#!"><i class="mdi-navigation-chevron-right"></i></a></li>')
     elif i == '.':
-        return '<li class="disabled"><a href="#" onclick="return false;">...</a></li>'
+        return mark_safe('<li class="disabled"><a href="#" onclick="return false;">...</a></li>')
     elif i == cl.page_num:
         return format_html('<li class="active"><a href="{0}">{0}</a></li> ',
                            i+1,
