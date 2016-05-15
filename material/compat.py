@@ -4,6 +4,7 @@ Django backport and compatibility utilites
 import inspect
 import functools
 
+import django
 from django.utils import six
 from django.utils.html import conditional_escape
 
@@ -115,3 +116,16 @@ except ImportError:
             return dec(func)
         else:
             raise ValueError("Invalid arguments provided to simple_tag")
+
+if django.VERSION >= (1, 9):
+    def context_flatten(context):
+        return context.flatten()
+else:
+    def context_flatten(context):
+        result = {}
+        # https://code.djangoproject.com/ticket/24765
+        for dict_ in context.dicts:
+            if hasattr(dict_, 'flatten'):
+                dict_ = context_flatten(dict_)
+            result.update(dict_)
+        return result

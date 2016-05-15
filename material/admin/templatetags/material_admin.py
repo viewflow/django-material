@@ -1,3 +1,4 @@
+import re
 import datetime
 from importlib import import_module
 
@@ -20,6 +21,9 @@ from ..base import AdminReadonlyField, TabularInline
 
 
 register = Library()
+
+
+CL_VALUE_RE = re.compile('value="(.*)\"')
 
 
 def get_admin_site():
@@ -303,3 +307,9 @@ def admin_related_field_urls(bound_field):
 
 
 simple_tag(register, admin_related_field_urls)
+
+
+@register.filter
+def admin_change_list_value(result_checkbox_html):
+    value = CL_VALUE_RE.findall(result_checkbox_html)
+    return value[0] if value else None

@@ -10,6 +10,8 @@ from django.template.base import (
 from django.template.loader import get_template
 from django.template.loader_tags import IncludeNode
 
+from ..compat import context_flatten
+
 
 register = Library()
 
@@ -112,7 +114,7 @@ class FormNode(Node):
                 for attr in attrs:
                     attr.render(context)
 
-            return template.render(context.flatten())
+            return template.render(context_flatten(context))
 
 
 @register.tag('part')

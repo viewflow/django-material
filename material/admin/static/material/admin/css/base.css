@@ -257,13 +257,62 @@ ul.side-nav.module-menu li.active>a>span.badge {
 /*
     Change list page
 */
-.filters a {
+@media only screen and (min-width : 601px) {
+    .actions-card {
+        margin-left: -10px;
+    }
+}
+
+.actions-card .card-content {
+    padding: 10px;
+    padding-top: 10px;
+}
+
+.actions-card .card-title {
+    font-size: 18px;
+    text-transform: uppercase;
+    font-weight: 100;
+    padding-left: 10px;
+    margin-bottom: -10px;
+}
+
+.actions-card span {
+    font-size: 12px;
+    padding-left: 10px;
+}
+
+.actions-card .card-action {
+    padding: 10px;
+}
+
+@media only screen and (min-width : 601px) {
+    .filters-card {
+        margin-left: -10px;
+    }
+}
+
+.filters-card .card-title {
+    font-size: 18px;
+    text-transform: uppercase;
+    font-weight: 100;
+    padding-left: 10px;
+    margin-top: -10px;
+}
+
+.filters-card .card-content {
+    padding: 10px;
+    padding-top: 10px;
+}
+
+.filters-card a {
     margin-right: 0;
 }
-.filters.card {
+
+.filters-card.card {
     overflow:initial;
 }
-.filters #changelist-search-button {
+
+.filters-card #changelist-search-button {
     z-index:1000;
     position:absolute;
     right:15px;
@@ -273,43 +322,43 @@ ul.side-nav.module-menu li.active>a>span.badge {
     background: white;
 }
 
+
+.results table th,
+.results table td {
+    vertical-align: top;
+}
+
+.results table tr th:first-child,
 .results table tr td:first-child {
+    padding-left:24px;
+}
+
+.results table tr th:last-child,
+.results table tr td:last-child {
+    padding-right:24px;
+}
+
+.fixedHeader-floating th:first-child,
+.fixedHeader-floating td:first-child {
+    padding-left:24px;
+}
+
+.results table tr .action-checkbox {
     width: 50px;
+}
+
+.fixedHeader-floating .action-checkbox label {
+    display: none;
 }
 
 .results thead th {
     white-space: nowrap;
 }
 
+.fixedHeader-floating thead .zmdi,
 .results thead .zmdi {
     line-height: 15px;
-}
-
-.results table.dataTable.dtr-inline.collapsed tbody td:first-child:before,
-.results table.dataTable.dtr-inline.collapsed tbody th:first-child:before {
-    top: 18px;
-    left: 4px;
-    color: orange;
-    font-size: 20px;
-    background-color: #fff;
-    border: none;
-    box-shadow: none;
-    content: "\e7c3";
-    font-family: "Material-Design-Icons";
-    speak: none;
-    font-style: normal;
-    font-weight: normal;
-    font-variant: normal;
-    text-transform: none;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-
-.results table.dataTable.dtr-inline.collapsed tbody tr.parent td:first-child:before,
-.results table.dataTable.dtr-inline.collapsed tbody tr.parent th:first-child:before {
-    color: orange;
-    background-color: #fff;
-    content: "\e7c1";
+    margin-left:-19px;
 }
 
 .results table.collapsed td,
@@ -321,10 +370,18 @@ ul.side-nav.module-menu li.active>a>span.badge {
     white-space: normal;
 }
 
-.results table a {
+.fixedHeader-floating thead th a,
+.results table thead a {
+    color: black;
+    font-weight: 200;
+    text-transform: none;
+}
+
+.results table tbody a {
     color: #039be5;
     text-transform: none;
 }
+
 
 .card .pagination a {
     margin-right: 0px;
@@ -500,4 +557,11 @@ ul.side-nav.module-menu li.active>a>span.badge {
     .change-form .multiselect .selector-chooser .selector-remove i {
         transform: rotate(90deg);
     }
+}
+
+/* 
+    Delete confirmation
+*/
+.delete-confirmation li {
+    padding-left: 20px;
 }

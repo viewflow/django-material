@@ -1,12 +1,15 @@
-{% load i18n admin_static %}{% load cycle from future %}
+{% load i18n admin_static material_admin %}{% load cycle from future %}
 {% if results %}
 <div class="results">
     <table id="result_list" class="table bordered">
         <thead>
             <tr>
-                <td></td>
                 {% for header in result_headers %}
-                {% if 'action-checkbox' not in header.class_attrib %}
+                {% if 'action_checkbox' in cl.list_display and forloop.counter == 1 %}
+                <th class="action-checkbox">
+                    {{ header.text }}<label for="action-toggle">&nbsp;</label>
+                </th>
+                {% else %}
                 <th scope="col" {{ header.class_attrib }}>
                     {% if header.sortable %}
                         {% if header.sort_priority == 0 %}
@@ -23,15 +26,21 @@
             </tr>
         </thead>
         <tbody>                
-            {% for result in results %}
+            {% for result in results %}            
             {% if result.form.non_field_errors %}
             <tr><td colspan="{{ result|length }}">{{ result.form.non_field_errors }}</td></tr>
             {% endif %}
             <tr class="{% cycle 'row1' 'row2' %}">
-                <td></td>
                 {% for item in result %}
-                {% if 'action-checkbox' not in item %}{{ item }}{% endif %}
-                {% endfor %}</tr>
+                {% if 'action_checkbox' in cl.list_display and forloop.counter == 1 %}
+                    <td class="action-checkbox">
+                        <input class="action-select" name="_selected_action" id="_selected_action_{{ forloop.parentloop.counter }}" type="checkbox" value="{{ item|admin_change_list_value }}" />
+                        <label for="_selected_action_{{ forloop.parentloop.counter }}">&nbsp;&nbsp;</label>
+                    </td>
+                {% else %}
+                    {{ item }}
+                {% endif %}{% endfor %}
+            </tr>
             {% endfor %}
         </tbody>
     </table>

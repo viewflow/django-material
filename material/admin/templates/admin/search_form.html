@@ -1,6 +1,6 @@
 {% load i18n admin_static %}
 {% if cl.search_fields %}
-<div class="row">
+<div class="row" style="margin-top:-10px">
     <form id="changelist-search" action="" method="get">
         <div class="input-field col s12">
             <input type="text" name="{{ search_var }}" value="{{ cl.query }}" id="searchbar"/>
