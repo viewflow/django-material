@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.conf.urls import include, url
 from django.contrib.auth.decorators import login_required
+from django.contrib import admin
 from django.shortcuts import render
 from django.views import generic
 
@@ -153,6 +154,9 @@ urlpatterns = [
     url(r'', include(frontend_urls)),
 ]
 
+
+if 'material.frontend' not in settings.INSTALLED_APPS:
+    urlpatterns += [url(r'^admin/', include(admin.site.urls))]
 
 if 'zinnia' in settings.INSTALLED_APPS:
     urlpatterns += [url(r'^weblog/', include('zinnia.urls', namespace='zinnia'))]
