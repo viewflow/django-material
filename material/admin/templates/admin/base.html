@@ -39,11 +39,11 @@
             <nav id="header" class="nav-top green">
                 <div class="nav-wrapper">
                     <a href="/" class="page-title hide-on-med-and-down">{% block brand-logo %}{% trans 'Administration' %}{% endblock %}</a>
-                    <a href="#" data-activates="nav-mobile" class="button-collapse full"><i class="mdi-navigation-menu"></i></a>
+                    <a href="#" data-activates="nav-mobile" class="button-collapse full"><i class="material-icons">menu</i></a>
 
                     <ul class="right">
                         {% if user.is_authenticated %}
-                        <li><a class="dropdown-button constrain_width" href="#!" data-activates="user-menu">{{ user.get_full_name|default:user.username }}<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
+                        <li><a class="dropdown-button constrain_width" href="#!" data-activates="user-menu">{{ user.get_full_name|default:user.username }}<i class="material-icons right">arrow_drop_down</i></a></li>
                         {% endif %}
                     </ul>
                 </div>
@@ -56,14 +56,14 @@
                     </li>
 
                     {% block breadcrumbs_left %}
-                    {% block back_link %}<li class="no-padding"><a class="collapsible-header no-pjax" href="/"><i class="mdi-navigation-arrow-back"></i>{% trans 'Back to website' %}</a></li>{% endblock %}
+                    {% block back_link %}<li class="no-padding"><a class="collapsible-header no-pjax" href="/"><i class="material-icons">arrow_back</i>{% trans 'Back to website' %}</a></li>{% endblock %}
                     <li class="no-padding active">
                         <div class="collapsible-body" style="display:block">
                             <ul class="collapsible" data-collapsible="accordion">
                                 {% get_app_list request as app_list %}
                                 {% for app in app_list %}
                                 <li class="header{% if app.active %} active{% endif %}">
-                                    <a class="collapsible-header{% if app.active %} active{% endif %}"><i class="mdi-action-settings-applications"></i> {{ app.name|truncatechars:23 }}</a>
+                                    <a class="collapsible-header{% if app.active %} active{% endif %}"><i class="material-icons">settings_applications</i> {{ app.name|truncatechars:23 }}</a>
                                     <div class="collapsible-body" {% if app.active %}style="display:block"{% endif %}>
                                         <ul>
                                             {% for model in app.models %}

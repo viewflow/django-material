@@ -4,4 +4,4 @@ from material.frontend.apps import ModuleMixin
 
 class Accounting(ModuleMixin, AppConfig):
     name = "demo.examples.accounting"
-    icon = '<i class="mdi-action-payment"></i>'
+    icon = '<i class="material-icons">payment</i>'

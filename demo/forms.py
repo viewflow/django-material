@@ -142,8 +142,8 @@ class LoginForm(forms.Form):
 
     template = Template("""
     {% form %}
-        {% part form.email prefix %}<i class="mdi-communication-email prefix"></i>{% endpart %}
-        {% part form.password prefix %}<i class="mdi-action-lock prefix"></i>{% endpart %}
+        {% part form.email prefix %}<i class="material-icons prefix">email</i>{% endpart %}
+        {% part form.password prefix %}<i class="material-icons prefix">lock</i>{% endpart %}
         {% attr form.keep_logged 'group' class append %}right-align{% endattr %}
     {% endform %}
     """)
@@ -180,9 +180,9 @@ class RegistrationForm(forms.Form):
 
     template = Template("""
     {% form %}
-        {% part form.username prefix %}<i class="mdi-action-account-box prefix"></i>{% endpart %}
-        {% part form.email prefix %}<i class="mdi-communication-email prefix"></i>{% endpart %}
-        {% part form.password prefix %}<i class="mdi-action-lock-open prefix"></i>{% endpart %}
+        {% part form.username prefix %}<i class="material-icons prefix">account_box</i>{% endpart %}
+        {% part form.email prefix %}<i class="material-icons prefix">email</i>{% endpart %}
+        {% part form.password prefix %}<i class="material-icons prefix">lock_open</i>{% endpart %}
     {% endform %}
     """)
 
@@ -203,10 +203,10 @@ class ContactForm(forms.Form):
 
     template = Template("""
     {% form %}
-        {% part form.name prefix %}<i class="mdi-action-account-box prefix"></i>{% endpart %}
-        {% part form.email prefix %}<i class="mdi-communication-email prefix"></i>{% endpart %}
-        {% part form.subject prefix %}<i class="mdi-action-announcement prefix"></i>{% endpart %}
-        {% part form.message prefix %}<i class="mdi-communication-message prefix"></i>{% endpart %}
+        {% part form.name prefix %}<i class="material-icons prefix">account_box</i>{% endpart %}
+        {% part form.email prefix %}<i class="material-icons prefix">email</i>{% endpart %}
+        {% part form.subject prefix %}<i class="material-icons prefix">announcement</i>{% endpart %}
+        {% part form.message prefix %}<i class="material-icons prefix">message</i>{% endpart %}
         {% attr form.send_copy 'group' class append %}right-align{% endattr %}
     {% endform %}
     """)
@@ -241,10 +241,10 @@ class OrderForm(forms.Form):
 
     template = Template("""
     {% form %}
-        {% part form.name prefix %}<i class="mdi-action-account-box prefix"></i>{% endpart %}
-        {% part form.company prefix %}<i class="mdi-communication-business prefix"></i>{% endpart %}
-        {% part form.email prefix %}<i class="mdi-communication-email prefix"></i>{% endpart %}
-        {% part form.phone prefix %}<i class="mdi-communication-call prefix"></i>{% endpart %}
+        {% part form.name prefix %}<i class="material-icons prefix">account_box</i>{% endpart %}
+        {% part form.company prefix %}<i class="material-icons prefix">business</i>{% endpart %}
+        {% part form.email prefix %}<i class="material-icons prefix">email</i>{% endpart %}
+        {% part form.phone prefix %}<i class="material-icons prefix">call</i>{% endpart %}
     {% endform %}
     """)
 
@@ -290,10 +290,10 @@ class CheckoutForm(forms.Form):
 
     template = Template("""
     {% form %}
-        {% part form.first_name prefix %}<i class="mdi-action-account-box prefix"></i>{% endpart %}
-        {% part form.last_name prefix %}<i class="mdi-action-account-box prefix"></i>{% endpart %}
-        {% part form.email prefix %}<i class="mdi-communication-email prefix"></i>{% endpart %}
-        {% part form.phone prefix %}<i class="mdi-communication-call prefix"></i>{% endpart %}
+        {% part form.first_name prefix %}<i class="material-icons prefix">account_box</i>{% endpart %}
+        {% part form.last_name prefix %}<i class="material-icons prefix">account_box</i>{% endpart %}
+        {% part form.email prefix %}<i class="material-icons prefix">email</i>{% endpart %}
+        {% part form.phone prefix %}<i class="material-icons prefix">call</i>{% endpart %}
         {% part form.card_type label %}{% endpart %}
     {% endform %}
     """)
@@ -323,10 +323,10 @@ class CommentForm(forms.Form):
 
     template = Template("""
     {% form %}
-        {% part form.name prefix %}<i class="mdi-action-account-box prefix"></i>{% endpart %}
-        {% part form.email prefix %}<i class="mdi-communication-email prefix"></i>{% endpart %}
-        {% part form.website prefix %}<i class="mdi-action-wallet-travel prefix"></i>{% endpart %}
-        {% part form.comment prefix %}<i class="mdi-communication-chat prefix"></i>{% endpart %}
+        {% part form.name prefix %}<i class="material-icons prefix">account_box</i>{% endpart %}
+        {% part form.email prefix %}<i class="material-icons prefix">email</i>{% endpart %}
+        {% part form.website prefix %}<i class="material-icons prefix">card_travel</i>{% endpart %}
+        {% part form.comment prefix %}<i class="material-icons prefix">chat</i>{% endpart %}
     {% endform %}
     """)
 
@@ -552,15 +552,15 @@ class HospitalRegistrationForm(forms.Form):
                     Fieldset('Procedural Questions', 'procedural_questions'),
                     Fieldset('Clinical Predictores of Cardiovascular Risk', 'cardiovascular_risks'),
                     Fieldset('Clinical Predictors of sleep Apnia Risk', 'apnia_risks'),
-                    Fieldset('Emergence Numbers', 'emergency_contacts'))
+                    Fieldset('Emergency Contacts', 'emergency_contacts'))
 
     template = Template("""
     {% form %}
-        {% part form.registration_date prefix %}<i class="mdi-editor-insert-invitation prefix"></i>{% endpart %}
-        {% part form.date_of_last_appointment prefix %}<i class="mdi-editor-insert-invitation prefix"></i>{% endpart %}
-        {% part form.primary_care_physician prefix %}<i class="mdi-action-face-unlock prefix"></i>{% endpart %}
-        {% part form.home_phone prefix %}<i class="mdi-communication-call prefix"></i>{% endpart %}
-        {% part form.work_phone prefix %}<i class="mdi-communication-call prefix"></i>{% endpart %}
+        {% part form.registration_date prefix %}<i class="material-icons prefix">insert_invitation</i>{% endpart %}
+        {% part form.date_of_last_appointment prefix %}<i class="material-icons prefix">insert_invitation</i>{% endpart %}
+        {% part form.primary_care_physician prefix %}<i class="material-icons prefix">face</i>{% endpart %}
+        {% part form.home_phone prefix %}<i class="material-icons prefix">call</i>{% endpart %}
+        {% part form.work_phone prefix %}<i class="material-icons prefix">call</i>{% endpart %}
         {% part form.procedural_questions label %}{% endpart %}
         {% part form.cardiovascular_risks label %}{% endpart %}
         {% part form.cardiovascular_risks columns %}2{% endpart %}

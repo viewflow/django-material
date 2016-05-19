@@ -13,7 +13,7 @@
         <link href="{% static 'material/css/jquery.datetimepicker.css ' %}" rel="stylesheet">
         <link href="{% static 'material/css/forms.css ' %}" rel="stylesheet">
         <link href="{% static 'material/frontend/css/frontend.css' %}" rel="stylesheet">
-        <link href="{% static 'material/css/material-design-iconic-font.css' %}" rel="stylesheet">
+        <link href="{% static 'material/fonts/material-design-icons/material-icons.css' %}" rel="stylesheet">
         {% endblock %}
 
         {% block js %}
@@ -33,7 +33,7 @@
         {% if user.is_authenticated %}{% block user_menu %}{% include 'material/frontend/includes/user_menu.html' %}{% endblock %}{% endif %}
         <header>
             <nav class="nav-top green">
-                <a href="#" data-activates="nav-mobile" class="button-collapse full"><i class="mdi-navigation-menu"></i></a>
+                <a href="#" data-activates="nav-mobile" class="button-collapse full"><i class="material-icons">menu</i></a>
 
                 <div class="nav-wrapper">
                     <div class="page-title hide-on-med-and-down">
@@ -44,9 +44,9 @@
                         {% block top_menu_extra %}{% endblock %}
                         {% block user_menu_dropdown %}
                         {% if user.is_authenticated %}
-                        <li><a class="dropdown-button constrain_width" href="#!" data-activates="user-menu">{{ user.get_full_name|default:user.username }}<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
+                        <li><a class="dropdown-button constrain_width" href="#!" data-activates="user-menu">{{ user.get_full_name|default:user.username }}<i class="material-icons right">arrow_drop_down</i></a></li>
                         {% else %}
-                        <li><a href="{% url 'login' %}" alt="Login"><i class="mdi-action-lock"></i></a></li>
+                        <li><a href="{% url 'login' %}" alt="Login"><i class="material-icons">lock</i></a></li>
                         {% endif %}
                         {% endblock %}
                     </ul>

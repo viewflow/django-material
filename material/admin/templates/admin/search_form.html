@@ -4,7 +4,7 @@
     <div class="input-field col s12">
         <input type="text" data-name="{{ search_var }}" value="{{ cl.query }}" id="searchbar"/>
         <label for="searchbar" class="{% if cl.query %}active{% endif %}">{% trans 'Search' %} {{ cl.opts.verbose_name_plural|capfirst }}</label>
-        <a href="#" id="changelist-search-button"><i class="mdi-action-search"></i></a>
+        <a href="#" id="changelist-search-button"><i class="material-icons">search</i></a>
         {% if show_result_count %}
         <small>{% blocktrans count counter=cl.result_count %}{{ counter }} result{% plural %}{{ counter }} results{% endblocktrans %} (<a href="?{% if cl.is_popup %}_popup=1{% endif %}">{% blocktrans with full_result_count=cl.full_result_count %}{{ full_result_count }} total{% endblocktrans %}</a>)</small>
         {% endif %}

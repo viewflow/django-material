@@ -1,9 +1,6 @@
 form  .row {
     margin-bottom: 0px;
 }
-[class^="mdi-"], [class*="mdi-"] {
-    line-height: 45px;
-}
 
 input[type=number] {
     -moz-appearance: textfield;
@@ -38,6 +35,10 @@ input[type=number] {
   text-overflow: ellipsis;
   width: calc(100% - 21px);
   overflow: hidden;
+}
+
+.input-field .prefix {
+    line-height: 45px;
 }
 
 .input-field .prefix ~ label {

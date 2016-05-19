@@ -15,9 +15,9 @@
                         {% if header.sort_priority == 0 %}
                             <a href="{{ header.url_primary }}">{{ header.text|capfirst }}</a>
                         {% elif header.ascending %}
-                            <a href="{{ header.url_primary }}" title="{% trans "Toggle sorting" %}"><i class="zmdi zmdi-long-arrow-up zmdi-hc-fw"></i> {{ header.text|capfirst }}</a>
+                            <a href="{{ header.url_primary }}" title="{% trans "Toggle sorting" %}"><i class="material-icons">arrow_upward</i> {{ header.text|capfirst }}</a>
                         {% else %}
-                            <a href="{{ header.url_remove }}" title="{% trans "Remove from sorting" %}"><i class="zmdi zmdi-long-arrow-down zmdi-hc-fw"></i> {{ header.text|capfirst }}</a>
+                            <a href="{{ header.url_remove }}" title="{% trans "Remove from sorting" %}"><i class="material-icons">arrow_downward</i> {{ header.text|capfirst }}</a>
                         {% endif %}
                     {% else %}
                         <span>{{ header.text|capfirst }}</span>

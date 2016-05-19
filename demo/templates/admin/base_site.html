@@ -1,7 +1,8 @@
 {% extends "admin/base.html" %}
 
 {% block title %}{{ title }} | {{ site_title|default:_('Django site admin') }}{% endblock %}
-{% block branding %}<i class="mdi-action-settings-applications" style="font-size:80px"></i>{% endblock %}
+{% block branding %}<i class="material-icons" style="font-size:80px">settings_applications</i>{% endblock %}
+
 {% block nav-global %}{% endblock %}
 
 {% block extrajs %}
@@ -14,5 +15,5 @@ toast('Use  admin:admin  to log into administration interface', 100000, 'alert-e
 
 
 {% block back_link %}
-<li class="no-padding"><a class="collapsible-header no-pjax" href="/accounting/"><i class="mdi-navigation-arrow-back"></i> Back to website</a></li>
+<li class="no-padding"><a class="collapsible-header no-pjax" href="/accounting/"><i class="material-icons">arrow_back</i> Back to website</a></li>
 {% endblock %}

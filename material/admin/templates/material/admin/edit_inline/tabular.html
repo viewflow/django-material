@@ -43,7 +43,7 @@
                     {% if element.inline.formset.can_delete %}
                     <td style="vertical-align:middle;width:60px">
                         <div style="display:none">{{ inline_admin_form.deletion_field.field }}</div>
-                        <button type="button" class="btn btn-flat white lighten-4" style="padding:0px 10px;font-size:0.7rem;height:calc(100% - 15px);width:100%" data-formset-delete-button><i class="mdi-content-clear"></i></button>
+                        <button type="button" class="btn btn-flat white lighten-4" style="padding:0px 10px;font-size:0.7rem;height:calc(100% - 15px);width:100%" data-formset-delete-button><i class="material-icons">clear</i></button>
                     </td>
                     {% endif %}
                 </tr>
@@ -53,7 +53,7 @@
                 {% endfor %}
             </tbody>
         </table>
-        <button type="button" class="btn btn-flat grey lighten-4" style="padding:0px 40px;width:100%" data-formset-add><i class="mdi-content-add"></i></button>
+        <button type="button" class="btn btn-flat grey lighten-4" style="padding:0px 40px;width:100%" data-formset-add><i class="material-icons">add</i></button>
         {{ element.inline.formset.management_form }}
     </div>
 </div>

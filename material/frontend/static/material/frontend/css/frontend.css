@@ -10,10 +10,6 @@ nav ul a:hover {
   background-color: rgba(0, 0, 0, 0);
 }
 
-nav img[class*="mdi-"] {
-    height: 35px;
-}
-
 nav ul a span.badge {
     position: absolute;
     line-height: 44px;
@@ -72,21 +68,29 @@ ul.side-nav.fixed.module-menu li a {
   overflow: hidden;
 }
 
+ul.side-nav.module-menu a.collapsible-header {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+ul.side-nav.module-menu .collapsible-header i.material-icons {
+    font-size: 1.6rem;
+    margin-right: 1rem;
+}
+
+.side-nav.fixed .collapsible-body .collapsible-body li a {
+    padding-left: 4rem;
+}
+
+
+ul.side-nav.module-menu .collapsible-body .collapsible-body .collapsible-body li a {
+    padding-left: 7rem;
+}
+
 ul.side-nav.module-menu .collapsible-body li.active, .side-nav.fixed .collapsible-body li.active {
     background: #4CAF50;
 }
 
-ul.side-nav.module-menu li a {
-    margin-left: 0;
-}
-
-ul.side-nav.module-menu .collapsible-body li .collapsible-body a {
-    margin-left: 45px;
-}
-
-ul.side-nav.module-menu .collapsible-body .collapsible-body .collapsible-body a {
-    margin-left: 70px;
-}
 
 ul.side-nav.module-menu li.active>a>span.badge {
     color: #fff;

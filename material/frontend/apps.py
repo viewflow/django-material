@@ -25,7 +25,7 @@ class ModuleMixin(object):
 
         class Sales(ModuleMixin, AppConfig):
             name = 'sales'
-            icon = '<i class="mdi-communication-quick-contacts-dialer"></i>'
+            icon = '<i class="material-icons">call</i>'
 
     The application have to have <app_module>/urls.py file, with
     a single no-parametrized url with name='index', ex::
@@ -50,7 +50,7 @@ class ModuleMixin(object):
 
     """
     order = 10
-    icon = '<i class="mdi mdi-action-receipt></i>'
+    icon = '<i class="material-icons">receipt</i>'
 
     @property
     def verbose_name(self):

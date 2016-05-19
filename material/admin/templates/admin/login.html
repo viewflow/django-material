@@ -11,8 +11,8 @@
                 <form action="{{ app_path }}" method="post" id="login-form">{% csrf_token %}
                     {% if 'username' in form.fields %}
                     {% form %}
-                        {% part form.username prefix %}<i class="mdi-action-account-box prefix"></i>{% endpart %}
-                        {% part form.password prefix %}<i class="mdi-action-lock prefix"></i>{% endpart %}
+                        {% part form.username prefix %}<i class="material-icons prefix">account_box</i>{% endpart %}
+                        {% part form.password prefix %}<i class="material-icons prefix">lock</i>{% endpart %}
                     {% endform %}
                     {% else %}
                         {% form %}{% endform %}

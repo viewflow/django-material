@@ -6,5 +6,6 @@ db*.sqlite3
 deploy
 build/
 dist/
+node_modules/
 django_material.egg-info/
 tests/visual/screenshots_test/

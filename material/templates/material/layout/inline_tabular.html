@@ -12,7 +12,7 @@
                 {% else %}
                 <td style="vertical-align: middle">
                     <div style="display:none">{{ bound_field }}</div>
-                    <button type="button" class="btn btn-flat white lighten-4" style="padding:0px 10px;font-size:0.7rem;height:calc(100% - 15px);width:100%" data-formset-delete-button><i class="mdi-content-clear"></i></button>
+                    <button type="button" class="btn btn-flat white lighten-4" style="padding:0px 10px;font-size:0.7rem;height:calc(100% - 15px);width:100%" data-formset-delete-button><i class="material-icons">clear</i></button>
                 </td>
                 {% endif %}
                 {% endfor %}{% endpart %}{% endwith %}
@@ -29,7 +29,7 @@
                     {% else %}
                     <td style="vertical-align: middle;width:40px">
                         <div style="display:none">{{ bound_field }}</div>
-                        <button type="button" class="btn btn-flat white lighten-4" style="padding:0px 10px;font-size:0.7rem;height:calc(100% - 15px);width:100%" data-formset-delete-button><i class="mdi-content-clear"></i></button>
+                        <button type="button" class="btn btn-flat white lighten-4" style="padding:0px 10px;font-size:0.7rem;height:calc(100% - 15px);width:100%" data-formset-delete-button><i class="material-icons">clear</i></button>
                     </td>
                     {% endif %}
                     {% endfor %}{% endpart %}
@@ -38,7 +38,7 @@
             </tbody>
         </table>
         <div class="row">
-            <button type="button" class="btn btn-flat grey lighten-4" style="padding:0px 40px;width:calc(100% - 30px);margin-left:15px;" data-formset-add><i class="mdi-content-add"></i></button>
+            <button type="button" class="btn btn-flat grey lighten-4" style="padding:0px 40px;width:calc(100% - 30px);margin-left:15px;" data-formset-add><i class="material-icons">add</i></button>
         </div>
         {{ inline.management_form }}
     </div>

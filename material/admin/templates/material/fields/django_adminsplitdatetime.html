@@ -13,7 +13,7 @@
                style="margin-top:-7px"
                {% endattrs %}>
             {% part field prefix %}{% endpart %}{% part field control %}
-            <i class="mdi-action-view-module prefix"></i>
+            <i class="material-icons prefix">view_module</i>
             <input{% attrs bound_field 'widget_date' default field.widget.attrs %}
                      id="id_{{ bound_field.html_name }}_0"
                      name="{{ bound_field.html_name }}_0"
@@ -35,7 +35,7 @@
         </div>
         <div class="{% if field.required %} required{% endif %}{% if bound_field.errors %} has-error{% endif %}"
              style="margin-top:-7px">
-            <i class="mdi-action-query-builder prefix" style="padding-left:10px"></i>
+            <i class="material-icons prefix" style="padding-left:10px">query_builder</i>
             <input{% attrs bound_field 'widget_time' default field.widget.attrs %}
                      id="id_{{ bound_field.html_name }}_1"
                      name="{{ bound_field.html_name }}_1"
