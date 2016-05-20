@@ -1,0 +1,38 @@
+{% load i18n material_form material_form_internal %}
+{% part bound_field.field %}<div class="row">
+    <div{% attrs bound_field 'group' %}
+        id="id_{{ bound_field.html_name }}_container"
+        class="input-field col s12{% if field.required %} required{% endif %}{% if bound_field.errors %} has-error{% endif %}"
+   {% endattrs %}>
+        {% part field prefix %}{% endpart %}{% part field control %}
+        <div class="input-group">
+            <input{% attrs bound_field 'widget' default field.widget.attrs %}
+                     id="id_{{ bound_field.html_name }}"
+                     name="{{ bound_field.html_name }}"
+                     type="{{ field.widget.input_type }}"
+                     data-date-format="{{ field|jquery_datepicker_format }}"
+                     data-form-control="datetime"
+                     {% if bound_field.errors %}class="invalid"{% endif %}
+                     {% if bound_field.value %}value="{{ bound_field.value|datepicker_value:field.input_formats.0 }}"{% endif %}
+                     {% endattrs %}>
+            {% endpart %}
+            {% part field suffix %}
+            <span class="suffix">
+                <a href="#" data-form-control="date-today-shortcut">{% trans 'Now' %}</a>
+            </span>
+            {% endpart %}            
+            {% part field label %}
+            <label{% attrs bound_field 'label' %}
+                     for="{{ bound_field.id_for_label }}"
+                     {% endattrs %}>{{ bound_field.label }}</label>
+        </div>
+        {% endpart %}
+        {% part field help_text %}{% if field.help_text %}
+        <small class="help-block">{{ bound_field.help_text }}</small>
+        {% endif %}
+        {% endpart %}{% part field errors %}
+        {% if bound_field.errors %}
+            {% include  'material/field_errors.html' %}
+        {% endif %}{% endpart %}{{ hidden_initial }}
+    </div>
+</div>{% endpart %}

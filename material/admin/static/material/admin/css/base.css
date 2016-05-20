@@ -565,3 +565,23 @@ ul.side-nav.module-menu li.active>a>span.badge {
 .delete-confirmation li {
     padding-left: 20px;
 }
+
+/*
+   Admin date field
+*/
+.input-group {
+    display: table;
+}
+
+.input-group>div, .input-group input, .suffix {
+    display: table-cell;
+}
+
+.input-group label {
+    z-index: -1;
+}
+
+.suffix {
+    padding-left: 10px;
+    width:1%;
+}
