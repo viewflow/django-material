@@ -430,6 +430,10 @@ ul.side-nav.module-menu li.active>a>span.badge {
 /*
    Change form
 */
+.change-form .row {
+    margin-left: -0.75rem;
+    margin-right: -0.75rem;
+}
 .change-form a {
     color: #039be5;
     text-transform: none;
@@ -471,11 +475,6 @@ ul.side-nav.module-menu li.active>a>span.badge {
     font-size: 1.2rem;
     border-bottom: 2px solid #555;
     padding-bottom: 0.5rem;
-}
-
-.change-form .formset-field table {
-    margin-left: -15px;
-    margin-right: -15px;
 }
 
 .change-form .section .row  {
