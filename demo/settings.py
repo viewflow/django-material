@@ -43,6 +43,7 @@ INSTALLED_APPS = (
     # test apps
     'demo.examples.accounting',
     'demo.examples.sales',
+    'demo.tests.integration',
     # test admin apps
     'django.contrib.flatpages',
     'django.contrib.redirects',

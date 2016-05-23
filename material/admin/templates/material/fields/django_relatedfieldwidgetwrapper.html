@@ -5,14 +5,14 @@
 <div class="related-widget-wrapper">
 {% render bound_field widget=field.widget.widget %}
     {% part field label %}
-    <h6 for="{{ bound_field.id_for_label }}" class="{% part field add_label_class %}{{ form_label_class }}{% endpart %}">
-        {{ bound_field.label }}
+    <label for="{{ bound_field.id_for_label }}" class="{% part field add_label_class %}{{ form_label_class }}{% endpart %}">
+        <span style="margin-right:5px">{{ bound_field.label }}</span>
         {% if bound_field_urls.can_change_related %}
         <a class="related-widget-wrapper-link change-related"
            data-href-template="{{ bound_field_urls.change_related_template_url }}?{{ bound_field_urls.url_params }}"
            id="change_id_{{ bound_field.html_name }}"
            title="{% blocktrans %}Change selected {{ bound_field_urls.model }}{% endblocktrans %}">
-            <i class="mdi-content-create"></i>
+            <i class="mdi-content-create" style="line-height:18px"></i>
         </a>
         {% endif %}
         {% if bound_field_urls.can_add_related %}
@@ -20,7 +20,7 @@
            href="{{ bound_field_urls.add_related_url }}?{{ bound_field_urls.url_params }}"
            id="add_id_{{ bound_field.html_name }}"
            title="{% blocktrans %}Add another {{ bound_field_urls.model }}{% endblocktrans %}">
-            <i class="mdi-content-add"></i>
+            <i class="mdi-content-add" style="line-height:18px"></i>
         </a>
         {% endif %}
         {% if bound_field_urls.can_delete_related %}
@@ -28,10 +28,10 @@
            data-href-template="{{ bound_field_urls.delete_related_template_url }}?{{ bound_field_urls.url_params }}"
            id="add_id_{{ bound_field.html_name }}"
            title="{% blocktrans %}Delete selected {{ bound_field_urls.model }}{% endblocktrans %}">
-            <i class="mdi-content-remove"></i>
+            <i class="mdi-content-remove" style="line-height:18px"></i>
         </a>
         {% endif %}
-    </h6>
+    </label>
     {% endpart %}
     {% part field help_text %}{% endpart%}
 {% endrender %}

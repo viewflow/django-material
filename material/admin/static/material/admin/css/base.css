@@ -497,6 +497,10 @@ ul.side-nav.module-menu li.active>a>span.badge {
     opacity: 1;
 }
 
+.change-form .formset-field td {
+    padding: 5px;
+}
+
 .errornote {
     color: #F44336;
 }
