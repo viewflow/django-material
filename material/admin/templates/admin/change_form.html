@@ -84,6 +84,7 @@
     {% endif %}
     {% if adminform and add %}
     <script type="text/javascript">
+      $('form#{{ opts.model_name }}_form :input:visible:enabled:first').attr('autofocus', true);
       $('form#{{ opts.model_name }}_form :input:visible:enabled:first').focus();
     </script>
     {% endif %}
