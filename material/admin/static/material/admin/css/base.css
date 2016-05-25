@@ -489,6 +489,12 @@ ul.side-nav.module-menu li.active>a>span.badge {
     margin-bottom: 5px;
 }
 
+.change-form .related-widget-wrapper label.related-widget-label {
+    font-size: 15px;
+    color: black;
+    font-weight: 200;
+}
+
 .change-form .related-widget-wrapper-link {
     opacity: 0.3;
 }
@@ -516,13 +522,14 @@ ul.side-nav.module-menu li.active>a>span.badge {
         border:none;
     }
 
-    .change-form .multiselect .selector {
-        margin-top: 10px;
-    }
-
     .change-form .multiselect .selector-available {
         width: calc(50% - 30px);
         width: -moz-calc(50% - 30px)
+    }
+
+    .change-form .multiselect .selector-available input,
+    .change-form .multiselect .selector-chosen input {
+        margin-bottom: 0px;
     }
 
     .change-form .multiselect .selector-available select {
@@ -531,7 +538,7 @@ ul.side-nav.module-menu li.active>a>span.badge {
 
     .change-form .multiselect .selector-chooser {
         width: 60px;
-        padding-top: 20px;
+        padding-top: 40px;
     }
 
     .change-form .multiselect .selector-chosen {

@@ -42,9 +42,13 @@ window.SelectFilter = {
         // <div class="selector-available">
         var selector_available = quickElement('div', selector_div);
         selector_available.className = 'selector-available col s12 m6';
-        var title_available = quickElement('label', selector_available, interpolate(gettext('Available %s') + ' ', [field_name]));
+
+        var filter_input = quickElement('input', selector_available, '', 'type', 'text', 'placeholder', interpolate(gettext('Available %s') + ' ', [field_name]));
+        filter_input.id = field_id + '_input';
 
         selector_available.appendChild(from_box);
+
+
 
         // <ul class="selector-chooser">
         var selector_chooser = quickElement('ul', selector_div);
@@ -59,7 +63,7 @@ window.SelectFilter = {
         // <div class="selector-chosen">
         var selector_chosen = quickElement('div', selector_div);
         selector_chosen.className = 'selector-chosen col s12 m6';
-        var title_chosen = quickElement('label', selector_chosen, interpolate(gettext('Chosen %s') + ' ', [field_name]));
+        quickElement('input', selector_chosen, '', 'type', 'text', 'placeholder', interpolate(gettext('Chosen %s') + ' ', [field_name]), 'disabled');
 
         var to_box = quickElement('select', selector_chosen, '', 'id', field_id + '_to', 'multiple', 'multiple', 'size', from_box.size, 'name', from_box.getAttribute('name'));
         to_box.className = 'filtered material-ignore';
@@ -67,8 +71,8 @@ window.SelectFilter = {
         from_box.setAttribute('name', from_box.getAttribute('name') + '_old');
 
         // Set up the JavaScript event handlers for the select box filter interface
-        addEvent(from_box, 'change', function(e) { SelectFilter.refresh_icons(field_id) });
-        addEvent(to_box, 'change', function(e) { SelectFilter.refresh_icons(field_id) });
+        addEvent(from_box, 'change', function(e) { SelectFilter.refresh_icons(field_id); });
+        addEvent(to_box, 'change', function(e) { SelectFilter.refresh_icons(field_id); });
         addEvent(from_box, 'dblclick', function() { SelectBox.move(field_id + '_from', field_id + '_to'); SelectFilter.refresh_icons(field_id); });
         addEvent(to_box, 'dblclick', function() { SelectBox.move(field_id + '_to', field_id + '_from'); SelectFilter.refresh_icons(field_id); });
         addEvent(findForm(from_box), 'submit', function() { SelectBox.select_all(field_id + '_to'); });
@@ -79,6 +83,11 @@ window.SelectFilter = {
 
         // Initial icon refresh
         SelectFilter.refresh_icons(field_id);
+
+        addEvent(filter_input, 'keypress', function(e) {SelectFilter.filter_key_press(e, field_id);});
+        addEvent(filter_input, 'keyup', function(e) { SelectFilter.filter_key_up(e, field_id); });
+        addEvent(filter_input, 'keydown', function(e) { SelectFilter.filter_key_down(e, field_id); });
+
     },
     refresh_icons: function(field_id) {
         var from = $('#' + field_id + '_from');
