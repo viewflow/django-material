@@ -58,23 +58,25 @@
         </form>
         </div>
     </div>
-    {% if not is_popup %}
+    {% if not is_popup and change %}
     <div class="col s12 m12 l3">
-        <div class="card">
+        <div class="card actions-card">
             <div class="card-content">
-                <span class="card-title black-text" style="margin-bottom:20px">{% trans "Actions " %}</span>
+                <span class="card-title black-text">{% trans "Action" %}</span>
                 {% block object-tools %}
-                {% if change %}{% if not is_popup %}
-                <ul class="object-tools">
-                    {% block object-tools-items %}
-                    <li>
-                        {% url opts|admin_urlname:'history' original.pk|admin_urlquote as history_url %}
-                        <a href="{% add_preserved_filters history_url %}" class="historylink">{% trans "History" %}</a>
-                    </li>
-                    {% if has_absolute_url %}<li><a href="{{ absolute_url }}" class="viewsitelink">{% trans "View on site" %}</a></li>{% endif %}
-                    {% endblock %}
-                </ul>
-                {% endif %}{% endif %}
+                <div class="row">
+                    <div class="col s12">
+                        <ul class="object-tools col s12">
+                            {% block object-tools-items %}
+                            <li>
+                                {% url opts|admin_urlname:'history' original.pk|admin_urlquote as history_url %}
+                                <a href="{% add_preserved_filters history_url %}" class="historylink">{% trans "History" %}</a>
+                            </li>
+                            {% if has_absolute_url %}<li><a href="{{ absolute_url }}" class="viewsitelink">{% trans "View on site" %}</a></li>{% endif %}
+                            {% endblock %}
+                        </ul>
+                    </div>
+                </div>
                 {% endblock %}
             </div>
         </div>
