@@ -20,7 +20,19 @@
       new $.fn.dataTable.FixedHeader(table);
     }
 
+    /*
+      Search form
+     */
+    $('#searchbar').keyup(function (e) {
+      if(e.keyCode == 13) {
+        $("#searchbar_hidden").attr('name', $('#searchbar').data('name'));
+        $("#searchbar_hidden").val($('#searchbar').val());
+        $("#changelist-search").submit();
+      }
+    });
     $("#changelist-search-button").click(function() {
+      $("#searchbar_hidden").attr('name', $('#searchbar').data('name'));
+      $("#searchbar_hidden").val($('#searchbar').val());
       $("#changelist-search").submit();
     });
 
@@ -104,4 +116,12 @@
 
 </div>
 </form>
+
+<form id="changelist-search" action="?" method="get">
+    <input type="hidden" id="searchbar_hidden"/>
+    {% for pair in cl.params.items %}
+    {% ifnotequal pair.0 'q' %}<input type="hidden" name="{{ pair.0 }}" value="{{ pair.1 }}"/>{% endifnotequal %}
+    {% endfor %}
+</form>
+
 {% endblock %}
