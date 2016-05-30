@@ -587,10 +587,6 @@ ul.side-nav.module-menu li.active>a>span.badge {
     display: table-cell;
 }
 
-.input-group label {
-    z-index: -1;
-}
-
 .suffix {
     padding-left: 10px;
     width:1%;

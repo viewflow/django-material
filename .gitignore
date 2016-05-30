@@ -1,4 +1,5 @@
 .tox
+.dumbjump
 *.idea
 *.pyc
 db*.sqlite3
