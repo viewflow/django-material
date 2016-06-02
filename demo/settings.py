@@ -17,13 +17,10 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
-DEMO_APPS = (
-    'mptt',
-    'tagging',
-    'zinnia',
-    'django_comments',
-    'social.apps.django_app.default',
+DEV_APPS = (
     'autofixture',
+    'debug_toolbar',
+    'template_debug',
 )
 
 INSTALLED_APPS = (
@@ -31,6 +28,7 @@ INSTALLED_APPS = (
     'material',
     'material.frontend',
     'material.admin',
+
     # standard django apps
     'django.contrib.admin',
     'django.contrib.auth',
@@ -38,12 +36,12 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'debug_toolbar',
-    'template_debug',
+
     # test apps
     'demo.examples.accounting',
     'demo.examples.sales',
     'demo.tests.integration',
+
     # test admin apps
     'django.contrib.flatpages',
     'django.contrib.redirects',
@@ -51,7 +49,7 @@ INSTALLED_APPS = (
 )
 
 if 'test' not in sys.argv:
-    INSTALLED_APPS += DEMO_APPS
+    INSTALLED_APPS += DEV_APPS
 
 
 MIDDLEWARE_CLASSES = (
@@ -126,6 +124,15 @@ STATICFILES_DIRS = (
 )
 
 SESSION_ENGINE = "django.contrib.sessions.backends.signed_cookies"
+
+# Django debug toolbar
+# http://django-debug-toolbar.readthedocs.io/en/1.4/configuration.html
+DEBUG_TOOLBAR_CONFIG = {
+    'DISABLE_PANELS': {
+        'debug_toolbar.panels.templates.TemplatesPanel',
+        'debug_toolbar.panels.redirects.RedirectsPanel',
+    },
+}
 
 # shortcut for in form templates
 try:

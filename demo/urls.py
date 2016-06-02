@@ -158,5 +158,6 @@ urlpatterns = [
 if 'material.frontend' not in settings.INSTALLED_APPS:
     urlpatterns += [url(r'^admin/', include(admin.site.urls))]
 
-if 'zinnia' in settings.INSTALLED_APPS:
-    urlpatterns += [url(r'^weblog/', include('zinnia.urls', namespace='zinnia'))]
+if 'django.contrib.flatpages' in settings.INSTALLED_APPS:
+    from django.contrib.flatpages import views
+    urlpatterns += [url(r'^(?P<url>.*/)$', views.flatpage)]

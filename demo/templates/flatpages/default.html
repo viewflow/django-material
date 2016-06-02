@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}{{ flatpage.title }}{% endblock %}
+{% block content %}
+<div class="card">
+    <div class="card-content">
+        <div class="card-title">{{ flatpage.title }}</div>
+        {{ flatpage.content }}
+    </div>
+    <div class="card-action">
+    <a href="#" onclick="window.history.back()">Go back</a>
+    </div>
+</div>
+{% endblock %}
