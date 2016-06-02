@@ -2,14 +2,14 @@
 {% load i18n admin_static %}
 
 {% block breadcrumbs_items %}
-<a href="{% url 'admin:index' %}">{% trans "All apps" %}</a>
+<a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
 {% endblock %}
 
 {% block content %}
 <div class="row">
     <div class="app-list">
         {% for app in app_list %}
-        <div class="col s12 m6 l6 app">
+        <div class="app">
             <div class="card">
                 <div class="card-content">
                     <span class="card-title black-text">{{ app.name }}</span>

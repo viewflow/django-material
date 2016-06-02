@@ -177,7 +177,43 @@ ul.side-nav.module-menu li.active>a>span.badge {
     App index page
 */
 .app-list {
-    max-width: 1300px;
+    padding: 5px;
+    -webkit-column-gap: 0;
+    -moz-column-gap: 0;
+    column-gap: 0;
+    -webkit-column-count: 3;
+    -moz-column-count: 3;
+    column-count: 3;
+}
+
+
+@media (max-width: 1401px) {
+    .app-list {
+        -webkit-column-count: 2;
+        -moz-column-count: 2;
+        column-count: 2;
+        padding: 0px;
+    }
+}
+
+@media (max-width: 600px) {
+    .app-list {
+        -webkit-column-count: 1;
+        -moz-column-count: 1;
+        column-count: 1;
+        padding: 0px;
+    }
+}
+
+.app {
+  -webkit-column-break-inside: avoid;
+  page-break-inside: avoid;   /* Chrome, Safari, Opera */
+  break-inside: avoid;   /* Firefox */
+  padding: 5px;
+}
+
+.app .card {
+    margin: 0px;
 }
 
 .app-item {
