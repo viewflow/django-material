@@ -6,9 +6,9 @@
             <tbody data-formset-body>
                 {% for inline_admin_form in element.inline %}
                 {% if inline_admin_form.form.prefix ==  element.inline.formset.empty_form.prefix %}<script type="form-template" data-formset-empty-form>{% endif %}
-                
+
                 <tr data-formset-form>
-                    {% part inline_admin_form.form hidden %}                        
+                    {% part inline_admin_form.form hidden %}
                         {% if inline_admin_form.needs_explicit_pk_field %}{{ inline_admin_form.pk_field.field }}{% endif %}
                         {{ inline_admin_form.fk_field.field }}
                         {% for fieldset in inline_admin_form %}{% for line in fieldset %}{% for field in line %}
@@ -23,8 +23,13 @@
                                 {% if field.is_readonly %}
                                 <div class="row">
                                     <div class="input-field col s12">
-                                        <label class="active">{{ field.field.label|title }}</label>
-                                        <input disabled value="{{ field.contents }}">
+                                        {% if '<img' in field.contents %}
+                                            <input type="checkbox" id="test7" {% if 'icon-yes' in field.contents %}checked="checked"{% endif %} disabled="disabled" />
+                                            <label for="test7">{{ field.field.label|title }}</label>
+                                        {% else %}
+                                            <label class="active">{{ field.field.label|title }}</label>
+                                            <input disabled value="{{ field.contents }}">
+                                        {% endif %}
                                     </div>
                                 </div>
                                 {% else %}
@@ -34,7 +39,7 @@
                             {% endif %}
                         {% endfor %}{% endfor %}{% endfor %}
                     {% endpart %}
-                            
+
                     {% if element.inline.formset.can_delete %}
                     <td style="vertical-align:middle;width:60px">
                         <div style="display:none">{{ inline_admin_form.deletion_field.field }}</div>
@@ -44,7 +49,7 @@
                 </tr>
 
                 {% if inline_admin_form.form.prefix ==  element.inline.formset.empty_form.prefix %}</script>{% endif %}
-                
+
                 {% endfor %}
             </tbody>
         </table>
