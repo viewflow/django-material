@@ -4,7 +4,7 @@ from django.utils.safestring import mark_safe
 
 class Ocean(models.Model):
     name = models.CharField(max_length=250, primary_key=True)
-    area = models.IntegerField()
+    area = models.BigIntegerField()
     slug = models.SlugField()
 
     class Meta:
@@ -19,7 +19,7 @@ class Sea(models.Model):
     parent = models.ForeignKey('self', blank=True, null=True)
     ocean = models.ForeignKey(Ocean)
 
-    area = models.IntegerField(help_text=mark_safe('km&#178;'))
+    area = models.BigIntegerField(help_text=mark_safe('km&#178;'))
     avg_depth = models.IntegerField(help_text='meters')
     max_depth = models.IntegerField(help_text='meters')
 
@@ -35,8 +35,8 @@ class Sea(models.Model):
 
 class Continent(models.Model):
     name = models.CharField(max_length=250, primary_key=True)
-    area = models.IntegerField(help_text=mark_safe('km&#178;'))
-    population = models.IntegerField()
+    area = models.BigIntegerField(help_text=mark_safe('km&#178;'))
+    population = models.BigIntegerField()
     population_density = models.DecimalField(decimal_places=2, max_digits=8)
 
     largest_country = models.OneToOneField(
@@ -79,7 +79,7 @@ class Country(models.Model):
 class City(models.Model):
     name = models.CharField(max_length=250)
     is_capital = models.BooleanField(default=False)
-    population = models.IntegerField()
+    population = models.BigIntegerField()
     country = models.ForeignKey(
         Country, related_name='cities')
 

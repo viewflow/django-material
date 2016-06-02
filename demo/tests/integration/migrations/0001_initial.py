@@ -13,10 +13,10 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='City',
             fields=[
-                ('id', models.AutoField(primary_key=True, serialize=False, auto_created=True, verbose_name='ID')),
+                ('id', models.AutoField(verbose_name='ID', serialize=False, primary_key=True, auto_created=True)),
                 ('name', models.CharField(max_length=250)),
                 ('is_capital', models.BooleanField(default=False)),
-                ('population', models.IntegerField()),
+                ('population', models.BigIntegerField()),
             ],
             options={
                 'ordering': ['name'],
@@ -26,14 +26,14 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Continent',
             fields=[
-                ('name', models.CharField(primary_key=True, max_length=250, serialize=False)),
-                ('area', models.IntegerField(help_text='km&#178;')),
-                ('population', models.IntegerField()),
+                ('name', models.CharField(max_length=250, primary_key=True, serialize=False)),
+                ('area', models.BigIntegerField(help_text='km&#178;')),
+                ('population', models.BigIntegerField()),
                 ('population_density', models.DecimalField(max_digits=8, decimal_places=2)),
                 ('longest_river', models.CharField(blank=True, max_length=250, null=True)),
                 ('biggest_mountain', models.CharField(blank=True, max_length=250, null=True)),
                 ('hemisphere', models.CharField(max_length=5, choices=[('NORTH', 'North'), ('SOUTH', 'South'), ('BOTH', 'Both')])),
-                ('biggest_city', models.OneToOneField(null=True, blank=True, to='integration.City')),
+                ('biggest_city', models.OneToOneField(blank=True, null=True, to='integration.City')),
             ],
             options={
                 'ordering': ['name'],
@@ -42,12 +42,12 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Country',
             fields=[
-                ('id', models.AutoField(primary_key=True, serialize=False, auto_created=True, verbose_name='ID')),
+                ('id', models.AutoField(verbose_name='ID', serialize=False, primary_key=True, auto_created=True)),
                 ('code', models.CharField(max_length=3, unique=True)),
                 ('name', models.CharField(max_length=250)),
                 ('independence_day', models.DateField(blank=True, null=True)),
                 ('gay_friendly', models.NullBooleanField()),
-                ('continent', models.ForeignKey(null=True, to='integration.Continent', related_name='countries')),
+                ('continent', models.ForeignKey(null=True, related_name='countries', to='integration.Continent')),
             ],
             options={
                 'ordering': ['name'],
@@ -57,8 +57,8 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Ocean',
             fields=[
-                ('name', models.CharField(primary_key=True, max_length=250, serialize=False)),
-                ('area', models.IntegerField()),
+                ('name', models.CharField(max_length=250, primary_key=True, serialize=False)),
+                ('area', models.BigIntegerField()),
                 ('slug', models.SlugField()),
             ],
             options={
@@ -68,14 +68,14 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Sea',
             fields=[
-                ('id', models.AutoField(primary_key=True, serialize=False, auto_created=True, verbose_name='ID')),
+                ('id', models.AutoField(verbose_name='ID', serialize=False, primary_key=True, auto_created=True)),
                 ('name', models.CharField(max_length=250)),
-                ('area', models.IntegerField(help_text='km&#178;')),
+                ('area', models.BigIntegerField(help_text='km&#178;')),
                 ('avg_depth', models.IntegerField(help_text='meters')),
                 ('max_depth', models.IntegerField(help_text='meters')),
                 ('basin_countries', models.ManyToManyField(blank=True, to='integration.Country', related_name='seas')),
                 ('ocean', models.ForeignKey(to='integration.Ocean')),
-                ('parent', models.ForeignKey(null=True, blank=True, to='integration.Sea')),
+                ('parent', models.ForeignKey(blank=True, null=True, to='integration.Sea')),
             ],
             options={
                 'ordering': ['name'],
@@ -84,7 +84,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='continent',
             name='largest_country',
-            field=models.OneToOneField(null=True, blank=True, to='integration.Country', related_name='+'),
+            field=models.OneToOneField(blank=True, null=True, related_name='+', to='integration.Country'),
         ),
         migrations.AddField(
             model_name='continent',
