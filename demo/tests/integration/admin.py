@@ -14,10 +14,6 @@ class CityStackedInline(admin.StackedInline):
     model = models.City
 
 
-class ContinentOceanStackedInline(admin.StackedInline):
-    model = models.Continent.oceans.through
-
-
 class SeaStackedInline(admin.StackedInline):
     model = models.Sea
     fields = ('name', 'area', 'avg_depth', 'max_depth')
@@ -67,12 +63,13 @@ class ContinentAdmin(admin.ModelAdmin):
             'fields': ('largest_country', 'biggest_mountain',
                        ('biggest_city', 'longest_river', ))})
     )
-    inlines = [CountryTabularInline, ContinentOceanStackedInline]
+    inlines = [CountryTabularInline]
     list_display = (
         'name', 'surrounded_oceans', 'countries_count',
         'area', 'population', )
     list_filter = ('oceans', )
     ordering = ['population']
+    raw_id_fields = ('oceans', )
     readonly_fields = ('biggest_city', 'longest_river', )
 
     def surrounded_oceans(self, contintent):

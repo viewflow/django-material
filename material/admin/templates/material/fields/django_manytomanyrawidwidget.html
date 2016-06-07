@@ -10,9 +10,9 @@
             id="id_{{ bound_field.html_name }}"
             name="{{ bound_field.html_name }}"
             type="{{ field.widget.input_type }}"
-            class="vForeignKeyRawIdAdminField"
+            class="vManyToManyRawIdAdminField"
             {% if bound_field.errors %}class="invalid"{% endif %}
-            {% if bound_field.value %}value="{{ bound_field.value|unlocalize }}"{% endif %}
+            {% if bound_field.value %}value="{{ bound_field.value|join:',' }}"{% endif %}
         {% endattrs %}>{% endpart %}
         {% part field label %}
         <label{% attrs bound_field 'label' %}
