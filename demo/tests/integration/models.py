@@ -20,8 +20,8 @@ class Sea(models.Model):
     ocean = models.ForeignKey(Ocean)
 
     area = models.BigIntegerField(help_text=mark_safe('km&#178;'))
-    avg_depth = models.IntegerField(help_text='meters')
-    max_depth = models.IntegerField(help_text='meters')
+    avg_depth = models.IntegerField(help_text='meters', null=True, blank=True)
+    max_depth = models.IntegerField(help_text='meters', null=True, blank=True)
 
     basin_countries = models.ManyToManyField(
         'Country', related_name='seas', blank=True)

@@ -17,7 +17,7 @@ class CityStackedInline(admin.StackedInline):
 class SeaStackedInline(admin.StackedInline):
     model = models.Sea
     fields = ('name', 'area', 'avg_depth', 'max_depth')
-    readonly_fields = ('area', 'avg_depth', 'max_depth')
+    readonly_fields = ('avg_depth', 'max_depth')
 
 
 @admin.register(models.Ocean)

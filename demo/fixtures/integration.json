@@ -3,7 +3,7 @@
     "model": "integration.ocean",
     "pk": "Arctic",
     "fields": {
-        "slug": "",
+        "slug": "arctic",
         "area": 15558000
     }
 },
@@ -11,7 +11,7 @@
     "model": "integration.ocean",
     "pk": "Atlantic",
     "fields": {
-        "slug": "",
+        "slug": "atlantic",
         "area": 85133000
     }
 },
@@ -19,7 +19,7 @@
     "model": "integration.ocean",
     "pk": "Indian",
     "fields": {
-        "slug": "",
+        "slug": "indian",
         "area": 70560000
     }
 },
@@ -27,7 +27,7 @@
     "model": "integration.ocean",
     "pk": "Pacific",
     "fields": {
-        "slug": "",
+        "slug": "pacific",
         "area": 168723000
     }
 },
@@ -35,7 +35,7 @@
     "model": "integration.ocean",
     "pk": "Southern",
     "fields": {
-        "slug": "",
+        "slug": "southern",
         "area": 21960000
     }
 },
