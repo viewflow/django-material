@@ -10,13 +10,14 @@ class CountryTabularInline(admin.TabularInline):
     model = models.Country
 
 
-class CityStackedInline(admin.StackedInline):
+class CityStackedInline(admin.TabularInline):
     model = models.City
 
 
 class SeaStackedInline(admin.StackedInline):
-    model = models.Sea
+    extra = 0
     fields = ('name', 'area', 'avg_depth', 'max_depth')
+    model = models.Sea
     readonly_fields = ('avg_depth', 'max_depth')
 
 

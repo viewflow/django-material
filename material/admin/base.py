@@ -11,9 +11,11 @@ class AdminReadonlyField(LayoutNode):
         return {'fieldset_field': self.fieldset_field}
 
 
-class TabularInline(LayoutNode):
-    template_name = 'inlines/tabular.html'
-
+class Inline(LayoutNode):
     def __init__(self, inline, **kwargs):
         self.inline = inline
         self.span_columns = kwargs.pop('span_columns', 1)
+
+    @property
+    def template_name(self):
+        return self.inline.opts.template

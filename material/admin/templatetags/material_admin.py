@@ -17,7 +17,7 @@ from django.template import Library
 
 from material import Layout, Fieldset, Row
 from material.compat import simple_tag
-from ..base import AdminReadonlyField, TabularInline
+from ..base import AdminReadonlyField, Inline
 
 
 register = Library()
@@ -104,7 +104,7 @@ def fieldset_layout(adminform, inline_admin_formsets):
     if layout is not None:
         for element in layout.elements:
             # TODO Ugly hack to substitute inline classes to instances
-            if isinstance(element, TabularInline) and isinstance(element.inline, type):
+            if isinstance(element, Inline) and isinstance(element.inline, type):
                 for inline in inline_admin_formsets:
                     if inline.formset.model == element.inline.model:
                         element.inline = inline
@@ -139,7 +139,7 @@ def fieldset_layout(adminform, inline_admin_formsets):
             sets += fields
 
     for inline in inline_admin_formsets:
-        sets.append(TabularInline(inline))
+        sets.append(Inline(inline))
 
     return Layout(*sets)
 
