@@ -9,10 +9,14 @@
                 <span class="card-title black-text">{% trans 'Log in' %}</span>
 
                 <form action="{{ app_path }}" method="post" id="login-form">{% csrf_token %}
+                    {% if 'username' in form.fields %}
                     {% form %}
                         {% part form.username prefix %}<i class="mdi-action-account-box prefix"></i>{% endpart %}
                         {% part form.password prefix %}<i class="mdi-action-lock prefix"></i>{% endpart %}
                     {% endform %}
+                    {% else %}
+                        {% form %}{% endform %}
+                    {% endif %}
 
                     {% url 'admin_password_reset' as password_reset_url %}
                     {% if password_reset_url %}
