@@ -1,4 +1,4 @@
-{% load material_form material_form_internal %}
+{% load l10n material_form material_form_internal %}
 {% part bound_field.field %}<div class="row">
     <div{% attrs bound_field 'group' %}
         id="id_{{ bound_field.html_name }}_container"
@@ -17,7 +17,7 @@
         {% endattrs %}>
             {% part field options %}{% for group, items in bound_field|select_options %}
             {% if group %}<optgroup label="{{ group }}">{% endif %}{% for choice, value, selected in items %}
-            <option {% if value == None or value == '' %}value{% else %}value="{{ value }}"{% endif %}{% if selected %} selected="selected"{% endif %}>{% if value == None or value == '' %}{{ form_select_empty_label|default:choice }}{% else %}{{ choice }}{% endif %}</option>{% endfor %}
+            <option {% if value == None or value == '' %}value{% else %}value="{{ value|unlocalize }}"{% endif %}{% if selected %} selected="selected"{% endif %}>{% if value == None or value == '' %}{{ form_select_empty_label|default:choice }}{% else %}{{ choice }}{% endif %}</option>{% endfor %}
             {% if group %}</optgroup>{% endif %}{% endfor %}{% endpart %}
         </select>
         {% endpart %}

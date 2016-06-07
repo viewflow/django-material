@@ -1,4 +1,4 @@
-{% load material_form material_form_internal %}
+{% load l10n material_form material_form_internal %}
 {% part bound_field.field %}<div class="row radio-field">
     <div class="col s12">
         {% part field prefix %}{% endpart %}{% part field label %}<label for="{{ bound_field.id_for_label }}" class="{% part field add_label_class %}{{ form_label_class }}{% endpart %}">{{ bound_field.label }}</label>{% endpart %}
@@ -14,7 +14,7 @@
                 name="{{ bound_field.html_name }}"
                 type="radio"
                 class="with-gap{% if bound_field.errors %} invalid{% endif %}"
-                value="{{ value }}"
+                value="{{ value|unlocalize }}"
                 {% if selected %}checked{% endif %}
             {% endattrs %}/>
             <label{% attrs bound_field 'label' %}

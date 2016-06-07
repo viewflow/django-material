@@ -56,6 +56,11 @@ class ChoiceFieldForm(forms.Form):
         (1, 'Apple'),
         (2, 'Orange'),
         (3, 'Watermeloun'))
+    FLOAT_CHOICES = (
+        (1.1, 'Perfect'),
+        (1.0, 'Good'),
+        (0.8, 'Bad'),
+    )
     GROUPED_CHOICES = (
         (None, [(7, 'Mikhail')]),
         ('Team 1', [(1, 'Joe'), (2, 'Bob'), (3, 'Marie')]),
@@ -65,14 +70,15 @@ class ChoiceFieldForm(forms.Form):
 
     field1 = forms.ChoiceField(help_text='default', choices=CHOICES)
     field2 = forms.ChoiceField(help_text='initial value', choices=CHOICES, initial=2)
-    field3 = forms.ChoiceField(help_text='groups', choices=GROUPED_CHOICES)
-    field4 = forms.ChoiceField(help_text='long choices list', choices=LONG_CHOICES)
-    field5 = forms.TypedChoiceField(help_text='cource to int', coerce=int, choices=CHOICES)
-    field6 = forms.ChoiceField(help_text='prefix', choices=CHOICES)
+    field3 = forms.ChoiceField(help_text='float choices', choices=FLOAT_CHOICES)
+    field4 = forms.ChoiceField(help_text='groups', choices=GROUPED_CHOICES)
+    field5 = forms.ChoiceField(help_text='long choices list', choices=LONG_CHOICES)
+    field6 = forms.TypedChoiceField(help_text='cource to int', coerce=int, choices=CHOICES)
+    field7 = forms.ChoiceField(help_text='prefix', choices=CHOICES)
 
     template = Template("""
     {% form %}
-        {% part form.field6 prefix %}<i class="mdi-editor-insert-invitation prefix"></i>{% endpart %}
+        {% part form.field7 prefix %}<i class="mdi-editor-insert-invitation prefix"></i>{% endpart %}
     {% endform %}
     """)
 
@@ -243,17 +249,23 @@ class MultipleChoiceFieldForm(forms.Form):
         (1, 'Apple'),
         (2, 'Orange'),
         (3, 'Watermeloun'))
+    FLOAT_CHOICES = (
+        (1.1, 'Perfect'),
+        (1.0, 'Good'),
+        (0.8, 'Bad'),
+    )
     LONG_CHOICES = ((n, n) for n in range(100))
 
     field1 = forms.MultipleChoiceField(help_text='default', choices=CHOICES)
     field2 = forms.MultipleChoiceField(help_text='initial value', choices=CHOICES, initial=[2, 3])
-    field3 = forms.MultipleChoiceField(help_text='long choices list', choices=LONG_CHOICES)
-    field4 = forms.TypedMultipleChoiceField(help_text='cource to int', coerce=int, choices=CHOICES)
-    field5 = forms.MultipleChoiceField(help_text='prefix', choices=CHOICES)
+    field3 = forms.MultipleChoiceField(help_text='float choices', choices=FLOAT_CHOICES)
+    field4 = forms.MultipleChoiceField(help_text='long choices list', choices=LONG_CHOICES)
+    field5 = forms.TypedMultipleChoiceField(help_text='cource to int', coerce=int, choices=CHOICES)
+    field6 = forms.MultipleChoiceField(help_text='prefix', choices=CHOICES)
 
     template = Template("""
     {% form %}
-        {% part form.field5 prefix %}<i class="mdi-editor-insert-invitation prefix"></i>{% endpart %}
+        {% part form.field6 prefix %}<i class="mdi-editor-insert-invitation prefix"></i>{% endpart %}
     {% endform %}
     """)
 
