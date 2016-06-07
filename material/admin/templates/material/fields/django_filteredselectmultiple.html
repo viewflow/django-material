@@ -1,15 +1,15 @@
-{% load material_form material_form_internal %}
+{% load l10n material_form material_form_internal %}
 
 {% render bound_field template='fields/django_select.html' %}
     {% attr field 'widget' multiple %}True{% endattr %}
     {% attr field 'widget' class append %}material-ignore{% endattr %}
     {% attr field 'group' class append %}multiselect{% endattr %}
     {% part field options %}
-        {% for value, choice in field.widget.choices %}
-        <option {% if value in bound_field.value %}selected="selected"{% endif %}
-                {% if value == None or value == '' %}style="display:none"{% endif %}
-                value="{{ value|default_if_none:"" }}" >{% if value == None or value == '' %}{{ form_select_empty_label|default:choice }}{% else %}{{ choice }}{% endif %} </option>
-        {% endfor %}
+        {% for group, items in bound_field|select_options %}
+            {% for choice, value, selected in items %}
+            <option value="{{ value|unlocalize }}"{% if selected %} selected="selected"{% endif %}>{{ choice }}</option>
+           {% endfor %}
+       {% endfor %}
     {% endpart %}
 {% endrender %}
 
