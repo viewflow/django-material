@@ -313,3 +313,27 @@ simple_tag(register, admin_related_field_urls)
 def admin_change_list_value(result_checkbox_html):
     value = CL_VALUE_RE.findall(result_checkbox_html)
     return value[0] if value else None
+
+
+def admin_select_related_link(bound_field):
+    """
+    {% admin_select_related_link bound_field as rel_field_urls %}
+    """
+    rel_widget = bound_field.field.widget
+    rel_to = rel_widget.rel.model
+    if rel_to in rel_widget.admin_site._registry:
+        related_url = reverse(
+            'admin:%s_%s_changelist' % (
+                rel_to._meta.app_label,
+                rel_to._meta.model_name,
+            ),
+            current_app=rel_widget.admin_site.name,
+        )
+        params = rel_widget.url_parameters()
+        if params:
+            related_url += '?' + '&amp;'.join('%s=%s' % (k, v) for k, v in params.items())
+        return {'related_url': related_url}
+    return {}
+
+
+simple_tag(register, admin_select_related_link)
