@@ -23,6 +23,7 @@ class SeaStackedInline(admin.StackedInline):
 
 @admin.register(models.Ocean)
 class OceanAdmin(admin.ModelAdmin):
+    icon = '<i class="fa fa-tint"></i>'
     actions = None
     exclude = ('area', )
     inlines = [SeaStackedInline]
@@ -38,6 +39,7 @@ class OceanAdmin(admin.ModelAdmin):
 
 @admin.register(models.Sea)
 class SeaAdmin(admin.ModelAdmin):
+    icon = '<i class="material-icons">bubble_chart</i>'
     fields = (('name', 'parent'),
               'ocean',
               ('area', 'avg_depth', 'max_depth'),
@@ -53,6 +55,7 @@ class SeaAdmin(admin.ModelAdmin):
 
 @admin.register(models.Continent)
 class ContinentAdmin(admin.ModelAdmin):
+    icon = '<i class="fa fa-globe"></i>'
     actions_selection_counter = False
     fieldsets = (
         (None, {
@@ -88,6 +91,7 @@ class CountryForm(forms.ModelForm):
 
 @admin.register(models.Country)
 class CountryAdmin(admin.ModelAdmin):
+    icon = '<i class="material-icons">flag</i>'
     date_hierarchy = 'independence_day'
     form = CountryForm
     inlines = [CityStackedInline]
@@ -114,6 +118,7 @@ class CountryAdmin(admin.ModelAdmin):
 
 @admin.register(models.City)
 class CityAdmin(admin.ModelAdmin):
+    icon = '<i class="fa fa-building"></i>'
     list_display = ('name', 'country', 'population')
     list_filter = ('is_capital', 'country', (
         'country__continent', admin.RelatedOnlyFieldListFilter))

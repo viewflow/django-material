@@ -56,10 +56,15 @@ def get_app_list(request):
             # If so, add the module to the model_list.
             if True in perms.values():
                 info = (app_label, model._meta.model_name)
+                model_icon = '<i class="material-icons admin-modelicon-default admin-modelicon-{}-{}"></i>'.format(
+                    app_label, model._meta.model_name)
+                if hasattr(model_admin, 'icon'):
+                    model_icon = model_admin.icon
                 model_dict = {
                     'name': capfirst(model._meta.verbose_name_plural),
                     'object_name': model._meta.object_name,
                     'perms': perms,
+                    'icon': mark_safe(model_icon)
                 }
                 if perms.get('change', False):
                     try:

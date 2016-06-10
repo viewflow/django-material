@@ -8,7 +8,11 @@
 }
 
 .admin-modelicon-auth-user:before {
-    content: "\f207";
+    content: "\e7fd";
+}
+
+.admin-modelicon-auth-group:before {
+    content: "\e8d3";
 }
 
 /* django.contrib.flatpages */
@@ -17,7 +21,7 @@
 }
 
 .admin-modelicon-flatpages-flatpage:before {
-    content: "\ed4d";
+    content: "\e24d";
 }
 
 /* django.contrib.redirects */
@@ -26,7 +30,7 @@
 }
 
 .admin-modelicon-redirects-redirect:before {
-    content: "\f30d";
+    content: "\e8d4";
 }
 
 /* django.contrib.sites */
@@ -35,5 +39,5 @@
 }
 
 .admin-modelicon-sites-site:before {
-    content: "\f31a";
+    content: "\e14d";
 }

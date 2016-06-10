@@ -9,6 +9,10 @@ body {
     content: "\e8b9";
 }
 
+.admin-modelicon-default:before {
+    content: "\e8b9";
+}
+
 th {
     font-weight: 300;
 }
@@ -226,7 +230,11 @@ ul.side-nav.module-menu li.active>a>span.badge {
     padding-left: 0px !important;
 }
 
-.app-item a{
+.app-item i {
+    font-size: 48px;
+}
+
+.app-item a {
     background: #f5f5f5;
     display: block;
     border-radius: 4px;

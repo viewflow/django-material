@@ -12,7 +12,7 @@
            data-href-template="{{ bound_field_urls.change_related_template_url }}?{{ bound_field_urls.url_params }}"
            id="change_id_{{ bound_field.html_name }}"
            title="{% blocktrans %}Change selected {{ bound_field_urls.model }}{% endblocktrans %}">
-            <i class="material-icons" style="line-height:18px">create</i>
+            <i class="material-icons" style="line-height:16px;font-size:16px">create</i>
         </a>
         {% endif %}
         {% if bound_field_urls.can_add_related %}
@@ -20,7 +20,7 @@
            href="{{ bound_field_urls.add_related_url }}?{{ bound_field_urls.url_params }}"
            id="add_id_{{ bound_field.html_name }}"
            title="{% blocktrans %}Add another {{ bound_field_urls.model }}{% endblocktrans %}">
-            <i class="material-icons" style="line-height:18px">add</i>
+            <i class="material-icons" style="line-height:16px;font-size:16px">add</i>
         </a>
         {% endif %}
         {% if bound_field_urls.can_delete_related %}
@@ -28,7 +28,7 @@
            data-href-template="{{ bound_field_urls.delete_related_template_url }}?{{ bound_field_urls.url_params }}"
            id="add_id_{{ bound_field.html_name }}"
            title="{% blocktrans %}Delete selected {{ bound_field_urls.model }}{% endblocktrans %}">
-            <i class="material-icons" style="line-height:18px">remove</i>
+            <i class="material-icons" style="line-height:16px;font-size:16px">remove</i>
         </a>
         {% endif %}
     </label>
