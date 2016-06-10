@@ -71,14 +71,21 @@ def get_app_list(request):
                 if app_label in app_dict:
                     app_dict[app_label]['models'].append(model_dict)
                 else:
-                    app_name = apps.get_app_config(app_label).verbose_name
+                    app_config = apps.get_app_config(app_label)
+
+                    app_name = app_config.verbose_name
                     if len(app_name) > 23:
                         app_name = app_label.title()
                     app_name = app_name.replace('_', ' ')
 
+                    app_icon = '<i class="material-icons admin-appicon-default admin-appicon-{}"></i>'.format(app_label)
+                    if hasattr(app_config, 'icon'):
+                        app_icon = app_config.icon
+
                     app_dict[app_label] = {
                         'name': app_name,
                         'app_label': app_label,
+                        'app_icon': mark_safe(app_icon),
                         'app_url': reverse('admin:app_list', kwargs={'app_label': app_label}, current_app=site.name),
                         'has_module_perms': has_module_perms,
                         'models': [model_dict],

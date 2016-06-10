@@ -63,7 +63,7 @@
                                 {% get_app_list request as app_list %}
                                 {% for app in app_list %}
                                 <li class="header{% if app.active %} active{% endif %}">
-                                    <a class="collapsible-header{% if app.active %} active{% endif %}"><i class="material-icons">settings_applications</i> {{ app.name|truncatechars:23 }}</a>
+                                    <a class="collapsible-header{% if app.active %} active{% endif %}">{{ app.app_icon }} {{ app.name|truncatechars:23 }}</a>
                                     <div class="collapsible-body" {% if app.active %}style="display:block"{% endif %}>
                                         <ul>
                                             {% for model in app.models %}

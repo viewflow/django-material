@@ -5,6 +5,10 @@ body {
     background: #eee;
 }
 
+.admin-appicon-default:before {
+    content: "\e8b9";
+}
+
 th {
     font-weight: 300;
 }
@@ -233,63 +237,6 @@ ul.side-nav.module-menu li.active>a>span.badge {
     margin-top: 10px;
     margin-bottom: 10px;
     margin-right: 0px;
-}
-
-
-.adm-app-default:before {
-    content: "\f1b4";
-}
-
-.adm-auth-group:before {
-    content: "\f209";
-}
-
-.adm-auth-user:before {
-    content: "\f207";
-}
-
-.adm-django_comments-comment:before {
-    content: "\f266";
-}
-
-.adm-flatpages-flatpage:before {
-    content: "\f323";
-}
-
-.adm-default-association:before {
-    content: "\f30d";
-}
-
-.adm-default-nonce:before {
-    content: "\f183";
-}
-
-.adm-default-usersocialauth:before {
-    content: "\f35b";
-}
-
-.adm-redirects-redirect:before {
-    content: "\f30d";
-}
-
-.adm-sites-site:before {
-    content: "\f31a";
-}
-
-.adm-tagging-taggeditem:before {
-    content: "\f188";
-}
-
-.adm-tagging-tag:before {
-    content: "\f187";
-}
-
-.adm-zinnia-category:before {
-    content: "\f222";
-}
-
-.adm-zinnia-entry:before {
-    content: "\f223";
 }
 
 /*

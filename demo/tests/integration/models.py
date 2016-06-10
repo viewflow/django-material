@@ -1,7 +1,9 @@
 from django.db import models
+from django.utils.encoding import python_2_unicode_compatible
 from django.utils.safestring import mark_safe
 
 
+@python_2_unicode_compatible
 class Ocean(models.Model):
     name = models.CharField(max_length=250, primary_key=True)
     area = models.BigIntegerField()
@@ -14,6 +16,7 @@ class Ocean(models.Model):
         return self.name
 
 
+@python_2_unicode_compatible
 class Sea(models.Model):
     name = models.CharField(max_length=250)
     parent = models.ForeignKey('self', blank=True, null=True)
@@ -33,6 +36,7 @@ class Sea(models.Model):
         return self.name
 
 
+@python_2_unicode_compatible
 class Continent(models.Model):
     name = models.CharField(max_length=250, primary_key=True)
     area = models.BigIntegerField(help_text=mark_safe('km&#178;'))
@@ -60,6 +64,7 @@ class Continent(models.Model):
         ordering = ['name']
 
 
+@python_2_unicode_compatible
 class Country(models.Model):
     code = models.CharField(max_length=3, unique=True)
     name = models.CharField(max_length=250)
@@ -76,6 +81,7 @@ class Country(models.Model):
         return self.name
 
 
+@python_2_unicode_compatible
 class City(models.Model):
     name = models.CharField(max_length=250)
     is_capital = models.BooleanField(default=False)

@@ -1,0 +1,39 @@
+/*
+   Icons 
+*/
+
+/* django.contrib.auth */
+.admin-appicon-auth:before {
+    content: "\e8d3";
+}
+
+.admin-modelicon-auth-user:before {
+    content: "\f207";
+}
+
+/* django.contrib.flatpages */
+.admin-appicon-flatpages:before {
+    content: "\e24d";
+}
+
+.admin-modelicon-flatpages-flatpage:before {
+    content: "\ed4d";
+}
+
+/* django.contrib.redirects */
+.admin-appicon-redirects:before {
+    content: "\e8d4";
+}
+
+.admin-modelicon-redirects-redirect:before {
+    content: "\f30d";
+}
+
+/* django.contrib.sites */
+.admin-appicon-sites:before {
+    content: "\e14d";
+}
+
+.admin-modelicon-sites-site:before {
+    content: "\f31a";
+}

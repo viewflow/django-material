@@ -95,6 +95,7 @@ class ModuleMixin(object):
 class MaterialFrontendConfig(AppConfig):
     name = 'material.frontend'
     verbose_name = 'Site Modules'
+    icon = '<i class="material-icons">view_module</i>'
 
     def ready(self):
         for app_config in apps.get_app_configs():
