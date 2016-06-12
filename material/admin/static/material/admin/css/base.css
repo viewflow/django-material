@@ -309,8 +309,12 @@ ul.side-nav.module-menu li.active>a>span.badge {
     z-index:1000;
     position:absolute;
     right:15px;
-    top:0px;
+    top:15px;
 }
+.filters-card #changelist-search-button i.material-icons {
+    font-size: 18px;
+}
+
 .fixedHeader th {
     background: white;
 }
