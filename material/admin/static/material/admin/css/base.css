@@ -589,3 +589,9 @@ ul.side-nav.module-menu li.active>a>span.badge {
     padding-left: 10px;
     width:1%;
 }
+
+/* Admin raw id select field */
+.vForeignKeyRawIdAdminField+label,
+.vManyToManyRawIdAdminField+label {
+    width: calc(100% - 110px);
+}

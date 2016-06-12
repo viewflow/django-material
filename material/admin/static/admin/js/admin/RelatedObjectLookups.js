@@ -53,6 +53,7 @@ function dismissRelatedLookupPopup(win, chosenId) {
     } else {
         document.getElementById(name).value = chosenId;
     }
+    elem.nextElementSibling.classList.add('active');
     win.close();
 }
 
