@@ -5,11 +5,11 @@ body {
     background: #eee;
 }
 
-.admin-appicon-default:before {
+.admin-appicon:before {
     content: "\e8b9";
 }
 
-.admin-modelicon-default:before {
+.admin-modelicon:before {
     content: "\e8b9";
 }
 

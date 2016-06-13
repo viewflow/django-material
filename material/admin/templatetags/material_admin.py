@@ -56,7 +56,7 @@ def get_app_list(request):
             # If so, add the module to the model_list.
             if True in perms.values():
                 info = (app_label, model._meta.model_name)
-                model_icon = '<i class="material-icons admin-modelicon-default admin-modelicon-{}-{}"></i>'.format(
+                model_icon = '<i class="material-icons admin-modelicon admin-modelicon-{}-{}"></i>'.format(
                     app_label, model._meta.model_name)
                 if hasattr(model_admin, 'icon'):
                     model_icon = model_admin.icon
@@ -83,7 +83,7 @@ def get_app_list(request):
                         app_name = app_label.title()
                     app_name = app_name.replace('_', ' ')
 
-                    app_icon = '<i class="material-icons admin-appicon-default admin-appicon-{}"></i>'.format(app_label)
+                    app_icon = '<i class="material-icons admin-appicon admin-appicon-{}"></i>'.format(app_label)
                     if hasattr(app_config, 'icon'):
                         app_icon = app_config.icon
 

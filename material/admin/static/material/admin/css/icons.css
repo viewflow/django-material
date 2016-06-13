@@ -103,7 +103,7 @@
 }
 
 /* python-social-auth */
-.admin-appicon-default2:before {
+.admin-appicon-default:before {
     content: "\e7fc";
 }
 
