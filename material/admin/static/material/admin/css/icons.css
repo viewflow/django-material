@@ -293,3 +293,83 @@
 .admin-modelicon-dynamic_scraper-scraper:before {
     content: "\e86d";
 }
+
+/* django-facebook */
+.admin-appicon-django_facebook:before {
+    content: "\e80d";
+}
+
+.admin-modelicon-django_facebook-facebooklike:before {
+    content: "\e8dc";
+}
+
+.admin-modelicon-django_facebook-facebookuser:before {
+    content: "\e813";
+}
+
+.admin-modelicon-django_facebook-opengraphshare:before {
+    content: "\e80d";
+}
+
+/* django-oauth-toolkit */
+.admin-appicon-oauth2_provider:before {
+    content: "\e886";
+}
+
+.admin-modelicon-oauth2_provider-accesstoken:before {
+    content: "\e898";
+}
+
+.admin-modelicon-oauth2_provider-application:before {
+    content: "\e5c3";
+}
+
+.admin-modelicon-oauth2_provider-grant:before {
+    content: "\e7f0";
+}
+
+.admin-modelicon-oauth2_provider-refreshtoken:before {
+    content: "\e899";
+}
+
+/* django-photologue */
+.admin-appicon-photologue:before {
+    content: "\e412";
+}
+
+.admin-modelicon-photologue-gallery:before {
+    content: "\e413";
+}
+
+.admin-modelicon-photologue-photoeffect:before {
+    content: "\e3a5";
+}
+
+.admin-modelicon-photologue-photosize:before {
+    content: "\e3be";
+}
+
+.admin-modelicon-photologue-photo:before {
+    content: "\e251";
+}
+
+.admin-modelicon-photologue-watermark:before {
+    content: "\e06b";
+}
+
+/* django-mailer */
+.admin-appicon-mailer:before {
+    content: "\e0be";
+}
+
+.admin-modelicon-mailer-dontsendentry:before {
+    content: "\e909";
+}
+
+.admin-modelicon-mailer-messagelog:before {
+    content: "\e896";
+}
+
+.admin-modelicon-mailer-message:before {
+    content: "\e0be";
+}
