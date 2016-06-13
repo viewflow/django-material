@@ -19,7 +19,7 @@ ALLOWED_HOSTS = []
 # Application definition
 DEV_APPS = (
     'autofixture',
-    'debug_toolbar',
+    # 'debug_toolbar',
     'template_debug',
 )
 
