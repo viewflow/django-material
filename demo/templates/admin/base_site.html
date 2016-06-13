@@ -12,7 +12,7 @@
 {% block extrajs %}
 {% if user.is_anonymous %}
 <script type="text/javascript">
-toast('Use  admin:admin  to log into administration interface', 100000, 'alert-error');
+Materialize.toast('Use  admin:admin  to log into administration interface', 100000, 'alert-error');
 </script>
 {% endif %}
 {% endblock %}
