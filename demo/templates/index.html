@@ -51,6 +51,10 @@
           background-image: url({% static 'img/background.png' %});
       }
 
+      footer {
+          background-image: url({% static 'img/background.png' %});
+      }
+
       h1, h2, h3, h4, h5, h6 { 
           font-weight: 300; 
       }
@@ -328,7 +332,8 @@ global urls.
                        <h4>Administration</h4>
                    </div>
                    <div id="admin" class="col s12 admin scrollspy">
-                           <div class="col s12 m12 l8 card grey lighten-4" style="padding: 0; padding-bottom: 25px; margin-top: 8px;   box-sizing: border-box;">
+                       <div class="col s12 m12 l8">
+                           <div class="card grey lighten-4" style="padding: 0; padding-bottom: 25px; margin-top: 8px;   box-sizing: border-box;">
                                <div class="slider">
                                    <ul class="slides">
                                        <li>
@@ -346,6 +351,10 @@ global urls.
                                    </ul>
                                </div>
                            </div>
+                           <div class="center-align">
+                               <h4><a href="/admin/">Live Demo</a></h4>
+                           </div>
+                       </div>
                        <div class="row">
 
                            <div class="col s12 m12 l4" style="padding-right:0">
@@ -395,29 +404,26 @@ global urls.
           <div class="container">
               <div class="row">
                   <div class="col l6 s12">
-                      <h5 class="white-text">Hey, this is alpha software</h5>
-                      <p class="grey-text text-lighten-4">You can use
-                      rows and columns here to organize your footer
-                      content.</p>
+                      <h5 class="white-text">Django-material</h5>
+                      <p class="grey-text text-lighten-4">Material design for django forms and admin</p>
+                      <a href="http://viewflow.io" class="white-text">viewflow.io</a>
                   </div>
                   <div class="col l4 offset-l2 s12">
                       <h5 class="white-text">Links</h5>
                       <ul>
                           <li><a class="grey-text text-lighten-3"
-                          href="#!">Link 1</a></li>
+                          href="https://github.com/viewflow/django-material">Source code</a></li>
                           <li><a class="grey-text text-lighten-3"
-                          href="#!">Link 2</a></li>
+                          href="https://github.com/viewflow/django-material/issues">Bug tracker</a></li>
                           <li><a class="grey-text text-lighten-3"
-                          href="#!">Link 3</a></li>
-                          <li><a class="grey-text text-lighten-3"
-                          href="#!">Link 4</a></li>
+                          href="https://gitter.im/viewflow/django-material">Chat room</a></li>
                       </ul>
                   </div>
               </div>
           </div>
           <div class="footer-copyright">
               <div class="container">
-                  © 2014 Mikhail Podgurskiy
+                  © 2014-2016 Mikhail Podgurskiy
                   <a class="grey-text text-lighten-4 right"
                   href="http://opensource.org/licenses/BSD-3-Clause">BSD License</a>
               </div>
