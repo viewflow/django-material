@@ -269,8 +269,6 @@ You can provide a custom admin site module in the `MATERIAL_ADMIN_SITE` setting
 
     MATERIAL_ADMIN_SITE = 'mymodule.admin.admin_site'
 
-**Admin support development is on initial stage. Only basic admin features are available.**
-
 ****
 
 Changelog
