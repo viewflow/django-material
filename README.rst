@@ -276,17 +276,20 @@ You can provide a custom admin site module in the `MATERIAL_ADMIN_SITE` setting
 Changelog
 =========
 
-0.7.0 2016-03-13 - Alpha
-------------------------
+0.8.0 2016-06-14 - Beta
+-----------------------
 
-The last alpha release.
+First beta release.
 
-* Forms - Fix controls in new forms in formsets
-* Forms - New way to append or override widget attrs in template
-* Forms - Removed `group_class`, `add_group_class`, `add_label_class` redifinable parts
-* Admin - Match table styles to google guidelines.
-* Admin - Start to work on admin widget support improvements http://forms.viewflow.io/demo/widget/admin/
-* Admin - Fix scrollbar
-* Frontend - Switch from fontawesome to material-design-iconic font
-* Frontend - Fix broken links on user navigation menu
-* Frontend - Modules are refactored to AppConfig mixins
+* Forms - Fix 0 as initial value for number input
+* Forms - Remove Roboto font fix hack on windows
+* Frontend - module heareds fixed
+* Admin - list sorting support
+* Admin - fixedHeader fixed
+* Admin - fix pagination display bug under dj19
+* Admin - lost actions support
+* Admin - added datetime today shortcut links
+* Admin - added filter for select multiple field
+* Admin - readonly fields support for inlines
+* Admin - mansory layout for index page
+* Admin - added app and model icons support

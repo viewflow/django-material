@@ -1,3 +1,21 @@
+0.8.0 2016-06-14 - Beta
+-----------------------
+
+First beta release.
+
+* Forms - Fix 0 as initial value for number input
+* Forms - Remove Roboto font fix hack on windows
+* Frontend - module heareds fixed
+* Admin - list sorting support
+* Admin - fixedHeader fixed
+* Admin - fix pagination display bug under dj19
+* Admin - lost actions support
+* Admin - added datetime today shortcut links
+* Admin - added filter for select multiple field
+* Admin - readonly fields support for inlines
+* Admin - mansory layout for index page
+* Admin - added app and model icons support
+
 0.7.0 2016-03-13 - Alpha
 ------------------------
 
