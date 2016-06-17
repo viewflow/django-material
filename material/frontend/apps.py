@@ -119,12 +119,16 @@ def update_modules(app_config, verbosity=2, interactive=True, **kwargs):
         if interactive:
             ok_to_delete = input(
                 "The following modules are stale and need to be deleted:\n {}\n"
-                "Are you sure you want to delete these content types?".format(
+                "Are you sure you want to delete these modules entries?\n\n"
+                "Type 'yes' to continue, or 'no' to cancel: ".format(
                     '    %s'.join(module.label for module in stale_modules)
                 ))
         else:
-            ok_to_delete = True
+            ok_to_delete = 'yes'
 
         if ok_to_delete == 'yes':
             stale_modules.delete()
             print("Stale modules deleted.")
+        else:
+            if verbosity >= 2 or interactive:
+                print("Stale modules remain.")
