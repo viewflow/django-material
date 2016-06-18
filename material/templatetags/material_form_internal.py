@@ -4,6 +4,7 @@ import math
 import re
 from collections import OrderedDict
 
+from django import forms
 from django.forms.forms import BoundField
 from django.template import Library
 from django.template.base import Node, TemplateSyntaxError, Variable, token_kwargs
@@ -139,6 +140,8 @@ def formset_value(bound_field):
     value = bound_field.value()
     if value is None:
         value = bound_field.field.widget.get_formset(bound_field.name)
+    elif not isinstance(value, forms.BaseFormSet):
+        value = bound_field.field.widget.get_formset(bound_field.name, initial=value)
     return value
 
 

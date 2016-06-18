@@ -73,7 +73,12 @@ urlpatterns = [
         form_class=forms.BankForm, success_url='/demo/bank/', template_name="demo.html")),
     url(r'^demo/wizard/$', Wizard.as_view()),
     url(r'^demo/hospital/$', generic.FormView.as_view(
-        form_class=forms.HospitalRegistrationForm, success_url='/demo/hospital/', template_name="demo.html")),
+        form_class=forms.HospitalRegistrationForm, success_url='/demo/hospital/', template_name="demo.html",
+        initial={'emergency_contacts': [
+             {'name': 'John Doe', 'relationship': 'FRD', 'daytime_phone': '+5-555-9909000'},
+             {'name': 'Suzy Wu', 'relationship': 'SPS', 'daytime_phone': '+5-555-9909001'}
+         ]}
+    )),
     url(r'^foundation/basic/', generic.RedirectView.as_view(url='/?cache=no', permanent=False)),
 
     # core widgets test
