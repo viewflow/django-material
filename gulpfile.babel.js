@@ -47,9 +47,16 @@ gulp.task('materialize.css', () => {
 });
 
 
+gulp.task('datatables.js', () => {
+  return gulp.src('./node_modules/datatables/media/js/jquery.dataTables.js')
+    .pipe(gulp.dest('./material/static/material/js/'));
+});
+
+
 gulp.task("default", [
   "materialize.js",
   "materialize.css",
   "roboto.font",
-  "material-icons.font"
+  "material-icons.font",
+  "datatables.js",
 ]);

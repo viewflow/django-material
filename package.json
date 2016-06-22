@@ -8,6 +8,7 @@
     "autoprefixer": "^6.3.6",
     "babel": "^6.5.2",
     "babel-preset-es2016": "^6.0.11",
+    "datatables": "^1.10.12",
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
     "gulp-postcss": "^6.1.1",
