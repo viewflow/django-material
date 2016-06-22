@@ -53,10 +53,24 @@ gulp.task('datatables.js', () => {
 });
 
 
+gulp.task('datatables.fixedHeader.js', () => {
+  return gulp.src('./node_modules/datatables.net-fixedheader/js/dataTables.fixedHeader.js')
+    .pipe(gulp.dest('./material/static/material/js/'));
+});
+
+
+gulp.task('datatables.responsive.js', () => {
+  return gulp.src('./node_modules/datatables.net-responsive/js/dataTables.responsive.js')
+    .pipe(gulp.dest('./material/static/material/js/'));
+});
+
+
 gulp.task("default", [
   "materialize.js",
   "materialize.css",
   "roboto.font",
   "material-icons.font",
   "datatables.js",
+  "datatables.fixedHeader.js",
+  "datatables.responsive.js",
 ]);
