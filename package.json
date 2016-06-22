@@ -9,7 +9,7 @@
     "babel": "^6.5.2",
     "babel-preset-es2016": "^6.0.11",
     "datatables": "^1.10.12",
-    "datatables.net-fixedheader": "^3.1.2",
+    "datatables.net-fixedheader": "kmmbvnr/Dist-DataTables-FixedHeader",
     "datatables.net-responsive": "^2.1.0",
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",

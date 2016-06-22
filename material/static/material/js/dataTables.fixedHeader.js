@@ -308,7 +308,7 @@ $.extend( FixedHeader.prototype, {
 		var get = function ( name ) {
 			return $(name, from)
 				.map( function () {
-					return $(this).width();
+					return $(this).outerWidth();
 				} ).toArray();
 		};
 
