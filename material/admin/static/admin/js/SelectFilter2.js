@@ -54,11 +54,11 @@ window.SelectFilter = {
         var selector_chooser = quickElement('ul', selector_div);
         selector_chooser.className = 'selector-chooser col s12';
         var add_link = quickElement('a', quickElement('li', selector_chooser), '', 'title', gettext('Choose'), 'href', 'javascript: (function(){ SelectBox.move("' + field_id + '_from","' + field_id + '_to"); SelectFilter.refresh_icons("' + field_id + '");})()', 'id', field_id + '_add_link');
-        add_link.className = 'selector-add btn-floating btn-flat  green lighten-2';
+        add_link.className = 'selector-add btn-floating btn-flat';
         quickElement('i', add_link, 'chevron_right').className = 'material-icons';
         var remove_link = quickElement('a', quickElement('li', selector_chooser), '', 'title', gettext('Remove'), 'href', 'javascript: (function(){ SelectBox.move("' + field_id + '_to","' + field_id + '_from"); SelectFilter.refresh_icons("' + field_id + '");})()', 'id', field_id + '_remove_link');
         quickElement('i', remove_link, 'chevron_left').className = 'material-icons';
-        remove_link.className = 'selector-remove btn-floating btn-flat  green lighten-2';
+        remove_link.className = 'selector-remove btn-floating btn-flat';
 
         // <div class="selector-chosen">
         var selector_chosen = quickElement('div', selector_div);

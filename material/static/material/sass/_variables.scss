@@ -1,8 +1,18 @@
-$primary-color: color("green", "lighten-2") !default;
-$primary-color-light: lighten($primary-color, 15%) !default;
-$primary-color-dark: darken($primary-color, 15%) !default;
+/* materialize.css variables */ 
+$primary-color: #4caf50 !default;                    // green
+$primary-color-light: lighten($primary-color, 15%);
+$primary-color-dark: darken($primary-color, 15%);
 
-$secondary-color: color("teal", "lighten-1") !default;
-$success-color: color("green", "base") !default;
-$error-color: color("red", "base") !default;
-$link-color: color("light-blue", "darken-1") !default;
+$secondary-color: #26a69a;                           // teal lighten-1
+$success-color: #4caf50;                             // green
+$error-color: #f44336;                               // red
+$link-color: #039be5;                                // light-blue darken-1
+
+
+/* django-material variables */
+$logo-background-color: $primary-color-dark;
+
+$nav-default-text-color: #424242;                    // grey darken-3
+$nav-1st-level-color: #388E3C;                       // green darken-2
+$nav-1st-level-text-color: #ffffff;                  // white
+$nav-2d-level-color: #4CAF50;                        // green

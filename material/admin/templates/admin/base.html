@@ -36,7 +36,7 @@
 
         {% if not is_popup %}
         <header>
-            <nav id="header" class="nav-top green">
+            <nav id="header" class="nav-top">
                 <div class="nav-wrapper">
                     <a href="/" class="page-title hide-on-med-and-down">{% block brand-logo %}{% trans 'Administration' %}{% endblock %}</a>
                     <a href="#" data-activates="nav-mobile" class="button-collapse full"><i class="material-icons">menu</i></a>
@@ -88,7 +88,7 @@
             {% if not is_popup %}
             {% block breadcrumbs %}
             <div class="breadcrumbs">
-                <div class="green darken-2 white-text">
+                <div>
                     {% block breadcrumbs_items %}
                     {% endblock %}
                 </div>

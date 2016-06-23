@@ -1618,6 +1618,8 @@
 .transparent-text {
   color: transparent !important; }
 
+/* materialize.css variables */
+/* django-material variables */
 /* ==========================================================================
    Materialize variables
    ========================================================================== */
@@ -2118,7 +2120,7 @@ ul {
 blockquote {
   margin: 20px 0;
   padding-left: 1.5rem;
-  border-left: 5px solid #81C784; }
+  border-left: 5px solid #4caf50; }
 
 i {
   line-height: inherit; }
@@ -2154,7 +2156,7 @@ video.responsive-video {
   .pagination li.active a {
     color: #fff; }
   .pagination li.active {
-    background-color: #81C784; }
+    background-color: #4caf50; }
   .pagination li.disabled a {
     cursor: default;
     color: #999; }
@@ -2290,7 +2292,7 @@ ul.staggered-list li {
 footer.page-footer {
   margin-top: 20px;
   padding-top: 20px;
-  background-color: #81C784; }
+  background-color: #4caf50; }
   footer.page-footer .footer-copyright {
     overflow: hidden;
     height: 50px;
@@ -3043,7 +3045,7 @@ input[type=range] + .thumb {
 
 nav {
   color: #fff;
-  background-color: #81C784;
+  background-color: #4caf50;
   width: 100%;
   height: 56px;
   line-height: 56px; }
@@ -3496,7 +3498,7 @@ small {
     width: 15%;
     min-width: 80px; }
     .tabs .tab a {
-      color: #81C784;
+      color: #4caf50;
       display: block;
       width: 100%;
       height: 100%;
@@ -3504,15 +3506,15 @@ small {
       overflow: hidden;
       transition: color .28s ease; }
       .tabs .tab a:hover {
-        color: #c8e6c9; }
+        color: #92cf94; }
     .tabs .tab.disabled a {
-      color: #c8e6c9;
+      color: #92cf94;
       cursor: default; }
   .tabs .indicator {
     position: absolute;
     bottom: 0;
     height: 2px;
-    background-color: #b6dfb8;
+    background-color: #80c883;
     will-change: left, right; }
 
 .material-tooltip {
@@ -4180,8 +4182,8 @@ textarea.materialize-textarea {
   input[type=search]:focus.valid,
   textarea.materialize-textarea.valid,
   textarea.materialize-textarea:focus.valid {
-    border-bottom: 1px solid #4CAF50;
-    box-shadow: 0 1px 0 0 #4CAF50; }
+    border-bottom: 1px solid #4caf50;
+    box-shadow: 0 1px 0 0 #4caf50; }
   input:not([type]).valid + label:after,
   input:not([type]):focus.valid + label:after,
   input[type=text].valid + label:after,
@@ -4209,7 +4211,7 @@ textarea.materialize-textarea {
   textarea.materialize-textarea.valid + label:after,
   textarea.materialize-textarea:focus.valid + label:after {
     content: attr(data-success);
-    color: #4CAF50;
+    color: #4caf50;
     opacity: 1; }
   input:not([type]).invalid, input:not([type]):focus.invalid,
   input[type=text].invalid,
@@ -4236,8 +4238,8 @@ textarea.materialize-textarea {
   input[type=search]:focus.invalid,
   textarea.materialize-textarea.invalid,
   textarea.materialize-textarea:focus.invalid {
-    border-bottom: 1px solid #F44336;
-    box-shadow: 0 1px 0 0 #F44336; }
+    border-bottom: 1px solid #f44336;
+    box-shadow: 0 1px 0 0 #f44336; }
   input:not([type]).invalid + label:after,
   input:not([type]):focus.invalid + label:after,
   input[type=text].invalid + label:after,
@@ -4265,7 +4267,7 @@ textarea.materialize-textarea {
   textarea.materialize-textarea.invalid + label:after,
   textarea.materialize-textarea:focus.invalid + label:after {
     content: attr(data-error);
-    color: #F44336;
+    color: #f44336;
     opacity: 1; }
   input:not([type]).validate + label,
   input[type=text].validate + label,
@@ -5072,7 +5074,7 @@ input[type=range]:focus::-ms-fill-upper {
 
 .side-nav .collapsible-body li.active,
 .side-nav.fixed .collapsible-body li.active {
-  background-color: #81C784; }
+  background-color: #4caf50; }
   .side-nav .collapsible-body li.active a,
   .side-nav.fixed .collapsible-body li.active a {
     color: #fff; }

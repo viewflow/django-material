@@ -32,7 +32,7 @@
     <body>
         {% if user.is_authenticated %}{% block user_menu %}{% include 'material/frontend/includes/user_menu.html' %}{% endblock %}{% endif %}
         <header>
-            <nav class="nav-top green">
+            <nav class="nav-top">
                 <a href="#" data-activates="nav-mobile" class="button-collapse full"><i class="material-icons">menu</i></a>
 
                 <div class="nav-wrapper">
@@ -84,7 +84,7 @@
             {% block main %}
             {% block breadcrumbs %}
             <div class="breadcrumbs">
-                <div class="green darken-2 white-text">
+                <div>
                     {% block breadcrumbs_items %}
                     {% endblock %}
                 </div>

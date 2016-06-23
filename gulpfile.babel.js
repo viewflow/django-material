@@ -3,6 +3,17 @@ import gulp from 'gulp';
 import postcss from 'gulp-postcss';
 import sass from 'gulp-sass';
 
+
+var supported_browsers = [
+  'Chrome >= 50',
+  'Firefox >= 46',
+  'Explorer >= 11',
+  'Safari >= 9',
+  'ChromeAndroid >= 50',
+  'FirefoxAndroid >= 46',
+];
+
+
 gulp.task('material-icons.font', () => {
   return gulp.src('./node_modules/material-design-icons/iconfont/*')
     .pipe(gulp.dest('./material/static/material/fonts/material-design-icons/'));
@@ -31,14 +42,7 @@ gulp.task('materialize.css', () => {
     ))
     .pipe(postcss([
       autoprefixer({
-        browsers: [
-          'Chrome >= 50',
-          'Firefox >= 46',
-          'Explorer >= 11',
-          'Safari >= 9',
-          'ChromeAndroid >= 50',
-          'FirefoxAndroid >= 46',
-        ]
+        browsers: supported_browsers
       })
     ]))
     .pipe(gulp.dest(
@@ -65,6 +69,42 @@ gulp.task('datatables.responsive.js', () => {
 });
 
 
+gulp.task('frontend.css', () => {
+  return gulp.src('./material/frontend/static/material/frontend/sass/*.scss')
+    .pipe(sass({
+      includePaths: ['./node_modules/', './material/static/']
+    }).on(
+      'error', sass.logError
+    ))
+    .pipe(postcss([
+      autoprefixer({
+        browsers: supported_browsers
+      })
+    ]))
+    .pipe(gulp.dest(
+      './material/frontend/static/material/frontend/css/'
+    ));
+});
+
+
+gulp.task('admin.css', () => {
+  return gulp.src('./material/admin/static/material/admin/sass/*.scss')
+    .pipe(sass({
+      includePaths: ['./node_modules/', './material/static/']
+    }).on(
+      'error', sass.logError
+    ))
+    .pipe(postcss([
+      autoprefixer({
+        browsers: supported_browsers
+      })
+    ]))
+    .pipe(gulp.dest(
+      './material/admin/static/material/admin/css/'
+    ));
+});
+
+
 gulp.task("default", [
   "materialize.js",
   "materialize.css",
@@ -73,4 +113,6 @@ gulp.task("default", [
   "datatables.js",
   "datatables.fixedHeader.js",
   "datatables.responsive.js",
+  "frontend.css",
+  "admin.css",
 ]);
