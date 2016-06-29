@@ -86,18 +86,6 @@ class Fieldset(LayoutNode):
         self.span_columns = kwargs.pop('span_columns', 1)
 
 
-class Inline(LayoutNode):
-    template_name = 'layout/inline_tabular.html'
-
-    def __init__(self, label, inline, varname=None):
-        self.label = label
-        self.inline = inline
-        self.varname = varname if varname else _camel_case_to_underscore(inline.__name__)
-
-    def get_context_data(self, context):
-        return {'inline': context[self.varname]}
-
-
 class Row(LayoutNode):
     template_name = 'layout/row.html'
 
@@ -208,16 +196,7 @@ def _collect_elements(element_cls, parent, container=None):
 class LayoutMixin(object):
     """
     Extracts from layout `fields` for django FormView
-    `inlines` and `inlines_names` for django-extra-views
     """
     @property
     def fields(self):
         return [field.field_name for field in _collect_elements(Span, self.layout)]
-
-    @property
-    def inlines(self):
-        return [inline.inline for inline in _collect_elements(Inline, self.layout)]
-
-    @property
-    def inlines_names(self):
-        return [inline.varname for inline in _collect_elements(Inline, self.layout)]

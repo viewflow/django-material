@@ -1,9 +1,7 @@
 import datetime
 
 from django.template import Template
-from django.forms.formsets import formset_factory
 from material import Layout, Row, Column, Fieldset, Span2, Span3, Span5, Span6, Span10
-from material.fields import FormSetField
 
 from . import demo as forms
 
@@ -510,79 +508,3 @@ class WizardForm1(forms.Form):
 
 class WizardForm2(forms.Form):
     message = forms.CharField(widget=forms.Textarea)
-
-
-class HospitalRegistrationForm(forms.Form):
-    class EmergencyContractForm(forms.Form):
-        name = forms.CharField()
-        relationship = forms.ChoiceField(choices=(
-            ('SPS', 'Spouse'), ('PRT', 'Partner'),
-            ('FRD', 'Friend'), ('CLG', 'Colleague')))
-        daytime_phone = forms.CharField()
-        evening_phone = forms.CharField(required=False)
-
-    registration_date = forms.DateField(initial=datetime.date.today)
-    full_name = forms.CharField()
-    birth_date = forms.DateField()
-    height = forms.IntegerField(help_text='cm')
-    weight = forms.IntegerField(help_text='kg')
-    primary_care_physician = forms.CharField()
-    date_of_last_appointment = forms.DateField()
-    home_phone = forms.CharField()
-    work_phone = forms.CharField(required=False)
-
-    procedural_questions = forms.MultipleChoiceField(
-        widget=forms.CheckboxSelectMultiple, required=False,
-        choices=QUESTION_CHOICES)
-
-    cardiovascular_risks = forms.MultipleChoiceField(
-        widget=forms.CheckboxSelectMultiple, required=False,
-        choices=CARDIOVASCULAR_RISK_CHOICES)
-
-    apnia_risks = forms.MultipleChoiceField(
-        widget=forms.CheckboxSelectMultiple, required=False,
-        choices=APNIA_RISK_CHOICES)
-
-    emergency_contacts = FormSetField(formset_factory(EmergencyContractForm, extra=2, can_delete=True))
-
-    layout = Layout(Row(Column('full_name', 'birth_date',
-                               Row('height', 'weight'), span_columns=3), 'registration_date'),
-                    Row(Span3('primary_care_physician'), 'date_of_last_appointment'),
-                    Row('home_phone', 'work_phone'),
-                    Fieldset('Procedural Questions', 'procedural_questions'),
-                    Fieldset('Clinical Predictores of Cardiovascular Risk', 'cardiovascular_risks'),
-                    Fieldset('Clinical Predictors of sleep Apnia Risk', 'apnia_risks'),
-                    Fieldset('Emergency Contacts', 'emergency_contacts'))
-
-    template = Template("""
-    {% form %}
-        {% part form.registration_date prefix %}<i class="material-icons prefix">insert_invitation</i>{% endpart %}
-        {% part form.date_of_last_appointment prefix %}<i class="material-icons prefix">insert_invitation</i>{% endpart %}
-        {% part form.primary_care_physician prefix %}<i class="material-icons prefix">face</i>{% endpart %}
-        {% part form.home_phone prefix %}<i class="material-icons prefix">call</i>{% endpart %}
-        {% part form.work_phone prefix %}<i class="material-icons prefix">call</i>{% endpart %}
-        {% part form.procedural_questions label %}{% endpart %}
-        {% part form.cardiovascular_risks label %}{% endpart %}
-        {% part form.cardiovascular_risks columns %}2{% endpart %}
-        {% part form.apnia_risks label %}{% endpart %}
-        {% part form.apnia_risks columns %}3{% endpart %}
-        {% part form.emergency_contacts label %}{% endpart %}
-
-    {% endform %}
-    """)
-
-    buttons = Template("""
-        <button class="btn btn-primary pull-right" type="submit">Registration</button>
-    """)
-
-    title = "Hospital registration form"
-
-    css = """
-    .section h5 {
-        font-size: 1.2rem;
-        padding-bottom: 0.2rem;
-        border-bottom: 3px solid black;
-    }
-    """
-
-    blockclass = "col s12 m12 l9 offset-l1"
