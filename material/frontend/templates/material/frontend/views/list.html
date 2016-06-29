@@ -1,0 +1,47 @@
+{% extends 'material/frontend/base_module.html' %}
+{% load material_frontend %}
+
+{% block content %}
+<div class="row frontend-list">
+    <div class="col s12">
+        <div class="card">
+            <div class="card-content">
+                <table id="table" class="table bordered">
+                    <thead>
+                        <tr>
+                            {% for header, header_title in headers %}
+                            <th data-name="{{ header }}">{{ header_title|title }}</th>
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in data %}
+                        <tr>
+                            {% for _, item in row.items %}
+                            <td>{{ item|safe }}</td>
+                            {% endfor %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    {% block action_btn %}
+    <div class="fixed-action-btn">
+        {% url view.model|frontend_urlname:'add' as add_url %}
+        <a class="btn-floating btn-large waves-effect waves-light red z-depth-2" href="{{ add_url }}">
+            <i class="large material-icons">add</i>
+        </a>
+    </div>
+    {% endblock %}
+
+    <script type="text/javascript">
+      {% block datatable %}
+      new $.fn.dataTable.FixedHeader(
+        $('#table').DataTable({{ datatable_config|safe }}));
+      {% endblock %}
+    </script>
+</div>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'material/frontend/base_module.html' %}
+{% load i18n material_form material_frontend %}
+
+{% block content %}
+<div class="row frontend-form">
+    <div class="col s12">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="card">
+                <div class="card-content">
+                    <div class="card-title">Create New</div>
+                    {% block form %}
+                    {% if view.layout or form.layout%}
+                        {% if view.layout %}
+                            {% form layout=view.layout %}{% endform %}
+                        {% endif %} 
+                        {% if form.layout %}
+                            {% form layout=form.layout %}{% endform %}
+                        {% endif %}
+                    {% else %}
+                        {% form %}{% endform %}
+                        {% for name, formset in formsets.items %}
+                        <table>
+                            {{ formset.as_table }}
+                        </table>
+                        {% endfor %}
+                    {% endif %}
+                    {% endblock %}
+                </div>
+                <div class="card-action">
+                    <div class="right-align">
+                        {% block submit_row %}
+                        <button type="submit" class="waves-effect waves-light btn white-text">{% trans 'Save' %}</button>
+                        {% endblock %}
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -38,3 +38,4 @@ class UnpjaxMiddleware(object):
                            encoding=request.encoding, mutable=True)
             qs.pop("_pjax", None)
             request.META["QUERY_STRING"] = qs.urlencode()
+            request.META["PJAX"] = True
