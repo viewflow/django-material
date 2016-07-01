@@ -1,9 +1,5 @@
-from django.views.generic import View
+from django.views import generic
 
 
-class DeleteModelView(View):
-    model = None
-    viewset = None
-
-    def has_perm(self, user, obj):
-        return True
+class DeleteModelView(generic.DeleteView):
+    pass

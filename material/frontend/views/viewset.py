@@ -20,6 +20,9 @@ class ModelViewSet(object):
     list_display = DEFAULT
     list_display_links = DEFAULT
 
+    form_layout = DEFAULT
+    form_class = DEFAULT
+
     def _filter_options(self, view_class, options):
         return {name: value for name, value in options.items()
                 if hasattr(view_class, name)
@@ -37,9 +40,15 @@ class ModelViewSet(object):
         return result
 
     def get_create_view_kwargs(self, **kwargs):
+        result = {
+            'layout': self.form_layout,
+            'form_Class': self.form_class,
+        }
+        result.update(kwargs)
+
         return self._filter_options(
             self.create_view_class,
-            self.get_common_kwargs(**kwargs))
+            self.get_common_kwargs(**result))
 
     def get_list_view_kwargs(self, **kwargs):
         result = {
@@ -53,9 +62,15 @@ class ModelViewSet(object):
             self.get_common_kwargs(**result))
 
     def get_update_view_kwargs(self, **kwargs):
+        result = {
+            'layout': self.form_layout,
+            'form_Class': self.form_class,
+        }
+        result.update(kwargs)
+
         return self._filter_options(
-            self.create_view_class,
-            self.get_common_kwargs(**kwargs))
+            self.update_view_class,
+            self.get_common_kwargs(**result))
 
     def get_delete_view_kwargs(self, **kwargs):
         return self._filter_options(
@@ -85,6 +100,6 @@ class ModelViewSet(object):
         return [
             url('^$', self.list_view, name='{}_list'.format(model_name)),
             url('^add/$', self.create_view, name='{}_add'.format(model_name)),
-            url(r'^(.+)/change/$', self.update_view, name='{}_change'.format(model_name)),
-            url(r'^(.+)/delete/$', self.delete_view, name='{}_delete'.format(model_name)),
+            url(r'^(?P<pk>.+)/change/$', self.update_view, name='{}_change'.format(model_name)),
+            url(r'^(?P<pk>.+)/delete/$', self.delete_view, name='{}_delete'.format(model_name)),
         ]
