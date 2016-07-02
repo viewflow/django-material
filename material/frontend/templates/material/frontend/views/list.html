@@ -10,15 +10,17 @@
                     <thead>
                         <tr>
                             {% for header, header_title in headers %}
-                            <th data-name="{{ header }}">{{ header_title|title }}</th>
+                            <th data-name="{{ header }}" class="{{ header }}">{{ header_title|title }}</th>
                             {% endfor %}
                         </tr>
                     </thead>
                     <tbody>
-                        {% for row in data %}
+                        {% for item, row in data %}
                         <tr>
-                            {% for _, item in row.items %}
-                            <td>{{ item|safe }}</td>
+                            {% for column_name, item in row.items %}                            
+                            <td>
+                                {% if column_name in view.datalist.list_display_links %}<a href="#">{{ item }}</a>{% else %}{{ item }}{% endif %}
+                            </td>
                             {% endfor %}
                         </tr>
                         {% endfor %}
@@ -39,8 +41,18 @@
 
     <script type="text/javascript">
       {% block datatable %}
+      var config = {{ datatable_config|safe }};
+      config['columnDefs'] = [
+        {
+          "targets": {{ view.datalist.list_display_links|safe }},
+          "render": function ( data, type, full, meta ) {
+            return "<a href='"+ full.view_url + "'>" + data+ "</a>";
+          },
+        }
+      ];
+
       new $.fn.dataTable.FixedHeader(
-        $('#table').DataTable({{ datatable_config|safe }}));
+        $('#table').DataTable(config));
       {% endblock %}
     </script>
 </div>

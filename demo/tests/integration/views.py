@@ -26,6 +26,7 @@ class CountriesViewSet(ModelViewSet):
         'tld', 'name', 'continent',
         'became_independent_in_20_century',
         'gay_friendly')
+    list_display_links = ('tld', 'name', )
 
     def tld(self, country):
         return '.' + country.code.lower()

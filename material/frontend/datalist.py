@@ -124,8 +124,8 @@ class DataList(object):
 
     def get_data(self, start, length):
         for item in self.queryset[start:start+length]:
-            results = OrderedDict()
+            columns = OrderedDict()
             for n, field_name in enumerate(self.list_display):
                 attr = self.get_data_attr(field_name)
-                results[n] = smart_text(attr.get_value(item))
-            yield results
+                columns[field_name] = smart_text(attr.get_value(item))
+            yield item, columns

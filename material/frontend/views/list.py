@@ -2,6 +2,7 @@ import json
 
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ImproperlyConfigured, PermissionDenied
+from django.core.urlresolvers import reverse
 from django.db.models.query import QuerySet
 from django.http import JsonResponse
 from django.utils.decorators import method_decorator
@@ -64,7 +65,7 @@ class ListModelView(ContextMixin, TemplateResponseMixin, View):
 
     def get_list_display_links(self, list_display):
         if self.list_display_links or self.list_display_links is None or not list_display:
-            return self.list_display_links
+            return list(self.list_display_links)
         else:
             # Use only the first item in list_display as link
             return list(list_display)[:1]
@@ -99,6 +100,7 @@ class ListModelView(ContextMixin, TemplateResponseMixin, View):
     def get_datatable_config(self):
         config = self.datatable_default_config.copy()
         config['iDisplayLength'] = self.paginate_by
+        config['columns'] = [{'data': field_name} for field_name in self.datalist.list_display]
         if self.datatable_config is not None:
             config.update(self.datatable_config)
         return config
@@ -118,6 +120,7 @@ class ListModelView(ContextMixin, TemplateResponseMixin, View):
         return self.render_to_response(context)
 
     def get_json_data(self, request, *args, **kwargs):
+        opts = self.model._meta
         form = forms.DatatableRequestForm(request.GET)
         if not form.is_valid():
             return {'error': form.errors}
@@ -126,11 +129,18 @@ class ListModelView(ContextMixin, TemplateResponseMixin, View):
         start = form.cleaned_data['start']
         length = form.cleaned_data['length']
 
+        result = []
+        for item, columns_data in self.datalist.get_data(start, length):
+            columns_data['view_url'] = reverse(
+                '{}:{}_change'.format(opts.app_label, opts.model_name),
+                args=[item.pk])
+            result.append(columns_data)
+
         data = {
             "draw": draw,
             "recordsTotal": self.datalist.total(),
             "recordsFiltered": self.datalist.total_filtered(),
-            "data": list(self.datalist.get_data(start, length))
+            "data": result
         }
 
         return JsonResponse(data)
