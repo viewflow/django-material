@@ -23,9 +23,13 @@
                     <tbody>
                         {% for item, row in data %}
                         <tr>
-                            {% for column_name, item in row.items %}                            
+                            {% for column_name, item in row.items %}
                             <td>
-                                {% if column_name in view.datalist.list_display_links %}<a href="#">{{ item }}</a>{% else %}{{ item }}{% endif %}
+                                {% if column_name in view.datalist.list_display_links %}
+                                    <a href="#">{{ item }}</a>
+                                {% else %}
+                                    {{ item }}
+                                {% endif %}
                             </td>
                             {% endfor %}
                         </tr>
@@ -52,7 +56,13 @@
         {
           "targets": {{ view.datalist.list_display_links|safe }},
           "render": function ( data, type, full, meta ) {
-            return "<a href='"+ full.view_url + "'>" + data+ "</a>";
+            if(full.change_url) {
+              return "<a href='"+ full.change_url + "'>" + data+ "</a>";
+            } if(full.view_url) {
+              return "<a href='"+ full.view_url + "'>" + data+ "</a>";
+            } else {
+              return data;
+            }
           },
         }
       ];

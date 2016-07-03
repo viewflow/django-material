@@ -1,3 +1,4 @@
+from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse
 
 
@@ -9,6 +10,15 @@ class ModelViewMixin(object):
         super(ModelViewMixin, self).__init__(*args, **kwargs)
         if self.form_class is None and self.fields is None:
             self.fields = '__all__'
+
+    def has_object_permission(self, request, obj):
+        raise NotImplementedError
+
+    def get_object(self):
+        obj = super(ModelViewMixin, self).get_object()
+        if not self.has_object_permission(self.request, obj):
+            raise PermissionDenied
+        return obj
 
     def get_context_data(self, **kwargs):
         if 'opts' not in kwargs:

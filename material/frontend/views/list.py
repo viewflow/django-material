@@ -48,8 +48,15 @@ class ListModelView(ContextMixin, TemplateResponseMixin, View):
         }
     }
 
-    def has_perm(self, user):
-        return True
+    def has_view_permission(self, request, obj=None):
+        if self.viewset is not None:
+            return self.viewset.has_view_permission(request, obj)
+        raise NotImplementedError('Viewset is not provided')
+
+    def has_change_permission(self, request, obj=None):
+        if self.viewset is not None:
+            return self.viewset.has_change_permission(request, obj)
+        raise NotImplementedError('Viewset is not provided')
 
     def get_template_names(self):
         if self.template_name is None:
@@ -120,8 +127,21 @@ class ListModelView(ContextMixin, TemplateResponseMixin, View):
         context = self.get_context_data()
         return self.render_to_response(context)
 
-    def get_json_data(self, request, *args, **kwargs):
+    def get_item_data(self, item):
         opts = self.model._meta
+
+        result = {}
+        if self.has_change_permission(self.request, item):
+            result['change_url'] = reverse(
+                '{}:{}_change'.format(opts.app_label, opts.model_name),
+                args=[item.pk])
+        if self.has_view_permission(self.request, item):
+            result['view_url'] = reverse(
+                '{}:{}_view'.format(opts.app_label, opts.model_name),
+                args=[item.pk])
+        return result
+
+    def get_json_data(self, request, *args, **kwargs):
         form = forms.DatatableRequestForm(request.GET)
         if not form.is_valid():
             return {'error': form.errors}
@@ -132,9 +152,7 @@ class ListModelView(ContextMixin, TemplateResponseMixin, View):
 
         result = []
         for item, columns_data in self.datalist.get_data(start, length):
-            columns_data['view_url'] = reverse(
-                '{}:{}_change'.format(opts.app_label, opts.model_name),
-                args=[item.pk])
+            columns_data.update(self.get_item_data(item))
             result.append(columns_data)
 
         data = {
@@ -148,7 +166,7 @@ class ListModelView(ContextMixin, TemplateResponseMixin, View):
 
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
-        if not self.has_perm(request.user):
+        if not self.has_view_permission(self.request):
             raise PermissionDenied
 
         self.object_list = self.get_queryset()
