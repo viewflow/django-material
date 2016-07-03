@@ -5,7 +5,7 @@ from django.apps import AppConfig, apps
 from django.core.urlresolvers import reverse
 from django.db.models.signals import post_migrate
 from django.template import Template, TemplateDoesNotExist
-from django.template.loader import get_template
+from django.template.loader import get_template, select_template
 from django.utils.module_loading import module_has_submodule
 
 from .registry import modules as modules_registry
@@ -90,6 +90,12 @@ class ModuleMixin(object):
             return get_template('{}/menu.html'.format(self.label))
         except TemplateDoesNotExist:
             return Template('')
+
+    def base_template(self):
+        return select_template([
+            '{}/base_module.html'.format(self.label),
+            'material/frontend/base_module.html'
+        ])
 
 
 class MaterialFrontendConfig(AppConfig):

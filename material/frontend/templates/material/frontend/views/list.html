@@ -1,5 +1,11 @@
-{% extends 'material/frontend/base_module.html' %}
-{% load material_frontend %}
+{% extends current_module.base_template %}
+{% load i18n material_frontend %}
+
+{% block breadcrumbs_items %}
+<a href="{% url view.model|frontend_urlname:'list' %}">{{ opts.verbose_name_plural }}</a> &rang;
+<a class="current">{% trans 'All' %}</a>
+{% endblock %}
+
 
 {% block content %}
 <div class="row frontend-list">

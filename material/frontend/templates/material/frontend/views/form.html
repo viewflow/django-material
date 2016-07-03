@@ -1,6 +1,11 @@
 {% extends 'material/frontend/base_module.html' %}
 {% load i18n material_form material_frontend %}
 
+{% block breadcrumbs_items %}
+<a href="{% url view.model|frontend_urlname:'list' %}">{{ opts.verbose_name_plural }}</a> &rang;
+<a class="current">{% if object.pk %}{% trans 'Change' %}{% else %}{% trans 'Add' %}{% endif %} {{ opts.verbose_name|title }}</a>
+{% endblock %}
+
 {% block content %}
 <div class="row frontend-form">
     <div class="col s12">
