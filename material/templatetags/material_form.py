@@ -9,13 +9,14 @@ from django.template.base import (
     TemplateSyntaxError, Node, Variable, token_kwargs)
 from django.template.loader import get_template
 from django.template.loader_tags import IncludeNode
+from django.utils.safestring import mark_safe
 
 from ..compat import context_flatten
 
 
 register = Library()
 
-ATTRS_RE = re.compile(r'(?P<attr>[-\w]+)(\s*=\s*[\'"](?P<val>.*)[\'"])?')
+ATTRS_RE = re.compile(r'(?P<attr>[-\w]+)(\s*=\s*[\'"](?P<val>.*?)[\'"])?', re.MULTILINE | re.DOTALL)
 
 
 def _render_parts(context, parts_list):
@@ -229,7 +230,7 @@ class WidgetAttrsNode(Node):
 
         build_in_attrs, tag_content = {}, self.nodelist.render(context)
         for attr, _, value in ATTRS_RE.findall(tag_content):
-            build_in_attrs[attr] = value if value != '' else True
+            build_in_attrs[attr] = mark_safe(value) if value != '' else True
 
         widget_attrs = {}
         if self.widget_attrs is not None:

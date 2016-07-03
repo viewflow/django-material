@@ -50,6 +50,14 @@ class Test(WebTest):
         self.assertIn('value="{}"'.format('a'*21), response.body.decode('utf-8'))
         self.assertIn('Ensure this value has at most 20 characters', response.body.decode('utf-8'))
 
+    def test_render_with_escaped_value(self):
+        xss_string = 'hola\n onclick="alert(document);'
+        form = self.app.get(self.test_render_with_value.url).form
+        form['test_field'] = xss_string
+        response = form.submit()
+        self.assertEqual(response.form['test_field'].value, xss_string)
+        self.assertIn('value="hola\n onclick=&quot;alert(document);'.format('a'*21), response.body.decode('utf-8'))
+        
     def test_part_group_class(self):
         page = self.app.get(self.test_part_group_class.url)
 
