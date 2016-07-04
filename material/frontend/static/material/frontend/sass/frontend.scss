@@ -201,10 +201,23 @@ ul.side-nav.module-menu li.active>a>span.badge {
     margin-top: 0px;
 }
 
-.frontend-form .card-content>.row {
+.frontend-form .card-content .row {
     margin-left: -0.75rem;
     margin-right: -0.75rem;
 }
+
+.frontend-form .section {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.frontend-form h5 {
+    font-size: 1.2rem;
+	padding-bottom: 0.5rem;
+	border-bottom: 2px solid black;
+	margin-bottom: 10px;
+}
+
 /*
   Responsible layout 
 */

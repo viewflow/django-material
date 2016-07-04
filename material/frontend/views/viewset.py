@@ -24,7 +24,7 @@ class ModelViewSet(object):
     list_display = DEFAULT
     list_display_links = DEFAULT
 
-    form_layout = DEFAULT
+    layout = DEFAULT
     form_class = DEFAULT
 
     def _filter_options(self, view_class, options):
@@ -65,7 +65,7 @@ class ModelViewSet(object):
 
     def get_create_view_kwargs(self, **kwargs):
         result = {
-            'layout': self.form_layout,
+            'layout': self.layout,
             'form_Class': self.form_class,
         }
         result.update(kwargs)
@@ -92,7 +92,7 @@ class ModelViewSet(object):
 
     def get_update_view_kwargs(self, **kwargs):
         result = {
-            'layout': self.form_layout,
+            'layout': self.layout,
             'form_Class': self.form_class,
         }
         result.update(kwargs)

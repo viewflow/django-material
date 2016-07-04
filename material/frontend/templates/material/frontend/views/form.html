@@ -13,7 +13,7 @@
             {% csrf_token %}
             <div class="card">
                 <div class="card-content">
-                    <div class="form-title">{% if object.pk %}{% trans 'Change' %}{% else %}{% trans 'Add' %}{% endif %} {{ opts.verbose_name|title }}</div>
+                    <div class="form-title">{% if object.pk %}{{ opts.verbose_name|title }}: {{ object }}{% else %}{% trans 'Add' %} {{ opts.verbose_name|title }}{% endif %}</div>
                     {% block form %}
                     {% if view.layout or form.layout%}
                         {% if view.layout %}

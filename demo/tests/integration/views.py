@@ -1,3 +1,4 @@
+from material import Layout, Row, Fieldset
 from material.frontend.views import ModelViewSet
 from . import models
 
@@ -7,11 +8,21 @@ class CityViewSet(ModelViewSet):
     list_display = ('name', 'country', 'population')
 
 
-class ContinentsViewSet(ModelViewSet):
+class ContinentViewSet(ModelViewSet):
     model = models.Continent
     list_display = (
         'name', 'surrounded_oceans', 'countries_count',
         'area', 'population', )
+    layout = Layout(
+        'name',
+        Fieldset('Details',
+                 'area',
+                 Row('oceans', 'hemisphere'),
+                 Row('population', 'population_density')),
+        Fieldset('Fun facts',
+                 Row('largest_country', 'biggest_mountain'),
+                 Row('biggest_city', 'longest_river'))
+    )
 
     def surrounded_oceans(self, contintent):
         return ', '.join(ocean.name for ocean in contintent.oceans.all())
@@ -20,7 +31,7 @@ class ContinentsViewSet(ModelViewSet):
         return contintent.countries.count()
 
 
-class CountriesViewSet(ModelViewSet):
+class CountryViewSet(ModelViewSet):
     model = models.Country
     list_display = (
         'tld', 'name', 'continent',
@@ -37,14 +48,20 @@ class CountriesViewSet(ModelViewSet):
             return 1900 <= country.independence_day.year <= 2000
 
 
-class OceansViewSet(ModelViewSet):
+class OceanViewSet(ModelViewSet):
     model = models.Ocean
     list_display = ('name', 'area', )
 
 
-class SeasViewSet(ModelViewSet):
+class SeaViewSet(ModelViewSet):
     model = models.Sea
     list_display = ('name', 'parent', 'ocean', 'sea_area', )
+    layout = Layout(
+        Row('name', 'parent'),
+        'ocean',
+        Row('area', 'avg_depth', 'max_depth'),
+        'basin_countries'
+    )
 
     def sea_area(self, sea):
         return None if sea.area == 0 else sea.area

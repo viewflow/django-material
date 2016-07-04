@@ -6,8 +6,8 @@ from . import views
 urlpatterns = [
     url('^$', generic.RedirectView.as_view(url='./city/'), name="index"),
     url('^city/', include(views.CityViewSet().urls)),
-    url('^continent/', include(views.ContinentsViewSet().urls)),
-    url('^country/', include(views.CountriesViewSet().urls)),
-    url('^ocean/', include(views.OceansViewSet().urls)),
-    url('^sea/', include(views.SeasViewSet().urls)),
+    url('^continent/', include(views.ContinentViewSet().urls)),
+    url('^country/', include(views.CountryViewSet().urls)),
+    url('^ocean/', include(views.OceanViewSet().urls)),
+    url('^sea/', include(views.SeaViewSet().urls)),
 ]
