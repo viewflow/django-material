@@ -1,0 +1,35 @@
+{% extends 'material/frontend/base_module.html' %}
+{% load i18n material_form material_frontend %}
+
+{% block breadcrumbs_items %}
+<a href="{% url view.model|frontend_urlname:'list' %}">{{ opts.verbose_name_plural }}</a> &rang;
+<a class="current">{{ opts.verbose_name|title }}</a>
+{% endblock %}
+
+{% block content %}
+<div class="row frontend-form">
+    <div class="col s6">
+        <div class="card">
+            <div class="card-content">
+                {% block card %}
+                <div class="form-title">{{ opts.verbose_name|title }}: {{ object }}</div>
+                <table class="table bordered">
+                    {% for field_name, value in object_data %}
+                    <tr>
+                        <th>{{ field_name }}</th>
+                        <td>{{ value }}</td>
+                        {% endfor %}
+                    </tr>
+                    {% endblock %}
+                </table>
+            </div>
+            <div class="card-action">
+                <div class="right-align">
+                    {% url view.model|frontend_urlname:'list' as list_url %}
+                    <a class="waves-effect waves-light btn white-text" href="{{ list_url }}">{% trans 'Back' %}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

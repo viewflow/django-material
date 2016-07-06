@@ -37,7 +37,7 @@
                         {% block submit_row %}
                         {% if object.pk %}
                         {% url view.model|frontend_urlname:'delete' object.pk as delete_url %}
-                            <a class="waves-effect waves-light btn red white-text" href="{{ delete_url }}">{% trans 'Delete' %}</a>
+                        <a class="waves-effect waves-light btn red white-text" href="{{ delete_url }}">{% trans 'Delete' %}</a>
                         {% endif %}
                         <button type="submit" class="waves-effect waves-light btn white-text">{% trans 'Save' %}</button>
                         {% endblock %}
