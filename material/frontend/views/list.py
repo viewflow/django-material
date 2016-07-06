@@ -35,7 +35,7 @@ class ListModelView(ContextMixin, TemplateResponseMixin, View):
         'bFilter': False,
         'bAutoWidth': False,
         'bLengthChange': False,
-        "oLanguage": {
+        'oLanguage': {
             'oPaginate': {
                 'sFirst': "",
                 'sLast': "",

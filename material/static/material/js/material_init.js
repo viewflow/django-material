@@ -2,7 +2,6 @@ $(document).on('ready pjax:complete', function() {
     function material_init($container) {
         $container.find('.dropdown-button.constrain_width').dropdown({hover: false, constrain_width: true});
         $container.find('.dropdown-button').not('.constrain_width').dropdown({hover: false, constrain_width: false});
-        $container.find('.button-collapse').sideNav();
         $container.find('select').not('.disabled').not('.material-ignore').material_select();
 
         $container.find('[data-form-control="date"]').each(function() {

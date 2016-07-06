@@ -65,8 +65,14 @@
         }
       ];
 
-      new $.fn.dataTable.FixedHeader(
-        $('#table').DataTable(config));
+      $('.dataTables_paginate').remove();
+      var datatable = $('#table').DataTable(config);
+      new $.fn.dataTable.FixedHeader(datatable);
+
+      $(document).one('pjax:beforeReplace', function() {
+        datatable.destroy();
+      });
+
       {% endblock %}
     </script>
 </div>
