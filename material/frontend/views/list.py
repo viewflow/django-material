@@ -137,7 +137,7 @@ class ListModelView(ContextMixin, TemplateResponseMixin, View):
                 args=[item.pk])
         if self.has_view_permission(self.request, item):
             result['view_url'] = reverse(
-                '{}:{}_view'.format(opts.app_label, opts.model_name),
+                '{}:{}_detail'.format(opts.app_label, opts.model_name),
                 args=[item.pk])
         return result
 

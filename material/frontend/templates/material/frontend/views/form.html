@@ -2,8 +2,9 @@
 {% load i18n material_form material_frontend %}
 
 {% block breadcrumbs_items %}
-<a href="{% url view.model|frontend_urlname:'list' %}">{{ opts.verbose_name_plural }}</a> &rang;
-<a class="current">{% if object.pk %}{% trans 'Change' %}{% else %}{% trans 'Add' %}{% endif %} {{ opts.verbose_name|title }}</a>
+<a href="{% url view.model|frontend_urlname:'list' %}">{{ view.model|verbose_name_plural }}</a> &rang;
+<a href="{% url view.model|frontend_urlname:'detail' object.pk %}">{{ object }}</a> &rang;
+<a class="current">{% if object.pk %}{% trans 'Change' %}{% else %}{% trans 'Add' %}{% endif %}</a>
 {% endblock %}
 
 {% block content %}
@@ -13,7 +14,7 @@
             {% csrf_token %}
             <div class="card">
                 <div class="card-content">
-                    <div class="form-title">{% if object.pk %}{{ opts.verbose_name|title }}: {{ object }}{% else %}{% trans 'Add' %} {{ opts.verbose_name|title }}{% endif %}</div>
+                    <div class="form-title">{% if object.pk %}{{ view.model|verbose_name|title }}: {{ object }}{% else %}{% trans 'Add' %} {{ view.model|verbose_name|title }}{% endif %}</div>
                     {% block form %}
                     {% if view.layout or form.layout%}
                         {% if view.layout %}

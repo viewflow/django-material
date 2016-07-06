@@ -103,7 +103,7 @@ class ModelViewSet(object):
 
     def get_delete_view_kwargs(self, **kwargs):
         return self._filter_options(
-            self.create_view_class,
+            self.delete_view_class,
             self.get_common_kwargs(**kwargs))
 
     def get_queryset(self, request):
@@ -127,7 +127,7 @@ class ModelViewSet(object):
 
     @property
     def delete_view(self):
-        return self.update_view_class.as_view(**self.get_delete_view_kwargs())
+        return self.delete_view_class.as_view(**self.get_delete_view_kwargs())
 
     @property
     def urls(self):
@@ -136,7 +136,7 @@ class ModelViewSet(object):
         return [
             url('^$', self.list_view, name='{}_list'.format(model_name)),
             url('^add/$', self.create_view, name='{}_add'.format(model_name)),
-            url(r'^(?P<pk>.+)/detail/$', self.detail_view, name='{}_view'.format(model_name)),
+            url(r'^(?P<pk>.+)/detail/$', self.detail_view, name='{}_detail'.format(model_name)),
             url(r'^(?P<pk>.+)/change/$', self.update_view, name='{}_change'.format(model_name)),
             url(r'^(?P<pk>.+)/delete/$', self.delete_view, name='{}_delete'.format(model_name)),
         ]

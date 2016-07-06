@@ -1,0 +1,35 @@
+{% extends 'material/frontend/base_module.html' %}
+{% load i18n material_form material_frontend %}
+
+{% block breadcrumbs_items %}
+<a href="{% url view.model|frontend_urlname:'list' %}">{{ view.model|verbose_name_plural }}</a> &rang;
+<a href="{% url view.model|frontend_urlname:'detail' object.pk %}">{{ object }}</a> &rang;
+<a class="current">{% trans 'Delete' %}</a>
+{% endblock %}
+
+{% block content %}
+<div class="row frontend-form">
+    <div class="col s12 m12 l6">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="card">
+                <div class="card-content">
+                    <div class="card-title">Are you sure you want to delete the {{ object }} and related items?</div>
+                    {% for model, items in deleted_objects.items %}
+                        <h5>{{ model|verbose_name_plural|title }}</h5>
+                        {% for item in items %}
+                            {% url item|frontend_urlname:'detail' item.pk as details_url %}
+                            {% if details_url %}<a href="{{ details_url }}">{{ item }}</a>{% else %}{{ item }}{% endif %}
+                        {% endfor %}
+                    {% endfor %}
+                </div>
+                <div class="card-action">
+                    <div class="right-align">
+                        <button type="submit" class="waves-effect waves-light btn red white-text">{% trans 'Confirm' %}</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

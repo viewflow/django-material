@@ -2,7 +2,7 @@
 {% load i18n material_frontend %}
 
 {% block breadcrumbs_items %}
-<a href="{% url view.model|frontend_urlname:'list' %}">{{ opts.verbose_name_plural }}</a> &rang;
+<a href="{% url view.model|frontend_urlname:'list' %}">{{ view.model|verbose_name_plural }}</a> &rang;
 <a class="current">{% trans 'All' %}</a>
 {% endblock %}
 
