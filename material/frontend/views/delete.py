@@ -1,4 +1,4 @@
-import itertools
+from django.core.urlresolvers import reverse
 from django.db import router
 from django.db.models.deletion import Collector
 from django.core.exceptions import PermissionDenied
@@ -19,8 +19,6 @@ class DeleteModelView(generic.DeleteView):
         return collector.data
 
     def get_context_data(self, **kwargs):
-        if 'opts' not in kwargs:
-            kwargs['opts'] = self.model._meta
         kwargs['deleted_objects'] = self.get_deleted_objects()
         return super(DeleteModelView, self).get_context_data(**kwargs)
 
@@ -29,6 +27,12 @@ class DeleteModelView(generic.DeleteView):
         if not self.has_object_permission(self.request, obj):
             raise PermissionDenied
         return obj
+
+    def get_success_url(self):
+        if self.success_url is None:
+            opts = self.model._meta
+            return reverse('{}:{}_list'.format(opts.app_label, opts.model_name))
+        return super(DeleteModelView, self).get_success_url()
 
     def get_template_names(self):
         if self.template_name is None:

@@ -25,8 +25,8 @@
             </div>
             <div class="card-action">
                 <div class="right-align">
-                    {% url view.model|frontend_urlname:'list' as list_url %}
-                    <a class="waves-effect waves-light btn white-text" href="{{ list_url }}">{% trans 'Back' %}</a>
+                    {% if delete_url %}<a class="waves-effect waves-light btn red white-text" href="{{ delete_url }}">{% trans 'Delete' %}</a>{% endif %}
+                    {% if change_url %}<a class="waves-effect waves-light btn white-text" href="{{ change_url }}">{% trans 'Change' %}</a>{% endif %}
                 </div>
             </div>
         </div>

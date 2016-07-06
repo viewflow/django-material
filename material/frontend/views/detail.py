@@ -1,3 +1,4 @@
+from django.core.urlresolvers import reverse
 from django.core.exceptions import PermissionDenied
 from django.db import models
 from django.views import generic
@@ -22,21 +23,40 @@ class DetailModelView(generic.DetailView):
                 if value is not None:
                     yield (field.verbose_name.title(), value)
 
-    def has_object_permission(self, request, obj):
+    def has_view_permission(self, request, obj):
         if self.viewset is not None:
             return self.viewset.has_view_permission(request, obj)
         raise NotImplementedError('Viewset is not provided')
 
+    def has_change_permission(self, request, obj):
+        if self.viewset is not None:
+            return self.viewset.has_change_permission(request, obj)
+        raise NotImplementedError('Viewset is not provided')
+
+    def has_delete_permission(self, request, obj):
+        if self.viewset is not None:
+            return self.viewset.has_delete_permission(request, obj)
+        raise NotImplementedError('Viewset is not provided')
+
     def get_object(self):
         obj = super(DetailModelView, self).get_object()
-        if not self.has_object_permission(self.request, obj):
+        if not self.has_view_permission(self.request, obj):
             raise PermissionDenied
         return obj
 
     def get_context_data(self, **kwargs):
-        if 'opts' not in kwargs:
-            kwargs['opts'] = self.model._meta
+        opts = self.model._meta
+
         kwargs['object_data'] = self.get_object_data()
+        if self.has_change_permission(self.request, self.object):
+            kwargs['change_url'] = reverse(
+                '{}:{}_change'.format(opts.app_label, opts.model_name),
+                args=[self.object.pk])
+        if self.has_delete_permission(self.request, self.object):
+            kwargs['delete_url'] = reverse(
+                '{}:{}_delete'.format(opts.app_label, opts.model_name),
+                args=[self.object.pk])
+
         return super(DetailModelView, self).get_context_data(**kwargs)
 
     def get_template_names(self):

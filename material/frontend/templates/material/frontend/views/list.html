@@ -56,9 +56,7 @@
         {
           "targets": {{ view.datalist.list_display_links|safe }},
           "render": function ( data, type, full, meta ) {
-            if(full.change_url) {
-              return "<a href='"+ full.change_url + "'>" + data+ "</a>";
-            } if(full.view_url) {
+            if(full.view_url) {
               return "<a href='"+ full.view_url + "'>" + data+ "</a>";
             } else {
               return data;

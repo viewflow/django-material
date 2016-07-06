@@ -20,11 +20,6 @@ class ModelViewMixin(object):
             raise PermissionDenied
         return obj
 
-    def get_context_data(self, **kwargs):
-        if 'opts' not in kwargs:
-            kwargs['opts'] = self.model._meta
-        return super(ModelViewMixin, self).get_context_data(**kwargs)
-
     def get_success_url(self):
         if self.success_url is None:
             opts = self.model._meta

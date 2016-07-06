@@ -115,7 +115,6 @@ class ListModelView(ContextMixin, TemplateResponseMixin, View):
     def get_context_data(self, **kwargs):
         context = super(ListModelView, self).get_context_data(**kwargs)
         context.update({
-            'opts': self.model._meta,
             'datatable_config': json.dumps(self.get_datatable_config()),
             'headers': self.datalist.get_headers_data(),
             'data': self.datalist.get_data(0, self.paginate_by),
@@ -131,10 +130,6 @@ class ListModelView(ContextMixin, TemplateResponseMixin, View):
         opts = self.model._meta
 
         result = {}
-        if self.has_change_permission(self.request, item):
-            result['change_url'] = reverse(
-                '{}:{}_change'.format(opts.app_label, opts.model_name),
-                args=[item.pk])
         if self.has_view_permission(self.request, item):
             result['view_url'] = reverse(
                 '{}:{}_detail'.format(opts.app_label, opts.model_name),

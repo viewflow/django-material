@@ -3,7 +3,7 @@
 
 {% block breadcrumbs_items %}
 <a href="{% url view.model|frontend_urlname:'list' %}">{{ view.model|verbose_name_plural }}</a> &rang;
-<a href="{% url view.model|frontend_urlname:'detail' object.pk %}">{{ object }}</a> &rang;
+{% if object.pk %}<a href="{% url view.model|frontend_urlname:'detail' object.pk %}">{{ object }}</a> &rang;{% endif %}
 <a class="current">{% if object.pk %}{% trans 'Change' %}{% else %}{% trans 'Add' %}{% endif %}</a>
 {% endblock %}
 
@@ -36,10 +36,6 @@
                 <div class="card-action">
                     <div class="right-align">
                         {% block submit_row %}
-                        {% if object.pk %}
-                        {% url view.model|frontend_urlname:'delete' object.pk as delete_url %}
-                        <a class="waves-effect waves-light btn red white-text" href="{{ delete_url }}">{% trans 'Delete' %}</a>
-                        {% endif %}
                         <button type="submit" class="waves-effect waves-light btn white-text">{% trans 'Save' %}</button>
                         {% endblock %}
                     </div>
