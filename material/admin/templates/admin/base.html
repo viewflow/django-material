@@ -43,7 +43,7 @@
 
                     <ul class="right">
                         {% if user.is_authenticated %}
-                        <li><a class="dropdown-button constrain_width" href="#!" data-activates="user-menu">{{ user.get_full_name|default:user.get_username }}<i class="material-icons right">arrow_drop_down</i></a></li>
+                        <li><a class="dropdown-button constrain_width" href="#!" data-activates="user-menu">{{ user.get_full_name }}<i class="material-icons right">arrow_drop_down</i></a></li>
                         {% endif %}
                     </ul>
                 </div>
