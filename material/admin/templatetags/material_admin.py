@@ -4,6 +4,7 @@ from importlib import import_module
 
 from django.apps import apps
 from django.contrib.admin.views.main import PAGE_VAR
+from django.contrib.admin.utils import get_fields_from_path
 from django.core.urlresolvers import reverse, NoReverseMatch
 from django.conf import settings
 from django.db import models
@@ -194,7 +195,7 @@ def date_hierarchy(cl):
     """
     if cl.date_hierarchy:
         field_name = cl.date_hierarchy
-        field = cl.opts.get_field_by_name(field_name)[0]
+        field = get_fields_from_path(cl.model, field_name)[-1]
         dates_or_datetimes = 'datetimes' if isinstance(field, models.DateTimeField) else 'dates'
         year_field = '%s__year' % field_name
         month_field = '%s__month' % field_name
