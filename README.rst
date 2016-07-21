@@ -256,7 +256,7 @@ Ensure that `django.template.context_processors.request` in your template contex
             'OPTIONS': {
                 'context_processors': [
                     ...
-                    'django.core.context_processors.request',
+                    'django.template.context_processors.request',
                     ...
                 ],
             },
