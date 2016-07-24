@@ -58,7 +58,7 @@ textarea.materialize-textarea {
     top: 5px;
     width: 2.5rem;
     font-size: 2rem;
-}  
+}
 
 .checkbox-field label {
     font-size: 14px;
@@ -80,10 +80,10 @@ textarea.materialize-textarea {
 }
 
 .readonly-password-field div {
-    margin-top: 10px;    
-    margin-bottom: 15px;    
+    margin-top: 10px;
+    margin-bottom: 15px;
     padding-bottom: 10px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.3); 
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
 }
 
 select.material-ignore {
@@ -177,7 +177,7 @@ select.material-ignore {
     top: 5px;
     width: 2.5rem;
     font-size: 2rem;
-}  
+}
 
 .radio-field .error,
 .radio-field .help-block {
@@ -211,4 +211,13 @@ select.material-ignore {
         width: 100% !important;
         padding: 0 0.8rem  !important;
     }
+}
+
+
+i.btn.btnDropDownAdmin{
+    width: 100%;
+}
+
+ul.dropdown-content > li.liDropDownAdmin{
+    min-height: 40px;
 }
