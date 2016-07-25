@@ -4,12 +4,12 @@
 {% url opts|admin_urlname:'delete' original.pk|admin_urlquote as delete_url %}
 <a href="{% add_preserved_filters delete_url %}" class="deletelink waves-effect waves-light btn red white-text">{% trans "Delete" %}</a>
 {% endif %}
-<a class='dropdown-button btn white-text' href='#' data-activates='saveDropdown'>Save</a>
-<ul id='saveDropdown' class='dropdown-content'>
-  {% if show_save %}<li class="liDropDownAdmin"><input type="submit" value="{% trans 'Save' %}"  class="btnDropDownAdmin waves-effect waves-light btn white-text" name="_save" /></li>{% endif %}
-  {% if show_save_as_new %}<li><input type="submit" value="{% trans 'Save as new' %}" class="waves-effect waves-light btn white-text" name="_saveasnew" /></li>{% endif %}
-  {% if show_save_and_add_another %} <li class="liDropDownAdmin"> <input type="submit" value="{% trans 'Save and add another' %}" class="btnDropDownAdmin waves-effect waves-light btn white-text" name="_addanother" /> </li> {% endif %}
-  {% if show_save_and_continue %} <li class="liDropDownAdmin"> <input type="submit" value="{% trans 'Save and continue editing' %}" class="btnDropDownAdmin waves-effect waves-light btn white-text" name="_continue" /> </li> {% endif %}
+{% if show_save %}<button type="submit" class="waves-effect waves-light btn white-text">{% trans 'Save' %}</button>{% endif %}
+<a class='dropdown-admin dropdown-button btn white-text' href='#' data-activates='save-dropdown-admin'><i class="material-icons right">arrow_drop_down</i>Others</a>
+<ul id='save-dropdown-admin' class='dropdown-content'>
+  {% if show_save_as_new %}<li class="li-dropdown-admin"><input type="submit" value="{% trans 'Save as new' %}" class="waves-effect waves-light btn white-text" name="_saveasnew" /></li>{% endif %}
+  {% if show_save_and_add_another %} <li class="li-dropdown-admin"> <input type="submit" value="{% trans 'Save and add another' %}" class="btn-dropdown-admin waves-effect waves-light btn white-text" name="_addanother" /> </li> {% endif %}
+  {% if show_save_and_continue %} <li class="li-dropdown-admin"> <input type="submit" value="{% trans 'Save and continue editing' %}" class="btn-dropdown-admin waves-effect waves-light btn white-text" name="_continue" /> </li> {% endif %}
 </ul>
 
 

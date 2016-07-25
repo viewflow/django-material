@@ -213,11 +213,21 @@ select.material-ignore {
     }
 }
 
-
-i.btn.btnDropDownAdmin{
+i.btn.btn-dropdown-admin{
     width: 100%;
 }
 
-ul.dropdown-content > li.liDropDownAdmin{
+ul.dropdown-content > li.li-dropdown-admin{
     min-height: 40px;
+}
+a.dropdown-button.btn.white-text.dropdown-admin > i{
+     margin-left: 0px;
+}
+
+@media only screen and (max-width : 320px) {
+    a.dropdown-button.btn.white-text.dropdown-admin{
+        max-width: 85px;
+        padding-left: 10px;
+        padding-right: 5px;
+    }
 }
