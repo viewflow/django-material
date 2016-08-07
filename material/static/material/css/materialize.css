@@ -2600,8 +2600,7 @@ input[type=range] + .thumb {
 /* This is needed for some mobile phones to display the Google Icon font properly */
 .material-icons {
   text-rendering: optimizeLegibility;
-  -webkit-font-feature-settings: 'liga';
-          font-feature-settings: 'liga'; }
+  font-feature-settings: 'liga'; }
 
 .container {
   margin: 0 auto;
@@ -4565,7 +4564,8 @@ form p:last-child {
   border-right: 2px solid #26a69a;
   border-bottom: 2px solid #26a69a;
   transform: rotate(40deg);
-  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
   transform-origin: 100% 100%; }
 
 [type="checkbox"]:checked:disabled + label:before {
@@ -4583,7 +4583,8 @@ form p:last-child {
   border-right: 2px solid #26a69a;
   border-bottom: none;
   transform: rotate(90deg);
-  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
   transform-origin: 100% 100%; }
 
 [type="checkbox"]:indeterminate:disabled + label:before {
@@ -5009,7 +5010,8 @@ input[type=range]:focus::-ms-fill-upper {
   padding-bottom: 60px;
   background-color: #fff;
   z-index: 999;
-  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
   overflow-y: auto;
   will-change: transform;
   backface-visibility: hidden;

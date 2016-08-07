@@ -5,17 +5,17 @@
     "gulp": "gulp"
   },
   "devDependencies": {
-    "autoprefixer": "^6.3.6",
+    "autoprefixer": "^6.4.0",
     "babel": "^6.5.2",
-    "babel-preset-es2016": "^6.0.11",
+    "babel-preset-node5": "^11.1.0",
     "datatables": "^1.10.12",
-    "datatables.net-fixedheader": "kmmbvnr/Dist-DataTables-FixedHeader",
+    "datatables.net-fixedheader": "github:kmmbvnr/Dist-DataTables-FixedHeader",
     "datatables.net-responsive": "^2.1.0",
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
     "gulp-postcss": "^6.1.1",
-    "gulp-sass": "^2.3.1",
+    "gulp-sass": "^2.3.2",
     "material-design-icons": "^2.2.3",
-    "materialize-css": "^0.97.6"
+    "materialize-css": "0.97.6"
   }
 }
