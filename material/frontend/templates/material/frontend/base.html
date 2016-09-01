@@ -68,7 +68,7 @@
                         <div class="collapsible-body" style="display:block">
                             <ul class="collapsible" data-collapsible="expandable">
                                 <li class="header active">
-                                    <a class="collapsible-header no-pjax">{{ module.icon|safe|default:" " }}{{ module.verbose_name|default:"" }}</a>
+                                    <a class="collapsible-header no-pjax" href="{{ module.index_url }}">{{ module.icon|safe|default:" " }}{{ module.verbose_name|default:"" }}</a>
                                     <div class="collapsible-body" style="display: block;">
                                         {% include module.menu %}
                                     </div>

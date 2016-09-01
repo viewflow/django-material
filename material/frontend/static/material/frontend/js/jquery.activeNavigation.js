@@ -26,13 +26,19 @@
             hrefs.sort(function(a,b){
                 return a.attr("href").length < b.attr("href").length;
             })
+            var href = hrefs[0];
+            for(var i=1; i< hrefs.length; i++) {
+                if(hrefs[i].attr('href') === href.attr('href')) {
+                    href = hrefs[i];
+                }
+            }
             $(selector).find("li").removeClass("active");
             $(selector).find("a").removeClass("active");
-            hrefs[0].closest('li').addClass("active");
-            hrefs[0].closest('div').closest('li').addClass('active');
-            hrefs[0].parents('li').addClass('active');
-            hrefs[0].closest('li.header').find('.collapsible-header:first').addClass("active");
-            hrefs[0].closest('li.header').find('.collapsible-body:first').css("display", "block");
+            href.closest('li').addClass("active");
+            href.closest('div').closest('li').addClass('active');
+            href.parents('li').addClass('active');
+            href.closest('li.header').find('.collapsible-header:first').addClass("active");
+            href.closest('li.header').find('.collapsible-body:first').css("display", "block");
         }
     };
 })(jQuery);
