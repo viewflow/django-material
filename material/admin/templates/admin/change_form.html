@@ -19,6 +19,11 @@
     <div class="col s12 m12 l9">
         <form {% if has_file_field %}enctype="multipart/form-data" {% endif %}action="{{ form_url }}" method="post" id="{{ opts.model_name }}_form">
             <div class="card">
+                {% if save_on_top %}{% block submit_buttons_top %}<div class="card-action">
+                    <div class="right-align">
+                        {% submit_row %}
+                    </div>
+                </div>{% endblock %}{% endif %}
                 <div class="card-content">
                     {% csrf_token %}
                     {% if is_popup %}<input type="hidden" name="{{ is_popup_var }}" value="1" />{% endif %}
