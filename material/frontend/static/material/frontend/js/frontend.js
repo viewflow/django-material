@@ -1,4 +1,4 @@
-$(document).pjax('a:not(.no-pjax)', 'main');
+$(document).pjax('a:not(.no-pjax)', 'main', {timeout: 2500});
 
 $(document).on('ready', function() {
       $(document).find('.button-collapse').sideNav();
