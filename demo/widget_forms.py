@@ -44,7 +44,7 @@ class CharFieldForm(forms.Form):
 
     template = Template("""
     {% form %}
-        {% part form.field4 prefix %}<i class="mdi-editor-insert-invitation prefix"></i>{% endpart %}
+        {% part form.field4 prefix %}<i class="material-icons prefix">insert_invitation</i>{% endpart %}
     {% endform %}
     """)
 
@@ -78,7 +78,7 @@ class ChoiceFieldForm(forms.Form):
 
     template = Template("""
     {% form %}
-        {% part form.field7 prefix %}<i class="mdi-editor-insert-invitation prefix"></i>{% endpart %}
+        {% part form.field7 prefix %}<i class="material-icons prefix">insert_invitation</i>{% endpart %}
     {% endform %}
     """)
 
@@ -93,7 +93,7 @@ class DateFieldForm(forms.Form):
 
     template = Template("""
     {% form %}
-        {% part form.field4 prefix %}<i class="mdi-editor-insert-invitation prefix"></i>{% endpart %}
+        {% part form.field4 prefix %}<i class="material-icons prefix">insert_invitation</i>{% endpart %}
     {% endform %}
     """)
 
@@ -108,7 +108,7 @@ class DateTimeFieldForm(forms.Form):
 
     template = Template("""
     {% form %}
-        {% part form.field4 prefix %}<i class="mdi-editor-insert-invitation prefix"></i>{% endpart %}
+        {% part form.field4 prefix %}<i class="material-icons prefix">insert_invitation</i>{% endpart %}
     {% endform %}
     """)
 
@@ -124,7 +124,7 @@ class DecimalFieldForm(forms.Form):
 
     template = Template("""
     {% form %}
-        {% part form.field5 prefix %}<i class="mdi-editor-insert-invitation prefix"></i>{% endpart %}
+        {% part form.field5 prefix %}<i class="material-icons prefix">insert_invitation</i>{% endpart %}
     {% endform %}
     """)
 
@@ -138,7 +138,7 @@ class DurationFieldForm(forms.Form):
 
     template = Template("""
     {% form %}
-        {% part form.field3 prefix %}<i class="mdi-editor-insert-invitation prefix"></i>{% endpart %}
+        {% part form.field3 prefix %}<i class="material-icons prefix">insert_invitation</i>{% endpart %}
     {% endform %}
     """)
 
@@ -153,7 +153,7 @@ class EmailFieldForm(forms.Form):
 
     template = Template("""
     {% form %}
-        {% part form.field4 prefix %}<i class="mdi-editor-insert-invitation prefix"></i>{% endpart %}
+        {% part form.field4 prefix %}<i class="material-icons prefix">insert_invitation</i>{% endpart %}
     {% endform %}
     """)
 
@@ -179,7 +179,7 @@ class FilePathFieldForm(forms.Form):
 
     template = Template("""
     {% form %}
-        {% part form.field4 prefix %}<i class="mdi-editor-insert-invitation prefix"></i>{% endpart %}
+        {% part form.field4 prefix %}<i class="material-icons prefix">insert_invitation</i>{% endpart %}
     {% endform %}
     """)
 
@@ -194,7 +194,7 @@ class FloatFieldForm(forms.Form):
 
     template = Template("""
     {% form %}
-        {% part form.field4 prefix %}<i class="mdi-editor-insert-invitation prefix"></i>{% endpart %}
+        {% part form.field4 prefix %}<i class="material-icons prefix">insert_invitation</i>{% endpart %}
     {% endform %}
     """)
 
@@ -220,7 +220,7 @@ class IntegerFieldForm(forms.Form):
 
     template = Template("""
     {% form %}
-        {% part form.field4 prefix %}<i class="mdi-editor-insert-invitation prefix"></i>{% endpart %}
+        {% part form.field4 prefix %}<i class="material-icons prefix">insert_invitation</i>{% endpart %}
     {% endform %}
     """)
 
@@ -237,7 +237,7 @@ class GenericIPAddressFieldForm(forms.Form):
 
     template = Template("""
     {% form %}
-        {% part form.field5 prefix %}<i class="mdi-editor-insert-invitation prefix"></i>{% endpart %}
+        {% part form.field5 prefix %}<i class="material-icons prefix">insert_invitation</i>{% endpart %}
     {% endform %}
     """)
 
@@ -265,7 +265,7 @@ class MultipleChoiceFieldForm(forms.Form):
 
     template = Template("""
     {% form %}
-        {% part form.field6 prefix %}<i class="mdi-editor-insert-invitation prefix"></i>{% endpart %}
+        {% part form.field6 prefix %}<i class="material-icons prefix">insert_invitation</i>{% endpart %}
     {% endform %}
     """)
 
@@ -287,7 +287,7 @@ class RegexFieldForm(forms.Form):
 
     template = Template("""
     {% form %}
-        {% part form.field4 prefix %}<i class="mdi-editor-insert-invitation prefix"></i>{% endpart %}
+        {% part form.field4 prefix %}<i class="material-icons prefix">insert_invitation</i>{% endpart %}
     {% endform %}
     """)
 
@@ -301,7 +301,7 @@ class SlugFieldForm(forms.Form):
 
     template = Template("""
     {% form %}
-        {% part form.field3 prefix %}<i class="mdi-editor-insert-invitation prefix"></i>{% endpart %}
+        {% part form.field3 prefix %}<i class="material-icons prefix">insert_invitation</i>{% endpart %}
     {% endform %}
     """)
 
@@ -316,7 +316,7 @@ class TimeFieldForm(forms.Form):
 
     template = Template("""
     {% form %}
-        {% part form.field4 prefix %}<i class="mdi-editor-insert-invitation prefix"></i>{% endpart %}
+        {% part form.field4 prefix %}<i class="material-icons prefix">insert_invitation</i>{% endpart %}
     {% endform %}
     """)
 
@@ -331,7 +331,7 @@ class URLFieldForm(forms.Form):
 
     template = Template("""
     {% form %}
-        {% part form.field4 prefix %}<i class="mdi-editor-insert-invitation prefix"></i>{% endpart %}
+        {% part form.field4 prefix %}<i class="material-icons prefix">insert_invitation</i>{% endpart %}
     {% endform %}
     """)
 
@@ -345,7 +345,7 @@ class UUIDField(forms.Form):
 
     template = Template("""
     {% form %}
-        {% part form.field3 prefix %}<i class="mdi-editor-insert-invitation prefix"></i>{% endpart %}
+        {% part form.field3 prefix %}<i class="material-icons prefix">insert_invitation</i>{% endpart %}
     {% endform %}
     """)
 
@@ -382,7 +382,7 @@ class ModelChoiceFieldForm(forms.Form):
 
     template = Template("""
     {% form %}
-        {% part form.field5 prefix %}<i class="mdi-editor-insert-invitation prefix"></i>{% endpart %}
+        {% part form.field5 prefix %}<i class="material-icons prefix">insert_invitation</i>{% endpart %}
     {% endform %}
     """)
 
@@ -399,7 +399,7 @@ class ModelMultipleChoiceFieldForm(forms.Form):
 
     template = Template("""
     {% form %}
-        {% part form.field4 prefix %}<i class="mdi-editor-insert-invitation prefix"></i>{% endpart %}
+        {% part form.field4 prefix %}<i class="material-icons prefix">insert_invitation</i>{% endpart %}
     {% endform %}
     """)
 
@@ -421,7 +421,7 @@ class PasswordInputForm(forms.Form):
 
     template = Template("""
     {% form %}
-        {% part form.field5 prefix %}<i class="mdi-editor-insert-invitation prefix"></i>{% endpart %}
+        {% part form.field5 prefix %}<i class="material-icons prefix">insert_invitation</i>{% endpart %}
     {% endform %}
     """)
 
@@ -444,7 +444,7 @@ class TextareaForm(forms.Form):
 
     template = Template("""
     {% form %}
-        {% part form.field4 prefix %}<i class="mdi-editor-insert-invitation prefix"></i>{% endpart %}
+        {% part form.field4 prefix %}<i class="material-icons prefix">insert_invitation</i>{% endpart %}
     {% endform %}
     """)
 
