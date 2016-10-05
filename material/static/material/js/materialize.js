@@ -2033,8 +2033,11 @@ $(document).ready(function(){
         }
 
         // Add Touch Area
-        var dragTarget = $('<div class="drag-target"></div>');
-        $('body').append(dragTarget);
+        var dragTarget = $('.drag-target');
+        if (!dragTarget.length) {
+            dragTarget = $('<div class="drag-target"></div>');
+            $('body').append(dragTarget);
+        }
 
         if (options.edge == 'left') {
           menu_id.css('transform', 'translateX(-100%)');
