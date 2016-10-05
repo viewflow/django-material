@@ -5,3 +5,6 @@
 <a href="{% add_preserved_filters delete_url %}" class="deletelink waves-effect waves-light btn red white-text">{% trans "Delete" %}</a>
 {% endif %}
 {% if show_save %}<button type="submit" class="waves-effect waves-light btn white-text">{% trans 'Save' %}</button>{% endif %}
+{% if show_save_as_new %}<input type="submit" class="waves-effect waves-light btn white-text" value="{% trans 'Save as new' %}" name="_saveasnew" />{% endif %}
+{% if show_save_and_add_another %}<input type="submit" class="waves-effect waves-light btn white-text" value="{% trans 'Save and add another' %}" name="_addanother" />{% endif %}
+{% if show_save_and_continue %}<input type="submit" class="waves-effect waves-light btn white-text" value="{% trans 'Save and continue editing' %}" name="_continue" />{% endif %}
