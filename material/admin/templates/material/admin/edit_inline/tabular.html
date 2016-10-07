@@ -22,20 +22,21 @@
                             <td{% if field.field.name %} class="field-{{ field.field.name }}"{% endif %}>
                                 {% if field.is_readonly %}
                                 <div class="row">
-                                    <div class="input-field col s12">
-                                        {% if '<img' in field.contents %}
+                                    {% if '<img' in field.contents %}
+                                        <div class="input-field col s12">
                                             <input type="checkbox" id="test7" {% if 'icon-yes' in field.contents %}checked="checked"{% endif %} disabled="disabled" />
                                             <label for="test7">{{ field.field.label|title }}</label>
+                                        </div>
+                                    {% else %}
+                                        {% if '<' in field.contents and '>' in field.contents or field.contents == "" %}
+                                            {{field.contents}}
                                         {% else %}
-                                            <label class="active">{{ field.field.label|title }}</label>
-
-                                            {%if field.contents|escape == field.contents %}
-                                                {{field.contents}}
-                                            {% else %}
+                                            <div class="input-field col s12">     
+                                                <label class="active">{{ field.field.label|title }}</label>
                                                 <input disabled value="{{ field.contents }}">
-                                            {% endif %}
+                                            </div>
                                         {% endif %}
-                                    </div>
+                                   {% endif %}
                                 </div>
                                 {% else %}
                                     {% with form=inline_admin_form.form %}{% render field.field %}{% endrender %}{% endwith %}

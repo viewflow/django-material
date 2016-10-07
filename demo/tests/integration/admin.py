@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib import admin
 from django.db import models as django
+from django.utils.html import mark_safe
 
 from . import models
 
@@ -12,6 +13,16 @@ class CountryTabularInline(admin.TabularInline):
 
 class CityStackedInline(admin.TabularInline):
     model = models.City
+    readonly_fields = ('wiki', )
+
+    wiki_link_template = "<a href='https://en.wikipedia.org/wiki/{}' target='_blank'>" \
+                         " <i style='padding-left:20px;margin-top:15px' class='material-icons left'>search</i>" \
+                         "</a>"
+
+    def wiki(self, city):
+        if city.id:
+            return mark_safe(self.wiki_link_template.format(city.name))
+        return ""
 
 
 class SeaStackedInline(admin.StackedInline):
