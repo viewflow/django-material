@@ -28,7 +28,12 @@
                                             <label for="test7">{{ field.field.label|title }}</label>
                                         {% else %}
                                             <label class="active">{{ field.field.label|title }}</label>
-                                            <input disabled value="{{ field.contents }}">
+
+                                            {%if field.contents|escape == field.contents %}
+                                                {{field.contents}}
+                                            {% else %}
+                                                <input disabled value="{{ field.contents }}">
+                                            {% endif %}
                                         {% endif %}
                                     </div>
                                 </div>
