@@ -153,10 +153,6 @@ select.material-ignore {
     margin-left: 3rem;
 }
 
-.radio-field {
-    paddign-bottom: 18px;
-}
-
 .radio-field label.item-label {
     font-size: 14px;
     color: rgba(0,0,0,.84);
