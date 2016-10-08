@@ -22,7 +22,7 @@
                             <td{% if field.field.name %} class="field-{{ field.field.name }}"{% endif %}>
                                 {% if field.is_readonly %}
                                 <div class="row">
-                                    {% if '<img' in field.contents %}
+                                    {% if 'admin/img/icon-' in field.contents %}
                                         <div class="input-field col s12">
                                             <input type="checkbox" id="test7" {% if 'icon-yes' in field.contents %}checked="checked"{% endif %} disabled="disabled" />
                                             <label for="test7">{{ field.field.label|title }}</label>
@@ -31,7 +31,7 @@
                                         {% if '<' in field.contents and '>' in field.contents or field.contents == "" %}
                                             {{field.contents}}
                                         {% else %}
-                                            <div class="input-field col s12">     
+                                            <div class="input-field col s12">
                                                 <label class="active">{{ field.field.label|title }}</label>
                                                 <input disabled value="{{ field.contents }}">
                                             </div>

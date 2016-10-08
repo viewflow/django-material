@@ -5,7 +5,7 @@
         <div data-formset-body>
             {% for inline_admin_form in element.inline %}
             {% if inline_admin_form.form.prefix ==  element.inline.formset.empty_form.prefix %}<script type="form-template" data-formset-empty-form>{% endif %}
-            
+
             <div class="col s12 m6 l4"  data-formset-form>
                 <div class="card">
                     <div class="card-content">
@@ -22,7 +22,7 @@
                         <div class="row">
                             {% if field.is_readonly %}
                                 <div class="row">
-                                    {% if '<img' in field.contents %}
+                                    {% if 'admin/img/icon-' in field.contents %}
                                         <div class="input-field col s12">
                                             <input type="checkbox" id="test7" {% if 'icon-yes' in field.contents %}checked="checked"{% endif %} disabled="disabled" />
                                             <label for="test7">{{ field.field.label|title }}</label>

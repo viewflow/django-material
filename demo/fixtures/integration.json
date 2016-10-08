@@ -4,7 +4,9 @@
     "pk": "Arctic",
     "fields": {
         "slug": "arctic",
-        "area": 15558000
+        "area": 15558000,
+        "description": "The Arctic Ocean is the smallest and shallowest of the world's five major oceans. The International Hydrographic Organization (IHO) recognizes it as an ocean, although some oceanographers call it the Arctic Mediterranean Sea or simply the Arctic Sea, classifying it a mediterranean sea or an estuary of the Atlantic Ocean. Alternatively, the Arctic Ocean can be seen as the northernmost part of the all-encompassing World Ocean.\r\n\r\nLocated mostly in the Arctic north polar region in the middle of the Northern Hemisphere, the Arctic Ocean is almost completely surrounded by Eurasia and North America. It is partly covered by sea ice throughout the year and almost completely in winter. The Arctic Ocean's surface temperature and salinity vary seasonally as the ice cover melts and freezes;[4] its salinity is the lowest on average of the five major oceans, due to low evaporation, heavy fresh water inflow from rivers and streams, and limited connection and outflow to surrounding oceanic waters with higher salinities. The summer shrinking of the ice has been quoted at 50%.[1] The US National Snow and Ice Data Center (NSIDC) uses satellite data to provide a daily record of Arctic sea ice cover and the rate of melting compared to an average period and specific past years.",
+        "map_url": "https://upload.wikimedia.org/wikipedia/commons/5/59/Arctic_Ocean_-_en.png"
     }
 },
 {
@@ -12,7 +14,9 @@
     "pk": "Atlantic",
     "fields": {
         "slug": "atlantic",
-        "area": 85133000
+        "area": 85133000,
+        "description": "The Atlantic Ocean is the second largest of the world's oceans with a total area of about 106,460,000 square kilometres (41,100,000 sq mi), slightly more than half that of the Pacific Ocean. It covers approximately 20 percent of the Earth's surface and about 29 percent of its water surface area. It separates the \"Old World\" from the \"New World\".\r\n\r\nThe Atlantic Ocean occupies an elongated, S-shaped basin extending longitudinally between Eurasia and Africa to the east, and the Americas to the west. As one component of the interconnected global ocean, it is connected in the north to the Arctic Ocean, to the Pacific Ocean in the southwest, the Indian Ocean in the southeast, and the Southern Ocean in the south (other definitions describe the Atlantic as extending southward to Antarctica). The equator subdivides it into the North Atlantic Ocean and South Atlantic Ocean.",
+        "map_url": "https://upload.wikimedia.org/wikipedia/commons/4/47/Atlantic_Ocean_-_en.png"
     }
 },
 {
@@ -20,7 +24,9 @@
     "pk": "Indian",
     "fields": {
         "slug": "indian",
-        "area": 70560000
+        "area": 70560000,
+        "description": "The Indian Ocean is the third largest of the world's oceanic divisions, covering 70,560,000 km2 (27,240,000 sq mi) (approximately 20% of the water on the Earth's surface). It is bounded by Asia on the north, on the west by Africa, on the east by Australia, and on the south by the Southern Ocean or, depending on definition, by Antarctica. It is named after the country of India. The Indian Ocean is known as Ratn\u0101kara (Sanskrit: \u0930\u0924\u094d\u0928\u093e\u0915\u0930), \"the mine of gems\" in ancient Sanskrit literature, and as Hind Mah\u0101s\u0101gar (Hindi: \u0939\u093f\u0928\u094d\u0926 \u092e\u0939\u093e\u0938\u093e\u0917\u0930), \"the great Indian sea\", in Hindi.",
+        "map_url": "https://upload.wikimedia.org/wikipedia/commons/d/d3/Indian_Ocean-CIA_WFB_Map.png"
     }
 },
 {
@@ -28,7 +34,9 @@
     "pk": "Pacific",
     "fields": {
         "slug": "pacific",
-        "area": 168723000
+        "area": 168723000,
+        "description": "The Pacific Ocean is the largest of the Earth's oceanic divisions. It extends from the Arctic Ocean in the north to the Southern Ocean (or, depending on definition, to Antarctica) in the south and is bounded by Asia and Australia in the west and the Americas in the east.\r\n\r\nAt 165.25 million square kilometers (63.8 million square miles) in area, this largest division of the World Ocean\u2014and, in turn, the hydrosphere\u2014covers about 46% of the Earth's water surface and about one-third of its total surface area, making it larger than all of the Earth's land area combined.\r\n\r\nThe equator subdivides it into the North Pacific Ocean and South Pacific Ocean, with two exceptions: the Gal\u00e1pagos and Gilbert Islands, while straddling the equator, are deemed wholly within the South Pacific. The Mariana Trench in the western North Pacific is the deepest point in the world, reaching a depth of 10,911 metres (35,797 ft).\r\n\r\nBoth the center of the Water Hemisphere and the Western Hemisphere are in the Pacific Ocean.\r\n\r\nThough the peoples of Asia and Oceania have travelled the Pacific Ocean since prehistoric times, the eastern Pacific was first sighted by Europeans in the early 16th century when Spanish explorer Vasco N\u00fa\u00f1ez de Balboa crossed the Isthmus of Panama in 1513 and discovered the great \"southern sea\" which he named Mar del Sur. The ocean's current name was coined by Portuguese explorer Ferdinand Magellan during the Spanish circumnavigation of the world in 1521, as he encountered favourable winds on reaching the ocean. He called it Mar Pac\u00edfico, which in both Portuguese and Spanish means \"peaceful sea\".",
+        "map_url": "https://upload.wikimedia.org/wikipedia/commons/f/f6/Pacific_Ocean_-_en.png"
     }
 },
 {
@@ -36,7 +44,9 @@
     "pk": "Southern",
     "fields": {
         "slug": "southern",
-        "area": 21960000
+        "area": 21960000,
+        "description": "The Southern Ocean, also known as the Antarctic Ocean or the Austral Ocean, comprises the southernmost waters of the World Ocean, generally taken to be south of 60\u00b0 S latitude and encircling Antarctica. As such, it is regarded as the fourth-largest of the five principal oceanic divisions: smaller than the Pacific, Atlantic, and Indian Oceans but larger than the Arctic Ocean. This ocean zone is where cold, northward flowing waters from the Antarctic mix with warmer subantarctic waters.\r\n\r\nBy way of his voyages in the 1770s, Captain James Cook proved that waters encompassed the southern latitudes of the globe. Since then, geographers have disagreed on the Southern Ocean's northern boundary or even existence, considering the waters part of the Pacific, Atlantic, and Indian Oceans, instead. This remains the current official policy of the International Hydrographic Organization (IHO), since a 2000 revision of its definitions including the Southern Ocean as the waters south of the 60th parallel has not yet been adopted. Others regard the seasonally-fluctuating Antarctic Convergence as the natural boundary.",
+        "map_url": "https://upload.wikimedia.org/wikipedia/commons/b/b8/Oceanus.png"
     }
 },
 {

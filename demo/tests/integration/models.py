@@ -8,6 +8,8 @@ class Ocean(models.Model):
     name = models.CharField(max_length=250, primary_key=True)
     area = models.BigIntegerField()
     slug = models.SlugField()
+    description = models.TextField()
+    map_url = models.URLField()
 
     class Meta:
         ordering = ['name']

@@ -1,7 +1,8 @@
 from django import forms
 from django.contrib import admin
 from django.db import models as django
-from django.utils.html import mark_safe
+from django.utils.text import Truncator
+from django.utils.html import mark_safe, format_html
 
 from . import models
 
@@ -37,9 +38,18 @@ class OceanAdmin(admin.ModelAdmin):
     icon = '<i class="fa fa-tint"></i>'
     actions = None
     exclude = ('area', )
+    readonly_fields = ('map', )
     inlines = [SeaStackedInline]
-    list_display = ('name', 'area', )
+    list_display = ('name', 'area', 'short_description', 'map',)
     prepopulated_fields = {'slug': ('name', )}
+
+    def map(self, ocean):
+        if ocean.map_url:
+            return format_html('<div class="col s12 center-align"><img src="{}" width="200" /></div>', ocean.map_url)
+        return ""
+
+    def short_description(self, ocean):
+        return Truncator(ocean.description).words(100, truncate=' ...')
 
     def has_add_permission(self, request):
         return False

@@ -1,16 +1,22 @@
 <div class="row">
-    {% if '<img' in fieldset_field.contents %}
+    {% if 'admin/img/icon-' in fieldset_field.contents %}
     <div class="checkbox-field col s12">
         <input type="checkbox" id="test7" {% if 'icon-yes' in fieldset_field.contents %}checked="checked"{% endif %} disabled="disabled" />
         <label for="test7">{{ fieldset_field.field.label|title }}</label>
     </div>
     {% else %}
-    <div class="input-field col s12">
-        <input disabled="" value="{{ fieldset_field.contents }}" id="disabled" type="text" class="validate">
-        <label for="disabled" class="active">{{ fieldset_field.field.label|title }}</label>
-        {% if fieldset_field.field.help_text %}
-        <small class="help-block">{{ fieldset_field.field.help_text }}</small>
-        {% endif %}
-    </div>
+    {% if '<' in fieldset_field.contents and '>' in fieldset_field.contents or fieldset_field.contents == "" %}
+        <div class="col s12">
+            {{ fieldset_field.contents }}
+        </div>
+        {% else %}
+            <div class="input-field col s12">
+                <label class="active">{{ fieldset_field.field.label|title }}</label>
+                <input disabled value="{{ field.contents }}">
+                {% if fieldset_field.field.help_text %}
+                    <small class="help-block">{{ fieldset_field.field.help_text }}</small>
+                {% endif %}
+            </div>
+         {% endif %}
     {% endif %}
 </div>
