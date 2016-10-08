@@ -1,5 +1,15 @@
 {% load i18n admin_static material_admin %}
 {% if results %}
+{% if cl.model_admin.actions == None %}
+<style>
+    .fixedHeader-floating th:first-child,
+    .fixedHeader-floating td:first-child,
+    .results table tr th:first-child,
+    .results table tr td:first-child {
+        padding-left: 40px;
+    }
+</style>
+{% endif %}
 <div class="results">
     <table id="result_list" class="table bordered">
         <thead>
