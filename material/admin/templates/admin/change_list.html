@@ -68,7 +68,7 @@
 <form method="POST">
 {% csrf_token %}
 <div class="row">
-    <div class="col s12 m8 l9">
+    <div class="col s12 {% if action_form or cl.date_hierarchy or cl.list_filter or cl.search_fields %}m8 l9{% endif %}">
         <div class="card data-card">
             <div class="card-content">
                 {% block result_list %}
@@ -79,6 +79,7 @@
             </div>
         </div>
     </div>
+    {% if action_form or cl.date_hierarchy or cl.list_filter or cl.search_fields %}
     <div class="col s12 m4 l3">
         {% if action_form and actions_on_top and cl.show_admin_actions %}
            {% admin_actions %}
@@ -104,7 +105,7 @@
         </div>
         {% endif %}
     </div>
-
+    {% endif %}
     {% if has_add_permission %}
     {% url cl.opts|admin_urlname:'add' as add_url %}
     <div class="fixed-action-btn">
