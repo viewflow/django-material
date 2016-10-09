@@ -52,6 +52,9 @@ if 'test' not in sys.argv:
     INSTALLED_APPS += DEV_APPS
 
 
+LOGIN_REDIRECT_URL = '/integration/'
+
+
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',

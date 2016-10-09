@@ -8,8 +8,6 @@ default_app_config = 'material.frontend.apps.MaterialFrontendConfig'
 
 
 if getattr(settings, 'MATERIAL_FRONTEND_AUTOREGISTER', True):
-    settings.LOGIN_REDIRECT_URL = '/'
-
     # Register middleware
     if 'material.frontend.middleware.SmoothNavigationMiddleware' not in settings.MIDDLEWARE_CLASSES:
         settings.MIDDLEWARE_CLASSES += ('material.frontend.middleware.SmoothNavigationMiddleware',)
