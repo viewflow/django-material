@@ -2,6 +2,13 @@
 <div class="row">
     <div class="formset-field col s12" data-formset-prefix="{{ element.inline.formset.prefix }}">
         {% part element.inline label %}<h5>{{ element.inline.opts.verbose_name_plural|capfirst }}</h5>{% endpart %}
+
+        {% if element.inline.formset.non_form_errors %}
+        <div>
+            <small class="errornote">{{ element.inline.formset.non_form_errors }}</small>
+        </div>
+        {% endif %}
+
         <div data-formset-body>
             {% for inline_admin_form in element.inline %}
             {% if inline_admin_form.form.prefix ==  element.inline.formset.empty_form.prefix %}<script type="form-template" data-formset-empty-form>{% endif %}

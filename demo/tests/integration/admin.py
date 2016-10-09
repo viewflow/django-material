@@ -11,6 +11,16 @@ class CountryTabularInline(admin.TabularInline):
     fields = ('code', 'name', )
     model = models.Country
 
+    class CountryInlineFormset(forms.models.BaseInlineFormSet):
+        def clean(self):
+            for form_data in self.cleaned_data:
+                code = form_data['code']
+                if len(code) < 2:
+                    raise forms.ValidationError('One of the countries code is invalid')
+                return self.cleaned_data
+
+    formset = CountryInlineFormset
+
 
 class CityStackedInline(admin.TabularInline):
     model = models.City
@@ -31,6 +41,16 @@ class SeaStackedInline(admin.StackedInline):
     fields = ('name', 'area', 'avg_depth', 'max_depth')
     model = models.Sea
     readonly_fields = ('avg_depth', 'max_depth')
+
+    class SeaInlineFormset(forms.models.BaseInlineFormSet):
+        def clean(self):
+            for form_data in self.cleaned_data:
+                name = form_data['name']
+                if len(name) < 2:
+                    raise forms.ValidationError('One of the seas name is too short')
+                return self.cleaned_data
+
+    formset = SeaInlineFormset
 
 
 @admin.register(models.Ocean)
