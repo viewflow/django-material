@@ -11,15 +11,32 @@ from .update import UpdateModelView
 DEFAULT = object()
 
 
-class ModelViewSet(object):
+class BaseViewset(object):
+    @property
+    def urls(self):
+        result = []
+
+        format_kwargs = {
+            'model_name': self.model._meta.model_name
+        }
+
+        url_entries = (
+            getattr(self, attr)
+            for attr in self.__dir__()
+            if attr.endswith('_view')
+            if isinstance(getattr(self, attr), (list, tuple))
+        )
+        for url_entry in url_entries:
+            regexp, view, name = url_entry
+            result.append(
+                url(regexp.format(**format_kwargs), view, name=name.format(**format_kwargs))
+            )
+
+        return result
+
+
+class ModelViewSet(BaseViewset):
     model = None
-
-    create_view_class = CreateModelView
-    detail_view_class = DetailModelView
-    list_view_class = ListModelView
-    update_view_class = UpdateModelView
-    delete_view_class = DeleteModelView
-
     queryset = DEFAULT
     list_display = DEFAULT
     list_display_links = DEFAULT
@@ -27,15 +44,59 @@ class ModelViewSet(object):
     layout = DEFAULT
     form_class = DEFAULT
 
-    def _filter_options(self, view_class, options):
-        return {name: value for name, value in options.items()
+    def get_queryset(self, request):
+        return self.queryset
+
+    def filter_kwargs(self, view_class, **kwargs):
+        result = {
+            'model': self.model,
+            'viewset': self,
+            'queryset': self.queryset,
+        }
+        result.update(kwargs)
+        return {name: value for name, value in result.items()
                 if hasattr(view_class, name)
                 if value is not DEFAULT}
+
+    """
+    Create
+    """
+    create_view_class = CreateModelView
+
+    def get_create_view(self):
+        return self.create_view_class.as_view(**self.get_create_view_kwargs())
+
+    def get_create_view_kwargs(self, **kwargs):
+        result = {
+            'layout': self.layout,
+            'form_class': self.form_class,
+        }
+        result.update(kwargs)
+        return self.filter_kwargs(self.create_view_class, **result)
+
+    @property
+    def create_view(self):
+        return [
+            r'^add/$',
+            self.get_create_view(),
+            '{model_name}_add',
+        ]
 
     def has_add_permission(self, request):
         opts = self.model._meta
         codename = get_permission_codename('add', opts)
         return request.user.has_perm('{}.{}'.format(opts.app_label, codename))
+
+    """
+    Detail
+    """
+    detail_view_class = DetailModelView
+
+    def get_detail_view(self):
+        return self.detail_view_class.as_view(**self.get_detail_view_kwargs())
+
+    def get_detail_view_kwargs(self, **kwargs):
+        return self.filter_kwargs(self.detail_view_class, **kwargs)
 
     def has_view_permission(self, request, obj=None):
         opts = self.model._meta
@@ -44,35 +105,21 @@ class ModelViewSet(object):
             return True
         return self.has_change_permission(request, obj=obj)
 
-    def has_change_permission(self, request, obj=None):
-        opts = self.model._meta
-        codename = get_permission_codename('change', opts)
-        return request.user.has_perm('{}.{}'.format(opts.app_label, codename), obj=obj)
+    @property
+    def detail_view(self):
+        return [
+            r'^(?P<pk>.+)/detail/$',
+            self.get_detail_view(),
+            '{model_name}_detail'
+        ]
 
-    def has_delete_permission(self, request, obj=None):
-        opts = self.model._meta
-        codename = get_permission_codename('delete', opts)
-        return request.user.has_perm('{}.{}'.format(opts.app_label, codename), obj=obj)
+    """
+    List
+    """
+    list_view_class = ListModelView
 
-    def get_common_kwargs(self, **kwargs):
-        result = {
-            'model': self.model,
-            'viewset': self,
-            'queryset': self.queryset,
-        }
-        result.update(kwargs)
-        return result
-
-    def get_create_view_kwargs(self, **kwargs):
-        result = {
-            'layout': self.layout,
-            'form_Class': self.form_class,
-        }
-        result.update(kwargs)
-
-        return self._filter_options(
-            self.create_view_class,
-            self.get_common_kwargs(**result))
+    def get_list_view(self):
+        return self.list_view_class.as_view(**self.get_list_view_kwargs())
 
     def get_list_view_kwargs(self, **kwargs):
         result = {
@@ -80,15 +127,23 @@ class ModelViewSet(object):
             'list_display_links': self.list_display_links
         }
         result.update(kwargs)
+        return self.filter_kwargs(self.list_view_class, **result)
 
-        return self._filter_options(
-            self.list_view_class,
-            self.get_common_kwargs(**result))
+    @property
+    def list_view(self):
+        return [
+            '^$',
+            self.get_list_view(),
+            '{model_name}_list'
+        ]
 
-    def get_detail_view_kwargs(self, **kwargs):
-        return self._filter_options(
-            self.detail_view_class,
-            self.get_common_kwargs(**kwargs))
+    """
+    Update
+    """
+    update_view_class = UpdateModelView
+
+    def get_update_view(self):
+        return self.update_view_class.as_view(**self.get_update_view_kwargs())
 
     def get_update_view_kwargs(self, **kwargs):
         result = {
@@ -96,47 +151,41 @@ class ModelViewSet(object):
             'form_Class': self.form_class,
         }
         result.update(kwargs)
+        return self.filter_kwargs(self.update_view_class, **result)
 
-        return self._filter_options(
-            self.update_view_class,
-            self.get_common_kwargs(**result))
-
-    def get_delete_view_kwargs(self, **kwargs):
-        return self._filter_options(
-            self.delete_view_class,
-            self.get_common_kwargs(**kwargs))
-
-    def get_queryset(self, request):
-        return self.queryset
-
-    @property
-    def create_view(self):
-        return self.create_view_class.as_view(**self.get_create_view_kwargs())
-
-    @property
-    def detail_view(self):
-        return self.detail_view_class.as_view(**self.get_detail_view_kwargs())
-
-    @property
-    def list_view(self):
-        return self.list_view_class.as_view(**self.get_list_view_kwargs())
+    def has_change_permission(self, request, obj=None):
+        opts = self.model._meta
+        codename = get_permission_codename('change', opts)
+        return request.user.has_perm('{}.{}'.format(opts.app_label, codename), obj=obj)
 
     @property
     def update_view(self):
-        return self.update_view_class.as_view(**self.get_update_view_kwargs())
+        return [
+            r'^(?P<pk>.+)/change/$',
+            self.get_update_view(),
+            '{model_name}_change',
+        ]
+
+    """
+    Delete
+    """
+    delete_view_class = DeleteModelView
+
+    def get_delete_view(self):
+        return self.delete_view_class.as_view(**self.get_delete_view_kwargs())
+
+    def has_delete_permission(self, request, obj=None):
+        opts = self.model._meta
+        codename = get_permission_codename('delete', opts)
+        return request.user.has_perm('{}.{}'.format(opts.app_label, codename), obj=obj)
+
+    def get_delete_view_kwargs(self, **kwargs):
+        return self.filter_kwargs(self.delete_view_class, **kwargs)
 
     @property
     def delete_view(self):
-        return self.delete_view_class.as_view(**self.get_delete_view_kwargs())
-
-    @property
-    def urls(self):
-        model_name = self.model._meta.model_name
-
         return [
-            url('^$', self.list_view, name='{}_list'.format(model_name)),
-            url('^add/$', self.create_view, name='{}_add'.format(model_name)),
-            url(r'^(?P<pk>.+)/detail/$', self.detail_view, name='{}_detail'.format(model_name)),
-            url(r'^(?P<pk>.+)/change/$', self.update_view, name='{}_change'.format(model_name)),
-            url(r'^(?P<pk>.+)/delete/$', self.delete_view, name='{}_delete'.format(model_name)),
+            r'^(?P<pk>.+)/delete/$',
+            self.get_delete_view(),
+            '{model_name}_delete'
         ]
