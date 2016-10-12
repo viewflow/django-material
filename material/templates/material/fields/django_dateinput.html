@@ -1,4 +1,6 @@
-{% load material_form material_form_internal %}
+{% load i18n material_form material_form_internal %}
+{% get_current_language as LANGUAGE_CODE %}
+{% get_language_info for LANGUAGE_CODE as lang %}
 {% part bound_field.field %}<div class="row">
     <div{% attrs bound_field 'group' %}
         id="id_{{ bound_field.html_name }}_container"
@@ -11,6 +13,7 @@
             type="{{ field.widget.input_type }}"
             data-date-format="{{ field|jquery_datepicker_format }}"
             data-form-control="date"
+            data-lang="{{ lang.code|default:'en' }}"
             {% if bound_field.errors %}class="invalid"{% endif %}
             {% if bound_field.value %}value="{{ bound_field.value|datepicker_value:field.input_formats.0 }}"{% endif %}
         {% endattrs %}>

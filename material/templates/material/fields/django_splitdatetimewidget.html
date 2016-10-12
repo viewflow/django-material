@@ -1,4 +1,6 @@
-{% load material_form material_form_internal %}
+{% load i18n material_form material_form_internal %}
+{% get_current_language as LANGUAGE_CODE %}
+{% get_language_info for LANGUAGE_CODE as lang %}
 {% part bound_field.field %}{% part field label %}
 {% endpart %}
 <div class="row" id="id_{{ bound_field.html_name }}_container">
@@ -19,6 +21,7 @@
             type="text"
             data-date-format="{{ field.fields.0|jquery_datepicker_format }}"
             data-form-control="date"
+            data-lang="{{ lang.code|default:'en' }}"
             {% if bound_field.errors %}class="invalid"{% endif %}
             {% if bound_field.value %} value="{{ bound_field|multiwidget_value:0|datepicker_value:field.fields.0.input_formats.0 }}"{% endif %}
         {% endattrs %}>
@@ -41,8 +44,9 @@
             type="text"
             data-date-format="{{ field.fields.1|jquery_datepicker_format }}"
             data-form-control="time"
+            data-lang="{{ lang.code|default:'en' }}"
             {% if bound_field.errors %}class="invalid"{% endif %}
-            {% if bound_field.value %} value="{{ bound_field|multiwidget_value:1|datepicker_value:field.fields.1.input_formats.0 }}"{% endif %}                 
+            {% if bound_field.value %} value="{{ bound_field|multiwidget_value:1|datepicker_value:field.fields.1.input_formats.0 }}"{% endif %}
          {% endattrs %}>
     </div>
 </div>{% endpart %}

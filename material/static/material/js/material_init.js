@@ -6,15 +6,15 @@ $(document).on('ready pjax:complete', function() {
 
         $container.find('[data-form-control="date"]').each(function() {
             var input = $(this);
-            input.datetimepicker({format: input.data('date-format'), timepicker:false, mask:false, scrollInput:false});
+            input.datetimepicker({format: input.data('date-format'), timepicker:false, mask:false, scrollInput:false, lang:input.data('lang')});
         });
         $container.find('[data-form-control="time"]').each(function() {
             var input = $(this);
-            input.datetimepicker({format: input.data('date-format'), datepicker: false, timepicker:true, mask:false, scrollInput:false});
+            input.datetimepicker({format: input.data('date-format'), datepicker: false, timepicker:true, mask:false, scrollInput:false, lang:input.data('lang')});
         });
         $container.find('[data-form-control="datetime"]').each(function() {
             var input = $(this);
-            input.datetimepicker({format: input.data('date-format'), datepicker: true, timepicker:true, mask:false, scrollInput:false});
+            input.datetimepicker({format: input.data('date-format'), datepicker: true, timepicker:true, mask:false, scrollInput:false, lang:input.data('lang')});
         });
     }
     $('.formset-field').formset({
