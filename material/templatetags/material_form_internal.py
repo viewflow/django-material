@@ -4,10 +4,11 @@ import math
 import re
 from collections import OrderedDict
 
-from django import forms
 from django.forms.forms import BoundField
 from django.template import Library
-from django.template.base import Node, TemplateSyntaxError, Variable, token_kwargs
+from django.template.base import (
+    Node, TemplateSyntaxError, Variable, token_kwargs
+)
 from django.utils import formats
 from django.utils.encoding import force_text
 
@@ -21,13 +22,16 @@ register = Library()
 
 @register.tag('render')
 class FormRenderNode(Node):
-    def __init__(self, parser, token):
+    """Shugar for element in template rendering."""
+
+    def __init__(self, parser, token):  # noqa D102
         bits = token.split_contents()
 
         if len(bits) == 0:
             raise TemplateSyntaxError(
-                "%r received invalid args, expected one element for render. Got: %r" %
-                (bits[0], bits[1:]))
+                "%r received invalid args, expected one element for render."
+                " Got: %r".format(bits[0], bits[1:])
+            )
 
         remaining_bits = bits[2:]
 
@@ -49,7 +53,7 @@ class FormRenderNode(Node):
 
         self.element = Variable(bits[1])
 
-    def render(self, context):
+    def render(self, context):  # noqa D102
         element = self.element.resolve(context)
 
         options = {}
@@ -57,10 +61,16 @@ class FormRenderNode(Node):
             options[key] = value.resolve(context)
 
         # render inner parts
-        children = (node for node in self.nodelist if isinstance(node, FormPartNode))
+        children = (
+            node for node in self.nodelist
+            if isinstance(node, FormPartNode)
+        )
         _render_parts(context, children)
 
-        attrs = (node for node in self.nodelist if isinstance(node, WidgetAttrNode))
+        attrs = (
+            node for node in self.nodelist
+            if isinstance(node, WidgetAttrNode)
+        )
         for attr in attrs:
             attr.render(context)
 
@@ -71,11 +81,14 @@ class FormRenderNode(Node):
             with context.push(parent=element):
                 return element.render(context, **options)
         else:
-            raise TemplateSyntaxError("form_render can't render %r" % (element, ))
+            raise TemplateSyntaxError(
+                "form_render can't render %r".format(element)
+            )
 
 
 @register.filter
 def multiwidget_value(bound_field, pos):
+    """Subwidget value for MultiWidget."""
     value = bound_field.value()
     if not isinstance(value, (list, tuple)):
         value = bound_field.field.widget.decompress(value)
@@ -84,11 +97,17 @@ def multiwidget_value(bound_field, pos):
 
 @register.filter
 def have_default_choice(field):
-    return [choice for choice, _ in field.widget.choices if choice is None or choice == ""]
+    """Handle special case for SelectMultiple widget."""
+    return [
+        choice
+        for choice, _ in field.widget.choices
+        if choice is None or choice == ""
+    ]
 
 
 @register.filter
 def jquery_datepicker_format(field):
+    """Convert django input format to jquery datepicket format."""
     input_format = field.input_formats[0]
 
     # %a, %A, %z, %f %Z %j %U %W %c %x %X unsupported
@@ -114,25 +133,32 @@ def jquery_datepicker_format(field):
 
 @register.filter
 def datepicker_value(value, date_format):
+    """Retun localized date value."""
     return formats.localize_input(value, date_format)
 
 
 @register.filter('force_text')
 def force_text_impl(value):
+    """Coerse widget value to text."""
     return force_text(value)
 
 
 @register.filter
 def split_choices_by_columns(choices, columns):
+    """Split CheckboxSelectMultiple values into columns."""
     columns = int(columns)
     col_span = 12 // columns
     per_column = int(math.ceil(len(choices)/columns))
     choices = [tuple(choice) + (i,) for i, choice in enumerate(choices)]
-    return [(col_span, choices[i:i + per_column]) for i in range(0, len(choices), per_column)]
+    return [
+        (col_span, choices[i:i + per_column])
+        for i in range(0, len(choices), per_column)
+    ]
 
 
 @register.filter
 def select_date_widget_wrapper(bound_field):
+    """Wrap SelectDateWidget into django-material internal wrapper."""
     class Wrapper(object):
         def __init__(self, bound_field):
             self.bound_field = bound_field
@@ -148,13 +174,16 @@ def select_date_widget_wrapper(bound_field):
 
 @register.filter
 def is_initial_file(value):
+    """Check for initial value of FileFile."""
     return bool(value and getattr(value, 'url', False))
 
 
 @register.filter
 def is_null_boolean_selected(bound_field, value):
+    """Return NullBooleanField state."""
+    BOOL_VALUES = {True: '2', False: '3', '2': '2', '3': '3'}
     try:
-        current_value = {True: '2', False: '3', '2': '2', '3': '3'}[bound_field.value()]
+        current_value = BOOL_VALUES[bound_field.value()]
     except KeyError:
         current_value = '1'
     return value == current_value
@@ -163,7 +192,7 @@ def is_null_boolean_selected(bound_field, value):
 @register.filter
 def select_options(bound_field):
     """
-    Returns list of (group_name, option_label, option_value, selected).
+    Return list of (group_name, option_label, option_value, selected).
 
     If group_name is None - option is not belongs to group
     """
@@ -188,6 +217,8 @@ def select_options(bound_field):
             if option_value is None:
                 option_value = ''
             value = force_text(option_value)
-            groups[None].append((option_label, option_value, value in selected))
+            groups[None].append(
+                (option_label, option_value, value in selected)
+            )
 
     return groups.items()

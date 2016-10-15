@@ -1,0 +1,1 @@
+"""django-material tags library."""

@@ -16,7 +16,10 @@ from ..compat import context_flatten
 
 register = Library()
 
-ATTRS_RE = re.compile(r'(?P<attr>[-\w]+)(\s*=\s*[\'"](?P<val>.*?)[\'"])?', re.MULTILINE | re.DOTALL)
+ATTRS_RE = re.compile(
+    r'(?P<attr>[-\w]+)(\s*=\s*[\'"](?P<val>.*?)[\'"])?',
+    re.MULTILINE | re.DOTALL
+)
 
 
 def _render_parts(context, parts_list):
@@ -32,16 +35,18 @@ def _render_parts(context, parts_list):
 @register.tag('form')
 class FormNode(Node):
     """
-    Template based form rendering
+    Template based form rendering.
 
     Example::
 
         {% form template='material/form.html' form=form layout=view.layout %}
-            {% part form.email prepend %}<span class="input-group-addon" id="basic-addon1">@</span>{% endpart %}
+            {% part form.email prepend %}
+                <span class="input-group-addon" id="basic-addon1">@</span>
+            {% endpart %}
         {% endform %}
     """
 
-    def __init__(self, parser, token):
+    def __init__(self, parser, token):  # noqa D102
         bits = token.split_contents()
         remaining_bits = bits[1:]
 
@@ -58,10 +63,10 @@ class FormNode(Node):
 
             self.kwargs[key] = self.kwargs[key]
 
-        self.nodelist = parser.parse(('end{}'.format(bits[0]),))
+        self.nodelist = parser.parse(('end{}'.format(bits[0])))
         parser.delete_first_token()
 
-    def render(self, context):
+    def render(self, context):  # noqa D102
         form = self.kwargs.get('form')
         form = form.resolve(context) if form else context.get('form')
 
@@ -97,21 +102,36 @@ class FormNode(Node):
                 form_widget_attrs=attrs):
 
             # direct children
-            children = (node for node in self.nodelist if isinstance(node, FormPartNode))
+            children = (
+                node for node in self.nodelist
+                if isinstance(node, FormPartNode)
+            )
             _render_parts(context, children)
 
-            attrs = (node for node in self.nodelist if isinstance(node, WidgetAttrNode))
+            attrs = (
+                node for node in self.nodelist
+                if isinstance(node, WidgetAttrNode)
+            )
             for attr in attrs:
                 attr.render(context)
 
             # include
-            children = (node for node in self.nodelist if isinstance(node, IncludeNode))
+            children = (
+                node for node in self.nodelist
+                if isinstance(node, IncludeNode)
+            )
             for included_list in children:
                 included = included_list.template.resolve(context)
-                children = (node for node in included.nodelist if isinstance(node, FormPartNode))
+                children = (
+                    node for node in included.nodelist
+                    if isinstance(node, FormPartNode)
+                )
                 _render_parts(context, children)
 
-                attrs = (node for node in self.nodelist if isinstance(node, WidgetAttrNode))
+                attrs = (
+                    node for node in self.nodelist
+                    if isinstance(node, WidgetAttrNode)
+                )
                 for attr in attrs:
                     attr.render(context)
 
@@ -120,16 +140,16 @@ class FormNode(Node):
 
 @register.tag('part')
 class FormPartNode(Node):
-    """
-    Named piece of HTML layout.
-    """
-    def __init__(self, parser, token):
+    """Named piece of HTML layout."""
+
+    def __init__(self, parser, token):  # noqa D102
         bits = token.split_contents()
 
         if len(bits) > 5:
             raise TemplateSyntaxError(
-                "%r accepts at most 4 arguments (part_id, section, asvar, varname), got: {}" %
-                (bits[0], ','.join(bits[1:])))
+                "%r accepts at most 4 arguments (part_id, section,"
+                " asvar, varname), got: {}".format(bits[0], ','.join(bits[1:]))
+            )
 
         self.part_id = Variable(bits[1])
         self.section = bits[2] if len(bits) >= 3 else None
@@ -137,7 +157,9 @@ class FormPartNode(Node):
         self.varname = None
         if len(bits) > 3:
             if bits[3] != 'asvar':
-                raise TemplateSyntaxError('Forth argument should be asvar, got {}', format(bits[3]))
+                raise TemplateSyntaxError(
+                    'Forth argument should be asvar," " got {}'.format(bits[3])
+                )
             if len(bits) < 4:
                 raise TemplateSyntaxError('Variable name not provided')
             else:
@@ -147,25 +169,30 @@ class FormPartNode(Node):
         parser.delete_first_token()
 
     def resolve_part(self, context):
+        """Resolve field reference form context."""
         part = self.part_id.resolve(context)
         if isinstance(part, BoundField):
             part = part.field
         return part
 
-    def render(self, context):
+    def render(self, context):  # noqa D102
         part = self.resolve_part(context)
         parts = context['form_parts']
 
         if self.section in parts[part]:
             # already rendered
             if self.varname is not None:
-                context[self.varname.resolve(context)] = parts[part][self.section]
+                varname = self.varname.resolve(context)
+                context[varname] = parts[part][self.section]
                 return ""
             else:
                 return parts[part][self.section]
 
         # child parts
-        children = (node for node in self.nodelist if isinstance(node, FormPartNode))
+        children = (
+            node for node in self.nodelist
+            if isinstance(node, FormPartNode)
+        )
         _render_parts(context, children)
 
         # render own content
@@ -189,37 +216,44 @@ class WidgetAttrsNode(Node):
         class="{% if bound_field.errors %}invalid{% endif %}"
     {% endattrs %}>
     """
-    def __init__(self, parser, token):
+
+    def __init__(self, parser, token):  # noqa D102
         bits = token.split_contents()
 
         if len(bits) < 3:
             raise TemplateSyntaxError(
-                "%r accepts at least 2 arguments (bound_field, 'groupname'), got: {}" %
-                (bits[0], ','.join(bits[1:])))
+                "%r accepts at least 2 arguments (bound_field,"
+                " 'groupname'), got: {}".format(bits[0], ','.join(bits[1:]))
+            )
 
         if len(bits) > 5:
             raise TemplateSyntaxError(
-                "%r accepts at mast 4 arguments (bound_field, 'groupname' default attrs_dict ), got: {}" %
-                (bits[0], ','.join(bits[1:])))
+                "%r accepts at mast 4 arguments (bound_field, 'groupname'"
+                " default attrs_dict ), got: {}".format(
+                    bits[0], ','.join(bits[1:]))
+            )
 
         if len(bits) > 3 and bits[3] != 'default':
             raise TemplateSyntaxError(
-                "%r 3d argument should be 'default' (bound_field, 'groupname' default attrs_dict ), got: {}" %
-                (bits[0], ','.join(bits[1:])))
+                "%r 3d argument should be 'default' (bound_field, 'groupname'"
+                " default attrs_dict ), got: {}".format(
+                    bits[0], ','.join(bits[1:]))
+            )
 
         self.field = Variable(bits[1])
         self.group = Variable(bits[2])
         self.widget_attrs = Variable(bits[4]) if len(bits) >= 5 else None
-        self.nodelist = parser.parse(('end{}'.format(bits[0]),))
+        self.nodelist = parser.parse(('end{}'.format(bits[0])))
         parser.delete_first_token()
 
     def resolve_field(self, context):
+        """Resolve field reference form context."""
         field = self.field.resolve(context)
         if isinstance(field, BoundField):
             field = field.field
         return field
 
-    def render(self, context):
+    def render(self, context):  # noqa D102
         field = self.resolve_field(context)
         group = self.group.resolve(context)
         form_widget_attrs = context['form_widget_attrs']
@@ -256,43 +290,57 @@ class WidgetAttrsNode(Node):
 
 @register.tag('attr')
 class WidgetAttrNode(Node):
+    """The tag allows to add or override specific attribute in the rendered HTML.
+
+    The first argumnent is the attribute group name, second is the
+    attribute name.  The third optional flag shows to override (by
+    default) or `append` the value.
+
+    Usage::
+
+        {% attr form.email 'widget' 'data-validate' %}email{% endattr %}
+        {% attr form.email 'widget' 'class' append %}green{%  endattr %}
+        {% attr form.email 'widget' 'required' %}True{%  endattr %}
+
     """
-    {% attr form.email 'widget' 'data-validate' %}email{% endattr %}
-    {% attr form.email 'widget' 'class' append %}green{%  endattr %}
-    {% attr form.email 'widget' 'required' %}True{%  endattr %}
-    """
-    def __init__(self, parser, token):
+
+    def __init__(self, parser, token):  # noqa D102
         bits = token.split_contents()
 
         if len(bits) < 4:
             raise TemplateSyntaxError(
-                "{} accepts at least 3 arguments (bound_field, 'groupname' 'attr_name'), got: {}".format(
-                    (bits[0], ','.join(bits[1:]))))
+                "{} accepts at least 3 arguments (bound_field, 'groupname'"
+                " 'attr_name'), got: {}".format(bits[0], ','.join(bits[1:]))
+            )
 
         if len(bits) > 5:
             raise TemplateSyntaxError(
-                "{} accepts at mast 4 arguments (bound_field, 'groupname' 'attr_name' action ), got: {}".format(
-                    (bits[0], ','.join(bits[1:]))))
+                "{} accepts at mast 4 arguments (bound_field, 'groupname'"
+                " 'attr_name' action ), got: {}".format(
+                    bits[0], ','.join(bits[1:]))
+            )
 
         if len(bits) >= 5 and bits[4] not in ['append', 'override']:
             raise TemplateSyntaxError(
-                "{} unknown action {}  should be 'append' of 'override'".format(
-                    (bits[0], ','.join(bits[4]))))
+                "{} unknown action {}  should be 'append'"
+                " of 'override'".format(bits[0], ','.join(bits[4]))
+            )
 
         self.field = Variable(bits[1])
         self.group = Variable(bits[2])
         self.attr = bits[3]
         self.action = bits[4] if len(bits) >= 5 else 'override'
-        self.nodelist = parser.parse(('end{}'.format(bits[0]),))
+        self.nodelist = parser.parse(('end{}'.format(bits[0])))
         parser.delete_first_token()
 
     def resolve_field(self, context):
+        """Resolve field reference form context."""
         field = self.field.resolve(context)
         if isinstance(field, BoundField):
             field = field.field
         return field
 
-    def render(self, context):
+    def render(self, context):  # noqa D102
         field = self.resolve_field(context)
         group = self.group.resolve(context)
         form_widget_attrs = context['form_widget_attrs']
@@ -307,4 +355,7 @@ class WidgetAttrNode(Node):
         else:
             old_value, old_action = attrs[self.attr]
             if old_action != 'override':
-                attrs[self.attr] = ('{} {}'.format(old_value, value), self.action)
+                attrs[self.attr] = (
+                    '{} {}'.format(old_value, value),
+                    self.action
+                )
