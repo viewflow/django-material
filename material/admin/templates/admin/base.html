@@ -56,7 +56,9 @@
                     </li>
 
                     {% block breadcrumbs_left %}
-                    {% block back_link %}<li class="no-padding"><a class="collapsible-header no-pjax" href="/"><i class="material-icons">arrow_back</i>{% trans 'Back to website' %}</a></li>{% endblock %}
+                    {% if site_url %}
+                    {% block back_link %}<li class="no-padding"><a class="collapsible-header no-pjax" href="{{ site_url }}"><i class="material-icons">arrow_back</i>{% trans 'View site' %}</a></li>{% endblock %}
+                    {% endif %}
                     <li class="no-padding active">
                         <div class="collapsible-body" style="display:block">
                             <ul class="collapsible" data-collapsible="accordion">
