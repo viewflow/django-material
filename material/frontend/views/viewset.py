@@ -12,12 +12,15 @@ DEFAULT = object()
 
 
 class BaseViewset(object):
-    """
-    Base router-like class for frontend viewset
-    """
+    """Base router-like class for frontend viewset."""
 
     @property
     def urls(self):
+        """Collect url specs from the instance attributes.
+
+        Assumes that each attribute with name ending with `_view`
+        contains tripple (regexp, view, url_name)
+        """
         result = []
 
         format_kwargs = {
@@ -42,6 +45,52 @@ class BaseViewset(object):
 
 
 class ModelViewSet(BaseViewset):
+    """Model Create/Read/Update/Delete/List viewset.
+
+    Lightweight alternative for django admin. CRUD interface based in
+    the django generic views. Viewset provides a sinple place to
+    configure the views and share the common configuration parameters.
+
+    :keyword model: Model class views
+
+    :keyword queryset: Base views queryset
+
+    :keyword list_display: List of fields for ListView
+
+    :keyword list_display_links: List of fields form `list_display`
+                                 linked to chage view
+
+    :keyword create_view_class: CBV for create an object
+
+    :keyword list_view_class:  CBV for create to list objects
+
+    :keyword detail_view_class:  CBV to show an object detail
+
+    :keyword update_view_class: CBV to update an object
+
+    :keyword delete_view_class: CBV to delete an object
+
+    There is no specifical requirements to CBV, by overriding
+    corresponsing `get_<op>_view` method you can even use function
+    based views with this viewset.
+
+    Example::
+
+        class CityViewSet(ModelViewSet):
+            model = models.Sea
+            list_display = ('name', 'parent', 'ocean', 'sea_area', )
+            layout = Layout(
+                Row('name', 'parent'),
+                'ocean',
+                Row('area', 'avg_depth', 'max_depth'),
+                'basin_countries'
+            )
+
+            def sea_area(self, sea):
+                return None if sea.area == 0 else sea.area
+
+    """
+
     model = None
     queryset = DEFAULT
     list_display = DEFAULT
@@ -51,9 +100,23 @@ class ModelViewSet(BaseViewset):
     form_class = DEFAULT
 
     def get_queryset(self, request):
+        """Return common queryset for all CRUD views.
+
+        By default just return `self.queryset`. Subclasses can
+        override that.
+        """
         return self.queryset
 
     def filter_kwargs(self, view_class, **kwargs):
+        """Add defaults and filter kwargs to only thouse that view can accept.
+
+        Viewset pass to the view only kwars that have non DEFAULT values,
+        and if the view have a corresponding attribute.
+
+        In addition, if view has `viewset` attribute, it will receive
+        the `self` instance
+
+        """
         result = {
             'model': self.model,
             'viewset': self,
@@ -70,9 +133,14 @@ class ModelViewSet(BaseViewset):
     create_view_class = CreateModelView
 
     def get_create_view(self):
+        """Function view for create an object."""
         return self.create_view_class.as_view(**self.get_create_view_kwargs())
 
     def get_create_view_kwargs(self, **kwargs):
+        """Configuration arguments for create view.
+
+        May not be called if `get_create_view` is overriden.
+        """
         result = {
             'layout': self.layout,
             'form_class': self.form_class,
@@ -82,6 +150,7 @@ class ModelViewSet(BaseViewset):
 
     @property
     def create_view(self):
+        """Tripple (regexp, view, name) for create view url config."""
         return [
             r'^add/$',
             self.get_create_view(),
@@ -89,6 +158,10 @@ class ModelViewSet(BaseViewset):
         ]
 
     def has_add_permission(self, request):
+        """Default add permission check for a detail and list views.
+
+        May not be called if views have own implementation.
+        """
         opts = self.model._meta
         codename = get_permission_codename('add', opts)
         return request.user.has_perm('{}.{}'.format(opts.app_label, codename))
@@ -99,12 +172,21 @@ class ModelViewSet(BaseViewset):
     detail_view_class = DetailModelView
 
     def get_detail_view(self):
+        """Function view for object detail."""
         return self.detail_view_class.as_view(**self.get_detail_view_kwargs())
 
     def get_detail_view_kwargs(self, **kwargs):
+        """Configuration arguments for detail view.
+
+        May not be called if `get_detail_view` is overriden.
+        """
         return self.filter_kwargs(self.detail_view_class, **kwargs)
 
     def has_view_permission(self, request, obj=None):
+        """Default view permission check for a detail and list views.
+
+        May not be called if views have own implementation.
+        """
         opts = self.model._meta
         codename = get_permission_codename('view', opts)
         view_perm = '{}.{}'.format(opts.app_label, codename)
@@ -114,6 +196,7 @@ class ModelViewSet(BaseViewset):
 
     @property
     def detail_view(self):
+        """Tripple (regexp, view, name) for detail view url config."""
         return [
             r'^(?P<pk>.+)/detail/$',
             self.get_detail_view(),
@@ -126,9 +209,14 @@ class ModelViewSet(BaseViewset):
     list_view_class = ListModelView
 
     def get_list_view(self):
+        """Function view for objects list."""
         return self.list_view_class.as_view(**self.get_list_view_kwargs())
 
     def get_list_view_kwargs(self, **kwargs):
+        """Configuration arguments for list view.
+
+        May not be called if `get_list_view` is overriden.
+        """
         result = {
             'list_display': self.list_display,
             'list_display_links': self.list_display_links
@@ -138,6 +226,7 @@ class ModelViewSet(BaseViewset):
 
     @property
     def list_view(self):
+        """Tripple (regexp, view, name) for list view url config."""
         return [
             '^$',
             self.get_list_view(),
@@ -150,9 +239,14 @@ class ModelViewSet(BaseViewset):
     update_view_class = UpdateModelView
 
     def get_update_view(self):
+        """Function view for update an object."""
         return self.update_view_class.as_view(**self.get_update_view_kwargs())
 
     def get_update_view_kwargs(self, **kwargs):
+        """Configuration arguments for update view.
+
+        May not be called if `get_update_view` is overriden.
+        """
         result = {
             'layout': self.layout,
             'form_Class': self.form_class,
@@ -161,6 +255,10 @@ class ModelViewSet(BaseViewset):
         return self.filter_kwargs(self.update_view_class, **result)
 
     def has_change_permission(self, request, obj=None):
+        """Default change permission check for a update view.
+
+        May not be called if update view have own implementation.
+        """
         opts = self.model._meta
         codename = get_permission_codename('change', opts)
         return request.user.has_perm(
@@ -168,6 +266,7 @@ class ModelViewSet(BaseViewset):
 
     @property
     def update_view(self):
+        """Tripple (regexp, view, name) for update view url config."""
         return [
             r'^(?P<pk>.+)/change/$',
             self.get_update_view(),
