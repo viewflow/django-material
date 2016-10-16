@@ -8,6 +8,8 @@ from ..frontend.urlconf import ModuleURLResolver
 
 
 class MaterialAdminConfig(ModuleMixin, AppConfig):
+    """Material Admin frontend module."""
+
     name = 'material.admin'
     label = "material_admin"
 
@@ -16,11 +18,11 @@ class MaterialAdminConfig(ModuleMixin, AppConfig):
     order = 1000
 
     @property
-    def urls(self):
+    def urls(self):  # noqa D102
         return ModuleURLResolver(r'^admin/', admin.site.urls[0], namespace='admin', module=self)
 
-    def index_url(self):
+    def index_url(self):  # noqa D102
         return reverse('admin:index'.format(self.label))
 
-    def has_perm(self, user):
+    def has_perm(self, user):  # noqa D102
         return user.is_staff

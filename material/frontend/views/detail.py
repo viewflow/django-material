@@ -63,7 +63,10 @@ class DetailModelView(generic.DetailView):
         if self.template_name is None:
             opts = self.model._meta
             return [
-                '{}/{}{}.html'.format(opts.app_label, opts.model_name, self.template_name_suffix),
+                '{}/{}{}.html'.format(
+                    opts.app_label,
+                    opts.model_name,
+                    self.template_name_suffix),
                 'material/frontend/views/detail.html',
             ]
 

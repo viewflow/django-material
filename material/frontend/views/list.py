@@ -62,7 +62,10 @@ class ListModelView(ContextMixin, TemplateResponseMixin, View):
         if self.template_name is None:
             opts = self.object_list.model._meta
             return [
-                '{}/{}{}.html'.format(opts.app_label, opts.model_name, self.template_name_suffix),
+                '{}/{}{}.html'.format(
+                    opts.app_label,
+                    opts.model_name,
+                    self.template_name_suffix),
                 'material/frontend/views/list.html',
             ]
         return [self.template_name]
@@ -71,7 +74,9 @@ class ListModelView(ContextMixin, TemplateResponseMixin, View):
         return self.list_display
 
     def get_list_display_links(self, list_display):
-        if self.list_display_links or self.list_display_links is None or not list_display:
+        if (self.list_display_links or
+                self.list_display_links is None or
+                not list_display):
             return list(self.list_display_links)
         else:
             # Use only the first item in list_display as link
@@ -107,7 +112,10 @@ class ListModelView(ContextMixin, TemplateResponseMixin, View):
     def get_datatable_config(self):
         config = self.datatable_default_config.copy()
         config['iDisplayLength'] = self.paginate_by
-        config['columns'] = [{'data': field_name} for field_name in self.datalist.list_display]
+        config['columns'] = [
+            {'data': field_name}
+            for field_name in self.datalist.list_display
+        ]
         if self.datatable_config is not None:
             config.update(self.datatable_config)
         return config
@@ -170,7 +178,8 @@ class ListModelView(ContextMixin, TemplateResponseMixin, View):
         if request.is_ajax() and not request.META.get("PJAX", False):
             handler = self.get_json_data
         elif request.method.lower() in self.http_method_names:
-            handler = getattr(self, request.method.lower(), self.http_method_not_allowed)
+            handler = getattr(
+                self, request.method.lower(), self.http_method_not_allowed)
         else:
             handler = self.http_method_not_allowed
         return handler(request, *args, **kwargs)

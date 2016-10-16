@@ -12,6 +12,10 @@ DEFAULT = object()
 
 
 class BaseViewset(object):
+    """
+    Base router-like class for frontend viewset
+    """
+
     @property
     def urls(self):
         result = []
@@ -29,7 +33,9 @@ class BaseViewset(object):
         for url_entry in url_entries:
             regexp, view, name = url_entry
             result.append(
-                url(regexp.format(**format_kwargs), view, name=name.format(**format_kwargs))
+                url(regexp.format(**format_kwargs),
+                    view,
+                    name=name.format(**format_kwargs))
             )
 
         return result
@@ -101,7 +107,8 @@ class ModelViewSet(BaseViewset):
     def has_view_permission(self, request, obj=None):
         opts = self.model._meta
         codename = get_permission_codename('view', opts)
-        if request.user.has_perm('{}.{}'.format(opts.app_label, codename), obj=obj):
+        view_perm = '{}.{}'.format(opts.app_label, codename)
+        if request.user.has_perm(view_perm, obj=obj):
             return True
         return self.has_change_permission(request, obj=obj)
 
@@ -156,7 +163,8 @@ class ModelViewSet(BaseViewset):
     def has_change_permission(self, request, obj=None):
         opts = self.model._meta
         codename = get_permission_codename('change', opts)
-        return request.user.has_perm('{}.{}'.format(opts.app_label, codename), obj=obj)
+        return request.user.has_perm(
+            '{}.{}'.format(opts.app_label, codename), obj=obj)
 
     @property
     def update_view(self):
@@ -172,18 +180,29 @@ class ModelViewSet(BaseViewset):
     delete_view_class = DeleteModelView
 
     def get_delete_view(self):
+        """Function view for delete an object."""
         return self.delete_view_class.as_view(**self.get_delete_view_kwargs())
 
     def has_delete_permission(self, request, obj=None):
+        """Default delete permission check for a delete view.
+
+        May not be called if delete view have own implementation.
+        """
         opts = self.model._meta
         codename = get_permission_codename('delete', opts)
-        return request.user.has_perm('{}.{}'.format(opts.app_label, codename), obj=obj)
+        return request.user.has_perm(
+            '{}.{}'.format(opts.app_label, codename), obj=obj)
 
     def get_delete_view_kwargs(self, **kwargs):
+        """Configuration arguments for delete view.
+
+        May not be called if `get_delete_view` is overriden.
+        """
         return self.filter_kwargs(self.delete_view_class, **kwargs)
 
     @property
     def delete_view(self):
+        """Tripple (regexp, view, name) for delete view url config."""
         return [
             r'^(?P<pk>.+)/delete/$',
             self.get_delete_view(),

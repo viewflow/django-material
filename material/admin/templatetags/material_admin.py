@@ -28,6 +28,7 @@ CL_VALUE_RE = re.compile('value="(.*)\"')
 
 
 def get_admin_site():
+    """TODO: Remove."""
     site_module = getattr(
         settings,
         'MATERIAL_ADMIN_SITE',
@@ -43,6 +44,7 @@ site = get_admin_site()
 
 @register.assignment_tag
 def get_app_list(request):
+    """Django 1.8 way to get application registred at default Admin Site."""
     app_dict = {}
     user = request.user
 
@@ -113,6 +115,7 @@ def get_app_list(request):
 
 @register.assignment_tag
 def fieldset_layout(adminform, inline_admin_formsets):
+    """Generate materila layout for admin inlines."""
     layout = getattr(adminform.model_admin, 'layout', None)
     if layout is not None:
         for element in layout.elements:
@@ -159,9 +162,7 @@ def fieldset_layout(adminform, inline_admin_formsets):
 
 @register.simple_tag
 def paginator_number(cl, i):
-    """
-    Generates an individual page index link in a paginated list.
-    """
+    """Generate an individual page index link in a paginated list."""
     current_page = cl.paginator.page(cl.page_num+1)
     if i == 'prev':
         if current_page.has_previous():
@@ -190,9 +191,7 @@ def paginator_number(cl, i):
 
 @register.inclusion_tag('admin/date_hierarchy.html')
 def date_hierarchy(cl):
-    """
-    Displays the date hierarchy for date drill-down functionality.
-    """
+    """Display the date hierarchy for date drill-down functionality."""
     if cl.date_hierarchy:
         field_name = cl.date_hierarchy
         field = get_fields_from_path(cl.model, field_name)[-1]
@@ -324,12 +323,15 @@ simple_tag(register, admin_related_field_urls)
 
 @register.filter
 def admin_change_list_value(result_checkbox_html):
+    """Extract value from rendered admin list action checkbox."""
     value = CL_VALUE_RE.findall(result_checkbox_html)
     return value[0] if value else None
 
 
 def admin_select_related_link(bound_field):
     """
+    Helper for admin RelatedWidgetWrapper.
+
     {% admin_select_related_link bound_field as rel_field_urls %}
     """
     rel_widget = bound_field.field.widget

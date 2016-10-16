@@ -23,15 +23,22 @@ class ModelViewMixin(object):
     def get_success_url(self):
         if self.success_url is None:
             opts = self.model._meta
-            return reverse('{}:{}_list'.format(opts.app_label, opts.model_name))
+            return reverse('{}:{}_list'.format(
+                opts.app_label, opts.model_name)
+            )
         return super(ModelViewMixin, self).get_success_url()
 
     def get_template_names(self):
         if self.template_name is None:
             opts = self.model._meta
             return [
-                '{}/{}{}.html'.format(opts.app_label, opts.model_name, self.template_name_suffix),
-                '{}/{}_form.html'.format(opts.app_label, opts.model_name),
+                '{}/{}{}.html'.format(
+                    opts.app_label,
+                    opts.model_name,
+                    self.template_name_suffix),
+                '{}/{}_form.html'.format(
+                    opts.app_label,
+                    opts.model_name),
                 'material/frontend/views/form.html',
             ]
 
