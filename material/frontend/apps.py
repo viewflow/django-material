@@ -37,9 +37,9 @@ class ModuleMixin(object):
     instance would be available as `current_module` template variable
 
     :keyword order: The relative module order priority. Modules in the
-    site menu would be listed according its priorities.
+                    site menu would be listed according its priorities.
 
-    :keyword icon" The module icon.
+    :keyword icon: The module icon.
 
     Example::
 
