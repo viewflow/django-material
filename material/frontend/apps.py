@@ -15,17 +15,6 @@ from .urlconf import ModuleURLResolver
 class ModuleMixin(object):
     """Extension for the django AppConfig. Makes django app pluggable at runtime.
 
-    - Application level user permission access
-    - Runtime app installation/deinstallation
-    - Autodiscovery for <app_module>/urls.py
-    - Collect common website menu from `<app_label>/menu.html`
-
-    Example::
-
-        class Sales(ModuleMixin, AppConfig):
-            name = 'sales'
-            icon = '<i class="material-icons">call</i>'
-
     The application have to have <app_module>/urls.py file, with
     a single no-parametrized url with name='index', ex::
 
@@ -51,6 +40,13 @@ class ModuleMixin(object):
     site menu would be listed according its priorities.
 
     :keyword icon" The module icon.
+
+    Example::
+
+        class Sales(ModuleMixin, AppConfig):
+            name = 'sales'
+            icon = '<i class="material-icons">call</i>'
+
     """
 
     order = 10
