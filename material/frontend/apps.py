@@ -13,8 +13,7 @@ from .urlconf import ModuleURLResolver
 
 
 class ModuleMixin(object):
-    """
-    Extension for the django AppConfig. Makes django app pluggable at runtime.
+    """Extension for the django AppConfig. Makes django app pluggable at runtime.
 
     - Application level user permission access
     - Runtime app installation/deinstallation
@@ -48,26 +47,42 @@ class ModuleMixin(object):
     In all application templates, the current application config
     instance would be available as `current_module` template variable
 
+    :keyword order: The relative module order priority. Modules in the
+    site menu would be listed according its priorities.
+
+    :keyword icon" The module icon.
     """
+
     order = 10
     icon = '<i class="material-icons">receipt</i>'
 
     @property
     def verbose_name(self):
+        """Module name."""
         return self.label.title()
 
     @property
     def installed(self):
+        """Check the module installation state.
+
+        Default implementation store installed state in the database
+        `frontend_dbmodule` table.
+        """
         from .models import Module as DbModule
         return DbModule.objects.installed(self.label)
 
     def description(self):
+        """Module description.
+
+        By default taken from the module docstring.
+        """
         return (self.__doc__ or "").strip()
 
     def has_perm(self, user):
+        """Check is user have permission to access to the module."""
         return True
 
-    def get_urls(self):
+    def get_urls(self):  # noqa D102
         if module_has_submodule(self.module, 'urls'):
             urls_module_name = '%s.%s' % (self.name, 'urls')
             urls_module = import_module(urls_module_name)
@@ -79,19 +94,43 @@ class ModuleMixin(object):
 
     @property
     def urls(self):
+        """Module url config.
+
+        By default it would be loaded from '<app>/urls.py'
+        """
         base_url = r'^{}/'.format(self.label)
         return ModuleURLResolver(base_url, self.get_urls(), module=self, app_name=self.label, namespace=self.label)
 
     def index_url(self):
+        """Entry url for a module."""
         return reverse('{}:index'.format(self.label))
 
     def menu(self):
+        """Load module menu template.
+
+        Template should be located in `<app_label>/menu.html`
+
+        If no template exists, no exception raised.
+
+        Intendent to use with {% include %} template tag::
+
+            {% include module.menu %}
+        """
         try:
             return get_template('{}/menu.html'.format(self.label))
         except TemplateDoesNotExist:
             return Template('')
 
     def base_template(self):
+        """Base template for a module.
+
+        If  <app_label>/base_module.html exists it would be used.
+        The default is 'material/frontend/base_module.html'
+
+        Intendent to use in modules generic tmeplates. Ex::
+
+            {% extends current_module.base_template %}
+        """
         return select_template([
             '{}/base_module.html'.format(self.label),
             'material/frontend/base_module.html'
@@ -99,11 +138,14 @@ class ModuleMixin(object):
 
 
 class MaterialFrontendConfig(AppConfig):
+    """Default condif for Material Frontend."""
+
     name = 'material.frontend'
     verbose_name = 'Site Modules'
     icon = '<i class="material-icons">view_module</i>'
 
     def ready(self):
+        """Register all available modules."""
         for app_config in apps.get_app_configs():
             if isinstance(app_config, ModuleMixin):
                 modules_registry.register(app_config)
@@ -111,6 +153,7 @@ class MaterialFrontendConfig(AppConfig):
 
 
 def update_modules(app_config, verbosity=2, interactive=True, **kwargs):
+    """Sync installed modules and database records."""
     from .models import Module as DbModule
 
     for module in modules_registry.modules():

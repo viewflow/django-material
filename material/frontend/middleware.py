@@ -8,7 +8,9 @@ except ImportError:
 
 
 class SmoothNavigationMiddleware(object):
-    def process_response(self, request, response):
+    """Keep `?back=` queryst parameter on POST requests."""
+
+    def process_response(self, request, response):  # noqa D102
         if isinstance(response, HttpResponseRedirect):
             back = request.GET.get('back')
             if back:
@@ -28,11 +30,9 @@ class SmoothNavigationMiddleware(object):
 
 
 class UnpjaxMiddleware(object):
-    """
-    Removes the `_pjax` parameter from query string
-    """
+    """Remove the `_pjax` parameter from query string."""
 
-    def process_request(self, request):
+    def process_request(self, request):  # noqa D102
         if "_pjax" in request.META.get("QUERY_STRING", ""):
             qs = QueryDict(request.META.get("QUERY_STRING", ""),
                            encoding=request.encoding, mutable=True)

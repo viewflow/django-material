@@ -172,10 +172,12 @@ def paginator_number(cl, i):
             return format_html('<li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>')
     elif i == 'next':
         if current_page.has_next():
-            return format_html('<li class="disabled"><a href="{}"><i class="material-icons">chevron_right</i></i></a></li>',
-                               cl.get_query_string({PAGE_VAR: current_page.next_page_number()}))
+            return format_html(
+                '<li class="disabled"><a href="{}"><i class="material-icons">chevron_right</i></i></a></li>',
+                cl.get_query_string({PAGE_VAR: current_page.next_page_number()}))
         else:
-            return format_html('<li class="disabled"><a href="#!"><i class="material-icons">chevron_right</i></a></li>')
+            return format_html(
+                '<li class="disabled"><a href="#!"><i class="material-icons">chevron_right</i></a></li>')
     elif i == '.':
         return mark_safe('<li class="disabled"><a href="#" onclick="return false;">...</a></li>')
     elif i == cl.page_num:
@@ -204,7 +206,8 @@ def date_hierarchy(cl):
         month_lookup = cl.params.get(month_field)
         day_lookup = cl.params.get(day_field)
 
-        link = lambda filters: cl.get_query_string(filters, [field_generic])
+        def link(filters):
+            return cl.get_query_string(filters, [field_generic])
 
         if not (year_lookup or month_lookup or day_lookup):
             # select appropriate start level

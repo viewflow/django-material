@@ -10,7 +10,8 @@ register = template.Library()
 @register.filter_function
 def pjax(template_names, request, default="pjax_base.html"):
     """
-    Returns template name for request.
+    Return template name for request.
+
     :param request: Django request or boolean value
     :param template_names: Base theme name or comma-separated names of base and
       pjax templates.
@@ -38,7 +39,10 @@ def pjax(template_names, request, default="pjax_base.html"):
 @register.filter_function
 def unpjax(url):
     """
-    Removes `_pjax` param from query string of a given url::
+    Remove `_pjax` param from query string of a given url.
+
+    Example::
+
         <a href="{{ request.get_full_path|unpjax }}"></a>
     """
     if "?" in url:

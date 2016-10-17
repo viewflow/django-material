@@ -23,14 +23,19 @@ def _get_attr_label(owner, attr_name):
 
 
 class ModelField(object):
-    def __init__(self, field):
+    """Retrive a field value from the model.
+
+    Field verbose name would be use as a label.
+    """
+
+    def __init__(self, field):  # noqa D102
         self.field = field
 
-    def get_value(self, obj):
+    def get_value(self, obj):  # noqa D102
         return getattr(obj, self.field.name)
 
     @property
-    def label(self):
+    def label(self):  # noqa D102
         try:
             return self.field.verbose_name
         except AttributeError:
@@ -39,30 +44,44 @@ class ModelField(object):
 
 
 class ModelAttr(object):
-    def __init__(self, model, name, label=None):
+    """Retrive attribute value from the model instance.
+
+    If model attribute is a callable, to get the value it would be
+    called without any arguments.
+    """
+
+    def __init__(self, model, name, label=None):  # noqa D102
         self.model = model
         self.name = name
         self._label = label
 
-    def get_value(self, obj):
+    def get_value(self, obj):  # noqa D102
         attr = getattr(obj, self.name)
         if callable(attr):
             return attr()
         return attr
 
     @property
-    def label(self):
+    def label(self):  # noqa D102
         if self._label:
             return self._label
         return _get_attr_label(self.model, self.name)
 
 
 class DataSourceAttr(object):
-    def __init__(self, data_source, name):
+    """Retrieve attribute value from extenal data source.
+
+    Data source attribute could be a property or callable.
+
+    For a callable, to get the value it would be called with model
+    instance.
+    """
+
+    def __init__(self, data_source, name):  # noqa D102
         self.data_source = data_source
         self.name = name
 
-    def get_value(self, obj):
+    def get_value(self, obj):  # noqa D102
         attr = getattr(self.data_source, self.name)
         if callable(attr):
             return attr(obj)
@@ -70,11 +89,32 @@ class DataSourceAttr(object):
 
     @property
     def label(self):
+        """Retrive the label for the data source attibute.
+
+        Label could be specifiend in `.short_description` or the
+        attribue name would be used.
+
+        Example::
+
+        class SampleDataSource(object):
+            def description(self, model):
+                return "Sample for {}".format(model)
+            description.short_description = "Model Description"
+
+        """
         return _get_attr_label(self.data_source, self.name)
 
 
 class DataList(object):
+    """Queryset to datatables data adapter."""
+
     def __init__(self, model, queryset, data_sources=None, list_display=None, list_display_links=None):
+        """Instantiate a datalist.
+
+        :keyword data_source: List of classes that used as source to
+        resole `list_display` fields values, in case if model have no
+        such field.
+        """
         self.model = model
         self.queryset = queryset
         self.data_sources = data_sources if data_sources else []
@@ -88,6 +128,11 @@ class DataList(object):
             list_display_links = list(self.list_display)[:1]
 
     def get_data_attr(self, attr_name):
+        """Data getter for an attribute.
+
+        Data could comes from the model field or extrnal `data_source`
+        method call.
+        """
         opts = self.model._meta
         try:
             return ModelField(opts.get_field(attr_name))
@@ -102,27 +147,35 @@ class DataList(object):
         raise AttributeError("Unable to lookup '{}' on {}" .format(attr_name, self.model._meta.object_name))
 
     def total(self):
+        """Total dataset size."""
         return self.queryset.count()
 
     def total_filtered(self):
+        """Dataset size with filter appllied."""
         return self.queryset.count()
 
     def set_filter(self):
         """
-        TODO
+        Add a filter to queryset.
+
+        TODO.
         """
 
     def set_ordering(self):
         """
+        Set result order.
+
         TODO
         """
 
     def get_headers_data(self):
+        """Readable column titles."""
         for field_name in self.list_display:
             attr = self.get_data_attr(field_name)
             yield field_name, attr.label
 
     def get_data(self, start, length):
+        """Get a page for datatable."""
         for item in self.queryset[start:start+length]:
             columns = OrderedDict()
             for n, field_name in enumerate(self.list_display):

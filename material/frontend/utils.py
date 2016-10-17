@@ -4,6 +4,10 @@ from django.db.models.deletion import Collector
 
 
 def get_deleted_objects(root):
+    """Collect linked objects required to be deleted.
+
+    And maps each one to the `detail` page link.
+    """
     using = router.db_for_write(root)
     collector = Collector(using=using)
     collector.collect([root])

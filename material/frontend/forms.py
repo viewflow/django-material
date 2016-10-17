@@ -1,8 +1,9 @@
 from django import forms
-from django.forms import BaseFormSet
 
 
 class DatatableRequestForm(forms.Form):
+    """Sanitize  incoming datatables request."""
+
     draw = forms.IntegerField()
     start = forms.IntegerField()
     length = forms.IntegerField()

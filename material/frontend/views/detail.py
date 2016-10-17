@@ -95,10 +95,8 @@ class DetailModelView(generic.DetailView):
 
         If no `self.template_name` defined, returns::
 
-             [
-                 <app_label>/<model_label>_detail.html
-                 'material/frontend/views/detail.html'
-             ]
+             [<app_label>/<model_label>_detail.html
+              'material/frontend/views/detail.html']
         """
         if self.template_name is None:
             opts = self.model._meta
