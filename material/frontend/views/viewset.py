@@ -58,7 +58,7 @@ class ModelViewSet(BaseViewset):
     :keyword list_display: List of fields for ListView
 
     :keyword list_display_links: List of fields form `list_display`
-                                 linked to chage view
+                                 linked to change view
 
     :keyword create_view_class: CBV for create an object
 

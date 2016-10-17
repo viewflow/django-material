@@ -53,12 +53,10 @@ class DeleteModelView(generic.DeleteView):
         """
         List of templates for the view.
 
-        If no `self.template_name` defined, returns::
+        If no `self.template_name` defined, uses::
 
-             [
-                 <app_label>/<model_label>_delete.html
-                 'material/frontend/views/confirm_delete.html'
-             ]
+             [<app_label>/<model_label>_delete.html,
+              'material/frontend/views/confirm_delete.html']
         """
         if self.template_name is None:
             opts = self.model._meta
