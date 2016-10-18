@@ -49,19 +49,7 @@ Django Material Pro has a commercial-friendly license and distributed as part of
 Changelog
 =========
 
-0.9.0 2016-10-17 - Beta
+0.9.1 2016-10-18 - Beta
 -----------------------
 
-- Forms - Add Formset and Inlines Form fields (PRO)
-- Forms - Add input[type=range] support
-- Forms - Fix initial label position for datetime field with value
-- Forms - Fix initial label position for number field with zero as inital value
-- Forms - Fix CSS vulnerability in input fields.
-- Forms - Fix CSS inclusion default template
-- Frontend - Fix module delete
-- Frontend - Add CRUD views and viewset
-- Frontend - Remove LOGIN_REDIRECT_URL override on frontend autoregister
-- Admin - User `user.get_username` instead of `user.username`
-- Admin - Django 1.9/1.10 compatibility
-- Admin - Readonly field support in inlines
-- Admin - Use `AdminSite.site_url` as back link
+- Fix duplicate error message for admin non field error.

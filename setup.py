@@ -7,7 +7,7 @@ except IOError:
 
 setup(
     name='django-material',
-    version='0.9.0',
+    version='0.9.1',
     description='Material design for django forms and admin',
     license='BSD',
     author='Mikhail Podgurskiy',
