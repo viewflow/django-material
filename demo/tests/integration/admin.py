@@ -129,6 +129,12 @@ class CountryForm(forms.ModelForm):
         model = models.Country
         fields = '__all__'
 
+    def clean(self):
+        code = self.cleaned_data.get('code')
+        if code and len(code) < 2:
+            raise forms.ValidationError('The country code is invalid')
+        return self.cleaned_data
+
 
 @admin.register(models.Country)
 class CountryAdmin(admin.ModelAdmin):
