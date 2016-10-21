@@ -88,9 +88,7 @@
                 {% block breadcrumbs %}
                 <nav class="breadcrumbs">
                     <div class="nav-wrapper">
-                        <a href="/workflow/helloworld/?back=%2Fworkflow%2Fhelloworld%2F">Hello world</a>
-                        <a href="/workflow/helloworld/869/?back=%2Fworkflow%2Fhelloworld%2F">#869</a>
-                        <a class="active" href="/workflow/helloworld/869/check_approve/171558/detail/?back=%2Fworkflow%2Fhelloworld%2F">Check Approve #171558</a>
+                        {% block breadcrumbs_items %}{% endblock %}
                     </div>
                 </nav>
                 {% endblock %}

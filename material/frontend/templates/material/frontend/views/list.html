@@ -2,8 +2,8 @@
 {% load i18n material_frontend %}
 
 {% block breadcrumbs_items %}
-<a href="{% url view.model|frontend_urlname:'list' %}">{{ view.model|verbose_name_plural }}</a> &rang;
-<a class="current">{% trans 'All' %}</a>
+<a href="{% url view.model|frontend_urlname:'list' %}">{{ view.model|verbose_name_plural|title }}</a>
+<a class="active">{% trans 'All' %}</a>
 {% endblock %}
 
 
@@ -40,7 +40,7 @@
 
 {% block content %}
 <div class="row frontend-list">
-    <div class="col s12">
+    <div class="col s12 m12 l9">
         <div class="card">
             <div class="card-content">
                 <table id="table" class="table bordered" data-form-control="datatable">

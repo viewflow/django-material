@@ -2,14 +2,14 @@
 {% load i18n material_form material_frontend %}
 
 {% block breadcrumbs_items %}
-<a href="{% url view.model|frontend_urlname:'list' %}">{{ view.model|verbose_name_plural }}</a> &rang;
-<a href="{% url view.model|frontend_urlname:'detail' object.pk %}">{{ object }}</a> &rang;
-<a class="current">{% trans 'Delete' %}</a>
+<a href="{% url view.model|frontend_urlname:'list' %}">{{ view.model|verbose_name_plural|title }}</a>
+<a href="{% url view.model|frontend_urlname:'detail' object.pk %}">{{ object }}</a>
+<a class="active">{% trans 'Delete' %}</a>
 {% endblock %}
 
 {% block content %}
 <div class="row frontend-form">
-    <div class="col s12 m12 l6">
+    <div class="col s12 m12 l9">
         <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="card">

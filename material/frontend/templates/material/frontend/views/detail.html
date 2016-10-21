@@ -2,13 +2,13 @@
 {% load i18n material_form material_frontend %}
 
 {% block breadcrumbs_items %}
-<a href="{% url view.model|frontend_urlname:'list' %}">{{ view.model|verbose_name_plural }}</a> &rang;
-<a class="current">{{ object }}</a>
+<a href="{% url view.model|frontend_urlname:'list' %}">{{ view.model|verbose_name_plural|title }}</a>
+<a class="active">{{ object }}</a>
 {% endblock %}
 
 {% block content %}
 <div class="row frontend-form">
-    <div class="col s12 m12 l6">
+    <div class="col s12 m12 l9">
         <div class="card">
             <div class="card-content">
                 {% block card %}
