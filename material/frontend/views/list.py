@@ -51,7 +51,9 @@ class ListModelView(ContextMixin, TemplateResponseMixin, View):
     datatable_default_config = {
         'processing': False,
         'serverSide': True,
-        'ajax': '.',
+        'ajax': {
+            'url': '.',
+        },
         'ordering': False,
         'info': False,
         'bFilter': False,
@@ -158,6 +160,7 @@ class ListModelView(ContextMixin, TemplateResponseMixin, View):
         """Prepare datatable config."""
         config = self.datatable_default_config.copy()
         config['iDisplayLength'] = self.paginate_by
+        config['ajax']['url'] = self.request.path
         config['columns'] = [
             {'data': field_name}
             for field_name in self.datalist.list_display
@@ -204,7 +207,7 @@ class ListModelView(ContextMixin, TemplateResponseMixin, View):
         """Return `JSONResponse` with data for datatable."""
         form = forms.DatatableRequestForm(request.GET)
         if not form.is_valid():
-            return {'error': form.errors}
+            return JsonResponse({'error': form.errors})
 
         draw = form.cleaned_data['draw']
         start = form.cleaned_data['start']
@@ -232,8 +235,7 @@ class ListModelView(ContextMixin, TemplateResponseMixin, View):
 
         self.object_list = self.get_queryset()
         self.datalist = self.create_datalist()
-
-        if request.is_ajax() and not request.META.get("PJAX", False):
+        if 'HTTP_DATATABLE' in request.META:
             handler = self.get_json_data
         elif request.method.lower() in self.http_method_names:
             handler = getattr(

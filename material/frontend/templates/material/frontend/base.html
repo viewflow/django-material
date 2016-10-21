@@ -1,11 +1,12 @@
 {% load i18n static %}
 {% get_current_language as LANGUAGE_CODE %}
 <!DOCTYPE html>
-<html lang="{{ LANGUAGE_CODE|default:"en-us" }}" style="background-color:#eee">
+<html lang="{{ LANGUAGE_CODE|default:"en-us" }}">
     <head>
+        {% block head %}
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
         <title>{% block title %}{% endblock %}</title>
         {% block favicon %}<link href="{% static 'material/imgs/favicon.png' %}" rel="shortcut icon">{% endblock %}
         {% block css %}
@@ -13,12 +14,12 @@
         <link href="{% static 'material/css/jquery.datetimepicker.css ' %}" rel="stylesheet">
         <link href="{% static 'material/css/responsive.dataTables.css' %}" rel="stylesheet">
         <link href="{% static 'material/css/fixedHeader.dataTables.css' %}" rel="stylesheet">
-        <link href="{% static 'material/css/forms.css ' %}" rel="stylesheet">
+        <!--link href="{% static 'material/css/forms.css ' %}" rel="stylesheet"-->
         <link href="{% static 'material/frontend/css/frontend.css' %}" rel="stylesheet">
         <link href="{% static 'material/fonts/material-design-icons/material-icons.css' %}" rel="stylesheet">
-        {% endblock %}
-
+        {% endblock css %}
         {% block js %}
+        <script src="{% static 'material/js/turbolinks.js' %}"></script>
         <script src="{% static 'material/js/jquery-2.2.0.js' %}"></script>
         <script src="{% static 'material/js/materialize.js' %}"></script>
         <script src="{% static 'material/js/jquery.datetimepicker.js' %}"></script>
@@ -26,101 +27,81 @@
         <script src="{% static 'material/js/jquery.dataTables.js' %}"></script>
         <script src="{% static 'material/js/dataTables.responsive.js' %}"></script>
         <script src="{% static 'material/js/dataTables.fixedHeader.js' %}"></script>
-        <script src="{% static 'material/frontend/js/jquery.activeNavigation.js' %}"></script>
-        <script src="{% static 'material/frontend/js/jquery.pjax.js' %}"></script>
-        <script src="{% static 'material/js/material_init.js' %}"></script>
+        <!--script src="{% static 'material/js/material_init.js' %}"></script-->
         <script src="{% static 'material/frontend/js/frontend.js' %}"></script>
-        {% endblock %}
-
+        {% endblock js %}
         {% block extrahead %}{% endblock %}
+        {% endblock head %}
     </head>
     <body>
-        {% if user.is_authenticated %}{% block user_menu %}{% include 'material/frontend/includes/user_menu.html' %}{% endblock %}{% endif %}
         <header>
-            <nav class="nav-top">
-                <a href="#" data-activates="nav-mobile" class="button-collapse full"><i class="material-icons">menu</i></a>
-
-                <div class="nav-wrapper">
-                    <div class="page-title hide-on-med-and-down">
-                        {% block page_title %}<a href="/">{% trans "Viewflow" %}</a>{% endblock %}
+            {% block header %}
+            <ul id="slide-out" class="side-nav fixed">
+                {% block sidenav_header %}
+                <li>
+                    <div class="userView">
+                        <img class="background" src="{% static 'material/imgs/sidenav.png' %}">
+                        <a href="#!user"><img class="circle" src="{% static 'material/imgs/user.png' %}"></a>
+                        <a href="#!name"><span class="white-text name">{{ request.user.get_username|title }}</span></a>
+                        <a href="#!email"><span class="white-text email">{{ request.user.email }}</span></a>
                     </div>
-                    
-                    <ul class="right">
-                        {% block top_menu_extra %}{% endblock %}
-                        {% block user_menu_dropdown %}
-                        {% if user.is_authenticated %}
-                        <li><a class="dropdown-button constrain_width" href="#!" data-activates="user-menu">{{ user.get_full_name|default:user.get_username }}<i class="material-icons right">arrow_drop_down</i></a></li>
-                        {% else %}
-                        <li><a href="{% url 'login' %}" alt="Login"><i class="material-icons">lock</i></a></li>
-                        {% endif %}
-                        {% endblock %}
-                    </ul>
-                </div>
-
-                <ul id="nav-mobile" class="side-nav fixed module-menu">
-                    <li class="logo valign-wrapper">
-                        <a href="/" class="no-navigation">{% block page_logo %}<img class="responsive-img" src="{% static 'material/imgs/logo.png' %}">{% endblock %}</a>
-                    </li>
-
-                    {% for module in modules %}
+                </li>
+                {% endblock %}
+                {% block sidenav_items %}
+                {% for module in modules %}
                     {% if current_module == module %}
-                    <li class="no-padding">
-                        <div class="collapsible-body" style="display:block">
-                            <ul class="collapsible" data-collapsible="expandable">
-                                <li class="header active">
-                                    <a class="collapsible-header no-pjax" href="{{ module.index_url }}">{{ module.icon|safe|default:" " }}{{ module.verbose_name|default:"" }}</a>
-                                    <div class="collapsible-body" style="display: block;">
-                                        {% include module.menu %}
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
+                    <li class="active">
+                        <ul class="collapsible collapsible-accordion">
+                            <li>
+                                <a class="collapsible-header active">{{ module.verbose_name }}{{ module.icon|safe }}</a>
+                                <div class="collapsible-body" style="display:block">
+                                    {% include module.menu %}
+                                </div>
+                            </li>
+                        </ul>
                     </li>
                     {% else %}
-                    <li class="no-padding">
-                        <a class="collapsible-header no-pjax" href="{{ module.index_url }}">{{ module.icon|safe|default:" " }} {{ module.verbose_name|default:"" }}</a>
+                    <li>
+                        <a href="{{ module.index_url }}">{{ module.verbose_name }}{{ module.icon|safe }}</a>
                     </li>
                     {% endif %}
-                    {% endfor %}
-                </ul>
-            </nav>
+                {% endfor %}
+                {% endblock sidenav_items %}
+            </ul>
+            {% endblock %}
         </header>
         <main>
             {% block main %}
-            {% block breadcrumbs %}
-            <div class="breadcrumbs">
-                <div>
-                    {% block breadcrumbs_items %}
-                    {% endblock %}
+                {% block topbar %}
+                <nav class="topbar">
+                    <div class="nav-wrapper">
+                        <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
+                        <div class="brand-logo">
+                            {% block page_title %}{% endblock %}
+                        </div>
+                        <ul id="nav-mobile" class="right hide-on-med-and-down">
+                            {% block topbar_links %}{% endblock %}
+                        </ul>
+                    </div>
+                </nav>
+                {% endblock topbar %}
+                {% block breadcrumbs %}
+                <nav class="breadcrumbs">
+                    <div class="nav-wrapper">
+                        <a href="/workflow/helloworld/?back=%2Fworkflow%2Fhelloworld%2F">Hello world</a>
+                        <a href="/workflow/helloworld/869/?back=%2Fworkflow%2Fhelloworld%2F">#869</a>
+                        <a class="active" href="/workflow/helloworld/869/check_approve/171558/detail/?back=%2Fworkflow%2Fhelloworld%2F">Check Approve #171558</a>
+                    </div>
+                </nav>
+                {% endblock %}
+                <div class="content">
+                    {% block content %}{% endblock %}
                 </div>
-            </div>
-            {% endblock %}
-            {% block content %}
-            <div class="row">
-            </div>
-            {% endblock %}
-            {% endblock %}
-
-            {% block messages %}
-            {% if messages %}
-            <script type="text/javascript">
-                $(document).ready(function() {
-                    {% for message in messages %}
-                        Materialize.toast('{{ message|capfirst }}', 10000, 'alert-{{ message.tags }}') 
-                    {% endfor %}
-                });
-            </script>
-            {% endif %}
-            {% endblock %}
+            {% endblock main %}
         </main>
-        {% block load_indicator %}
-        <div id="load_indicator" class="preloader-wrapper big active" style="position:absolute;left:45%;top:45%;display:none">
-            <div class="spinner-layer spinner-blue-only">
-                <div class="circle-clipper left"><div class="circle"></div></div>
-                <div class="gap-patch"><div class="circle"></div></div>
-                <div class="circle-clipper right"><div class="circle"></div></div>
-            </div>
-        </div>
-        {% endblock %}
+        <footer>
+            {% block footer %}
+            {% endblock footer %}
+        </footer>
     </body>
-</html> 
+</html>

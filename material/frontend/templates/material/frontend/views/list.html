@@ -7,6 +7,37 @@
 {% endblock %}
 
 
+{% block footer %}
+<script type="text/javascript">
+  config = {{ datatable_config|safe }};
+  config['ajax']['beforeSend'] = function(request) {
+    request.setRequestHeader("datatable", true);
+  };
+  config['columnDefs'] = [
+    {
+      "targets": {{ view.datalist.list_display_links|safe }},
+      "render": function ( data, type, full, meta ) {
+        if(full.view_url) {
+          return "<a href='"+ full.view_url + "'>" + data+ "</a>";
+        } else {
+          return data;
+        }
+      },
+    }
+  ];
+  
+  $(document).one("turbolinks:load", function() {
+    if ( ! $.fn.DataTable.isDataTable( '#table' ) ) {
+      var datatable = $('#table').DataTable(config);
+      new $.fn.dataTable.FixedHeader(datatable);
+      $(document).one("turbolinks:before-cache", function() {
+        datatable.destroy();
+      });
+    }
+  });
+</script>
+{% endblock %}
+
 {% block content %}
 <div class="row frontend-list">
     <div class="col s12">
@@ -48,32 +79,5 @@
         </a>
     </div>
     {% endblock %}
-
-    <script type="text/javascript">
-      {% block datatable %}
-      var config = {{ datatable_config|safe }};
-      config['columnDefs'] = [
-        {
-          "targets": {{ view.datalist.list_display_links|safe }},
-          "render": function ( data, type, full, meta ) {
-            if(full.view_url) {
-              return "<a href='"+ full.view_url + "'>" + data+ "</a>";
-            } else {
-              return data;
-            }
-          },
-        }
-      ];
-
-      $('.dataTables_paginate').remove();
-      var datatable = $('#table').DataTable(config);
-      new $.fn.dataTable.FixedHeader(datatable);
-
-      $(document).one('pjax:beforeReplace', function() {
-        datatable.destroy();
-      });
-
-      {% endblock %}
-    </script>
 </div>
 {% endblock %}

@@ -69,6 +69,12 @@ gulp.task('datatables.responsive.js', () => {
 });
 
 
+gulp.task('turbolinks.js', () => {
+  return gulp.src('./node_modules/turbolinks/dist/turbolinks.js')
+    .pipe(gulp.dest('./material/static/material/js/'));
+});
+
+
 gulp.task('frontend.css', () => {
   return gulp.src('./material/frontend/static/material/frontend/sass/*.scss')
     .pipe(sass({
@@ -113,6 +119,7 @@ gulp.task("default", [
   "datatables.js",
   "datatables.fixedHeader.js",
   "datatables.responsive.js",
+  "turbolinks.js",
   "frontend.css",
   "admin.css",
 ]);
