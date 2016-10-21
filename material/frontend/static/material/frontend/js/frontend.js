@@ -1,5 +1,6 @@
 $(document).on("turbolinks:load", function() {
   $(".button-collapse").sideNav();
+  $(document).activeNavigation("#slide-out");
 });
 
 $(document).on("turbolinks:before-cache", function() {

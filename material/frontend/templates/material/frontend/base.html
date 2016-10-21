@@ -10,15 +10,21 @@
         <title>{% block title %}{% endblock %}</title>
         {% block favicon %}<link href="{% static 'material/imgs/favicon.png' %}" rel="shortcut icon">{% endblock %}
         {% block css %}
+        <!-- 3d party deps -->
         <link href="{% static 'material/css/materialize.css' %}" rel="stylesheet">
         <link href="{% static 'material/css/jquery.datetimepicker.css ' %}" rel="stylesheet">
         <link href="{% static 'material/css/responsive.dataTables.css' %}" rel="stylesheet">
         <link href="{% static 'material/css/fixedHeader.dataTables.css' %}" rel="stylesheet">
-        <!--link href="{% static 'material/css/forms.css ' %}" rel="stylesheet"-->
-        <link href="{% static 'material/frontend/css/frontend.css' %}" rel="stylesheet">
         <link href="{% static 'material/fonts/material-design-icons/material-icons.css' %}" rel="stylesheet">
+
+        <!-- material forms -->
+        <!--link href="{% static 'material/css/forms.css ' %}" rel="stylesheet"-->
+
+        <!-- material fronend -->
+        <link href="{% static 'material/frontend/css/frontend.css' %}" rel="stylesheet">
         {% endblock css %}
         {% block js %}
+        <!-- 3d party deps -->
         <script src="{% static 'material/js/turbolinks.js' %}"></script>
         <script src="{% static 'material/js/jquery-2.2.0.js' %}"></script>
         <script src="{% static 'material/js/materialize.js' %}"></script>
@@ -27,7 +33,12 @@
         <script src="{% static 'material/js/jquery.dataTables.js' %}"></script>
         <script src="{% static 'material/js/dataTables.responsive.js' %}"></script>
         <script src="{% static 'material/js/dataTables.fixedHeader.js' %}"></script>
+
+        <!-- material forms -->
         <!--script src="{% static 'material/js/material_init.js' %}"></script-->
+
+        <!-- material fronend -->
+        <script src="{% static 'material/frontend/js/jquery.activeNavigation.js' %}"></script>
         <script src="{% static 'material/frontend/js/frontend.js' %}"></script>
         {% endblock js %}
         {% block extrahead %}{% endblock %}
