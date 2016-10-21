@@ -3,7 +3,7 @@ $(document).on("turbolinks:load", function() {
 });
 
 $(document).on("turbolinks:before-cache", function() {
-  $('.sidenav-overlay').remove();
+  $('#sidenav-overlay').remove();
   $('.drag-target').remove();
 });
 

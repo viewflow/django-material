@@ -1,3 +1,5 @@
+@import "material/sass/variables";
+
 /* MAIN */
 body {
     background: #efefef;
@@ -63,7 +65,7 @@ nav.breadcrumbs {
         font-size: 1rem;
         color: rgba(255,255,255,0.7)
     }
-    
+
     a.active {
         color: white;
     }
@@ -85,5 +87,67 @@ nav.breadcrumbs {
 @media only screen and (max-width : 992px) {
     nav.breadcrumbs {
         text-align: center;
+    }
+}
+
+@media only screen and (max-width : 600px) {
+    nav.breadcrumbs {
+        white-space: nowrap;
+
+        .nav-wrapper {
+            width: 100%;
+            overflow-x: hidden;
+            padding: 0 20px 0 10px;
+            text-overflow: ellipsis;
+        }
+    }
+}
+
+/* DATATABLE */
+table[data-form-control="datatable"] {
+    ~.dataTables_paginate {
+        text-align: right;
+    
+        .paginate_button {
+            display: inline-block;
+            font-size: 1.2rem;
+            padding: 0 10px;
+            margin: 15px 2px;
+            line-height: 30px;
+            border-radius: 2px;
+            text-align: center;
+            color: #444;
+            cursor: pointer;
+    
+            &.current {
+                background-color: $primary-color;
+                color: white;
+            }
+        
+            &.disabled  {
+                cursor: default;
+                color: #999;
+            }
+        }
+    }
+}
+
+
+/* ALERTS */
+.toast a {
+    padding-left: 5px;
+    padding-right: 5px;
+    color: wheat;
+
+    &.alert-info {
+        background-color: #0277bd;
+    }
+
+    &.alert-warning {
+        background-color: #ff8f00;
+    }
+
+    &.alert-error {
+        background-color: #bf360c;
     }
 }
