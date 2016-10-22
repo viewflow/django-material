@@ -4,6 +4,9 @@
 body {
   background: #efefef; }
 
+th {
+  font-weight: 300; }
+
 /* LAYOUT */
 @media only screen and (min-width: 993px) {
   html {
@@ -14,15 +17,17 @@ body {
     padding-left: 40px; } }
 
 /* SIDEBAR */
-.side-nav.fixed .collapsible-body li a {
-  padding-left: 70px; }
-
-.side-nav.fixed .collapsible-body li.active .collapsible-body li.active {
-  background-color: rgba(0, 0, 0, 0.05); }
-
-.side-nav.fixed .collapsible-body li.active .collapsible-body li a {
-  color: rgba(0, 0, 0, 0.87);
-  padding-left: 90px; }
+.side-nav.fixed {
+  overflow-y: hidden; }
+  .side-nav.fixed > li.last {
+    padding-bottom: 58px; }
+  .side-nav.fixed .collapsible-body li a {
+    padding-left: 70px; }
+  .side-nav.fixed .collapsible-body li.active .collapsible-body li.active {
+    background-color: rgba(0, 0, 0, 0.05); }
+  .side-nav.fixed .collapsible-body li.active .collapsible-body li a {
+    color: rgba(0, 0, 0, 0.87);
+    padding-left: 90px; }
 
 /* TOPBAR */
 nav.topbar {
@@ -102,3 +107,24 @@ table[data-form-control="datatable"] ~ .dataTables_paginate {
     background-color: #ff8f00; }
   .toast a.alert-error {
     background-color: #bf360c; }
+
+/* FORM CARD */
+.frontend-form .form-title {
+  font-size: 1.5rem;
+  font-weight: 200;
+  margin-bottom: 10px;
+  margin-top: 0px; }
+
+.frontend-form .card-content .row {
+  margin-left: -0.75rem;
+  margin-right: -0.75rem; }
+
+.frontend-form .section {
+  padding-top: 0;
+  padding-bottom: 0; }
+
+.frontend-form h5 {
+  font-size: 1.2rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid black;
+  margin-bottom: 10px; }

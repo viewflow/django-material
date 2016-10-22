@@ -16,9 +16,8 @@
     "gulp-postcss": "^6.1.1",
     "gulp-sass": "^2.3.2",
     "material-design-icons": "^2.2.3",
-    "materialize-css": "Dogfalo/materialize"
-  },
-  "dependencies": {
+    "materialize-css": "Dogfalo/materialize",
+    "perfect-scrollbar": "^0.6.13",
     "turbolinks": "^5.0.0"
   }
 }

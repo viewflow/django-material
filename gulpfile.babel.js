@@ -74,6 +74,17 @@ gulp.task('turbolinks.js', () => {
     .pipe(gulp.dest('./material/static/material/js/'));
 });
 
+gulp.task('perfect-scrollbar.js', () => {
+  return gulp.src('./node_modules/perfect-scrollbar/dist/js/perfect-scrollbar.jquery.js')
+    .pipe(gulp.dest('./material/static/material/js/'));
+});
+
+
+gulp.task('perfect-scrollbar.css', () => {
+  return gulp.src('./node_modules/perfect-scrollbar/dist/css/perfect-scrollbar.css')
+    .pipe(gulp.dest('./material/static/material/css/'));
+});
+
 
 gulp.task('frontend.css', () => {
   return gulp.src('./material/frontend/static/material/frontend/sass/*.scss')
@@ -120,6 +131,8 @@ gulp.task("default", [
   "datatables.fixedHeader.js",
   "datatables.responsive.js",
   "turbolinks.js",
+  "perfect-scrollbar.js",
+  "perfect-scrollbar.css",
   "frontend.css",
   "admin.css",
 ]);

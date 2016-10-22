@@ -15,7 +15,9 @@
         <link href="{% static 'material/css/jquery.datetimepicker.css ' %}" rel="stylesheet">
         <link href="{% static 'material/css/responsive.dataTables.css' %}" rel="stylesheet">
         <link href="{% static 'material/css/fixedHeader.dataTables.css' %}" rel="stylesheet">
-        <link href="{% static 'material/fonts/material-design-icons/material-icons.css' %}" rel="stylesheet">
+        <!--link href="{% static 'material/css//perfect-scrollbar.css' %}" rel="stylesheet" /-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/0.6.12/css/perfect-scrollbar.min.css" type="text/css" />
+        <link href="{% static 'material/fonts/material-design-icons/material-icons.css' %}"  rel="stylesheet">
 
         <!-- material forms -->
         <!--link href="{% static 'material/css/forms.css ' %}" rel="stylesheet"-->
@@ -33,6 +35,9 @@
         <script src="{% static 'material/js/jquery.dataTables.js' %}"></script>
         <script src="{% static 'material/js/dataTables.responsive.js' %}"></script>
         <script src="{% static 'material/js/dataTables.fixedHeader.js' %}"></script>
+        <!--script src="{% static 'material/js/perfect-scrollbar.jquery.js' %}"></script-->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/0.6.12/js/perfect-scrollbar.jquery.min.js"></script>
+
 
         <!-- material forms -->
         <!--script src="{% static 'material/js/material_init.js' %}"></script-->
@@ -72,7 +77,7 @@
                         </ul>
                     </li>
                     {% else %}
-                    <li>
+                    <li {% if forloop.last %}class="last"{% endif %}>
                         <a href="{{ module.index_url }}" data-turbolinks="false">{{ module.verbose_name }}{{ module.icon|safe }}</a>
                     </li>
                     {% endif %}
