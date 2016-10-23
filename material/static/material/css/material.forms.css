@@ -1,0 +1,165 @@
+/* form  .row { */
+/*     margin-bottom: 0px; */
+/* } */
+/* input[type=number] { */
+/*     -moz-appearance: textfield; */
+/* } */
+/* ::-webkit-inner-spin-button { */
+/*     -webkit-appearance: none; */
+/* } */
+/* ::-webkit-outer-spin-button { */
+/*     -webkit-appearance: none; */
+/* } */
+/* .card.form-card .section.row .layout-row.row>.col { */
+/*     padding: 0; */
+/* } */
+/* .card.form-card .section h5 { */
+/*     font-size: 1.2rem; */
+/*     padding-bottom: 0.2rem; */
+/*     border-bottom: 3px solid black; */
+/*     margin: 0 0.75rem; */
+/* } */
+/* .card.data-card .card-content { */
+/*     padding-left: 0px; */
+/*     padding-right: 0px; */
+/* } */
+/* .input-field label { */
+/*   white-space: nowrap; */
+/*   text-overflow: ellipsis; */
+/*   width: calc(100% - 21px); */
+/*   overflow: hidden; */
+/* } */
+/* .input-field .prefix { */
+/*     line-height: 45px; */
+/* } */
+/* .input-field .prefix ~ label { */
+/*   width: calc(100% - 21px - 3rem); */
+/* } */
+/* textarea.materialize-textarea { */
+/*     padding-top: 0.6rem; */
+/* } */
+/* .checkbox-field { */
+/*     line-height: 35px; */
+/* } */
+/* .checkbox-field .prefix { */
+/*     position: relative; */
+/*     top: 5px; */
+/*     width: 2.5rem; */
+/*     font-size: 2rem; */
+/* }   */
+/* .checkbox-field label { */
+/*     font-size: 14px; */
+/*     color: rgba(0,0,0,.84); */
+/* } */
+/* .checkbox-field .help-block { */
+/*     padding-top: 5px; */
+/*     padding-left: 35px; */
+/*     font-size: 12px; */
+/*     line-height: 16px; */
+/*     display: block; */
+/* } */
+/* .readonly-password-field { */
+/*     margin-top: 10px; */
+/*     margin-bottom: 10px; */
+/*     color: rgba(0, 0, 0, 0.3); */
+/* } */
+/* .readonly-password-field div { */
+/*     margin-top: 10px;     */
+/*     margin-bottom: 15px;     */
+/*     padding-bottom: 10px; */
+/*     border-bottom: 1px solid rgba(0, 0, 0, 0.3);  */
+/* } */
+/* select.material-ignore { */
+/*     display: block; */
+/*     background: #fff; */
+/* } */
+/* .select-wrapper { */
+/*     margin-top: 0px; */
+/* } */
+/* .select-wrapper input.select-dropdown { */
+/*     margin-top: -7px; */
+/* } */
+/* .file-field .btn, .file-field .btn-large { */
+/*     left: auto; */
+/* } */
+/* .file-field-clear { */
+/*     float:right; */
+/* } */
+/* .file-field-clear label { */
+/*     margin-right:25px; */
+/*     width: auto; */
+/* } */
+/* .help-block { */
+/*     line-height: 12px; */
+/*     position: relative; */
+/*     top: -10px; */
+/*     color: rgba(0, 0, 0, 0.6); */
+/* } */
+/* .error { */
+/*     line-height: 12px; */
+/*     position: relative; */
+/*     top: -10px; */
+/*     color: #F44336; */
+/* } */
+/* .input-field .prefix ~ .errors .error { */
+/*     margin-left: 3rem; */
+/* } */
+/* .input-field.has-error .prefix { */
+/*     color: #F44336; */
+/* } */
+/* .select-field.has-error input { */
+/*     border-bottom: 1px solid #F44336; */
+/*     -webkit-box-shadow: 0 1px 0 0 #F44336; */
+/*     -moz-box-shadow: 0 1px 0 0 #F44336; */
+/*     box-shadow: 0 1px 0 0 #F44336; */
+/* } */
+/* .select-field .prefix { */
+/*     position: absolute; */
+/*     width: 3rem; */
+/*     font-size: 2rem; */
+/*     margin-top: 25px; */
+/*     transition: color .2s; */
+/* } */
+/* .select-field .prefix ~ label { */
+/*     margin-left: 3rem; */
+/* } */
+/* .radio-field label.item-label { */
+/*     font-size: 14px; */
+/*     color: rgba(0,0,0,.84); */
+/* } */
+/* .radio-field .prefix ~ label { */
+/*   width: calc(100% - 21px - 3rem); */
+/* } */
+/* .radio-field .prefix { */
+/*     position: relative; */
+/*     top: 5px; */
+/*     width: 2.5rem; */
+/*     font-size: 2rem; */
+/* }   */
+/* .radio-field .error, */
+/* .radio-field .help-block { */
+/*     top: 0px; */
+/*     left: 5px; */
+/* } */
+/* .radio-field .inline { */
+/*     margin-top: 10px; */
+/* } */
+/* .radio-field .inline .radio { */
+/*     display: inline; */
+/*     margin-right: 20px; */
+/* } */
+/* .radio-field .radio { */
+/*     padding-top: 10px; */
+/* } */
+/* .checkbox-field .checkbox { */
+/*     padding-top: 10px; */
+/* } */
+/* .formset-field td { */
+/*     vertical-align: top; */
+/* } */
+/* @media only screen and (max-width : 600px) { */
+/*     .container.expand-on-small-only { */
+/*         width: 100% !important; */
+/*         padding: 0 0.8rem  !important; */
+/*     } */
+/* } */

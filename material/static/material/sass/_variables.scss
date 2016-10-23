@@ -1,5 +1,5 @@
 /* materialize.css variables */ 
-$primary-color: #4caf50 !default;                    // green
+$primary-color: #4caf50;                             // green
 $primary-color-light: lighten($primary-color, 15%);
 $primary-color-dark: darken($primary-color, 15%);
 
@@ -16,3 +16,6 @@ $nav-default-text-color: #424242;                    // grey darken-3
 $nav-1st-level-color: #388E3C;                       // green darken-2
 $nav-1st-level-text-color: #ffffff;                  // white
 $nav-2d-level-color: #4CAF50;                        // green
+
+/* fixes */
+$input-margin: 0 0 15px 0; //  0 0 20px 0 !default   // label data-error/data-success placeholders not used
