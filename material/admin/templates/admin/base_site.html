@@ -1,7 +1,8 @@
 {% extends "admin/base.html" %}
+{% load material_tags %}
 
-{% block title %}{{ title }} | {{ site_title|default:_('Django site admin') }}{% endblock %}
+{% block title %}{{ title }} | {{ 'ADMIN_NAME'|material_conf }}{% endblock %}
 
-{% block branding %}<i class="material-icons" style="font-size:80px">settings_applications</i>{% endblock %}
+{% block branding %}{{ 'ADMIN_HEADER'|material_conf }}{% endblock %}
 
 {% block nav-global %}{% endblock %}
