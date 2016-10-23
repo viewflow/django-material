@@ -1,39 +1,54 @@
-import autoprefixer from 'autoprefixer';
-import gulp from 'gulp';
-import postcss from 'gulp-postcss';
-import sass from 'gulp-sass';
+import autoprefixer from 'autoprefixer'
+import gulp from 'gulp'
+import postcss from 'gulp-postcss'
+import sass from 'gulp-sass'
+import merge from 'merge-stream'
 
-
-var supported_browsers = [
+var supportedBrowsers = [
   'Chrome >= 50',
   'Firefox >= 46',
   'Explorer >= 11',
   'Safari >= 9',
   'ChromeAndroid >= 50',
-  'FirefoxAndroid >= 46',
-];
+  'FirefoxAndroid >= 46'
+]
 
+gulp.task('3rdparty.fonts', () => {
+  return merge(
+    gulp.src('./node_modules/material-design-icons/iconfont/*')
+      .pipe(gulp.dest('./material/static/material/fonts/material-design-icons/')),
+    gulp.src('./node_modules/materialize-css/fonts/roboto/*')
+      .pipe(gulp.dest('./material/static/material/fonts/roboto/'))
+  )
+})
 
-gulp.task('material-icons.font', () => {
-  return gulp.src('./node_modules/material-design-icons/iconfont/*')
-    .pipe(gulp.dest('./material/static/material/fonts/material-design-icons/'));
-});
+gulp.task('3rdparty.js', () => {
+  var deps = [
+    'node_modules/datatables.net-fixedheader/js/dataTables.fixedHeader.js',
+    'node_modules/datatables.net-responsive/js/dataTables.responsive.js',
+    'node_modules/datatables/media/js/jquery.dataTables.js',
+    'node_modules/jquery-datetimepicker/build/jquery.datetimepicker.full.js',
+    'node_modules/materialize-css/dist/js/materialize.js',
+    'node_modules/perfect-scrollbar/dist/js/perfect-scrollbar.jquery.js',
+    'node_modules/turbolinks/dist/turbolinks.js'
+  ]
 
+  return gulp.src(deps)
+    .pipe(gulp.dest('./material/static/material/js/'))
+})
 
-gulp.task('roboto.font', () => {
-  return gulp.src('./node_modules/materialize-css/fonts/roboto/*')
-    .pipe(gulp.dest('./material/static/material/fonts/roboto/'));
-});
+gulp.task('3rdparty.css', () => {
+  var deps = [
+    './node_modules/datatables.net-fixedheader-dt/css/fixedHeader.dataTables.css',
+    './node_modules/datatables.net-responsive-dt/css/responsive.dataTables.css',
+    './node_modules/jquery-datetimepicker/jquery.datetimepicker.css',
+    './node_modules/perfect-scrollbar/dist/css/perfect-scrollbar.css'
+  ]
+  return gulp.src(deps)
+    .pipe(gulp.dest('./material/static/material/css/'))
+})
 
-
-
-gulp.task('materialize.js', () => {
-  return gulp.src('./node_modules/materialize-css/dist/js/materialize.js')
-    .pipe(gulp.dest('./material/static/material/js/'));
-});
-
-
-gulp.task('materialize.css', () => {
+gulp.task('materialize.scss', () => {
   return gulp.src('./material/static/material/sass/*.scss')
     .pipe(sass({
       includePaths: './node_modules/'
@@ -42,52 +57,16 @@ gulp.task('materialize.css', () => {
     ))
     .pipe(postcss([
       autoprefixer({
-        browsers: supported_browsers
+        browsers: supportedBrowsers
       })
     ]))
     .pipe(gulp.dest(
       './material/static/material/css/'
-    ));
-});
+    ))
+})
 
-
-gulp.task('datatables.js', () => {
-  return gulp.src('./node_modules/datatables/media/js/jquery.dataTables.js')
-    .pipe(gulp.dest('./material/static/material/js/'));
-});
-
-
-gulp.task('datatables.fixedHeader.js', () => {
-  return gulp.src('./node_modules/datatables.net-fixedheader/js/dataTables.fixedHeader.js')
-    .pipe(gulp.dest('./material/static/material/js/'));
-});
-
-
-gulp.task('datatables.responsive.js', () => {
-  return gulp.src('./node_modules/datatables.net-responsive/js/dataTables.responsive.js')
-    .pipe(gulp.dest('./material/static/material/js/'));
-});
-
-
-gulp.task('turbolinks.js', () => {
-  return gulp.src('./node_modules/turbolinks/dist/turbolinks.js')
-    .pipe(gulp.dest('./material/static/material/js/'));
-});
-
-gulp.task('perfect-scrollbar.js', () => {
-  return gulp.src('./node_modules/perfect-scrollbar/dist/js/perfect-scrollbar.jquery.js')
-    .pipe(gulp.dest('./material/static/material/js/'));
-});
-
-
-gulp.task('perfect-scrollbar.css', () => {
-  return gulp.src('./node_modules/perfect-scrollbar/dist/css/perfect-scrollbar.css')
-    .pipe(gulp.dest('./material/static/material/css/'));
-});
-
-
-gulp.task('frontend.css', () => {
-  return gulp.src('./material/frontend/static/material/frontend/sass/*.scss')
+gulp.task('materialize.django.scss', () => {
+  return gulp.src('./material/static/material/sass/*.scss')
     .pipe(sass({
       includePaths: ['./node_modules/', './material/static/']
     }).on(
@@ -95,44 +74,18 @@ gulp.task('frontend.css', () => {
     ))
     .pipe(postcss([
       autoprefixer({
-        browsers: supported_browsers
+        browsers: supportedBrowsers
       })
     ]))
     .pipe(gulp.dest(
-      './material/frontend/static/material/frontend/css/'
-    ));
-});
-
-
-gulp.task('admin.css', () => {
-  return gulp.src('./material/admin/static/material/admin/sass/*.scss')
-    .pipe(sass({
-      includePaths: ['./node_modules/', './material/static/']
-    }).on(
-      'error', sass.logError
+      './material/static/material/css/'
     ))
-    .pipe(postcss([
-      autoprefixer({
-        browsers: supported_browsers
-      })
-    ]))
-    .pipe(gulp.dest(
-      './material/admin/static/material/admin/css/'
-    ));
-});
+})
 
-
-gulp.task("default", [
-  "materialize.js",
-  "materialize.css",
-  "roboto.font",
-  "material-icons.font",
-  "datatables.js",
-  "datatables.fixedHeader.js",
-  "datatables.responsive.js",
-  "turbolinks.js",
-  "perfect-scrollbar.js",
-  "perfect-scrollbar.css",
-  "frontend.css",
-  "admin.css",
-]);
+gulp.task('default', [
+  '3rdparty.fonts',
+  '3rdparty.js',
+  '3rdparty.css',
+  'materialize.scss',
+  'materialize.django.scss'
+])

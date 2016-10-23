@@ -9,11 +9,11 @@ $(document).on("turbolinks:load", function() {
 
   // Dropdowns
   // http://materializecss.com/dropdown.html
-  $container
+  $(document)
     .find('.dropdown-button.constrain_width')
     .dropdown({hover: false, constrain_width: true});
 
-  $container
+  $(document)
     .find('.dropdown-button')
     .not('.constrain_width')
     .dropdown({hover: false, constrain_width: false});

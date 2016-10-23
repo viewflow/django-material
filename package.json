@@ -10,13 +10,17 @@
     "babel-preset-node5": "^11.1.0",
     "datatables": "^1.10.12",
     "datatables.net-fixedheader": "github:kmmbvnr/Dist-DataTables-FixedHeader",
+    "datatables.net-fixedheader-dt": "^3.1.2",
     "datatables.net-responsive": "^2.1.0",
+    "datatables.net-responsive-dt": "^2.1.0",
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
     "gulp-postcss": "^6.1.1",
     "gulp-sass": "^2.3.2",
+    "jquery-datetimepicker": "^2.5.4",
     "material-design-icons": "^2.2.3",
     "materialize-css": "Dogfalo/materialize",
+    "merge-stream": "^1.0.0",
     "perfect-scrollbar": "^0.6.13",
     "turbolinks": "^5.0.0"
   }
