@@ -1,11 +1,13 @@
-{% load admin_static material_admin i18n %}<!DOCTYPE html>
+{% load admin_static material_admin i18n %}
+{% load material_tags %}
+<!DOCTYPE html>
 {% get_current_language as LANGUAGE_CODE %}
 <html lang="{{ LANGUAGE_CODE|default:"en-us" }}">
     <head>
         <title>{% block title %}{% endblock %}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-        {% block favicon %}<link href="{% static 'material/imgs/favicon.png' %}" rel="shortcut icon">{% endblock %}
-      
+        {% block favicon %}<link href="{{ 'FAVICON'|material_conf  }}" rel="shortcut icon">{% endblock %}
+
         {% include 'admin/includes/material_css.html' %}
         {% block extrastyle %}{% endblock %}
 
@@ -110,7 +112,7 @@
         <script type="text/javascript">
             $(document).ready(function() {
                 {% for message in messages %}
-                Materialize.toast('{{ message|capfirst }}', 10000, 'alert-{{ message.tags }}') 
+                Materialize.toast('{{ message|capfirst }}', 10000, 'alert-{{ message.tags }}')
                 {% endfor %}
             });
         </script>
