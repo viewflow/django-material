@@ -2,6 +2,9 @@
 /* django-material variables */
 /* fixes */
 /* MAIN */
+html, body, main {
+  height: 100%; }
+
 body {
   background: #efefef; }
 

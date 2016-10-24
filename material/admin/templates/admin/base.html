@@ -73,6 +73,7 @@
         </header>
         <main>
             {% block main %}
+                {% if user.is_authenticated %}
                 {% block topbar %}
                 <nav class="topbar">
                     <div class="nav-wrapper">
@@ -83,8 +84,17 @@
                             {% endblock %}
                         </div>
                         <ul id="nav-mobile" class="right hide-on-med-and-down">
-                            {% block topbar_links %}
-                            <a href="#">Documentation</a>
+                            {% block userlinks %}
+                            {% if user.is_active and user.is_staff %}
+                                {% url 'django-admindocs-docroot' as docsroot %}
+                                {% if docsroot %}
+                                    <li><a href="{{ docsroot }}">{% trans 'Documentation' %}</a></li>
+                                {% endif %}
+                            {% endif %}
+                            {% if user.has_usable_password %}
+                                <li><a href="{% url 'admin:password_change' %}">{% trans 'Change password' %}</a></li>
+                            {% endif %}
+                            <li><a href="{% url 'admin:logout' %}">{% trans 'Log out' %}</a></li>
                             {% endblock %}
                         </ul>
                     </div>
@@ -99,6 +109,7 @@
                 </nav>
                 {% endif %}
                 {% endblock %}
+                {% endif %}
                 <div class="content">
                     {% block content %}{% endblock %}
                 </div>

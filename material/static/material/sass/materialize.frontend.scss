@@ -1,6 +1,10 @@
 @import "variables";
 
 /* MAIN */
+html, body, main {
+    height: 100%;
+}
+
 body {
     background: #efefef;
 }
@@ -18,7 +22,6 @@ th {
     main, footer {
         margin-left: 300px;
     }
-
     nav {
         padding-left: 40px;
     }

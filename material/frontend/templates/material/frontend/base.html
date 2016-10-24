@@ -43,6 +43,7 @@
     <body>
         <header>
             {% block header %}
+            {% if user.is_authenticated %}
             <ul id="slide-out" class="side-nav fixed">
                 {% block sidenav_header %}
                 <li>
@@ -75,10 +76,12 @@
                 {% endfor %}
                 {% endblock sidenav_items %}
             </ul>
+            {% endif %}
             {% endblock %}
         </header>
         <main>
             {% block main %}
+                {% if user.is_authenticated %}
                 {% block topbar %}
                 <nav class="topbar">
                     <div class="nav-wrapper">
@@ -99,9 +102,12 @@
                     </div>
                 </nav>
                 {% endblock %}
+                {% endif %}
+                {% block main_content %}
                 <div class="content">
                     {% block content %}{% endblock %}
                 </div>
+                {% endblock %}
             {% endblock main %}
         </main>
         <footer>
