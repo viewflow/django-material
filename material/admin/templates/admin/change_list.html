@@ -59,12 +59,14 @@
 {% block brand-logo %}{{ cl.opts.verbose_name_plural|title }}{% endblock %}
 
 {% block breadcrumbs_items %}
-<a href="{% url 'admin:index' %}">{% trans 'Home' %}</a> &rang;
-<a href="{% url opts|admin_urlname:'changelist' %}">{{ opts.verbose_name_plural|capfirst }}</a>
+<a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
+<a class="active" href="{% url opts|admin_urlname:'changelist' %}">{{ opts.verbose_name_plural|capfirst }}</a>
 {% endblock %}
 
 
 {% block content %}
+<div class="row">
+    <div class="col s12">
 <form method="POST">
 {% csrf_token %}
 <div class="row">
@@ -124,5 +126,6 @@
     {% ifnotequal pair.0 'q' %}<input type="hidden" name="{{ pair.0 }}" value="{{ pair.1 }}"/>{% endifnotequal %}
     {% endfor %}
 </form>
-
+    </div>
+</div>
 {% endblock %}

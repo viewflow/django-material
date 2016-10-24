@@ -2,10 +2,10 @@
 {% load i18n admin_urls %}
 
 {% block breadcrumbs_items %}
-<a href="{% url 'admin:index' %}">{% trans 'All apps' %}</a> &rang;
-<a href="{% url opts|admin_urlname:'changelist' %}">{{ opts.verbose_name_plural|capfirst }}</a>  &rang;
-<a href="{% url opts|admin_urlname:'change' object.pk|admin_urlquote %}">{{ object|truncatewords:"18" }}</a>  &rang;
-<a>{% trans 'History' %}</a>
+<a href="{% url 'admin:index' %}">{% trans 'All apps' %}</a>
+<a href="{% url opts|admin_urlname:'changelist' %}">{{ opts.verbose_name_plural|capfirst }}</a>
+<a href="{% url opts|admin_urlname:'change' object.pk|admin_urlquote %}">{{ object|title|truncatewords:"18" }}</a>
+<a class="active">{% trans 'History' %}</a>
 {% endblock %}
 
 {% block content %}

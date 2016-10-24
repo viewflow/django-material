@@ -1,9 +1,9 @@
 {% load admin_static %}
 <link href="{% static 'material/fonts/material-design-icons/material-icons.css' %}" rel="stylesheet">
 <link href="{% static 'material/css/materialize.css' %}" rel="stylesheet">
+<link href="{% static 'material/css/materialize.forms.css' %}" rel="stylesheet">
 <link href="{% static 'material/css/jquery.datetimepicker.css' %}" rel="stylesheet">
 <link href="{% static 'material/css/responsive.dataTables.css' %}" rel="stylesheet">
 <link href="{% static 'material/css/fixedHeader.dataTables.css' %}" rel="stylesheet">
-<link href="{% static 'material/css/forms.css' %}" rel="stylesheet">
-<link href="{% block stylesheet %}{% static 'material/admin/css/base.css' %}{% endblock %}" rel="stylesheet" type="text/css" />
-<link href="{% static 'material/admin/css/icons.css' %}" rel="stylesheet" type="text/css" />
+<link href="{% block stylesheet %}{% static 'material/css/materialize.admin.css' %}{% endblock %}" rel="stylesheet" type="text/css" />
+<link href="{% block extraicons %}{% static 'admin/css/icons.css' %}" rel="stylesheet" type="text/css" />{% endblock %}
