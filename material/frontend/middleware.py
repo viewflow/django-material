@@ -27,15 +27,3 @@ class SmoothNavigationMiddleware(object):
                 response['location'] = urlunsplit((scheme, netloc, path, new_query_string, fragment))
 
         return response
-
-
-class UnpjaxMiddleware(object):
-    """Remove the `_pjax` parameter from query string."""
-
-    def process_request(self, request):  # noqa D102
-        if "_pjax" in request.META.get("QUERY_STRING", ""):
-            qs = QueryDict(request.META.get("QUERY_STRING", ""),
-                           encoding=request.encoding, mutable=True)
-            qs.pop("_pjax", None)
-            request.META["QUERY_STRING"] = qs.urlencode()
-            request.META["PJAX"] = True

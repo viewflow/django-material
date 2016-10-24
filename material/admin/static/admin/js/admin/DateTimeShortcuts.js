@@ -1,5 +1,5 @@
 (function($) {
-  $(document).on('ready pjax:complete', function() {
+  $(document).on('ready turbolinks:load', function() {
     $('[data-form-control="date-today-shortcut"]').click(function() {
         var now = Date(),
             datePicker = $(this).closest('.input-group').find('[data-form-control="date"]').data('xdsoft_datetimepicker'),

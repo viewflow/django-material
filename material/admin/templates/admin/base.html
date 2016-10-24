@@ -46,7 +46,7 @@
                 {% endblock %}
                 {% block sidenav_items %}
                 {% if site_url %}
-                    {% block back_link %}<li class="no-padding"><a class="collapsible-header no-pjax" href="{{ site_url }}"><i class="material-icons">arrow_back</i>{% trans 'View site' %}</a></li>{% endblock %}
+                    {% block back_link %}<li class="no-padding"><a class="collapsible-header" href="{{ site_url }}"><i class="material-icons">arrow_back</i>{% trans 'View site' %}</a></li>{% endblock %}
                 {% endif %}
                 {% get_app_list request as app_list %}
                 {% for app in app_list %}

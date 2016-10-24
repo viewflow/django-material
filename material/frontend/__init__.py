@@ -12,26 +12,6 @@ if getattr(settings, 'MATERIAL_FRONTEND_AUTOREGISTER', True):
     if 'material.frontend.middleware.SmoothNavigationMiddleware' not in settings.MIDDLEWARE_CLASSES:
         settings.MIDDLEWARE_CLASSES += ('material.frontend.middleware.SmoothNavigationMiddleware',)
 
-    if 'material.frontend.middleware.UnpjaxMiddleware' not in settings.MIDDLEWARE_CLASSES:
-        settings.MIDDLEWARE_CLASSES += ('material.frontend.middleware.UnpjaxMiddleware',)
-
-    # Register pjax template tag
-    try:
-        from django.template.base import add_to_builtins
-        add_to_builtins("material.frontend.templatetags.pjax_tags")
-    except ImportError:
-        """
-        Django 1.9
-        """
-        for engine in settings.TEMPLATES:
-            if engine['BACKEND'] == 'django.template.backends.django.DjangoTemplates':
-                if 'OPTIONS' not in engine:
-                    engine['OPTIONS'] = {}
-                if 'builtins' not in engine['OPTIONS']:
-                    engine['OPTIONS']['builtins'] = []
-                if "material.frontend.templatetags.pjax_tags" not in engine['OPTIONS']['builtins']:
-                    engine['OPTIONS']['builtins'].append("material.frontend.templatetags.pjax_tags")
-
     # Context processors
     for engine in settings.TEMPLATES:
         if engine['BACKEND'] == 'django.template.backends.django.DjangoTemplates':
