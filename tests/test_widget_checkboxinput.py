@@ -74,13 +74,13 @@ class Test(WebTest):
         {% endform %}
     '''
 
-    def test_part_add_control_class(self):
+    def test_part_add_control_class(self):  # TODO
         response = self.app.get(self.test_part_add_control_class.url)
         self.assertIn('class="filled-in"', response.body.decode('utf-8'))
 
     test_part_add_control_class.template = '''
         {% form %}
-             {% attr form.test_field 'widget' class append %}filled-in{% endattr %}
+             {% attr form.test_field 'widget' class %}filled-in{% endattr %}
         {% endform %}
     '''
 
