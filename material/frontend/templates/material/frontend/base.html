@@ -90,7 +90,9 @@
                             {% block page_title %}{% endblock %}
                         </div>
                         <ul id="nav-mobile" class="right hide-on-med-and-down">
-                            {% block topbar_links %}{% endblock %}
+                            {% block topbar_links %}
+                            <li><a href="{% url 'logout' %}" data-turbolinks="false"><i class="material-icons right">exit_to_app</i>{% trans "Logout" %}</a></li>
+                            {% endblock %}
                         </ul>
                     </div>
                 </nav>

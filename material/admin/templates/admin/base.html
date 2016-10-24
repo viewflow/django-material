@@ -94,7 +94,7 @@
                             {% if user.has_usable_password %}
                                 <li><a href="{% url 'admin:password_change' %}">{% trans 'Change password' %}</a></li>
                             {% endif %}
-                            <li><a href="{% url 'admin:logout' %}">{% trans 'Log out' %}</a></li>
+                            <li><a href="{% url 'admin:logout' %}"><i class="material-icons right">exit_to_app</i>{% trans 'Log out' %}</a></li>
                             {% endblock %}
                         </ul>
                     </div>

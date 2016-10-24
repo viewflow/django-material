@@ -61,6 +61,12 @@ nav.topbar {
     height: 54px;
     line-height: 54px;
 
+    i,
+    a.button-collapse,
+    a.button-collapse i {
+        height: 54px;
+        line-height: 54px;
+    }
     .brand-logo {
         font-weight: 100;
         font-size: 2.5rem;
