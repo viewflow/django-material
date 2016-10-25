@@ -43,6 +43,10 @@ form .error {
 .input-field ::-webkit-outer-spin-button {
   -webkit-appearance: none; }
 
+input:-webkit-autofill + label {
+  font-size: 0.8rem;
+  transform: translateY(-140%); }
+
 /* SELECT FIELD */
 select.material-ignore {
   display: block; }

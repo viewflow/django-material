@@ -59,6 +59,14 @@ form .error {
     }
 }
 
+input:-webkit-autofill {
+    +label {
+        font-size: 0.8rem;
+        transform: translateY(-140%);
+    }
+}
+
+
 /* SELECT FIELD */
 select.material-ignore {
     display: block;
