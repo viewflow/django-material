@@ -1,3 +1,4 @@
 $(document).on('ready', function() {
-      $(document).find('.button-collapse').sideNav();
+  $('.button-collapse').sideNav()
+  $('#slide-out').perfectScrollbar()
 });
