@@ -1,0 +1,17 @@
+{% load static %}
+{% if not debug %}
+<script src="{% static 'material/js/materialize.frontend.min.js' %}"></script>
+{% else %}
+<script src="{% static 'material/js/turbolinks.js' %}"></script>
+<script src="{% static 'material/js/jquery-2.2.0.js' %}"></script>
+<script src="{% static 'material/js/jquery.dataTables.js' %}"></script>
+<script src="{% static 'material/js/jquery.activeNavigation.js' %}"></script>
+<script src="{% static 'material/js/jquery.datetimepicker.js' %}"></script>
+<script src="{% static 'material/js/jquery.formset.js' %}"></script>
+<script src="{% static 'material/js/perfect-scrollbar.jquery.js' %}"></script>
+<script src="{% static 'material/js/dataTables.fixedHeader.js' %}"></script>
+<script src="{% static 'material/js/dataTables.responsive.js' %}"></script>
+<script src="{% static 'material/js/materialize.js' %}"></script>
+<script src="{% static 'material/js/materialize.forms.js' %}"></script>
+<script src="{% static 'material/js/materialize.frontend.js' %}"></script>
+{% endif %}

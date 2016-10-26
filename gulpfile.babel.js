@@ -1,9 +1,12 @@
 import autoprefixer from 'autoprefixer'
 import concat from 'gulp-concat'
+import cssnano from 'cssnano';
 import gulp from 'gulp'
 import merge from 'merge-stream'
 import postcss from 'gulp-postcss'
+import pump from 'pump'
 import sass from 'gulp-sass'
+import uglify from 'gulp-uglify'
 
 var supportedBrowsers = [
   'Chrome >= 50',
@@ -122,11 +125,54 @@ gulp.task('materialize.django.scss', () => {
     ))
 })
 
+gulp.task('frontend.min.js', (cb) => {
+  var deps = [
+    'material/static/material/js/turbolinks.js',
+    'material/static/material/js/jquery-2.2.0.js',
+    'material/static/material/js/jquery.dataTables.js',
+    'material/static/material/js/jquery.activeNavigation.js',
+    'material/static/material/js/jquery.datetimepicker.js',
+    'material/static/material/js/jquery.formset.js',
+    'material/static/material/js/perfect-scrollbar.jquery.js',
+    'material/static/material/js/dataTables.fixedHeader.js',
+    'material/static/material/js/dataTables.responsive.js',
+    'material/static/material/js/materialize.js',
+    'material/static/material/js/materialize.forms.js',
+    'material/static/material/js/materialize.frontend.js',
+  ]
+  pump([
+    gulp.src(deps),
+    concat('materialize.frontend.min.js'),
+    uglify(),
+    gulp.dest('material/static/material/js/')], cb)
+})
+
+gulp.task('frontend.min.css', () => {
+  var deps = [
+    'material/static/material/css/materialize.css',
+    'material/static/material/css/materialize.forms.css',
+    'material/static/material/css/materialize.frontend.css',
+    'material/static/material/css/jquery.datetimepicker.css',
+    'material/static/material/css/responsive.dataTables.css',
+    'material/static/material/css/fixedHeader.dataTables.css',
+    'material/static/material/css//perfect-scrollbar.css'
+  ]
+
+  return gulp.src(deps)
+    .pipe(concat('materialize.frontend.min.css'))
+    .pipe(postcss([
+      cssnano()
+    ]))
+    .pipe(gulp.dest('material/static/material/css/'))
+})
+
 gulp.task('default', [
   '3rdparty.fonts',
   '3rdparty.js',
   '3rdparty.css',
   'materialize.scss',
   'materialize.django.scss',
-  'materialize.js'
+  'materialize.js',
+  'frontend.min.js',
+  'frontend.min.css',
 ])
