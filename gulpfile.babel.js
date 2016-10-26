@@ -189,11 +189,11 @@ gulp.task('admin.min.css', () => {
   var deps = [
     'material/static/material/css/materialize.css',
     'material/static/material/css/materialize.forms.css',
-    'material/static/material/css/materialize.frontend.css',
+    'material/static/material/css/materialize.admin.css',
     'material/static/material/css/jquery.datetimepicker.css',
     'material/static/material/css/responsive.dataTables.css',
     'material/static/material/css/fixedHeader.dataTables.css',
-    'material/static/material/css//perfect-scrollbar.css'
+    'material/static/material/css/perfect-scrollbar.css'
   ]
 
   return gulp.src(deps)
