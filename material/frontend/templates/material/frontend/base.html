@@ -9,34 +9,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
         <title>{% block title %}{% endblock %}</title>
         {% block favicon %}<link href="{% static 'material/imgs/favicon.png' %}" rel="shortcut icon">{% endblock %}
-        {% block css %}
-        <!-- 3d party deps -->
-        <link href="{% static 'material/fonts/material-design-icons/material-icons.css' %}"  rel="stylesheet">
-
-        <link href="{% static 'material/css/materialize.css' %}" rel="stylesheet">
-        <link href="{% static 'material/css/materialize.forms.css ' %}" rel="stylesheet">
-        <link href="{% static 'material/css/materialize.frontend.css' %}" rel="stylesheet">
-        <link href="{% static 'material/css/jquery.datetimepicker.css ' %}" rel="stylesheet">
-        <link href="{% static 'material/css/responsive.dataTables.css' %}" rel="stylesheet">
-        <link href="{% static 'material/css/fixedHeader.dataTables.css' %}" rel="stylesheet">
-        <link href="{% static 'material/css//perfect-scrollbar.css' %}" rel="stylesheet" />
-        {% endblock css %}
-        {% block js %}
-        <!-- 3d party deps -->
-        <script src="{% static 'material/js/turbolinks.js' %}"></script>
-
-        <script src="{% static 'material/js/jquery-2.2.0.js' %}"></script>
-        <script src="{% static 'material/js/jquery.dataTables.js' %}"></script>
-        <script src="{% static 'material/js/jquery.activeNavigation.js' %}"></script>
-        <script src="{% static 'material/js/jquery.datetimepicker.js' %}"></script>
-        <script src="{% static 'material/js/jquery.formset.js' %}"></script>
-        <script src="{% static 'material/js/perfect-scrollbar.jquery.js' %}"></script>
-        <script src="{% static 'material/js/dataTables.fixedHeader.js' %}"></script>
-        <script src="{% static 'material/js/dataTables.responsive.js' %}"></script>
-        <script src="{% static 'material/js/materialize.js' %}"></script>
-        <script src="{% static 'material/js/materialize.forms.js' %}"></script>
-        <script src="{% static 'material/js/materialize.frontend.js' %}"></script>
-        {% endblock js %}
+        {% block css %}{% include 'material/frontend/includes/material_css.html' %}{% endblock css %}
+        {% block js %}{% include 'material/frontend/includes/material_js.html' %}{% endblock js %}
         {% block extrahead %}{% endblock %}
         {% endblock head %}
     </head>
