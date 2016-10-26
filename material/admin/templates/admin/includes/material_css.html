@@ -1,4 +1,9 @@
 {% load admin_static %}
+{% load static %}
+<link href="{% static 'material/fonts/material-design-icons/material-icons.css' %}"  rel="stylesheet">
+<link href="{% static 'material/css/materialize.admin.min.css' %}" rel="stylesheet">
+{% if not debug %}
+{% else %}
 <link href="{% static 'material/fonts/material-design-icons/material-icons.css' %}" rel="stylesheet">
 <link href="{% static 'material/css/materialize.css' %}" rel="stylesheet">
 <link href="{% static 'material/css/materialize.forms.css' %}" rel="stylesheet">
@@ -6,5 +11,6 @@
 <link href="{% static 'material/css/responsive.dataTables.css' %}" rel="stylesheet">
 <link href="{% static 'material/css/fixedHeader.dataTables.css' %}" rel="stylesheet">
 <link href="{% static 'material/css//perfect-scrollbar.css' %}" rel="stylesheet" />
-<link href="{% block stylesheet %}{% static 'material/css/materialize.admin.css' %}{% endblock %}" rel="stylesheet" type="text/css" />
+<link href="{% static 'material/css/materialize.admin.css' %}" rel="stylesheet"/>
+{% endif %}
 <link href="{% block extraicons %}{% static 'admin/css/icons.css' %}" rel="stylesheet" type="text/css" />{% endblock %}

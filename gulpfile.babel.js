@@ -166,6 +166,44 @@ gulp.task('frontend.min.css', () => {
     .pipe(gulp.dest('material/static/material/css/'))
 })
 
+gulp.task('admin.min.js', (cb) => {
+  var deps = [
+    'material/static/material/js/jquery.datetimepicker.js',
+    'material/static/material/js/jquery.formset.js',
+    'material/static/material/js/jquery.dataTables.js',
+    'material/static/material/js/dataTables.responsive.js',
+    'material/static/material/js/dataTables.fixedHeader.js',
+    'material/static/material/js/perfect-scrollbar.jquery.js',
+    'material/static/material/js/materialize.js',
+    'material/static/material/js/materialize.forms.js',
+    'material/static/material/js/materialize.admin.js',
+  ]
+  pump([
+    gulp.src(deps),
+    concat('materialize.admin.min.js'),
+    uglify(),
+    gulp.dest('material/static/material/js/')], cb)
+})
+
+gulp.task('admin.min.css', () => {
+  var deps = [
+    'material/static/material/css/materialize.css',
+    'material/static/material/css/materialize.forms.css',
+    'material/static/material/css/materialize.frontend.css',
+    'material/static/material/css/jquery.datetimepicker.css',
+    'material/static/material/css/responsive.dataTables.css',
+    'material/static/material/css/fixedHeader.dataTables.css',
+    'material/static/material/css//perfect-scrollbar.css'
+  ]
+
+  return gulp.src(deps)
+    .pipe(concat('materialize.admin.min.css'))
+    .pipe(postcss([
+      cssnano()
+    ]))
+    .pipe(gulp.dest('material/static/material/css/'))
+})
+
 gulp.task('default', [
   '3rdparty.fonts',
   '3rdparty.js',
@@ -175,4 +213,6 @@ gulp.task('default', [
   'materialize.js',
   'frontend.min.js',
   'frontend.min.css',
+  'admin.min.js',
+  'admin.min.css',
 ])
