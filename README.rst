@@ -49,7 +49,7 @@ Django Material Pro has a commercial-friendly license and distributed as part of
 Changelog
 =========
 
-0.9.1 2016-10-18 - Beta
+0.9.2 2016-10-27 - Beta
 -----------------------
 
-- Fix duplicate error message for admin non field error.
+- Fix admin read-only field for simple values

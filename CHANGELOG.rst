@@ -1,3 +1,9 @@
+0.9.2 2016-10-27 - Beta
+-----------------------
+
+- Fix admin read-only field for simple values
+
+
 0.9.1 2016-10-18 - Beta
 -----------------------
 
