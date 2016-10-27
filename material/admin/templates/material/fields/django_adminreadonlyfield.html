@@ -12,7 +12,7 @@
         {% else %}
             <div class="input-field col s12">
                 <label class="active">{{ fieldset_field.field.label|title }}</label>
-                <input disabled value="{{ field.contents }}">
+                <input disabled value="{{ fieldset_field.contents }}">
                 {% if fieldset_field.field.help_text %}
                     <small class="help-block">{{ fieldset_field.field.help_text }}</small>
                 {% endif %}
