@@ -17,7 +17,7 @@
 - Forms - Add input[type=range] support
 - Forms - Fix initial label position for datetime field with value
 - Forms - Fix initial label position for number field with zero as inital value
-- Forms - Fix CSS vulnerability in input fields.
+- Forms - Fix XSS vulnerability in input fields.
 - Forms - Fix CSS inclusion default template
 - Frontend - Fix module delete
 - Frontend - Add CRUD views and viewset
