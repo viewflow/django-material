@@ -1,6 +1,10 @@
 {% extends "admin/base_site.html" %}
 {% load i18n %}
 
+{% block title %}{{ block.super }}{% endblock %}
+{% block page_title %}{% trans 'Logged out' %}{% endblock %}
+
+
 {% block content %}
 <div class="row">
     <div class="col s12 offset-m3 m6">
@@ -9,10 +13,11 @@
                 <span class="card-title black-text">{{ title }}</span>
                 <p><br/>{% trans "Thanks for spending some quality time with the Web site today." %}</p>
             </div>
-            <div class="card-action">
-                <a href="{% url 'admin:index' %}" class="btn btn-primary white-text pull-right">{% trans 'Log in again' %}</a>
+            <div class="card-action right-align">
+                <a href="{% url 'admin:login' %}" class="btn btn-primary white-text">{% trans 'Log in again' %}</a>
             </div>
         </div>
     </div>
 </div>
 {% endblock %}
+

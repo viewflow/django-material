@@ -32,7 +32,7 @@
     <body class="{% if is_popup %}popup{% endif %}">
         <header>
             {% block header %}
-            {% if user.is_authenticated  and not is_popup %}
+            {% if not is_popup %}
             <ul id="slide-out" class="side-nav fixed">
                 {% block sidenav_header %}
                 <li>
@@ -79,7 +79,6 @@
         </header>
         <main>
             {% block main %}
-                {% if user.is_authenticated %}
                 {% block topbar %}
                 <nav class="topbar">
                     <div class="nav-wrapper">
@@ -100,7 +99,11 @@
                             {% if user.has_usable_password %}
                                 <li><a href="{% url 'admin:password_change' %}">{% trans 'Change password' %}</a></li>
                             {% endif %}
-                            <li><a href="{% url 'admin:logout' %}"><i class="material-icons right">exit_to_app</i>{% trans 'Log out' %}</a></li>
+                            {% if user.is_authenticated %}
+                            <li><a href="{% url 'admin:logout' %}" data-turbolinks="false"><i class="material-icons right">exit_to_app</i>{% trans "Logout" %}</a></li>
+                            {% else %}
+                            <li><a href="{% url 'admin:login' %}" data-turbolinks="false"><i class="material-icons right">lock_open</i>{% trans "Login" %}</a></li>
+                            {% endif %}
                             {% endblock %}
                         </ul>
                     </div>
@@ -115,7 +118,6 @@
                 </nav>
                 {% endif %}
                 {% endblock %}
-                {% endif %}
                 <div class="content">
                     {% block content %}{% endblock %}
                 </div>
