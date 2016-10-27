@@ -4,8 +4,10 @@ from django.db.models.deletion import Collector
 from django.core.exceptions import PermissionDenied
 from django.views import generic
 
+from .mixins import MessageUserMixin
 
-class DeleteModelView(generic.DeleteView):
+
+class DeleteModelView(MessageUserMixin, generic.DeleteView):
     """View for deleting an object and all linked by foreign key data."""
 
     viewset = None
@@ -66,3 +68,11 @@ class DeleteModelView(generic.DeleteView):
             ]
 
         return [self.template_name]
+
+    def delete(self, request, *args, **kwargs):
+        response = super(DeleteModelView, self).delete(request, *args, **kwargs)
+        self.message_user()
+        return response
+
+    def message_user(self):
+        self.success('The {name} "{link}"  was deleted successfully.')

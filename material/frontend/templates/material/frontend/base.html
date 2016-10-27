@@ -14,81 +14,99 @@
         {% block extrahead %}{% endblock %}
         {% endblock head %}
     </head>
-    <body>
+    <body class="{%block bodyclass %}with-sidebar{% endblock %}">
+        {% block body %}
         <header>
             {% block header %}
-            {% if user.is_authenticated %}
             <ul id="slide-out" class="side-nav fixed">
                 {% block sidenav_header %}
                 <li>
                     <div class="userView">
                         <img class="background" src="{% static 'material/imgs/sidenav.png' %}">
-                        <a href="#!user"><img class="circle" src="{% static 'material/imgs/user.png' %}"></a>
-                        <a href="#!name"><span class="white-text name">{{ request.user.get_username|title }}</span></a>
-                        <a href="#!email"><span class="white-text email">{{ request.user.email }}</span></a>
+                        {% block userphoto %}
+                        {% if user.photo.url %}
+                        <a href="#"><img class="circle" src="{{ user.photo.url %}"></a>
+                        {% else %}
+                        <a href="#"><img class="circle" src="{% static 'material/imgs/user.png' %}"></a>
+                        {% endif %}
+                        {% endblock %}
+                        <a href="#"><span class="white-text name">{{ request.user.get_username|title }}</span></a>
+                        <a href="#"><span class="white-text email">{{ request.user.email }}</span></a>
                     </div>
                 </li>
                 {% endblock %}
                 {% block sidenav_items %}
                 {% for module in modules %}
-                    {% if current_module == module %}
-                    <li class="active">
-                        <ul class="collapsible collapsible-accordion">
-                            <li>
-                                <a class="collapsible-header active">{{ module.verbose_name }}{{ module.icon|safe }}</a>
-                                <div class="collapsible-body" style="display:block">
-                                    {% include module.menu %}
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
-                    {% else %}
-                    <li {% if forloop.last %}class="last"{% endif %}>
-                        <a href="{{ module.index_url }}" data-turbolinks="false">{{ module.verbose_name }}{{ module.icon|safe }}</a>
-                    </li>
-                    {% endif %}
+                {% if current_module == module %}
+                <li class="active">
+                    <ul class="collapsible collapsible-accordion">
+                        <li>
+                            <a class="collapsible-header active">{{ module.verbose_name }}{{ module.icon|safe }}</a>
+                            <div class="collapsible-body" style="display:block">
+                                {% include module.menu %}
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+                {% else %}
+                <li {% if forloop.last %}class="last"{% endif %}>
+                    <a href="{{ module.index_url }}" data-turbolinks="false">{{ module.verbose_name }}{{ module.icon|safe }}</a>
+                </li>
+                {% endif %}
                 {% endfor %}
                 {% endblock sidenav_items %}
             </ul>
-            {% endif %}
-            {% endblock %}
+            {% endblock %}            
         </header>
         <main>
             {% block main %}
-                {% if user.is_authenticated %}
-                {% block topbar %}
-                <nav class="topbar">
-                    <div class="nav-wrapper">
-                        <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
-                        <div class="brand-logo">
-                            {% block page_title %}{% endblock %}
-                        </div>
-                        <ul id="nav-mobile" class="right hide-on-med-and-down">
-                            {% block topbar_links %}
-                            <li><a href="{% url 'logout' %}" data-turbolinks="false"><i class="material-icons right">exit_to_app</i>{% trans "Logout" %}</a></li>
-                            {% endblock %}
-                        </ul>
+            {% block topbar %}
+            <nav class="topbar">
+                <div class="nav-wrapper">
+                    <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
+                    <div class="brand-logo">
+                        {% block page_title %}{% endblock %}
                     </div>
-                </nav>
-                {% endblock topbar %}
-                {% block breadcrumbs %}
-                <nav class="breadcrumbs">
-                    <div class="nav-wrapper">
-                        {% block breadcrumbs_items %}{% endblock %}
-                    </div>
-                </nav>
-                {% endblock %}
-                {% endif %}
-                {% block main_content %}
-                <div class="content">
-                    {% block content %}{% endblock %}
+                    <ul id="nav-mobile" class="right hide-on-med-and-down">
+                        {% block topbar_links %}
+                        {% if user.is_authenticated %}
+                        <li><a href="{% url 'logout' %}" data-turbolinks="false"><i class="material-icons right">exit_to_app</i>{% trans "Logout" %}</a></li>
+                        {% else %}
+                        <li><a href="{% url 'login' %}" data-turbolinks="false"><i class="material-icons right">lock_open</i>{% trans "Login" %}</a></li>
+                        {% endif %}
+                        {% endblock %}
+                    </ul>
                 </div>
-                {% endblock %}
+            </nav>
+            {% endblock topbar %}
+            {% block breadcrumbs %}
+            <nav class="breadcrumbs">
+                <div class="nav-wrapper">
+                    {% block breadcrumbs_items %}{% endblock %}
+                </div>
+            </nav>
+            {% endblock %}
+            {% block main_content %}
+            <div class="content">
+                {% block content %}{% endblock %}
+            </div>
+            {% endblock main_content %}
             {% endblock main %}
         </main>
         <footer>
-            {% block footer %}
-            {% endblock footer %}
+            {% block footer %}{% endblock footer %}
         </footer>
+        {% endblock %}
+        {% block messages %}
+        {% if messages %}
+        <script type="text/javascript">
+            $(document).one('turbolinks:load', function () {
+              {% for message in messages %}
+              Materialize.toast('{{ message|capfirst }}', 10000, 'alert-{{ message.tags }}')
+              {% endfor %}
+            });
+        </script>
+        {% endif %}
+        {% endblock messages %}
     </body>
 </html>

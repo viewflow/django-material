@@ -1,5 +1,10 @@
+from django.contrib import messages
 from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse
+from django.utils.encoding import force_text
+from django.utils.html import format_html
+from django.utils.http import urlquote
+from django.utils.translation import ugettext as _
 
 
 class ModelViewMixin(object):
@@ -60,3 +65,41 @@ class ModelViewMixin(object):
             ]
 
         return [self.template_name]
+
+    def form_valid(self, *args, **kwargs):
+        response = super(ModelViewMixin, self).form_valid(*args, **kwargs)
+        self.message_user()
+        return response
+
+    def message_user(self):
+        """Successfull notification.
+
+        Subclasses can override it.
+        """
+
+
+class MessageUserMixin(object):
+    """User notification utilities django.messages framework.'"""
+
+    def report(self, message, level=messages.INFO, fail_silently=True, **kwargs):
+        """Construct message and notify the user."""
+        opts = self.model._meta
+
+        url = reverse('{}:{}_detail'.format(
+            opts.app_label, opts.model_name), args=[self.object.pk])
+        link = format_html('<a href="{}">{}</a>', urlquote(url), self.object)
+        name = force_text(opts.verbose_name)
+
+        options = {
+            'link': link,
+            'name': name
+        }
+        options.update(kwargs)
+        message = format_html(_(message).format(**options))
+        messages.add_message(self.request, messages.SUCCESS, message, fail_silently=True)
+
+    def success(self, message, fail_silently=True, **kwargs):
+        self.report(message, level=messages.SUCCESS, fail_silently=fail_silently, **kwargs)
+
+    def error(self, message, fail_silently=True, **kwargs):
+        self.report(message, level=messages.ERROR, fail_silently=fail_silently, **kwargs)

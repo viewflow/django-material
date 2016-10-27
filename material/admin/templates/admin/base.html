@@ -38,9 +38,15 @@
                 <li>
                     <div class="userView">
                         <img class="background" src="{% static 'material/imgs/sidenav.png' %}">
-                        <a href="#!user"><img class="circle" src="{% static 'material/imgs/user.png' %}"></a>
-                        <a href="#!name"><span class="white-text name">{{ request.user.get_username|title }}</span></a>
-                        <a href="#!email"><span class="white-text email">{{ request.user.email }}</span></a>
+                        {% block userphoto %}
+                        {% if user.photo.url %}
+                        <a href="#"><img class="circle" src="{{ user.photo.url %}"></a>
+                        {% else %}
+                        <a href="#"><img class="circle" src="{% static 'material/imgs/user.png' %}"></a>
+                        {% endif %}
+                        {% endblock %}
+                        <a href="#"><span class="white-text name">{{ request.user.get_username|title }}</span></a>
+                        <a href="#"><span class="white-text email">{{ request.user.email }}</span></a>
                     </div>
                 </li>
                 {% endblock %}

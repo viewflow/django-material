@@ -1,9 +1,9 @@
 from django.views import generic
 
-from .mixins import ModelViewMixin
+from .mixins import MessageUserMixin, ModelViewMixin
 
 
-class CreateModelView(ModelViewMixin, generic.CreateView):
+class CreateModelView(MessageUserMixin, ModelViewMixin, generic.CreateView):
     """Thin `generic.CreateView` wrapper plays nice with `ModelViewSet`."""
 
     template_name_suffix = '_create'
@@ -16,3 +16,6 @@ class CreateModelView(ModelViewMixin, generic.CreateView):
         if self.viewset is not None:
             return self.viewset.has_add_permission(request, obj)
         raise NotImplementedError('Viewset is not provided')
+
+    def message_user(self):
+        self.success('The {name} "{link}" was added successfully.')

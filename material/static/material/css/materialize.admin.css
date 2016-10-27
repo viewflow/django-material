@@ -18,18 +18,17 @@ th {
     padding-left: 40px; } }
 
 /* ALERTS */
-.toast.alert-success {
-  background-color: #43a047; }
-
-.toast.alert-info {
-  background-color: #0277bd; }
-
-.toast.alert-warning {
-  background-color: #ef6c00;
-  color: #fff; }
-
-.toast.alert-error {
-  background-color: #bf360c; }
+.toast a {
+  color: white; }
+  .toast a.alert-success {
+    background-color: #43a047; }
+  .toast a.alert-info {
+    background-color: #0277bd; }
+  .toast a.alert-warning {
+    background-color: #ef6c00;
+    color: #fff; }
+  .toast a.alert-error {
+    background-color: #bf360c; }
 
 /* DEFAULT ICONS */
 .admin-appicon:before {

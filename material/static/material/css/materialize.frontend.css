@@ -23,6 +23,8 @@ th {
 /* SIDEBAR */
 .side-nav.fixed {
   overflow-y: hidden; }
+  .side-nav.fixed .userView {
+    min-height: 175px; }
   .side-nav.fixed > li.last {
     padding-bottom: 58px; }
   .side-nav.fixed .collapsible-body li a {
@@ -107,9 +109,7 @@ table[data-form-control="datatable"] ~ .dataTables_paginate {
 
 /* ALERTS */
 .toast a {
-  padding-left: 5px;
-  padding-right: 5px;
-  color: wheat; }
+  color: white; }
   .toast a.alert-info {
     background-color: #0277bd; }
   .toast a.alert-warning {

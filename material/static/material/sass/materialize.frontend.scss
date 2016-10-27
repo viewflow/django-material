@@ -32,6 +32,10 @@ th {
     // managed by perfect-scrollbar
     overflow-y: hidden;
 
+    .userView {
+        min-height: 175px;
+    }
+
     // fix for chrome scrolling bug
     > li.last {
         padding-bottom: 58px;
@@ -158,9 +162,7 @@ table[data-form-control="datatable"] {
 
 /* ALERTS */
 .toast a {
-    padding-left: 5px;
-    padding-right: 5px;
-    color: wheat;
+    color: white;
 
     &.alert-info {
         background-color: #0277bd;

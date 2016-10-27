@@ -1,5 +1,5 @@
 {% extends 'material/frontend/base_site.html' %}
+{% load i18n static %}
 
 {% block title %}{{ current_module.verbose_name }} - {{ block.super }}{% endblock %}
-
 {% block page_title %}<a href="{{ current_module.index_url }}">{{ current_module.verbose_name }}</a>{% endblock %}

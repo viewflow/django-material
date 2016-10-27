@@ -25,7 +25,9 @@ th {
 }
 
 /* ALERTS */
-.toast {
+.toast a {
+    color: white;
+
     &.alert-success {
         background-color: #43a047;
     }

@@ -1,5 +1,9 @@
-{% extends "material/frontend/base_module.html" %}
+{% extends "material/frontend/base_site.html" %}
 {% load i18n material_form %}
+
+{% block title %}{% trans Login %} - {{ block.super }}{% endblock %}
+{% block page_title %}{% trans 'Authentication' %}{% endblock %}
+
 
 {% block content %}
 <div class="row">
