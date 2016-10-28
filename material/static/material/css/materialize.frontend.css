@@ -27,11 +27,21 @@ th {
     min-height: 175px; }
   .side-nav.fixed > li.last {
     padding-bottom: 58px; }
+  .side-nav.fixed .collapsible-body .submenu.active {
+    background-color: transparent; }
   .side-nav.fixed .collapsible-body li a {
     padding-left: 70px; }
-  .side-nav.fixed .collapsible-body li.active .collapsible-body li.active {
+  .side-nav.fixed .collapsible-body li .collapsible li.active {
     background-color: rgba(0, 0, 0, 0.05); }
-  .side-nav.fixed .collapsible-body li.active .collapsible-body li a {
+    .side-nav.fixed .collapsible-body li .collapsible li.active a {
+      color: rgba(0, 0, 0, 0.87); }
+  .side-nav.fixed .collapsible-body li:not(.active) > a.collapsible-header {
+    color: rgba(0, 0, 0, 0.87); }
+  .side-nav.fixed .collapsible-body li .collapsible-body li.active {
+    background-color: #4caf50; }
+    .side-nav.fixed .collapsible-body li .collapsible-body li.active a {
+      color: #fff; }
+  .side-nav.fixed .collapsible-body li .collapsible-body li a {
     color: rgba(0, 0, 0, 0.87);
     padding-left: 90px; }
 

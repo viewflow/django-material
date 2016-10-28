@@ -42,17 +42,35 @@ th {
     }
 
     .collapsible-body {
-        // 2d level
+        .submenu.active {
+            background-color: transparent
+        }
         li a {
             padding-left: 70px;
         }
 
-        // 3d level
-        li.active .collapsible-body li.active {
-            background-color: rgba(0,0,0,0.05)
+        // 3d level header
+        li .collapsible li.active {
+            background-color: rgba(0, 0, 0, 0.05);
+            a {
+                color: rgba(0, 0, 0, 0.87);
+            }
         }
 
-        li.active .collapsible-body li a {
+        li:not(.active)>a.collapsible-header {
+                color: rgba(0, 0, 0, 0.87);
+        }
+
+
+        // 3d level body
+        li .collapsible-body li.active {
+            background-color: #4caf50;
+            a {
+                color: #fff;
+            }
+        }
+
+        li .collapsible-body li a {
             color: rgba(0,0,0,0.87);
             padding-left: 90px;
         }
@@ -184,11 +202,11 @@ table[data-form-control="datatable"] {
         font-weight: 200;
         margin-bottom: 10px;
         margin-top: 0px;
-    }    
+    }
 
 	.section {
         padding-top: 0;
-        padding-bottom: 0;    
+        padding-bottom: 0;
 
         h5 {
             font-size: 1.2rem;

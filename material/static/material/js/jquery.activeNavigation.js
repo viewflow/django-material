@@ -33,12 +33,9 @@
                 }
             }
             $(selector).find("li").removeClass("active");
-            $(selector).find("a").removeClass("active");
-            href.closest('li').addClass("active");
-            href.closest('div').closest('li').addClass('active');
             href.parents('li').addClass('active');
-            href.closest('li.header').find('.collapsible-header:first').addClass("active");
-            href.closest('li.header').find('.collapsible-body:first').css("display", "block");
+            href.parent('li').closest('.collapsible-body').css('display', "block");
+            href.parent('li').closest('.collapsible-body').parent('li').addClass('active');
         }
     };
 })(jQuery);
