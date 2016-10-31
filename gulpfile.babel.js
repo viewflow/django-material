@@ -125,7 +125,7 @@ gulp.task('materialize.django.scss', () => {
     ))
 })
 
-gulp.task('frontend.min.js', (cb) => {
+gulp.task('frontend.min.js', ['materialize.js', '3rdparty.js'], (cb) => {
   var deps = [
     'material/static/material/js/turbolinks.js',
     'material/static/material/js/jquery-2.2.0.js',
@@ -147,7 +147,7 @@ gulp.task('frontend.min.js', (cb) => {
     gulp.dest('material/static/material/js/')], cb)
 })
 
-gulp.task('frontend.min.css', () => {
+gulp.task('frontend.min.css', ['3rdparty.css', 'materialize.scss', 'materialize.django.scss'], () => {
   var deps = [
     'material/static/material/css/materialize.css',
     'material/static/material/css/materialize.forms.css',
@@ -155,7 +155,7 @@ gulp.task('frontend.min.css', () => {
     'material/static/material/css/jquery.datetimepicker.css',
     'material/static/material/css/responsive.dataTables.css',
     'material/static/material/css/fixedHeader.dataTables.css',
-    'material/static/material/css//perfect-scrollbar.css'
+    'material/static/material/css/perfect-scrollbar.css'
   ]
 
   return gulp.src(deps)
@@ -166,7 +166,7 @@ gulp.task('frontend.min.css', () => {
     .pipe(gulp.dest('material/static/material/css/'))
 })
 
-gulp.task('admin.min.js', (cb) => {
+gulp.task('admin.min.js', ['materialize.js', '3rdparty.js'], (cb) => {
   var deps = [
     'material/static/material/js/jquery.datetimepicker.js',
     'material/static/material/js/jquery.formset.js',
@@ -185,7 +185,7 @@ gulp.task('admin.min.js', (cb) => {
     gulp.dest('material/static/material/js/')], cb)
 })
 
-gulp.task('admin.min.css', () => {
+gulp.task('admin.min.css', ['3rdparty.css', 'materialize.scss', 'materialize.django.scss'], () => {
   var deps = [
     'material/static/material/css/materialize.css',
     'material/static/material/css/materialize.forms.css',
