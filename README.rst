@@ -49,7 +49,12 @@ Django Material Pro has a commercial-friendly license and distributed as part of
 Changelog
 =========
 
-0.9.2 2016-10-27 - Beta
------------------------
+0.10.0 2016-10-31 - Beta
+------------------------
 
-- Fix admin read-only field for simple values
+- Forms - Upgrade to Materialize CSS 0.97.8
+- Frontend, Admin - New sidebar with user photo
+- Frontend, Admin - Massive CSS/JS/HTML cleanup
+- Frontend, Admin - Serve minfied js/css in the production mode
+- Frontend - Switch from unsupported PJAX to Turbolinks!
+- Admin - Use `model_admin.has_module_permission()` permission check
