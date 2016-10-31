@@ -1965,7 +1965,7 @@ html {
   box-sizing: inherit; }
 
 ul:not(.browser-default) {
-  padding: 0;
+  padding-left: 0;
   list-style-type: none; }
   ul:not(.browser-default) li {
     list-style-type: none; }
@@ -3537,7 +3537,6 @@ small {
   display: inline-block;
   height: 36px;
   line-height: 36px;
-  outline: 0;
   padding: 0 2rem;
   text-transform: uppercase;
   vertical-align: middle;
@@ -3579,12 +3578,21 @@ small {
     background-color: #DFDFDF !important;
     color: #9F9F9F !important; }
 
-.btn i, .btn-large i,
-.btn-floating i,
-.btn-large i,
-.btn-flat i {
-  font-size: 1.3rem;
-  line-height: inherit; }
+.btn, .btn-large,
+.btn-floating,
+.btn-large,
+.btn-flat {
+  outline: 0; }
+  .btn i, .btn-large i,
+  .btn-floating i,
+  .btn-large i,
+  .btn-flat i {
+    font-size: 1.3rem;
+    line-height: inherit; }
+
+.btn:focus, .btn-large:focus,
+.btn-floating:focus {
+  background-color: #1d7d74; }
 
 .btn, .btn-large {
   text-decoration: none;
@@ -3714,9 +3722,11 @@ button.btn-floating {
   transition: background-color .2s; }
   .btn-flat:focus, .btn-flat:active {
     background-color: transparent; }
-  .btn-flat:hover {
+  .btn-flat:focus, .btn-flat:hover {
     background-color: rgba(0, 0, 0, 0.1);
     box-shadow: none; }
+  .btn-flat:active {
+    background-color: rgba(0, 0, 0, 0.2); }
   .btn-flat.disabled {
     background-color: transparent !important;
     color: #b3b3b3 !important;
@@ -5187,16 +5197,16 @@ input[type=range]:focus::-ms-fill-upper {
     .side-nav .subheader:hover {
       background-color: transparent; }
   .side-nav .userView {
-    overflow: hidden;
     position: relative;
     padding: 32px 32px 0;
     margin-bottom: 8px; }
-    .side-nav .userView a {
+    .side-nav .userView > a {
       height: auto;
       padding: 0; }
-      .side-nav .userView a:hover {
+      .side-nav .userView > a:hover {
         background-color: transparent; }
     .side-nav .userView .background {
+      overflow: hidden;
       position: absolute;
       top: 0;
       right: 0;
@@ -5226,11 +5236,6 @@ input[type=range]:focus::-ms-fill-upper {
   top: 0;
   z-index: 998; }
 
-.side-nav.fixed a {
-  display: block;
-  padding: 0 16px;
-  color: rgba(0, 0, 0, 0.87); }
-
 .side-nav.fixed {
   left: 0;
   transform: translateX(0);
@@ -5249,11 +5254,11 @@ input[type=range]:focus::-ms-fill-upper {
   .side-nav .userView {
     padding: 16px 16px 0; } }
 
-.side-nav .collapsible-body li.active,
-.side-nav.fixed .collapsible-body li.active {
+.side-nav .collapsible-body > ul:not(.collapsible) > li.active,
+.side-nav.fixed .collapsible-body > ul:not(.collapsible) > li.active {
   background-color: #4caf50; }
-  .side-nav .collapsible-body li.active a,
-  .side-nav.fixed .collapsible-body li.active a {
+  .side-nav .collapsible-body > ul:not(.collapsible) > li.active a,
+  .side-nav.fixed .collapsible-body > ul:not(.collapsible) > li.active a {
     color: #fff; }
 
 #sidenav-overlay {

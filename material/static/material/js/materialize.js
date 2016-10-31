@@ -2077,33 +2077,34 @@ Materialize.toast = function (message, displayLength, className, completeCallbac
 
     // Allows timer to be pause while being panned
     var timeLeft = displayLength;
-    var counterInterval = setInterval (function(){
+    var counterInterval;
+    if (timeLeft != null)  {
+      counterInterval = setInterval (function(){
+        if (newToast.parentNode === null)
+          window.clearInterval(counterInterval);
 
+        // If toast is not being dragged, decrease its time remaining
+        if (!newToast.classList.contains('panning')) {
+          timeLeft -= 20;
+        }
 
-      if (newToast.parentNode === null)
-        window.clearInterval(counterInterval);
-
-      // If toast is not being dragged, decrease its time remaining
-      if (!newToast.classList.contains('panning')) {
-        timeLeft -= 20;
-      }
-
-      if (timeLeft <= 0) {
-        // Animate toast out
-        Vel(newToast, {"opacity": 0, marginTop: '-40px'}, { duration: 375,
-            easing: 'easeOutExpo',
-            queue: false,
-            complete: function(){
-              // Call the optional callback
-              if(typeof(completeCallback) === "function")
-                completeCallback();
-              // Remove toast after it times out
-              this[0].parentNode.removeChild(this[0]);
-            }
-          });
-        window.clearInterval(counterInterval);
-      }
-    }, 20);
+        if (timeLeft <= 0) {
+          // Animate toast out
+          Vel(newToast, {"opacity": 0, marginTop: '-40px'}, { duration: 375,
+              easing: 'easeOutExpo',
+              queue: false,
+              complete: function(){
+                // Call the optional callback
+                if(typeof(completeCallback) === "function")
+                  completeCallback();
+                // Remove toast after it times out
+                this[0].parentNode.removeChild(this[0]);
+              }
+            });
+          window.clearInterval(counterInterval);
+        }
+      }, 20);
+    }
 
 
 
@@ -2130,7 +2131,7 @@ Materialize.toast = function (message, displayLength, className, completeCallbac
         }
         else {
           // Insert as text;
-          toast.innerHTML = html; 
+          toast.innerHTML = html;
         }
         // Bind hammer
         var hammerHandler = new Hammer(toast, {prevent_default: false});
@@ -2616,7 +2617,7 @@ Materialize.toast = function (message, displayLength, className, completeCallbac
 	/**
 	 * Called when the user scrolls the window
 	 */
-	function onScroll() {
+	function onScroll(scrollOffset) {
 		// unique tick id
 		++ticks;
 
@@ -2627,8 +2628,7 @@ Materialize.toast = function (message, displayLength, className, completeCallbac
 			bottom = top + jWindow.height();
 
 		// determine which elements are in view
-//        + 60 accounts for fixed nav
-		var intersections = findElements(top+offset.top + 200, right+offset.right, bottom+offset.bottom, left+offset.left);
+		var intersections = findElements(top+offset.top + scrollOffset || 200, right+offset.right, bottom+offset.bottom, left+offset.left);
 		$.each(intersections, function(i, element) {
 
 			var lastTick = element.data('scrollSpy:ticks');
@@ -2750,7 +2750,9 @@ Materialize.toast = function (message, displayLength, className, completeCallbac
 		offset.bottom = options.offsetBottom || 0;
 		offset.left = options.offsetLeft || 0;
 
-		var throttledScroll = throttle(onScroll, options.throttle || 100);
+		var throttledScroll = throttle(function() {
+			onScroll(options.scrollOffset);
+		}, options.throttle || 100);
 		var readyScroll = function(){
 			$(document).ready(throttledScroll);
 		};
@@ -3915,10 +3917,6 @@ Materialize.toast = function (message, displayLength, className, completeCallbac
         var $chips = $(this);
         var chipId = Materialize.guid();
 
-        if ($chips.attr('data-initialized')) {
-          // Prevent double initialization.
-          return;
-        }
         if (!curr_options.data || !(curr_options.data instanceof Array)) {
           curr_options.data = [];
         }
@@ -3938,16 +3936,16 @@ Materialize.toast = function (message, displayLength, className, completeCallbac
     this.handleEvents = function(){
       var SELS = self.SELS;
 
-      self.$document.on('click', SELS.CHIPS, function(e){
+      self.$document.off('click.chips-focus', SELS.CHIPS).on('click.chips-focus', SELS.CHIPS, function(e){
         $(e.target).find(SELS.INPUT).focus();
       });
 
-      self.$document.on('click', SELS.CHIP, function(e){
+      self.$document.off('click.chips-select', SELS.CHIP).on('click.chips-select', SELS.CHIP, function(e){
         $(SELS.CHIP).removeClass('selected');
         $(this).toggleClass('selected');
       });
 
-      self.$document.on('keydown', function(e){
+      self.$document.off('keydown.chips').on('keydown.chips', function(e){
         if ($(e.target).is('input, textarea')) {
           return;
         }
@@ -4003,14 +4001,14 @@ Materialize.toast = function (message, displayLength, className, completeCallbac
         }
       });
 
-      self.$document.on('focusin', SELS.CHIPS + ' ' + SELS.INPUT, function(e){
+      self.$document.off('focusin.chips', SELS.CHIPS + ' ' + SELS.INPUT).on('focusin.chips', SELS.CHIPS + ' ' + SELS.INPUT, function(e){
         var $currChips = $(e.target).closest(SELS.CHIPS);
         $currChips.addClass('focus');
         $currChips.siblings('label, .prefix').addClass('active');
         $(SELS.CHIP).removeClass('selected');
       });
 
-      self.$document.on('focusout', SELS.CHIPS + ' ' + SELS.INPUT, function(e){
+      self.$document.off('focusout.chips', SELS.CHIPS + ' ' + SELS.INPUT).on('focusout.chips', SELS.CHIPS + ' ' + SELS.INPUT, function(e){
         var $currChips = $(e.target).closest(SELS.CHIPS);
         $currChips.removeClass('focus');
 
@@ -4021,7 +4019,7 @@ Materialize.toast = function (message, displayLength, className, completeCallbac
         $currChips.siblings('.prefix').removeClass('active');
       });
 
-      self.$document.on('keydown', SELS.CHIPS + ' ' + SELS.INPUT, function(e){
+      self.$document.off('keydown.chips-add', SELS.CHIPS + ' ' + SELS.INPUT).on('keydown.chips-add', SELS.CHIPS + ' ' + SELS.INPUT, function(e){
         var $target = $(e.target);
         var $chips = $target.closest(SELS.CHIPS);
         var chipsLength = $chips.children(SELS.CHIP).length;
@@ -4042,7 +4040,8 @@ Materialize.toast = function (message, displayLength, className, completeCallbac
         }
       });
 
-      self.$document.on('click', SELS.CHIPS + ' ' + SELS.DELETE, function(e) {
+      // Click on delete icon in chip.
+      self.$document.off('click.chips-delete', SELS.CHIPS + ' ' + SELS.DELETE).on('click.chips-delete', SELS.CHIPS + ' ' + SELS.DELETE, function(e) {
         var $target = $(e.target);
         var $chips = $target.closest(SELS.CHIPS);
         var $chip = $target.closest(SELS.CHIP);

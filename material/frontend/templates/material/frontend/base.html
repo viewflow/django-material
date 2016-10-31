@@ -50,7 +50,7 @@
                 </li>
                 {% else %}
                 <li {% if forloop.last %}class="last"{% endif %}>
-                    <a href="{{ module.index_url }}" data-turbolinks="false">{{ module.verbose_name }}{{ module.icon|safe }}</a>
+                    <a href="{{ module.index_url }}" class="collapsible-header" data-turbolinks="false">{{ module.verbose_name }}{{ module.icon|safe }}</a>
                 </li>
                 {% endif %}
                 {% endfor %}
