@@ -41,7 +41,7 @@
                 <li class="active">
                     <ul class="collapsible collapsible-accordion">
                         <li>
-                            <a class="collapsible-header active">{{ module.verbose_name }}{{ module.icon|safe }}</a>
+                            <a href="{{ module.index_url }}" class="collapsible-header active">{{ module.verbose_name }}{{ module.icon|safe }}</a>
                             <div class="collapsible-body" style="display:block">
                                 {% include module.menu %}
                             </div>
