@@ -14,8 +14,8 @@ class CountryTabularInline(admin.TabularInline):
     class CountryInlineFormset(forms.models.BaseInlineFormSet):
         def clean(self):
             for form_data in self.cleaned_data:
-                code = form_data['code']
-                if len(code) < 2:
+                code = form_data.get('code', None)
+                if code and len(code) < 2:
                     raise forms.ValidationError('One of the countries code is invalid')
                 return self.cleaned_data
 
