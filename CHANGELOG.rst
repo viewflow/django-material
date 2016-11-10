@@ -1,4 +1,4 @@
-0.10.1 2016-01-10 - Beta
+0.10.1 2016-11-10 - Beta
 ------------------------
 
 - Fix admin raw_id select on django 1.10
