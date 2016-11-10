@@ -60,6 +60,10 @@ th {
     // managed by perfect-scrollbar
     overflow-y: hidden;
 
+    .userView {
+        min-height: 175px;
+    }
+
     // fix for chrome scrolling bug
     > li.last {
         padding-bottom: 58px;

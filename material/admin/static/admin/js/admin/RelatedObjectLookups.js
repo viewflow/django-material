@@ -161,6 +161,11 @@
     window.dismissAddAnotherPopup = dismissAddRelatedObjectPopup;
 
     $(document).ready(function() {
+        $("a[data-popup-opener]").click(function(event) {
+            event.preventDefault();
+            opener.dismissRelatedLookupPopup(window, $(this).data("popup-opener"));
+        });
+
         $('body').on('click', '.related-widget-wrapper-link', function(e) {
             e.preventDefault();
             if (this.href) {
