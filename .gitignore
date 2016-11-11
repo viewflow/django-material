@@ -7,5 +7,5 @@ deploy
 build/
 dist/
 node_modules/
-django_material.egg-info/
+*.egg-info/
 tests/visual/screenshots_test/
