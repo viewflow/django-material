@@ -337,8 +337,9 @@ nav.breadcrumbs {
       padding-top: 40px; }
     .change-form .multiselect .selector-chosen {
       width: calc(50% - 30px);
-      width: -moz-calc(50% - 30px) select;
-        width-height: 120px; } }
+      width: -moz-calc(50% - 30px); }
+      .change-form .multiselect .selector-chosen select {
+        height: 120px; } }
 
 @media only screen and (max-width: 600px) {
   .change-form .multiselect .selector-available select {
