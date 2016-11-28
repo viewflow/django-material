@@ -175,7 +175,71 @@ table[data-form-control="datatable"] {
             }
         }
     }
+
+    thead {
+        tr>th {
+            &.sorting,
+            &.sorting_asc,
+            &.sorting_desc {
+                cursor: pointer;
+                position: relative;
+                padding-right: 30px;
+            }
+
+            &.sorting:before,
+            &.sorting:after,
+            &.sorting_asc:before,
+            &.sorting_asc:after,
+            &.sorting_desc:before,
+            &.sorting_desc:after,
+            &.sorting_asc_disabled:before,
+            &.sorting_asc_disabled:after,
+            &.sorting_desc_disabled:before,
+            &.sorting_desc_disabled:after {
+                position: absolute;
+                bottom: 11px;
+                display: block;
+                opacity: 0.3;
+                font-size: 1.3em;
+                margin: auto;
+                height:30px;
+                top:0px;
+                bottom:0px;
+            }
+
+            &.sorting:before,
+            &.sorting_asc:before,
+            &.sorting_desc:before,
+            &.sorting_asc_disabled:before,
+            &.sorting_desc_disabled:before {
+                right: 1em;
+                content: "\2191"
+            }
+
+            &.sorting:after,
+            &.sorting_asc:after,
+            &.sorting_desc:after,
+            &.sorting_asc_disabled:after,
+            &.sorting_desc_disabled:after {
+                right: 0.5em;
+                content: "\2193"
+            }
+
+            &.sorting_asc:before,
+            &.sorting_desc:after {
+                opacity: 1
+            }
+
+            &.sorting_asc_disabled:before,
+            &.sorting_desc_disabled:after {
+                opacity: 0
+            }
+        }
+    }
 }
+
+
+
 
 
 /* ALERTS */

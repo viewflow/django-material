@@ -5,6 +5,7 @@ from django.core.exceptions import ImproperlyConfigured, PermissionDenied
 from django.core.urlresolvers import reverse
 from django.db.models.query import QuerySet
 from django.http import JsonResponse
+from django.utils import six
 from django.utils.decorators import method_decorator
 from django.views.generic import View
 from django.views.generic.base import ContextMixin, TemplateResponseMixin
@@ -26,6 +27,8 @@ class ListModelView(ContextMixin, TemplateResponseMixin, View):
 
     :keyword paginate_by: Page size
 
+    :keyword ordering: Default list order
+
     :keyword datatable_config: Datatable default config overrides
 
     :keyword datalist_class: Queryset to data adapter implementation
@@ -41,6 +44,7 @@ class ListModelView(ContextMixin, TemplateResponseMixin, View):
     viewset = None
     queryset = None
     paginate_by = 15
+    ordering = None
     datatable_config = None
     template_name_suffix = '_list'
 
@@ -54,10 +58,12 @@ class ListModelView(ContextMixin, TemplateResponseMixin, View):
         'ajax': {
             'url': '.',
         },
-        'ordering': False,
+        'order': [],
+        'ordering': True,
+        'orderMulti': True,
         'info': False,
         'bFilter': False,
-        'bAutoWidth': False,
+        'bAutoWidth': True,
         'bLengthChange': False,
         'oLanguage': {
             'oPaginate': {
@@ -154,17 +160,39 @@ class ListModelView(ContextMixin, TemplateResponseMixin, View):
                 "%(cls)s.get_queryset()." % {
                     'cls': self.__class__.__name__
                 })
+        ordering = self.get_ordering()
+        if ordering:
+            if isinstance(ordering, six.string_types):
+                ordering = (ordering,)
+            queryset = queryset.order_by(*ordering)
         return queryset
+
+    def get_ordering(self):
+        """ Return the field or fields to use for ordering the queryset."""
+        if self.request_form.is_valid():
+            ordering = []
+            requested_order = self.request_form.cleaned_data['ordering']
+            for spec in requested_order:
+                column_num, column_dir = spec.get('column', 0), spec.get('dir', 'asc')
+
+                try:
+                    order = self.list_display[int(column_num)]
+                    if column_dir == 'asc':
+                        order = '-' + order
+                except (IndexError, TypeError):
+                    """ Skip """
+                else:
+                    ordering.append(order)
+            return ordering
+        else:
+            return self.ordering
 
     def get_datatable_config(self):
         """Prepare datatable config."""
         config = self.datatable_default_config.copy()
-        config['iDisplayLength'] = self.paginate_by
+        config['pageLength'] = self.paginate_by
         config['ajax']['url'] = self.request.path
-        config['columns'] = [
-            {'data': field_name}
-            for field_name in self.datalist.list_display
-        ]
+        config['columns'] = self.datalist.get_columns_def()
         if self.datatable_config is not None:
             config.update(self.datatable_config)
         return config
@@ -205,13 +233,12 @@ class ListModelView(ContextMixin, TemplateResponseMixin, View):
 
     def get_json_data(self, request, *args, **kwargs):
         """Return `JSONResponse` with data for datatable."""
-        form = forms.DatatableRequestForm(request.GET)
-        if not form.is_valid():
-            return JsonResponse({'error': form.errors})
+        if not self.request_form.is_valid():
+            return JsonResponse({'error': self.request_form.errors})
 
-        draw = form.cleaned_data['draw']
-        start = form.cleaned_data['start']
-        length = form.cleaned_data['length']
+        draw = self.request_form.cleaned_data['draw']
+        start = self.request_form.cleaned_data['start']
+        length = self.request_form.cleaned_data['length']
 
         result = []
         for item, columns_data in self.datalist.get_data(start, length):
@@ -233,6 +260,7 @@ class ListModelView(ContextMixin, TemplateResponseMixin, View):
         if not self.has_view_permission(self.request):
             raise PermissionDenied
 
+        self.request_form = forms.DatatableRequestForm(request.GET)
         self.object_list = self.get_queryset()
         self.datalist = self.create_datalist()
         if 'HTTP_DATATABLE' in request.META:

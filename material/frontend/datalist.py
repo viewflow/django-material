@@ -42,6 +42,10 @@ class ModelField(object):
             # field is likely a ForeignObjectRel
             return self.field.related_model._meta.verbose_name
 
+    @property
+    def orderable(self):  # noqa D102
+        return True
+
 
 class ModelAttr(object):
     """Retrive attribute value from the model instance.
@@ -66,6 +70,11 @@ class ModelAttr(object):
         if self._label:
             return self._label
         return _get_attr_label(self.model, self.name)
+
+
+    @property
+    def orderable(self):  # noqa D102
+        return False
 
 
 class DataSourceAttr(object):
@@ -103,6 +112,10 @@ class DataSourceAttr(object):
 
         """
         return _get_attr_label(self.data_source, self.name)
+
+    @property
+    def orderable(self):  # noqa D102
+        return False
 
 
 class DataList(object):
@@ -167,6 +180,13 @@ class DataList(object):
 
         TODO
         """
+
+    def get_columns_def(self):
+        """Returns columns definition for the datables js config."""
+        return [
+            {'data': field_name, 'orderable': self.get_data_attr(field_name).orderable}
+            for field_name in self.list_display
+        ]
 
     def get_headers_data(self):
         """Readable column titles."""

@@ -24,11 +24,11 @@
       },
     }
   ];
-  
   $(document).one("turbolinks:load", function() {
     if ( ! $.fn.DataTable.isDataTable( '#table' ) ) {
       var datatable = $('#table').DataTable(config);
       new $.fn.dataTable.FixedHeader(datatable);
+
       $(document).one("turbolinks:before-cache", function() {
         datatable.destroy();
       });
@@ -42,7 +42,7 @@
     <div class="col s12 m12 l9">
         <div class="card">
             <div class="card-content">
-                <table id="table" class="table bordered" data-form-control="datatable">
+                <table id="table" class="table bordered" data-form-control="datatable" style="width:100%">
                     <thead>
                         <tr>
                             {% for header, header_title in headers %}
