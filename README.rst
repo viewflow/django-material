@@ -25,6 +25,11 @@ Material design for Django Forms and Admin. Template driven.
 
 Django-Material works with Django 1.8/1.9/1.10
 
+Tested with:
+
+.. image:: demo/static/img/browserstack_small.png
+  :target:  http://browserstack.com/
+
 Overview
 ========
 
