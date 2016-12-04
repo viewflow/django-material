@@ -24,7 +24,7 @@
 
         if (hrefs.length) {
             hrefs.sort(function(a,b){
-                return a.attr("href").length < b.attr("href").length;
+                return b.attr("href").length - a.attr("href").length;
             })
             var href = hrefs[0];
             for(var i=1; i< hrefs.length; i++) {
