@@ -1,5 +1,5 @@
 {% extends current_module.base_template %}
-{% load i18n material_frontend %}
+{% load i18n material_form material_frontend %}
 
 {% block breadcrumbs_items %}
 <a class="active" href="{% url view.model|frontend_urlname:'list' %}">{{ view.model|verbose_name_plural|title }}</a>
