@@ -1,10 +1,10 @@
-{% load l10n material_form material_form_internal %}
+{% load i18n l10n material_form material_form_internal %}
 
 {% render bound_field template='fields/django_select.html' %}
     {% attr field 'widget' multiple %}True{% endattr %}
     {% attr field 'group' class append %}multiselect{% endattr %}
     {% part field options %}
-        {% if not field|have_default_choice %}<option value="" disabled selected>Choose your option</option>{% endif %}{% for group, items in bound_field|select_options %}{% if group %}<optgroup label="{{ group }}">{% endif %}{% for choice, value, selected in items %}
+        {% if not field|have_default_choice %}<option value="" disabled selected>{% trans "Choose your option" %}</option>{% endif %}{% for group, items in bound_field|select_options %}{% if group %}<optgroup label="{{ group }}">{% endif %}{% for choice, value, selected in items %}
             <option {% if value == None or value == '' %}disabled{% else %}value="{{ value|unlocalize }}"{% endif %}{% if selected %} selected="selected"{% endif %}>{% if value == None or value == '' %}{{ form_select_empty_label|default:choice }}{% else %}{{ choice }}{% endif %}</option>{% endfor %}
             {% if group %}</optgroup>{% endif %}{% endfor %}
     {% endpart %}
