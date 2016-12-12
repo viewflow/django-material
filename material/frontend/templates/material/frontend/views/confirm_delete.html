@@ -19,7 +19,7 @@
                         <h5>{{ model|verbose_name_plural|title }}</h5>
                         {% for item in items %}
                             {% url item|frontend_urlname:'detail' item.pk as details_url %}
-                            {% if details_url %}<a href="{{ details_url }}">{{ item }}</a>{% else %}{{ item }}{% endif %}
+                            {% if details_url %}<a href="{{ details_url }}">{{ item }}</a>{% else %}{{ item }}{% endif %}{% if not forloop.last %},&nbsp;{% endif %}
                         {% endfor %}
                     {% endfor %}
                 </div>
