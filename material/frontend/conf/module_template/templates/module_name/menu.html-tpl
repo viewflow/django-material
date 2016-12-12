@@ -1,0 +1,5 @@
+<ul>
+<!--
+    <li><a href="{% templatetag openblock %} url '{{ app_name }}:mymodel_list' {% templatetag closeblock %}">MyModel</a></li>
+-->
+</ul>
