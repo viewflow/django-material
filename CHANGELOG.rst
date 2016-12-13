@@ -1,3 +1,14 @@
+0.11.0 2016-12-13 - Beta
+------------------------
+
+* Forms - Default theme secondary color changed to green
+* Frontend - Added `startmodule` management command
+* Frontend - Added list view actions (PRO)
+* Frontend - Integration with django-filters (PRO)
+* Frontend - Active page highlight fixed under IE/Safari
+* Admin - Fix ManyToMany field height
+* Admin - Fix change form markup
+
 0.10.1 2016-11-10 - Beta
 ------------------------
 

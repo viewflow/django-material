@@ -3,6 +3,7 @@ include MANIFEST.in
 include README.rst
 recursive-include material/templates *
 recursive-include material/static *
+recursive-include material/frontend/conf *
 recursive-include material/frontend/templates *
 recursive-include material/frontend/static *
 recursive-include material/admin/templates *
