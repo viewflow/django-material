@@ -64,7 +64,13 @@ Django Material Pro has a commercial-friendly license and distributed as part of
 Changelog
 =========
 
-0.10.1 2016-11-10 - Beta
+0.11.0 2016-12-13 - Beta
 ------------------------
 
-- Fix admin raw_id select on django 1.10
+* Forms - Default theme secondary color changed to green
+* Frontend - Added `startmodule` management command
+* Frontend - Added list view actions (PRO)
+* Frontend - Integration with django-filters (PRO)
+* Frontend - Active page highlight fixed under IE/Safari
+* Admin - Fix ManyToMany field height
+* Admin - Fix change form markup
