@@ -19,8 +19,8 @@ class Department(models.Model):
 
 
 class DeptEmp(models.Model):
-    employee = models.ForeignKey('Employee', on_delete=models.DO_NOTHING, db_column='emp_no')
-    department = models.ForeignKey(Department, on_delete=models.DO_NOTHING, db_column='dept_no')
+    employee = models.ForeignKey('Employee', on_delete=models.CASCADE, db_column='emp_no')
+    department = models.ForeignKey(Department, on_delete=models.CASCADE, db_column='dept_no')
     from_date = models.DateField()
     to_date = models.DateField()
 
@@ -31,8 +31,8 @@ class DeptEmp(models.Model):
 
 
 class DeptManager(models.Model):
-    employee = models.ForeignKey('Employee', on_delete=models.DO_NOTHING, db_column='emp_no')
-    department = models.ForeignKey(Department, on_delete=models.DO_NOTHING, db_column='dept_no')
+    employee = models.ForeignKey('Employee', on_delete=models.CASCADE, db_column='emp_no')
+    department = models.ForeignKey(Department, on_delete=models.CASCADE, db_column='dept_no')
     from_date = models.DateField()
     to_date = models.DateField()
 
@@ -59,7 +59,7 @@ class Employee(models.Model):
 
 
 class Salary(models.Model):
-    employee = models.ForeignKey(Employee, on_delete=models.DO_NOTHING, db_column='emp_no')
+    employee = models.ForeignKey(Employee, on_delete=models.CASCADE, db_column='emp_no')
     salary = models.IntegerField()
     from_date = models.DateField()
     to_date = models.DateField()
@@ -74,7 +74,7 @@ class Salary(models.Model):
 
 
 class Title(models.Model):
-    employee = models.ForeignKey(Employee, on_delete=models.DO_NOTHING, db_column='emp_no')
+    employee = models.ForeignKey(Employee, on_delete=models.CASCADE, db_column='emp_no')
     title = models.CharField(max_length=50)
     from_date = models.DateField()
     to_date = models.DateField(blank=True, null=True)
