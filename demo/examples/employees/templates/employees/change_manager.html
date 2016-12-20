@@ -1,0 +1,16 @@
+{% extends 'employees/base_module.html' %}
+{% load material_frontend %}
+
+{% block breadcrumbs_items %}
+<a href="{% url department|frontend_urlname:'list' %}">{{ department|verbose_name_plural|title }}</a>
+<a href="{% url department|frontend_urlname:'detail' department.pk %}">{{ department }}</a>
+<a class="active">Change Manager</a>
+{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-content">
+        {{ form }}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends 'material/frontend/views/detail.html' %}
+{% load i18n material_frontend %}
+
+{% block content %}
+<div class="row frontend-form">
+    <div class="col s12 m12 l9">
+        <div class="card">
+            <div class="card-content">
+                {% block card %}
+                <div class="form-title">{{ view.model|verbose_name|title }}: {{ object }}</div>
+                <table class="table bordered">
+                    {% for field_name, value in object_data %}
+                    <tr>
+                        <th>{{ field_name }}</th>
+                        <td>{{ value }}</td>
+                    {% endfor %}
+                    </tr>
+                    {% endblock %}
+                    <tr>
+                        <th>Employees</th>
+                        <td>
+                            <a href="{% url 'employees:department_employees' object.pk %}">{{ object.deptemp_set.count }}</a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="card-action">
+                <div class="right-align">
+                    {% if delete_url %}<a class="waves-effect waves-light btn red white-text" href="{{ delete_url }}">{% trans 'Delete' %}</a>{% endif %}
+                    {% if change_url %}<a class="waves-effect waves-light btn white-text" href="{{ change_url }}">{% trans 'Change' %}</a>{% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col s12 m12 l3">
+        <div class="card">
+            <div class="card-content">
+                <div class="card-title">Department Managers</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <td>Manager</td>
+                            <td>Since</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for manager in object.deptmanager_set.all %}
+                    <tr>
+                        <td>{{ manager.employee }}</td>
+                        <td>{{ manager.from_date }}</td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="card-action right-align">
+                <a href="{% url 'employees:department_change_manager' object.pk %}" class="btn disabled">Change</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

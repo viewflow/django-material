@@ -1,0 +1,45 @@
+{% extends 'employees/base_module.html' %}
+{% load material_frontend %}
+
+{% block breadcrumbs_items %}
+<a href="{% url employee|frontend_urlname:'list' %}">{{ employee|verbose_name_plural|title }}</a>
+<a href="{% url employee|frontend_urlname:'detail' employee.pk %}">{{ employee }}</a>
+<a class="active">Change Title</a>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col s12 m12 l6">
+        <form method="POST">
+            {% csrf_token %}
+            <div class="card">
+                <div class="card-content">
+                    <div class="card-title">Positions</div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>Position</td>
+                                <td>Since</td>
+                                <td>To</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for title in employee.title_set.all %}
+                            <tr>
+                                <td>{{ title.title }}</td>
+                                <td>{{ title.from_date }}</td>
+                                <td>{{ title.to_date }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    {{ form }}
+                </div>
+                <div class="card-action right-align">
+                    <button type="submit" class="btn">Change</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

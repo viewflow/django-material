@@ -39,10 +39,11 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
 
     # test apps
     'demo.examples.accounting',
-    'demo.examples.sales',
+    'demo.examples.employees.apps.EmployeesConfig',
     'demo.tests.integration',
 
     # test admin apps

@@ -1,0 +1,48 @@
+{% extends 'employees/base_module.html' %}
+{% load material_frontend %}
+
+{% block breadcrumbs_items %}
+<a href="{% url employee|frontend_urlname:'list' %}">{{ employee|verbose_name_plural|title }}</a>
+<a href="{% url employee|frontend_urlname:'detail' employee.pk %}">{{ employee }}</a>
+<a class="active">Change Salary</a>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col s12 m12 l6">
+        <div class="card">
+            <div class="card-content">
+                <div class="card-title">Salary History</div>
+                <canvas id="salaryChart" ></canvas>
+
+                <script type="text/javascript">
+                  new Chart($("#salaryChart"), {
+                    type: 'line',
+                    data: {{ salary_history|safe }},
+                    options: {
+                      scales: {
+                        xAxes: [{
+                          type: 'time',
+                        }]
+                      }
+                    }
+                  });
+                </script>
+            </div>
+        </div>
+    </div>
+    <div class="col s12 m12 l6">
+        <form method="POST">
+            {% csrf_token %}
+            <div class="card">
+                <div class="card-content">
+                    {{ form }}
+                </div>
+                <div class="card-action right-align">
+                    <button class=" btn" type="submit">Set new Salary</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
