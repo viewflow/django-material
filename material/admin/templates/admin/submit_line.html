@@ -7,6 +7,11 @@
         <i class="material-icons">arrow_drop_down</i>
     </a>
     <ul id='save-dropdown-admin' class='dropdown-content'>
+        {% if show_save_as_new %}
+        <li class="li-dropdown-admin">
+            <input type="submit" value="{% trans 'Save as new' %}" class="btn-flat" name="_saveasnew" />
+        </li>
+        {% endif %}
         {% if show_save_and_add_another %}
         <li class="li-dropdown-admin">
             <input type="submit" value="{% trans 'Save and add another' %}" class="btn-flat" name="_addanother" />
