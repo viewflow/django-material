@@ -111,7 +111,7 @@ table[data-form-control="datatable"] ~ .dataTables_paginate {
     color: #444;
     cursor: pointer; }
     table[data-form-control="datatable"] ~ .dataTables_paginate .paginate_button.current {
-      background-color: #4caf50;
+      background-color: #424242;
       color: white; }
     table[data-form-control="datatable"] ~ .dataTables_paginate .paginate_button.disabled {
       cursor: default;

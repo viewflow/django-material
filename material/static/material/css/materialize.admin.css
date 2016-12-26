@@ -125,7 +125,7 @@ nav.breadcrumbs {
           font-size: 48px; }
         .app-list .app .card .app-item a {
           background: #f5f5f5;
-          color: #80c883;
+          color: #686868;
           display: block;
           border-radius: 4px;
           padding: 35px 0px;
@@ -314,7 +314,7 @@ nav.breadcrumbs {
 
 .change-form .multiselect .selector-add,
 .change-form .multiselect .selector-remove {
-  background-color: #80c883; }
+  background-color: #686868; }
 
 @media only screen and (min-width: 601px) {
   .change-form .multiselect {

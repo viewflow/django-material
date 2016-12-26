@@ -1,21 +1,16 @@
 /* materialize.css variables */ 
-$primary-color: #4caf50;                             // green
+$primary-color: #424242;
 $primary-color-light: lighten($primary-color, 15%);
 $primary-color-dark: darken($primary-color, 15%);
 
-$secondary-color: #4caf50;                           // green
-$success-color: #4caf50;                             // green
+$secondary-color: #37474f;                           // blue-grey
+$success-color: #607d8b;                             // green
 $error-color: #f44336;                               // red
 $link-color: #039be5;                                // light-blue darken-1
 
 
 /* django-material variables */
-$logo-background-color: $primary-color-dark;
-
-$nav-default-text-color: #424242;                    // grey darken-3
-$nav-1st-level-color: #388E3C;                       // green darken-2
-$nav-1st-level-text-color: #ffffff;                  // white
-$nav-2d-level-color: #4CAF50;                        // green
+// $logo-background-color: $primary-color-dark;
 
 /* fixes */
 $input-margin: 0 0 15px 0; //  0 0 20px 0 !default   // label data-error/data-success placeholders not used
