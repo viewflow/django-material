@@ -1,0 +1,209 @@
+/* materialize.css variables */
+/* fixes */
+/* MAIN */
+html, body, main {
+  height: 100%; }
+
+body {
+  background: #efefef; }
+
+th {
+  font-weight: 300; }
+
+/* LAYOUT */
+@media only screen and (min-width: 993px) {
+  html {
+    overflow-y: scroll; }
+  main, footer {
+    margin-left: 300px; }
+  nav {
+    padding-left: 40px; }
+  .right-panel .card {
+    margin-left: -0.75rem;
+    margin-bottom: 0.75rem; } }
+
+@media only screen and (max-width: 993px) {
+  .right-panel {
+    display: none; } }
+
+/* SIDEBAR */
+.side-nav.fixed {
+  overflow-y: hidden; }
+  .side-nav.fixed .userView {
+    min-height: 175px; }
+  .side-nav.fixed > li.last {
+    padding-bottom: 58px; }
+  .side-nav.fixed .collapsible-body .submenu.active {
+    background-color: transparent; }
+  .side-nav.fixed .collapsible-body li a {
+    padding-left: 70px; }
+  .side-nav.fixed .collapsible-body li .collapsible li.active {
+    background-color: rgba(0, 0, 0, 0.05); }
+    .side-nav.fixed .collapsible-body li .collapsible li.active a {
+      color: rgba(0, 0, 0, 0.87); }
+  .side-nav.fixed .collapsible-body li:not(.active) > a.collapsible-header {
+    color: rgba(0, 0, 0, 0.87); }
+  .side-nav.fixed .collapsible-body li .collapsible-body li.active {
+    background-color: #4caf50; }
+    .side-nav.fixed .collapsible-body li .collapsible-body li.active a {
+      color: #fff; }
+  .side-nav.fixed .collapsible-body li .collapsible-body li a {
+    color: rgba(0, 0, 0, 0.87);
+    padding-left: 90px; }
+
+/* TOPBAR */
+nav.topbar {
+  box-shadow: none;
+  height: 54px;
+  line-height: 54px; }
+  nav.topbar i,
+  nav.topbar a.button-collapse,
+  nav.topbar a.button-collapse i {
+    height: 54px;
+    line-height: 54px; }
+  nav.topbar .brand-logo {
+    font-weight: 100;
+    font-size: 2.5rem;
+    top: 5px; }
+
+/* BREADCRUMBS */
+nav.breadcrumbs {
+  height: 48px;
+  line-height: 48px;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 0px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2); }
+  nav.breadcrumbs a:first-child {
+    padding-left: 0px; }
+  nav.breadcrumbs a {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.7); }
+  nav.breadcrumbs a.active {
+    color: white; }
+  nav.breadcrumbs a:not(:first-child):before {
+    content: '\E5CC';
+    color: rgba(255, 255, 255, 0.7);
+    vertical-align: top;
+    display: inline-block;
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 20px;
+    margin: 0 5px 0 4px;
+    -webkit-font-smoothing: antialiased; }
+
+@media only screen and (max-width: 992px) {
+  nav.breadcrumbs {
+    text-align: center; } }
+
+@media only screen and (max-width: 600px) {
+  nav.breadcrumbs {
+    white-space: nowrap; }
+    nav.breadcrumbs .nav-wrapper {
+      width: 100%;
+      overflow-x: hidden;
+      padding: 0 20px 0 10px;
+      text-overflow: ellipsis; } }
+
+/* DATATABLE */
+.list-card .card-content {
+  padding-left: 0px;
+  padding-right: 0px; }
+
+table[data-form-control="datatable"] {
+  margin-bottom: 60px; }
+  table[data-form-control="datatable"] ~ .dataTables_paginate {
+    margin-top: -60px;
+    padding-right: 20px;
+    min-height: 60px;
+    text-align: right; }
+    table[data-form-control="datatable"] ~ .dataTables_paginate .paginate_button {
+      display: inline-block;
+      font-size: 1.2rem;
+      padding: 0 10px;
+      margin: 15px 2px;
+      line-height: 30px;
+      border-radius: 2px;
+      text-align: center;
+      color: #444;
+      cursor: pointer; }
+      table[data-form-control="datatable"] ~ .dataTables_paginate .paginate_button.current {
+        background-color: #f57f17;
+        color: white; }
+      table[data-form-control="datatable"] ~ .dataTables_paginate .paginate_button.disabled {
+        cursor: default;
+        color: #999; }
+  table[data-form-control="datatable"] thead tr > th:first-child {
+    padding-left: 20px; }
+  table[data-form-control="datatable"] thead tr > th:last-child {
+    padding-right: 20px; }
+  table[data-form-control="datatable"] thead tr > th {
+    padding-right: 30px; }
+    table[data-form-control="datatable"] thead tr > th.sorting, table[data-form-control="datatable"] thead tr > th.sorting_asc, table[data-form-control="datatable"] thead tr > th.sorting_desc {
+      cursor: pointer;
+      position: relative; }
+    table[data-form-control="datatable"] thead tr > th.sorting_asc, table[data-form-control="datatable"] thead tr > th.sorting_desc {
+      font-weight: 500; }
+    table[data-form-control="datatable"] thead tr > th.sorting:before, table[data-form-control="datatable"] thead tr > th.sorting:after, table[data-form-control="datatable"] thead tr > th.sorting_asc:before, table[data-form-control="datatable"] thead tr > th.sorting_asc:after, table[data-form-control="datatable"] thead tr > th.sorting_desc:before, table[data-form-control="datatable"] thead tr > th.sorting_desc:after, table[data-form-control="datatable"] thead tr > th.sorting_asc_disabled:before, table[data-form-control="datatable"] thead tr > th.sorting_asc_disabled:after, table[data-form-control="datatable"] thead tr > th.sorting_desc_disabled:before, table[data-form-control="datatable"] thead tr > th.sorting_desc_disabled:after {
+      position: absolute;
+      bottom: 11px;
+      display: block;
+      opacity: 0.3;
+      font-size: 1.3em;
+      margin: auto;
+      height: 30px;
+      top: 0px;
+      bottom: 0px; }
+    table[data-form-control="datatable"] thead tr > th.sorting:last-child:before, table[data-form-control="datatable"] thead tr > th.sorting:last-child:after, table[data-form-control="datatable"] thead tr > th.sorting_asc:last-child:before, table[data-form-control="datatable"] thead tr > th.sorting_asc:last-child:after, table[data-form-control="datatable"] thead tr > th.sorting_desc:last-child:before, table[data-form-control="datatable"] thead tr > th.sorting_desc:last-child:after, table[data-form-control="datatable"] thead tr > th.sorting_asc_disabled:last-child:before, table[data-form-control="datatable"] thead tr > th.sorting_asc_disabled:last-child:after, table[data-form-control="datatable"] thead tr > th.sorting_desc_disabled:last-child:before, table[data-form-control="datatable"] thead tr > th.sorting_desc_disabled:last-child:after {
+      padding-right: 20px; }
+    table[data-form-control="datatable"] thead tr > th.sorting:before, table[data-form-control="datatable"] thead tr > th.sorting_asc:before, table[data-form-control="datatable"] thead tr > th.sorting_desc:before, table[data-form-control="datatable"] thead tr > th.sorting_asc_disabled:before, table[data-form-control="datatable"] thead tr > th.sorting_desc_disabled:before {
+      right: 1em;
+      content: "\2191"; }
+    table[data-form-control="datatable"] thead tr > th.sorting:after, table[data-form-control="datatable"] thead tr > th.sorting_asc:after, table[data-form-control="datatable"] thead tr > th.sorting_desc:after, table[data-form-control="datatable"] thead tr > th.sorting_asc_disabled:after, table[data-form-control="datatable"] thead tr > th.sorting_desc_disabled:after {
+      right: 0.5em;
+      content: "\2193"; }
+    table[data-form-control="datatable"] thead tr > th.sorting_asc:before, table[data-form-control="datatable"] thead tr > th.sorting_desc:after {
+      opacity: 1; }
+    table[data-form-control="datatable"] thead tr > th.sorting_asc_disabled:before, table[data-form-control="datatable"] thead tr > th.sorting_desc_disabled:after {
+      opacity: 0; }
+  table[data-form-control="datatable"] tbody tr:hover,
+  table[data-form-control="datatable"] tbody tr.selected:hover {
+    background-color: #eeeeee; }
+  table[data-form-control="datatable"] tbody tr.selected {
+    background: #f5f5f5; }
+  table[data-form-control="datatable"] tbody .dt-body-center {
+    padding-top: 10px;
+    padding-bottom: 0px; }
+  table[data-form-control="datatable"] tbody tr > td:first-child {
+    padding-left: 20px; }
+  table[data-form-control="datatable"] tbody tr > td:last-child {
+    padding-right: 20px; }
+
+.fixedHeader-floating {
+  /* Fix for checkbox column */
+  z-index: 1; }
+
+/* ALERTS */
+.toast a {
+  color: white; }
+  .toast a.alert-info {
+    background-color: #0277bd; }
+  .toast a.alert-warning {
+    background-color: #ff8f00; }
+  .toast a.alert-error {
+    background-color: #bf360c; }
+
+/* FORM CARD */
+.form-card .card-title {
+  font-size: 1.2rem;
+  font-weight: 100;
+  text-transform: uppercase;
+  display: block;
+  margin-top: -10px; }
+
+.form-card .section {
+  padding-top: 0;
+  padding-bottom: 0; }
+  .form-card .section h5 {
+    font-size: 1.2rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid black;
+    margin-bottom: 10px; }

@@ -1,0 +1,142 @@
+/* FORM LAYOUT */
+form .row {
+  margin-bottom: 0px;
+  margin-left: -0.75rem;
+  margin-right: -0.75rem; }
+
+/* COMMON ELEMENTS */
+form .help-block {
+  line-height: 12px;
+  position: relative;
+  top: -10px;
+  color: rgba(0, 0, 0, 0.6); }
+
+form .error {
+  line-height: 12px;
+  position: relative;
+  top: -10px;
+  color: #F44336; }
+
+/* INPUT FIELD */
+.input-field label {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: calc(100% - 21px);
+  overflow: hidden; }
+
+.input-field.has-error .prefix {
+  color: #F44336; }
+
+.input-field .prefix {
+  line-height: 45px; }
+  .input-field .prefix ~ label {
+    width: calc(100% - 21px - 3rem); }
+  .input-field .prefix ~ .errors .error {
+    margin-left: 3rem; }
+
+.input-field input[type=number] {
+  -moz-appearance: textfield; }
+
+.input-field ::-webkit-inner-spin-button {
+  -webkit-appearance: none; }
+
+.input-field ::-webkit-outer-spin-button {
+  -webkit-appearance: none; }
+
+input:-webkit-autofill + label {
+  font-size: 0.8rem;
+  transform: translateY(-140%); }
+
+/* SELECT FIELD */
+select.material-ignore {
+  display: block; }
+
+.select-field .prefix {
+  position: absolute;
+  width: 3rem;
+  font-size: 2rem;
+  margin-top: 25px;
+  transition: color .2s; }
+  .select-field .prefix ~ label {
+    margin-left: 3rem; }
+
+.select-field.has-error input {
+  border-bottom: 1px solid #F44336;
+  box-shadow: 0 1px 0 0 #F44336; }
+
+.select-field .select-wrapper {
+  margin-top: 0px; }
+  .select-field .select-wrapper input.select-dropdown {
+    margin-top: -7px; }
+
+/* CHECHBOX FIELD */
+.checkbox-field {
+  line-height: 35px; }
+  .checkbox-field label {
+    color: rgba(0, 0, 0, 0.84); }
+  .checkbox-field .prefix {
+    position: relative;
+    top: 5px;
+    width: 2.5rem;
+    font-size: 2rem; }
+  .checkbox-field .help-block {
+    padding-top: 5px;
+    padding-left: 35px;
+    font-size: 12px;
+    line-height: 16px;
+    display: block; }
+
+/* RADIO FIELD */
+.radio-field .radio {
+  padding-top: 10px; }
+
+.radio-field .error, .radio-field .help-block {
+  top: 0px;
+  left: 5px; }
+
+.radio-field label.item-label {
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.84); }
+
+.radio-field .prefix {
+  position: relative;
+  top: 5px;
+  width: 2.5rem;
+  font-size: 2rem; }
+  .radio-field .prefix ~ label {
+    width: calc(100% - 21px - 3rem); }
+
+.radio-field .inline {
+  margin-top: 10px; }
+  .radio-field .inline .radio {
+    display: inline;
+    margin-right: 20px; }
+
+/* FILE FIELD */
+.file-field .btn,
+.file-field .btn-large {
+  left: auto; }
+
+.file-field-clear {
+  float: right; }
+  .file-field-clear label {
+    margin-right: 25px;
+    width: auto; }
+
+/* FORMSET*/
+.formset-field h5 {
+  font-size: 1.2rem;
+  padding-bottom: 0.2rem;
+  border-bottom: 2px solid black;
+  margin-bottom: 0px; }
+
+.formset-field td {
+  vertical-align: top;
+  padding-bottom: 0px;
+  padding-top: 5px; }
+
+.formset-field td:first-child {
+  padding-left: 0px; }
+
+.formset-field td:last-child {
+  padding-right: 0px; }

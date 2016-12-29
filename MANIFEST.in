@@ -2,6 +2,7 @@ include LICENSE
 include MANIFEST.in
 include README.rst
 recursive-include material/templates *
+recursive-include material/theme *
 recursive-include material/static *
 recursive-include material/frontend/conf *
 recursive-include material/frontend/templates *
