@@ -38,7 +38,7 @@ class Command(TemplateCommand):
         know into which directory Django has been installed.
         """
         if template is None:
-            return path.join(material.__path__[0], 'frontend', 'conf', subdir)
+            return path.join(material.__path__[0], 'conf', subdir)
         return super(Command, self).handle_template(template, subdir)
 
     def _validate_name(self, app_name):
