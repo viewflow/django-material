@@ -1,4 +1,8 @@
 /* global $ */
+$(document).on('turbolinks:before-render', function (event) {
+  $(event.originalEvent.data.newBody).activeNavigation('#slide-out')
+})
+
 $(document).on('turbolinks:load', function () {
   // Sidenav
   // http://materializecss.com/side-nav.html
