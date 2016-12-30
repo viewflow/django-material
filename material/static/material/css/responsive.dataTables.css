@@ -92,20 +92,20 @@ table.dataTable > tbody > tr.child {
 table.dataTable > tbody > tr.child:hover {
   background: transparent !important;
 }
-table.dataTable > tbody > tr.child ul {
+table.dataTable > tbody > tr.child ul.dtr-details {
   display: inline-block;
   list-style-type: none;
   margin: 0;
   padding: 0;
 }
-table.dataTable > tbody > tr.child ul li {
+table.dataTable > tbody > tr.child ul.dtr-details li {
   border-bottom: 1px solid #efefef;
   padding: 0.5em 0;
 }
-table.dataTable > tbody > tr.child ul li:first-child {
+table.dataTable > tbody > tr.child ul.dtr-details li:first-child {
   padding-top: 0;
 }
-table.dataTable > tbody > tr.child ul li:last-child {
+table.dataTable > tbody > tr.child ul.dtr-details li:last-child {
   border-bottom: none;
 }
 table.dataTable > tbody > tr.child span.dtr-title {
