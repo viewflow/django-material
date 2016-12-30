@@ -7,10 +7,13 @@ Material design for Django Forms and Admin. Template driven.
 .. image:: https://img.shields.io/pypi/v/django-material.svg
     :target: https://pypi.python.org/pypi/django-material
 .. image:: https://img.shields.io/pypi/wheel/django-material.svg
+    :target: https://pypi.python.org/pypi/django-material
 .. image:: https://img.shields.io/pypi/status/django-material.svg
+    :target: https://pypi.python.org/pypi/django-material
 .. image:: https://travis-ci.org/viewflow/django-material.svg
     :target: https://travis-ci.org/viewflow/django-material
 .. image:: https://img.shields.io/pypi/pyversions/django-material.svg
+    :target: https://pypi.python.org/pypi/django-material
 .. image:: https://img.shields.io/pypi/l/Django.svg
     :target: https://raw.githubusercontent.com/viewflow/django-material/master/LICENSE.txt
 .. image:: https://badges.gitter.im/Join%20Chat.svg
