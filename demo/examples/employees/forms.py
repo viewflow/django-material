@@ -1,7 +1,4 @@
-from datetime import date
-
 from django import forms
-from django.utils import timezone
 
 from .models import Employee, DeptManager, Title, Salary
 
@@ -43,7 +40,7 @@ class ChangeTitleForm(forms.Form):
 
 
 class ChangeSalaryForm(forms.Form):
-    salary = forms.IntegerField()
+    salary = forms.IntegerField(max_value=1000000)
 
     def __init__(self, *args, **kwargs):
         self.employee = kwargs.pop('employee')
