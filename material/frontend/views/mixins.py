@@ -87,7 +87,7 @@ class MessageUserMixin(object):
 
         url = reverse('{}:{}_detail'.format(
             opts.app_label, opts.model_name), args=[self.object.pk])
-        link = format_html('<a href="{}">{}</a>', urlquote(url), self.object)
+        link = format_html('<a href="{}">{}</a>', urlquote(url), force_text(self.object))
         name = force_text(opts.verbose_name)
 
         options = {

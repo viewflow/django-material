@@ -15,7 +15,7 @@ class Ocean(models.Model):
         ordering = ['name']
 
     def __str__(self):
-        return self.name
+        return self.name if self.name is not None else 'Ocean'
 
 
 @python_2_unicode_compatible
@@ -60,7 +60,7 @@ class Continent(models.Model):
             ('BOTH', 'Both')))
 
     def __str__(self):
-        return self.name
+        return self.name if self.name is not None else 'Continent'
 
     class Meta:
         ordering = ['name']
