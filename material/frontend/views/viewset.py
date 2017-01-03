@@ -29,7 +29,7 @@ class BaseViewset(object):
 
         url_entries = (
             getattr(self, attr)
-            for attr in self.__dir__()
+            for attr in dir(self)
             if attr.endswith('_view')
             if isinstance(getattr(self, attr), (list, tuple))
         )
