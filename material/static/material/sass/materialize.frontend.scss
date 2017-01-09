@@ -42,9 +42,6 @@ th {
     }
 
     .collapsible-body {
-        .submenu.active {
-            background-color: transparent
-        }
         li a {
             padding-left: 70px;
         }
@@ -64,7 +61,7 @@ th {
 
         // 3d level body
         li .collapsible-body li.active {
-            background-color: #4caf50;
+            background-color: $primary-color;
             a {
                 color: #fff;
             }
@@ -73,6 +70,19 @@ th {
         li .collapsible-body li a {
             color: rgba(0,0,0,0.87);
             padding-left: 90px;
+        }
+
+        .collapsible li.active > a.active {
+            color: rgba(0, 0, 0, 0.87);
+        }
+
+        .submenu.active {
+            background-color: rgba(0, 0, 0, 0.05) !important;
+
+            .collapsible li.active > a.active,
+            .collapsible li.active > .collapsible-header {
+                color: rgba(0, 0, 0, 0.87);
+            }
         }
     }
 }
