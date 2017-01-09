@@ -290,3 +290,12 @@ table[data-form-control="datatable"] {
         }
     }
 }
+
+/* HELPERS */
+.primary {
+    background-color: $primary-color;
+}
+
+.secondary {
+    background-color: $secondary-color;
+}

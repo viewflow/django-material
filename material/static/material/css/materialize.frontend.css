@@ -177,3 +177,10 @@ table[data-form-control="datatable"] thead tr > th.sorting_asc_disabled:before, 
     padding-bottom: 0.5rem;
     border-bottom: 2px solid black;
     margin-bottom: 10px; }
+
+/* HELPERS */
+.primary {
+  background-color: #424242; }
+
+.secondary {
+  background-color: #37474f; }
