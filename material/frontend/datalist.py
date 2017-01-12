@@ -121,14 +121,13 @@ class DataSourceAttr(object):
 class DataList(object):
     """Queryset to datatables data adapter."""
 
-    def __init__(self, model, queryset, data_sources=None, list_display=None, list_display_links=None):
+    def __init__(self, queryset, data_sources=None, list_display=None, list_display_links=None):
         """Instantiate a datalist.
 
         :keyword data_source: List of classes that used as source to
         resole `list_display` fields values, in case if model have no
         such field.
         """
-        self.model = model
         self.queryset = queryset
         self.data_sources = data_sources if data_sources else []
 
@@ -146,18 +145,18 @@ class DataList(object):
         Data could comes from the model field or extrnal `data_source`
         method call.
         """
-        opts = self.model._meta
+        opts = self.queryset.model._meta
         try:
             return ModelField(opts.get_field(attr_name))
         except FieldDoesNotExist:
             if attr_name == "__str__":
-                return ModelAttr(self.model, attr_name, opts.verbose_name)
+                return ModelAttr(self.queryset.model, attr_name, opts.verbose_name)
             else:
                 for data_source in self.data_sources:
                     if hasattr(data_source, attr_name):
                         return DataSourceAttr(data_source, attr_name)
 
-        raise AttributeError("Unable to lookup '{}' on {}" .format(attr_name, self.model._meta.object_name))
+        raise AttributeError("Unable to lookup '{}' on {}" .format(attr_name, self.queryset.model._meta.object_name))
 
     def total(self):
         """Total dataset size."""

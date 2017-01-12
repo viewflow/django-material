@@ -138,7 +138,6 @@ class ListModelView(ContextMixin, TemplateResponseMixin, View):
         list_display = self.get_list_display()
         list_display_links = self.get_list_display_links(list_display)
         return self.datalist_class(
-            self.model,
             self.object_list,
             data_sources=[self, self.viewset] if self.viewset else [self],
             list_display=list_display,
