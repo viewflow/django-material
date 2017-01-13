@@ -132,7 +132,183 @@ class DataSourceAttr(object):
         return False
 
 
-class ListModelView(ContextMixin, TemplateResponseMixin, View):
+class DataTableMixin(ContextMixin):
+    """Mixing for list views with DataTable."""
+
+    datatable_config = None
+    datatable_default_config = {
+        'processing': False,
+        'serverSide': True,
+        'ajax': {
+            'url': '.',
+        },
+        'order': [],
+        'ordering': True,
+        'orderMulti': True,
+        'info': False,
+        'bFilter': False,
+        'bAutoWidth': True,
+        'bLengthChange': False,
+        'oLanguage': {
+            'oPaginate': {
+                'sFirst': "",
+                'sLast': "",
+                'sNext': "&rang;",
+                'sPrevious': "&lang;",
+            }
+        },
+        'responsive': {
+            'details': False
+        }
+    }
+    list_display = ('__str__', )
+    ordering = None
+
+    def get_context_data(self, **kwargs):
+        """Update view context.
+
+        Include `datatable_config`, 'headers' and initial `data` to
+        first page render.
+        """
+        context = super(DataTableMixin, self).get_context_data(**kwargs)
+        context.update({
+            'datatable_config': json.dumps(self.get_datatable_config()),
+            'headers': self.get_headers_data(),
+            'data': self.get_table_data(0, self.paginate_by),
+        })
+
+        return context
+
+    def get_list_display(self):
+        """Return list of coluns to display."""
+        return self.list_display
+
+    def get_datatable_config(self):
+        """Prepare datatable config."""
+        config = self.datatable_default_config.copy()
+        config['pageLength'] = self.paginate_by
+        config['ajax']['url'] = self.request.path
+        config['columns'] = self.get_columns_def()
+        if self.datatable_config is not None:
+            config.update(self.datatable_config)
+        return config
+
+    def get_data_attr(self, attr_name):
+        """Data getter for an attribute.
+
+        Data could comes from the model field or extrnal `data_source`
+        method call.
+        """
+        opts = self.object_list.model._meta
+        try:
+            return ModelField(opts.get_field(attr_name))
+        except FieldDoesNotExist:
+            if attr_name == "__str__":
+                return ModelAttr(self.object_list.model, attr_name, opts.verbose_name)
+            else:
+                data_sources = [self, self.viewset] if self.viewset is not None else [self]
+                for data_source in data_sources:
+                    if hasattr(data_source, attr_name):
+                        return DataSourceAttr(data_source, attr_name)
+
+        raise AttributeError("Unable to lookup '{}' on {}" .format(attr_name, self.object_list.model._meta.object_name))
+
+    def get_columns_def(self):
+        """Returns columns definition for the datables js config."""
+        return [
+            {'data': field_name, 'orderable': self.get_data_attr(field_name).orderable}
+            for field_name in self.get_list_display()
+        ]
+
+    def get_headers_data(self):
+        """Readable column titles."""
+        for field_name in self.get_list_display():
+            attr = self.get_data_attr(field_name)
+            yield field_name, attr.label
+
+    def format_column(self, item, field_name, value):
+        return smart_text(value)
+
+    def get_table_data(self, start, length):
+        """Get a page for datatable."""
+        for item in self.object_list[start:start+length]:
+            columns = OrderedDict()
+            for n, field_name in enumerate(self.get_list_display()):
+                attr = self.get_data_attr(field_name)
+                value = self.format_column(item, field_name, attr.get_value(item))
+                columns[field_name] = value
+            yield item, columns
+
+    def total(self):
+        """Total dataset size."""
+        return self.object_list.count()
+
+    def total_filtered(self):
+        """Dataset size with filter appllied."""
+        return self.object_list.count()
+
+    def get_ordering(self):
+        """ Return the field or fields to use for ordering the queryset."""
+        if self.request_form.is_valid():
+            ordering = []
+            requested_order = self.request_form.cleaned_data['ordering']
+            for spec in requested_order:
+                column_num, column_dir = spec.get('column', 0), spec.get('dir', 'asc')
+
+                try:
+                    order = self.get_list_display()[int(column_num)]
+                    if column_dir == 'asc':
+                        order = '-' + order
+                except (IndexError, TypeError):
+                    """ Skip """
+                else:
+                    ordering.append(order)
+            return ordering
+        else:
+            return self.ordering
+
+    def get(self, request, *args, **kwargs):
+        """Response with rendered html template."""
+        context = self.get_context_data()
+        return self.render_to_response(context)
+
+    def get_json_data(self, request, *args, **kwargs):
+        """Return `JSONResponse` with data for datatable."""
+        if not self.request_form.is_valid():
+            return JsonResponse({'error': self.request_form.errors})
+
+        draw = self.request_form.cleaned_data['draw']
+        start = self.request_form.cleaned_data['start']
+        length = self.request_form.cleaned_data['length']
+
+        result = []
+        for item, columns_data in self.get_table_data(start, length):
+            result.append(columns_data)
+
+        data = {
+            "draw": draw,
+            "recordsTotal": self.total(),
+            "recordsFiltered": self.total_filtered(),
+            "data": result
+        }
+
+        return JsonResponse(data)
+
+    def dispatch(self, request, *args, **kwargs):
+        """Handle for browser HTTP and AJAX requests from datatables."""
+        self.request_form = forms.DatatableRequestForm(request.GET)
+        self.object_list = self.get_queryset()
+        if 'HTTP_DATATABLE' in request.META:
+            handler = self.get_json_data
+        elif request.method.lower() in self.http_method_names:
+            handler = getattr(
+                self, request.method.lower(), self.http_method_not_allowed)
+        else:
+            handler = self.http_method_not_allowed
+        return handler(request, *args, **kwargs)
+
+
+class ListModelView(TemplateResponseMixin, DataTableMixin, View):
     """List view sutable to work with jQuery Datatables.
 
     The view responsive for handling GET/POST requests from the browser
@@ -159,38 +335,8 @@ class ListModelView(ContextMixin, TemplateResponseMixin, View):
     viewset = None
     queryset = None
     paginate_by = 15
-    ordering = None
-    datatable_config = None
     template_name_suffix = '_list'
-
-    list_display = ('__str__', )
     list_display_links = ()
-
-    datatable_default_config = {
-        'processing': False,
-        'serverSide': True,
-        'ajax': {
-            'url': '.',
-        },
-        'order': [],
-        'ordering': True,
-        'orderMulti': True,
-        'info': False,
-        'bFilter': False,
-        'bAutoWidth': True,
-        'bLengthChange': False,
-        'oLanguage': {
-            'oPaginate': {
-                'sFirst': "",
-                'sLast': "",
-                'sNext': "&rang;",
-                'sPrevious': "&lang;",
-            }
-        },
-        'responsive': {
-            'details': False
-        }
-    }
 
     def has_view_permission(self, request, obj=None):
         """Object view permission check.
@@ -230,10 +376,6 @@ class ListModelView(ContextMixin, TemplateResponseMixin, View):
             ]
         return [self.template_name]
 
-    def get_list_display(self):
-        """Return list of coluns to display."""
-        return self.list_display
-
     def get_list_display_links(self, list_display):
         """Return columns list that would be linked to the object details.
 
@@ -242,7 +384,7 @@ class ListModelView(ContextMixin, TemplateResponseMixin, View):
         if (self.list_display_links or
                 self.list_display_links is None or
                 not list_display):
-            return list(self.list_display_links)
+            return self.list_display_links
         else:
             # Use only the first item in list_display as link
             return list(list_display)[:1]
@@ -269,108 +411,11 @@ class ListModelView(ContextMixin, TemplateResponseMixin, View):
             queryset = queryset.order_by(*ordering)
         return queryset
 
-    def get_ordering(self):
-        """ Return the field or fields to use for ordering the queryset."""
-        if self.request_form.is_valid():
-            ordering = []
-            requested_order = self.request_form.cleaned_data['ordering']
-            for spec in requested_order:
-                column_num, column_dir = spec.get('column', 0), spec.get('dir', 'asc')
-
-                try:
-                    order = self.list_display[int(column_num)]
-                    if column_dir == 'asc':
-                        order = '-' + order
-                except (IndexError, TypeError):
-                    """ Skip """
-                else:
-                    ordering.append(order)
-            return ordering
-        else:
-            return self.ordering
-
-    def get_datatable_config(self):
-        """Prepare datatable config."""
-        config = self.datatable_default_config.copy()
-        config['pageLength'] = self.paginate_by
-        config['ajax']['url'] = self.request.path
-        config['columns'] = self.get_columns_def()
-        if self.datatable_config is not None:
-            config.update(self.datatable_config)
-        return config
-
-    def get_context_data(self, **kwargs):
-        """Update view context.
-
-        Include `datatable_config`, 'headers' and initial `data` to
-        first page render.
-        """
-        context = super(ListModelView, self).get_context_data(**kwargs)
-        context.update({
-            'datatable_config': json.dumps(self.get_datatable_config()),
-            'headers': self.get_headers_data(),
-            'data': self.get_data(0, self.paginate_by),
-        })
-
-        return context
-
-    def get(self, request, *args, **kwargs):
-        """Response with rendered html template."""
-        context = self.get_context_data()
-        return self.render_to_response(context)
-
-    def get_data_attr(self, attr_name):
-        """Data getter for an attribute.
-
-        Data could comes from the model field or extrnal `data_source`
-        method call.
-        """
-        opts = self.object_list.model._meta
-        try:
-            return ModelField(opts.get_field(attr_name))
-        except FieldDoesNotExist:
-            if attr_name == "__str__":
-                return ModelAttr(self.object_list.model, attr_name, opts.verbose_name)
-            else:
-                data_sources = [self, self.viewset] if self.viewset is not None else [self]
-                for data_source in data_sources:
-                    if hasattr(data_source, attr_name):
-                        return DataSourceAttr(data_source, attr_name)
-
-        raise AttributeError("Unable to lookup '{}' on {}" .format(attr_name, self.object_list.model._meta.object_name))
-
-    def total(self):
-        """Total dataset size."""
-        return self.object_list.count()
-
-    def total_filtered(self):
-        """Dataset size with filter appllied."""
-        return self.object_list.count()
-
-    def get_columns_def(self):
-        """Returns columns definition for the datables js config."""
-        return [
-            {'data': field_name, 'orderable': self.get_data_attr(field_name).orderable}
-            for field_name in self.list_display
-        ]
-
-    def get_headers_data(self):
-        """Readable column titles."""
-        for field_name in self.list_display:
-            attr = self.get_data_attr(field_name)
-            yield field_name, attr.label
-
-    def get_data(self, start, length):
-        """Get a page for datatable."""
-        for item in self.object_list[start:start+length]:
-            columns = OrderedDict()
-            for n, field_name in enumerate(self.list_display):
-                attr = self.get_data_attr(field_name)
-                value = smart_text(attr.get_value(item))
-                if field_name in self.list_display_links:
-                    value = format_html('<a href="{}">{}</a>', self.get_item_url(item), value)
-                columns[field_name] = value
-            yield item, columns
+    def format_column(self, item, field_name, value):
+        value = super(ListModelView, self).format_column(item, field_name, value)
+        if field_name in self.get_list_display_links(self.get_list_display()):
+            value = format_html('<a href="{}">{}</a>', self.get_item_url(item), value)
+        return value
 
     def get_item_url(self, item):
         """Link to object detail to `list_display_links` columns."""
@@ -379,44 +424,10 @@ class ListModelView(ContextMixin, TemplateResponseMixin, View):
             '{}:{}_detail'.format(opts.app_label, opts.model_name),
             args=[item.pk])
 
-    def get_json_data(self, request, *args, **kwargs):
-        """Return `JSONResponse` with data for datatable."""
-        if not self.request_form.is_valid():
-            return JsonResponse({'error': self.request_form.errors})
-
-        draw = self.request_form.cleaned_data['draw']
-        start = self.request_form.cleaned_data['start']
-        length = self.request_form.cleaned_data['length']
-
-        result = []
-        for item, columns_data in self.get_data(start, length):
-            result.append(columns_data)
-
-        data = {
-            "draw": draw,
-            "recordsTotal": self.total(),
-            "recordsFiltered": self.total_filtered(),
-            "data": result
-        }
-
-        return JsonResponse(data)
-
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         """Handle for browser HTTP and AJAX requests from datatables."""
         if not self.has_view_permission(self.request):
             raise PermissionDenied
 
-        if self.list_display_links is not None and self.list_display:
-            self.list_display_links = self.list_display[0]
-
-        self.request_form = forms.DatatableRequestForm(request.GET)
-        self.object_list = self.get_queryset()
-        if 'HTTP_DATATABLE' in request.META:
-            handler = self.get_json_data
-        elif request.method.lower() in self.http_method_names:
-            handler = getattr(
-                self, request.method.lower(), self.http_method_not_allowed)
-        else:
-            handler = self.http_method_not_allowed
-        return handler(request, *args, **kwargs)
+        return super(ListModelView, self).dispatch(request, *args, **kwargs)
