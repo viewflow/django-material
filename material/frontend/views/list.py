@@ -294,10 +294,14 @@ class DataTableMixin(ContextMixin):
 
         return JsonResponse(data)
 
+    def get_object_list(self):
+        """Create prepared queryset for datatables view."""
+        return self.get_queryset()
+
     def dispatch(self, request, *args, **kwargs):
         """Handle for browser HTTP and AJAX requests from datatables."""
         self.request_form = forms.DatatableRequestForm(request.GET)
-        self.object_list = self.get_queryset()
+        self.object_list = self.get_object_list()
         if 'HTTP_DATATABLE' in request.META:
             handler = self.get_json_data
         elif request.method.lower() in self.http_method_names:
