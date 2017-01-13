@@ -12,18 +12,6 @@
   config['ajax']['beforeSend'] = function(request) {
     request.setRequestHeader("datatable", true);
   };
-  config['columnDefs'] = [
-    {
-      "targets": {{ view.datalist.list_display_links|safe }},
-      "render": function ( data, type, full, meta ) {
-        if(full.view_url) {
-          return "<a href='"+ full.view_url + "'>" + data+ "</a>";
-        } else {
-          return data;
-        }
-      },
-    }
-  ];
   $(document).one("turbolinks:load", function() {
     if ( ! $.fn.DataTable.isDataTable( '#table' ) ) {
       var datatable = $('#table').DataTable(config);
