@@ -13,6 +13,10 @@ class CountryTabularInline(admin.TabularInline):
 
     class CountryInlineFormset(forms.models.BaseInlineFormSet):
         def clean(self):
+            super(CountryTabularInline.CountryInlineFormset, self).clean()
+            if not hasattr(self, 'cleaned_data'):
+                return
+
             for form_data in self.cleaned_data:
                 code = form_data.get('code', None)
                 if code and len(code) < 2:
@@ -44,6 +48,10 @@ class SeaStackedInline(admin.StackedInline):
 
     class SeaInlineFormset(forms.models.BaseInlineFormSet):
         def clean(self):
+            super(SeaStackedInline.SeaInlineFormset, self).clean()
+            if not hasattr(self, 'cleaned_data'):
+                return
+
             for form_data in self.cleaned_data:
                 name = form_data['name']
                 if len(name) < 2:
@@ -130,7 +138,8 @@ class CountryForm(forms.ModelForm):
         fields = '__all__'
 
     def clean(self):
-        code = self.cleaned_data.get('code')
+        cleaned_data = super(CountryForm, self).clean()
+        code = cleaned_data.get('code')
         if code and len(code) < 2:
             raise forms.ValidationError('The country code is invalid')
         return self.cleaned_data
