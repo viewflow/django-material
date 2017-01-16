@@ -163,6 +163,8 @@ class DataTableMixin(ContextMixin):
     }
     list_display = ('__str__', )
     ordering = None
+    viewset = None
+    paginate_by = 15
 
     def get_context_data(self, **kwargs):
         """Update view context.
@@ -336,9 +338,7 @@ class ListModelView(TemplateResponseMixin, DataTableMixin, View):
     """
 
     model = None
-    viewset = None
     queryset = None
-    paginate_by = 15
     template_name_suffix = '_list'
     list_display_links = ()
 
