@@ -1,5 +1,7 @@
 from __future__ import unicode_literals
 
+import datetime
+import decimal
 import json
 
 from collections import OrderedDict
@@ -11,9 +13,9 @@ from django.core.urlresolvers import reverse
 from django.db.models.query import QuerySet
 from django.forms.forms import pretty_name
 from django.http import JsonResponse
-from django.utils import six
+from django.utils import formats, six, timezone
 from django.utils.decorators import method_decorator
-from django.utils.encoding import smart_text
+from django.utils.encoding import force_text
 from django.utils.html import format_html
 from django.views.generic import View
 from django.views.generic.base import ContextMixin, TemplateResponseMixin
@@ -162,6 +164,7 @@ class DataTableMixin(ContextMixin):
         }
     }
     list_display = ('__str__', )
+    empty_value_display = ""
     ordering = None
     viewset = None
     paginate_by = 15
@@ -229,7 +232,18 @@ class DataTableMixin(ContextMixin):
             yield field_name, attr.label
 
     def format_column(self, item, field_name, value):
-        return smart_text(value)
+        if value is None:
+            return self.empty_value_display
+        elif isinstance(value, datetime.datetime):
+            return formats.localize(timezone.template_localtime(value))
+        elif isinstance(value, (datetime.date, datetime.time)):
+            return formats.localize(value)
+        elif isinstance(value, six.integer_types + (decimal.Decimal, float)):
+            return formats.number_format(value)
+        elif isinstance(value, (list, tuple)):
+            return ', '.join(force_text(v) for v in value)
+        else:
+            return force_text(value)
 
     def get_table_data(self, start, length):
         """Get a page for datatable."""

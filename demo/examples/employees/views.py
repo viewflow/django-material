@@ -92,7 +92,7 @@ class DepartmentEmployesListView(ListModelView):
 
 class EmployeeViewSet(ModelViewSet):
     model = models.Employee
-    list_display = ('emp_no', 'first_name', 'last_name', 'current_salary')
+    list_display = ('emp_no', 'first_name', 'last_name', 'birth_date', 'current_salary')
 
     change_salary_view = [
         r'^(?P<employee_pk>.+)/change_salary/$',
