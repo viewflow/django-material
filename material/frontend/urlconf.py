@@ -1,4 +1,13 @@
+from __future__ import unicode_literals
+
+try:
+    from urllib.parse import quote
+except:
+    from urllib import quote
+
 from django.core.urlresolvers import RegexURLResolver, Resolver404
+from django.http.request import QueryDict
+from django.utils import six
 
 
 class ModuleMatchName(str):
@@ -36,3 +45,39 @@ class ModuleURLResolver(RegexURLResolver):
         result.url_name.module = self._module
 
         return result
+
+
+def frontend_url(request, url=None, back_link=None, absolute=True):
+    """Construct an url for a frontend view.
+
+    :keyword back: type of the back link to be added to the query string
+                   - here: link to the current request page
+                   - here_if_none: add link only if there is no `back` parameter
+    :keyword absolute: construct absolute url, including host name
+
+    namespace = self.ns_map[task.process.flow_class]
+    return frontend_url(
+        self.request,
+        flow_url(namespace, task, 'index', user=request.user),
+        back='here')
+    """
+    params = QueryDict(mutable=True)
+    for key, value in six.iterlists(request.GET):
+        if not key.startswith('datatable-') and key != '_':
+            params.setlist(key, value)
+
+    if back_link == 'here_if_none' and 'back' in params:
+        # Do nothing
+        pass
+    elif back_link is not None:
+        if params:
+            back = "{}?{}".format(quote(request.path), quote(params.urlencode()))
+        else:
+            back = "{}".format(quote(request.path))
+        params['back'] = back
+
+    if url is not None:
+        location = '{}?{}'.format(url, params.urlencode())
+        return request.build_absolute_uri(location) if absolute else location
+    else:
+        return params.urlencode()

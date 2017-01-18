@@ -1,5 +1,7 @@
 from django.db import models
-from django.template import Library
+from django.template import Library, TemplateSyntaxError
+
+from ..urlconf import frontend_url
 
 
 register = Library()
@@ -35,3 +37,20 @@ def verbose_name_plural(obj):
     if isinstance(obj, models.Model):
         type(obj)._meta.verbose_name_plural
     return obj._meta.verbose_name_plural
+
+
+@register.filter
+def query_back(request, back_link=None):
+    """
+    Set the `back` url GET parameter.
+
+    Usage::
+
+        <a href="{{ url }}?{{ request|query_back:"here" }}>
+        <a href="{{ url }}?{{ request|query_back:"here_if_none" }}>
+    """
+    if back_link is not None and back_link not in ['here', 'here_if_none']:
+        raise TemplateSyntaxError(
+            "query_back tag accepts `here`, or `here_if_none` as parameter. Got {}".format(back_link))
+
+    return frontend_url(request, back_link=back_link)

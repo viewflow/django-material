@@ -1,8 +1,12 @@
 from django.conf import settings
 
-from .urlconf import ModuleURLResolver  # NOQA
-from .registry import modules  # NOQA
+from .urlconf import ModuleURLResolver, frontend_url
+from .registry import modules
 
+
+__all__ = [
+    'ModuleURLResolver', 'frontend_url', 'modules'
+]
 
 default_app_config = 'material.frontend.apps.MaterialFrontendConfig'
 
