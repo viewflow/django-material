@@ -3,7 +3,7 @@ import re
 from django import forms
 
 
-ORDER_RE = re.compile('order\[(\d+)\]\[(\w+)\]')
+ORDER_RE = re.compile('datatable-order\[(\d+)\]\[(\w+)\]')
 
 
 class DatatableRequestForm(forms.Form):
@@ -16,7 +16,7 @@ class DatatableRequestForm(forms.Form):
     def clean_ordering(self):
         order = {}
         for key, value in self.data.items():
-            if key.startswith('order['):
+            if key.startswith('datatable-order['):
                 match = ORDER_RE.match(key)
                 pos, attr = match.groups()
                 if pos not in order:

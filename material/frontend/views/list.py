@@ -316,7 +316,7 @@ class DataTableMixin(ContextMixin):
 
     def dispatch(self, request, *args, **kwargs):
         """Handle for browser HTTP and AJAX requests from datatables."""
-        self.request_form = forms.DatatableRequestForm(request.GET)
+        self.request_form = forms.DatatableRequestForm(request.GET, prefix='datatable')
         self.object_list = self.get_object_list()
         if 'HTTP_DATATABLE' in request.META:
             handler = self.get_json_data
