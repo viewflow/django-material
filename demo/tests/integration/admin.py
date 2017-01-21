@@ -25,6 +25,9 @@ class CountryTabularInline(admin.TabularInline):
 
     formset = CountryInlineFormset
 
+    def has_add_permission(self, request):
+        return False
+
 
 class CityStackedInline(admin.TabularInline):
     model = models.City

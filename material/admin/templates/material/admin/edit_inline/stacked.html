@@ -65,7 +65,9 @@
             {% if inline_admin_form.form.prefix ==  element.inline.formset.empty_form.prefix %}</script>{% endif %}
             {% endfor %}
         </div>
+        {% if element.inline.formset.max_num != 0 %}
         <button type="button" class="btn btn-flat grey lighten-4" style="padding:0px 40px;width:100%" data-formset-add><i class="material-icons">add</i></button>
+        {% endif %}
         {{ element.inline.formset.management_form }}
     </div>
 </div>
