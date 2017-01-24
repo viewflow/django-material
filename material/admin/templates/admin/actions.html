@@ -10,7 +10,7 @@
             {% if actions_selection_counter %}
             <script type="text/javascript">var _actions_icnt="{{ cl.result_list|length|default:"0" }}";</script>
             
-            <span class="action-counter">{{ selection_note }}</span>
+            <span class="action-counter" data-actions-icnt="{{ cl.result_list|length }}">{{ selection_note }}</span>
             {% if cl.result_count != cl.result_list|length %}
             <span class="all" style="display:none">{{ selection_note_all }}</span>
             <span class="question" style="display:none">
