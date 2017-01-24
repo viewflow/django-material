@@ -35,6 +35,7 @@
 {% endblock %}
 
 {% block content %}
+{% block left-panel %}
 <div class="left-panel">
     <div class="card list-card">
         <div class="card-content">
@@ -65,7 +66,8 @@
         </div>
     </div>
 </div>
-
+{% endblock left-panel %}
+{% block right-panel %}{% endblock right-panel %}
 {% block action_btn %}
 <div class="fixed-action-btn">
     {% url view.model|frontend_urlname:'add' as add_url %}
