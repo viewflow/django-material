@@ -35,45 +35,43 @@
 {% endblock %}
 
 {% block content %}
-<div class="row frontend-list">
-    <div class="col s12 m12 l9">
-        <div class="card">
-            <div class="card-content">
-                <table id="table" class="table bordered" data-form-control="datatable" style="width:100%">
-                    <thead>
-                        <tr>
-                            {% for header, header_title in headers %}
-                            <th data-name="{{ header }}" class="{{ header }}">{{ header_title|title }}</th>
-                            {% endfor %}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for item, row in data %}
-                        <tr>
-                            {% for column_name, item in row.items %}
-                            <td>
-                                {% if column_name in view.datalist.list_display_links %}
-                                    <a href="#">{{ item }}</a>
-                                {% else %}
-                                    {{ item }}
-                                {% endif %}
-                            </td>
-                            {% endfor %}
-                        </tr>
+<div class="left-panel">
+    <div class="card list-card">
+        <div class="card-content">
+            <table id="table" class="table bordered" data-form-control="datatable" style="width:100%">
+                <thead>
+                    <tr>
+                        {% for header, header_title in headers %}
+                        <th data-name="{{ header }}" class="{{ header }}">{{ header_title|title }}</th>
                         {% endfor %}
-                    </tbody>
-                </table>
-            </div>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item, row in data %}
+                    <tr>
+                        {% for column_name, item in row.items %}
+                        <td>
+                            {% if column_name in view.datalist.list_display_links %}
+                            <a href="#">{{ item }}</a>
+                            {% else %}
+                            {{ item }}
+                            {% endif %}
+                        </td>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
     </div>
-
-    {% block action_btn %}
-    <div class="fixed-action-btn">
-        {% url view.model|frontend_urlname:'add' as add_url %}
-        <a class="btn-floating btn-large waves-effect waves-light red z-depth-2" href="{{ add_url }}">
-            <i class="large material-icons">add</i>
-        </a>
-    </div>
-    {% endblock %}
 </div>
+
+{% block action_btn %}
+<div class="fixed-action-btn">
+    {% url view.model|frontend_urlname:'add' as add_url %}
+    <a class="btn-floating btn-large waves-effect waves-light red z-depth-2" href="{{ add_url }}">
+        <i class="large material-icons">add</i>
+    </a>
+</div>
+{% endblock %}
 {% endblock %}
