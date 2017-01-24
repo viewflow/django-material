@@ -1,3 +1,4 @@
+from django.contrib.auth import get_permission_codename
 from django.views import generic
 
 from .mixins import MessageUserMixin, ModelViewMixin
@@ -15,7 +16,11 @@ class CreateModelView(MessageUserMixin, ModelViewMixin, generic.CreateView):
         """
         if self.viewset is not None:
             return self.viewset.has_add_permission(request, obj)
-        raise NotImplementedError('Viewset is not provided')
+
+        # default lookup for the django permission
+        opts = self.model._meta
+        codename = get_permission_codename('add', opts)
+        return request.user.has_perm('{}.{}'.format(opts.app_label, codename))
 
     def message_user(self):
         self.success('The {name} "{link}" was added successfully.')

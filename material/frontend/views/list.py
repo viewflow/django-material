@@ -6,6 +6,7 @@ import json
 
 from collections import OrderedDict
 
+from django.contrib.auth import get_permission_codename
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import FieldDoesNotExist
 from django.core.exceptions import ImproperlyConfigured, PermissionDenied
@@ -364,7 +365,14 @@ class ListModelView(TemplateResponseMixin, DataTableMixin, View):
         """
         if self.viewset is not None:
             return self.viewset.has_view_permission(request, obj)
-        raise NotImplementedError('Viewset is not provided')
+
+        # default lookup for the django permission
+        opts = self.model._meta
+        codename = get_permission_codename('view', opts)
+        view_perm = '{}.{}'.format(opts.app_label, codename)
+        if request.user.has_perm(view_perm, obj=obj):
+            return True
+        return self.has_change_permission(request, obj=obj)
 
     def has_change_permission(self, request, obj=None):
         """Object change permission check.
@@ -373,7 +381,12 @@ class ListModelView(TemplateResponseMixin, DataTableMixin, View):
         """
         if self.viewset is not None:
             return self.viewset.has_change_permission(request, obj)
-        raise NotImplementedError('Viewset is not provided')
+
+        # default lookup for the django permission
+        opts = self.model._meta
+        codename = get_permission_codename('change', opts)
+        return request.user.has_perm(
+            '{}.{}'.format(opts.app_label, codename), obj=obj)
 
     def get_template_names(self):
         """

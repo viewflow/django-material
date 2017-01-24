@@ -1,3 +1,4 @@
+from django.contrib.auth import get_permission_codename
 from django.core.urlresolvers import reverse
 from django.core.exceptions import PermissionDenied
 from django.db import models
@@ -5,7 +6,7 @@ from django.views import generic
 
 
 class DetailModelView(generic.DetailView):
-    """Think wrapper for `generic.DetailView`."""
+    """Thin wrapper for `generic.DetailView`."""
 
     viewset = None
 
@@ -36,7 +37,14 @@ class DetailModelView(generic.DetailView):
         """
         if self.viewset is not None:
             return self.viewset.has_view_permission(request, obj)
-        raise NotImplementedError('Viewset is not provided')
+
+        # default lookup for the django permission
+        opts = self.model._meta
+        codename = get_permission_codename('view', opts)
+        view_perm = '{}.{}'.format(opts.app_label, codename)
+        if request.user.has_perm(view_perm, obj=obj):
+            return True
+        return self.has_change_permission(request, obj=obj)
 
     def has_change_permission(self, request, obj):
         """Object chane permission check.
@@ -47,7 +55,12 @@ class DetailModelView(generic.DetailView):
         """
         if self.viewset is not None:
             return self.viewset.has_change_permission(request, obj)
-        raise NotImplementedError('Viewset is not provided')
+
+        # default lookup for the django permission
+        opts = self.model._meta
+        codename = get_permission_codename('change', opts)
+        return request.user.has_perm(
+            '{}.{}'.format(opts.app_label, codename), obj=obj)
 
     def has_delete_permission(self, request, obj):
         """Object delete permission check.
@@ -56,7 +69,12 @@ class DetailModelView(generic.DetailView):
         """
         if self.viewset is not None:
             return self.viewset.has_delete_permission(request, obj)
-        raise NotImplementedError('Viewset is not provided')
+
+        # default lookup for the django permission
+        opts = self.model._meta
+        codename = get_permission_codename('delete', opts)
+        return request.user.has_perm(
+            '{}.{}'.format(opts.app_label, codename), obj=obj)
 
     def get_object(self):
         """Retrive the object.

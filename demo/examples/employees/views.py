@@ -67,12 +67,6 @@ class DepartmentEmployesListView(ListModelView):
     list_display = ('emp_no', 'first_name', 'last_name', 'current_salary')
     template_name = 'employees/department_employees.html'
 
-    def has_change_permission(self, request, obj=None):
-        return True
-
-    def has_view_permission(self, request, obj=None):
-        return True
-
     def get_queryset(self):
         today = timezone.now().date()
         department = get_object_or_404(models.Department, pk=self.kwargs['department_pk'])

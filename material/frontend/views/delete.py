@@ -1,3 +1,4 @@
+from django.contrib.auth import get_permission_codename
 from django.core.urlresolvers import reverse
 from django.db import router
 from django.db.models.deletion import Collector
@@ -19,7 +20,12 @@ class DeleteModelView(MessageUserMixin, generic.DeleteView):
         """
         if self.viewset is not None:
             return self.viewset.has_delete_permission(request, obj)
-        raise NotImplementedError('Viewset is not provided')
+
+        # default lookup for the django permission
+        opts = self.model._meta
+        codename = get_permission_codename('delete', opts)
+        return request.user.has_perm(
+            '{}.{}'.format(opts.app_label, codename), obj=obj)
 
     def _get_deleted_objects(self):
         collector = Collector(using=router.db_for_write(self.object))
