@@ -2,8 +2,7 @@
 {% load i18n l10n admin_urls %}
 
 {% block breadcrumbs_items %}
-<a href="{% url 'admin:index' %}">{% trans 'All apps' %}</a> &rang;
-<a href="{% url 'admin:app_list' app_label=opts.app_label %}">{{ opts.app_config.verbose_name }}</a>
+<a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
 <a href="{% url opts|admin_urlname:'changelist' %}">{{ opts.verbose_name_plural|capfirst }}</a>
 <a>{% trans 'Delete multiple objects' %}</a>
 {% endblock %}
@@ -47,7 +46,7 @@
                             {% endfor %}
                             <input type="hidden" name="action" value="delete_selected" />
                             <input type="hidden" name="post" value="yes" />
-                            <button type="submit" class="btn btn-primary"><i class="material-icons">done</i> {% trans "Yes, I'm sure" %}</button>
+                            <button type="submit" class="btn btn-primary">{% trans "Yes, I'm sure" %}</button>
                         </div>
                     </form>
                 </div>                
