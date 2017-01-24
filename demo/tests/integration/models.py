@@ -65,6 +65,9 @@ class Continent(models.Model):
     class Meta:
         ordering = ['name']
 
+    def countries_count(self):
+        return self.countries.count()
+
 
 @python_2_unicode_compatible
 class Country(models.Model):

@@ -27,9 +27,6 @@ class ContinentViewSet(ModelViewSet):
     def surrounded_oceans(self, contintent):
         return ', '.join(ocean.name for ocean in contintent.oceans.all())
 
-    def countries_count(self, contintent):
-        return contintent.countries.count()
-
 
 class CountryViewSet(ModelViewSet):
     model = models.Country

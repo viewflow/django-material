@@ -215,7 +215,8 @@ class DataTableMixin(ContextMixin):
                 for data_source in data_sources:
                     if hasattr(data_source, attr_name):
                         return DataSourceAttr(data_source, attr_name)
-
+            if hasattr(self.object_list.model, attr_name):
+                return ModelAttr(self.object_list.model, attr_name)
         raise AttributeError("Unable to lookup '{}' on {}" .format(attr_name, self.object_list.model._meta.object_name))
 
     def get_columns_def(self):
