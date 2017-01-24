@@ -40,7 +40,7 @@
                         <img class="background" src="{% static 'material/imgs/sidenav.svg' %}">
                         {% block userphoto %}
                         {% if user.photo.url %}
-                        <a href="#"><img class="circle" src="{{ user.photo.url %}"></a>
+                        <a href="#"><img class="circle" src="{{ user.photo.url }}"></a>
                         {% else %}
                         <a href="#"><img class="circle" src="{% static 'material/imgs/user.png' %}"></a>
                         {% endif %}
