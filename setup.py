@@ -51,6 +51,7 @@ setup(
         'Framework :: Django',
         "Framework :: Django :: 1.8",
         "Framework :: Django :: 1.9",
+        "Framework :: Django :: 1.10",
         'Development Status :: 4 - Beta',
         'Environment :: Web Environment',
         'Intended Audience :: Developers',

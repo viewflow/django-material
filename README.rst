@@ -61,13 +61,16 @@ Django Material Pro has a commercial-friendly license and distributed as part of
 Changelog
 =========
 
-0.11.0 2016-12-13 - Beta
+0.12.0 2017-01-24 - Beta
 ------------------------
-
-* Forms - Default theme secondary color changed to green
-* Frontend - Added `startmodule` management command
-* Frontend - Added list view actions (PRO)
-* Frontend - Integration with django-filters (PRO)
-* Frontend - Active page highlight fixed under IE/Safari
-* Admin - Fix ManyToMany field height
-* Admin - Fix change form markup
+* Forms - Fix select rendering
+* Forms - Fix date and datetime fields rendering
+* Frontend - Refactor datatables list view
+* Frontend - Fix viewset incompatibility under python 2.7
+* Frontend - Netural default theme color
+* Frontend - Prebuild theme set
+* Frontend - Custom theme builder management command (PRO)
+* Frontend - Generic views templates now extends base module template
+* Frontend - Improve base 2 columns layout
+* Admin - Add "Save as New" change form action
+* Admin - Fix rederect after login
