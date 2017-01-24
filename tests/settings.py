@@ -1,5 +1,5 @@
 import os
-import sys
+import django
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 # Quick-start development settings - unsuitable for production
@@ -105,8 +105,10 @@ class DisableMigrations(object):
     def __getitem__(self, item):
         return "notmigrations"
 
-MIGRATION_MODULES = DisableMigrations()
-
+if django.VERSION <= (1, 8):
+    MIGRATION_MODULES = DisableMigrations()
+else:
+    MIGRATION_MODULES = []
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
