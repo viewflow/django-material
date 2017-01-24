@@ -202,7 +202,8 @@ def select_options(bound_field):
     selected = set(force_text(v) for v in selected)
 
     groups = OrderedDict()
-    for option_value, option_label in bound_field.field.widget.choices:
+    for option in bound_field.field.widget.choices:
+        option_value, option_label = option[0], option[1]
         if isinstance(option_label, (list, tuple)):
             if option_value not in groups:
                 groups[option_value] = []
