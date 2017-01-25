@@ -4,7 +4,7 @@ from material.frontend.apps import ModuleMixin
 
 class IntegrationAppConfig(ModuleMixin, AppConfig):
     name = 'demo.tests.integration'
-    icon = '<i class="material-icons">flag</i>'
+    icon = '<i class="material-icons">extension</i>'
     verbose_name = "CRUD Sample"
 
     def has_perm(self, user):
