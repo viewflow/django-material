@@ -99,14 +99,6 @@ class ModelViewSet(BaseViewset):
     layout = DEFAULT
     form_class = DEFAULT
 
-    def get_queryset(self, request):
-        """Return common queryset for all CRUD views.
-
-        By default just return `self.queryset`. Subclasses can
-        override that.
-        """
-        return self.queryset
-
     def filter_kwargs(self, view_class, **kwargs):
         """Add defaults and filter kwargs to only thouse that view can accept.
 

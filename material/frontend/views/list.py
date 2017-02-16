@@ -427,6 +427,8 @@ class ListModelView(TemplateResponseMixin, DataTableMixin, View):
             queryset = self.queryset
             if isinstance(queryset, QuerySet):
                 queryset = queryset.all()
+        elif self.viewset is not None and hasattr(self.viewset, 'get_queryset'):
+            queryset = self.viewset.get_queryset(self.request)
         elif self.model is not None:
             queryset = self.model._default_manager.all()
         else:

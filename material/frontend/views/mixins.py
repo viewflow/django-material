@@ -1,6 +1,7 @@
 from django.contrib import messages
 from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse
+from django.utils import six
 from django.utils.encoding import force_text
 from django.utils.html import format_html
 from django.utils.http import urlquote
@@ -24,6 +25,23 @@ class ModelViewMixin(object):
         Subclasses should override it
         """
         raise NotImplementedError
+
+    def get_queryset(self):
+        """Return the list of items for this view.
+
+        If view have no explicit `self.queryset`, tries too lookup to
+        `viewflow.get_queryset`
+        """
+        if self.queryset is None and self.viewset is not None:
+            if hasattr(self.viewset, 'get_queryset'):
+                queryset = self.viewset.get_queryset(self.request)
+                ordering = self.get_ordering()
+                if ordering:
+                    if isinstance(ordering, six.string_types):
+                        ordering = (ordering,)
+                    queryset = queryset.order_by(*ordering)
+                return queryset
+        return super(ModelViewMixin, self).get_queryset()
 
     def get_object(self):
         """Retrive an object and check user permissions."""
