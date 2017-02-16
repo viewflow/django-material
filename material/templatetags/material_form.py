@@ -87,7 +87,11 @@ class FormNode(Node):
             if hasattr(form, 'layout'):
                 layout = form.layout
 
-        template_name = self.kwargs.get('template', 'material/form.html')
+        template_name = self.kwargs.get('template')
+        if template_name is None:
+            template_name = 'material/form.html'
+        else:
+            template_name = template_name.resolve(context)
         template = get_template(template_name)
 
         # Render form and parts
