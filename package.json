@@ -21,7 +21,7 @@
     "gulp-sass": "^2.3.2",
     "gulp-uglify": "^2.0.0",
     "jquery-datetimepicker": "^2.5.4",
-    "material-design-icons": "^2.2.3",
+    "material-design-icons": "^3.0.1",
     "materialize-css": "^0.97.8",
     "merge-stream": "^1.0.0",
     "perfect-scrollbar": "^0.6.13",

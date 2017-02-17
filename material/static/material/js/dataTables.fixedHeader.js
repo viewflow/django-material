@@ -1,4 +1,4 @@
-/*! FixedHeader 3.1.2
+/*! FixedHeader 3.1.3-dev
  * ©2009-2016 SpryMedia Ltd - datatables.net/license
  */
 
@@ -6,7 +6,7 @@
  * @summary     FixedHeader
  * @description Fix a table's header or footer, so it is always visible while
  *              scrolling
- * @version     3.1.2
+ * @version     3.1.3-dev
  * @file        dataTables.fixedHeader.js
  * @author      SpryMedia Ltd (www.sprymedia.co.uk)
  * @contact     www.sprymedia.co.uk/contact
@@ -285,7 +285,10 @@ $.extend( FixedHeader.prototype, {
 				.appendTo( 'body' );
 
 			// Insert a fake thead/tfoot into the DataTable to stop it jumping around
-			itemDom.placeholder = itemElement.clone( false );
+			var clonedElement = itemElement.clone( false )
+			clonedElement.find("*[id]").attr('id',function(i,id){ return id+"_cloned"; });
+			clonedElement.find("*[for]").attr('for',function(i,id){ return id+"_cloned"; });
+			itemDom.placeholder  = clonedElement;
 			itemDom.host.prepend( itemDom.placeholder );
 
 			// Clone widths
@@ -571,7 +574,7 @@ $.extend( FixedHeader.prototype, {
  * @type {String}
  * @static
  */
-FixedHeader.version = "3.1.2";
+FixedHeader.version = "3.1.3-dev";
 
 /**
  * Defaults
