@@ -20,9 +20,12 @@
                     {% csrf_token %}
                     {% if is_popup %}<input type="hidden" name="{{ is_popup_var }}" value="1" />{% endif %}
                     {% if to_field %}<input type="hidden" name="{{ to_field_var }}" value="{{ to_field }}" />{% endif %}
-                    <div class="row">
+                    <div class="row{% if save_on_top %} pushpinned{% endif %}">
                         <div class="col s12">
-                            <h4 class="form-title black-text">{% if add %}{% trans 'New' %} {{ opts.verbose_name }}{% else %}{{ adminform.form.instance|title }}{% endif %}</h4>
+                            <h4 class="form-title black-text"{% if save_on_top %} style="float: left!important;"{% endif %}>{% if add %}{% trans 'New' %} {{ opts.verbose_name }}{% else %}{{ adminform.form.instance|title }}{% endif %}</h4>
+                            {% if save_on_top %}
+                            <div id="pushpinned-save-dropdown-wrapper" class="right-align"></div>
+                            {% endif %}
                         </div>
                     </div>
                     {% if errors %}
@@ -80,4 +83,19 @@
     </script>
     {% endif %}
 </div>
+{% endblock %}
+
+{% block extrastyle %}
+    {{ block.super }}
+    <style type="text/css">
+        .row.pushpinned.pinned {
+            background-color: white !important;
+            z-index: 10;
+            margin-left: -1.5rem;
+            box-shadow: 0 0px 2px 0 rgba(0,0,0,0.14), 0 0px 5px 0 rgba(0,0,0,0.12), 0 0px 1px 0px rgba(0,0,0,0.2);
+        }
+        .row.pushpinned.pinned > div.col {
+            
+        }
+    </style>
 {% endblock %}

@@ -48,6 +48,47 @@
           scrollInput: false
         })
       })
+
+    $container.find('.pushpinned').each(
+      function() {
+        var top = $(this).offset().top;
+        var width = $(this).parents('div.card').width();
+        var height = $(this).parents('div.card').height() || 0;
+        $('.pushpinned')
+          .width(width)
+          .pushpin({
+            top: top,
+            bottom: top + height,
+            offset: 0
+          })
+    })
+
+    if ($container.find('.pushpinned').length == 1) {
+
+      var save_dropdown = $('#save-dropdown-admin');
+      var save_dropdown_btn = $('[data-activates="save-dropdown-admin"]');
+
+      if (save_dropdown != undefined && save_dropdown_btn != undefined) {
+
+          var save_dropdown_new = $(save_dropdown[0].outerHTML)
+                                    .attr('id', 'save-dropdown-admin-pushpinned');
+
+          var save_dropdown_btn_new = $(save_dropdown_btn[0].outerHTML)
+                                        .attr('data-activates', 'save-dropdown-admin-pushpinned');
+
+          $container
+            .find('#pushpinned-save-dropdown-wrapper')
+            .append(save_dropdown_btn_new);
+
+          $container
+            .find('#pushpinned-save-dropdown-wrapper')
+            .append(save_dropdown_new);
+
+          save_dropdown_btn_new.dropdown();
+        
+      }
+
+    }
   }
 
   $(document).on('ready turbolinks:load', function() { initForms($(document)) })
