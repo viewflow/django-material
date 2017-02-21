@@ -241,7 +241,7 @@ class ModelViewSet(BaseViewset):
         """
         result = {
             'layout': self.layout,
-            'form_Class': self.form_class,
+            'form_class': self.form_class,
         }
         result.update(kwargs)
         return self.filter_kwargs(self.update_view_class, **result)
