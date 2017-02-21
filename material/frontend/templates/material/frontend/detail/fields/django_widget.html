@@ -1,0 +1,12 @@
+{% load material_frontend %}
+
+<div class="row">
+    <p class="detail-item">
+        <span>
+            {% block label %}{{ bound_field.label }}{% endblock label %}
+        </span>
+    </p>
+    <p>
+        {% block value %}{% format_field_value bound_field.value %}{% endblock value %}
+    </p>
+</div>

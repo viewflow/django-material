@@ -1,14 +1,23 @@
 from django.contrib.auth import get_permission_codename
 from django.core.urlresolvers import reverse
-from django.core.exceptions import PermissionDenied
+from django.core.exceptions import PermissionDenied, ImproperlyConfigured
 from django.db import models
 from django.views import generic
+from django.forms import models as model_forms
 
 
 class DetailModelView(generic.DetailView):
     """Thin wrapper for `generic.DetailView`."""
 
     viewset = None
+    form_class = None
+    layout = None
+    fields = None
+
+    def __init__(self, *args, **kwargs):  # noqa D102
+        super(DetailModelView, self).__init__(*args, **kwargs)
+        if self.form_class is None and self.fields is None:
+            self.fields = '__all__'
 
     def get_object_data(self):
         """List of object fields to display.
@@ -86,6 +95,37 @@ class DetailModelView(generic.DetailView):
             raise PermissionDenied
         return obj
 
+    def get_form_class(self):
+        """
+        Returns the form class to use in this view.
+        """
+        if self.fields is not None and self.form_class:
+            raise ImproperlyConfigured(
+                "Specifying both 'fields' and 'form_class' is not permitted."
+            )
+        if self.form_class:
+            return self.form_class
+        else:
+            if self.model is not None:
+                # If a model has been explicitly provided, use it
+                model = self.model
+            elif hasattr(self, 'object') and self.object is not None:
+                # If this view is operating on a single object, use
+                # the class of that object
+                model = self.object.__class__
+            else:
+                # Try to get a queryset and extract the model class
+                # from that
+                model = self.get_queryset().model
+
+            if self.fields is None:
+                raise ImproperlyConfigured(
+                    "Using ModelFormMixin (base class of %s) without "
+                    "the 'fields' attribute is prohibited." % self.__class__.__name__
+                )
+
+            return model_forms.modelform_factory(model, fields=self.fields)
+
     def get_context_data(self, **kwargs):
         """Additional context data for detail view.
 
@@ -104,7 +144,7 @@ class DetailModelView(generic.DetailView):
             kwargs['delete_url'] = reverse(
                 '{}:{}_delete'.format(opts.app_label, opts.model_name),
                 args=[self.object.pk])
-
+        kwargs['form'] = self.get_form_class()(instance=self.object)
         return super(DetailModelView, self).get_context_data(**kwargs)
 
     def get_template_names(self):

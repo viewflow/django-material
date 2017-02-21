@@ -1,0 +1,7 @@
+{% extends "material/frontend/detail/fields/django_widget.html" %}
+
+{% load material_frontend %}
+
+{% block value %}
+    {% if bound_field.value %}{% format_select bound_field %}{% else %}-{% endif %}
+{% endblock value %}

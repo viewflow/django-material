@@ -1,0 +1,2 @@
+{% load material_form_internal %}
+<div class="layout-column"{% if parent.column_id and element.field_name %} id="{{ parent.column_id }}_{{ element.field_name }}"{% endif %}>{% for element in parent.elements %}{% render element %}{% endrender %}{% endfor %}</div>

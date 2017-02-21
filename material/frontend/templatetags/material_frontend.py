@@ -1,6 +1,8 @@
 from django.db import models
 from django.template import Library, TemplateSyntaxError
+from django.utils.encoding import force_text
 
+from ..utils import format_value
 from ..urlconf import frontend_url
 
 
@@ -54,3 +56,19 @@ def query_back(request, back_link=None):
             "query_back tag accepts `here`, or `here_if_none` as parameter. Got {}".format(back_link))
 
     return frontend_url(request, back_link=back_link)
+
+
+@register.simple_tag
+def format_field_value(value):
+    return format_value(value, '-')
+
+
+@register.simple_tag
+def format_select(field):
+    return getattr(field.form.instance, field.name)
+
+
+@register.simple_tag
+def format_select_multiple(field):
+    related_manager = getattr(field.form.instance, field.name)
+    return ', '.join(force_text(v) for v in related_manager.all())

@@ -1,0 +1,7 @@
+{% load material_form_internal %}
+<div class="section row">
+    <div class="col s12">
+        <h5>{{ parent.label|default:"" }}</h5>
+        {% for element in parent.elements %}{% render element %}{% endrender %}{% endfor %}
+    </div>
+</div>
