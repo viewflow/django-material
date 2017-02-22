@@ -14,6 +14,7 @@ from django.core.urlresolvers import reverse
 from django.db.models.query import QuerySet
 from django.forms.forms import pretty_name
 from django.http import JsonResponse
+from django.template.loader import render_to_string
 from django.utils import formats, six, timezone
 from django.utils.decorators import method_decorator
 from django.utils.encoding import force_text
@@ -233,11 +234,18 @@ class DataTableMixin(ContextMixin):
             attr = self.get_data_attr(field_name)
             yield field_name, attr.label
 
+    def _boolean_column(self, value):
+        if value:
+            return render_to_string(template_name='material/icons/true.html')
+        return render_to_string(template_name='material/icons/false.html')
+
     def format_column(self, item, field_name, value):
         if value is None:
             return self.empty_value_display
         elif isinstance(value, datetime.datetime):
             return formats.localize(timezone.template_localtime(value))
+        elif isinstance(value, bool):
+            return self._boolean_column(value)
         elif isinstance(value, (datetime.date, datetime.time)):
             return formats.localize(value)
         elif isinstance(value, six.integer_types + (decimal.Decimal, float)):
