@@ -13,7 +13,7 @@ class DetailModelView(generic.DetailView):
     def get_object_data(self):
         """List of object fields to display.
 
-        Choice fields values are exapanded to readable choice label.
+        Choice fields values are expanded to readable choice label.
         """
         for field in self.object._meta.fields:
             if isinstance(field, models.AutoField):
@@ -77,7 +77,7 @@ class DetailModelView(generic.DetailView):
             '{}.{}'.format(opts.app_label, codename), obj=obj)
 
     def get_object(self):
-        """Retrive the object.
+        """Retrieve the object.
 
         Check object view permission at the same time.
         """

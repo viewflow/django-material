@@ -41,7 +41,7 @@ class DeleteModelView(MessageUserMixin, generic.DeleteView):
         return super(DeleteModelView, self).get_context_data(**kwargs)
 
     def get_object(self):
-        """Retrive the object for delete.
+        """Retrieve the object for delete.
 
         Check object delete permission at the same time.
         """

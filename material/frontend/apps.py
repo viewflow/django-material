@@ -108,7 +108,7 @@ class ModuleMixin(object):
 
         If no template exists, no exception raised.
 
-        Intendent to use with {% include %} template tag::
+        Intended to use with {% include %} template tag::
 
             {% include module.menu %}
         """
@@ -123,7 +123,7 @@ class ModuleMixin(object):
         If  <app_label>/base_module.html exists it would be used.
         The default is 'material/frontend/base_module.html'
 
-        Intendent to use in modules generic tmeplates. Ex::
+        Intended to use in modules generic templates. Ex::
 
             {% extends current_module.base_template %}
         """
@@ -134,7 +134,7 @@ class ModuleMixin(object):
 
 
 class MaterialFrontendConfig(AppConfig):
-    """Default condif for Material Frontend."""
+    """Default config for Material Frontend."""
 
     name = 'material.frontend'
     verbose_name = 'Site Modules'

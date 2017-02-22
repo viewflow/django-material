@@ -22,7 +22,7 @@ register = Library()
 
 @register.tag('render')
 class FormRenderNode(Node):
-    """Shugar for element in template rendering."""
+    """Sugar for element in template rendering."""
 
     def __init__(self, parser, token):  # noqa D102
         bits = token.split_contents()
@@ -133,13 +133,13 @@ def jquery_datepicker_format(field):
 
 @register.filter
 def datepicker_value(value, date_format):
-    """Retun localized date value."""
+    """Returns localized date value."""
     return formats.localize_input(value, date_format)
 
 
 @register.filter('force_text')
 def force_text_impl(value):
-    """Coerse widget value to text."""
+    """Coerce widget value to text."""
     return force_text(value)
 
 

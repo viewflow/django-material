@@ -25,7 +25,7 @@ def frontend_urlname(model, url_type):
 
 @register.filter
 def verbose_name(obj):
-    """Return model verobse name."""
+    """Return model verbose name."""
     if isinstance(obj, models.Model):
         type(obj)._meta.verbose_name
     return obj._meta.verbose_name
