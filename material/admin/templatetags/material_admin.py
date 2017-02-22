@@ -4,7 +4,6 @@ from importlib import import_module
 
 from django.apps import apps
 from django.contrib.admin.views.main import PAGE_VAR
-from django.contrib.admin.utils import get_fields_from_path
 from django.core.urlresolvers import reverse, NoReverseMatch
 from django.conf import settings
 from django.db import models
@@ -27,29 +26,35 @@ register = Library()
 CL_VALUE_RE = re.compile('value="(.*)\"')
 
 
-def get_admin_site():
-    """TODO: Remove."""
-    site_module = getattr(
+def get_admin_site(request):
+    site_modules = getattr(
         settings,
-        'MATERIAL_ADMIN_SITE',
-        'django.contrib.admin.site'
+        'MATERIAL_ADMIN_SITES',
+        ['django.contrib.admin.site']
     )
-    mod, inst = site_module.rsplit('.', 1)
-    mod = import_module(mod)
-    return getattr(mod, inst)
+    curr_url = request.META['PATH_INFO']
+    for site_module in site_modules:
+        mod, inst = site_module.rsplit('.', 1)
+        mod = import_module(mod)
+        admin_site = getattr(mod, inst)
+        admin_url = reverse('%s:index' % admin_site.name)
+        if curr_url.startswith(admin_url):
+            return admin_site
+    raise ValueError('Admin site matching "%s" not found' % curr_url)
 
 
-site = get_admin_site()
+
+#site = get_admin_site()
 
 
 @register.assignment_tag
 def get_app_list(request):
-    """Django 1.8 way to get application registred at default Admin Site."""
     app_dict = {}
-
+    user = request.user
+    site=get_admin_site(request)
     for model, model_admin in site._registry.items():
         app_label = model._meta.app_label
-        has_module_perms = model_admin.has_module_permission(request)
+        has_module_perms = user.has_module_perms(app_label)
 
         if has_module_perms:
             perms = model_admin.get_model_perms(request)
@@ -114,7 +119,6 @@ def get_app_list(request):
 
 @register.assignment_tag
 def fieldset_layout(adminform, inline_admin_formsets):
-    """Generate materila layout for admin inlines."""
     layout = getattr(adminform.model_admin, 'layout', None)
     if layout is not None:
         for element in layout.elements:
@@ -161,7 +165,9 @@ def fieldset_layout(adminform, inline_admin_formsets):
 
 @register.simple_tag
 def paginator_number(cl, i):
-    """Generate an individual page index link in a paginated list."""
+    """
+    Generates an individual page index link in a paginated list.
+    """
     current_page = cl.paginator.page(cl.page_num+1)
     if i == 'prev':
         if current_page.has_previous():
@@ -171,16 +177,14 @@ def paginator_number(cl, i):
             return format_html('<li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>')
     elif i == 'next':
         if current_page.has_next():
-            return format_html(
-                '<li class="disabled"><a href="{}"><i class="material-icons">chevron_right</i></i></a></li>',
-                cl.get_query_string({PAGE_VAR: current_page.next_page_number()}))
+            return format_html('<li class="disabled"><a href="{}"><i class="material-icons">chevron_right</i></i></a></li>',
+                               cl.get_query_string({PAGE_VAR: current_page.next_page_number()}))
         else:
-            return format_html(
-                '<li class="disabled"><a href="#!"><i class="material-icons">chevron_right</i></a></li>')
+            return format_html('<li class="disabled"><a href="#!"><i class="material-icons">chevron_right</i></a></li>')
     elif i == '.':
         return mark_safe('<li class="disabled"><a href="#" onclick="return false;">...</a></li>')
     elif i == cl.page_num:
-        return format_html('<li class="active"><a href="#!">{0}</a></li> ',
+        return format_html('<li class="active"><a href="{0}">{0}</a></li> ',
                            i+1,
                            cl.get_query_string({PAGE_VAR: i}))
     else:
@@ -192,10 +196,12 @@ def paginator_number(cl, i):
 
 @register.inclusion_tag('admin/date_hierarchy.html')
 def date_hierarchy(cl):
-    """Display the date hierarchy for date drill-down functionality."""
+    """
+    Displays the date hierarchy for date drill-down functionality.
+    """
     if cl.date_hierarchy:
         field_name = cl.date_hierarchy
-        field = get_fields_from_path(cl.model, field_name)[-1]
+        field = cl.opts.get_field_by_name(field_name)[0]
         dates_or_datetimes = 'datetimes' if isinstance(field, models.DateTimeField) else 'dates'
         year_field = '%s__year' % field_name
         month_field = '%s__month' % field_name
@@ -205,8 +211,7 @@ def date_hierarchy(cl):
         month_lookup = cl.params.get(month_field)
         day_lookup = cl.params.get(day_field)
 
-        def link(filters):
-            return cl.get_query_string(filters, [field_generic])
+        link = lambda filters: cl.get_query_string(filters, [field_generic])
 
         if not (year_lookup or month_lookup or day_lookup):
             # select appropriate start level
@@ -325,15 +330,12 @@ simple_tag(register, admin_related_field_urls)
 
 @register.filter
 def admin_change_list_value(result_checkbox_html):
-    """Extract value from rendered admin list action checkbox."""
     value = CL_VALUE_RE.findall(result_checkbox_html)
     return value[0] if value else None
 
 
 def admin_select_related_link(bound_field):
     """
-    Helper for admin RelatedWidgetWrapper.
-
     {% admin_select_related_link bound_field as rel_field_urls %}
     """
     rel_widget = bound_field.field.widget
