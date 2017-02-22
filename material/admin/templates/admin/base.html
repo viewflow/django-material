@@ -118,9 +118,11 @@
                 </nav>
                 {% endif %}
                 {% endblock %}
+                {% block main_content %}
                 <div class="content">
                     {% block content %}{% endblock %}
                 </div>
+                {% endblock main_content %}
             {% endblock main %}
         </main>
         <footer>
