@@ -14,7 +14,7 @@ class ModuleMatchName(str):
     """Dump str wrapper.
 
     Just to keep module reference over django url resolve calling
-    hierarhy.
+    hierarchy.
     """
 
 
@@ -25,7 +25,7 @@ class ModuleURLResolver(RegexURLResolver):
     state. And allows access to the resolved current module at runtime.
 
     Django reads url config once at the start. Installation and
-    deisntallation the module at runtime don't produce change in the
+    uninstallation the module at runtime don't produce change in the
     django url-conf.
 
     Url access check happens at the resolve time.

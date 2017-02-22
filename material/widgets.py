@@ -9,7 +9,7 @@ from django.utils.encoding import force_str
 class SelectDateWidget(Widget):
     """Wrapper around django.widgets.SelectDateWidget.
 
-    Provides api suitble for template-based rendering
+    Provides api suitable for template-based rendering
     """
 
     def __init__(self, widget):  # noqa: D102
@@ -67,7 +67,7 @@ class SelectDateWidget(Widget):
                 yield 'day'
 
     def none_choice(self, none_value):
-        """Value for the emply select option."""
+        """Value for the empty select option."""
         return [] if self.widget.is_required else [none_value]
 
     def selects_data(self, value):

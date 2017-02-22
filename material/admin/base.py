@@ -14,7 +14,7 @@ class AdminReadonlyField(LayoutNode):
 
 
 class Inline(LayoutNode):
-    """Leayout wrapper node for admin inline."""
+    """Layout wrapper node for admin inline."""
 
     def __init__(self, inline, **kwargs):  # noqa D102
         self.inline = inline

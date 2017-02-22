@@ -4,13 +4,13 @@
 * Forms - Fix date and datetime fields rendering
 * Frontend - Refactor datatables list view
 * Frontend - Fix viewset incompatibility under python 2.7
-* Frontend - Netural default theme color
+* Frontend - Natural default theme color
 * Frontend - Prebuild theme set
 * Frontend - Custom theme builder management command (PRO)
 * Frontend - Generic views templates now extends base module template
 * Frontend - Improve base 2 columns layout
 * Admin - Add "Save as New" change form action
-* Admin - Fix rederect after login
+* Admin - Fix redirect after login
 
 0.11.0 2016-12-13 - Beta
 ------------------------
@@ -57,7 +57,7 @@
 - Forms - Add Formset and Inlines Form fields (PRO)
 - Forms - Add input[type=range] support
 - Forms - Fix initial label position for datetime field with value
-- Forms - Fix initial label position for number field with zero as inital value
+- Forms - Fix initial label position for number field with zero as initial value
 - Forms - Fix XSS vulnerability in input fields.
 - Forms - Fix CSS inclusion default template
 - Frontend - Fix module delete
@@ -93,7 +93,7 @@ The last alpha release.
 
 * Forms - Fix controls in new forms in formsets
 * Forms - New way to append or override widget attrs in template
-* Forms - Removed `group_class`, `add_group_class`, `add_label_class` redifinable parts
+* Forms - Removed `group_class`, `add_group_class`, `add_label_class` redefinable parts
 * Admin - Match table styles to google guidelines.
 * Admin - Start to work on admin widget support improvements http://forms.viewflow.io/demo/widget/admin/
 * Admin - Fix scrollbar
@@ -104,14 +104,14 @@ The last alpha release.
 0.6.0 2015-11-19 - Alpha
 ------------------------
 
-* First release with full django stardard widgets support
+* First release with full django standard widgets support
 * Forms - New per-widget demos on http://forms.viewflow.io/demo/widget/
 * Forms - Many widget behaviour fixes (DecimalInput, Select, MultiSelect, RadioInput)
 * Forms - Disable change datetime on mouse wheel
 * Admin - Style fixes and improvements
 * Admin - Custom form layouts support (ex: http://forms.viewflow.io/admin/sales/shipment/add/)
-* Admin - Admin css/js files moded to separate templates. Fix static files issue with CDN
-* Admin - Move All js/css dependencies inside the package. Meke it intranet app fiendly.
+* Admin - Admin css/js files modded to separate templates. Fix static files issue with CDN
+* Admin - Move All js/css dependencies inside the package. Make it intranet app friendly.
 * Frontend - Style fixes and improvements
 * Frontend - Fix load indicator on pjax back
 
@@ -133,7 +133,7 @@ The last alpha release.
 ------------------------
 
 * Forms - CheckboxSelectMultiple widgets with multi-column layout support
-* Forms - TimeiInput widget support (thnks @Morozzzko)
+* Forms - TimeInput widget support (thnks @Morozzzko)
 * Forms - Dynamic formsets support 
 * Admin - fix user change password form
 * Frontend - support for smooth navigation back to initial page
@@ -154,7 +154,7 @@ The last alpha release.
 
 * Fixed SplitDateTime widget rendering with empty value
 * More consistent parts/variables names over widgets templates
-* Fixed file field submition and validation
+* Fixed file field submission and validation
 * Compact html output
 * Added ellipses on long labels overflow
 

@@ -44,7 +44,7 @@ class ModelViewMixin(object):
         return super(ModelViewMixin, self).get_queryset()
 
     def get_object(self):
-        """Retrive an object and check user permissions."""
+        """Retreive an object and check user permissions."""
         obj = super(ModelViewMixin, self).get_object()
         if not self.has_object_permission(self.request, obj):
             raise PermissionDenied
@@ -90,7 +90,7 @@ class ModelViewMixin(object):
         return response
 
     def message_user(self):
-        """Successfull notification.
+        """Successful notification.
 
         Subclasses can override it.
         """

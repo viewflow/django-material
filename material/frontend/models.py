@@ -5,7 +5,7 @@ from django.db.models.signals import post_save
 
 
 class ModuleManager(models.Manager):
-    """Base module state maanger."""
+    """Base module state manager."""
 
     def installed(self, module):
         """By default, all modules considered installed."""

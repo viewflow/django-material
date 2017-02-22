@@ -26,7 +26,7 @@ class LayoutNode(object):
         """Determine template for the node.
 
         If `context` have the `template` variable it would be used as
-        relative template name in the curent template pack.
+        relative template name in the current template pack.
 
         Assumes `form_template_pack` context variable points to the
         current template pack
@@ -152,7 +152,7 @@ class Row(LayoutNode):
 
 
 class Column(LayoutNode):
-    """Place elements vertically stacked, one ander another.
+    """Place elements vertically stacked, one under another.
 
     :param span_columns: Relative width of the fieldset
     """
@@ -169,7 +169,7 @@ class Span(object):
     """Wrapper for a field reference.
 
     There are  ``Span2``, ``Span3``, .., ``Span12`` shortcut classes.
-    ``Layout`` autowraps string field referencies into Span(1, field_name)
+    ``Layout`` autowraps string field references into Span(1, field_name)
 
     :param span_columns: relative field width
     :param field_name: field name in the form
