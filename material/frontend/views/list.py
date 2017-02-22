@@ -479,9 +479,7 @@ class ListModelView(TemplateResponseMixin, DataTableMixin, View):
         opts = self.model._meta
 
         if self.has_add_permission(self.request):
-            kwargs['add_url'] = reverse(
-                '{}:{}_add'.format(opts.app_label, opts.model_name),
-                args=[self.object.pk])
+            kwargs['add_url'] = reverse('{}:{}_add'.format(opts.app_label, opts.model_name))
 
         return super(ListModelView, self).get_context_data(**kwargs)
 
