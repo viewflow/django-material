@@ -388,6 +388,19 @@ class ListModelView(TemplateResponseMixin, DataTableMixin, View):
         return request.user.has_perm(
             '{}.{}'.format(opts.app_label, codename), obj=obj)
 
+    def has_add_permission(self, request):
+        """Object add permission check.
+
+        If view had a `viewset`, the `viewset.has_add_permission` used.
+        """
+        if self.viewset is not None:
+            return self.viewset.has_add_permission(request)
+
+        # default lookup for the django permission
+        opts = self.model._meta
+        codename = get_permission_codename('add', opts)
+        return request.user.has_perm('{}.{}'.format(opts.app_label, codename))
+
     def get_template_names(self):
         """
         List of templates for the view.
@@ -457,6 +470,20 @@ class ListModelView(TemplateResponseMixin, DataTableMixin, View):
         return reverse(
             '{}:{}_detail'.format(opts.app_label, opts.model_name),
             args=[item.pk])
+
+    def get_context_data(self, **kwargs):
+        """Additional context data for list view.
+
+        :keyword add_url: Link to the add view
+        """
+        opts = self.model._meta
+
+        if self.has_add_permission(self.request):
+            kwargs['add_url'] = reverse(
+                '{}:{}_add'.format(opts.app_label, opts.model_name),
+                args=[self.object.pk])
+
+        return super(ListModelView, self).get_context_data(**kwargs)
 
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
