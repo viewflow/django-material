@@ -234,18 +234,15 @@ class DataTableMixin(ContextMixin):
             attr = self.get_data_attr(field_name)
             yield field_name, attr.label
 
-    def _boolean_column(self, value):
-        if value:
-            return render_to_string(template_name='material/icons/true.html')
-        return render_to_string(template_name='material/icons/false.html')
-
     def format_column(self, item, field_name, value):
         if value is None:
             return self.empty_value_display
         elif isinstance(value, datetime.datetime):
             return formats.localize(timezone.template_localtime(value))
         elif isinstance(value, bool):
-            return self._boolean_column(value)
+            if value:
+                return render_to_string(template_name='material/icons/true.html')
+            return render_to_string(template_name='material/icons/false.html')
         elif isinstance(value, (datetime.date, datetime.time)):
             return formats.localize(value)
         elif isinstance(value, six.integer_types + (decimal.Decimal, float)):
