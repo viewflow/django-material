@@ -4,6 +4,7 @@ import math
 import re
 from collections import OrderedDict
 
+from django.db.models.query import QuerySet
 from django.forms.forms import BoundField
 from django.template import Library
 from django.template.base import (
@@ -197,7 +198,7 @@ def select_options(bound_field):
     If group_name is None - option is not belongs to group
     """
     selected = bound_field.value()
-    if not isinstance(selected, (list, tuple)):
+    if not isinstance(selected, (list, tuple, QuerySet)):
         selected = [selected]
     selected = set(force_text(v) for v in selected)
 
