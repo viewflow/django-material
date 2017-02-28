@@ -67,7 +67,7 @@
 {% block main_content %}
 <form method="POST" class="content">
     {% csrf_token %}
-    <div class="left-panel">
+    <div class="left-panel{% if action_form or cl.date_hierarchy or cl.list_filter or cl.search_fields %}{% else %} wide{% endif %}">
         <div class="card">
             <div class="card-content">
                 {% block result_list %}
