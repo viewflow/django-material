@@ -70,10 +70,9 @@
 {% block right-panel %}{% endblock right-panel %}
 {% block action_btn %}
 <div class="fixed-action-btn">
-    {% url view.model|frontend_urlname:'add' as add_url %}
-    <a class="btn-floating btn-large waves-effect waves-light red z-depth-2" href="{{ add_url }}">
-        <i class="large material-icons">add</i>
-    </a>
+    {% if add_url %}
+      <a class="btn-floating btn-large waves-effect waves-light red z-depth-2" href="{{ add_url }}"><i class="large material-icons">add</i></a>
+    {% endif %}
 </div>
 {% endblock %}
 {% endblock %}

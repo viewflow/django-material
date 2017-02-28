@@ -8,7 +8,7 @@ except ImportError:
 
 
 class SmoothNavigationMiddleware(object):
-    """Keep `?back=` queryst parameter on POST requests."""
+    """Keep `?back=` queryset parameter on POST requests."""
 
     def process_response(self, request, response):  # noqa D102
         if isinstance(response, HttpResponseRedirect):

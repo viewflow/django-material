@@ -5,7 +5,7 @@ class Registry(object):
         self._registry = {}
 
     def modules(self):
-        """List of modules in the forntend according to it's order."""
+        """List of modules in the frontend according to it's order."""
         return sorted([module for module in self._registry.values()],
                       key=lambda module: (module.order, module.label))
 

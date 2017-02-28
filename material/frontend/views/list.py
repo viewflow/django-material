@@ -41,7 +41,7 @@ def _get_attr_label(owner, attr_name):
 
 
 class ModelField(object):
-    """Retrive a field value from the model.
+    """Retrieve a field value from the model.
 
     Field verbose name would be use as a label.
     """
@@ -66,7 +66,7 @@ class ModelField(object):
 
 
 class ModelAttr(object):
-    """Retrive attribute value from the model instance.
+    """Retrieve attribute value from the model instance.
 
     If model attribute is a callable, to get the value it would be
     called without any arguments.
@@ -115,10 +115,10 @@ class DataSourceAttr(object):
 
     @property
     def label(self):
-        """Retrive the label for the data source attibute.
+        """Retrieve the label for the data source attribute.
 
-        Label could be specifiend in `.short_description` or the
-        attribue name would be used.
+        Label could be specified in `.short_description` or the
+        attribute name would be used.
 
         Example::
 
@@ -186,7 +186,7 @@ class DataTableMixin(ContextMixin):
         return context
 
     def get_list_display(self):
-        """Return list of coluns to display."""
+        """Return list of columns to display."""
         return self.list_display
 
     def get_datatable_config(self):
@@ -202,7 +202,7 @@ class DataTableMixin(ContextMixin):
     def get_data_attr(self, attr_name):
         """Data getter for an attribute.
 
-        Data could comes from the model field or extrnal `data_source`
+        Data could comes from the model field or external `data_source`
         method call.
         """
         opts = self.object_list.model._meta
@@ -262,7 +262,7 @@ class DataTableMixin(ContextMixin):
         return self.object_list.count()
 
     def total_filtered(self):
-        """Dataset size with filter appllied."""
+        """Dataset size with filter applied."""
         return self.object_list.count()
 
     def get_ordering(self):
@@ -331,7 +331,7 @@ class DataTableMixin(ContextMixin):
 
 
 class ListModelView(TemplateResponseMixin, DataTableMixin, View):
-    """List view sutable to work with jQuery Datatables.
+    """List view suitable to work with jQuery Datatables.
 
     The view responsive for handling GET/POST requests from the browser
     and AJAX from the datatable.
@@ -388,6 +388,19 @@ class ListModelView(TemplateResponseMixin, DataTableMixin, View):
         return request.user.has_perm(
             '{}.{}'.format(opts.app_label, codename), obj=obj)
 
+    def has_add_permission(self, request):
+        """Object add permission check.
+
+        If view had a `viewset`, the `viewset.has_add_permission` used.
+        """
+        if self.viewset is not None:
+            return self.viewset.has_add_permission(request)
+
+        # default lookup for the django permission
+        opts = self.model._meta
+        codename = get_permission_codename('add', opts)
+        return request.user.has_perm('{}.{}'.format(opts.app_label, codename))
+
     def get_template_names(self):
         """
         List of templates for the view.
@@ -422,7 +435,7 @@ class ListModelView(TemplateResponseMixin, DataTableMixin, View):
             return list(list_display)[:1]
 
     def get_queryset(self):
-        """Retrive the view queryset."""
+        """Retrieve the view queryset."""
         if self.queryset is not None:
             queryset = self.queryset
             if isinstance(queryset, QuerySet):
@@ -457,6 +470,18 @@ class ListModelView(TemplateResponseMixin, DataTableMixin, View):
         return reverse(
             '{}:{}_detail'.format(opts.app_label, opts.model_name),
             args=[item.pk])
+
+    def get_context_data(self, **kwargs):
+        """Additional context data for list view.
+
+        :keyword add_url: Link to the add view
+        """
+        opts = self.model._meta
+
+        if self.has_add_permission(self.request):
+            kwargs['add_url'] = reverse('{}:{}_add'.format(opts.app_label, opts.model_name))
+
+        return super(ListModelView, self).get_context_data(**kwargs)
 
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
