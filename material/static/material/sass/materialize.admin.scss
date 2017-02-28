@@ -24,6 +24,55 @@ th {
     }
 }
 
+.content {
+    display: flex;
+    max-width: 100%;
+    padding-bottom: 50px;
+}
+
+.left-panel {
+    flex-basis: 80%;
+    margin-left: 0.375rem;
+
+    &.wide {
+        flex-basis: 100%;
+        margin-right: 0.375rem;
+    }
+
+    > .card {
+        margin-bottom: 0.375rem;
+    }
+
+}
+
+.right-panel {
+    flex-basis: 20%;
+    min-width: 250px;
+    margin-left: 0.375rem;
+    margin-right: 0.375rem;
+
+    > .card {
+        margin-bottom: 0.5rem;
+    }
+}
+
+@media only screen and (max-width : 993px) {
+    .left-panel {
+        flex-basis: 100%;
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+    }
+   
+    .left-panel > .card {
+        margin-top: 1px;
+    }
+
+    .right-panel {
+        display: none;
+    }
+}
+
 /* ALERTS */
 .toast a {
     color: white;
@@ -225,13 +274,18 @@ nav.breadcrumbs {
     .card-title {
         font-size: 18px;
         text-transform: uppercase;
-        font-weight: 100;
         margin-bottom: -10px;
     }
 
     .card-content {
         padding: 20px;
-        padding-top: 10px;
+        padding-top: 5px;
+    }
+
+    .row {
+        margin-bottom: 0px;
+        margin-left: -0.75rem;
+        margin-right: -0.75rem;
     }
 
     span.action-counter,
@@ -246,12 +300,6 @@ nav.breadcrumbs {
     }
 }
 
-@media only screen and (min-width : 601px) {
-    .actions-card {
-        margin-left: -10px;
-    }
-}
-
 
 .filters-card {
     overflow:initial;
@@ -259,13 +307,18 @@ nav.breadcrumbs {
     .card-title {
         font-size: 18px;
         text-transform: uppercase;
-        font-weight: 100;
         margin-top: -10px;
     }
 
     .card-content {
         padding: 20px;
-        padding-top: 10px;
+        padding-top: 5px;
+    }
+
+    .row {
+        margin-bottom: 0px;
+        margin-left: -0.75rem;
+        margin-right: -0.75rem;
     }
 
     a {
@@ -282,12 +335,6 @@ nav.breadcrumbs {
         i.material-icons {
             font-size: 18px;
         }
-    }
-}
-
-@media only screen and (min-width : 601px) {
-    .filters-card {
-        margin-left: -10px;
     }
 }
 

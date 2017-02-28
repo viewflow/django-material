@@ -22,7 +22,8 @@ th {
 
 .content {
   display: flex;
-  max-width: 100%; }
+  max-width: 100%;
+  padding-bottom: 50px; }
 
 .left-panel {
   flex-basis: 80%;
@@ -38,6 +39,8 @@ th {
   min-width: 250px;
   margin-left: 0.375rem;
   margin-right: 0.375rem; }
+  .right-panel > .card {
+    margin-bottom: 0.5rem; }
 
 @media only screen and (max-width: 993px) {
   .left-panel {

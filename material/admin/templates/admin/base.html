@@ -118,9 +118,11 @@
                 </nav>
                 {% endif %}
                 {% endblock %}
+                {% block main_content %}
                 <div class="content">
                     {% block content %}{% endblock %}
                 </div>
+                {% endblock %}
             {% endblock main %}
         </main>
         <footer>
@@ -144,35 +146,3 @@
         {% endblock messages %}
     </body>
 </html>
-<!--
-    <body>
-        <ul id="user-menu" class="dropdown-content">
-        </ul>
-        {# endif #}
-
-        {# if not is_popup #}
-        <header>
-            <nav id="header" class="nav-top">
-                <div class="nav-wrapper">
-                    <a href="/" class="page-title hide-on-med-and-down">{# block brand-logo #}{# trans 'Administration' #}{# endblock #}</a>
-                    <a href="#" data-activates="nav-mobile" class="button-collapse full"><i class="material-icons">menu</i></a>
-
-                    <ul class="right">
-                        {# if user.is_authenticated #}
-                        <li><a class="dropdown-button constrain_width" href="#!" data-activates="user-menu">{{ user.get_full_name }}<i class="material-icons right">arrow_drop_down</i></a></li>
-                        {# endif #}
-                    </ul>
-                </div>
-
-                <ul id="nav-mobile" class="side-nav fixed module-menu">
-                    <li class="logo valign-wrapper">
-                        <a href="{# url 'admin:index' #}" class="no-navigation">
-                            {# block branding #}{# endblock #}
-                        </a>
-                    </li>
-
-                </ul>
-            </nav>
-        </header>
-        {# endif #}
--->

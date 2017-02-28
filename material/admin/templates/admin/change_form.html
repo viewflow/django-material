@@ -12,47 +12,43 @@
 
 
 {% block content %}
-<div class="row change-form">
-    <div class="col s12 m12 l9">
-        <form {% if has_file_field %}enctype="multipart/form-data" {% endif %}action="{{ form_url }}" method="post" id="{{ opts.model_name }}_form">
-            <div class="card">
-                <div class="card-content">
-                    {% csrf_token %}
-                    {% if is_popup %}<input type="hidden" name="{{ is_popup_var }}" value="1" />{% endif %}
-                    {% if to_field %}<input type="hidden" name="{{ to_field_var }}" value="{{ to_field }}" />{% endif %}
-                    <div class="row">
-                        <div class="col s12">
-                            <h4 class="form-title black-text">{% if add %}{% trans 'New' %} {{ opts.verbose_name }}{% else %}{{ adminform.form.instance|title }}{% endif %}</h4>
-                        </div>
+<div class="left-panel change-form">
+    <form {% if has_file_field %}enctype="multipart/form-data" {% endif %}action="{{ form_url }}" method="post" id="{{ opts.model_name }}_form">
+        {% csrf_token %}
+        {% if is_popup %}<input type="hidden" name="{{ is_popup_var }}" value="1" />{% endif %}
+        {% if to_field %}<input type="hidden" name="{{ to_field_var }}" value="{{ to_field }}" />{% endif %}
+        <div class="card">
+            <div class="card-content">
+                <span class="card-title">{% if add %}{% trans 'New' %} {{ opts.verbose_name }}{% else %}{{ adminform.form.instance|title }}{% endif %}</span>
+                {% if errors %}
+                <div class="row">
+                    <div class="col s12">
+                        <small class="errornote">
+                            {% if errors|length == 1 %}{% trans "Please correct the error below." %}{% else %}{% trans "Please correct the errors below." %}{% endif %}
+                            <br/><br/>
+                        </small>
                     </div>
-                    {% if errors %}
-                    <div class="row">
-                        <div class="col s12">
-                            <small class="errornote">
-                                {% if errors|length == 1 %}{% trans "Please correct the error below." %}{% else %}{% trans "Please correct the errors below." %}{% endif %}
-                                <br/><br/>
-                            </small>
-                        </div>
-                    </div>
-                    {% endif %}
-
-                    {% block change_form %}
-                        {% fieldset_layout adminform inline_admin_formsets as layout %}
-                        {% form form=adminform.form layout=layout %}{% endform %}
-                        {% prepopulated_fields_js %}
-                    {% endblock %}
-                    {% block after_related_objects %}{% endblock %}
                 </div>
-                <div class="card-action">
-                    {% submit_row %}
-                </div>
+                {% endif %}
+                
+                {% block change_form %}
+                {% fieldset_layout adminform inline_admin_formsets as layout %}
+                {% form form=adminform.form layout=layout %}{% endform %}
+                {% prepopulated_fields_js %}
+                {% endblock %}
+                {% block after_related_objects %}{% endblock %}
             </div>
-        </form>
-    </div>
+            <div class="card-action">
+                {% submit_row %}
+            </div>
+        </div>
+    </form>
+</div>
+<div class="right-panel">
     {% if not is_popup and change %}
-    <div class="col s12 m12 l3">
+    <div class="z-depth-1">
         {% block object-tools %}
-        <ul class="object-tools collection with-header card">
+        <ul class="object-tools collection with-header">
             <li class="collection-header"><h5>{% trans "Tools" %}</h5></li>
             {% block object-tools-items %}
             <li class="collection-item">
@@ -71,11 +67,12 @@
         <div style="clear:both"></div>
     </div>
     {% endif %}
-    {% if adminform and add %}
-    <script type="text/javascript">
-      $('form#{{ opts.model_name }}_form :input:visible:enabled:first').attr('autofocus', true);
-      $('form#{{ opts.model_name }}_form :input:visible:enabled:first').focus();
-    </script>
-    {% endif %}
 </div>
+
+{% if adminform and add %}
+<script type="text/javascript">
+  $('form#{{ opts.model_name }}_form :input:visible:enabled:first').attr('autofocus', true);
+  $('form#{{ opts.model_name }}_form :input:visible:enabled:first').focus();
+</script>
+{% endif %}
 {% endblock %}

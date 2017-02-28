@@ -1,7 +1,7 @@
 {% load i18n material_form %}
 <div class="card actions-card">
     <div class="card-content">
-        <span class="card-title black-text" style="margin-bottom:20px">{% trans 'Action' %}</span>
+        <span class="card-title">{% trans 'Action' %}</span>
         <div class="actions">
             {% form form=action_form %}
                 {% part form.action label %}{% endpart %}
