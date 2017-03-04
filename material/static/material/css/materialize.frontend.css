@@ -214,6 +214,11 @@ table[data-form-control="datatable"] {
     padding-left: 20px; }
   table[data-form-control="datatable"] tbody tr > td:last-child {
     padding-right: 20px; }
+  table[data-form-control="datatable"] tbody tr > td > i.material-icons {
+    height: 16px;
+    margin-top: -8px;
+    font-size: 22px;
+    display: block; }
 
 /* ALERTS */
 .toast a {

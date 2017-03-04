@@ -459,10 +459,15 @@ class ListModelView(TemplateResponseMixin, DataTableMixin, View):
         return queryset
 
     def format_column(self, item, field_name, value):
-        value = super(ListModelView, self).format_column(item, field_name, value)
-        if field_name in self.get_list_display_links(self.get_list_display()):
-            value = format_html('<a href="{}">{}</a>', self.get_item_url(item), value)
-        return value
+        if isinstance(value, bool):
+            return format_html('<i class="material-icons">{}</i>'.format(
+                'check' if value else 'close'
+            ))
+        else:
+            formatted = super(ListModelView, self).format_column(item, field_name, value)
+            if field_name in self.get_list_display_links(self.get_list_display()):
+                formatted = format_html('<a href="{}">{}</a>', self.get_item_url(item), formatted)
+            return formatted
 
     def get_item_url(self, item):
         """Link to object detail to `list_display_links` columns."""
