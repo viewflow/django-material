@@ -99,7 +99,7 @@
         {% endblock %}
         {% block messages %}
         {% if messages %}
-        <script type="text/javascript">
+        <script id="messages" type="text/javascript">
             $(document).one('turbolinks:load', function () {
               {% for message in messages %}
               Materialize.toast('{{ message|capfirst }}', 10000, 'alert-{{ message.tags }}')
