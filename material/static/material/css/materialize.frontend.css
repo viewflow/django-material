@@ -231,16 +231,10 @@ table[data-form-control="datatable"] {
     background-color: #bf360c; }
 
 /* FORM CARD */
-.form-card .form-title {
-  font-size: 1.5rem;
-  font-weight: 200;
-  margin-bottom: 10px;
-  margin-top: 0px; }
-
-.form-card .section {
+.card form .section {
   padding-top: 0;
   padding-bottom: 0; }
-  .form-card .section h5 {
+  .card form .section h5 {
     font-size: 1.2rem;
     padding-bottom: 0.5rem;
     border-bottom: 2px solid black;

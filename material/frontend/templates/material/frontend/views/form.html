@@ -14,7 +14,7 @@
         <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="card-content">
-                <div class="form-title">{% if object.pk %}{{ view.model|verbose_name|title }}: {{ object }}{% else %}{% trans 'Add' %} {{ view.model|verbose_name|title }}{% endif %}</div>
+                <div class="card-title">{% if object.pk %}{{ view.model|verbose_name|title }}: {{ object }}{% else %}{% trans 'Add' %} {{ view.model|verbose_name|title }}{% endif %}</div>
                 {% block form %}
                 {% if view.layout or form.layout%}
                 {% if view.layout %}
