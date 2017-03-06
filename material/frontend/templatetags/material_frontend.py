@@ -1,6 +1,7 @@
 from django.db import models
 from django.template import Library, TemplateSyntaxError
 from django.utils.encoding import force_text
+from django.utils.html import format_html
 
 from ..utils import format_value
 from ..urlconf import frontend_url
@@ -60,7 +61,12 @@ def query_back(request, back_link=None):
 
 @register.simple_tag
 def format_field_value(value):
-    return format_value(value, '-')
+    if isinstance(value, bool):
+        return format_html('<i class="material-icons">{}</i>'.format(
+            'check' if value else 'close'
+        ))
+    else:
+        return format_value(value, '-')
 
 
 @register.simple_tag
