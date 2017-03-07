@@ -34,13 +34,7 @@ class ModelViewMixin(object):
         """
         if self.queryset is None and self.viewset is not None:
             if hasattr(self.viewset, 'get_queryset'):
-                queryset = self.viewset.get_queryset(self.request)
-                ordering = self.get_ordering()
-                if ordering:
-                    if isinstance(ordering, six.string_types):
-                        ordering = (ordering,)
-                    queryset = queryset.order_by(*ordering)
-                return queryset
+                return self.viewset.get_queryset(self.request)
         return super(ModelViewMixin, self).get_queryset()
 
     def get_object(self):
