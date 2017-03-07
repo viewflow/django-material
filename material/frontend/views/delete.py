@@ -24,8 +24,10 @@ class DeleteModelView(MessageUserMixin, generic.DeleteView):
         # default lookup for the django permission
         opts = self.model._meta
         codename = get_permission_codename('delete', opts)
-        return request.user.has_perm(
-            '{}.{}'.format(opts.app_label, codename), obj=obj)
+        delete_perm = '{}.{}'.format(opts.app_label, codename)
+        if request.user.has_perm(delete_perm):
+            return True
+        return request.user.has_perm(delete_perm, obj=obj)
 
     def _get_deleted_objects(self):
         collector = Collector(using=router.db_for_write(self.object))

@@ -42,7 +42,9 @@ class DetailModelView(generic.DetailView):
         opts = self.model._meta
         codename = get_permission_codename('view', opts)
         view_perm = '{}.{}'.format(opts.app_label, codename)
-        if request.user.has_perm(view_perm, obj=obj):
+        if request.user.has_perm(view_perm):
+            return True
+        elif request.user.has_perm(view_perm, obj=obj):
             return True
         return self.has_change_permission(request, obj=obj)
 
@@ -59,8 +61,10 @@ class DetailModelView(generic.DetailView):
         # default lookup for the django permission
         opts = self.model._meta
         codename = get_permission_codename('change', opts)
-        return request.user.has_perm(
-            '{}.{}'.format(opts.app_label, codename), obj=obj)
+        change_perm = '{}.{}'.format(opts.app_label, codename)
+        if request.user.has_perm(change_perm):
+            return True
+        return request.user.has_perm(change_perm, obj=obj)
 
     def has_delete_permission(self, request, obj):
         """Object delete permission check.
@@ -73,8 +77,10 @@ class DetailModelView(generic.DetailView):
         # default lookup for the django permission
         opts = self.model._meta
         codename = get_permission_codename('delete', opts)
-        return request.user.has_perm(
-            '{}.{}'.format(opts.app_label, codename), obj=obj)
+        delete_perm = '{}.{}'.format(opts.app_label, codename)
+        if request.user.has_perm(delete_perm):
+            return True
+        return request.user.has_perm(delete_perm, obj=obj)
 
     def get_object(self):
         """Retrieve the object.

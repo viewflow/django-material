@@ -182,7 +182,9 @@ class ModelViewSet(BaseViewset):
         opts = self.model._meta
         codename = get_permission_codename('view', opts)
         view_perm = '{}.{}'.format(opts.app_label, codename)
-        if request.user.has_perm(view_perm, obj=obj):
+        if request.user.has_perm(view_perm):
+            return True
+        elif request.user.has_perm(view_perm, obj=obj):
             return True
         return self.has_change_permission(request, obj=obj)
 
@@ -253,8 +255,10 @@ class ModelViewSet(BaseViewset):
         """
         opts = self.model._meta
         codename = get_permission_codename('change', opts)
-        return request.user.has_perm(
-            '{}.{}'.format(opts.app_label, codename), obj=obj)
+        change_perm = '{}.{}'.format(opts.app_label, codename)
+        if request.user.has_perm(change_perm):
+            return True
+        return request.user.has_perm(change_perm, obj=obj)
 
     @property
     def update_view(self):
@@ -281,8 +285,10 @@ class ModelViewSet(BaseViewset):
         """
         opts = self.model._meta
         codename = get_permission_codename('delete', opts)
-        return request.user.has_perm(
-            '{}.{}'.format(opts.app_label, codename), obj=obj)
+        delete_perm = '{}.{}'.format(opts.app_label, codename)
+        if request.user.has_perm(delete_perm):
+            return True
+        return request.user.has_perm(delete_perm, obj=obj)
 
     def get_delete_view_kwargs(self, **kwargs):
         """Configuration arguments for delete view.
