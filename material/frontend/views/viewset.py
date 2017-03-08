@@ -70,6 +70,14 @@ class ModelViewSet(BaseViewset):
 
     :keyword delete_view_class: CBV to delete an object
 
+    :keyword layout: Layout for django-material forms
+
+    :keyword form_class: Form Class for Create and Update views
+
+    :keyword form_widgets: Custom widgets for the model form
+                           in the Create and Update views, if
+                           no custom form_class provided.
+
     There is no specifically requirements to CBV, by overriding
     corresponding `get_<op>_view` method you can even use function
     based views with this viewset.
@@ -98,6 +106,7 @@ class ModelViewSet(BaseViewset):
 
     layout = DEFAULT
     form_class = DEFAULT
+    form_widgets = DEFAULT
 
     def filter_kwargs(self, view_class, **kwargs):
         """Add defaults and filter kwargs to only those that view can accept.
@@ -136,6 +145,7 @@ class ModelViewSet(BaseViewset):
         result = {
             'layout': self.layout,
             'form_class': self.form_class,
+            'form_widgets': self.form_widgets,
         }
         result.update(kwargs)
         return self.filter_kwargs(self.create_view_class, **result)
@@ -244,6 +254,7 @@ class ModelViewSet(BaseViewset):
         result = {
             'layout': self.layout,
             'form_class': self.form_class,
+            'form_widgets': self.form_widgets,
         }
         result.update(kwargs)
         return self.filter_kwargs(self.update_view_class, **result)
