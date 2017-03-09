@@ -1,4 +1,5 @@
 from django.contrib.auth import get_permission_codename
+from django.core.urlresolvers import reverse
 from django.views import generic
 
 from .mixins import MessageUserMixin, ModelViewMixin
@@ -21,6 +22,15 @@ class CreateModelView(MessageUserMixin, ModelViewMixin, generic.CreateView):
         opts = self.model._meta
         codename = get_permission_codename('add', opts)
         return request.user.has_perm('{}.{}'.format(opts.app_label, codename))
+
+    def get_success_url(self):
+        """Redirect back to the detail view if no `success_url` is configured."""
+        if self.success_url is None:
+            opts = self.model._meta
+            return reverse('{}:{}_detail'.format(
+                opts.app_label, opts.model_name), args=[self.object.pk]
+            )
+        return super(ModelViewMixin, self).get_success_url()
 
     def message_user(self):
         self.success('The {name} "{link}" was added successfully.')
