@@ -25,8 +25,10 @@
         </div>
         <div class="card-action">
             <div class="right-align">
+                {% block actions_row %}
                 {% if delete_url %}<a class="waves-effect waves-light btn red white-text" href="{{ delete_url }}">{% trans 'Delete' %}</a>{% endif %}
                 {% if change_url %}<a class="waves-effect waves-light btn white-text" href="{{ change_url }}">{% trans 'Change' %}</a>{% endif %}
+                {% endblock actions_row %}
             </div>
         </div>
     </div>
