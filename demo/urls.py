@@ -8,7 +8,7 @@ from django.views import generic
 from formtools.wizard.views import SessionWizardView
 from material.frontend import urls as frontend_urls
 
-from . import forms, widget_forms, admin_forms
+from . import forms, readonly_forms, widget_forms, admin_forms
 
 
 def index_view(request):
@@ -72,6 +72,29 @@ urlpatterns = [
         form_class=forms.BankForm, success_url='/demo/bank/', template_name="demo.html")),
     url(r'^demo/wizard/$', Wizard.as_view()),
     url(r'^foundation/basic/', generic.RedirectView.as_view(url='/?cache=no', permanent=False)),
+
+    # demo disabled
+    url(r'^demo/readonly/login/$', generic.FormView.as_view(
+        form_class=readonly_forms.LoginForm, initial=readonly_forms.LoginForm.initial,
+        success_url='/demo/readonly/login/', template_name="demo.html")),
+    url(r'^demo/readonly/registration/$', generic.FormView.as_view(
+        form_class=readonly_forms.RegistrationForm, initial=readonly_forms.RegistrationForm.initial,
+        success_url='/demo/registration/', template_name="demo.html")),
+    url(r'^demo/readonly/contact/$', generic.FormView.as_view(
+        form_class=readonly_forms.ContactForm, initial=readonly_forms.ContactForm.initial,
+        success_url='/demo/readonly/contact/', template_name="demo.html")),
+    url(r'^demo/readonly/order/$', generic.FormView.as_view(
+        form_class=readonly_forms.OrderForm, initial=readonly_forms.OrderForm.initial,
+        success_url='/demo/readonly/order/', template_name="demo.html")),
+    url(r'^demo/readonly/checkout/$', generic.FormView.as_view(
+        form_class=readonly_forms.CheckoutForm, initial=readonly_forms.CheckoutForm.initial,
+        success_url='/demo/readonly/checkout/', template_name="demo.html")),
+    url(r'^demo/readonly/comment/$', generic.FormView.as_view(
+        form_class=readonly_forms.CommentForm, initial=readonly_forms.CommentForm.initial,
+        success_url='/demo/readonly/comment/', template_name="demo.html")),
+    url(r'^demo/readonly/bank/$', generic.FormView.as_view(
+        form_class=readonly_forms.BankForm, initial=readonly_forms.BankForm.initial,
+        success_url='/demo/readonly/bank/', template_name="demo.html")),
 
     # core widgets test
     url(r'^demo/widget/$', generic.RedirectView.as_view(url='/demo/widget/boolean/', permanent=False)),

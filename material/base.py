@@ -75,7 +75,7 @@ def _get_field_template(template_pack, field):
         '{}_{}.html'.format(
             cls.__module__.split('.', 1)[0],
             cls.__name__.lower())
-        for cls in type(field.widget).mro()[:-2]
+        for cls in type(field.widget).mro()[:-1]
     ]
 
     field_templates = [
