@@ -24,6 +24,10 @@ form .error {
   width: calc(100% - 21px);
   overflow: hidden; }
 
+.input-field.readonly label {
+  font-size: 0.8rem;
+  transform: translateY(-140%); }
+
 .input-field.has-error .prefix {
   color: #F44336; }
 

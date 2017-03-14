@@ -11,7 +11,7 @@
             name="{{ bound_field.html_name }}"
             type="{{ field.widget.input_type|default:'text' }}"
             readonly
-            {% if bound_field.value != None %}value="{{ bound_field.value|unlocalize }}"{% endif %}
+            {% if bound_field.value != None %}value="{{ bound_field|selected_options|join:', ' }}"{% endif %}
         {% endattrs %}/>{% endpart %}
         {% part field label %}
         <label{% attrs bound_field 'label' %}

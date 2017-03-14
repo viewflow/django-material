@@ -224,3 +224,11 @@ def select_options(bound_field):
             )
 
     return groups.items()
+
+
+@register.filter
+def selected_options(bound_field):
+    for group, items in select_options(bound_field):
+        for choice, value, selected in items:
+            if selected:
+                yield choice

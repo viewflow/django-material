@@ -30,6 +30,11 @@ form .error {
         overflow: hidden;
     }
 
+    &.readonly label {
+        font-size: 0.8rem;
+        transform: translateY(-140%);
+    }
+
     &.has-error .prefix {
         color: #F44336;
     }

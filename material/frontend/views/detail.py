@@ -1,34 +1,63 @@
 from django.contrib.auth import get_permission_codename
 from django.core.urlresolvers import reverse
 from django.core.exceptions import PermissionDenied
-from django.db import models
+from django.forms.models import modelform_factory
 from django.views import generic
+
+from .mixins import _collect_elements
 
 
 class DetailModelView(generic.DetailView):
     """Thin wrapper for `generic.DetailView`."""
 
     viewset = None
+    form_class = None
+    form_widgets = None
+    layout = None
+    fields = None
 
-    def get_object_data(self):
-        """List of object fields to display.
+    def __init__(self, *args, **kwargs):  # noqa D102
+        super(DetailModelView, self).__init__(*args, **kwargs)
+        if self.form_class is None and self.fields is None:
+            if self.layout is not None:
+                self.fields = _collect_elements(self.layout)
+            else:
+                self.fields = '__all__'
 
-        Choice fields values are expanded to readable choice label.
+    def get_queryset(self):
+        """Return the list of items for this view.
+
+        If view have no explicit `self.queryset`, tries too lookup to
+        `viewflow.get_queryset`
         """
-        for field in self.object._meta.fields:
-            if isinstance(field, models.AutoField):
-                continue
-            elif field.auto_created:
-                continue
-            else:
-                choice_display_attr = "get_{}_display".format(field.get_attname())
-            if hasattr(self.object, choice_display_attr):
-                value = getattr(self.object, choice_display_attr)()
-            else:
-                value = getattr(self.object, field.get_attname())
+        if self.queryset is None and self.viewset is not None:
+            if hasattr(self.viewset, 'get_queryset'):
+                return self.viewset.get_queryset(self.request)
+        return super(DetailModelView, self).get_queryset()
 
-                if value is not None:
-                    yield (field.verbose_name.title(), value)
+    def get_form_kwargs(self):
+        return {
+            'instance': self.object
+        }
+
+    def get_form(self, form_class=None):
+        """
+        Returns an instance of the form to be used in this view.
+        """
+        if form_class is None:
+            form_class = self.get_form_class()
+        return form_class(**self.get_form_kwargs())
+
+    def get_form_class(self):
+        if self.form_class is None:
+            if self.model is not None:
+                model = self.model
+            elif hasattr(self, 'object') and self.object is not None:
+                model = self.object.__class__
+            else:
+                model = self.get_queryset().model
+            return modelform_factory(model, fields=self.fields, widgets=self.form_widgets)
+        return super(DetailModelView, self).get_form_class()
 
     def has_view_permission(self, request, obj):
         """Object view permission check.
@@ -101,7 +130,8 @@ class DetailModelView(generic.DetailView):
         """
         opts = self.model._meta
 
-        kwargs['object_data'] = self.get_object_data()
+        if 'form' not in kwargs:
+            kwargs['form'] = self.get_form()
         if self.has_change_permission(self.request, self.object):
             kwargs['change_url'] = reverse(
                 '{}:{}_change'.format(opts.app_label, opts.model_name),

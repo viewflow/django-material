@@ -182,7 +182,13 @@ class ModelViewSet(BaseViewset):
 
         May not be called if `get_detail_view` is overridden.
         """
-        return self.filter_kwargs(self.detail_view_class, **kwargs)
+        result = {
+            'layout': self.layout,
+            'form_class': self.form_class,
+            'form_widgets': self.form_widgets,
+        }
+        result.update(kwargs)
+        return self.filter_kwargs(self.detail_view_class, **result)
 
     def has_view_permission(self, request, obj=None):
         """Default view permission check for a detail and list views.
