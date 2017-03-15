@@ -74,27 +74,27 @@ urlpatterns = [
     url(r'^foundation/basic/', generic.RedirectView.as_view(url='/?cache=no', permanent=False)),
 
     # demo disabled
-    url(r'^demo/readonly/login/$', generic.FormView.as_view(
+    url(r'^demo/login/readonly/$', generic.FormView.as_view(
         form_class=readonly_forms.LoginForm, initial=readonly_forms.LoginForm.initial,
-        success_url='/demo/readonly/login/', template_name="demo.html")),
-    url(r'^demo/readonly/registration/$', generic.FormView.as_view(
+        success_url='/demo/login/readonly/', template_name="demo.html")),
+    url(r'^demo/registration/readonly/$', generic.FormView.as_view(
         form_class=readonly_forms.RegistrationForm, initial=readonly_forms.RegistrationForm.initial,
-        success_url='/demo/registration/', template_name="demo.html")),
-    url(r'^demo/readonly/contact/$', generic.FormView.as_view(
+        success_url='/demo/registration/readonly/', template_name="demo.html")),
+    url(r'^demo/contact/readonly/$', generic.FormView.as_view(
         form_class=readonly_forms.ContactForm, initial=readonly_forms.ContactForm.initial,
-        success_url='/demo/readonly/contact/', template_name="demo.html")),
-    url(r'^demo/readonly/order/$', generic.FormView.as_view(
+        success_url='/demo/contact/readonly/', template_name="demo.html")),
+    url(r'^demo/order/readonly/$', generic.FormView.as_view(
         form_class=readonly_forms.OrderForm, initial=readonly_forms.OrderForm.initial,
-        success_url='/demo/readonly/order/', template_name="demo.html")),
-    url(r'^demo/readonly/checkout/$', generic.FormView.as_view(
+        success_url='/demo/order/readonly/', template_name="demo.html")),
+    url(r'^demo/checkout/readonly/$', generic.FormView.as_view(
         form_class=readonly_forms.CheckoutForm, initial=readonly_forms.CheckoutForm.initial,
-        success_url='/demo/readonly/checkout/', template_name="demo.html")),
-    url(r'^demo/readonly/comment/$', generic.FormView.as_view(
+        success_url='/demo/checkout/readonly/', template_name="demo.html")),
+    url(r'^demo/comment/readonly/$', generic.FormView.as_view(
         form_class=readonly_forms.CommentForm, initial=readonly_forms.CommentForm.initial,
-        success_url='/demo/readonly/comment/', template_name="demo.html")),
-    url(r'^demo/readonly/bank/$', generic.FormView.as_view(
+        success_url='/demo/comment/readonly/', template_name="demo.html")),
+    url(r'^demo/bank/readonly/$', generic.FormView.as_view(
         form_class=readonly_forms.BankForm, initial=readonly_forms.BankForm.initial,
-        success_url='/demo/readonly/bank/', template_name="demo.html")),
+        success_url='/demo/bank/readonly/', template_name="demo.html")),
 
     # core widgets test
     url(r'^demo/widget/$', generic.RedirectView.as_view(url='/demo/widget/boolean/', permanent=False)),

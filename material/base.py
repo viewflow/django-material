@@ -88,7 +88,7 @@ def _get_field_template(template_pack, field):
     ]
 
     template_names = ["{}/fields/{}".format(template_pack, template_name)
-                      for template_name in widget_templates + field_templates]
+                      for template_name in field_templates + widget_templates]
 
     return select_template(template_names)
 
