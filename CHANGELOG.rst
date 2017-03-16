@@ -1,5 +1,24 @@
+0.13.0 2017-03-16 - Beta
+------------------------
+
+- Forms - Update MaterializeCSS to 0.98.0
+- Forms - `model autocomplete<http://docs.viewflow.io/forms_widgets.html>`_ widgets added (PRO)
+- Frontend - Fix viewset customization for update view form.
+- Frontend - Fix permission validation to add items in detail template
+- Frontend - Icons for boolean variables in the list view
+- Frontend - Destroy select and toast to fix issue with turbolinks cache
+- Frontend - Allow using non-object level permission in the frontend
+- Frontend - Allow specifying custom form widgets in the viewset
+- Frontend - Redirect to detail view after object create
+- Admin - Improve content page layout
+- Admin - Add {% block main_content %}
+- Admin - Improve object tools list
+- Admin - django-guardian support (PRO)
+
+
 0.12.0 2017-01-24 - Beta
 ------------------------
+
 * Forms - Fix select rendering
 * Forms - Fix date and datetime fields rendering
 * Frontend - Refactor datatables list view
@@ -12,6 +31,7 @@
 * Admin - Add "Save as New" change form action
 * Admin - Fix redirect after login
 
+
 0.11.0 2016-12-13 - Beta
 ------------------------
 
@@ -22,6 +42,7 @@
 * Frontend - Active page highlight fixed under IE/Safari
 * Admin - Fix ManyToMany field height
 * Admin - Fix change form markup
+
 
 0.10.1 2016-11-10 - Beta
 ------------------------
@@ -38,6 +59,7 @@
 - Frontend, Admin - Serve minfied js/css in the production mode
 - Frontend - Switch from unsupported PJAX to Turbolinks!
 - Admin - Use `model_admin.has_module_permission()` permission check
+
 
 0.9.2 2016-10-27 - Beta
 -----------------------
@@ -68,6 +90,7 @@
 - Admin - Readonly field support in inlines
 - Admin - Use `AdminSite.site_url` as back link
 
+
 0.8.0 2016-06-14 - Beta
 -----------------------
 
@@ -86,6 +109,7 @@ First beta release.
 * Admin - mansory layout for index page
 * Admin - added app and model icons support
 
+
 0.7.0 2016-03-13 - Alpha
 ------------------------
 
@@ -101,6 +125,7 @@ The last alpha release.
 * Frontend - Fix broken links on user navigation menu
 * Frontend - Modules are refactored to AppConfig mixins
 
+
 0.6.0 2015-11-19 - Alpha
 ------------------------
 
@@ -114,6 +139,7 @@ The last alpha release.
 * Admin - Move All js/css dependencies inside the package. Make it intranet app friendly.
 * Frontend - Style fixes and improvements
 * Frontend - Fix load indicator on pjax back
+
 
 0.5.0 2015-11-19 - Alpha
 ------------------------
@@ -134,7 +160,7 @@ The last alpha release.
 
 * Forms - CheckboxSelectMultiple widgets with multi-column layout support
 * Forms - TimeInput widget support (thnks @Morozzzko)
-* Forms - Dynamic formsets support 
+* Forms - Dynamic formsets support
 * Admin - fix user change password form
 * Frontend - support for smooth navigation back to initial page
 
@@ -148,6 +174,7 @@ The last alpha release.
 * Custom material css and js cleanup
 * New Frontend template
 * Various widget rendering fixes (splitdatetime, empty selects)
+
 
 0.2.1 2015-04-20 - Alpha
 ------------------------

@@ -61,16 +61,19 @@ Django Material Pro has a commercial-friendly license and distributed as part of
 Changelog
 =========
 
-0.12.0 2017-01-24 - Beta
+0.13.0 2017-03-16 - Beta
 ------------------------
-* Forms - Fix select rendering
-* Forms - Fix date and datetime fields rendering
-* Frontend - Refactor datatables list view
-* Frontend - Fix viewset incompatibility under python 2.7
-* Frontend - Netural default theme color
-* Frontend - Prebuild theme set
-* Frontend - Custom theme builder management command (PRO)
-* Frontend - Generic views templates now extends base module template
-* Frontend - Improve base 2 columns layout
-* Admin - Add "Save as New" change form action
-* Admin - Fix rederect after login
+
+- Forms - Update MaterializeCSS to 0.98.0
+- Forms - `model autocomplete <http://docs.viewflow.io/forms_widgets.html>`_ widgets added (PRO)
+- Frontend - Fix viewset customization for update view form.
+- Frontend - Fix permission validation to add items in detail template
+- Frontend - Icons for boolean variables in the list view
+- Frontend - Destroy select and toast to fix issue with turbolinks cache
+- Frontend - Allow using non-object level permission in the frontend
+- Frontend - Allow specifying custom form widgets in the viewset
+- Frontend - Redirect to detail view after object create
+- Admin - Improve content page layout
+- Admin - Add {% block main_content %}
+- Admin - Improve object tools list
+- Admin - django-guardian support (PRO)
