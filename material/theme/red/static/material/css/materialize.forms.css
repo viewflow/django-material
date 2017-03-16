@@ -1,3 +1,5 @@
+/* materialize.css variables */
+/* fixes */
 /* FORM LAYOUT */
 form .row {
   margin-bottom: 0px;
@@ -140,3 +142,41 @@ select.material-ignore {
 
 .formset-field td:last-child {
   padding-right: 0px; }
+
+/* AUTOCOMPLETE */
+.autocomplete-suggestions {
+  background-color: #fff;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+  max-height: 650px;
+  min-width: 100px;
+  overflow-y: auto;
+  will-change: width, height;
+  z-index: 999; }
+  .autocomplete-suggestions .autocomplete-suggestion,
+  .autocomplete-suggestions .autocomplete-no-suggestion {
+    clear: both;
+    color: #26a69a;
+    color: rgba(0, 0, 0, 0.87);
+    cursor: pointer;
+    display: block;
+    font-size: 16px;
+    line-height: 1.5rem;
+    line-height: 22px;
+    min-height: 50px;
+    padding: 14px 16px;
+    text-align: left;
+    text-transform: none;
+    width: 100%; }
+    .autocomplete-suggestions .autocomplete-suggestion.autocomplete-selected,
+    .autocomplete-suggestions .autocomplete-no-suggestion.autocomplete-selected {
+      background-color: #eee; }
+
+.autocomplete-field input.invalid-selection {
+  color: #f44336; }
+
+.autocomplete-field .chips.focus {
+  border-bottom: 1px solid #01579b;
+  box-shadow: 0 1px 0 0 #01579b; }
+
+.autocomplete-field .chips .input {
+  width: auto !important; }
