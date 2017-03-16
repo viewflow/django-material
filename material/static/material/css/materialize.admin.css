@@ -77,8 +77,10 @@ th {
     min-height: 175px; }
   .side-nav.fixed > li.last {
     padding-bottom: 58px; }
-  .side-nav.fixed .collapsible-body li a {
-    padding-left: 70px; }
+  .side-nav.fixed .collapsible-body {
+    padding: 0; }
+    .side-nav.fixed .collapsible-body li a {
+      padding-left: 70px; }
 
 /* TOPBAR */
 nav.topbar {

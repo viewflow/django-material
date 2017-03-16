@@ -60,28 +60,30 @@ th {
     min-height: 175px; }
   .side-nav.fixed > li.last {
     padding-bottom: 58px; }
-  .side-nav.fixed .collapsible-body li a {
-    padding-left: 70px; }
-  .side-nav.fixed .collapsible-body li .collapsible li.active {
-    background-color: rgba(0, 0, 0, 0.05); }
-    .side-nav.fixed .collapsible-body li .collapsible li.active a {
+  .side-nav.fixed .collapsible-body {
+    padding: 0; }
+    .side-nav.fixed .collapsible-body li a {
+      padding-left: 70px; }
+    .side-nav.fixed .collapsible-body li .collapsible li.active {
+      background-color: rgba(0, 0, 0, 0.05); }
+      .side-nav.fixed .collapsible-body li .collapsible li.active a {
+        color: rgba(0, 0, 0, 0.87); }
+    .side-nav.fixed .collapsible-body li:not(.active) > a.collapsible-header {
       color: rgba(0, 0, 0, 0.87); }
-  .side-nav.fixed .collapsible-body li:not(.active) > a.collapsible-header {
-    color: rgba(0, 0, 0, 0.87); }
-  .side-nav.fixed .collapsible-body li .collapsible-body li.active {
-    background-color: #424242; }
-    .side-nav.fixed .collapsible-body li .collapsible-body li.active a {
-      color: #fff; }
-  .side-nav.fixed .collapsible-body li .collapsible-body li a {
-    color: rgba(0, 0, 0, 0.87);
-    padding-left: 90px; }
-  .side-nav.fixed .collapsible-body .collapsible li.active > a.active {
-    color: rgba(0, 0, 0, 0.87); }
-  .side-nav.fixed .collapsible-body .submenu.active {
-    background-color: rgba(0, 0, 0, 0.05) !important; }
-    .side-nav.fixed .collapsible-body .submenu.active .collapsible li.active > a.active,
-    .side-nav.fixed .collapsible-body .submenu.active .collapsible li.active > .collapsible-header {
+    .side-nav.fixed .collapsible-body li .collapsible-body li.active {
+      background-color: #424242; }
+      .side-nav.fixed .collapsible-body li .collapsible-body li.active a {
+        color: #fff; }
+    .side-nav.fixed .collapsible-body li .collapsible-body li a {
+      color: rgba(0, 0, 0, 0.87);
+      padding-left: 90px; }
+    .side-nav.fixed .collapsible-body .collapsible li.active > a.active {
       color: rgba(0, 0, 0, 0.87); }
+    .side-nav.fixed .collapsible-body .submenu.active {
+      background-color: rgba(0, 0, 0, 0.05) !important; }
+      .side-nav.fixed .collapsible-body .submenu.active .collapsible li.active > a.active,
+      .side-nav.fixed .collapsible-body .submenu.active .collapsible li.active > .collapsible-header {
+        color: rgba(0, 0, 0, 0.87); }
 
 /* TOPBAR */
 nav.topbar {

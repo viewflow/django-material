@@ -2193,13 +2193,14 @@ ul.staggered-list li {
     text-align: center; } }
 
 footer.page-footer {
-  margin-top: 20px;
   padding-top: 20px;
   background-color: #424242; }
   footer.page-footer .footer-copyright {
     overflow: hidden;
-    height: 50px;
-    line-height: 50px;
+    min-height: 50px;
+    display: flex;
+    align-items: center;
+    padding: 10px 0px;
     color: rgba(255, 255, 255, 0.8);
     background-color: rgba(51, 51, 51, 0.08); }
 
@@ -2357,53 +2358,6 @@ td, th {
 .collapsible .collection {
   margin: 0;
   border: none; }
-
-span.badge {
-  min-width: 3rem;
-  padding: 0 6px;
-  margin-left: 14px;
-  text-align: center;
-  font-size: 1rem;
-  line-height: inherit;
-  color: #757575;
-  float: right;
-  box-sizing: border-box; }
-  span.badge.new {
-    font-weight: 300;
-    font-size: 0.8rem;
-    color: #fff;
-    background-color: #37474f;
-    border-radius: 2px; }
-  span.badge.new:after {
-    content: " new"; }
-  span.badge[data-badge-caption]::after {
-    content: " " attr(data-badge-caption); }
-
-nav ul a span.badge {
-  display: inline-block;
-  float: none;
-  margin-left: 4px;
-  line-height: 22px;
-  height: 22px; }
-
-.side-nav span.badge.new,
-.collapsible span.badge.new {
-  position: relative;
-  background-color: transparent; }
-  .side-nav span.badge.new::before,
-  .collapsible span.badge.new::before {
-    content: '';
-    position: absolute;
-    top: 10px;
-    right: 0;
-    bottom: 10px;
-    left: 0;
-    background-color: #37474f;
-    border-radius: 2px;
-    z-index: -1; }
-
-.collapsible span.badge.new {
-  z-index: 1; }
 
 .video-container {
   position: relative;
@@ -2978,7 +2932,11 @@ nav {
   nav.nav-extended {
     height: auto; }
     nav.nav-extended .nav-wrapper {
+      min-height: 56px;
       height: auto; }
+    nav.nav-extended .nav-content {
+      position: relative;
+      line-height: normal; }
   nav a {
     color: #fff; }
   nav i,
@@ -3033,6 +2991,10 @@ nav {
     nav .brand-logo i.material-icons {
       float: left;
       margin-right: 15px; }
+  nav .nav-title {
+    display: inline-block;
+    font-size: 32px;
+    padding: 28px 0; }
   nav ul {
     margin: 0; }
     nav ul li {
@@ -3052,6 +3014,9 @@ nav {
         margin-top: -2px;
         margin-left: 15px;
         margin-right: 15px; }
+        nav ul a.btn > .material-icons, nav ul a.btn-large > .material-icons, nav ul a.btn-large > .material-icons, nav ul a.btn-flat > .material-icons, nav ul a.btn-floating > .material-icons {
+          height: inherit;
+          line-height: inherit; }
       nav ul a:hover {
         background-color: rgba(0, 0, 0, 0.1); }
     nav ul.left {
@@ -3077,8 +3042,6 @@ nav {
         transition: color .3s; }
       nav .input-field label.active i {
         color: #fff; }
-      nav .input-field label.active {
-        transform: translateY(0); }
 
 .navbar-fixed {
   position: relative;
@@ -3088,6 +3051,8 @@ nav {
     position: fixed; }
 
 @media only screen and (min-width: 601px) {
+  nav.nav-extended .nav-wrapper {
+    min-height: 64px; }
   nav, nav .nav-wrapper i, nav a.button-collapse, nav a.button-collapse i {
     height: 64px;
     line-height: 64px; }
@@ -3265,7 +3230,7 @@ small {
 
 .card-panel {
   transition: box-shadow .25s;
-  padding: 20px;
+  padding: 24px;
   margin: 0.5rem 0 1rem 0;
   border-radius: 2px;
   background-color: #fff; }
@@ -3344,29 +3309,34 @@ small {
       position: absolute;
       bottom: 0;
       left: 0;
-      padding: 20px; }
+      max-width: 100%;
+      padding: 24px; }
   .card .card-content {
-    padding: 20px;
+    padding: 24px;
     border-radius: 0 0 2px 2px; }
     .card .card-content p {
       margin: 0;
       color: inherit; }
     .card .card-content .card-title {
-      line-height: 48px; }
+      display: block;
+      line-height: 32px;
+      margin-bottom: 8px; }
+      .card .card-content .card-title i {
+        line-height: 32px; }
   .card .card-action {
     position: relative;
     background-color: inherit;
     border-top: 1px solid rgba(160, 160, 160, 0.2);
-    padding: 20px; }
+    padding: 16px 24px; }
     .card .card-action a:not(.btn):not(.btn-large):not(.btn-large):not(.btn-floating) {
       color: #ffab40;
-      margin-right: 20px;
+      margin-right: 24px;
       transition: color .3s ease;
       text-transform: uppercase; }
       .card .card-action a:not(.btn):not(.btn-large):not(.btn-large):not(.btn-floating):hover {
         color: #ffd8a6; }
   .card .card-reveal {
-    padding: 20px;
+    padding: 24px;
     position: absolute;
     background-color: #fff;
     width: 100%;
@@ -3401,7 +3371,7 @@ small {
 
 .toast {
   border-radius: 2px;
-  top: 0;
+  top: 35px;
   width: auto;
   clear: both;
   margin-top: 10px;
@@ -3509,26 +3479,25 @@ small {
   min-height: 36px;
   line-height: 120%;
   opacity: 0;
-  display: none;
   position: absolute;
   text-align: center;
   max-width: calc(100% - 4px);
   overflow: hidden;
   left: 0;
   top: 0;
-  pointer-events: none; }
+  pointer-events: none;
+  visibility: hidden; }
 
 .backdrop {
   position: absolute;
   opacity: 0;
-  display: none;
   height: 7px;
   width: 14px;
   border-radius: 0 0 50% 50%;
   background-color: #323232;
   z-index: -1;
   transform-origin: 50% 0%;
-  transform: translate3d(0, 0, 0); }
+  visibility: hidden; }
 
 .btn, .btn-large,
 .btn-flat {
@@ -3620,13 +3589,6 @@ small {
   transition: .3s;
   cursor: pointer;
   vertical-align: middle; }
-  .btn-floating i {
-    width: inherit;
-    display: inline-block;
-    text-align: center;
-    color: #fff;
-    font-size: 1.6rem;
-    line-height: 40px; }
   .btn-floating:hover {
     background-color: #37474f; }
   .btn-floating:before {
@@ -3636,6 +3598,21 @@ small {
     height: 56px; }
     .btn-floating.btn-large i {
       line-height: 56px; }
+  .btn-floating.halfway-fab {
+    position: absolute;
+    right: 24px;
+    bottom: 0;
+    transform: translateY(50%); }
+    .btn-floating.halfway-fab.left {
+      right: auto;
+      left: 24px; }
+  .btn-floating i {
+    width: inherit;
+    display: inline-block;
+    text-align: center;
+    color: #fff;
+    font-size: 1.6rem;
+    line-height: 40px; }
 
 button.btn-floating {
   border: none; }
@@ -3801,13 +3778,12 @@ button.btn-floating {
   display: inline-block;
   overflow: hidden;
   -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
   -webkit-tap-highlight-color: transparent;
   vertical-align: middle;
   z-index: 1;
-  will-change: opacity, transform;
   transition: .3s ease-out; }
   .waves-effect .waves-ripple {
     position: absolute;
@@ -3971,10 +3947,8 @@ button.btn-floating {
 .collapsible-body {
   display: none;
   border-bottom: 1px solid #ddd;
-  box-sizing: border-box; }
-  .collapsible-body p {
-    margin: 0;
-    padding: 2rem; }
+  box-sizing: border-box;
+  padding: 2rem; }
 
 .side-nav .collapsible,
 .side-nav.fixed .collapsible {
@@ -4087,21 +4061,19 @@ button.btn-floating {
   display: block;
   cursor: zoom-in;
   position: relative;
-  transition: opacity .4s; }
-  .materialboxed:hover {
-    will-change: left, top, width, height; }
-    .materialboxed:hover:not(.active) {
-      opacity: .8; }
-
-.materialboxed.active {
-  cursor: zoom-out; }
+  transition: opacity .4s;
+  -webkit-backface-visibility: hidden; }
+  .materialboxed:hover:not(.active) {
+    opacity: .8; }
+  .materialboxed.active {
+    cursor: zoom-out; }
 
 #materialbox-overlay {
   position: fixed;
   top: 0;
-  left: 0;
   right: 0;
   bottom: 0;
+  left: 0;
   background-color: #292929;
   z-index: 1000;
   will-change: opacity; }
@@ -4112,6 +4084,7 @@ button.btn-floating {
   color: #fff;
   line-height: 50px;
   bottom: 0;
+  left: 0;
   width: 100%;
   text-align: center;
   padding: 0% 15%;
@@ -4427,9 +4400,9 @@ textarea.materialize-textarea {
     font-size: 1rem;
     cursor: text;
     transition: .2s ease-out; }
-  .input-field label.active {
-    font-size: 0.8rem;
-    transform: translateY(-140%); }
+    .input-field label:not(.label-icon).active {
+      font-size: 0.8rem;
+      transform: translateY(-140%); }
   .input-field .prefix {
     position: absolute;
     width: 3rem;
@@ -5120,11 +5093,11 @@ input[type=range]:focus::-ms-fill-upper {
   .table-of-contents a:hover {
     color: #a8a8a8;
     padding-left: 19px;
-    border-left: 1px solid #ea4a4f; }
+    border-left: 1px solid #424242; }
   .table-of-contents a.active {
     font-weight: 500;
     padding-left: 18px;
-    border-left: 2px solid #ea4a4f; }
+    border-left: 2px solid #424242; }
 
 .side-nav {
   position: fixed;
@@ -5635,7 +5608,7 @@ input[type=range]:focus::-ms-fill-upper {
   .carousel .carousel-item {
     display: none;
     width: 200px;
-    height: 400px;
+    height: 200px;
     position: absolute;
     top: 0;
     left: 0; }

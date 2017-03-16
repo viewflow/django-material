@@ -215,16 +215,14 @@ jQuery.extend( jQuery.easing,
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  */
-    // Custom Easing
-    jQuery.extend( jQuery.easing,
-    {
-      easeInOutMaterial: function (x, t, b, c, d) {
-        if ((t/=d/2) < 1) return c/2*t*t + b;
-        return c/4*((t-=2)*t*t + 2) + b;
-      }
-    });
-
-
+// Custom Easing
+jQuery.extend( jQuery.easing,
+{
+  easeInOutMaterial: function (x, t, b, c, d) {
+    if ((t/=d/2) < 1) return c/2*t*t + b;
+    return c/4*((t-=2)*t*t + 2) + b;
+  }
+});
 /*! VelocityJS.org (1.2.3). (C) 2014 Julian Shapiro. MIT @license: en.wikipedia.org/wiki/MIT_License */
 /*! VelocityJS.org jQuery Shim (1.0.1). (C) 2014 The jQuery Foundation. MIT @license: en.wikipedia.org/wiki/MIT_License. */
 /*! Note that this has been modified by Materialize to confirm that Velocity is not already being imported. */
@@ -353,6 +351,61 @@ Materialize.elementOrParentIsFixed = function(element) {
     });
     return isFixed;
 };
+
+
+/**
+ * Get time in ms
+ * @license https://raw.github.com/jashkenas/underscore/master/LICENSE
+ * @type {function}
+ * @return {number}
+ */
+var getTime = (Date.now || function () {
+  return new Date().getTime();
+});
+
+
+/**
+ * Returns a function, that, when invoked, will only be triggered at most once
+ * during a given window of time. Normally, the throttled function will run
+ * as much as it can, without ever going more than once per `wait` duration;
+ * but if you'd like to disable the execution on the leading edge, pass
+ * `{leading: false}`. To disable execution on the trailing edge, ditto.
+ * @license https://raw.github.com/jashkenas/underscore/master/LICENSE
+ * @param {function} func
+ * @param {number} wait
+ * @param {Object=} options
+ * @returns {Function}
+ */
+Materialize.throttle = function(func, wait, options) {
+  var context, args, result;
+  var timeout = null;
+  var previous = 0;
+  options || (options = {});
+  var later = function () {
+    previous = options.leading === false ? 0 : getTime();
+    timeout = null;
+    result = func.apply(context, args);
+    context = args = null;
+  };
+  return function () {
+    var now = getTime();
+    if (!previous && options.leading === false) previous = now;
+    var remaining = wait - (now - previous);
+    context = this;
+    args = arguments;
+    if (remaining <= 0) {
+      clearTimeout(timeout);
+      timeout = null;
+      previous = now;
+      result = func.apply(context, args);
+      context = args = null;
+    } else if (!timeout && options.trailing !== false) {
+      timeout = setTimeout(later, remaining);
+    }
+    return result;
+  };
+};
+
 
 // Velocity has conflicts when loaded with jQuery, this will check for it
 // First, check if in noConflict mode
@@ -538,7 +591,7 @@ if (jQuery) {
     var defaults = {
       inDuration: 300,
       outDuration: 225,
-      constrain_width: true, // Constrains width of dropdown to the activator
+      constrainWidth: true, // Constrains width of dropdown to the activator
       hover: false,
       gutter: 0, // Spacing from edge
       belowOrigin: false,
@@ -576,7 +629,7 @@ if (jQuery) {
         if (origin.data('outduration') !== undefined)
           curr_options.outDuration = origin.data('outduration');
         if (origin.data('constrainwidth') !== undefined)
-          curr_options.constrain_width = origin.data('constrainwidth');
+          curr_options.constrainWidth = origin.data('constrainwidth');
         if (origin.data('hover') !== undefined)
           curr_options.hover = origin.data('hover');
         if (origin.data('gutter') !== undefined)
@@ -612,7 +665,7 @@ if (jQuery) {
         origin.addClass('active');
 
         // Constrain width
-        if (curr_options.constrain_width === true) {
+        if (curr_options.constrainWidth === true) {
           activates.css('width', origin.outerWidth());
 
         } else {
@@ -701,6 +754,14 @@ if (jQuery) {
             }
           })
           .animate( {opacity: 1}, {queue: false, duration: curr_options.inDuration, easing: 'easeOutSine'});
+
+        // Add click close handler to document
+        $(document).bind('click.'+ activates.attr('id') + ' touchstart.' + activates.attr('id'), function (e) {
+          if (!activates.is(e.target) && !origin.is(e.target) && (!origin.find(e.target).length) ) {
+            hideDropdown();
+            $(document).unbind('click.'+ activates.attr('id') + ' touchstart.' + activates.attr('id'));
+          }
+        });
       }
 
       function hideDropdown() {
@@ -709,6 +770,7 @@ if (jQuery) {
         activates.fadeOut(curr_options.outDuration);
         activates.removeClass('active');
         origin.removeClass('active');
+        $(document).unbind('click.'+ activates.attr('id') + ' touchstart.' + activates.attr('id'));
         setTimeout(function() { activates.css('max-height', ''); }, curr_options.outDuration);
       }
 
@@ -762,15 +824,6 @@ if (jQuery) {
               hideDropdown();
               $(document).unbind('click.'+ activates.attr('id') + ' touchstart.' + activates.attr('id'));
             }
-            // If menu open, add click close handler to document
-            if (activates.hasClass('active')) {
-              $(document).bind('click.'+ activates.attr('id') + ' touchstart.' + activates.attr('id'), function (e) {
-                if (!activates.is(e.target) && !origin.is(e.target) && (!origin.find(e.target).length) ) {
-                  hideDropdown();
-                  $(document).unbind('click.'+ activates.attr('id') + ' touchstart.' + activates.attr('id'));
-                }
-              });
-            }
           }
         });
 
@@ -803,13 +856,13 @@ if (jQuery) {
     init : function(options) {
       var defaults = {
         opacity: 0.5,
-        in_duration: 350,
-        out_duration: 250,
+        inDuration: 350,
+        outDuration: 250,
         ready: undefined,
         complete: undefined,
         dismissible: true,
-        starting_top: '4%',
-        ending_top: '10%'
+        startingTop: '4%',
+        endingTop: '10%'
       };
 
       // Override defaults
@@ -833,12 +886,12 @@ if (jQuery) {
           $modal.find('.modal-close').off('click.close');
           $(document).off('keyup.modal' + overlayID);
 
-          $overlay.velocity( { opacity: 0}, {duration: options.out_duration, queue: false, ease: "easeOutQuart"});
+          $overlay.velocity( { opacity: 0}, {duration: options.outDuration, queue: false, ease: "easeOutQuart"});
 
 
           // Define Bottom Sheet animation
           var exitVelocityOptions = {
-            duration: options.out_duration,
+            duration: options.outDuration,
             queue: false,
             ease: "easeOutCubic",
             // Handle modal ready callback
@@ -858,7 +911,7 @@ if (jQuery) {
           }
           else {
             $modal.velocity(
-              { top: options.starting_top, opacity: 0, scaleX: 0.7},
+              { top: options.startingTop, opacity: 0, scaleX: 0.7},
               exitVelocityOptions
             );
           }
@@ -908,12 +961,12 @@ if (jQuery) {
             opacity: 0
           });
 
-          $overlay.velocity({opacity: options.opacity}, {duration: options.in_duration, queue: false, ease: "easeOutCubic"});
+          $overlay.velocity({opacity: options.opacity}, {duration: options.inDuration, queue: false, ease: "easeOutCubic"});
           $modal.data('associated-overlay', $overlay[0]);
 
           // Define Bottom Sheet animation
           var enterVelocityOptions = {
-            duration: options.in_duration,
+            duration: options.inDuration,
             queue: false,
             ease: "easeOutCubic",
             // Handle modal ready callback
@@ -928,8 +981,8 @@ if (jQuery) {
           }
           else {
             $.Velocity.hook($modal, "scaleX", 0.7);
-            $modal.css({ top: options.starting_top });
-            $modal.velocity({top: options.ending_top, opacity: 1, scaleX: '1'}, enterVelocityOptions);
+            $modal.css({ top: options.startingTop });
+            $modal.velocity({top: options.endingTop, opacity: 1, scaleX: '1'}, enterVelocityOptions);
           }
 
         };
@@ -941,7 +994,7 @@ if (jQuery) {
 
         // Close Handlers
         $(document).on('click.modalTrigger', 'a[href="#' + modal_id + '"], [data-target="' + modal_id + '"]', function(e) {
-          options.starting_top = ($(this).offset().top - $(window).scrollTop()) /1.15;
+          options.startingTop = ($(this).offset().top - $(window).scrollTop()) /1.15;
           openModal($(this));
           e.preventDefault();
         }); // done set on click
@@ -1053,7 +1106,11 @@ if (jQuery) {
         }
 
         // Set css on origin
-        origin.css({position: 'absolute', 'z-index': 1000})
+        origin.css({
+          position: 'absolute',
+          'z-index': 1000,
+          'will-change': 'left, top, width, height'
+        })
         .data('width', originalWidth)
         .data('height', originalHeight);
 
@@ -1066,10 +1123,21 @@ if (jQuery) {
             if (doneAnimating === true)
             returnToOriginal();
           });
-          // Animate Overlay
-          // Put before in origin image to preserve z-index layering.
-          origin.before(overlay);
-          overlay.velocity({opacity: 1},
+
+        // Put before in origin image to preserve z-index layering.
+        origin.before(overlay);
+
+        // Set dimensions if needed
+        var overlayOffset = overlay[0].getBoundingClientRect();
+        overlay.css({
+          width: windowWidth,
+          height: windowHeight,
+          left: -1 * overlayOffset.left,
+          top: -1 * overlayOffset.top
+        })
+
+        // Animate Overlay
+        overlay.velocity({opacity: 1},
                            {duration: inDuration, queue: false, easing: 'easeOutQuad'} );
 
         // Add and animate caption if it exists
@@ -1140,7 +1208,7 @@ if (jQuery) {
             ); // End Velocity
         }
 
-    }); // End origin on click
+      }); // End origin on click
 
 
       // Return on scroll
@@ -1164,145 +1232,146 @@ if (jQuery) {
       // This function returns the modaled image to the original spot
       function returnToOriginal() {
 
-          doneAnimating = false;
+        doneAnimating = false;
 
-          var placeholder = origin.parent('.material-placeholder');
-          var windowWidth = window.innerWidth;
-          var windowHeight = window.innerHeight;
-          var originalWidth = origin.data('width');
-          var originalHeight = origin.data('height');
+        var placeholder = origin.parent('.material-placeholder');
+        var windowWidth = window.innerWidth;
+        var windowHeight = window.innerHeight;
+        var originalWidth = origin.data('width');
+        var originalHeight = origin.data('height');
 
-          origin.velocity("stop", true);
-          $('#materialbox-overlay').velocity("stop", true);
-          $('.materialbox-caption').velocity("stop", true);
+        origin.velocity("stop", true);
+        $('#materialbox-overlay').velocity("stop", true);
+        $('.materialbox-caption').velocity("stop", true);
 
 
-          $('#materialbox-overlay').velocity({opacity: 0}, {
-            duration: outDuration, // Delay prevents animation overlapping
-            queue: false, easing: 'easeOutQuad',
-            complete: function(){
-              // Remove Overlay
-              overlayActive = false;
-              $(this).remove();
-            }
-          });
-
-          // Resize Image
-          origin.velocity(
-            {
-              width: originalWidth,
-              height: originalHeight,
-              left: 0,
-              top: 0
-            },
-            {
-              duration: outDuration,
-              queue: false, easing: 'easeOutQuad'
-            }
-          );
-
-          // Remove Caption + reset css settings on image
-          $('.materialbox-caption').velocity({opacity: 0}, {
-            duration: outDuration, // Delay prevents animation overlapping
-            queue: false, easing: 'easeOutQuad',
-            complete: function(){
-              placeholder.css({
-                height: '',
-                width: '',
-                position: '',
-                top: '',
-                left: ''
-              });
-
-              origin.css({
-                height: '',
-                top: '',
-                left: '',
-                width: '',
-                'max-width': '',
-                position: '',
-                'z-index': ''
-              });
-
-              // Remove class
-              origin.removeClass('active');
-              doneAnimating = true;
-              $(this).remove();
-
-              // Remove overflow overrides on ancestors
-              if (ancestorsChanged) {
-                ancestorsChanged.css('overflow', '');
-              }
-            }
-          });
-
-        }
+        $('#materialbox-overlay').velocity({opacity: 0}, {
+          duration: outDuration, // Delay prevents animation overlapping
+          queue: false, easing: 'easeOutQuad',
+          complete: function(){
+            // Remove Overlay
+            overlayActive = false;
+            $(this).remove();
+          }
         });
-};
 
-$(document).ready(function(){
-  $('.materialboxed').materialbox();
-});
+        // Resize Image
+        origin.velocity(
+          {
+            width: originalWidth,
+            height: originalHeight,
+            left: 0,
+            top: 0
+          },
+          {
+            duration: outDuration,
+            queue: false, easing: 'easeOutQuad'
+          }
+        );
+
+        // Remove Caption + reset css settings on image
+        $('.materialbox-caption').velocity({opacity: 0}, {
+          duration: outDuration, // Delay prevents animation overlapping
+          queue: false, easing: 'easeOutQuad',
+          complete: function(){
+            placeholder.css({
+              height: '',
+              width: '',
+              position: '',
+              top: '',
+              left: ''
+            });
+
+            origin.css({
+              height: '',
+              top: '',
+              left: '',
+              width: '',
+              'max-width': '',
+              position: '',
+              'z-index': '',
+              'will-change': ''
+            });
+
+            // Remove class
+            origin.removeClass('active');
+            doneAnimating = true;
+            $(this).remove();
+
+            // Remove overflow overrides on ancestors
+            if (ancestorsChanged) {
+              ancestorsChanged.css('overflow', '');
+            }
+          }
+        });
+
+      }
+    });
+  };
+
+  $(document).ready(function(){
+    $('.materialboxed').materialbox();
+  });
 
 }( jQuery ));
 
 (function ($) {
 
-    $.fn.parallax = function () {
-      var window_width = $(window).width();
-      // Parallax Scripts
-      return this.each(function(i) {
-        var $this = $(this);
-        $this.addClass('parallax');
+  $.fn.parallax = function () {
+    var window_width = $(window).width();
+    // Parallax Scripts
+    return this.each(function(i) {
+      var $this = $(this);
+      $this.addClass('parallax');
 
-        function updateParallax(initial) {
-          var container_height;
-          if (window_width < 601) {
-            container_height = ($this.height() > 0) ? $this.height() : $this.children("img").height();
-          }
-          else {
-            container_height = ($this.height() > 0) ? $this.height() : 500;
-          }
-          var $img = $this.children("img").first();
-          var img_height = $img.height();
-          var parallax_dist = img_height - container_height;
-          var bottom = $this.offset().top + container_height;
-          var top = $this.offset().top;
-          var scrollTop = $(window).scrollTop();
-          var windowHeight = window.innerHeight;
-          var windowBottom = scrollTop + windowHeight;
-          var percentScrolled = (windowBottom - top) / (container_height + windowHeight);
-          var parallax = Math.round((parallax_dist * percentScrolled));
+      function updateParallax(initial) {
+        var container_height;
+        if (window_width < 601) {
+          container_height = ($this.height() > 0) ? $this.height() : $this.children("img").height();
+        }
+        else {
+          container_height = ($this.height() > 0) ? $this.height() : 500;
+        }
+        var $img = $this.children("img").first();
+        var img_height = $img.height();
+        var parallax_dist = img_height - container_height;
+        var bottom = $this.offset().top + container_height;
+        var top = $this.offset().top;
+        var scrollTop = $(window).scrollTop();
+        var windowHeight = window.innerHeight;
+        var windowBottom = scrollTop + windowHeight;
+        var percentScrolled = (windowBottom - top) / (container_height + windowHeight);
+        var parallax = Math.round((parallax_dist * percentScrolled));
 
-          if (initial) {
-            $img.css('display', 'block');
-          }
-          if ((bottom > scrollTop) && (top < (scrollTop + windowHeight))) {
-            $img.css('transform', "translate3D(-50%," + parallax + "px, 0)");
-          }
-
+        if (initial) {
+          $img.css('display', 'block');
+        }
+        if ((bottom > scrollTop) && (top < (scrollTop + windowHeight))) {
+          $img.css('transform', "translate3D(-50%," + parallax + "px, 0)");
         }
 
-        // Wait for image load
-        $this.children("img").one("load", function() {
-          updateParallax(true);
-        }).each(function() {
-          if (this.complete) $(this).trigger("load");
-        });
+      }
 
-        $(window).scroll(function() {
-          window_width = $(window).width();
-          updateParallax(false);
-        });
-
-        $(window).resize(function() {
-          window_width = $(window).width();
-          updateParallax(false);
-        });
-
+      // Wait for image load
+      $this.children("img").one("load", function() {
+        updateParallax(true);
+      }).each(function() {
+        if (this.complete) $(this).trigger("load");
       });
 
-    };
+      $(window).scroll(function() {
+        window_width = $(window).width();
+        updateParallax(false);
+      });
+
+      $(window).resize(function() {
+        window_width = $(window).width();
+        updateParallax(false);
+      });
+
+    });
+
+  };
 }( jQuery ));
 
 (function ($) {
@@ -1310,7 +1379,9 @@ $(document).ready(function(){
   var methods = {
     init : function(options) {
       var defaults = {
-        onShow: null
+        onShow: null,
+        swipeable: false,
+        responsiveThreshold: Infinity, // breakpoint for swipeable
       };
       options = $.extend(defaults, options);
 
@@ -1323,8 +1394,15 @@ $(document).ready(function(){
 
       var $active, $content, $links = $this.find('li.tab a'),
           $tabs_width = $this.width(),
+          $tabs_content = $(),
+          $tabs_wrapper,
           $tab_width = Math.max($tabs_width, $this[0].scrollWidth) / $links.length,
-          $index = 0;
+          $indicator,
+          index = prev_index = 0,
+          clicked = false,
+          clickedTimeout,
+          transition = 300;
+
 
       // Finds right attribute for indicator based on active tab.
       // el: jQuery Object
@@ -1338,6 +1416,27 @@ $(document).ready(function(){
         return el.position().left + $this.scrollLeft();
       };
 
+      // Animates Indicator to active tab.
+      // prev_index: Number
+      var animateIndicator = function(prev_index) {
+        if ((index - prev_index) >= 0) {
+          $indicator.velocity({"right": calcRightPos($active) }, { duration: transition, queue: false, easing: 'easeOutQuad'});
+          $indicator.velocity({"left": calcLeftPos($active) }, {duration: transition, queue: false, easing: 'easeOutQuad', delay: 90});
+
+        } else {
+          $indicator.velocity({"left": calcLeftPos($active) }, { duration: transition, queue: false, easing: 'easeOutQuad'});
+          $indicator.velocity({"right": calcRightPos($active) }, {duration: transition, queue: false, easing: 'easeOutQuad', delay: 90});
+        }
+      };
+
+      // Change swipeable according to responsive threshold
+      if (options.swipeable) {
+        if (window_width > options.responsiveThreshold) {
+          options.swipeable = false;
+        }
+      }
+
+
       // If the location.hash matches one of the links, use that as the active tab.
       $active = $($links.filter('[href="'+location.hash+'"]'));
 
@@ -1350,21 +1449,28 @@ $(document).ready(function(){
       }
 
       $active.addClass('active');
-      $index = $links.index($active);
-      if ($index < 0) {
-        $index = 0;
+      index = $links.index($active);
+      if (index < 0) {
+        index = 0;
       }
 
       if ($active[0] !== undefined) {
         $content = $($active[0].hash);
+        $content.addClass('active');
       }
 
       // append indicator then set indicator width to tab width
-      $this.append('<div class="indicator"></div>');
-      var $indicator = $this.find('.indicator');
+      if (!$this.find('.indicator').length) {
+        $this.append('<div class="indicator"></div>');
+      }
+      $indicator = $this.find('.indicator');
+
+      // we make sure that the indicator is at the end of the tabs
+      $this.append($indicator);
+
       if ($this.is(":visible")) {
-        // $indicator.css({"right": $tabs_width - (($index + 1) * $tab_width)});
-        // $indicator.css({"left": $index * $tab_width});
+        // $indicator.css({"right": $tabs_width - ((index + 1) * $tab_width)});
+        // $indicator.css({"left": index * $tab_width});
         setTimeout(function() {
           $indicator.css({"right": calcRightPos($active) });
           $indicator.css({"left": calcLeftPos($active) });
@@ -1373,8 +1479,8 @@ $(document).ready(function(){
       $(window).resize(function () {
         $tabs_width = $this.width();
         $tab_width = Math.max($tabs_width, $this[0].scrollWidth) / $links.length;
-        if ($index < 0) {
-          $index = 0;
+        if (index < 0) {
+          index = 0;
         }
         if ($tab_width !== 0 && $tabs_width !== 0) {
           $indicator.css({"right": calcRightPos($active) });
@@ -1382,10 +1488,34 @@ $(document).ready(function(){
         }
       });
 
-      // Hide the remaining content
-      $links.not($active).each(function () {
-        $(Materialize.escapeHash(this.hash)).hide();
-      });
+      // Initialize Tabs Content.
+      if (options.swipeable) {
+        // TODO: Duplicate calls with swipeable? handle multiple div wrapping.
+        $links.each(function () {
+          var $curr_content = $(Materialize.escapeHash(this.hash));
+          $curr_content.addClass('carousel-item');
+          $tabs_content = $tabs_content.add($curr_content);
+        });
+        $tabs_wrapper = $tabs_content.wrapAll('<div class="tabs-content carousel"></div>');
+        $tabs_content.css('display', '');
+        $('.tabs-content.carousel').carousel({
+          fullWidth: true,
+          noWrap: true,
+          onCycleTo: function(item) {
+            if (!clicked) {
+              var prev_index = index;
+              index = $tabs_wrapper.index(item);
+              $active = $links.eq(index);
+              animateIndicator(prev_index);
+            }
+          },
+        });
+      } else {
+        // Hide the remaining content
+        $links.not($active).each(function () {
+          $(Materialize.escapeHash(this.hash)).hide();
+        });
+      }
 
 
       // Bind the click event handler
@@ -1400,14 +1530,13 @@ $(document).ready(function(){
           return;
         }
 
+        clicked = true;
         $tabs_width = $this.width();
         $tab_width = Math.max($tabs_width, $this[0].scrollWidth) / $links.length;
 
         // Make the old tab inactive.
         $active.removeClass('active');
-        if ($content !== undefined) {
-          $content.hide();
-        }
+        var $oldContent = $content
 
         // Update the variables with the new link and content
         $active = $(this);
@@ -1417,31 +1546,40 @@ $(document).ready(function(){
 
         // Make the tab active.
         $active.addClass('active');
-        var $prev_index = $index;
-        $index = $links.index($(this));
-        if ($index < 0) {
-          $index = 0;
+        prev_index = index;
+        index = $links.index($(this));
+        if (index < 0) {
+          index = 0;
         }
         // Change url to current tab
         // window.location.hash = $active.attr('href');
 
-        if ($content !== undefined) {
-          $content.show();
-          if (typeof(options.onShow) === "function") {
-            options.onShow.call(this, $content);
+        // Swap content
+        if (options.swipeable) {
+          if ($tabs_content.length) {
+            $tabs_content.carousel('set', index);
+          }
+        } else {
+          if ($content !== undefined) {
+            $content.show();
+            $content.addClass('active');
+            if (typeof(options.onShow) === "function") {
+              options.onShow.call(this, $content);
+            }
+          }
+
+          if ($oldContent !== undefined &&
+              !$oldContent.is($content)) {
+            $oldContent.hide();
+            $oldContent.removeClass('active');
           }
         }
 
+        // Reset clicked state
+        clickedTimeout = setTimeout(function(){ clicked = false; }, transition);
+
         // Update indicator
-
-        if (($index - $prev_index) >= 0) {
-          $indicator.velocity({"right": calcRightPos($active) }, { duration: 300, queue: false, easing: 'easeOutQuad'});
-          $indicator.velocity({"left": calcLeftPos($active) }, {duration: 300, queue: false, easing: 'easeOutQuad', delay: 90});
-
-        } else {
-          $indicator.velocity({"left": calcLeftPos($active) }, { duration: 300, queue: false, easing: 'easeOutQuad'});
-          $indicator.velocity({"right": calcRightPos($active) }, {duration: 300, queue: false, easing: 'easeOutQuad', delay: 90});
-        }
+        animateIndicator(prev_index);
 
         // Prevent the anchor's default click action
         e.preventDefault();
@@ -1558,18 +1696,20 @@ $(document).ready(function(){
             started = true;
             tooltipEl.velocity('stop');
             backdrop.velocity('stop');
-            tooltipEl.css({ display: 'block', left: '0px', top: '0px' });
+            tooltipEl.css({ visibility: 'visible', left: '0px', top: '0px' });
 
             // Tooltip positioning
             var originWidth = origin.outerWidth();
             var originHeight = origin.outerHeight();
-
             var tooltipHeight = tooltipEl.outerHeight();
             var tooltipWidth = tooltipEl.outerWidth();
             var tooltipVerticalMovement = '0px';
             var tooltipHorizontalMovement = '0px';
+            var backdropOffsetWidth = backdrop[0].offsetWidth;
+            var backdropOffsetHeight = backdrop[0].offsetHeight;
             var scaleXFactor = 8;
             var scaleYFactor = 8;
+            var scaleFactor = 0;
             var targetTop, targetLeft, newCoordinates;
 
             if (tooltipPosition === "top") {
@@ -1577,7 +1717,6 @@ $(document).ready(function(){
               targetTop = origin.offset().top - tooltipHeight - margin;
               targetLeft = origin.offset().left + originWidth/2 - tooltipWidth/2;
               newCoordinates = repositionWithinScreen(targetLeft, targetTop, tooltipWidth, tooltipHeight);
-
               tooltipVerticalMovement = '-10px';
               backdrop.css({
                 bottom: 0,
@@ -1585,7 +1724,7 @@ $(document).ready(function(){
                 borderRadius: '14px 14px 0 0',
                 transformOrigin: '50% 100%',
                 marginTop: tooltipHeight,
-                marginLeft: (tooltipWidth/2) - (backdrop.width()/2)
+                marginLeft: (tooltipWidth/2) - (backdropOffsetWidth/2)
               });
             }
             // Left Position
@@ -1633,7 +1772,7 @@ $(document).ready(function(){
               backdrop.css({
                 top: 0,
                 left: 0,
-                marginLeft: (tooltipWidth/2) - (backdrop.width()/2)
+                marginLeft: (tooltipWidth/2) - (backdropOffsetWidth/2)
               });
             }
 
@@ -1644,14 +1783,15 @@ $(document).ready(function(){
             });
 
             // Calculate Scale to fill
-            scaleXFactor = Math.SQRT2 * tooltipWidth / parseInt(backdrop.css('width'));
-            scaleYFactor = Math.SQRT2 * tooltipHeight / parseInt(backdrop.css('height'));
+            scaleXFactor = Math.SQRT2 * tooltipWidth / parseInt(backdropOffsetWidth);
+            scaleYFactor = Math.SQRT2 * tooltipHeight / parseInt(backdropOffsetHeight);
+            scaleFactor = Math.max(scaleXFactor, scaleYFactor);
 
-            tooltipEl.velocity({ marginTop: tooltipVerticalMovement, marginLeft: tooltipHorizontalMovement}, { duration: 350, queue: false })
+            tooltipEl.velocity({ translateY: tooltipVerticalMovement, translateX: tooltipHorizontalMovement}, { duration: 350, queue: false })
               .velocity({opacity: 1}, {duration: 300, delay: 50, queue: false});
-            backdrop.css({ display: 'block' })
+            backdrop.css({ visibility: 'visible' })
               .velocity({opacity:1},{duration: 55, delay: 0, queue: false})
-              .velocity({scaleX: scaleXFactor, scaleY: scaleYFactor}, {duration: 300, delay: 0, queue: false, easing: 'easeInOutQuad'});
+              .velocity({scaleX: scaleFactor, scaleY: scaleFactor}, {duration: 300, delay: 0, queue: false, easing: 'easeInOutQuad'});
           };
 
           timeoutRef = setTimeout(showTooltip, tooltipDelay); // End Interval
@@ -1667,13 +1807,13 @@ $(document).ready(function(){
           setTimeout(function() {
             if (started !== true) {
               tooltipEl.velocity({
-                opacity: 0, marginTop: 0, marginLeft: 0}, { duration: 225, queue: false});
+                opacity: 0, translateY: 0, translateX: 0}, { duration: 225, queue: false});
               backdrop.velocity({opacity: 0, scaleX: 1, scaleY: 1}, {
                 duration:225,
                 queue: false,
                 complete: function(){
-                  backdrop.css('display', 'none');
-                  tooltipEl.css('display', 'none');
+                  backdrop.css({ visibility: 'hidden' });
+                  tooltipEl.css({ visibility: 'hidden' });
                   started = false;}
               });
             }
@@ -2047,141 +2187,140 @@ $(document).ready(function(){
 })(window);
 
 Materialize.toast = function (message, displayLength, className, completeCallback) {
-    className = className || "";
+  className = className || "";
 
-    var container = document.getElementById('toast-container');
+  var container = document.getElementById('toast-container');
 
-    // Create toast container if it does not exist
-    if (container === null) {
-        // create notification container
-        container = document.createElement('div');
-        container.id = 'toast-container';
-        document.body.appendChild(container);
-    }
+  // Create toast container if it does not exist
+  if (container === null) {
+    // create notification container
+    container = document.createElement('div');
+    container.id = 'toast-container';
+    document.body.appendChild(container);
+  }
 
-    // Select and append toast
-    var newToast = createToast(message);
+  // Select and append toast
+  var newToast = createToast(message);
 
-    // only append toast if message is not undefined
-    if(message){
-        container.appendChild(newToast);
-    }
+  // only append toast if message is not undefined
+  if(message){
+    container.appendChild(newToast);
+  }
 
-    newToast.style.top = '35px';
-    newToast.style.opacity = 0;
+  newToast.style.opacity = 0;
 
-    // Animate toast in
-    Vel(newToast, { "top" : "0px", opacity: 1 }, {duration: 300,
-      easing: 'easeOutCubic',
-      queue: false});
+  // Animate toast in
+  Vel(newToast, {translateY: '-35px',  opacity: 1 }, {duration: 300,
+    easing: 'easeOutCubic',
+    queue: false});
 
-    // Allows timer to be pause while being panned
-    var timeLeft = displayLength;
-    var counterInterval;
-    if (timeLeft != null)  {
-      counterInterval = setInterval (function(){
-        if (newToast.parentNode === null)
-          window.clearInterval(counterInterval);
+  // Allows timer to be pause while being panned
+  var timeLeft = displayLength;
+  var counterInterval;
+  if (timeLeft != null)  {
+    counterInterval = setInterval (function(){
+      if (newToast.parentNode === null)
+        window.clearInterval(counterInterval);
 
-        // If toast is not being dragged, decrease its time remaining
-        if (!newToast.classList.contains('panning')) {
-          timeLeft -= 20;
-        }
+      // If toast is not being dragged, decrease its time remaining
+      if (!newToast.classList.contains('panning')) {
+        timeLeft -= 20;
+      }
 
-        if (timeLeft <= 0) {
-          // Animate toast out
-          Vel(newToast, {"opacity": 0, marginTop: '-40px'}, { duration: 375,
-              easing: 'easeOutExpo',
-              queue: false,
-              complete: function(){
-                // Call the optional callback
-                if(typeof(completeCallback) === "function")
-                  completeCallback();
-                // Remove toast after it times out
-                this[0].parentNode.removeChild(this[0]);
-              }
-            });
-          window.clearInterval(counterInterval);
-        }
-      }, 20);
-    }
-
-
-
-    function createToast(html) {
-
-        // Create toast
-        var toast = document.createElement('div');
-        toast.classList.add('toast');
-        if (className) {
-            var classes = className.split(' ');
-
-            for (var i = 0, count = classes.length; i < count; i++) {
-                toast.classList.add(classes[i]);
+      if (timeLeft <= 0) {
+        // Animate toast out
+        Vel(newToast, {"opacity": 0, marginTop: '-40px'}, { duration: 375,
+            easing: 'easeOutExpo',
+            queue: false,
+            complete: function(){
+              // Call the optional callback
+              if(typeof(completeCallback) === "function")
+                completeCallback();
+              // Remove toast after it times out
+              this[0].parentNode.removeChild(this[0]);
             }
-        }
-        // If type of parameter is HTML Element
-        if ( typeof HTMLElement === "object" ? html instanceof HTMLElement : html && typeof html === "object" && html !== null && html.nodeType === 1 && typeof html.nodeName==="string"
-) {
-          toast.appendChild(html);
-        }
-        else if (html instanceof jQuery) {
-          // Check if it is jQuery object
-          toast.appendChild(html[0]);
-        }
-        else {
-          // Insert as text;
-          toast.innerHTML = html;
-        }
-        // Bind hammer
-        var hammerHandler = new Hammer(toast, {prevent_default: false});
-        hammerHandler.on('pan', function(e) {
-          var deltaX = e.deltaX;
-          var activationDistance = 80;
+          });
+        window.clearInterval(counterInterval);
+      }
+    }, 20);
+  }
 
-          // Change toast state
-          if (!toast.classList.contains('panning')){
-            toast.classList.add('panning');
-          }
 
-          var opacityPercent = 1-Math.abs(deltaX / activationDistance);
-          if (opacityPercent < 0)
-            opacityPercent = 0;
 
-          Vel(toast, {left: deltaX, opacity: opacityPercent }, {duration: 50, queue: false, easing: 'easeOutQuad'});
+  function createToast(html) {
 
-        });
+    // Create toast
+    var toast = document.createElement('div');
+    toast.classList.add('toast');
+    if (className) {
+      var classes = className.split(' ');
 
-        hammerHandler.on('panend', function(e) {
-          var deltaX = e.deltaX;
-          var activationDistance = 80;
-
-          // If toast dragged past activation point
-          if (Math.abs(deltaX) > activationDistance) {
-            Vel(toast, {marginTop: '-40px'}, { duration: 375,
-                easing: 'easeOutExpo',
-                queue: false,
-                complete: function(){
-                  if(typeof(completeCallback) === "function") {
-                    completeCallback();
-                  }
-                  toast.parentNode.removeChild(toast);
-                }
-            });
-
-          } else {
-            toast.classList.remove('panning');
-            // Put toast back into original position
-            Vel(toast, { left: 0, opacity: 1 }, { duration: 300,
-              easing: 'easeOutExpo',
-              queue: false
-            });
-
-          }
-        });
-
-        return toast;
+      for (var i = 0, count = classes.length; i < count; i++) {
+        toast.classList.add(classes[i]);
+      }
     }
+  // If type of parameter is HTML Element
+    if ( typeof HTMLElement === "object" ? html instanceof HTMLElement : html && typeof html === "object" && html !== null && html.nodeType === 1 && typeof html.nodeName==="string"
+) {
+      toast.appendChild(html);
+    }
+    else if (html instanceof jQuery) {
+      // Check if it is jQuery object
+      toast.appendChild(html[0]);
+    }
+    else {
+      // Insert as text;
+      toast.innerHTML = html;
+    }
+    // Bind hammer
+    var hammerHandler = new Hammer(toast, {prevent_default: false});
+    hammerHandler.on('pan', function(e) {
+      var deltaX = e.deltaX;
+      var activationDistance = 80;
+
+      // Change toast state
+      if (!toast.classList.contains('panning')){
+        toast.classList.add('panning');
+      }
+
+      var opacityPercent = 1-Math.abs(deltaX / activationDistance);
+      if (opacityPercent < 0)
+        opacityPercent = 0;
+
+      Vel(toast, {left: deltaX, opacity: opacityPercent }, {duration: 50, queue: false, easing: 'easeOutQuad'});
+
+    });
+
+    hammerHandler.on('panend', function(e) {
+      var deltaX = e.deltaX;
+      var activationDistance = 80;
+
+      // If toast dragged past activation point
+      if (Math.abs(deltaX) > activationDistance) {
+        Vel(toast, {marginTop: '-40px'}, { duration: 375,
+          easing: 'easeOutExpo',
+          queue: false,
+          complete: function(){
+            if(typeof(completeCallback) === "function") {
+              completeCallback();
+            }
+            toast.parentNode.removeChild(toast);
+          }
+        });
+
+      } else {
+        toast.classList.remove('panning');
+        // Put toast back into original position
+        Vel(toast, { left: 0, opacity: 1 }, { duration: 300,
+          easing: 'easeOutExpo',
+          queue: false
+        });
+
+      }
+    });
+
+    return toast;
+  }
 };
 
 (function ($) {
@@ -2198,41 +2337,47 @@ Materialize.toast = function (message, displayLength, className, completeCallbac
 
       $(this).each(function(){
         var $this = $(this);
-        var menu_id = $("#"+ $this.attr('data-activates'));
+        var menuId = $this.attr('data-activates');
+        var menu = $("#"+ menuId);
 
         // Set to width
         if (options.menuWidth != 300) {
-          menu_id.css('width', options.menuWidth);
+          menu.css('width', options.menuWidth);
         }
 
         // Add Touch Area
-        var $dragTarget;
+        var $dragTarget = $('.drag-target[data-sidenav="' + menuId + '"]');
         if (options.draggable) {
-          $dragTarget = $('<div class="drag-target"></div>').attr('data-sidenav', $this.attr('data-activates'));
+          // Regenerate dragTarget
+          if ($dragTarget.length) {
+            $dragTarget.remove();
+          }
+
+          $dragTarget = $('<div class="drag-target"></div>').attr('data-sidenav', menuId);
           $('body').append($dragTarget);
         } else {
           $dragTarget = $();
         }
 
         if (options.edge == 'left') {
-          menu_id.css('transform', 'translateX(-100%)');
+          menu.css('transform', 'translateX(-100%)');
           $dragTarget.css({'left': 0}); // Add Touch Area
         }
         else {
-          menu_id.addClass('right-aligned') // Change text-alignment to right
+          menu.addClass('right-aligned') // Change text-alignment to right
             .css('transform', 'translateX(100%)');
           $dragTarget.css({'right': 0}); // Add Touch Area
         }
 
         // If fixed sidenav, bring menu out
-        if (menu_id.hasClass('fixed')) {
+        if (menu.hasClass('fixed')) {
             if (window.innerWidth > 992) {
-              menu_id.css('transform', 'translateX(0)');
+              menu.css('transform', 'translateX(0)');
             }
           }
 
         // Window resize to reset on large screens fixed
-        if (menu_id.hasClass('fixed')) {
+        if (menu.hasClass('fixed')) {
           $(window).resize( function() {
             if (window.innerWidth > 992) {
               // Close menu if window is resized bigger than 992 and user has fixed sidenav
@@ -2240,16 +2385,16 @@ Materialize.toast = function (message, displayLength, className, completeCallbac
                 removeMenu(true);
               }
               else {
-                // menu_id.removeAttr('style');
-                menu_id.css('transform', 'translateX(0%)');
-                // menu_id.css('width', options.menuWidth);
+                // menu.removeAttr('style');
+                menu.css('transform', 'translateX(0%)');
+                // menu.css('width', options.menuWidth);
               }
             }
             else if (menuOut === false){
               if (options.edge === 'left') {
-                menu_id.css('transform', 'translateX(-100%)');
+                menu.css('transform', 'translateX(-100%)');
               } else {
-                menu_id.css('transform', 'translateX(100%)');
+                menu.css('transform', 'translateX(100%)');
               }
 
             }
@@ -2259,7 +2404,7 @@ Materialize.toast = function (message, displayLength, className, completeCallbac
 
         // if closeOnClick, then add close event for all a tags in side sideNav
         if (options.closeOnClick === true) {
-          menu_id.on("click.itemclick", "a:not(.collapsible-header)", function(){
+          menu.on("click.itemclick", "a:not(.collapsible-header)", function(){
             removeMenu();
           });
         }
@@ -2281,7 +2426,7 @@ Materialize.toast = function (message, displayLength, className, completeCallbac
           if (options.edge === 'left') {
             // Reset phantom div
             $dragTarget.css({width: '', right: '', left: '0'});
-            menu_id.velocity(
+            menu.velocity(
               {'translateX': '-100%'},
               { duration: 200,
                 queue: false,
@@ -2289,8 +2434,8 @@ Materialize.toast = function (message, displayLength, className, completeCallbac
                 complete: function() {
                   if (restoreNav === true) {
                     // Restore Fixed sidenav
-                    menu_id.removeAttr('style');
-                    menu_id.css('width', options.menuWidth);
+                    menu.removeAttr('style');
+                    menu.css('width', options.menuWidth);
                   }
                 }
 
@@ -2299,7 +2444,7 @@ Materialize.toast = function (message, displayLength, className, completeCallbac
           else {
             // Reset phantom div
             $dragTarget.css({width: '', right: '0', left: ''});
-            menu_id.velocity(
+            menu.velocity(
               {'translateX': '100%'},
               { duration: 200,
                 queue: false,
@@ -2307,8 +2452,8 @@ Materialize.toast = function (message, displayLength, className, completeCallbac
                 complete: function() {
                   if (restoreNav === true) {
                     // Restore Fixed sidenav
-                    menu_id.removeAttr('style');
-                    menu_id.css('width', options.menuWidth);
+                    menu.removeAttr('style');
+                    menu.css('width', options.menuWidth);
                   }
                 }
               });
@@ -2366,7 +2511,7 @@ Materialize.toast = function (message, displayLength, className, completeCallbac
                 if (x < (options.menuWidth / 2)) { menuOut = false; }
                 // Right Direction
                 else if (x >= (options.menuWidth / 2)) { menuOut = true; }
-                menu_id.css('transform', 'translateX(' + (x - options.menuWidth) + 'px)');
+                menu.css('transform', 'translateX(' + (x - options.menuWidth) + 'px)');
               }
               else {
                 // Left Direction
@@ -2382,7 +2527,7 @@ Materialize.toast = function (message, displayLength, className, completeCallbac
                   rightPos = 0;
                 }
 
-                menu_id.css('transform', 'translateX(' + rightPos + 'px)');
+                menu.css('transform', 'translateX(' + rightPos + 'px)');
               }
 
 
@@ -2419,7 +2564,7 @@ Materialize.toast = function (message, displayLength, className, completeCallbac
                 if ((menuOut && velocityX <= 0.3) || velocityX < -0.5) {
                   // Return menu to open
                   if (leftPos !== 0) {
-                    menu_id.velocity({'translateX': [0, leftPos]}, {duration: 300, queue: false, easing: 'easeOutQuad'});
+                    menu.velocity({'translateX': [0, leftPos]}, {duration: 300, queue: false, easing: 'easeOutQuad'});
                   }
 
                   $overlay.velocity({opacity: 1 }, {duration: 50, queue: false, easing: 'easeOutQuad'});
@@ -2433,7 +2578,7 @@ Materialize.toast = function (message, displayLength, className, completeCallbac
                     width: ''
                   });
                   // Slide menu closed
-                  menu_id.velocity({'translateX': [-1 * options.menuWidth - 10, leftPos]}, {duration: 200, queue: false, easing: 'easeOutQuad'});
+                  menu.velocity({'translateX': [-1 * options.menuWidth - 10, leftPos]}, {duration: 200, queue: false, easing: 'easeOutQuad'});
                   $overlay.velocity({opacity: 0 }, {duration: 200, queue: false, easing: 'easeOutQuad',
                     complete: function () {
                       $(this).remove();
@@ -2445,7 +2590,7 @@ Materialize.toast = function (message, displayLength, className, completeCallbac
                 if ((menuOut && velocityX >= -0.3) || velocityX > 0.5) {
                   // Return menu to open
                   if (rightPos !== 0) {
-                    menu_id.velocity({'translateX': [0, rightPos]}, {duration: 300, queue: false, easing: 'easeOutQuad'});
+                    menu.velocity({'translateX': [0, rightPos]}, {duration: 300, queue: false, easing: 'easeOutQuad'});
                   }
 
                   $overlay.velocity({opacity: 1 }, {duration: 50, queue: false, easing: 'easeOutQuad'});
@@ -2460,7 +2605,7 @@ Materialize.toast = function (message, displayLength, className, completeCallbac
                   });
 
                   // Slide menu closed
-                  menu_id.velocity({'translateX': [options.menuWidth + 10, rightPos]}, {duration: 200, queue: false, easing: 'easeOutQuad'});
+                  menu.velocity({'translateX': [options.menuWidth + 10, rightPos]}, {duration: 200, queue: false, easing: 'easeOutQuad'});
                   $overlay.velocity({opacity: 0 }, {duration: 200, queue: false, easing: 'easeOutQuad',
                     complete: function () {
                       $(this).remove();
@@ -2473,7 +2618,7 @@ Materialize.toast = function (message, displayLength, className, completeCallbac
           });
         }
 
-        $this.click(function() {
+        $this.off('click.sidenav').on('click.sidenav', function() {
           if (menuOut === true) {
             menuOut = false;
             panning = false;
@@ -2493,11 +2638,11 @@ Materialize.toast = function (message, displayLength, className, completeCallbac
 
             if (options.edge === 'left') {
               $dragTarget.css({width: '50%', right: 0, left: ''});
-              menu_id.velocity({'translateX': [0, -1 * options.menuWidth]}, {duration: 300, queue: false, easing: 'easeOutQuad'});
+              menu.velocity({'translateX': [0, -1 * options.menuWidth]}, {duration: 300, queue: false, easing: 'easeOutQuad'});
             }
             else {
               $dragTarget.css({width: '50%', right: '', left: 0});
-              menu_id.velocity({'translateX': [0, options.menuWidth]}, {duration: 300, queue: false, easing: 'easeOutQuad'});
+              menu.velocity({'translateX': [0, options.menuWidth]}, {duration: 300, queue: false, easing: 'easeOutQuad'});
             }
 
             $overlay.css('opacity', 0)
@@ -2543,16 +2688,16 @@ Materialize.toast = function (message, displayLength, className, completeCallbac
   };
 
 
-    $.fn.sideNav = function(methodOrOptions) {
-      if ( methods[methodOrOptions] ) {
-        return methods[ methodOrOptions ].apply( this, Array.prototype.slice.call( arguments, 1 ));
-      } else if ( typeof methodOrOptions === 'object' || ! methodOrOptions ) {
-        // Default to "init"
-        return methods.init.apply( this, arguments );
-      } else {
-        $.error( 'Method ' +  methodOrOptions + ' does not exist on jQuery.sideNav' );
-      }
-    }; // Plugin end
+  $.fn.sideNav = function(methodOrOptions) {
+    if ( methods[methodOrOptions] ) {
+      return methods[ methodOrOptions ].apply( this, Array.prototype.slice.call( arguments, 1 ));
+    } else if ( typeof methodOrOptions === 'object' || ! methodOrOptions ) {
+      // Default to "init"
+      return methods.init.apply( this, arguments );
+    } else {
+      $.error( 'Method ' +  methodOrOptions + ' does not exist on jQuery.sideNav' );
+    }
+  }; // Plugin end
 }( jQuery ));
 
 /**
@@ -2662,57 +2807,6 @@ Materialize.toast = function (message, displayLength, className, completeCallbac
 		jWindow.trigger('scrollSpy:winSize');
 	}
 
-	/**
-	 * Get time in ms
-   * @license https://raw.github.com/jashkenas/underscore/master/LICENSE
-	 * @type {function}
-	 * @return {number}
-	 */
-	var getTime = (Date.now || function () {
-		return new Date().getTime();
-	});
-
-	/**
-	 * Returns a function, that, when invoked, will only be triggered at most once
-	 * during a given window of time. Normally, the throttled function will run
-	 * as much as it can, without ever going more than once per `wait` duration;
-	 * but if you'd like to disable the execution on the leading edge, pass
-	 * `{leading: false}`. To disable execution on the trailing edge, ditto.
-	 * @license https://raw.github.com/jashkenas/underscore/master/LICENSE
-	 * @param {function} func
-	 * @param {number} wait
-	 * @param {Object=} options
-	 * @returns {Function}
-	 */
-	function throttle(func, wait, options) {
-		var context, args, result;
-		var timeout = null;
-		var previous = 0;
-		options || (options = {});
-		var later = function () {
-			previous = options.leading === false ? 0 : getTime();
-			timeout = null;
-			result = func.apply(context, args);
-			context = args = null;
-		};
-		return function () {
-			var now = getTime();
-			if (!previous && options.leading === false) previous = now;
-			var remaining = wait - (now - previous);
-			context = this;
-			args = arguments;
-			if (remaining <= 0) {
-				clearTimeout(timeout);
-				timeout = null;
-				previous = now;
-				result = func.apply(context, args);
-				context = args = null;
-			} else if (!timeout && options.trailing !== false) {
-				timeout = setTimeout(later, remaining);
-			}
-			return result;
-		};
-	};
 
 	/**
 	 * Enables ScrollSpy using a selector
@@ -2750,7 +2844,7 @@ Materialize.toast = function (message, displayLength, className, completeCallbac
 		offset.bottom = options.offsetBottom || 0;
 		offset.left = options.offsetLeft || 0;
 
-		var throttledScroll = throttle(function() {
+		var throttledScroll = Materialize.throttle(function() {
 			onScroll(options.scrollOffset);
 		}, options.throttle || 100);
 		var readyScroll = function(){
@@ -2820,7 +2914,7 @@ Materialize.toast = function (message, displayLength, className, completeCallbac
 		options = options || {
 			throttle: 100
 		};
-		return jWindow.on('resize', throttle(onWinSize, options.throttle || 100));
+		return jWindow.on('resize', Materialize.throttle(onWinSize, options.throttle || 100));
 	};
 
 	/**
@@ -2847,11 +2941,13 @@ Materialize.toast = function (message, displayLength, className, completeCallbac
     Materialize.updateTextFields = function() {
       var input_selector = 'input[type=text], input[type=password], input[type=email], input[type=url], input[type=tel], input[type=number], input[type=search], textarea';
       $(input_selector).each(function(index, element) {
-        if ($(element).val().length > 0 || element.autofocus ||$(this).attr('placeholder') !== undefined || $(element)[0].validity.badInput === true) {
-          $(this).siblings('label').addClass('active');
-        }
-        else {
-          $(this).siblings('label').removeClass('active');
+        var $this = $(this);
+        if ($(element).val().length > 0 || element.autofocus || $this.attr('placeholder') !== undefined) {
+          $this.siblings('label').addClass('active');
+        } else if ($(element)[0].validity) {
+          $this.siblings('label').toggleClass('active', $(element)[0].validity.badInput === true);
+        } else {
+          $this.siblings('label').removeClass('active');
         }
       });
     };
@@ -2910,8 +3006,8 @@ Materialize.toast = function (message, displayLength, className, completeCallbac
     });
 
     window.validate_field = function(object) {
-      var hasLength = object.attr('length') !== undefined;
-      var lenAttr = parseInt(object.attr('length'));
+      var hasLength = object.attr('data-length') !== undefined;
+      var lenAttr = parseInt(object.attr('data-length'));
       var len = object.val().length;
 
       if (object.val().length === 0 && object[0].validity.badInput === false) {
@@ -3123,7 +3219,9 @@ Materialize.toast = function (message, displayLength, className, completeCallbac
     $.fn.autocomplete = function (options) {
       // Defaults
       var defaults = {
-        data: {}
+        data: {},
+        limit: Infinity,
+        onAutocomplete: null
       };
 
       options = $.extend(defaults, options);
@@ -3131,20 +3229,34 @@ Materialize.toast = function (message, displayLength, className, completeCallbac
       return this.each(function() {
         var $input = $(this);
         var data = options.data,
+            count = 0,
+            activeIndex = 0,
+            oldVal,
             $inputDiv = $input.closest('.input-field'); // Div to append on
 
         // Check if data isn't empty
         if (!$.isEmptyObject(data)) {
-          // Create autocomplete element
           var $autocomplete = $('<ul class="autocomplete-content dropdown-content"></ul>');
+          var $oldAutocomplete;
 
-          // Append autocomplete element
+          // Append autocomplete element.
+          // Prevent double structure init.
           if ($inputDiv.length) {
-            $inputDiv.append($autocomplete); // Set ul in body
+            $oldAutocomplete = $inputDiv.children('.autocomplete-content.dropdown-content').first();
+            if (!$oldAutocomplete.length) {
+              $inputDiv.append($autocomplete); // Set ul in body
+            }
           } else {
-            $input.after($autocomplete);
+            $oldAutocomplete = $input.next('.autocomplete-content.dropdown-content');
+            if (!$oldAutocomplete.length) {
+              $input.after($autocomplete);
+            }
+          }
+          if ($oldAutocomplete.length) {
+            $autocomplete = $oldAutocomplete;
           }
 
+          // Highlight partial match.
           var highlight = function(string, $el) {
             var img = $el.find('img');
             var matchStart = $el.text().toLowerCase().indexOf("" + string.toLowerCase() + ""),
@@ -3158,42 +3270,109 @@ Materialize.toast = function (message, displayLength, className, completeCallbac
             }
           };
 
+          // Reset current element position
+          var resetCurrentElement = function() {
+            activeIndex = 0;
+            $autocomplete.find('.active').removeClass('active');
+          }
+
           // Perform search
-          $input.on('keyup', function (e) {
-            // Capture Enter
-            if (e.which === 13) {
-              $autocomplete.find('li').first().click();
+          $input.off('keyup.autocomplete').on('keyup.autocomplete', function (e) {
+            // Reset count.
+            count = 0;
+
+            // Don't capture enter or arrow key usage.
+            if (e.which === 13 ||
+                e.which === 38 ||
+                e.which === 40) {
               return;
             }
 
             var val = $input.val().toLowerCase();
-            $autocomplete.empty();
 
             // Check if the input isn't empty
-            if (val !== '') {
-              for(var key in data) {
-                if (data.hasOwnProperty(key) &&
-                    key.toLowerCase().indexOf(val) !== -1 &&
-                    key.toLowerCase() !== val) {
-                  var autocompleteOption = $('<li></li>');
-                  if(!!data[key]) {
-                    autocompleteOption.append('<img src="'+ data[key] +'" class="right circle"><span>'+ key +'</span>');
-                  } else {
-                    autocompleteOption.append('<span>'+ key +'</span>');
-                  }
-                  $autocomplete.append(autocompleteOption);
+            if (oldVal !== val) {
+              $autocomplete.empty();
+              resetCurrentElement();
 
-                  highlight(val, autocompleteOption);
+              if (val !== '') {
+                for(var key in data) {
+                  if (data.hasOwnProperty(key) &&
+                      key.toLowerCase().indexOf(val) !== -1 &&
+                      key.toLowerCase() !== val) {
+                    // Break if past limit
+                    if (count >= options.limit) {
+                      break;
+                    }
+
+                    var autocompleteOption = $('<li></li>');
+                    if (!!data[key]) {
+                      autocompleteOption.append('<img src="'+ data[key] +'" class="right circle"><span>'+ key +'</span>');
+                    } else {
+                      autocompleteOption.append('<span>'+ key +'</span>');
+                    }
+
+                    $autocomplete.append(autocompleteOption);
+                    highlight(val, autocompleteOption);
+                    count++;
+                  }
                 }
               }
+            }
+
+            // Update oldVal
+            oldVal = val;
+          });
+
+          $input.off('keydown.autocomplete').on('keydown.autocomplete', function (e) {
+            // Arrow keys and enter key usage
+            var keyCode = e.which,
+                liElement,
+                numItems = $autocomplete.children('li').length,
+                $active = $autocomplete.children('.active').first();
+
+            // select element on Enter
+            if (keyCode === 13) {
+              liElement = $autocomplete.children('li').eq(activeIndex);
+              if (liElement.length) {
+                liElement.click();
+                e.preventDefault();
+              }
+              return;
+            }
+
+            // Capture up and down key
+            if ( keyCode === 38 || keyCode === 40 ) {
+              e.preventDefault();
+
+              if (keyCode === 38 &&
+                  activeIndex > 0) {
+                activeIndex--;
+              }
+
+              if (keyCode === 40 &&
+                  activeIndex < (numItems - 1) &&
+                  $active.length) {
+                activeIndex++;
+              }
+
+              $active.removeClass('active');
+              $autocomplete.children('li').eq(activeIndex).addClass('active');
             }
           });
 
           // Set input value
           $autocomplete.on('click', 'li', function () {
-            $input.val($(this).text().trim());
+            var text = $(this).text().trim();
+            $input.val(text);
             $input.trigger('change');
             $autocomplete.empty();
+            resetCurrentElement();
+
+            // Handle onAutocomplete callback.
+            if (typeof(options.onAutocomplete) === "function") {
+              options.onAutocomplete.call(this, text);
+            }
           });
         }
       });
@@ -3356,10 +3535,14 @@ Materialize.toast = function (message, displayLength, className, completeCallbac
           if (!options.is(':visible')) {
             $(this).trigger('open', ['focus']);
             var label = $(this).val();
+            if (multiple && label.indexOf(',') >= 0) {
+              label = label.split(',')[0];
+            }
+
             var selectedOption = options.find('li').filter(function() {
               return $(this).text().toLowerCase() === label.toLowerCase();
             })[0];
-            activateOption(options, selectedOption);
+            activateOption(options, selectedOption, true);
           }
         },
         'click': function (e){
@@ -3396,13 +3579,20 @@ Materialize.toast = function (message, displayLength, className, completeCallbac
         });
       }
 
-      // Make option as selected and scroll to selected position
-      var activateOption = function(collection, newOption) {
+      /**
+       * Make option as selected and scroll to selected position
+       * @param {jQuery} collection  Select options jQuery element
+       * @param {Element} newOption  element of the new option
+       * @param {Boolean} firstActivation  If on first activation of select
+       */
+      var activateOption = function(collection, newOption, firstActivation) {
         if (newOption) {
           collection.find('li.selected').removeClass('selected');
           var option = $(newOption);
           option.addClass('selected');
-          options.scrollTo(option);
+          if (!multiple || !!firstActivation) {
+            options.scrollTo(option);
+          }
         }
       };
 
@@ -3705,10 +3895,13 @@ Materialize.toast = function (message, displayLength, className, completeCallbac
             var direction = e.gesture.direction;
             var x = e.gesture.deltaX;
             var velocityX = e.gesture.velocityX;
+            var velocityY = e.gesture.velocityY;
 
             $curr_slide = $slider.find('.active');
-            $curr_slide.velocity({ translateX: x
-                }, {duration: 50, queue: false, easing: 'easeOutQuad'});
+            if (Math.abs(velocityX) > Math.abs(velocityY)) {
+              $curr_slide.velocity({ translateX: x
+                  }, {duration: 50, queue: false, easing: 'easeOutQuad'});
+            }
 
             // Swipe Left
             if (direction === 4 && (x > ($this.innerWidth() / 2) || velocityX < -0.65)) {
@@ -3833,16 +4026,16 @@ Materialize.toast = function (message, displayLength, className, completeCallbac
   };
 
 
-    $.fn.slider = function(methodOrOptions) {
-      if ( methods[methodOrOptions] ) {
-        return methods[ methodOrOptions ].apply( this, Array.prototype.slice.call( arguments, 1 ));
-      } else if ( typeof methodOrOptions === 'object' || ! methodOrOptions ) {
-        // Default to "init"
-        return methods.init.apply( this, arguments );
-      } else {
-        $.error( 'Method ' +  methodOrOptions + ' does not exist on jQuery.tooltip' );
-      }
-    }; // Plugin end
+  $.fn.slider = function(methodOrOptions) {
+    if ( methods[methodOrOptions] ) {
+      return methods[ methodOrOptions ].apply( this, Array.prototype.slice.call( arguments, 1 ));
+    } else if ( typeof methodOrOptions === 'object' || ! methodOrOptions ) {
+      // Default to "init"
+      return methods.init.apply( this, arguments );
+    } else {
+      $.error( 'Method ' +  methodOrOptions + ' does not exist on jQuery.tooltip' );
+    }
+  }; // Plugin end
 }( jQuery ));
 
 (function ($) {
@@ -3872,11 +4065,12 @@ Materialize.toast = function (message, displayLength, className, completeCallbac
   });
 }( jQuery ));
 (function ($) {
-  var chipsHandleEvents = false;
   var materialChipsDefaults = {
     data: [],
     placeholder: '',
     secondaryPlaceholder: '',
+    autocompleteData: {},
+    autocompleteLimit: Infinity,
   };
 
   $(document).ready(function() {
@@ -3907,7 +4101,7 @@ Materialize.toast = function (message, displayLength, className, completeCallbac
     }
 
     var curr_options = $.extend({}, materialChipsDefaults, options);
-
+    self.hasAutocomplete = !$.isEmptyObject(curr_options.autocompleteData);
 
     // Initialize
     this.init = function() {
@@ -3916,6 +4110,7 @@ Materialize.toast = function (message, displayLength, className, completeCallbac
       self.$el.each(function(){
         var $chips = $(this);
         var chipId = Materialize.guid();
+        self.chipId = chipId;
 
         if (!curr_options.data || !(curr_options.data instanceof Array)) {
           curr_options.data = [];
@@ -3933,7 +4128,7 @@ Materialize.toast = function (message, displayLength, className, completeCallbac
       });
     };
 
-    this.handleEvents = function(){
+    this.handleEvents = function() {
       var SELS = self.SELS;
 
       self.$document.off('click.chips-focus', SELS.CHIPS).on('click.chips-focus', SELS.CHIPS, function(e){
@@ -3941,8 +4136,16 @@ Materialize.toast = function (message, displayLength, className, completeCallbac
       });
 
       self.$document.off('click.chips-select', SELS.CHIP).on('click.chips-select', SELS.CHIP, function(e){
-        $(SELS.CHIP).removeClass('selected');
-        $(this).toggleClass('selected');
+        var $chip = $(e.target);
+        if ($chip.length) {
+          var wasSelected = $chip.hasClass('selected');
+          var $chips = $chip.closest(SELS.CHIPS);
+          $(SELS.CHIP).removeClass('selected');
+
+          if (!wasSelected) {
+            self.selectChip($chip.index(), $chips);
+          }
+        }
       });
 
       self.$document.off('keydown.chips').on('keydown.chips', function(e){
@@ -4026,6 +4229,13 @@ Materialize.toast = function (message, displayLength, className, completeCallbac
 
         // enter
         if (13 === e.which) {
+          // Override enter if autocompleting.
+          if (self.hasAutocomplete &&
+              $chips.find('.autocomplete-content.dropdown-content').length &&
+              $chips.find('.autocomplete-content.dropdown-content').children().length) {
+            return;
+          }
+
           e.preventDefault();
           self.addChip({tag: $target.val()}, $chips);
           $target.val('');
@@ -4033,7 +4243,8 @@ Materialize.toast = function (message, displayLength, className, completeCallbac
         }
 
         // delete or left
-         if ((8 === e.keyCode || 37 === e.keyCode) && '' === $target.val() && chipsLength) {
+        if ((8 === e.keyCode || 37 === e.keyCode) && '' === $target.val() && chipsLength) {
+          e.preventDefault();
           self.selectChip(chipsLength - 1, $chips);
           $target.blur();
           return;
@@ -4068,6 +4279,20 @@ Materialize.toast = function (message, displayLength, className, completeCallbac
         if ($chips.data('chips').length) {
           label.addClass('active');
         }
+      }
+
+      // Setup autocomplete if needed.
+      var input = $('#' + chipId);
+      if (self.hasAutocomplete) {
+        input.autocomplete({
+          data: curr_options.autocompleteData,
+          limit: curr_options.autocompleteLimit,
+          onAutocomplete: function(val) {
+            self.addChip({tag: val}, $chips);
+            input.val('');
+            input.focus();
+          },
+        })
       }
     };
 
@@ -4154,12 +4379,10 @@ Materialize.toast = function (message, displayLength, className, completeCallbac
     // init
     this.init();
 
-    if (!chipsHandleEvents) {
-      this.handleEvents();
-      chipsHandleEvents = true;
-    }
+    this.handleEvents();
   };
 }( jQuery ));
+
 (function ($) {
   $.fn.pushpin = function (options) {
     // Defaults
@@ -4501,7 +4724,7 @@ Materialize.toast = function (message, displayLength, className, completeCallbac
 
 (function ($) {
   // Image transition function
-  Materialize.fadeInImage =  function(selectorOrEl) {
+  Materialize.fadeInImage = function(selectorOrEl) {
     var element;
     if (typeof(selectorOrEl) === 'string') {
       element = $(selectorOrEl);
@@ -4512,30 +4735,30 @@ Materialize.toast = function (message, displayLength, className, completeCallbac
     }
     element.css({opacity: 0});
     $(element).velocity({opacity: 1}, {
-        duration: 650,
-        queue: false,
-        easing: 'easeOutSine'
-      });
+      duration: 650,
+      queue: false,
+      easing: 'easeOutSine'
+    });
     $(element).velocity({opacity: 1}, {
-          duration: 1300,
-          queue: false,
-          easing: 'swing',
-          step: function(now, fx) {
-              fx.start = 100;
-              var grayscale_setting = now/100;
-              var brightness_setting = 150 - (100 - now)/1.75;
+      duration: 1300,
+      queue: false,
+      easing: 'swing',
+      step: function(now, fx) {
+        fx.start = 100;
+        var grayscale_setting = now/100;
+        var brightness_setting = 150 - (100 - now)/1.75;
 
-              if (brightness_setting < 100) {
-                brightness_setting = 100;
-              }
-              if (now >= 0) {
-                $(this).css({
-                    "-webkit-filter": "grayscale("+grayscale_setting+")" + "brightness("+brightness_setting+"%)",
-                    "filter": "grayscale("+grayscale_setting+")" + "brightness("+brightness_setting+"%)"
-                });
-              }
-          }
-      });
+        if (brightness_setting < 100) {
+          brightness_setting = 100;
+        }
+        if (now >= 0) {
+          $(this).css({
+              "-webkit-filter": "grayscale("+grayscale_setting+")" + "brightness("+brightness_setting+"%)",
+              "filter": "grayscale("+grayscale_setting+")" + "brightness("+brightness_setting+"%)"
+          });
+        }
+      }
+    });
   };
 
   // Horizontal staggered list
@@ -4671,49 +4894,52 @@ Materialize.toast = function (message, displayLength, className, completeCallbac
 
 (function($) {
 
+  var scrollFireEventsHandled = false;
+
   // Input: Array of JSON objects {selector, offset, callback}
-
   Materialize.scrollFire = function(options) {
+    var onScroll = function() {
+      var windowScroll = window.pageYOffset + window.innerHeight;
 
-    var didScroll = false;
+      for (var i = 0 ; i < options.length; i++) {
+        // Get options from each line
+        var value = options[i];
+        var selector = value.selector,
+            offset = value.offset,
+            callback = value.callback;
 
-    window.addEventListener("scroll", function() {
-      didScroll = true;
-    });
+        var currentElement = document.querySelector(selector);
+        if ( currentElement !== null) {
+          var elementOffset = currentElement.getBoundingClientRect().top + window.pageYOffset;
 
-    // Rate limit to 100ms
-    setInterval(function() {
-      if(didScroll) {
-          didScroll = false;
-
-          var windowScroll = window.pageYOffset + window.innerHeight;
-
-          for (var i = 0 ; i < options.length; i++) {
-            // Get options from each line
-            var value = options[i];
-            var selector = value.selector,
-                offset = value.offset,
-                callback = value.callback;
-
-            var currentElement = document.querySelector(selector);
-            if ( currentElement !== null) {
-              var elementOffset = currentElement.getBoundingClientRect().top + window.pageYOffset;
-
-              if (windowScroll > (elementOffset + offset)) {
-                if (value.done !== true) {
-                  if (typeof(callback) === 'function') {
-                    callback.call(this, currentElement);
-                  } else if (typeof(callback) === 'string') {
-                    var callbackFunc = new Function(callback);
-                    callbackFunc(currentElement);
-                  }
-                  value.done = true;
-                }
+          if (windowScroll > (elementOffset + offset)) {
+            if (value.done !== true) {
+              if (typeof(callback) === 'function') {
+                callback.call(this, currentElement);
+              } else if (typeof(callback) === 'string') {
+                var callbackFunc = new Function(callback);
+                callbackFunc(currentElement);
               }
+              value.done = true;
             }
           }
+        }
       }
-    }, 100);
+    };
+
+
+    var throttledScroll = Materialize.throttle(function() {
+      onScroll();
+    }, options.throttle || 100);
+
+    if (!scrollFireEventsHandled) {
+      window.addEventListener("scroll", throttledScroll);
+      window.addEventListener("resize", throttledScroll);
+      scrollFireEventsHandled = true;
+    }
+
+    // perform a scan once, after current execution context, and after dom is ready
+    setTimeout(throttledScroll, 0);
   };
 
 })(jQuery);
@@ -7285,7 +7511,7 @@ Picker.extend( 'pickadate', DatePicker )
         return;
       }
 
-      var itHasLengthAttribute = $input.attr('length') !== undefined;
+      var itHasLengthAttribute = $input.attr('data-length') !== undefined;
 
       if(itHasLengthAttribute){
         $input.on('input', updateCounter);
@@ -7299,7 +7525,7 @@ Picker.extend( 'pickadate', DatePicker )
   };
 
   function updateCounter(){
-    var maxLength     = +$(this).attr('length'),
+    var maxLength     = +$(this).attr('data-length'),
     actualLength      = +$(this).val().length,
     isValidLength     = actualLength <= maxLength;
 
@@ -7352,19 +7578,20 @@ Picker.extend( 'pickadate', DatePicker )
 
     init : function(options) {
       var defaults = {
-        time_constant: 200, // ms
+        duration: 200, // ms
         dist: -100, // zoom scale TODO: make this more intuitive as an option
         shift: 0, // spacing for center image
         padding: 0, // Padding between non center items
-        full_width: false, // Change to full width styles
+        fullWidth: false, // Change to full width styles
         indicators: false, // Toggle indicators
-        no_wrap: false // Don't wrap around and cycle through items.
+        noWrap: false, // Don't wrap around and cycle through items.
+        onCycleTo: null // Callback for when a new slide is cycled to.
       };
       options = $.extend(defaults, options);
 
       return this.each(function() {
 
-        var images, offset, center, pressed, dim, count,
+        var images, item_width, item_height, offset, center, pressed, dim, count,
             reference, referenceY, amplitude, target, velocity,
             xform, frame, timestamp, ticker, dragged, vertical_dragged;
         var $indicators = $('<ul class="indicators"></ul>');
@@ -7383,7 +7610,7 @@ Picker.extend( 'pickadate', DatePicker )
 
 
         // Options
-        if (options.full_width) {
+        if (options.fullWidth) {
           options.dist = 0;
           var firstImage = view.find('.carousel-item img').first();
           if (firstImage.length) {
@@ -7407,6 +7634,7 @@ Picker.extend( 'pickadate', DatePicker )
         offset = target = 0;
         images = [];
         item_width = view.find('.carousel-item').first().innerWidth();
+        item_height = view.find('.carousel-item').first().innerHeight();
         dim = item_width * 2 + options.padding;
 
         view.find('.carousel-item').each(function (i) {
@@ -7420,7 +7648,9 @@ Picker.extend( 'pickadate', DatePicker )
             }
 
             // Handle clicks on indicators.
-            $indicator.click(function () {
+            $indicator.click(function (e) {
+              e.stopPropagation();
+
               var index = $(this).index();
               cycleTo(index);
             });
@@ -7473,6 +7703,7 @@ Picker.extend( 'pickadate', DatePicker )
 
         function scroll(x) {
           var i, half, delta, dir, tween, el, alignment, xTranslation;
+          var lastCenter = center;
 
           offset = (typeof x === 'number') ? x : offset;
           center = Math.floor((offset + dim / 2) / dim);
@@ -7481,9 +7712,9 @@ Picker.extend( 'pickadate', DatePicker )
           tween = -dir * delta * 2 / dim;
           half = count >> 1;
 
-          if (!options.full_width) {
+          if (!options.fullWidth) {
             alignment = 'translateX(' + (view[0].clientWidth - item_width) / 2 + 'px) ';
-            alignment += 'translateY(' + (view[0].clientHeight - item_width) / 2 + 'px)';
+            alignment += 'translateY(' + (view[0].clientHeight - item_height) / 2 + 'px)';
           } else {
             alignment = 'translateX(0)';
           }
@@ -7500,14 +7731,20 @@ Picker.extend( 'pickadate', DatePicker )
 
           // center
           // Don't show wrapped items.
-          if (!options.no_wrap || (center >= 0 && center < count)) {
+          if (!options.noWrap || (center >= 0 && center < count)) {
             el = images[wrap(center)];
+
+            // Add active class to center item.
+            if (!$(el).hasClass('active')) {
+              view.find('.carousel-item').removeClass('active');
+              $(el).addClass('active');
+            }
             el.style[xform] = alignment +
               ' translateX(' + (-delta / 2) + 'px)' +
               ' translateX(' + (dir * options.shift * tween * i) + 'px)' +
               ' translateZ(' + (options.dist * tween) + 'px)';
             el.style.zIndex = 0;
-            if (options.full_width) { tweenedOpacity = 1; }
+            if (options.fullWidth) { tweenedOpacity = 1; }
             else { tweenedOpacity = 1 - 0.2 * tween; }
             el.style.opacity = tweenedOpacity;
             el.style.display = 'block';
@@ -7515,7 +7752,7 @@ Picker.extend( 'pickadate', DatePicker )
 
           for (i = 1; i <= half; ++i) {
             // right side
-            if (options.full_width) {
+            if (options.fullWidth) {
               zTranslation = options.dist;
               tweenedOpacity = (i === half && delta < 0) ? 1 - tween : 1;
             } else {
@@ -7523,7 +7760,7 @@ Picker.extend( 'pickadate', DatePicker )
               tweenedOpacity = 1 - 0.2 * (i * 2 + tween * dir);
             }
             // Don't show wrapped items.
-            if (!options.no_wrap || center + i < count) {
+            if (!options.noWrap || center + i < count) {
               el = images[wrap(center + i)];
               el.style[xform] = alignment +
                 ' translateX(' + (options.shift + (dim * i - delta) / 2) + 'px)' +
@@ -7535,7 +7772,7 @@ Picker.extend( 'pickadate', DatePicker )
 
 
             // left side
-            if (options.full_width) {
+            if (options.fullWidth) {
               zTranslation = options.dist;
               tweenedOpacity = (i === half && delta > 0) ? 1 - tween : 1;
             } else {
@@ -7543,7 +7780,7 @@ Picker.extend( 'pickadate', DatePicker )
               tweenedOpacity = 1 - 0.2 * (i * 2 - tween * dir);
             }
             // Don't show wrapped items.
-            if (!options.no_wrap || center - i >= 0) {
+            if (!options.noWrap || center - i >= 0) {
               el = images[wrap(center - i)];
               el.style[xform] = alignment +
                 ' translateX(' + (-options.shift + (-dim * i - delta) / 2) + 'px)' +
@@ -7556,17 +7793,24 @@ Picker.extend( 'pickadate', DatePicker )
 
           // center
           // Don't show wrapped items.
-          if (!options.no_wrap || (center >= 0 && center < count)) {
+          if (!options.noWrap || (center >= 0 && center < count)) {
             el = images[wrap(center)];
             el.style[xform] = alignment +
               ' translateX(' + (-delta / 2) + 'px)' +
               ' translateX(' + (dir * options.shift * tween) + 'px)' +
               ' translateZ(' + (options.dist * tween) + 'px)';
             el.style.zIndex = 0;
-            if (options.full_width) { tweenedOpacity = 1; }
+            if (options.fullWidth) { tweenedOpacity = 1; }
             else { tweenedOpacity = 1 - 0.2 * tween; }
             el.style.opacity = tweenedOpacity;
             el.style.display = 'block';
+          }
+
+          // onCycleTo callback
+          if (lastCenter !== center &&
+              typeof(options.onCycleTo) === "function") {
+            var $curr_item = view.find('.carousel-item').eq(wrap(center));
+            options.onCycleTo.call(this, $curr_item, dragged);
           }
         }
 
@@ -7588,7 +7832,7 @@ Picker.extend( 'pickadate', DatePicker )
 
           if (amplitude) {
             elapsed = Date.now() - timestamp;
-            delta = amplitude * Math.exp(-elapsed / options.time_constant);
+            delta = amplitude * Math.exp(-elapsed / options.duration);
             if (delta > 2 || delta < -2) {
                 scroll(target - delta);
                 requestAnimationFrame(autoScroll);
@@ -7605,7 +7849,7 @@ Picker.extend( 'pickadate', DatePicker )
             e.stopPropagation();
             return false;
 
-          } else if (!options.full_width) {
+          } else if (!options.fullWidth) {
             var clickedIndex = $(e.target).closest('.carousel-item').index();
             var diff = (center % count) - clickedIndex;
 
@@ -7622,7 +7866,7 @@ Picker.extend( 'pickadate', DatePicker )
           var diff = (center % count) - n;
 
           // Account for wraparound.
-          if (!options.no_wrap) {
+          if (!options.noWrap) {
             if (diff < 0) {
               if (Math.abs(diff + count) < Math.abs(diff)) { diff += count; }
 
@@ -7706,7 +7950,7 @@ Picker.extend( 'pickadate', DatePicker )
           target = Math.round(target / dim) * dim;
 
           // No wrap of items.
-          if (options.no_wrap) {
+          if (options.noWrap) {
             if (target >= dim * (count - 1)) {
               target = dim * (count - 1);
             } else if (target < 0) {
@@ -7735,8 +7979,17 @@ Picker.extend( 'pickadate', DatePicker )
         });
 
 
-
-        window.onresize = scroll;
+        $(window).on('resize.carousel', function() {
+          if (options.fullWidth) {
+            item_width = view.find('.carousel-item').first().innerWidth();
+            item_height = view.find('.carousel-item').first().innerHeight();
+            dim = item_width * 2 + options.padding;
+            offset = center * 2 * item_width;
+            target = offset;
+          } else {
+            scroll();
+          }
+        });
 
         setupEvents();
         scroll(offset);
@@ -7745,7 +7998,7 @@ Picker.extend( 'pickadate', DatePicker )
           if (n === undefined) {
             n = 1;
           }
-          target = offset + dim * n;
+          target = (dim * Math.round(offset / dim)) + (dim * n);
           if (offset !== target) {
             amplitude = target - offset;
             timestamp = Date.now();
@@ -7757,7 +8010,7 @@ Picker.extend( 'pickadate', DatePicker )
           if (n === undefined) {
             n = 1;
           }
-          target = offset - dim * n;
+          target = (dim * Math.round(offset / dim)) - (dim * n);
           if (offset !== target) {
             amplitude = target - offset;
             timestamp = Date.now();
