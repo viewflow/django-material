@@ -64,6 +64,10 @@
       .datetimepicker('destroy');
   }
 
-  $(document).on('ready turbolinks:load', function() { initForms($(document)) })
-  $(document).on('turbolinks:before-cache', function () { destroyForms($(document))})
+  if(window.Turbolinks) {
+    $(document).on('turbolinks:load', function() { initForms($(document)) })
+    $(document).on('turbolinks:before-cache', function () { destroyForms($(document))})
+  } else {
+    $(document).on('ready', function() { initForms($(document)) })
+  }
 })()
