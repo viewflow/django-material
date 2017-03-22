@@ -1,6 +1,11 @@
 {% extends "admin/base_site.html" %}
 {% load i18n admin_static material_form %}
 
+{% block extrastyle %}
+{{ block.super }}
+{{ media.css }}
+{% endblock %}
+
 {% block content %}
 <div class="left-panel">
     <div class="card">
