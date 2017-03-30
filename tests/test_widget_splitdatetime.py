@@ -126,11 +126,11 @@ class Test(WebTest):
 
     def test_part_help_text(self):
         response = self.app.get(self.test_part_help_text.url)
-        self.assertIn('<small class="help-block">My help</small>', response.body.decode('utf-8'))
+        self.assertIn('<div class="help-block">My help</div>', response.body.decode('utf-8'))
 
     test_part_help_text.template = '''
         {% form %}
-             {% part form.test_field help_text %}<small class="help-block">My help</small>{% endpart %}
+             {% part form.test_field help_text %}<div class="help-block">My help</div>{% endpart %}
         {% endform %}
     '''
 

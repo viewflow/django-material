@@ -26,7 +26,7 @@
         {% endattrs %}>{{ bound_field.label }}</label>
         {% endpart %}
         {% part field help_text %}{% if field.help_text %}
-        <small class="help-block">{{ bound_field.help_text }}</small>
+        <div class="help-block">{{ bound_field.help_text|safe }}</div>
         {% endif %}
         {% endpart %}{% part field errors %}
         {% if bound_field.errors %}
