@@ -26,7 +26,7 @@
     </div>
     <div class="col s12">
         {% part field help_text %}{% if field.help_text %}
-        <small class="help-block" style="display:block">{{ bound_field.help_text }}</small>
+        <div class="help-block">{{ bound_field.help_text|safe }}</div>
         {% endif %}
         {% endpart %}{% part field errors %}
         {% if bound_field.errors %}{% include  'material/field_errors.html' %}{% endif %}

@@ -14,7 +14,7 @@
                 <label class="active">{{ fieldset_field.field.label|title }}</label>
                 <input disabled value="{{ fieldset_field.contents }}">
                 {% if fieldset_field.field.help_text %}
-                    <small class="help-block">{{ fieldset_field.field.help_text }}</small>
+                    <div class="help-block">{{ fieldset_field.field.help_text|safe }}</div>
                 {% endif %}
             </div>
          {% endif %}

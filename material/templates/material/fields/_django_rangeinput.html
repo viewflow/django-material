@@ -20,11 +20,10 @@
             {% if bound_field.value != None %}value="{{ bound_field.value|unlocalize }}"{% endif %}
         {% endattrs %}></p>{% endpart %}
         {% part field help_text %}{% if field.help_text %}
-        <small class="help-block">{{ bound_field.help_text }}</small>
+        <div class="help-block">{{ bound_field.help_text|safe }}</div>
         {% endif %}
         {% endpart %}{% part field errors %}
         {% if bound_field.errors %}{% include  'material/field_errors.html' %}{% endif %}
         {% endpart %}{{ hidden_initial }}
     </div>
 </div>{% endpart %}
-

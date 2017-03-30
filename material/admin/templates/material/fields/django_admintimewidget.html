@@ -20,7 +20,7 @@
             <span class="suffix">
                 <a href="#" data-form-control="date-today-shortcut">{% trans 'Now' %}</a>
             </span>
-            {% endpart %}            
+            {% endpart %}
             {% part field label %}
             <label{% attrs bound_field 'label' %}
                      for="{{ bound_field.id_for_label }}"
@@ -28,7 +28,7 @@
         </div>
         {% endpart %}
         {% part field help_text %}{% if field.help_text %}
-        <small class="help-block">{{ bound_field.help_text }}</small>
+        <div class="help-block">{{ bound_field.help_text|safe }}</div>
         {% endif %}
         {% endpart %}{% part field errors %}
         {% if bound_field.errors %}
