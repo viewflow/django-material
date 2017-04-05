@@ -9,7 +9,8 @@ form .help-block {
   line-height: 12px;
   position: relative;
   top: -10px;
-  color: rgba(0, 0, 0, 0.6); }
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 75%; }
 
 form .error {
   line-height: 12px;

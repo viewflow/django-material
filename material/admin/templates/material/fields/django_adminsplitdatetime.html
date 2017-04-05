@@ -29,9 +29,9 @@
             {% include  'material/field_errors.html' %}
             {% endif %}
             {% endpart %}{% if field.help_text %}
-            <small class="help-block">{{ bound_field.help_text }}</small>
+            <div class="help-block">{{ bound_field.help_text|safe }}</div>
             {% endif %}
-            {% endpart %}{{ hidden_initial }}            
+            {% endpart %}{{ hidden_initial }}
         </div>
         <div class="{% if field.required %} required{% endif %}{% if bound_field.errors %} has-error{% endif %}"
              style="margin-top:-7px">
@@ -43,7 +43,7 @@
                      data-date-format="{{ field.fields.1|jquery_datepicker_format }}"
                      data-form-control="time"
                      {% if bound_field.errors %}class="invalid"{% endif %}
-                     {% if bound_field.value %} value="{{ bound_field|multiwidget_value:1|datepicker_value:field.fields.1.input_formats.0 }}"{% endif %}                 
+                     {% if bound_field.value %} value="{{ bound_field|multiwidget_value:1|datepicker_value:field.fields.1.input_formats.0 }}"{% endif %}
                      {% endattrs %}>
         </div>
         <span class="suffix">

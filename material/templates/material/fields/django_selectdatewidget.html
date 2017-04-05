@@ -3,7 +3,7 @@
     <div id="id_{{ bound_field.html_name }}_container">
         {% part field label %}
         <div class="col s12">
-            <label for="{{ bound_field.id_for_label }}" class="{% part field add_label_class %}{{ form_label_class }}{% endpart %}">{{ bound_field.label }}</label>        
+            <label for="{{ bound_field.id_for_label }}" class="{% part field add_label_class %}{{ form_label_class }}{% endpart %}">{{ bound_field.label }}</label>
         </div>
         {% endpart %}
         {% part field prefix %}{% endpart %}
@@ -24,7 +24,7 @@
                 {% if bound_field.errors %}class="invalid"{% endif %}
             {% endattrs %}> {% for value, choice in select.choices %}
                 <option {% if value == None or value == '' %}value{% else %}value="{{ value }}"{% endif %}{% if value|force_text == select.value|force_text %} selected="selected"{% endif %}>{% if value == None or value == '' %}{{ form_select_empty_label|default:choice }}{% else %}{{ choice }}{% endif %}</option> {% endfor %}
-            </select>       
+            </select>
         </div> {% endif %}{% if select.type == "year" %}<div class="col s4">
             <select{% attrs bound_field 'widget_year' %}
                 id="id_{{ bound_field.html_name }}_year"
@@ -34,10 +34,10 @@
                 <option {% if value == None or value == '' %}value{% else %}value="{{ value }}"{% endif %}{% if value|force_text == select.value|force_text %} selected="selected"{% endif %}>{% if value == None or value == '' %}{{ form_select_empty_label|default:choice }}{% else %}{{ choice }}{% endif %}</option>{% endfor %}
             </select>
         </div>{% endif %}
-        {% endfor %}{% endwith %}        
+        {% endfor %}{% endwith %}
         <div class="col s12">
         {% part field help_text %}{% if field.help_text %}
-            <small class="help-block">{{ bound_field.help_text }}</small>
+            <div class="help-block">{{ bound_field.help_text|safe }}</div>
         {% endif %}{% endpart %}{% part field errors %}
         {% if bound_field.errors %}
         {% include  'material/field_errors.html' %}

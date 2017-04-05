@@ -11,6 +11,7 @@ form .help-block {
     position: relative;
     top: -10px;
     color: rgba(0, 0, 0, 0.6);
+    font-size: 75%;
 }
 
 form .error {
@@ -19,7 +20,6 @@ form .error {
     top: -10px;
     color: #F44336;
 }
-
 
 /* INPUT FIELD */
 .input-field {
@@ -49,7 +49,7 @@ form .error {
     input[type=number] {
         -moz-appearance: textfield;
     }
-    
+
     ::-webkit-inner-spin-button {
         -webkit-appearance: none;
     }
@@ -146,7 +146,7 @@ select.material-ignore {
         top: 5px;
         width: 2.5rem;
         font-size: 2rem;
-    
+
         ~ label {
             width: calc(100% - 21px - 3rem);
         }
@@ -173,7 +173,7 @@ select.material-ignore {
         margin-right:25px;
         width: auto;
     }
-} 
+}
 
 /* FORMSET*/
 .formset-field {
