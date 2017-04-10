@@ -42,7 +42,7 @@ def get_admin_site():
 site = get_admin_site()
 
 
-@register.assignment_tag
+@register.simple_tag
 def get_app_list(request):
     """Django 1.8 way to get application registered at default Admin Site."""
     app_dict = {}
@@ -112,7 +112,7 @@ def get_app_list(request):
     return app_list
 
 
-@register.assignment_tag
+@register.simple_tag
 def fieldset_layout(adminform, inline_admin_formsets):
     """Generate material layout for admin inlines."""
     layout = getattr(adminform.model_admin, 'layout', None)
