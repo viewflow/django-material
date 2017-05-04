@@ -213,8 +213,7 @@ nav.breadcrumbs {
   overflow: initial; }
   .filters-card .card-title {
     font-size: 18px;
-    text-transform: uppercase;
-    margin-top: -10px; }
+    text-transform: uppercase; }
   .filters-card .card-content {
     padding: 20px;
     padding-top: 5px; }
