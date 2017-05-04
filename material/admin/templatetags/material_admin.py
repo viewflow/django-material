@@ -24,7 +24,7 @@ from ..base import AdminReadonlyField, Inline
 register = Library()
 
 
-CL_VALUE_RE = re.compile('value="(.*)\"')
+CL_VALUE_RE = re.compile('value=\"([^"]*)\"')
 
 
 def get_admin_site():
