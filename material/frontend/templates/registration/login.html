@@ -1,9 +1,41 @@
 {% extends "material/frontend/base_site.html" %}
-{% load i18n material_form %}
+{% load i18n static material_form %}
 
 {% block title %}{% trans Login %} - {{ block.super }}{% endblock %}
-{% block page_title %}{% trans 'Authentication' %}{% endblock %}
+{%block bodyclass %}auth{% endblock %}
 
+
+{% block body %}
+<div class="registration" style="background:url({% static 'material/imgs/background.svg' %})">
+    <div class="sidebar z-depth-3">
+        <h4>{% block page_title %}{{ block.super }}{% endblock %}</h4>
+
+        <form action="{{ app_path }}" method="post" id="login-form">{% csrf_token %}
+            {% if 'username' in form.fields %}
+            {% form %}
+            {% part form.username prefix %}<i class="material-icons prefix">account_box</i>{% endpart %}
+            {% part form.password prefix %}<i class="material-icons prefix">lock</i>{% endpart %}
+            {% endform %}
+            {% else %}
+            {% form %}{% endform %}
+            {% endif %}
+            
+            {% url 'admin_password_reset' as password_reset_url %}
+            {% if password_reset_url %}
+            <div class="password-reset-link">
+                <a href="{{ password_reset_url }}">{% trans 'Forgotten your password or username?' %}</a>
+            </div>
+            {% endif %}
+            <div class="action right-align">
+                <button type="submit" class="btn btn-primary">{% trans 'Log in' %}</button>
+            </div>
+        </form>
+    </div>
+    <div class="logo">
+        <i class="logo__icon material-icons">account_circle</i>
+    </div>
+</div>
+{% endblock %}
 
 {% block content %}
 {% block left-panel %}
