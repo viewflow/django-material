@@ -1,4 +1,4 @@
-/* perfect-scrollbar v0.6.16 */
+/* perfect-scrollbar v0.7.0 */
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 'use strict';
 
@@ -273,7 +273,7 @@ var toInt = exports.toInt = function (x) {
 var clone = exports.clone = function (obj) {
   if (!obj) {
     return null;
-  } else if (obj.constructor === Array) {
+  } else if (Array.isArray(obj)) {
     return obj.map(clone);
   } else if (typeof obj === 'object') {
     var result = {};
@@ -370,6 +370,7 @@ module.exports = {
   suppressScrollX: false,
   suppressScrollY: false,
   swipePropagation: true,
+  swipeEasing: true,
   useBothWheelAxes: false,
   wheelPropagation: false,
   wheelSpeed: 1,
@@ -767,7 +768,14 @@ function bindMouseWheelHandler(element, i) {
   function shouldBeConsumedByChild(deltaX, deltaY) {
     var child = element.querySelector('textarea:hover, select[multiple]:hover, .ps-child:hover');
     if (child) {
-      if (!window.getComputedStyle(child).overflow.match(/(scroll|auto)/)) {
+      var style = window.getComputedStyle(child);
+      var overflow = [
+        style.overflow,
+        style.overflowX,
+        style.overflowY
+      ].join('');
+
+      if (!overflow.match(/(scroll|auto)/)) {
         // if not scrollable
         return false;
       }
@@ -1103,28 +1111,30 @@ function bindTouchHandler(element, i, supportsTouch, supportsIePointer) {
     if (!inGlobalTouch && inLocalTouch) {
       inLocalTouch = false;
 
-      clearInterval(easingLoop);
-      easingLoop = setInterval(function () {
-        if (!instances.get(element)) {
-          clearInterval(easingLoop);
-          return;
-        }
+      if (i.settings.swipeEasing) {
+        clearInterval(easingLoop);
+        easingLoop = setInterval(function () {
+          if (!instances.get(element)) {
+            clearInterval(easingLoop);
+            return;
+          }
 
-        if (!speed.x && !speed.y) {
-          clearInterval(easingLoop);
-          return;
-        }
+          if (!speed.x && !speed.y) {
+            clearInterval(easingLoop);
+            return;
+          }
 
-        if (Math.abs(speed.x) < 0.01 && Math.abs(speed.y) < 0.01) {
-          clearInterval(easingLoop);
-          return;
-        }
+          if (Math.abs(speed.x) < 0.01 && Math.abs(speed.y) < 0.01) {
+            clearInterval(easingLoop);
+            return;
+          }
 
-        applyTouchMove(speed.x * 30, speed.y * 30);
+          applyTouchMove(speed.x * 30, speed.y * 30);
 
-        speed.x *= 0.8;
-        speed.y *= 0.8;
-      }, 10);
+          speed.x *= 0.8;
+          speed.y *= 0.8;
+        }, 10);
+      }
     }
   }
 
@@ -1182,13 +1192,13 @@ var nativeScrollHandler = require('./handler/native-scroll');
 module.exports = function (element, userSettings) {
   userSettings = typeof userSettings === 'object' ? userSettings : {};
 
-  cls.add(element, 'ps-container');
+  cls.add(element, 'ps');
 
   // Create a plugin instance.
   var i = instances.add(element);
 
   i.settings = _.extend(i.settings, userSettings);
-  cls.add(element, 'ps-theme-' + i.settings.theme);
+  cls.add(element, 'ps--theme_' + i.settings.theme);
 
   i.settings.handlers.forEach(function (handlerName) {
     handlers[handlerName](element);
@@ -1234,15 +1244,15 @@ function Instance(element) {
   i.ownerDocument = element.ownerDocument || document;
 
   function focus() {
-    cls.add(element, 'ps-focus');
+    cls.add(element, 'ps--focus');
   }
 
   function blur() {
-    cls.remove(element, 'ps-focus');
+    cls.remove(element, 'ps--focus');
   }
 
-  i.scrollbarXRail = dom.appendTo(dom.e('div', 'ps-scrollbar-x-rail'), element);
-  i.scrollbarX = dom.appendTo(dom.e('div', 'ps-scrollbar-x'), i.scrollbarXRail);
+  i.scrollbarXRail = dom.appendTo(dom.e('div', 'ps__scrollbar-x-rail'), element);
+  i.scrollbarX = dom.appendTo(dom.e('div', 'ps__scrollbar-x'), i.scrollbarXRail);
   i.scrollbarX.setAttribute('tabindex', 0);
   i.event.bind(i.scrollbarX, 'focus', focus);
   i.event.bind(i.scrollbarX, 'blur', blur);
@@ -1260,8 +1270,8 @@ function Instance(element) {
   i.railXWidth = null;
   i.railXRatio = null;
 
-  i.scrollbarYRail = dom.appendTo(dom.e('div', 'ps-scrollbar-y-rail'), element);
-  i.scrollbarY = dom.appendTo(dom.e('div', 'ps-scrollbar-y'), i.scrollbarYRail);
+  i.scrollbarYRail = dom.appendTo(dom.e('div', 'ps__scrollbar-y-rail'), element);
+  i.scrollbarY = dom.appendTo(dom.e('div', 'ps__scrollbar-y'), i.scrollbarYRail);
   i.scrollbarY.setAttribute('tabindex', 0);
   i.event.bind(i.scrollbarY, 'focus', focus);
   i.event.bind(i.scrollbarY, 'blur', blur);
@@ -1371,7 +1381,7 @@ module.exports = function (element) {
 
   var existingRails;
   if (!element.contains(i.scrollbarXRail)) {
-    existingRails = dom.queryChildren(element, '.ps-scrollbar-x-rail');
+    existingRails = dom.queryChildren(element, '.ps__scrollbar-x-rail');
     if (existingRails.length > 0) {
       existingRails.forEach(function (rail) {
         dom.remove(rail);
@@ -1380,7 +1390,7 @@ module.exports = function (element) {
     dom.appendTo(i.scrollbarXRail, element);
   }
   if (!element.contains(i.scrollbarYRail)) {
-    existingRails = dom.queryChildren(element, '.ps-scrollbar-y-rail');
+    existingRails = dom.queryChildren(element, '.ps__scrollbar-y-rail');
     if (existingRails.length > 0) {
       existingRails.forEach(function (rail) {
         dom.remove(rail);
@@ -1419,17 +1429,17 @@ module.exports = function (element) {
   updateCss(element, i);
 
   if (i.scrollbarXActive) {
-    cls.add(element, 'ps-active-x');
+    cls.add(element, 'ps--active-x');
   } else {
-    cls.remove(element, 'ps-active-x');
+    cls.remove(element, 'ps--active-x');
     i.scrollbarXWidth = 0;
     i.scrollbarXLeft = 0;
     updateScroll(element, 'left', 0);
   }
   if (i.scrollbarYActive) {
-    cls.add(element, 'ps-active-y');
+    cls.add(element, 'ps--active-y');
   } else {
-    cls.remove(element, 'ps-active-y');
+    cls.remove(element, 'ps--active-y');
     i.scrollbarYHeight = 0;
     i.scrollbarYTop = 0;
     updateScroll(element, 'top', 0);
@@ -1440,9 +1450,6 @@ module.exports = function (element) {
 'use strict';
 
 var instances = require('./instances');
-
-var lastTop;
-var lastLeft;
 
 var createDOMEvent = function (name) {
   var event = document.createEvent("Event");
@@ -1499,37 +1506,37 @@ module.exports = function (element, axis, value) {
     element.dispatchEvent(createDOMEvent('ps-x-reach-end'));
   }
 
-  if (!lastTop) {
-    lastTop = element.scrollTop;
+  if (i.lastTop === undefined) {
+    i.lastTop = element.scrollTop;
   }
 
-  if (!lastLeft) {
-    lastLeft = element.scrollLeft;
+  if (i.lastLeft === undefined) {
+    i.lastLeft = element.scrollLeft;
   }
 
-  if (axis === 'top' && value < lastTop) {
+  if (axis === 'top' && value < i.lastTop) {
     element.dispatchEvent(createDOMEvent('ps-scroll-up'));
   }
 
-  if (axis === 'top' && value > lastTop) {
+  if (axis === 'top' && value > i.lastTop) {
     element.dispatchEvent(createDOMEvent('ps-scroll-down'));
   }
 
-  if (axis === 'left' && value < lastLeft) {
+  if (axis === 'left' && value < i.lastLeft) {
     element.dispatchEvent(createDOMEvent('ps-scroll-left'));
   }
 
-  if (axis === 'left' && value > lastLeft) {
+  if (axis === 'left' && value > i.lastLeft) {
     element.dispatchEvent(createDOMEvent('ps-scroll-right'));
   }
 
-  if (axis === 'top') {
-    element.scrollTop = lastTop = value;
+  if (axis === 'top' && value !== i.lastTop) {
+    element.scrollTop = i.lastTop = value;
     element.dispatchEvent(createDOMEvent('ps-scroll-y'));
   }
 
-  if (axis === 'left') {
-    element.scrollLeft = lastLeft = value;
+  if (axis === 'left' && value !== i.lastLeft) {
+    element.scrollLeft = i.lastLeft = value;
     element.dispatchEvent(createDOMEvent('ps-scroll-x'));
   }
 

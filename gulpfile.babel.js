@@ -28,6 +28,7 @@ gulp.task('3rdparty.fonts', () => {
 
 gulp.task('3rdparty.js', () => {
   var deps = [
+    'node_modules/jquery/dist/jquery.js',
     'node_modules/datatables.net-fixedheader/js/dataTables.fixedHeader.js',
     'node_modules/datatables.net-responsive/js/dataTables.responsive.js',
     'node_modules/datatables/media/js/jquery.dataTables.js',
@@ -128,7 +129,7 @@ gulp.task('materialize.django.scss', () => {
 gulp.task('frontend.min.js', ['materialize.js', '3rdparty.js'], (cb) => {
   var deps = [
     'material/static/material/js/turbolinks.js',
-    'material/static/material/js/jquery-2.2.0.js',
+    'material/static/material/js/jquery.js',
     'material/static/material/js/jquery.dataTables.js',
     'material/static/material/js/jquery.activeNavigation.js',
     'material/static/material/js/jquery.datetimepicker.js',

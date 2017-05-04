@@ -5,6 +5,8 @@ from django.contrib import admin
 from django.shortcuts import render
 from django.views import generic
 
+import debug_toolbar
+
 from formtools.wizard.views import SessionWizardView
 from material.frontend import urls as frontend_urls
 
@@ -54,6 +56,7 @@ class AdminFormView(generic.FormView):
 
 urlpatterns = [
     url(r'^$', index_view),
+    url(r'^__debug__/', include(debug_toolbar.urls)),
 
     # demo
     url(r'^demo/login/$', generic.FormView.as_view(

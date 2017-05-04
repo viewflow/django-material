@@ -204,7 +204,7 @@ And add desired apps into INSTALLED_APPS settings
 Include material javascript and styles along with jQuery into your base template.
 
 <pre><code class="django">    {% templatetag openblock %} include 'material/includes/material_css.html' {% templatetag closeblock %}
-    &lt;script src="{% templatetag openblock %} static 'material/js/jquery-2.2.0.js' {% templatetag closeblock %}"&gt;&lt;/script&gt;
+    &lt;script src="{% templatetag openblock %} static 'material/js/jquery.js' {% templatetag closeblock %}"&gt;&lt;/script&gt;
     {% templatetag openblock %} include 'material/includes/material_js.html' {% templatetag closeblock %}
 </code></pre>
 
