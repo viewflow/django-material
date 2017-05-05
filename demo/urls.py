@@ -154,6 +154,11 @@ urlpatterns = [
     url(r'', include(frontend_urls)),
 ]
 
+from django.conf.urls.static import static
+urlpatterns += [
+    url(r'^static/(?P<path>.*)$', 'django.views.static.serve',
+        {'document_root': settings.STATIC_ROOT, 'show_indexes': True})
+]
 
 if 'material.frontend' not in settings.INSTALLED_APPS:
     urlpatterns += [url(r'^admin/', include(admin.site.urls))]

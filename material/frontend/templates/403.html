@@ -1,0 +1,35 @@
+{% extends "material/frontend/base_site.html" %}
+{% load i18n static material_form %}
+
+{% block title %}403 {% trans 'Access Forbidden' %} - {{ block.super }}{% endblock %}
+{%block bodyclass %}auth{% endblock %}
+
+
+{% block body %}
+<div class="registration" style="background:url({% static 'material/imgs/background.svg' %})">
+    <div class="sidebar z-depth-3">
+        <h4>{% block page_title %}{{ block.super }}{% endblock %}</h4>
+        <div class="row">
+            <div class="col s12">
+                {% trans 'Access Forbidden' %}
+            </div>
+            <div class="col s12">
+                {% if request.user.is_anonymous %}
+                {% trans 'You are not logged in' %}
+                {% else %}
+                {{ request.user|default:"You" }} have no right to access to the page
+                {% endif %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12">
+                <a href="{% url 'login' %}?next={{ request.path }}" class="btn btn-primary white-text">{% trans 'Log in' %}</a>
+            </div>
+        </div>
+
+    </div>
+    <div class="logo">
+        <i class="logo__icon material-icons">lock</i>
+    </div>
+</div>
+{% endblock %}

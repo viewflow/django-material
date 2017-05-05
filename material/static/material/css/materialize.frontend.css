@@ -26,6 +26,7 @@ th {
     height: 100%;
     justify-content: center;
     min-width: 400px;
+    max-width: 400px;
     opacity: 0.95;
     text-align: center; }
     .registration .sidebar h4 {

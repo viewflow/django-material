@@ -1,29 +1,28 @@
 {% extends "material/frontend/base_site.html" %}
-{% load i18n static %}
+{% load i18n static material_form %}
 
-{% block title %}{{ block.super }}{% endblock %}
+{% block title %}404 {% trans 'Page not found' %} - {{ block.super }}{% endblock %}
 {%block bodyclass %}auth{% endblock %}
 
 
 {% block body %}
 <div class="registration" style="background:url({% static 'material/imgs/background.svg' %})">
     <div class="sidebar z-depth-3">
-        <h4>{% block page_title %}{{ block.super }}{% endblock %}</h4>
-
+        <h4>{% block page_title %}404<br/>{% trans 'Page not found' %}{% endblock %}</h4>
         <div class="row">
             <div class="col s8 offset-s2">
-                {% trans "Thanks for spending some quality time with the Web site today." %}
+                <p>{% trans "We're sorry, but the requested page could not be found." %}</p>
             </div>
         </div>
         <div class="row">
             <div class="col s12">
-                <a href="{% url 'login' %}" class="btn btn-primary white-text">{% trans 'Log in again' %}</a>
+                <a href="/" class="btn btn-primary white-text">{% trans 'View site' %}</a>
             </div>
         </div>
-    </div>
 
+    </div>
     <div class="logo">
-        <i class="logo__icon material-icons">thumb_up</i>
+        <i class="logo__icon material-icons">not_interested</i>
     </div>
 </div>
 {% endblock %}
