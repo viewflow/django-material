@@ -119,10 +119,15 @@ def fieldset_layout(adminform, inline_admin_formsets):
     if layout is not None:
         for element in layout.elements:
             # TODO Ugly hack to substitute inline classes to instances
-            if isinstance(element, Inline) and isinstance(element.inline, type):
+            try:
+                inline_model = element.inline.model
                 for inline in inline_admin_formsets:
-                    if inline.formset.model == element.inline.model:
+                    if inline.formset.model == inline_model:
                         element.inline = inline
+            except AttributeError:
+                # if element has no inline or model attribute is not necesary to substitute
+                # inline from inline_admin_formsets will always have model
+                pass
         return layout
 
     sets = []
