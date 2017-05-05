@@ -1,31 +1,23 @@
-{% extends "material/frontend/base_site.html" %}
-{% load i18n static material_form %}
+{% extends "material/frontend/base_lockscreen.html" %}
+{% load i18n %}
 
 {% block title %}500 {% trans 'Server error' %} - {{ block.super }}{% endblock %}
-{%block bodyclass %}auth{% endblock %}
 
 
-{% block body %}
-<div class="registration" style="background:url({% static 'material/imgs/background.svg' %})">
-    <div class="sidebar z-depth-3">
-        <h4>{% block page_title %}{{ block.super }}{% endblock %}</h4>
-        <div class="row">
-            <div class="col s12">
-                <p class="flow-text">{% trans 'Server error' %}</p>
-            </div>
-            <div class="col s8 offset-s2">
-                {% trans "There's been an error. It's been reported to the site administrators via email and should be fixed shortly. Thanks for your patience." %}
-            </div>
-        </div>
-        <div class="row">
-            <div class="col s12">
-                <a href="/" class="btn btn-primary white-text">{% trans 'View site' %}</a>
-            </div>
-        </div>
-
+{% block content %}
+<div class="row">
+    <div class="col s12">
+        <p class="flow-text">{% trans 'Server error' %}</p>
     </div>
-    <div class="logo">
-        <i class="logo__icon material-icons">error_outline</i>
+    <div class="col s8 offset-s2">
+        {% trans "There's been an error. It's been reported to the site administrators via email and should be fixed shortly. Thanks for your patience." %}
+    </div>
+</div>
+<div class="row">
+    <div class="col s12">
+        <a href="/" class="btn btn-primary white-text">{% trans 'View site' %}</a>
     </div>
 </div>
 {% endblock %}
+
+{% block icon %}error_outline{% endblock %}

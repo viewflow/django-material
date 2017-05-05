@@ -1,0 +1,20 @@
+{% extends "material/frontend/base_site.html" %}
+{% load i18n static %}
+
+{% block body %}
+{% block main %}
+<div class="registration" style="background:url({% static 'material/imgs/background.svg' %})">
+    <div class="sidebar z-depth-3">
+        <h4>{% block page_title %}{{ block.super }}{% endblock %}</h4>
+        
+        {% block content %}{% endblock %}
+    </div>
+    
+    {% block icon_wrapper %}
+    <div class="logo">
+        <i class="logo__icon material-icons">{% block icon %}home{% endblock %}</i>
+    </div>
+    {% endblock %}
+</div>
+{% endblock %}
+{% endblock %}

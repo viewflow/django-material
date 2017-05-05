@@ -1,23 +1,16 @@
-{% extends "material/frontend/base_site.html" %}
-{% load i18n static material_form %}
+{% extends "material/frontend/base_lockscreen.html" %}
+{% load i18n %}
 
 {% block title %}400 {% trans 'Bad Request' %} - {{ block.super }}{% endblock %}
-{%block bodyclass %}auth{% endblock %}
 
+{% block page_title %}400<br/>{% trans 'Bad Request' %}{% endblock %}
 
-{% block body %}
-<div class="registration" style="background:url({% static 'material/imgs/background.svg' %})">
-    <div class="sidebar z-depth-3">
-        <h4>{% block page_title %}400<br/>{% trans 'Bad Request' %}{% endblock %}</h4>
-        <div class="row">
-            <div class="col s12">
-                <a href="/" class="btn btn-primary white-text">{% trans 'View site' %}</a>
-            </div>
-        </div>
-
-    </div>
-    <div class="logo">
-        <i class="logo__icon material-icons">not_interested</i>
+{% block content %}
+<div class="row">
+    <div class="col s12">
+        <a href="/" class="btn btn-primary white-text">{% trans 'View site' %}</a>
     </div>
 </div>
 {% endblock %}
+
+{% block icon %}error{% endblock %}

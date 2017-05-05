@@ -1,29 +1,17 @@
-{% extends "material/frontend/base_site.html" %}
-{% load i18n static %}
+{% extends "material/frontend/base_lockscreen.html" %}
+{% load i18n  %}
 
-{% block title %}{{ block.super }}{% endblock %}
-{%block bodyclass %}auth{% endblock %}
-
-
-{% block body %}
-<div class="registration" style="background:url({% static 'material/imgs/background.svg' %})">
-    <div class="sidebar z-depth-3">
-        <h4>{% block page_title %}{{ block.super }}{% endblock %}</h4>
-
-        <div class="row">
-            <div class="col s8 offset-s2">
-                {% trans "Thanks for spending some quality time with the Web site today." %}
-            </div>
-        </div>
-        <div class="row">
-            <div class="col s12">
-                <a href="{% url 'login' %}" class="btn btn-primary white-text">{% trans 'Log in again' %}</a>
-            </div>
-        </div>
+{% block content %}
+<div class="row">
+    <div class="col s8 offset-s2">
+        {% trans "Thanks for spending some quality time with the Web site today." %}
     </div>
-
-    <div class="logo">
-        <i class="logo__icon material-icons">thumb_up</i>
+</div>
+<div class="row">
+    <div class="col s12">
+        <a href="{% url 'login' %}" class="btn btn-primary white-text">{% trans 'Log in again' %}</a>
     </div>
 </div>
 {% endblock %}
+
+{% block icon %}thumb_up{% endblock %}
