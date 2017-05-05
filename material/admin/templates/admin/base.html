@@ -30,6 +30,7 @@
         {% endblock head %}
     </head>
     <body class="{% if is_popup %}popup{% endif %}">
+        {% block body %}
         <header>
             {% block header %}
             {% if not is_popup %}
@@ -129,6 +130,7 @@
             {% block footer %}
             {% endblock footer %}
         </footer>
+        {% endblock body %}
 
         {% include 'admin/includes/material_js.html' %}
         {% block extrajs %}{% endblock %}
