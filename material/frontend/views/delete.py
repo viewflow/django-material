@@ -4,6 +4,7 @@ from django.db import router
 from django.db.models.deletion import Collector
 from django.core.exceptions import PermissionDenied
 from django.views import generic
+from django.utils.translation import ugettext_lazy as _
 
 from .mixins import MessageUserMixin
 
@@ -83,4 +84,4 @@ class DeleteModelView(MessageUserMixin, generic.DeleteView):
         return response
 
     def message_user(self):
-        self.success('The {name} "{link}"  was deleted successfully.')
+        self.success(_('The {name} "{link}"  was deleted successfully.'))

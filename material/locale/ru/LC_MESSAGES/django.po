@@ -2,17 +2,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: django-material\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-05-10 11:28+0000\n"
+"Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: ru\n"
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
 "%100>=11 && n%100<=14)? 2 : 3);\n"
-
-#: admin/templates/material/fields/django_admintimewidget.html:21
-msgid "Now"
-msgstr "Сейчас"
 
 #: frontend/apps.py:141
 msgid "Frontend"
@@ -30,7 +28,7 @@ msgstr "установлен"
 msgid "module"
 msgstr "модуль"
 
-#: models.py:32
+#: frontend/models.py:32
 msgid "modules"
 msgstr "модули"
 
@@ -45,6 +43,48 @@ msgstr "Доступ запрещен"
 #: frontend/templates/403.html:14
 msgid "You are not logged in"
 msgstr "Вы не авторизованы"
+
+#: frontend/templates/403.html:16
+#, python-format
+msgid "%(user)s have no rights to access to the page"
+msgstr ""
+
+#: frontend/templates/404.html:4 frontend/templates/404.html.py:6
+msgid "Page not found"
+msgstr "Страница не найдена"
+
+#: frontend/templates/404.html:11
+msgid "We're sorry, but the requested page could not be found."
+msgstr "Извините, запрошенная страница не найдена"
+
+#: frontend/templates/500.html:4 frontend/templates/500.html.py:10
+msgid "Server error"
+msgstr "Ошибка сервера"
+
+#: frontend/templates/material/frontend/base_site.html:4
+#: frontend/templates/material/frontend/base_site.html:5
+msgid "Django Material"
+msgstr ""
+
+#: frontend/templates/material/frontend/views/confirm_delete.html:16
+#, python-format
+msgid "Are you sure you want to delete the %(object)s and related items?"
+msgstr "Вы уверены, что хотите удалить %(object)s и связанные элементы?"
+
+#: frontend/views/create.py:37
+#, python-brace-format
+msgid "The {name} \"{link}\" was added successfully."
+msgstr "Добавлено {name} \"{link}\""
+
+#: frontend/views/delete.py:87
+#, python-brace-format
+msgid "The {name} \"{link}\"  was deleted successfully."
+msgstr "Удалено {name} \"{link}\""
+
+#: frontend/views/update.py:38
+#, python-brace-format
+msgid "The {name} \"{link}\" was changed successfully."
+msgstr "Изменено {name} \"{link}\""
 
 #: templates/material/fields/django_fileinput.html:8
 msgid "File"

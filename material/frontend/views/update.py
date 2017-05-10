@@ -1,6 +1,7 @@
 from django.contrib.auth import get_permission_codename
 from django.core.urlresolvers import reverse
 from django.views import generic
+from django.utils.translation import ugettext_lazy as _
 
 from .mixins import MessageUserMixin, ModelViewMixin
 
@@ -34,4 +35,4 @@ class UpdateModelView(MessageUserMixin, ModelViewMixin, generic.UpdateView):
         return super(ModelViewMixin, self).get_success_url()
 
     def message_user(self):
-        self.success('The {name} "{link}" was changed successfully.')
+        self.success(_('The {name} "{link}" was changed successfully.'))

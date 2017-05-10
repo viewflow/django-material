@@ -68,6 +68,26 @@ msgstr "Server error"
 msgid "Django Material"
 msgstr ""
 
+#: frontend/templates/material/frontend/views/confirm_delete.html:16
+#, python-format
+msgid "Are you sure you want to delete the %(object)s and related items?"
+msgstr "您确定要删除 %(object)s 和相关项目吗？"
+
+#: frontend/views/create.py:37
+#, python-brace-format
+msgid "The {name} \"{link}\" was added successfully."
+msgstr "{name} \"{link}\" 已成功添加"
+
+#: frontend/views/delete.py:87
+#, python-brace-format
+msgid "The {name} \"{link}\"  was deleted successfully."
+msgstr "{name} \"{link}\" 已成功删除"
+
+#: frontend/views/update.py:38
+#, python-brace-format
+msgid "The {name} \"{link}\" was changed successfully."
+msgstr "{name} \"{link}\" 已成功更改。"
+
 #: templates/material/fields/django_fileinput.html:8
 msgid "File"
 msgstr "文件"

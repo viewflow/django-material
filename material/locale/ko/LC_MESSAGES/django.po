@@ -68,6 +68,26 @@ msgstr "서버 오류"
 msgid "Django Material"
 msgstr ""
 
+#: frontend/templates/material/frontend/views/confirm_delete.html:16
+#, python-format
+msgid "Are you sure you want to delete the %(object)s and related items?"
+msgstr "%(object)s 및 관련 항목을 삭제 하시겠습니까?"
+
+#: frontend/views/create.py:37
+#, python-brace-format
+msgid "The {name} \"{link}\" was added successfully."
+msgstr "{name} \"{link}\" 이 (가) 성공적으로 추가되었습니다."
+
+#: frontend/views/delete.py:87
+#, python-brace-format
+msgid "The {name} \"{link}\"  was deleted successfully."
+msgstr "{name} \"{link}\" 이 (가) 성공적으로 삭제되었습니다."
+
+#: frontend/views/update.py:38
+#, python-brace-format
+msgid "The {name} \"{link}\" was changed successfully."
+msgstr "{name} \"{link}\" 이 (가) 변경되었습니다."
+
 #: templates/material/fields/django_fileinput.html:8
 msgid "File"
 msgstr "파일"
