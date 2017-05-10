@@ -22,7 +22,6 @@ INTERNAL_IPS = [
 # Application definition
 DEV_APPS = (
     'autofixture',
-    # 'debug_toolbar',
     'template_debug',
 )
 
@@ -40,7 +39,6 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.humanize',
-    'debug_toolbar',
 
     # test apps
     # 'demo.examples.accounting',
@@ -69,7 +67,6 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
 )
 
 SITE_ID = 1
@@ -167,6 +164,10 @@ EMAIL_HOST_USER = os.environ.get('EMAIL')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASSWORD')
 EMAIL_PORT = 587
 
+
+if os.environ.get('DEBUG_TOOLBAR'):
+    INSTALLED_APPS += ('debug_toolbar',)
+    MIDDLEWARE_CLASSES += ('debug_toolbar.middleware.DebugToolbarMiddleware', )
 
 try:
     from deploy.local_settings import *  # NOQA
