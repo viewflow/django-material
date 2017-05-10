@@ -34,12 +34,12 @@
 <div class="right-panel">
     <div class="card">
         <div class="card-content">
-            <div class="card-title">Department Managers</div>
+            <div class="card-title">{% trans 'Department Managers' %}</div>
             <table>
                 <thead>
                     <tr>
-                        <td>Manager</td>
-                        <td>Since</td>
+                        <td>{% trans 'Manager' %}</td>
+                        <td>{% trans 'Since' %}</td>
                     </tr>
                 </thead>
                 <tbody>
@@ -53,7 +53,7 @@
             </table>
         </div>
         <div class="card-action right-align">
-            <a href="{% url 'employees:department_change_manager' object.pk %}" class="btn disabled">Change</a>
+            <a href="{% url 'employees:department_change_manager' object.pk %}" class="btn disabled">{% trans 'Change' %}</a>
         </div>
     </div>
 </div>

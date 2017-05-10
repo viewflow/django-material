@@ -1,0 +1,191 @@
+# distributed under the same license as the Django Material package.
+msgid ""
+msgstr ""
+"Project-Id-Version: django-material\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-05-09 09:52+0000\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: admin.py:45
+msgid "wiki"
+msgstr ""
+
+#: admin.py:83
+msgid "map"
+msgstr "carte"
+
+#: admin.py:87
+msgid "short description"
+msgstr "brève description"
+
+#: admin.py:109 views.py:69
+msgid "sea area"
+msgstr "zone maritime"
+
+#: admin.py:120 views.py:21
+msgid "Details"
+msgstr "Détails"
+
+#: admin.py:123 views.py:25
+msgid "Fun facts"
+msgstr "Faits amusants"
+
+#: admin.py:138
+msgid "surrounded oceans"
+msgstr "océans entourés"
+
+#: admin.py:142
+msgid "countries count"
+msgstr "pays comptent"
+
+#: admin.py:182 admin.py:204 views.py:49
+msgid "became independent in XX century"
+msgstr "est devenu indépendant au XXème siècle"
+
+#: apps.py:9
+msgid "CRUD sample"
+msgstr "Échantillon CRUD"
+
+#: models.py:9 models.py:26 models.py:48 models.py:82 models.py:99
+msgid "name"
+msgstr "prénom"
+
+#: models.py:10 models.py:30 models.py:49
+msgid "area"
+msgstr "région"
+
+#: models.py:11
+msgid "slug"
+msgstr ""
+
+#: models.py:12
+msgid "description"
+msgstr "la description"
+
+#: models.py:13
+msgid "map url"
+msgstr "URL de la carte"
+
+#: models.py:16 models.py:28
+msgid "ocean"
+msgstr "océan"
+
+#: models.py:17 models.py:60
+msgid "oceans"
+msgstr "océans"
+
+#: models.py:27
+msgid "parent"
+msgstr "origine"
+
+#: models.py:30
+msgid "km&#178;"
+msgstr ""
+
+#: models.py:31
+msgid "average depth"
+msgstr "profondeur moyenne"
+
+#: models.py:31 models.py:32
+msgid "meters"
+msgstr "metros"
+
+#: models.py:32
+msgid "maximum depth"
+msgstr "profondeur maximale"
+
+#: models.py:38
+msgid "sea"
+msgstr "mer"
+
+#: models.py:39
+msgid "seas"
+msgstr "Les mers"
+
+#: models.py:50 models.py:101
+msgid "population"
+msgstr "population"
+
+#: models.py:51
+msgid "population density"
+msgstr "densité de population"
+
+#: models.py:54
+msgid "largest country"
+msgstr "le plus grand pays"
+
+#: models.py:56
+msgid "biggest city"
+msgstr "la plus grande ville"
+
+#: models.py:57
+msgid "longest river"
+msgstr "la plus longue rivière"
+
+#: models.py:58
+msgid "biggest mountain"
+msgstr "la plus grande montagne"
+
+#: models.py:71 models.py:86
+msgid "continent"
+msgstr "continent"
+
+#: models.py:72
+msgid "continents"
+msgstr "continents"
+
+#: models.py:81
+msgid "code"
+msgstr "code"
+
+#: models.py:83
+msgid "independence day"
+msgstr "le jour de l'indépendance"
+
+#: models.py:84
+msgid "gay friendly"
+msgstr "amical"
+
+#: models.py:89 models.py:103
+msgid "country"
+msgstr "pays"
+
+#: models.py:90
+msgid "countries"
+msgstr "des pays"
+
+#: models.py:100
+msgid "is capital city"
+msgstr "Est la capitale"
+
+#: models.py:106
+msgid "city"
+msgstr "ville"
+
+#: models.py:107
+msgid "cities"
+msgstr "villes"
+
+#: templates/integration/menu.html:3
+msgid "Cities"
+msgstr "Villes"
+
+#: templates/integration/menu.html:4
+msgid "Continents"
+msgstr "Continents"
+
+#: templates/integration/menu.html:5
+msgid "Countries"
+msgstr "Des pays"
+
+#: templates/integration/menu.html:6
+msgid "Oceans"
+msgstr "Océans"
+
+#: templates/integration/menu.html:7
+msgid "Seas"
+msgstr "Les mers"

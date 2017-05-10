@@ -1,0 +1,197 @@
+# distributed under the same license as the Django Material package.
+msgid ""
+msgstr ""
+"Project-Id-Version: django-material\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-05-10 06:13+0000\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
+"%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: apps.py:10 templates/employees/department_employees.html:7
+#: templates/employees/menu.html:4
+msgid "Employees"
+msgstr "Cотрудники"
+
+#: forms.py:8
+msgid "manager"
+msgstr "менеджер"
+
+#: forms.py:26
+msgid "position"
+msgstr "должность"
+
+#: forms.py:44 models.py:76 models.py:85
+msgid "salary"
+msgstr "зарплата"
+
+#: models.py:11
+msgid "code"
+msgstr "код"
+
+#: models.py:12
+msgid "name"
+msgstr "имя"
+
+#: models.py:15 models.py:27 models.py:42
+msgid "department"
+msgstr "отдел"
+
+#: models.py:16
+msgid "departments"
+msgstr "отделы"
+
+#: models.py:26 models.py:41 models.py:65 models.py:75 models.py:91
+msgid "employee"
+msgstr "сотрудник"
+
+#: models.py:28 models.py:43 models.py:77 models.py:93
+msgid "from"
+msgstr "с"
+
+#: models.py:29 models.py:44 models.py:78 models.py:94
+msgid "to"
+msgstr "по"
+
+#: models.py:34
+msgid "department employee"
+msgstr "сотрудник отдела"
+
+#: models.py:35
+msgid "department employees"
+msgstr "сотрудники отдела"
+
+#: models.py:49
+msgid "department manager"
+msgstr "менеджер отдела"
+
+#: models.py:50
+msgid "department managers"
+msgstr "менеджеры отделов"
+
+#: models.py:57
+msgid "employee number"
+msgstr "табельный номер"
+
+#: models.py:58
+msgid "birthday"
+msgstr "день рождения"
+
+#: models.py:59
+msgid "first name"
+msgstr "имя"
+
+#: models.py:60
+msgid "last name"
+msgstr "фамилия"
+
+#: models.py:61
+msgid "gender"
+msgstr "пол"
+
+#: models.py:62
+msgid "hire date"
+msgstr "дата приема на работу"
+
+#: models.py:66 views.py:137
+msgid "employees"
+msgstr "сотрудники"
+
+#: models.py:86
+msgid "salaries"
+msgstr "зарплаты"
+
+#: models.py:92 models.py:99
+msgid "title"
+msgstr "должность"
+
+#: models.py:100
+msgid "titles"
+msgstr "должности"
+
+#: templates/employees/change_manager.html:7
+msgid "Change Manager"
+msgstr "Сменить менеджера"
+
+#: templates/employees/change_salary.html:7
+msgid "Change Salary"
+msgstr "Изменить зарплату"
+
+#: templates/employees/change_salary.html:14 views.py:39
+msgid "Salary History"
+msgstr "История зарплаты"
+
+#: templates/employees/change_salary.html:43
+msgid "Set new Salary"
+msgstr "Установить новую зарплату"
+
+#: templates/employees/change_title.html:7
+msgid "Change Title"
+msgstr "Изменить должность"
+
+#: templates/employees/change_title.html:16
+#: templates/employees/employee_detail.html:29
+msgid "Positions"
+msgstr "Должности"
+
+#: templates/employees/change_title.html:20
+#: templates/employees/employee_detail.html:33
+msgid "Position"
+msgstr "Должность"
+
+#: templates/employees/change_title.html:21
+#: templates/employees/department_detail.html:42
+#: templates/employees/employee_detail.html:34
+#: templates/employees/employee_detail.html:60
+#: templates/employees/employee_detail.html:85
+msgid "Since"
+msgstr "С"
+
+#: templates/employees/change_title.html:22
+#: templates/employees/employee_detail.html:35
+#: templates/employees/employee_detail.html:61
+msgid "To"
+msgstr "По"
+
+#: templates/employees/change_title.html:38
+#: templates/employees/department_detail.html:29
+#: templates/employees/department_detail.html:56
+#: templates/employees/employee_detail.html:23
+#: templates/employees/employee_detail.html:50
+#: templates/employees/employee_detail.html:99
+msgid "Change"
+msgstr "Изменить"
+
+#: templates/employees/department_detail.html:28
+#: templates/employees/employee_detail.html:22
+msgid "Delete"
+msgstr "Удалить"
+
+#: templates/employees/department_detail.html:37
+msgid "Department Managers"
+msgstr "Менеджеры отделов"
+
+#: templates/employees/department_detail.html:41
+msgid "Manager"
+msgstr "Менеджер"
+
+#: templates/employees/employee_detail.html:55 templates/employees/menu.html:3
+msgid "Departments"
+msgstr "Департаменты"
+
+#: templates/employees/employee_detail.html:59
+msgid "Department"
+msgstr "Департаменты"
+
+#: templates/employees/employee_detail.html:80
+#: templates/employees/employee_detail.html:84
+msgid "Salary"
+msgstr "Зарплата"
+
+#: views.py:107
+msgid "current salary"
+msgstr "текущая зарплата"

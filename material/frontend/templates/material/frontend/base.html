@@ -70,9 +70,9 @@
                     <ul id="nav-mobile" class="right hide-on-med-and-down">
                         {% block topbar_links %}
                         {% if user.is_authenticated %}
-                        <li><a href="{% url 'logout' %}" data-turbolinks="false"><i class="material-icons right">exit_to_app</i>{% trans "Logout" %}</a></li>
+                        <li><a href="{% url 'logout' %}" data-turbolinks="false"><i class="material-icons right">exit_to_app</i>{% trans "Log out" %}</a></li>
                         {% else %}
-                        <li><a href="{% url 'login' %}" data-turbolinks="false"><i class="material-icons right">lock_open</i>{% trans "Login" %}</a></li>
+                        <li><a href="{% url 'login' %}" data-turbolinks="false"><i class="material-icons right">lock_open</i>{% trans "Log in" %}</a></li>
                         {% endif %}
                         {% endblock %}
                     </ul>

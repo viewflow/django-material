@@ -1,0 +1,77 @@
+# distributed under the same license as the Django Material package.
+msgid ""
+msgstr ""
+"Project-Id-Version: django-material\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-05-09 09:52+0000\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: admin/templates/material/fields/django_admintimewidget.html:21
+msgid "Now"
+msgstr "Ahora"
+
+#: frontend/apps.py:141
+msgid "Frontend"
+msgstr "Interfaz"
+
+#: frontend/models.py:25
+msgid "label"
+msgstr "etiqueta"
+
+#: frontend/models.py:26
+msgid "installed"
+msgstr "instalado"
+
+#: frontend/models.py:31
+msgid "module"
+msgstr "módulo"
+
+#: frontend/models.py:32
+msgid "modules"
+msgstr "módulos"
+
+#: frontend/templates/400.html:4 frontend/templates/400.html.py:6
+msgid "Bad Request"
+msgstr "Solicitud incorrecta"
+
+#: frontend/templates/403.html:4 frontend/templates/403.html.py:10
+msgid "Access Forbidden"
+msgstr "Acceso Prohibido"
+
+#: frontend/templates/403.html:14
+msgid "You are not logged in"
+msgstr "Usted no se ha identificado"
+
+#: frontend/templates/403.html:16
+#, python-format
+msgid "%(user)s have no rights to access to the page"
+msgstr "%(user)s No tiene derechos de acceso a la página"
+
+#: frontend/templates/404.html:4 frontend/templates/404.html.py:6
+msgid "Page not found"
+msgstr "Página no encontrada"
+
+#: frontend/templates/404.html:11
+msgid "We're sorry, but the requested page could not be found."
+msgstr "Lo sentimos, pero no se pudo encontrar la página solicitada."
+
+#: frontend/templates/500.html:4 frontend/templates/500.html.py:10
+msgid "Server error"
+msgstr "Error del Servidor"
+
+#: frontend/templates/material/frontend/base_site.html:4
+#: frontend/templates/material/frontend/base_site.html:5
+msgid "Django Material"
+msgstr ""
+
+#: templates/material/fields/django_fileinput.html:8
+msgid "File"
+msgstr "Archivo"
+
+#: templates/material/fields/django_selectmultiple.html:7
+msgid "Choose your option"
+msgstr "Elija su opción"

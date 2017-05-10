@@ -3,6 +3,7 @@ from django.contrib import admin
 from django.db import models as django
 from django.utils.text import Truncator
 from django.utils.html import mark_safe, format_html
+from django.utils.translation import gettext_lazy as _
 
 from . import models
 
@@ -41,6 +42,7 @@ class CityStackedInline(admin.TabularInline):
         if city.id:
             return mark_safe(self.wiki_link_template.format(city.name))
         return ""
+    wiki.short_description = _('wiki')
 
 
 class SeaStackedInline(admin.StackedInline):
@@ -78,10 +80,12 @@ class OceanAdmin(admin.ModelAdmin):
         if ocean.map_url:
             return format_html('<div class="col s12 center-align"><img src="{}" width="200" /></div>', ocean.map_url)
         return ""
+    map.short_description = _('map')
 
     def short_description(self, ocean):
         return Truncator(ocean.description).words(100, truncate=' ...')
-
+    short_description.short_description = _('short description')
+    
     def has_add_permission(self, request):
         return False
 
@@ -102,6 +106,7 @@ class SeaAdmin(admin.ModelAdmin):
 
     def sea_area(self, sea):
         return None if sea.area == 0 else sea.area
+    sea_area.short_description = _('sea area')
     sea_area.empty_value_display = '?'
 
 
@@ -112,10 +117,10 @@ class ContinentAdmin(admin.ModelAdmin):
     fieldsets = (
         (None, {
             'fields': ('name',)}),
-        ('Details', {
+        (_('Details'), {
             'fields': ('area', ('oceans', 'hemisphere'),
                        ('population', 'population_density'))}),
-        ('Fun facts', {
+        (_('Fun facts'), {
             'fields': ('largest_country', 'biggest_mountain',
                        ('biggest_city', 'longest_river', ))})
     )
@@ -130,10 +135,12 @@ class ContinentAdmin(admin.ModelAdmin):
 
     def surrounded_oceans(self, contintent):
         return ', '.join(ocean.name for ocean in contintent.oceans.all())
-
+    surrounded_oceans.short_description = _('surrounded oceans')
+    
     def countries_count(self, contintent):
         return contintent.countries.count()
-
+    countries_count.short_description = _('countries count')
+    
 
 class CountryForm(forms.ModelForm):
     class Meta:
@@ -172,6 +179,7 @@ class CountryAdmin(admin.ModelAdmin):
     def became_independent_in_20_century(self, country):
         if country.independence_day:
             return 1900 <= country.independence_day.year <= 2000
+    became_independent_in_20_century.short_description = _('became independent in XX century')
     became_independent_in_20_century.boolean = True
 
 
@@ -193,4 +201,5 @@ class CityAdmin(admin.ModelAdmin):
     def became_independent_in_20_century(self, city):
         if city.country_id is not None and city.country.independence_day:
             return 1900 <= city.country.independence_day.year <= 2000
+    became_independent_in_20_century.short_description = _('became independent in XX century')
     became_independent_in_20_century.boolean = True

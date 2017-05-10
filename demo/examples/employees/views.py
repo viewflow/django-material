@@ -2,6 +2,7 @@ import json
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 from django.shortcuts import get_object_or_404, render
+from django.utils.translation import ugettext, ugettext_lazy as _
 
 from material.frontend.views import ModelViewSet, ListModelView
 
@@ -35,7 +36,7 @@ def change_salary(request, employee_pk):
     salary_data = {
         'labels': [salary.from_date.strftime('%Y-%m-%d') for salary in salaries],
         'datasets': [
-            {'data': [salary.salary for salary in salaries], 'label': 'Salary History'}
+            {'data': [salary.salary for salary in salaries], 'label': ugettext('Salary History')}
         ]
     }
 
@@ -103,6 +104,7 @@ class EmployeeViewSet(ModelViewSet):
     def current_salary(self, obj):
         salary = obj.salary_set.current()
         return salary.salary if salary is not None else 0
+    current_salary.short_description = _('current salary')
 
 
 class DepartmentViewSet(ModelViewSet):
@@ -132,3 +134,4 @@ class DepartmentViewSet(ModelViewSet):
 
     def employees(self, obj):
         return obj.deptemp_set.count()
+    employees.short_description = _('employees')

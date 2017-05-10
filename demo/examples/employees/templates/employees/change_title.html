@@ -1,10 +1,10 @@
 {% extends 'employees/base_module.html' %}
-{% load material_frontend %}
+{% load i18n material_frontend %}
 
 {% block breadcrumbs_items %}
 <a href="{% url employee|frontend_urlname:'list' %}">{{ employee|verbose_name_plural|title }}</a>
 <a href="{% url employee|frontend_urlname:'detail' employee.pk %}">{{ employee }}</a>
-<a class="active">Change Title</a>
+<a class="active">{% trans 'Change Title' %}</a>
 {% endblock %}
 
 {% block content %}
@@ -13,13 +13,13 @@
         <form method="POST">
             {% csrf_token %}
             <div class="card-content">
-                <div class="card-title">Positions</div>
+                <div class="card-title">{% trans 'Positions' %}</div>
                 <table>
                     <thead>
                         <tr>
-                            <td>Position</td>
-                            <td>Since</td>
-                            <td>To</td>
+                            <td>{% trans 'Position' %}</td>
+                            <td>{% trans 'Since' %}</td>
+                            <td>{% trans 'To' %}</td>
                         </tr>
                     </thead>
                     <tbody>
@@ -35,7 +35,7 @@
                 {{ form }}
             </div>
             <div class="card-action right-align">
-                <button type="submit" class="btn">Change</button>
+                <button type="submit" class="btn">{% trans 'Change' %}</button>
             </div>
         </form>
     </div>

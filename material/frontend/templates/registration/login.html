@@ -1,7 +1,7 @@
 {% extends "material/frontend/base_lockscreen.html" %}
 {% load i18n material_form %}
 
-{% block title %}{% trans 'Login' %} - {{ block.super }}{% endblock %}
+{% block title %}{% trans 'Log in' %} - {{ block.super }}{% endblock %}
 
 {% block content %}
 <form action="{{ app_path }}" method="post" id="login-form">{% csrf_token %}

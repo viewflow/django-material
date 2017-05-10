@@ -1,0 +1,195 @@
+# distributed under the same license as the Django Material package.
+msgid ""
+msgstr ""
+"Project-Id-Version: django-material\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-05-09 09:52+0000\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: apps.py:10 templates/employees/department_employees.html:7
+#: templates/employees/menu.html:4
+msgid "Employees"
+msgstr "Employés"
+
+#: forms.py:8
+msgid "manager"
+msgstr "directeur"
+
+#: forms.py:26
+msgid "position"
+msgstr "titre"
+
+#: forms.py:44 models.py:76 models.py:85
+msgid "salary"
+msgstr "un salaire"
+
+#: models.py:11
+msgid "code"
+msgstr ""
+
+#: models.py:12
+msgid "name"
+msgstr "prénom"
+
+#: models.py:15 models.py:27 models.py:42
+msgid "department"
+msgstr "département"
+
+#: models.py:16
+msgid "departments"
+msgstr "départements"
+
+#: models.py:26 models.py:41 models.py:65 models.py:75 models.py:91
+msgid "employee"
+msgstr "employé"
+
+#: models.py:28 models.py:43 models.py:77 models.py:93
+msgid "from"
+msgstr "de"
+
+#: models.py:29 models.py:44 models.py:78 models.py:94
+msgid "to"
+msgstr "à"
+
+#: models.py:34
+msgid "department employee"
+msgstr "employé du département"
+
+#: models.py:35
+msgid "department employees"
+msgstr "employés du département"
+
+#: models.py:49
+msgid "department manager"
+msgstr "gestionnaire département"
+
+#: models.py:50
+msgid "department managers"
+msgstr "directeurs de département"
+
+#: models.py:57
+msgid "employee number"
+msgstr "numéro d'employé"
+
+#: models.py:58
+msgid "birthday"
+msgstr "anniversaire"
+
+#: models.py:59
+msgid "first name"
+msgstr "prénom"
+
+#: models.py:60
+msgid "last name"
+msgstr "nom de famille"
+
+#: models.py:61
+msgid "gender"
+msgstr "le genre"
+
+#: models.py:62
+msgid "hire date"
+msgstr "date d'embauche"
+
+#: models.py:66 views.py:137
+msgid "employees"
+msgstr "employés"
+
+#: models.py:86
+msgid "salaries"
+msgstr "les salaires"
+
+#: models.py:92 models.py:99
+msgid "title"
+msgstr "titre"
+
+#: models.py:100
+msgid "titles"
+msgstr "Titres"
+
+#: templates/employees/change_manager.html:7
+msgid "Change Manager"
+msgstr "Changer de directeur"
+
+#: templates/employees/change_salary.html:7
+msgid "Change Salary"
+msgstr "Changer de salaire"
+
+#: templates/employees/change_salary.html:14 views.py:39
+msgid "Salary History"
+msgstr "Historique des salaires"
+
+#: templates/employees/change_salary.html:43
+msgid "Set new Salary"
+msgstr "Nouveau salaire"
+
+#: templates/employees/change_title.html:7
+msgid "Change Title"
+msgstr "Modifier le titre"
+
+#: templates/employees/change_title.html:16
+#: templates/employees/employee_detail.html:29
+msgid "Positions"
+msgstr "Titres"
+
+#: templates/employees/change_title.html:20
+#: templates/employees/employee_detail.html:33
+msgid "Position"
+msgstr "Titre"
+
+#: templates/employees/change_title.html:21
+#: templates/employees/department_detail.html:42
+#: templates/employees/employee_detail.html:34
+#: templates/employees/employee_detail.html:60
+#: templates/employees/employee_detail.html:85
+msgid "Since"
+msgstr "Depuis"
+
+#: templates/employees/change_title.html:22
+#: templates/employees/employee_detail.html:35
+#: templates/employees/employee_detail.html:61
+msgid "To"
+msgstr "À"
+
+#: templates/employees/change_title.html:38
+#: templates/employees/department_detail.html:29
+#: templates/employees/department_detail.html:56
+#: templates/employees/employee_detail.html:23
+#: templates/employees/employee_detail.html:50
+#: templates/employees/employee_detail.html:99
+msgid "Change"
+msgstr ""
+
+#: templates/employees/department_detail.html:28
+#: templates/employees/employee_detail.html:22
+msgid "Delete"
+msgstr ""
+
+#: templates/employees/department_detail.html:37
+msgid "Department Managers"
+msgstr "Directeurs de département"
+
+#: templates/employees/department_detail.html:41
+msgid "Manager"
+msgstr "Directeur"
+
+#: templates/employees/employee_detail.html:55 templates/employees/menu.html:3
+msgid "Departments"
+msgstr "Départements"
+
+#: templates/employees/employee_detail.html:59
+msgid "Department"
+msgstr "Département"
+
+#: templates/employees/employee_detail.html:80
+#: templates/employees/employee_detail.html:84
+msgid "Salary"
+msgstr "Un salaire"
+
+#: views.py:107
+msgid "current salary"
+msgstr "salaire actuel"

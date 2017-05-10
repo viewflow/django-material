@@ -1,7 +1,8 @@
+{% load i18n %}
 <ul>
-    <li><a href="{% url 'integration:city_list' %}">Cities</a></li>
-    <li><a href="{% url 'integration:continent_list' %}">Continents</a></li>
-    <li><a href="{% url 'integration:country_list' %}">Countries</a></li>
-    <li><a href="{% url 'integration:ocean_list' %}">Oceans</a></li>
-    <li><a href="{% url 'integration:sea_list' %}">Seas</a></li>
+    <li><a href="{% url 'integration:city_list' %}">{% trans 'Cities' %}</a></li>
+    <li><a href="{% url 'integration:continent_list' %}">{% trans 'Continents' %}</a></li>
+    <li><a href="{% url 'integration:country_list' %}">{% trans 'Countries' %}</a></li>
+    <li><a href="{% url 'integration:ocean_list' %}">{% trans 'Oceans' %}</a></li>
+    <li><a href="{% url 'integration:sea_list' %}">{% trans 'Seas' %}</a></li>
 </ul>

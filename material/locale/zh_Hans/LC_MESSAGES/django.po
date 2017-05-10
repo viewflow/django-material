@@ -1,0 +1,77 @@
+# distributed under the same license as the Django Material package.
+msgid ""
+msgstr ""
+"Project-Id-Version: django-material\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-05-09 09:52+0000\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: admin/templates/material/fields/django_admintimewidget.html:21
+msgid "Now"
+msgstr "现在"
+
+#: frontend/apps.py:141
+msgid "Frontend"
+msgstr "前端"
+
+#: frontend/models.py:25
+msgid "label"
+msgstr "标签"
+
+#: frontend/models.py:26
+msgid "installed"
+msgstr "安装"
+
+#: frontend/models.py:31
+msgid "module"
+msgstr "模"
+
+#: frontend/models.py:32
+msgid "modules"
+msgstr "模块"
+
+#: frontend/templates/400.html:4 frontend/templates/400.html.py:6
+msgid "Bad Request"
+msgstr "错误的请求"
+
+#: frontend/templates/403.html:4 frontend/templates/403.html.py:10
+msgid "Access Forbidden"
+msgstr "访问禁止"
+
+#: frontend/templates/403.html:14
+msgid "You are not logged in"
+msgstr "你没有登录"
+
+#: frontend/templates/403.html:16
+#, python-format
+msgid "%(user)s have no rights to access to the page"
+msgstr "%(user)s 您无权访问该页面"
+
+#: frontend/templates/404.html:4 frontend/templates/404.html.py:6
+msgid "Page not found"
+msgstr "找不到网页"
+
+#: frontend/templates/404.html:11
+msgid "We're sorry, but the requested page could not be found."
+msgstr "很抱歉，找不到请求的页面"
+
+#: frontend/templates/500.html:4 frontend/templates/500.html.py:10
+msgid "Server error"
+msgstr "Server error"
+
+#: frontend/templates/material/frontend/base_site.html:4
+#: frontend/templates/material/frontend/base_site.html:5
+msgid "Django Material"
+msgstr ""
+
+#: templates/material/fields/django_fileinput.html:8
+msgid "File"
+msgstr "文件"
+
+#: templates/material/fields/django_selectmultiple.html:7
+msgid "Choose your option"
+msgstr "选择您的选项"

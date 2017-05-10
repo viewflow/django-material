@@ -26,13 +26,13 @@
     </div>
     <div class="card">
         <div class="card-content">
-            <div class="card-title">Positions</div>
+            <div class="card-title">{% trans 'Positions' %}</div>
             <table>
                 <thead>
                     <tr>
-                        <td>Position</td>
-                        <td>Since</td>
-                        <td>To</td>
+                        <td>{% trans 'Position' %}</td>
+                        <td>{% trans 'Since' %}</td>
+                        <td>{% trans 'To' %}</td>
                     </tr>
                 </thead>
                 <tbody>
@@ -47,18 +47,18 @@
             </table>
         </div>
         <div class="card-action right-align">
-            <a href="{% url 'employees:employee_change_title' object.pk %}" class="btn">Change</a>
+            <a href="{% url 'employees:employee_change_title' object.pk %}" class="btn">{% trans 'Change' %}</a>
         </div>
     </div>
     <div class="card">
         <div class="card-content">
-            <div class="card-title">Departments</div>
+            <div class="card-title">{% trans 'Departments' %}</div>
             <table>
                 <thead>
                     <tr>
-                        <td>Department</td>
-                        <td>Since</td>
-                        <td>To</td>
+                        <td>{% trans 'Department' %}</td>
+                        <td>{% trans 'Since' %}</td>
+                        <td>{% trans 'To' %}</td>
                     </tr>
                 </thead>
                 <tbody>
@@ -77,12 +77,12 @@
 <div class="right-panel">
     <div class="card">
         <div class="card-content">
-            <div class="card-title">Salary</div>
+            <div class="card-title">{% trans 'Salary' %}</div>
             <table>
                 <thead>
                     <tr>
-                        <td>Salary</td>
-                        <td>Since</td>
+                        <td>{% trans 'Salary' %}</td>
+                        <td>{% trans 'Since' %}</td>
                     </tr>
                 </thead>
                 <tbody>
@@ -96,7 +96,7 @@
             </table>
         </div>
         <div class="card-action right-align">
-            <a href="{% url 'employees:employee_change_salary' object.pk %}" class="btn">Change</a>
+            <a href="{% url 'employees:employee_change_salary' object.pk %}" class="btn">{% trans 'Change' %}</a>
         </div>
     </div>
 </div>

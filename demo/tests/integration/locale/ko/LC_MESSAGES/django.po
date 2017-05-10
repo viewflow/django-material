@@ -1,0 +1,191 @@
+# distributed under the same license as the Django Material package.
+msgid ""
+msgstr ""
+"Project-Id-Version: django-material\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-05-09 09:52+0000\n"
+"Language: ko\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: admin.py:45
+msgid "wiki"
+msgstr "위키"
+
+#: admin.py:83
+msgid "map"
+msgstr "지도"
+
+#: admin.py:87
+msgid "short description"
+msgstr "간단한 설명"
+
+#: admin.py:109 views.py:69
+msgid "sea area"
+msgstr "해역"
+
+#: admin.py:120 views.py:21
+msgid "Details"
+msgstr "세부"
+
+#: admin.py:123 views.py:25
+msgid "Fun facts"
+msgstr "재미있는 사실"
+
+#: admin.py:138
+msgid "surrounded oceans"
+msgstr "둘러싸인 바다"
+
+#: admin.py:142
+msgid "countries count"
+msgstr "국가 수"
+
+#: admin.py:182 admin.py:204 views.py:49
+msgid "became independent in XX century"
+msgstr "20 세기에 독립했다."
+
+#: apps.py:9
+msgid "CRUD sample"
+msgstr "CRUD 샘플"
+
+#: models.py:9 models.py:26 models.py:48 models.py:82 models.py:99
+msgid "name"
+msgstr "이름"
+
+#: models.py:10 models.py:30 models.py:49
+msgid "area"
+msgstr "지역"
+
+#: models.py:11
+msgid "slug"
+msgstr "URL 슬러그"
+
+#: models.py:12
+msgid "description"
+msgstr "기술"
+
+#: models.py:13
+msgid "map url"
+msgstr "지도 URL"
+
+#: models.py:16 models.py:28
+msgid "ocean"
+msgstr "대양"
+
+#: models.py:17 models.py:60
+msgid "oceans"
+msgstr "대양"
+
+#: models.py:27
+msgid "parent"
+msgstr "유래"
+
+#: models.py:30
+msgid "km&#178;"
+msgstr ""
+
+#: models.py:31
+msgid "average depth"
+msgstr "평균 깊이"
+
+#: models.py:31 models.py:32
+msgid "meters"
+msgstr "미터"
+
+#: models.py:32
+msgid "maximum depth"
+msgstr "최대 깊이"
+
+#: models.py:38
+msgid "sea"
+msgstr "바다"
+
+#: models.py:39
+msgid "seas"
+msgstr "바다"
+
+#: models.py:50 models.py:101
+msgid "population"
+msgstr "인구"
+
+#: models.py:51
+msgid "population density"
+msgstr "인구 밀도"
+
+#: models.py:54
+msgid "largest country"
+msgstr "가장 큰 나라"
+
+#: models.py:56
+msgid "biggest city"
+msgstr "가장 큰 도시"
+
+#: models.py:57
+msgid "longest river"
+msgstr "가장 긴 강"
+
+#: models.py:58
+msgid "biggest mountain"
+msgstr "가장 큰 산"
+
+#: models.py:71 models.py:86
+msgid "continent"
+msgstr "대륙"
+
+#: models.py:72
+msgid "continents"
+msgstr "대륙"
+
+#: models.py:81
+msgid "code"
+msgstr "규약"
+
+#: models.py:83
+msgid "independence day"
+msgstr "독립 기념일"
+
+#: models.py:84
+msgid "gay friendly"
+msgstr "동성애자 친화적 인"
+
+#: models.py:89 models.py:103
+msgid "country"
+msgstr "국가"
+
+#: models.py:90
+msgid "countries"
+msgstr "국가"
+
+#: models.py:100
+msgid "is capital city"
+msgstr "수도이다"
+
+#: models.py:106
+msgid "city"
+msgstr "시티"
+
+#: models.py:107
+msgid "cities"
+msgstr "도시들"
+
+#: templates/integration/menu.html:3
+msgid "Cities"
+msgstr "도시들"
+
+#: templates/integration/menu.html:4
+msgid "Continents"
+msgstr "대륙"
+
+#: templates/integration/menu.html:5
+msgid "Countries"
+msgstr "국가"
+
+#: templates/integration/menu.html:6
+msgid "Oceans"
+msgstr "대양"
+
+#: templates/integration/menu.html:7
+msgid "Seas"
+msgstr "바다"

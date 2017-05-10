@@ -1,17 +1,20 @@
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.safestring import mark_safe
+from django.utils.translation import gettext_lazy as _
 
 
 @python_2_unicode_compatible
 class Ocean(models.Model):
-    name = models.CharField(max_length=250, primary_key=True)
-    area = models.BigIntegerField()
-    slug = models.SlugField()
-    description = models.TextField()
-    map_url = models.URLField()
+    name = models.CharField(_('name'), max_length=250, primary_key=True)
+    area = models.BigIntegerField(_('area'))
+    slug = models.SlugField(_('slug'))
+    description = models.TextField(_('description'))
+    map_url = models.URLField(_('map url'))
 
     class Meta:
+        verbose_name = _('ocean')
+        verbose_name_plural = _('oceans')
         ordering = ['name']
 
     def __str__(self):
@@ -20,18 +23,20 @@ class Ocean(models.Model):
 
 @python_2_unicode_compatible
 class Sea(models.Model):
-    name = models.CharField(max_length=250)
-    parent = models.ForeignKey('self', blank=True, null=True)
-    ocean = models.ForeignKey(Ocean)
+    name = models.CharField(_('name'), max_length=250)
+    parent = models.ForeignKey('self', blank=True, null=True, verbose_name=_('parent'))
+    ocean = models.ForeignKey(Ocean, verbose_name=_('ocean'))
 
-    area = models.BigIntegerField(help_text=mark_safe('km&#178;'))
-    avg_depth = models.IntegerField(help_text='meters', null=True, blank=True)
-    max_depth = models.IntegerField(help_text='meters', null=True, blank=True)
+    area = models.BigIntegerField(_('area'), help_text=mark_safe(_('km&#178;')))
+    avg_depth = models.IntegerField(_('average depth'), help_text=_('meters'), null=True, blank=True)
+    max_depth = models.IntegerField(_('maximum depth'), help_text=_('meters'), null=True, blank=True)
 
     basin_countries = models.ManyToManyField(
         'Country', related_name='seas', blank=True)
 
     class Meta:
+        verbose_name = _('sea')
+        verbose_name_plural = _('seas')
         ordering = ['name']
 
     def __str__(self):
@@ -40,19 +45,19 @@ class Sea(models.Model):
 
 @python_2_unicode_compatible
 class Continent(models.Model):
-    name = models.CharField(max_length=250, primary_key=True)
-    area = models.BigIntegerField(help_text=mark_safe('km&#178;'))
-    population = models.BigIntegerField()
-    population_density = models.DecimalField(decimal_places=2, max_digits=8)
+    name = models.CharField(_('name'), max_length=250, primary_key=True)
+    area = models.BigIntegerField(_('area'), help_text=mark_safe('km&#178;'))
+    population = models.BigIntegerField(_('population'))
+    population_density = models.DecimalField(_('population density'), decimal_places=2, max_digits=8)
 
     largest_country = models.OneToOneField(
-        'Country', related_name='+', blank=True, null=True)
+        'Country', related_name='+', blank=True, null=True, verbose_name=_('largest country'))
     biggest_city = models.OneToOneField(
-        'City', blank=True, null=True)
-    longest_river = models.CharField(max_length=250, blank=True, null=True)
-    biggest_mountain = models.CharField(max_length=250, blank=True, null=True)
+        'City', blank=True, null=True, verbose_name=_('biggest city'))
+    longest_river = models.CharField(_('longest river'), max_length=250, blank=True, null=True)
+    biggest_mountain = models.CharField(_('biggest mountain'), max_length=250, blank=True, null=True)
 
-    oceans = models.ManyToManyField(Ocean)
+    oceans = models.ManyToManyField(Ocean, verbose_name=_('oceans'))
     hemisphere = models.CharField(
         max_length=5, choices=(
             ('NORTH', 'North'),
@@ -63,24 +68,28 @@ class Continent(models.Model):
         return self.name if self.name is not None else 'Continent'
 
     class Meta:
+        verbose_name = _('continent')
+        verbose_name_plural = _('continents')
         ordering = ['name']
 
     def countries_count(self):
         return self.countries.count()
+    countries_count.short_description = _('countries count')
 
 
 @python_2_unicode_compatible
 class Country(models.Model):
-    code = models.CharField(max_length=3, unique=True)
-    name = models.CharField(max_length=250)
-    independence_day = models.DateField(null=True, blank=True)
-    gay_friendly = models.NullBooleanField()
+    code = models.CharField(_('code'), max_length=3, unique=True)
+    name = models.CharField(_('name'), max_length=250)
+    independence_day = models.DateField(_('independence day'), null=True, blank=True)
+    gay_friendly = models.NullBooleanField(_('gay friendly'))
     continent = models.ForeignKey(
-        Continent, null=True, related_name='countries')
+        Continent, null=True, related_name='countries', verbose_name=_('continent'))
 
     class Meta:
+        verbose_name = _('country')
+        verbose_name_plural = _('countries')
         ordering = ['name']
-        verbose_name_plural = 'countries'
 
     def __str__(self):
         return self.name
@@ -88,14 +97,15 @@ class Country(models.Model):
 
 @python_2_unicode_compatible
 class City(models.Model):
-    name = models.CharField(max_length=250)
-    is_capital = models.BooleanField(default=False)
-    population = models.BigIntegerField()
+    name = models.CharField(_('name'), max_length=250)
+    is_capital = models.BooleanField(_('is capital city'), default=False)
+    population = models.BigIntegerField(_('population'))
     country = models.ForeignKey(
-        Country, related_name='cities')
+        Country, related_name='cities', verbose_name=_('country'))
 
     class Meta:
-        verbose_name_plural = 'cities'
+        verbose_name = _('city')
+        verbose_name_plural = _('cities')
         unique_together = ('name', 'country')
         ordering = ['name']
 

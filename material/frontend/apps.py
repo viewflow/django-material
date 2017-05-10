@@ -7,6 +7,7 @@ from django.db.models.signals import post_migrate
 from django.template import Template, TemplateDoesNotExist
 from django.template.loader import get_template, select_template
 from django.utils.module_loading import module_has_submodule
+from django.utils.translation import gettext_lazy as _
 
 from .registry import modules as modules_registry
 from .urlconf import ModuleURLResolver
@@ -137,7 +138,7 @@ class MaterialFrontendConfig(AppConfig):
     """Default config for Material Frontend."""
 
     name = 'material.frontend'
-    verbose_name = 'Site Modules'
+    verbose_name = _('Frontend')
     icon = '<i class="material-icons">view_module</i>'
 
     def ready(self):

@@ -1,0 +1,191 @@
+# distributed under the same license as the Django Material package.
+msgid ""
+msgstr ""
+"Project-Id-Version: django-material\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-05-09 09:52+0000\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: admin.py:45
+msgid "wiki"
+msgstr "维基"
+
+#: admin.py:83
+msgid "map"
+msgstr "地图"
+
+#: admin.py:87
+msgid "short description"
+msgstr "简短的介绍"
+
+#: admin.py:109 views.py:69
+msgid "sea area"
+msgstr "海域"
+
+#: admin.py:120 views.py:21
+msgid "Details"
+msgstr "细节"
+
+#: admin.py:123 views.py:25
+msgid "Fun facts"
+msgstr "有趣的事实"
+
+#: admin.py:138
+msgid "surrounded oceans"
+msgstr "周围的海洋"
+
+#: admin.py:142
+msgid "countries count"
+msgstr "国家数"
+
+#: admin.py:182 admin.py:204 views.py:49
+msgid "became independent in XX century"
+msgstr "在二十世纪成为独立的"
+
+#: apps.py:9
+msgid "CRUD sample"
+msgstr "CRUD样本"
+
+#: models.py:9 models.py:26 models.py:48 models.py:82 models.py:99
+msgid "name"
+msgstr "名称"
+
+#: models.py:10 models.py:30 models.py:49
+msgid "area"
+msgstr "区"
+
+#: models.py:11
+msgid "slug"
+msgstr ""
+
+#: models.py:12
+msgid "description"
+msgstr "描述"
+
+#: models.py:13
+msgid "map url"
+msgstr "地图网址"
+
+#: models.py:16 models.py:28
+msgid "ocean"
+msgstr "海洋"
+
+#: models.py:17 models.py:60
+msgid "oceans"
+msgstr "海洋"
+
+#: models.py:27
+msgid "parent"
+msgstr "起源"
+
+#: models.py:30
+msgid "km&#178;"
+msgstr "平方公里"
+
+#: models.py:31
+msgid "average depth"
+msgstr "平均深度"
+
+#: models.py:31 models.py:32
+msgid "meters"
+msgstr "米"
+
+#: models.py:32
+msgid "maximum depth"
+msgstr "最大深度"
+
+#: models.py:38
+msgid "sea"
+msgstr "海"
+
+#: models.py:39
+msgid "seas"
+msgstr "海域"
+
+#: models.py:50 models.py:101
+msgid "population"
+msgstr "人口"
+
+#: models.py:51
+msgid "population density"
+msgstr "人口密度"
+
+#: models.py:54
+msgid "largest country"
+msgstr "最大的国家"
+
+#: models.py:56
+msgid "biggest city"
+msgstr "最大的城市"
+
+#: models.py:57
+msgid "longest river"
+msgstr "最长的河"
+
+#: models.py:58
+msgid "biggest mountain"
+msgstr "最大的山"
+
+#: models.py:71 models.py:86
+msgid "continent"
+msgstr "大陆"
+
+#: models.py:72
+msgid "continents"
+msgstr "大陆"
+
+#: models.py:81
+msgid "code"
+msgstr "码"
+
+#: models.py:83
+msgid "independence day"
+msgstr "独立日"
+
+#: models.py:84
+msgid "gay friendly"
+msgstr "同志友好"
+
+#: models.py:89 models.py:103
+msgid "country"
+msgstr "国家"
+
+#: models.py:90
+msgid "countries"
+msgstr "国家"
+
+#: models.py:100
+msgid "is capital city"
+msgstr "是首都"
+
+#: models.py:106
+msgid "city"
+msgstr "市"
+
+#: models.py:107
+msgid "cities"
+msgstr "城市"
+
+#: templates/integration/menu.html:3
+msgid "Cities"
+msgstr "城市"
+
+#: templates/integration/menu.html:4
+msgid "Continents"
+msgstr "大陆"
+
+#: templates/integration/menu.html:5
+msgid "Countries"
+msgstr "国家"
+
+#: templates/integration/menu.html:6
+msgid "Oceans"
+msgstr "海洋"
+
+#: templates/integration/menu.html:7
+msgid "Seas"
+msgstr "海域"
