@@ -1,5 +1,6 @@
 .tox
 .dumbjump
+.material
 *.idea
 *.pyc
 db*.sqlite3
