@@ -141,11 +141,11 @@ class ContinentAdmin(admin.ModelAdmin):
     def surrounded_oceans(self, contintent):
         return ', '.join(ocean.name for ocean in contintent.oceans.all())
     surrounded_oceans.short_description = _('surrounded oceans')
-    
+
     def countries_count(self, contintent):
         return contintent.countries.count()
     countries_count.short_description = _('countries count')
-    
+
 
 class CountryForm(forms.ModelForm):
     class Meta:

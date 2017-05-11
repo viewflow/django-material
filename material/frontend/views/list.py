@@ -249,7 +249,7 @@ class DataTableMixin(ContextMixin):
 
     def get_table_data(self, start, length):
         """Get a page for datatable."""
-        for item in self.object_list[start:start+length]:
+        for item in self.object_list[start:start + length]:
             columns = OrderedDict()
             for n, field_name in enumerate(self.get_list_display()):
                 attr = self.get_data_attr(field_name)

@@ -3,7 +3,7 @@ from django.conf.urls import include, url
 from django.contrib.auth.decorators import login_required
 from django.contrib import admin
 from django.shortcuts import render
-from django.views import generic
+from django.views import generic, static
 
 import debug_toolbar
 
@@ -154,7 +154,6 @@ urlpatterns = [
     url(r'', include(frontend_urls)),
 ]
 
-from django.views import static
 urlpatterns += [
     url(r'^static/(?P<path>.*)$', static.serve,
         {'document_root': settings.STATIC_ROOT, 'show_indexes': True})

@@ -14,7 +14,7 @@ class ModuleManager(models.Manager):
         installed_cache = cache.get('material.modules.installed')
         if not installed_cache:
             installed_cache = [mod.label for mod in self.get_queryset().filter(installed=True)]
-            cache.set('material.modules.installed', installed_cache, 60*60*24)
+            cache.set('material.modules.installed', installed_cache, 60 * 60 * 24)
         return module in installed_cache
 
 

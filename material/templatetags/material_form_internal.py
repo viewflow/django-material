@@ -149,7 +149,7 @@ def split_choices_by_columns(choices, columns):
     """Split CheckboxSelectMultiple values into columns."""
     columns = int(columns)
     col_span = 12 // columns
-    per_column = int(math.ceil(len(choices)/columns))
+    per_column = int(math.ceil(len(choices) / columns))
     choices = [tuple(choice) + (i,) for i, choice in enumerate(choices)]
     return [
         (col_span, choices[i:i + per_column])

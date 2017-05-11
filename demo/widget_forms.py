@@ -467,7 +467,7 @@ class RadioSelectForm(forms.Form):
     field3 = forms.TypedChoiceField(
         help_text='cource to int', choices=CHOICES, widget=forms.RadioSelect, coerce=int)
     field4 = forms.ModelChoiceField(
-        help_text='model choice radioselect with to_field_name=codename',  widget=forms.RadioSelect,
+        help_text='model choice radioselect with to_field_name=codename', widget=forms.RadioSelect,
         queryset=Permission.objects.filter(content_type__app_label='frontend'),
         to_field_name='codename', empty_label=None)
 

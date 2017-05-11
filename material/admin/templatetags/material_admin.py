@@ -162,7 +162,7 @@ def fieldset_layout(adminform, inline_admin_formsets):
 @register.simple_tag
 def paginator_number(cl, i):
     """Generate an individual page index link in a paginated list."""
-    current_page = cl.paginator.page(cl.page_num+1)
+    current_page = cl.paginator.page(cl.page_num + 1)
     if i == 'prev':
         if current_page.has_previous():
             return format_html('<li class="disabled"><a href="{}"><i class="material-icons">chevron_left</i></a></li>',
@@ -181,7 +181,7 @@ def paginator_number(cl, i):
         return mark_safe('<li class="disabled"><a href="#" onclick="return false;">...</a></li>')
     elif i == cl.page_num:
         return format_html('<li class="active"><a href="#!">{0}</a></li> ',
-                           i+1,
+                           i + 1,
                            cl.get_query_string({PAGE_VAR: i}))
     else:
         return format_html('<li><a href="{0}"{1}>{2}</a></li>',
