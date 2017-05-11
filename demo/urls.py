@@ -154,9 +154,9 @@ urlpatterns = [
     url(r'', include(frontend_urls)),
 ]
 
-from django.conf.urls.static import static
+from django.views import static
 urlpatterns += [
-    url(r'^static/(?P<path>.*)$', 'django.views.static.serve',
+    url(r'^static/(?P<path>.*)$', static.serve,
         {'document_root': settings.STATIC_ROOT, 'show_indexes': True})
 ]
 
