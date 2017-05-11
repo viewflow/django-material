@@ -66,13 +66,18 @@ class SeaStackedInline(admin.StackedInline):
     formset = SeaInlineFormset
 
 
+class ContinentTabularInline(admin.TabularInline):
+    model = models.Continent.oceans.through
+    extra = 1
+
+
 @admin.register(models.Ocean)
 class OceanAdmin(admin.ModelAdmin):
     icon = '<i class="fa fa-tint"></i>'
     actions = None
     exclude = ('area', )
     readonly_fields = ('map', )
-    inlines = [SeaStackedInline]
+    inlines = [ContinentTabularInline, SeaStackedInline]
     list_display = ('name', 'area', 'short_description', 'map',)
     prepopulated_fields = {'slug': ('name', )}
 
@@ -85,7 +90,7 @@ class OceanAdmin(admin.ModelAdmin):
     def short_description(self, ocean):
         return Truncator(ocean.description).words(100, truncate=' ...')
     short_description.short_description = _('short description')
-    
+
     def has_add_permission(self, request):
         return False
 
