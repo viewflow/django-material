@@ -10,6 +10,46 @@ body {
 th {
   font-weight: 300; }
 
+/* REGISTRATION */
+.registration {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row; }
+  .registration .sidebar {
+    align-items: center;
+    align-self: flex-start;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
+    min-width: 400px;
+    max-width: 400px;
+    opacity: 0.95;
+    text-align: center; }
+    .registration .sidebar h4 {
+      font-weight: 300; }
+    .registration .sidebar form {
+      width: 90%; }
+  .registration .logo {
+    -ms-grid-row-align: center;
+        align-self: center;
+    width: 100%;
+    text-align: center;
+    color: white; }
+    .registration .logo .logo__icon {
+      font-size: 20rem; }
+  .registration .action button {
+    width: calc(100% - 3rem);
+    margin-top: 1.5rem; }
+
+@media only screen and (max-width: 600px) {
+  .registration .logo {
+    display: none; }
+  .registration .sidebar {
+    width: 100%; } }
+
 /* LAYOUT */
 @media only screen and (min-width: 993px) {
   html {

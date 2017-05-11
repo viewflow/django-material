@@ -1,11 +1,54 @@
 /* materialize.css variables */
 /* fixes */
 /* MAIN */
+html, body, main {
+  height: 100%; }
+
 body {
   background: #efefef; }
 
 th {
   font-weight: 300; }
+
+/* REGISTRATION */
+.registration {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row; }
+  .registration .sidebar {
+    align-items: center;
+    align-self: flex-start;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
+    min-width: 400px;
+    max-width: 400px;
+    opacity: 0.95;
+    text-align: center; }
+    .registration .sidebar h4 {
+      font-weight: 300; }
+    .registration .sidebar form {
+      width: 90%; }
+  .registration .logo {
+    -ms-grid-row-align: center;
+        align-self: center;
+    width: 100%;
+    text-align: center;
+    color: white; }
+    .registration .logo .logo__icon {
+      font-size: 20rem; }
+  .registration .action button {
+    width: calc(100% - 3rem);
+    margin-top: 1.5rem; }
+
+@media only screen and (max-width: 600px) {
+  .registration .logo {
+    display: none; }
+  .registration .sidebar {
+    width: 100%; } }
 
 /* LAYOUT */
 @media only screen and (min-width: 993px) {
@@ -20,6 +63,8 @@ th {
   display: flex;
   max-width: 100%;
   padding-bottom: 50px; }
+  .content > .row {
+    width: 100%; }
 
 .left-panel {
   flex-basis: 80%;
@@ -210,8 +255,7 @@ nav.breadcrumbs {
   overflow: initial; }
   .filters-card .card-title {
     font-size: 18px;
-    text-transform: uppercase;
-    margin-top: -10px; }
+    text-transform: uppercase; }
   .filters-card .card-content {
     padding: 20px;
     padding-top: 5px; }
