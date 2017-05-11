@@ -122,7 +122,7 @@ class ModelViewMixin(object):
 
 
 class MessageUserMixin(object):
-    """User notification utilities django.messages framework.'"""
+    """User notification utilities django.messages framework."""
 
     def report(self, message, level=messages.INFO, fail_silently=True, **kwargs):
         """Construct message and notify the user."""

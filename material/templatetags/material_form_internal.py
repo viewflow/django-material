@@ -134,7 +134,7 @@ def jquery_datepicker_format(field):
 
 @register.filter
 def datepicker_value(value, date_format):
-    """Returns localized date value."""
+    """Return localized date value."""
     return formats.localize_input(value, date_format)
 
 

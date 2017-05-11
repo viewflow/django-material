@@ -4,9 +4,9 @@ from .urlconf import ModuleURLResolver, frontend_url
 from .registry import modules
 
 
-__all__ = [
+__all__ = (
     'ModuleURLResolver', 'frontend_url', 'modules'
-]
+)
 
 default_app_config = 'material.frontend.apps.MaterialFrontendConfig'
 

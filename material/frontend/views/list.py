@@ -221,7 +221,7 @@ class DataTableMixin(ContextMixin):
         raise AttributeError("Unable to lookup '{}' on {}" .format(attr_name, self.object_list.model._meta.object_name))
 
     def get_columns_def(self):
-        """Returns columns definition for the datables js config."""
+        """Return columns definition for the datables js config."""
         return [
             {'data': field_name, 'orderable': self.get_data_attr(field_name).orderable}
             for field_name in self.get_list_display()
@@ -266,7 +266,7 @@ class DataTableMixin(ContextMixin):
         return self.object_list.count()
 
     def get_ordering(self):
-        """ Return the field or fields to use for ordering the queryset."""
+        """Return the field or fields to use for ordering the queryset."""
         if self.request_form.is_valid():
             ordering = []
             requested_order = self.request_form.cleaned_data['ordering']

@@ -18,7 +18,7 @@ import material
 
 class Command(TemplateCommand):
     help = (
-        "Creates a Frontend Module directory structure for the given app name in "
+        "Create a Frontend Module directory structure for the given app name in "
         "the current directory or optionally in the given directory."
     )
     missing_args_message = "You must provide an application name."
@@ -33,7 +33,8 @@ class Command(TemplateCommand):
 
     def handle_template(self, template, subdir):
         """
-        Determines where the app or project templates are.
+        Determine where the app or project templates are.
+
         Use django.__path__[0] as the default because we don't
         know into which directory Django has been installed.
         """
