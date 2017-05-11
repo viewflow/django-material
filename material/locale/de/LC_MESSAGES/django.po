@@ -95,3 +95,7 @@ msgstr "Datei"
 #: templates/material/fields/django_selectmultiple.html:7
 msgid "Choose your option"
 msgstr "Wählen Sie Ihre Option"
+
+# action
+msgid "Delete selected objects"
+msgstr "Ausgewählte Objekte löschen"

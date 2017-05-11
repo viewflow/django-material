@@ -5,7 +5,7 @@ from .models import Employee, DeptManager, Title, Salary
 
 
 class ChangeManagerForm(forms.Form):
-    manager = forms.ModelChoiceField(queryset=Employee.objects.all()[:100], label=_('manager'))
+    manager = forms.ModelChoiceField(queryset=Employee.objects.all()[:100], label=_('Manager'))
 
     def __init__(self, *args, **kwargs):
         self.department = kwargs.pop('department')
@@ -23,7 +23,7 @@ class ChangeManagerForm(forms.Form):
 
 
 class ChangeTitleForm(forms.Form):
-    position = forms.CharField(label=_('position'))
+    position = forms.CharField(label=_('Position'))
 
     def __init__(self, *args, **kwargs):
         self.employee = kwargs.pop('employee')
@@ -41,7 +41,7 @@ class ChangeTitleForm(forms.Form):
 
 
 class ChangeSalaryForm(forms.Form):
-    salary = forms.IntegerField(max_value=1000000, label=_('salary'))
+    salary = forms.IntegerField(max_value=1000000, label=_('Salary'))
 
     def __init__(self, *args, **kwargs):
         self.employee = kwargs.pop('employee')
