@@ -92,7 +92,7 @@ msgstr "средняя глубина"
 
 #: models.py:31 models.py:32
 msgid "meters"
-msgstr "метны"
+msgstr "метры"
 
 #: models.py:32
 msgid "maximum depth"
