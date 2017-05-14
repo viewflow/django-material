@@ -263,6 +263,9 @@ table[data-form-control="datatable"] {
     display: block; }
 
 /* ALERTS */
+.toast {
+  justify-content: flex-start; }
+
 .toast a {
   color: white; }
   .toast a.alert-info {

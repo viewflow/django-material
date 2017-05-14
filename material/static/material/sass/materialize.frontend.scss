@@ -436,6 +436,10 @@ table[data-form-control="datatable"] {
 
 
 /* ALERTS */
+.toast {
+    justify-content: flex-start; // fix: allow links inside toast messages
+}
+
 .toast a {
     color: white;
 

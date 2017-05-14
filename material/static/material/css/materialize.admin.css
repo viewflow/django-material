@@ -96,6 +96,9 @@ th {
     display: none; } }
 
 /* ALERTS */
+.toast {
+  justify-content: flex-start; }
+
 .toast a {
   color: white; }
   .toast a.alert-success {
