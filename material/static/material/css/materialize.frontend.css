@@ -16,7 +16,8 @@ th {
   width: 100%;
   height: 100%;
   display: flex;
-  flex-direction: row; }
+  flex-direction: row;
+  background-size: cover; }
   .registration .sidebar {
     align-items: center;
     align-self: flex-start;
