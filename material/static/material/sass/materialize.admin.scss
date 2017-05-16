@@ -183,6 +183,10 @@ th {
         min-height: 175px;
     }
 
+    li {
+        min-height: 48px;
+    }
+
     // fix for chrome scrolling bug
     > li.last {
         padding-bottom: 58px;

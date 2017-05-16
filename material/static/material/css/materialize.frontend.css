@@ -98,6 +98,8 @@ th {
   overflow-y: hidden; }
   .side-nav.fixed .userView {
     min-height: 175px; }
+  .side-nav.fixed li {
+    min-height: 48px; }
   .side-nav.fixed > li.last {
     padding-bottom: 58px; }
   .side-nav.fixed .collapsible-body {
