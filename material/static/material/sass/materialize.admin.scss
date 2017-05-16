@@ -296,8 +296,7 @@ nav.breadcrumbs {
 
     .app {
         -webkit-column-break-inside: avoid;
-        page-break-inside: avoid;   // Chrome, Safari, Opera
-        break-inside: avoid;   // Firefox
+        page-break-inside: avoid;
         padding: 5px;
 
         .card {
@@ -315,13 +314,20 @@ nav.breadcrumbs {
                     color: $primary-color-light;
                     display: block;
                     border-radius: 4px;
-                    padding: 35px 0px;
+                    padding: 30px 0px;
                     text-align: center;
                     position: relative;
                     height: 130px;
                     margin-top: 10px;
                     margin-bottom: 10px;
                     margin-right: 0px;
+
+                    h6 {
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        word-wrap: break-word;
+                        padding: 5px;
+                    }
                 }
             }
         }
