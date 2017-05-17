@@ -35,6 +35,9 @@ class DeptEmp(models.Model):
         verbose_name_plural = _('department employees')
         db_table = 'dept_emp'
 
+    def __str__(self):
+        return "{} - {}".format(self.employee, self.department)
+
 
 @python_2_unicode_compatible
 class DeptManager(models.Model):
@@ -50,6 +53,9 @@ class DeptManager(models.Model):
         verbose_name_plural = _('department managers')
         db_table = 'dept_manager'
         ordering = ['-from_date']
+
+    def __str__(self):
+        return "{} - {}".format(self.employee, self.department)
 
 
 @python_2_unicode_compatible
@@ -85,6 +91,9 @@ class Salary(models.Model):
         verbose_name = _('salary')
         verbose_name_plural = _('salaries')
 
+    def __str__(self):
+        return "{} - {}".format(self.employee, self.salary)
+
 
 @python_2_unicode_compatible
 class Title(models.Model):
@@ -99,3 +108,6 @@ class Title(models.Model):
         verbose_name = _('title')
         verbose_name_plural = _('titles')
         db_table = 'titles'
+
+    def __str__(self):
+        return "{} - {}".format(self.employee, self.title)
