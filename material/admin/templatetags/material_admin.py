@@ -42,73 +42,26 @@ def get_admin_site():
 site = get_admin_site()
 
 
-@register.assignment_tag
-def get_app_list(request):
-    """Django 1.8 way to get application registered at default Admin Site."""
-    app_dict = {}
-
-    for model, model_admin in site._registry.items():
-        app_label = model._meta.app_label
-        has_module_perms = model_admin.has_module_permission(request)
-
-        if has_module_perms:
-            perms = model_admin.get_model_perms(request)
-
-            # Check whether user has any perm for this module.
-            # If so, add the module to the model_list.
-            if True in perms.values():
-                info = (app_label, model._meta.model_name)
-                model_icon = '<i class="material-icons admin-modelicon admin-modelicon-{}-{}"></i>'.format(
-                    app_label, model._meta.model_name)
-                if hasattr(model_admin, 'icon'):
-                    model_icon = model_admin.icon
-                model_dict = {
-                    'name': capfirst(model._meta.verbose_name_plural),
-                    'object_name': model._meta.object_name,
-                    'perms': perms,
-                    'icon': mark_safe(model_icon)
-                }
-                if perms.get('change', False):
-                    try:
-                        model_dict['admin_url'] = reverse('admin:%s_%s_changelist' % info, current_app=site.name)
-                        if request.path.startswith(model_dict['admin_url']):
-                            model_dict['active'] = True
-                    except NoReverseMatch:
-                        pass
-                if app_label in app_dict:
-                    app_dict[app_label]['models'].append(model_dict)
-                else:
-                    app_config = apps.get_app_config(app_label)
-
-                    app_name = app_config.verbose_name
-                    if len(app_name) > 23:
-                        app_name = app_label.title()
-                    app_name = app_name.replace('_', ' ')
-
-                    app_icon = '<i class="material-icons admin-appicon admin-appicon-{}"></i>'.format(app_label)
-                    if hasattr(app_config, 'icon'):
+@register.simple_tag
+def get_app_list(apps_list):
+    """Set icons for app and models."""
+    app_list = []
+    for app in apps_list:
+        app_label = app['app_label']
+        app_config = apps.get_app_config(app_label)
+        app_icon = '<i class="material-icons admin-appicon admin-appicon-{}"></i>'.format(
+            app_label)
+        if hasattr(app_config, 'icon'):
                         app_icon = app_config.icon
-
-                    app_dict[app_label] = {
-                        'name': app_name,
-                        'app_label': app_label,
-                        'app_icon': mark_safe(app_icon),
-                        'app_url': reverse('admin:app_list', kwargs={'app_label': app_label}, current_app=site.name),
-                        'has_module_perms': has_module_perms,
-                        'models': [model_dict],
-                    }
-
-                    if request.path.startswith(app_dict[app_label]['app_url']):
-                        app_dict[app_label]['active'] = True
-
-    # Sort the apps alphabetically.
-    app_list = list(six.itervalues(app_dict))
-    app_list.sort(key=lambda x: x['name'].lower())
-
-    # Sort the models alphabetically within each app.
-    for app in app_list:
-        app['models'].sort(key=lambda x: x['name'])
-
+        app['app_icon'] = mark_safe(app_icon)
+        # Add icon for models
+        for model in app['models']:
+            model_icon = '<i class="material-icons admin-modelicon admin-modelicon-{}-{}"></i>'.format(
+                        app_label, model['name'])
+            # if hasattr(model_admin, 'icon'):
+            #         model_icon = model_admin.icon
+            model['icon'] = mark_safe(model_icon)
+        app_list.append(app)
     return app_list
 
 
