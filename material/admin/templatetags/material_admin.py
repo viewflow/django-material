@@ -44,7 +44,11 @@ site = get_admin_site()
 
 @register.simple_tag
 def get_app_list(apps_list):
-    """Set icons for app and models."""
+    """
+    Set icons for app and models.
+
+    `app_list` already in context.
+    """
     app_list = []
     for app in apps_list:
         app_label = app['app_label']
