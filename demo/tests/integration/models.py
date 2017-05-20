@@ -34,6 +34,9 @@ class Sea(models.Model):
     basin_countries = models.ManyToManyField(
         'Country', related_name='seas', blank=True)
 
+    def get_parent_id_display(self):
+        return self.parent
+
     class Meta:
         verbose_name = _('sea')
         verbose_name_plural = _('seas')
