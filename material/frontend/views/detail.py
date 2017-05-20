@@ -27,8 +27,8 @@ class DetailModelView(generic.DetailView):
             else:
                 value = getattr(self.object, field.get_attname())
 
-                if value is not None:
-                    yield (field.verbose_name.title(), value)
+            if value is not None:
+                yield (field.verbose_name.title(), value)
 
     def has_view_permission(self, request, obj):
         """Object view permission check.
