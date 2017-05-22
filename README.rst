@@ -2,6 +2,10 @@
 Django Material
 ===============
 
+.. image:: https://badges.gitter.im/Join%20Chat.svg
+   :alt: Join the chat at https://gitter.im/viewflow/django-material
+   :target: https://gitter.im/viewflow/django-material?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
+
 Material design for Django Forms and Admin. Template driven.
 
 .. image:: https://img.shields.io/pypi/v/django-material.svg
