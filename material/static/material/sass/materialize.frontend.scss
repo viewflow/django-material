@@ -374,7 +374,7 @@ table[data-form-control="datatable"] {
             &.sorting_asc_disabled:last-child:after,
             &.sorting_desc_disabled:last-child:before,
             &.sorting_desc_disabled:last-child:after {
-                padding-right: 20px;
+                // padding-right: 20px;
             }
 
             &.sorting:before,

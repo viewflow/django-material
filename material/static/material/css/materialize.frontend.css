@@ -235,8 +235,6 @@ table[data-form-control="datatable"] {
       height: 30px;
       top: 0px;
       bottom: 0px; }
-    table[data-form-control="datatable"] thead tr > th.sorting:last-child:before, table[data-form-control="datatable"] thead tr > th.sorting:last-child:after, table[data-form-control="datatable"] thead tr > th.sorting_asc:last-child:before, table[data-form-control="datatable"] thead tr > th.sorting_asc:last-child:after, table[data-form-control="datatable"] thead tr > th.sorting_desc:last-child:before, table[data-form-control="datatable"] thead tr > th.sorting_desc:last-child:after, table[data-form-control="datatable"] thead tr > th.sorting_asc_disabled:last-child:before, table[data-form-control="datatable"] thead tr > th.sorting_asc_disabled:last-child:after, table[data-form-control="datatable"] thead tr > th.sorting_desc_disabled:last-child:before, table[data-form-control="datatable"] thead tr > th.sorting_desc_disabled:last-child:after {
-      padding-right: 20px; }
     table[data-form-control="datatable"] thead tr > th.sorting:before, table[data-form-control="datatable"] thead tr > th.sorting_asc:before, table[data-form-control="datatable"] thead tr > th.sorting_desc:before, table[data-form-control="datatable"] thead tr > th.sorting_asc_disabled:before, table[data-form-control="datatable"] thead tr > th.sorting_desc_disabled:before {
       right: 1em;
       content: "\2191"; }
