@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.db import models as django
 from django.utils.text import Truncator
 from django.utils.html import mark_safe, format_html
-from django.utils.translation import gettext_lazy as _
+from django.utils.translation import ugettext_lazy as _
 
 from . import models
 
