@@ -10,4 +10,4 @@ class EmployeesConfig(ModuleMixin, AppConfig):
     verbose_name = _('Employees')
 
     def has_perm(self, user):
-        return user.is_authenticated()
+        return user.is_superuser
