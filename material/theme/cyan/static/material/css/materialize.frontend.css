@@ -15,7 +15,8 @@ th {
   width: 100%;
   height: 100%;
   display: flex;
-  flex-direction: row; }
+  flex-direction: row;
+  background-size: cover !important; }
   .registration .sidebar {
     align-items: center;
     align-self: flex-start;
@@ -26,7 +27,7 @@ th {
     justify-content: center;
     min-width: 400px;
     max-width: 400px;
-    opacity: 0.95;
+    opacity: 0.85;
     text-align: center; }
     .registration .sidebar h4 {
       font-weight: 300; }
@@ -127,6 +128,8 @@ th {
   overflow-y: hidden; }
   .side-nav.fixed .userView {
     min-height: 175px; }
+  .side-nav.fixed li {
+    min-height: 48px; }
   .side-nav.fixed > li.last {
     padding-bottom: 58px; }
   .side-nav.fixed .collapsible-body {
@@ -261,8 +264,6 @@ table[data-form-control="datatable"] {
       height: 30px;
       top: 0px;
       bottom: 0px; }
-    table[data-form-control="datatable"] thead tr > th.sorting:last-child:before, table[data-form-control="datatable"] thead tr > th.sorting:last-child:after, table[data-form-control="datatable"] thead tr > th.sorting_asc:last-child:before, table[data-form-control="datatable"] thead tr > th.sorting_asc:last-child:after, table[data-form-control="datatable"] thead tr > th.sorting_desc:last-child:before, table[data-form-control="datatable"] thead tr > th.sorting_desc:last-child:after, table[data-form-control="datatable"] thead tr > th.sorting_asc_disabled:last-child:before, table[data-form-control="datatable"] thead tr > th.sorting_asc_disabled:last-child:after, table[data-form-control="datatable"] thead tr > th.sorting_desc_disabled:last-child:before, table[data-form-control="datatable"] thead tr > th.sorting_desc_disabled:last-child:after {
-      padding-right: 20px; }
     table[data-form-control="datatable"] thead tr > th.sorting:before, table[data-form-control="datatable"] thead tr > th.sorting_asc:before, table[data-form-control="datatable"] thead tr > th.sorting_desc:before, table[data-form-control="datatable"] thead tr > th.sorting_asc_disabled:before, table[data-form-control="datatable"] thead tr > th.sorting_desc_disabled:before {
       right: 1em;
       content: "\2191"; }
@@ -296,6 +297,9 @@ table[data-form-control="datatable"] {
   z-index: 1; }
 
 /* ALERTS */
+.toast {
+  justify-content: flex-start; }
+
 .toast a {
   color: white; }
   .toast a.alert-info {

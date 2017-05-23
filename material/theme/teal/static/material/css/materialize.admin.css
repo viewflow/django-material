@@ -15,7 +15,8 @@ th {
   width: 100%;
   height: 100%;
   display: flex;
-  flex-direction: row; }
+  flex-direction: row;
+  background-size: cover !important; }
   .registration .sidebar {
     align-items: center;
     align-self: flex-start;
@@ -26,7 +27,7 @@ th {
     justify-content: center;
     min-width: 400px;
     max-width: 400px;
-    opacity: 0.95;
+    opacity: 0.85;
     text-align: center; }
     .registration .sidebar h4 {
       font-weight: 300; }
@@ -95,6 +96,9 @@ th {
     display: none; } }
 
 /* ALERTS */
+.toast {
+  justify-content: flex-start; }
+
 .toast a {
   color: white; }
   .toast a.alert-success {
@@ -119,6 +123,8 @@ th {
   overflow-y: hidden; }
   .side-nav.fixed .userView {
     min-height: 175px; }
+  .side-nav.fixed li {
+    min-height: 48px; }
   .side-nav.fixed > li.last {
     padding-bottom: 58px; }
   .side-nav.fixed .collapsible-body {
@@ -194,7 +200,6 @@ nav.breadcrumbs {
   column-count: 3; }
   .app-list .app {
     page-break-inside: avoid;
-    break-inside: avoid;
     padding: 5px; }
     .app-list .app .card {
       margin: 0px; }
@@ -207,13 +212,18 @@ nav.breadcrumbs {
           color: #00c6af;
           display: block;
           border-radius: 4px;
-          padding: 35px 0px;
+          padding: 30px 0px;
           text-align: center;
           position: relative;
           height: 130px;
           margin-top: 10px;
           margin-bottom: 10px;
           margin-right: 0px; }
+          .app-list .app .card .app-item a h6 {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            word-wrap: break-word;
+            padding: 5px; }
 
 @media (max-width: 1401px) {
   .app-list {
