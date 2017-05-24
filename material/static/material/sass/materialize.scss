@@ -13,11 +13,13 @@
 
 // components
 @import "materialize-css/sass/components/global";
+@import "materialize-css/sass/components/badges";
 @import "materialize-css/sass/components/icons-material-design";
 @import "materialize-css/sass/components/grid";
 @import "materialize-css/sass/components/navbar";
 @import "materialize-css/sass/components/roboto";
 @import "materialize-css/sass/components/typography";
+@import "materialize-css/sass/components/transitions";
 @import "materialize-css/sass/components/cards";
 @import "materialize-css/sass/components/toast";
 @import "materialize-css/sass/components/tabs";
@@ -35,6 +37,8 @@
 @import "materialize-css/sass/components/preloader";
 @import "materialize-css/sass/components/slider";
 @import "materialize-css/sass/components/carousel";
+@import "materialize-css/sass/components/tapTarget";
+@import "materialize-css/sass/components/pulse";
 @import "materialize-css/sass/components/date_picker/default";
 @import "materialize-css/sass/components/date_picker/default.date";
 @import "materialize-css/sass/components/date_picker/default.time";
