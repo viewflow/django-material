@@ -45,7 +45,7 @@ Demo: http://forms.viewflow.io/
 .. image:: .screen.png
    :width: 400px
 
-Documentation
+           Documentation
 =============
 
 http://docs.viewflow.io/material_forms.html
@@ -61,19 +61,13 @@ Django Material Pro has a commercial-friendly license and distributed as part of
 Changelog
 =========
 
-0.13.0 2017-03-16 - Beta
-------------------------
+GIT VERSION
+-----------
 
-- Forms - Update MaterializeCSS to 0.98.0
-- Forms - `model autocomplete <http://docs.viewflow.io/forms_widgets.html>`_ widgets added (PRO)
-- Frontend - Fix viewset customization for update view form.
-- Frontend - Fix permission validation to add items in detail template
-- Frontend - Icons for boolean variables in the list view
-- Frontend - Destroy select and toast to fix issue with turbolinks cache
-- Frontend - Allow using non-object level permission in the frontend
-- Frontend - Allow specifying custom form widgets in the viewset
-- Frontend - Redirect to detail view after object create
-- Admin - Improve content page layout
-- Admin - Add {% block main_content %}
-- Admin - Improve object tools list
-- Admin - django-guardian support (PRO)
+- Django 1.11 support
+- Update MaterializeCSS to 0.98.2
+- Fix missing badges in shipped MaterializeCSS build
+- Localization added: German/French/Spainish/Korean/Chinese
+- Forms - Fix allows to use html in a `help_text` of widgets
+- Frontend - Improved Login/Logout/403/404/500 service screen templates
+- Admin - fix application list layout
