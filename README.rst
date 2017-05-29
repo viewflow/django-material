@@ -63,7 +63,7 @@ Django Material Pro has a commercial-friendly license and distributed as part of
 Changelog
 =========
 
-1.0.0 2017-29-30 - Stable
+1.0.0 2017-05-29 - Stable
 -------------------------
 
 - Django 1.11 support
