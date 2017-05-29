@@ -1,3 +1,14 @@
+1.0.0 2017-29-30 - Stable
+-------------------------
+
+- Django 1.11 support
+- Update MaterializeCSS to 0.98.2
+- Fix missing badges in shipped MaterializeCSS build
+- Localization added: German/French/Spainish/Korean/Chinese
+- Forms - Fix allows to use html in a `help_text` of widgets
+- Frontend - Improved Login/Logout/403/404/500 service screen templates
+- Admin - fix application list layout
+
 0.13.0 2017-03-16 - Beta
 ------------------------
 

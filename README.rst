@@ -20,7 +20,9 @@ Material design for Django Forms and Admin. Template driven.
    :alt: Join the chat at https://gitter.im/viewflow/django-material
    :target: https://gitter.im/viewflow/django-material?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
 
-Django-Material works with Django 1.8/1.9/1.10
+Django-Material works with Django 1.8/1.9/1.10/1.11
+
+Django-Material 1.x branch going to be supported till Django 1.8 lifetime (April 2018)
 
 Tested with:
 
@@ -30,15 +32,15 @@ Tested with:
 Overview
 ========
 
-- Forms_ - New way to render django forms
+- Forms - New way to render django forms
 
   * Strong python/html code separation
   * Easy redefinition of particular fields rendering
   * Complex form layout support
 
-- Frontend_ - Quick starter template for modular applications development
+- Frontend - Quick starter template for modular applications development
 
-- Admin_ - Material-designed django admin
+- Admin - Material-designed django admin
 
 Demo: http://forms.viewflow.io/
 
@@ -61,8 +63,8 @@ Django Material Pro has a commercial-friendly license and distributed as part of
 Changelog
 =========
 
-GIT VERSION
------------
+1.0.0 2017-29-30 - Stable
+-------------------------
 
 - Django 1.11 support
 - Update MaterializeCSS to 0.98.2
