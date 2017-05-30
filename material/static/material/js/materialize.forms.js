@@ -15,6 +15,12 @@
       .not('.material-ignore')
       .material_select()
 
+    // Tabs
+    // http://materializecss.com/tabs.html
+    $container
+      .find('ul.tabs')
+      .tabs()
+
     // Date/DateTime/Time
     // https://github.com/xdan/datetimepicker
     $container
