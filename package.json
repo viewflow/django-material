@@ -27,6 +27,7 @@
     "merge-stream": "^1.0.1",
     "perfect-scrollbar": "^0.7.0",
     "pump": "^1.0.2",
-    "turbolinks": "^5.0.2"
+    "turbolinks": "^5.0.2",
+    "rtlcss": "2.1.2"
   }
 }

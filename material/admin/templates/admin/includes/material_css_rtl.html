@@ -1,0 +1,15 @@
+{% load admin_static %}
+{% load static %}
+<link href="{% static 'material/fonts/material-design-icons/material-icons.css' %}"  rel="stylesheet">
+{% if not debug %}
+<link href="{% static 'material/css/materialize.admin.rtl.min.css' %}" rel="stylesheet">
+{% else %}
+<link href="{% static 'material/css/materialize.rtl.css' %}" rel="stylesheet">
+<link href="{% static 'material/css/materialize.forms.rtl.css' %}" rel="stylesheet">
+<link href="{% static 'material/css/jquery.datetimepicker.rtl.css' %}" rel="stylesheet">
+<link href="{% static 'material/css/responsive.dataTables.rtl.css' %}" rel="stylesheet">
+<link href="{% static 'material/css/fixedHeader.dataTables.rtl.css' %}" rel="stylesheet">
+<link href="{% static 'material/css/perfect-scrollbar.rtl.css' %}" rel="stylesheet" />
+<link href="{% static 'material/css/materialize.admin.rtl.css' %}" rel="stylesheet"/>
+{% endif %}
+<link href="{% block extraicons %}{% static 'admin/css/icons.css' %}" rel="stylesheet" type="text/css" />{% endblock %}
