@@ -1,3 +1,5 @@
+from __future__ import unicode_literals
+
 from django.contrib.auth import get_permission_codename
 from django.core.urlresolvers import reverse
 from django.views import generic
