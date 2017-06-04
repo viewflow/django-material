@@ -44,7 +44,7 @@
                 {% for item in result %}
                 {% if 'action_checkbox' in cl.list_display and forloop.counter == 1 %}
                     <td class="action-checkbox">
-                        <input class="action-select" name="_selected_action" id="_selected_action_{{ forloop.parentloop.counter }}" type="checkbox" value="{{ item|admin_change_list_value }}" />
+                        <input class="action-select" name="_selected_action" id="_selected_action_{{ forloop.parentloop.counter }}" type="checkbox" value="{{ item|admin_change_list_value|safe }}" />
                         <label for="_selected_action_{{ forloop.parentloop.counter }}">&nbsp;&nbsp;</label>
                     </td>
                 {% else %}
