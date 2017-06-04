@@ -1,0 +1,330 @@
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+# , 2015.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-11-24 18:59+0000\n"
+"PO-Revision-Date: 2015-11-24 19:27-0200\n"
+"Last-Translator: \n"
+"Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Lokalize 1.5\n"
+
+#: admin/apps.py:8
+msgid "Material Admin"
+msgstr "Administração do Material"
+
+#: admin/templates/admin/actions.html:7
+msgid "Run the selected action"
+msgstr "Executar a ação selecionada"
+
+#: admin/templates/admin/actions.html:8
+msgid "Go"
+msgstr "Fazer"
+
+#: admin/templates/admin/actions.html:19
+msgid "Click here to select the objects across all pages"
+msgstr ""
+
+#: admin/templates/admin/actions.html:20
+#, python-format
+msgid "Select all %(total_count)s %(module_name)s"
+msgstr ""
+
+#: admin/templates/admin/actions.html:23
+msgid "Clear selection"
+msgstr ""
+
+#: admin/templates/admin/app_index.html:11
+#: admin/templates/admin/delete_selected_confirmation.html:10
+#: admin/templates/admin/object_history.html:8
+#: admin/templates/registration/password_change_done.html:10
+#: admin/templates/registration/password_change_form.html:10
+msgid "Home"
+msgstr ""
+
+#: admin/templates/admin/auth/user/change_password.html:10
+#: admin/templates/admin/auth/user/change_password.html:20
+#: admin/templates/registration/password_change_done.html:3
+#: admin/templates/registration/password_change_form.html:4
+msgid "Change password"
+msgstr ""
+
+#: admin/templates/admin/base.html:35
+#: frontend/templates/material/frontend/base.html:35
+#: frontend/templates/registration/profile.html:9
+msgid "Profile"
+msgstr "Perfil"
+
+#: admin/templates/admin/base.html:36
+#: admin/templates/registration/password_change_done.html:3
+#: admin/templates/registration/password_change_form.html:4
+msgid "Log out"
+msgstr ""
+
+#: admin/templates/admin/base.html:46 admin/templates/admin/base.html.py:64
+msgid "Administration"
+msgstr ""
+
+#: admin/templates/admin/base.html:62
+msgid "Back to website"
+msgstr "Voltar ao website"
+
+#: admin/templates/admin/base_site.html:3
+msgid "Django site admin"
+msgstr ""
+
+#: admin/templates/admin/base_site.html:8
+msgid "Django administration"
+msgstr ""
+
+#: admin/templates/admin/change_form.html:10
+#: admin/templates/admin/change_list.html:40
+#: admin/templates/admin/index.html:5
+msgid "All apps"
+msgstr "Todos os aplicativos"
+
+#: admin/templates/admin/change_form.html:12
+msgid "Add"
+msgstr ""
+
+#: admin/templates/admin/change_form.html:12
+#: admin/templates/material/inlines/tabular.html:77
+msgid "Change"
+msgstr ""
+
+#: admin/templates/admin/change_form.html:26
+msgid "New"
+msgstr "Adicionar"
+
+#: admin/templates/admin/change_form.html:31
+#: admin/templates/admin/login.html:13
+#: admin/templates/registration/password_change_form.html:30
+#: frontend/templates/registration/login.html:13
+msgid "Please correct the error below."
+msgstr ""
+
+#: admin/templates/admin/change_form.html:31
+#: admin/templates/admin/login.html:13
+#: admin/templates/registration/password_change_form.html:30
+#: frontend/templates/registration/login.html:13
+msgid "Please correct the errors below."
+msgstr ""
+
+#: admin/templates/admin/change_list.html:61
+msgid "Filters"
+msgstr "Filtros"
+
+#: admin/templates/admin/delete_confirmation.html:12
+#, python-format
+msgid ""
+"Deleting the %(object_name)s '%(escaped_object)s' would result in deleting "
+"related objects, but your account doesn't have permission to delete the "
+"following types of objects:"
+msgstr ""
+
+#: admin/templates/admin/delete_confirmation.html:20
+#, python-format
+msgid ""
+"Deleting the %(object_name)s '%(escaped_object)s' would require deleting the "
+"following protected related objects:"
+msgstr ""
+
+#: admin/templates/admin/delete_confirmation.html:28
+#, python-format
+msgid ""
+"Are you sure you want to delete the %(object_name)s \"%(escaped_object)s\"? "
+"All of the following related items will be deleted:"
+msgstr ""
+
+#: admin/templates/admin/delete_confirmation.html:35
+#: admin/templates/admin/delete_selected_confirmation.html:51
+msgid "Yes, I'm sure"
+msgstr ""
+
+#: admin/templates/admin/delete_selected_confirmation.html:13
+msgid "Delete multiple objects"
+msgstr ""
+
+#: admin/templates/admin/delete_selected_confirmation.html:24
+#, python-format
+msgid ""
+"Deleting the selected %(objects_name)s would result in deleting related "
+"objects, but your account doesn't have permission to delete the following "
+"types of objects:"
+msgstr ""
+
+#: admin/templates/admin/delete_selected_confirmation.html:32
+#, python-format
+msgid ""
+"Deleting the selected %(objects_name)s would require deleting the following "
+"protected related objects:"
+msgstr ""
+
+#: admin/templates/admin/delete_selected_confirmation.html:40
+#, python-format
+msgid ""
+"Are you sure you want to delete the selected %(objects_name)s? All of the "
+"following objects and their related items will be deleted:"
+msgstr ""
+
+#: admin/templates/admin/filter.html:3 admin/templates/admin/filter.html:4
+#, python-format
+msgid " By %(filter_title)s "
+msgstr ""
+
+#: admin/templates/admin/login.html:9 admin/templates/admin/login.html:38
+#: frontend/templates/registration/login.html:9
+#: frontend/templates/registration/login.html:38
+msgid "Log in"
+msgstr ""
+
+#: admin/templates/admin/login.html:34
+#: frontend/templates/registration/login.html:34
+msgid "Forgotten your password or username?"
+msgstr ""
+
+#: admin/templates/admin/object_history.html:12
+msgid "History"
+msgstr ""
+
+#: admin/templates/admin/object_history.html:26
+msgid "Date/time"
+msgstr ""
+
+#: admin/templates/admin/object_history.html:27
+msgid "User"
+msgstr ""
+
+#: admin/templates/admin/object_history.html:28
+msgid "Action"
+msgstr ""
+
+#: admin/templates/admin/object_history.html:42
+msgid ""
+"This object doesn't have a change history. It probably wasn't added via this "
+"admin site."
+msgstr ""
+
+#: admin/templates/admin/pagination.html:21
+msgid "Show all"
+msgstr ""
+
+#: admin/templates/admin/search_form.html:7
+msgid "Search"
+msgstr ""
+
+#: admin/templates/admin/search_form.html:10
+#, python-format
+msgid "%(counter)s result"
+msgid_plural "%(counter)s results"
+msgstr[0] ""
+msgstr[1] ""
+
+#: admin/templates/admin/search_form.html:10
+#, python-format
+msgid "%(full_result_count)s total"
+msgstr ""
+
+#: admin/templates/admin/submit_line.html:5
+msgid "Delete"
+msgstr ""
+
+#: admin/templates/admin/submit_line.html:7
+msgid "Save"
+msgstr ""
+
+#: admin/templates/material/fields/django_relatedfieldwidgetwrapper.html:14
+#, python-format
+msgid "Change selected %(bound_field_urls.model)s"
+msgstr "Alterar %(bound_field_urls.model)s selecionado"
+
+#: admin/templates/material/fields/django_relatedfieldwidgetwrapper.html:22
+#, python-format
+msgid "Add another %(bound_field_urls.model)s"
+msgstr "Adicionar outro %(bound_field_urls.model)s"
+
+#: admin/templates/material/fields/django_relatedfieldwidgetwrapper.html:30
+#, python-format
+msgid "Delete selected %(bound_field_urls.model)s"
+msgstr "Apagar %(bound_field_urls.model)s selecionado"
+
+#: admin/templates/material/inlines/tabular.html:63
+msgid "Delete?"
+msgstr ""
+
+#: admin/templates/material/inlines/tabular.html:79
+msgid "View on site"
+msgstr ""
+
+#: admin/templates/material/inlines/tabular.html:124
+#, python-format
+msgid "Add another %(verbose_name)s"
+msgstr ""
+
+#: admin/templates/material/inlines/tabular.html:125
+msgid "Remove"
+msgstr ""
+
+#: admin/templates/registration/logged_out.html:11
+#: frontend/templates/registration/logged_out.html:11
+msgid "Thanks for spending some quality time with the Web site today."
+msgstr ""
+
+#: admin/templates/registration/logged_out.html:14
+#: frontend/templates/registration/logged_out.html:14
+msgid "Log in again"
+msgstr ""
+
+#: admin/templates/registration/password_change_done.html:3
+#: admin/templates/registration/password_change_form.html:4
+msgid "Documentation"
+msgstr ""
+
+#: admin/templates/registration/password_change_done.html:11
+#: admin/templates/registration/password_change_form.html:11
+msgid "Password change"
+msgstr ""
+
+#: admin/templates/registration/password_change_done.html:25
+msgid "Your password was changed."
+msgstr ""
+
+#: admin/templates/registration/password_change_form.html:34
+msgid ""
+"Please enter your old password, for security's sake, and then enter your new "
+"password twice so we can verify you typed it in correctly."
+msgstr ""
+
+#: admin/templates/registration/password_change_form.html:39
+msgid "Change my password"
+msgstr ""
+
+#: admin/templatetags/material_admin.py:228
+msgid "All dates"
+msgstr ""
+
+#: admin/templatetags/material_admin.py:239
+msgid "All"
+msgstr ""
+
+#: frontend/templates/material/frontend/base.html:36
+msgid "Logout"
+msgstr ""
+
+#: frontend/templates/material/frontend/base.html:46
+msgid "Viewflow"
+msgstr ""
+
+#: templates/material/fields/django_fileinput.html:11
+msgid "File"
+msgstr ""
+
+
