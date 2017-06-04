@@ -1,0 +1,179 @@
+@import url('https://fonts.googleapis.com/css?family=Cairo:200,300,400,600,700,900&subset=arabic');
+
+body {
+    font-family: 'Cairo', sans-serif;
+    direction: rtl;
+}
+
+/* FORM LAYOUT */
+form .row {
+    margin-bottom: 0px;
+    margin-right: -0.75rem;
+    margin-left: -0.75rem;
+}
+
+/* COMMON ELEMENTS */
+form .help-block {
+    line-height: 12px;
+    position: relative;
+    top: -10px;
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 75%;
+}
+
+form .error {
+    line-height: 12px;
+    position: relative;
+    top: -10px;
+    color: #F44336;
+}
+
+/* INPUT FIELD */
+.input-field label {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: calc(100% - 21px);
+    overflow: hidden;
+}
+
+.input-field.has-error .prefix {
+    color: #F44336;
+}
+
+.input-field .prefix {
+    line-height: 45px;
+}
+
+.input-field .prefix ~ label {
+    width: calc(100% - 21px - 3rem);
+}
+
+.input-field .prefix ~ .errors .error {
+    margin-right: 3rem;
+}
+
+.input-field input[type=number] {
+    -moz-appearance: textfield;
+}
+
+.input-field ::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+.input-field ::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+}
+
+input:-webkit-autofill + label {
+    font-size: 0.8rem;
+    transform: translateY(-140%);
+}
+
+/* SELECT FIELD */
+select.material-ignore {
+    display: block;
+}
+
+.select-field .prefix {
+    position: absolute;
+    width: 3rem;
+    font-size: 2rem;
+    margin-top: 25px;
+    transition: color .2s;
+}
+
+.select-field .prefix ~ label {
+    margin-right: 3rem;
+}
+
+.select-field.has-error input {
+    border-bottom: 1px solid #F44336;
+    box-shadow: 0 1px 0 0 #F44336;
+}
+
+.select-field .select-wrapper {
+    margin-top: 0px;
+}
+
+.select-field .select-wrapper input.select-dropdown {
+    margin-top: -7px;
+}
+
+/* CHECHBOX FIELD */
+.checkbox-field {
+    line-height: 35px;
+}
+
+.checkbox-field label {
+    color: rgba(0, 0, 0, 0.84);
+}
+
+.checkbox-field .prefix {
+    position: relative;
+    top: 5px;
+    width: 2.5rem;
+    font-size: 2rem;
+}
+
+.checkbox-field .help-block {
+    padding-top: 5px;
+    padding-right: 35px;
+    font-size: 12px;
+    line-height: 16px;
+    display: block;
+}
+
+/* RADIO FIELD */
+.radio-field .radio {
+    padding-top: 10px;
+}
+
+.radio-field .error, .radio-field .help-block {
+    top: 0px;
+    right: 5px;
+}
+
+.radio-field label.item-label {
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.84);
+}
+
+.radio-field .prefix {
+    position: relative;
+    top: 5px;
+    width: 2.5rem;
+    font-size: 2rem;
+}
+
+.radio-field .prefix ~ label {
+    width: calc(100% - 21px - 3rem);
+}
+
+.radio-field .inline {
+    margin-top: 10px;
+}
+
+.radio-field .inline .radio {
+    display: inline;
+    margin-left: 20px;
+}
+
+/* FILE FIELD */
+.file-field .btn,
+.file-field .btn-large {
+    right: auto;
+}
+
+.file-field-clear {
+    float: left;
+}
+
+.file-field-clear label {
+    margin-left: 25px;
+    width: auto;
+}
+
+/* FORMSET*/
+.formset-field td {
+    vertical-align: top;
+}
