@@ -1,9 +1,10 @@
 from __future__ import unicode_literals
 
 from django.contrib import messages
-from django.core.exceptions import PermissionDenied
+from django.core.exceptions import PermissionDenied, ValidationError
 from django.core.urlresolvers import reverse
 from django.forms.models import modelform_factory
+from django.http import Http404
 from django.utils.encoding import force_text
 from django.utils.html import format_html
 from django.utils.http import urlquote
@@ -61,6 +62,15 @@ class ModelViewMixin(object):
 
     def get_object(self):
         """Retreive an object and check user permissions."""
+        queryset = self.get_queryset()
+        model = queryset.model
+        pk = self.kwargs.get(self.pk_url_kwarg)
+        if pk is not None:
+            try:
+                self.kwargs[self.pk_url_kwarg] = model._meta.pk.to_python(pk)
+            except (ValidationError, ValueError):
+                raise Http404
+
         obj = super(ModelViewMixin, self).get_object()
         if not self.has_object_permission(self.request, obj):
             raise PermissionDenied

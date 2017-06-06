@@ -1,12 +1,13 @@
 from __future__ import unicode_literals
 
 from django.contrib.auth import get_permission_codename
+from django.core.exceptions import PermissionDenied, ValidationError
 from django.core.urlresolvers import reverse
 from django.db import router
 from django.db.models.deletion import Collector
-from django.core.exceptions import PermissionDenied
-from django.views import generic
+from django.http import Http404
 from django.utils.translation import ugettext_lazy as _
+from django.views import generic
 
 from .mixins import MessageUserMixin
 
@@ -50,6 +51,15 @@ class DeleteModelView(MessageUserMixin, generic.DeleteView):
 
         Check object delete permission at the same time.
         """
+        queryset = self.get_queryset()
+        model = queryset.model
+        pk = self.kwargs.get(self.pk_url_kwarg)
+        if pk is not None:
+            try:
+                self.kwargs[self.pk_url_kwarg] = model._meta.pk.to_python(pk)
+            except (ValidationError, ValueError):
+                raise Http404
+
         obj = super(DeleteModelView, self).get_object()
         if not self.has_object_permission(self.request, obj):
             raise PermissionDenied
