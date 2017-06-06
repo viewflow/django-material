@@ -13,15 +13,17 @@
         <div class="card-content">
             {% block card %}
             <div class="card-title">{{ view.model|verbose_name|title }}: {{ object }}</div>
-            <table class="table bordered">
-                {% for field_name, value in object_data %}
-                <tr>
-                    <th>{{ field_name }}</th>
-                    <td>{{ value }}</td>
-                    {% endfor %}
-                </tr>
-                {% endblock %}
-            </table>
+            {% if view.layout or form.layout %}
+                {% if view.layout %}
+                    {% form layout=view.layout template='material/frontend/detail/form.html' %}{% endform %}
+                {% endif %}
+                {% if form.layout %}
+                    {% form layout=form.layout template='material/frontend/detail/form.html' %}{% endform %}
+                {% endif %}
+            {% else %}
+                {% form template='material/frontend/detail/form.html' %}{% endform %}
+            {% endif %}
+            {% endblock %}
         </div>
         <div class="card-action">
             <div class="right-align">

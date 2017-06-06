@@ -1,0 +1,14 @@
+{% load material_form material_form_internal %}
+{% part form %}
+    {% if layout %}{% part form visible %}
+            {% render layout %}{% endrender %}
+    {% endpart %}{% else %}
+        {% part form visible %}
+            {% for bound_field in form.visible_fields %}{% render bound_field %}{% endrender %} {% endfor %}
+        {% endpart %}{% part 'inlines' %}
+            {% for inline in inlines %}
+                {{ inline }}
+            {% endfor %}
+        {% endpart %}
+    {% endif %}
+{% endpart %}
