@@ -2,6 +2,7 @@ from django.contrib import messages
 from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse
 from django.forms.models import modelform_factory
+from django.urls import NoReverseMatch
 from django.utils.encoding import force_text
 from django.utils.html import format_html
 from django.utils.http import urlquote
@@ -128,8 +129,11 @@ class MessageUserMixin(object):
         """Construct message and notify the user."""
         opts = self.model._meta
 
-        url = reverse('{}:{}_detail'.format(
-            opts.app_label, opts.model_name), args=[self.object.pk])
+        try:
+            url = reverse('{}:{}_detail'.format(
+                opts.app_label, opts.model_name), args=[self.object.pk])
+        except NoReverseMatch:
+            url = "#"
         link = format_html('<a href="{}">{}</a>', urlquote(url), force_text(self.object))
         name = force_text(opts.verbose_name)
 
