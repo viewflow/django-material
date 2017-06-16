@@ -16,7 +16,13 @@
                 placeholder="{{ bound_field.label }}"
                 {% if bound_field.value|is_initial_file %}value="{{ bound_field.value }}"{% endif %}
             {% endattrs %}>
+            {% if bound_field.value|is_initial_file %}
+                <a class="right file-field-link" href="{{MEDIA_URL}}{{ bound_field.value.url }}" target="blank" title="{{ bound_field.value.name }}">
+                    <i class="material-icons">open_in_new</i>
+                </a>
+            {% endif %}
         </div>{% endpart %}
+
         {% part field help_text %}
         {% if field.help_text %}
         <div class="help-block">{{ bound_field.help_text|safe }}</div>

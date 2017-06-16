@@ -165,6 +165,10 @@ select.material-ignore {
 .file-field .btn,
 .file-field .btn-large {
      left: auto;
+
+     input {
+        z-index: 1;
+     }
 }
 
 .file-field-clear {
@@ -172,6 +176,22 @@ select.material-ignore {
     label {
         margin-right:25px;
         width: auto;
+    }
+}
+
+.file-field .file-path-wrapper {
+    position: relative;
+}
+
+.file-field-link {
+    position: absolute;
+    right: 0;
+    bottom: 15px;
+    line-height: 3em;
+    z-index: 2;
+
+    i {
+        vertical-align: middle;
     }
 }
 

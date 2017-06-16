@@ -117,12 +117,27 @@ select.material-ignore {
 .file-field .btn,
 .file-field .btn-large {
   left: auto; }
+  .file-field .btn input,
+  .file-field .btn-large input {
+    z-index: 1; }
 
 .file-field-clear {
   float: right; }
   .file-field-clear label {
     margin-right: 25px;
     width: auto; }
+
+.file-field .file-path-wrapper {
+  position: relative; }
+
+.file-field-link {
+  position: absolute;
+  right: 0;
+  bottom: 15px;
+  line-height: 3em;
+  z-index: 2; }
+  .file-field-link i {
+    vertical-align: middle; }
 
 /* FORMSET*/
 .formset-field td {
