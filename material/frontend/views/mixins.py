@@ -5,6 +5,7 @@ from django.core.exceptions import PermissionDenied, ValidationError
 from django.core.urlresolvers import reverse
 from django.forms.models import modelform_factory
 from django.http import Http404
+from django.urls import NoReverseMatch
 from django.utils.encoding import force_text
 from django.utils.html import format_html
 from django.utils.http import urlquote
@@ -136,14 +137,13 @@ class ModelViewMixin(object):
 class MessageUserMixin(object):
     """User notification utilities django.messages framework."""
 
+    success_message_url = None
+
     def report(self, message, level=messages.INFO, fail_silently=True, **kwargs):
         """Construct message and notify the user."""
-        opts = self.model._meta
-
-        url = reverse('{}:{}_detail'.format(
-            opts.app_label, opts.model_name), args=[self.object.pk])
+        url = self.get_success_message_url()
         link = format_html('<a href="{}">{}</a>', urlquote(url), force_text(self.object))
-        name = force_text(opts.verbose_name)
+        name = force_text(self.model._meta.verbose_name)
 
         options = {
             'link': link,
@@ -158,3 +158,13 @@ class MessageUserMixin(object):
 
     def error(self, message, fail_silently=True, **kwargs):
         self.report(message, level=messages.ERROR, fail_silently=fail_silently, **kwargs)
+
+    def get_success_message_url(self):
+        if self.success_message_url:
+            return force_text(self.success_message_url)
+
+        try:
+            opts = self.model._meta
+            return reverse('{}:{}_detail'.format(opts.app_label, opts.model_name), args=[self.object.pk])
+        except NoReverseMatch:
+            return ""
