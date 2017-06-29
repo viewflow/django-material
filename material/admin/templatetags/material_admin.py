@@ -172,7 +172,7 @@ def paginator_number(cl, i):
     elif i == 'next':
         if current_page.has_next():
             return format_html(
-                '<li class="disabled"><a href="{}"><i class="material-icons">chevron_right</i></i></a></li>',
+                '<li class="disabled"><a href="{}"><i class="material-icons">chevron_right</i></a></li>',
                 cl.get_query_string({PAGE_VAR: current_page.next_page_number()}))
         else:
             return format_html(
