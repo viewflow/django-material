@@ -62,6 +62,8 @@ class ModelViewSet(BaseViewset):
     :keyword list_display_links: List of fields form `list_display`
                                  linked to change view
 
+    :keyword ordering: Defaul ListView ordering
+
     :keyword create_view_class: CBV for create an object
 
     :keyword list_view_class:  CBV for create to list objects
@@ -105,6 +107,7 @@ class ModelViewSet(BaseViewset):
     queryset = DEFAULT
     list_display = DEFAULT
     list_display_links = DEFAULT
+    ordering = None
 
     layout = DEFAULT
     form_class = DEFAULT
@@ -225,7 +228,8 @@ class ModelViewSet(BaseViewset):
         """
         result = {
             'list_display': self.list_display,
-            'list_display_links': self.list_display_links
+            'list_display_links': self.list_display_links,
+            'ordering': self.ordering
         }
         result.update(kwargs)
         return self.filter_kwargs(self.list_view_class, **result)

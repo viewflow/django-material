@@ -195,6 +195,16 @@ class DataTableMixin(ContextMixin):
         config['pageLength'] = self.paginate_by
         config['ajax']['url'] = self.request.path
         config['columns'] = self.get_columns_def()
+
+        if self.ordering:
+            datatable_ordering = []
+            columns = self.get_list_display()
+
+            for column in self.ordering:
+                idx = columns.index(column.strip('-'))
+                datatable_ordering.append([idx, 'asc' if column.startswith('-') else 'desc'])
+            config['order'] = datatable_ordering
+
         if self.datatable_config is not None:
             config.update(self.datatable_config)
         return config

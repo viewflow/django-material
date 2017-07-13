@@ -8,6 +8,7 @@ from . import models
 
 class CityViewSet(ModelViewSet):
     model = models.City
+    ordering = ['-country', 'name']
     list_display = ('name', 'country', 'population')
 
 
