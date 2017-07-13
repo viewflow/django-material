@@ -8,7 +8,7 @@
 {% block content %}
 <div class="row">
     <div class="app-list">
-        {% get_app_list request as app_list %}
+        {% get_app_list app_list as app_list %}
         {% for app in app_list %}
         <div class="app">
             <div class="card">
