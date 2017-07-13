@@ -78,7 +78,7 @@ License
 
 Django Material is an Open Source project licensed under the terms of the `BSD3 license <https://github.com/viewflow/django-material/blob/master/LICENSE.txt>`_
 
-Django Material Pro has a commercial-friendly license and distributed as part of Viewflow Pro
+Django Material Pro with additional features has a commercial-friendly license. Check http:viewflow.io/pro/ for details.
 
 
 Changelog
