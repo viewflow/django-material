@@ -6,7 +6,7 @@
    {% endattrs %}>
         <div class="btn">
             {% part field prefix %}<span>{% trans 'File' %}</span>{% endpart %}
-            <input type="file" name="{{ bound_field.html_name }}"/>
+            <input type="file" name="{{ bound_field.html_name }}" {% if field.widget.attrs.multiple %}multiple{% endif%}/>
         </div>
         {% part field suffix %}{% endpart %}{% part field control %}<div class="file-path-wrapper">
             <input{% attrs bound_field 'widget' default field.widget.attrs %}
