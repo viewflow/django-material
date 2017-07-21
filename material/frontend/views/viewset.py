@@ -111,6 +111,7 @@ class ModelViewSet(BaseViewset):
 
     layout = DEFAULT
     form_class = DEFAULT
+    model_form_class = DEFAULT
     form_widgets = DEFAULT
 
     def filter_kwargs(self, view_class, **kwargs):
@@ -150,6 +151,7 @@ class ModelViewSet(BaseViewset):
         result = {
             'layout': self.layout,
             'form_class': self.form_class,
+            'model_form_class': self.model_form_class,
             'form_widgets': self.form_widgets,
         }
         result.update(kwargs)
@@ -260,6 +262,7 @@ class ModelViewSet(BaseViewset):
         result = {
             'layout': self.layout,
             'form_class': self.form_class,
+            'model_form_class': self.model_form_class,
             'form_widgets': self.form_widgets,
         }
         result.update(kwargs)

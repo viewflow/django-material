@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 from django.contrib import messages
 from django.core.exceptions import PermissionDenied, ValidationError
 from django.core.urlresolvers import reverse
-from django.forms.models import modelform_factory
+from django.forms.models import ModelForm, modelform_factory
 from django.http import Http404
 from django.utils.encoding import force_text
 from django.utils.html import format_html
@@ -33,6 +33,7 @@ class ModelViewMixin(object):
     viewset = None
     layout = None
     form_widgets = None
+    model_form_class = ModelForm
 
     def __init__(self, *args, **kwargs):  # noqa D102
         super(ModelViewMixin, self).__init__(*args, **kwargs)
@@ -41,6 +42,7 @@ class ModelViewMixin(object):
                 self.fields = _collect_elements(self.layout)
             else:
                 self.fields = '__all__'
+
 
     def has_object_permission(self, request, obj):
         """Check object access permission.
@@ -84,7 +86,9 @@ class ModelViewMixin(object):
                 model = self.object.__class__
             else:
                 model = self.get_queryset().model
-            return modelform_factory(model, fields=self.fields, widgets=self.form_widgets)
+            return modelform_factory(
+                model, form=self.model_form_class, fields=self.fields, widgets=self.form_widgets
+            )
         return super(ModelViewMixin, self).get_form_class()
 
     def get_success_url(self):
