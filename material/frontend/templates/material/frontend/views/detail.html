@@ -17,7 +17,11 @@
                 {% for field_name, value in object_data %}
                 <tr>
                     <th>{{ field_name }}</th>
+                    {% if value.get_absolute_url %}
+                    <td><a href="{{ value.get_absolute_url }}">{{ value }}</a></td>
+                    {% else %}
                     <td>{{ value }}</td>
+                    {% endif %}
                 </tr>
                 {% endfor %}
             </table>
