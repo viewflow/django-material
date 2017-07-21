@@ -24,11 +24,11 @@ class DetailModelView(generic.DetailView):
             elif field.auto_created:
                 continue
             else:
-                choice_display_attr = "get_{}_display".format(field.get_attname())
+                choice_display_attr = "get_{}_display".format(field.name)
             if hasattr(self.object, choice_display_attr):
                 value = getattr(self.object, choice_display_attr)()
             else:
-                value = getattr(self.object, field.get_attname())
+                value = getattr(self.object, field.name)
 
             if value is not None:
                 yield (field.verbose_name.title(), value)
