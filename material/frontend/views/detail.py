@@ -1,5 +1,5 @@
 from __future__ import unicode_literals
-
+from itertools import chain
 from django.contrib.auth import get_permission_codename
 from django.core.urlresolvers import reverse
 from django.core.exceptions import PermissionDenied, ValidationError
@@ -18,7 +18,8 @@ class DetailModelView(generic.DetailView):
 
         Choice fields values are expanded to readable choice label.
         """
-        for field in self.object._meta.fields:
+        for field in chain(self.object._meta.fields,
+                           self.object._meta.many_to_many):
             if isinstance(field, models.AutoField):
                 continue
             elif field.auto_created:
