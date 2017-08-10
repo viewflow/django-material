@@ -7,6 +7,7 @@ import postcss from 'gulp-postcss'
 import pump from 'pump'
 import sass from 'gulp-sass'
 import uglify from 'gulp-uglify'
+import babel from 'gulp-babel'
 
 var supportedBrowsers = [
   'Chrome >= 50',
@@ -88,6 +89,7 @@ gulp.task('materialize.js', () => {
     "node_modules/materialize-css/js/carousel.js",
   ]
   return gulp.src(deps)
+    .pipe(babel({presets: ['es2015']}))
     .pipe(concat('materialize.js'))
     .pipe(gulp.dest('./material/static/material/js/'));
 })
