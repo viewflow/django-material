@@ -11,3 +11,4 @@ node_modules/
 *.egg-info/
 tests/visual/screenshots_test/
 yarn.lock
+package-lock.json

@@ -7,6 +7,7 @@ import postcss from 'gulp-postcss'
 import pump from 'pump'
 import sass from 'gulp-sass'
 import uglify from 'gulp-uglify'
+import babel from 'gulp-babel'
 
 var supportedBrowsers = [
   'Chrome >= 50',
@@ -55,39 +56,8 @@ gulp.task('3rdparty.css', () => {
 
 
 gulp.task('materialize.js', () => {
-  var deps = [
-    "node_modules/materialize-css/js/initial.js",
-    "node_modules/materialize-css/js/jquery.easing.1.3.js",
-    "node_modules/materialize-css/js/animation.js",
-    "node_modules/materialize-css/js/velocity.min.js",
-    "node_modules/materialize-css/js/hammer.min.js",
-    "node_modules/materialize-css/js/jquery.hammer.js",
-    "node_modules/materialize-css/js/global.js",
-    "node_modules/materialize-css/js/collapsible.js",
-    "node_modules/materialize-css/js/dropdown.js",
-    "node_modules/materialize-css/js/modal.js",
-    "node_modules/materialize-css/js/materialbox.js",
-    "node_modules/materialize-css/js/parallax.js",
-    "node_modules/materialize-css/js/tabs.js",
-    "node_modules/materialize-css/js/tooltip.js",
-    "node_modules/materialize-css/js/waves.js",
-    "node_modules/materialize-css/js/toasts.js",
-    "node_modules/materialize-css/js/sideNav.js",
-    "node_modules/materialize-css/js/scrollspy.js",
-    "node_modules/materialize-css/js/forms.js",
-    "node_modules/materialize-css/js/slider.js",
-    "node_modules/materialize-css/js/cards.js",
-    "node_modules/materialize-css/js/chips.js",
-    "node_modules/materialize-css/js/pushpin.js",
-    "node_modules/materialize-css/js/buttons.js",
-    "node_modules/materialize-css/js/transitions.js",
-    "node_modules/materialize-css/js/scrollFire.js",
-    "node_modules/materialize-css/js/date_picker/picker.js",
-    "node_modules/materialize-css/js/date_picker/picker.date.js",
-    "node_modules/materialize-css/js/character_counter.js",
-    "node_modules/materialize-css/js/carousel.js",
-  ]
-  return gulp.src(deps)
+  return gulp.src('node_modules/materialize-css/js/**/*.js')
+    .pipe(babel({presets: ['es2015']}))
     .pipe(concat('materialize.js'))
     .pipe(gulp.dest('./material/static/material/js/'));
 })
