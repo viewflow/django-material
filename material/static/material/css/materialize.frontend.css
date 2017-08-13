@@ -125,7 +125,8 @@ th {
     .side-nav.fixed .collapsible-body .submenu.active {
       background-color: rgba(0, 0, 0, 0.05) !important; }
       .side-nav.fixed .collapsible-body .submenu.active .collapsible li.active > a.active,
-      .side-nav.fixed .collapsible-body .submenu.active .collapsible li.active > .collapsible-header {
+      .side-nav.fixed .collapsible-body .submenu.active .collapsible li.active > .collapsible-header,
+      .side-nav.fixed .collapsible-body .submenu.active .collapsible > li > .collapsible-header {
         color: rgba(0, 0, 0, 0.87); }
 
 /* TOPBAR */
