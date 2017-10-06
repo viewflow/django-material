@@ -1,0 +1,7 @@
+.dmc-form-field,
+.dmc-textfield,
+.dmc-textfield__input {
+  width: 100%; }
+
+.dmc-form-field {
+  display: block; }

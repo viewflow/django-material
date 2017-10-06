@@ -1,0 +1,32 @@
+<!DOCTYPE html>{% load static %}
+<html lang="en" class="mdc-typography">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>{% block title %}Material Design for Django{% endblock %}</title>
+  <link href="{% static 'material/css/material-components-web.css' %}" rel="stylesheet">
+  <link href="{% static 'material/css/django-material-components.css' %}" rel="stylesheet">
+  <link href="{% static 'material/fonts/material-design-icons/material-icons.css' %}" rel="stylesheet">
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      background: #eee;
+    }
+    .page {
+      max-width: 900px;
+      flex-grow: 1;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    {% block content %}{% endblock %}
+  </div>
+  <script src="{% static 'material/js/material-components-web.js' %}"></script>
+  <script type="text/javascript">
+    window.mdc.autoInit();
+  </script>  
+</body>
+</html>
