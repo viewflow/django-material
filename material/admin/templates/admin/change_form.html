@@ -24,6 +24,11 @@
         {% if to_field %}<input type="hidden" name="{{ to_field_var }}" value="{{ to_field }}" />{% endif %}
         <div class="card">
             <div class="card-content">
+                {% if save_on_top %}
+                <div class="card-action-top">
+                    {% submit_row %}
+                </div>
+                {% endif %}
                 <span class="card-title">{% if add %}{% trans 'New' %} {{ opts.verbose_name }}{% else %}{{ adminform.form.instance|title }}{% endif %}</span>
                 {% if errors %}
                 <div class="row">
@@ -43,9 +48,11 @@
                 {% endblock %}
                 {% block after_related_objects %}{% endblock %}
             </div>
+            {% if not save_on_top %}
             <div class="card-action">
                 {% submit_row %}
             </div>
+            {% endif %}
         </div>
     </form>
 </div>
