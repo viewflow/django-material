@@ -132,7 +132,7 @@ gulp.task('frontend.min.js', ['materialize.js', '3rdparty.js'], (cb) => {
     'material/static/material/js/jquery.js',
     'material/static/material/js/jquery.dataTables.js',
     'material/static/material/js/jquery.activeNavigation.js',
-    'material/static/material/js/jquery.datetimepicker.js',
+    'material/static/material/js/jquery.datetimepicker.full.js',
     'material/static/material/js/jquery.formset.js',
     'material/static/material/js/perfect-scrollbar.jquery.js',
     'material/static/material/js/dataTables.fixedHeader.js',
@@ -169,7 +169,7 @@ gulp.task('frontend.min.css', ['3rdparty.css', 'materialize.scss', 'materialize.
 
 gulp.task('admin.min.js', ['materialize.js', '3rdparty.js'], (cb) => {
   var deps = [
-    'material/static/material/js/jquery.datetimepicker.js',
+    'material/static/material/js/jquery.datetimepicker.full.js',
     'material/static/material/js/jquery.formset.js',
     'material/static/material/js/jquery.dataTables.js',
     'material/static/material/js/dataTables.responsive.js',

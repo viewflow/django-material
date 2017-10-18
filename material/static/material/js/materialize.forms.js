@@ -15,6 +15,11 @@
       .not('.material-ignore')
       .material_select()
 
+    var lang = jQuery( ":root" ).attr('lang')
+    if(lang) {
+      jQuery.datetimepicker.setLocale(lang.substr(0, 2));
+    }
+
     // Date/DateTime/Time
     // https://github.com/xdan/datetimepicker
     $container
