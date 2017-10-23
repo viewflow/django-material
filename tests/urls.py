@@ -1,9 +1,17 @@
 from django.urls import path
-
 from django.views.generic import FormView
+from material import Site
+
 from .forms import widgets, demo
+from .atlas.urls import Atlas
+
+frontend = Site([
+    Atlas,
+])
 
 urlpatterns = [
+    path('', [frontend.urls, 'frontend', 'frontend']),
+
     # widets
     path('widget/checkboxinput/', FormView.as_view(
         template_name='form.html',

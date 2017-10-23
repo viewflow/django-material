@@ -1,0 +1,21 @@
+html, body {
+    height: 100%
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.dmc-page {
+  height: 100%;
+  display: flex;
+}
+
+.mdc-list-group__subheader--dmc {
+  padding-left: 16px;
+  color: rgba(0, 0, 0, 0.54);
+}
+

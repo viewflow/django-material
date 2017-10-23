@@ -1,0 +1,53 @@
+<!DOCTYPE html>{% load static %}
+<html lang="en" class="mdc-typography">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>{% block title %}Django Material{% endblock %}</title>
+  <link href="{% static 'material/css/material-components-web.css' %}" rel="stylesheet">
+  <link href="{% static 'material/css/django-material-components.css' %}" rel="stylesheet">
+  <link href="{% static 'material/css/django-material-frontend.css' %}" rel="stylesheet">
+  <link href="{% static 'material/fonts/material-design-icons/material-icons.css' %}" rel="stylesheet">
+</head>
+<body>
+  <header class="mdc-toolbar">
+    <div class="mdc-toolbar__row">
+      <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
+        <a href="#" class="material-icons mdc-toolbar__icon--menu">menu</a>
+        <span class="mdc-toolbar__title">Authentification</span>
+      </section>
+    </div>
+  </header>
+  <div class="dmc-page">
+      <nav class="mdc-permanent-drawer mdc-typography dmc-page__sidenav">
+          <nav class="mdc-list">
+            <div class="mdc-list-group">
+              <h3 class="mdc-list-group__subheader mdc-list-group__subheader--dmc">Auth</h3>
+              <a class="mdc-list-item mdc-permanent-drawer--selected" href="#">
+                  <i class="material-icons mdc-list-item__start-detail" aria-hidden="true">person</i>Users
+              </a>
+              <a class="mdc-list-item" href="#">
+                  <i class="material-icons mdc-list-item__start-detail" aria-hidden="true">people</i>Groups
+              </a>
+              <a class="mdc-list-item">&nbsp;</a>
+            </div>
+            <div class="mdc-list-divider"></div>
+            <div class="mdc-list-group">
+                <h3 class="mdc-list-group__subheader mdc-list-group__subheader--dmc">Applications</h3>
+              <a class="mdc-list-item mdc-permanent-drawer--selected" href="#">
+                <i class="material-icons mdc-list-item__start-detail" aria-hidden="true">inbox</i>Auth
+              </a>
+              <a class="mdc-list-item" href="#">
+                <i class="material-icons mdc-list-item__start-detail" aria-hidden="true">star</i>Atlas
+              </a>
+            </div>
+          </nav>
+        </nav>
+        <main class="dmc-page__content">
+
+        </main>
+  </div>
+  {% block content %}{% endblock %}
+</body>
+</html>
