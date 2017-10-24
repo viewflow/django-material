@@ -73,6 +73,6 @@
     $(document).on('turbolinks:load', function() { initForms($(document)) })
     $(document).on('turbolinks:before-cache', function () { destroyForms($(document))})
   } else {
-    $(document).on('ready', function() { initForms($(document)) })
+    $(document).ready(function() { initForms($(document)) })
   }
 })()

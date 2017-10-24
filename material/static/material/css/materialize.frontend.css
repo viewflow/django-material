@@ -35,8 +35,7 @@ th {
     .registration .sidebar form {
       width: 90%; }
   .registration .logo {
-    -ms-grid-row-align: center;
-        align-self: center;
+    align-self: center;
     width: 100%;
     text-align: center;
     color: white; }

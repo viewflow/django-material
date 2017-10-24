@@ -1,4 +1,5 @@
 import autoprefixer from 'autoprefixer'
+import babel from 'gulp-babel'
 import concat from 'gulp-concat'
 import cssnano from 'cssnano';
 import gulp from 'gulp'
@@ -33,7 +34,6 @@ gulp.task('3rdparty.js', () => {
     'node_modules/datatables.net-responsive/js/dataTables.responsive.js',
     'node_modules/datatables/media/js/jquery.dataTables.js',
     'node_modules/jquery-datetimepicker/build/jquery.datetimepicker.full.js',
-    // 'node_modules/materialize-css/dist/js/materialize.js',
     'node_modules/perfect-scrollbar/dist/js/perfect-scrollbar.jquery.js',
     'node_modules/turbolinks/dist/turbolinks.js'
   ]
@@ -57,7 +57,7 @@ gulp.task('3rdparty.css', () => {
 gulp.task('materialize.js', () => {
   var deps = [
     "node_modules/materialize-css/js/initial.js",
-    "node_modules/materialize-css/js/jquery.easing.1.3.js",
+    "node_modules/materialize-css/js/jquery.easing.1.4.js",
     "node_modules/materialize-css/js/animation.js",
     "node_modules/materialize-css/js/velocity.min.js",
     "node_modules/materialize-css/js/hammer.min.js",
@@ -84,10 +84,19 @@ gulp.task('materialize.js', () => {
     "node_modules/materialize-css/js/scrollFire.js",
     "node_modules/materialize-css/js/date_picker/picker.js",
     "node_modules/materialize-css/js/date_picker/picker.date.js",
+    "node_modules/materialize-css/js/date_picker/picker.time.js",
     "node_modules/materialize-css/js/character_counter.js",
     "node_modules/materialize-css/js/carousel.js",
+    "node_modules/materialize-css/js/tapTarget.js",
   ]
   return gulp.src(deps)
+    .pipe(babel({presets: [
+      ['env', {
+        "targets": {
+          "browsers": supportedBrowsers
+        }
+      }]
+    ]}))
     .pipe(concat('materialize.js'))
     .pipe(gulp.dest('./material/static/material/js/'));
 })

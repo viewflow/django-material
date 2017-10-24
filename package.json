@@ -5,8 +5,9 @@
     "gulp": "gulp"
   },
   "devDependencies": {
-    "autoprefixer": "^6.7.7",
+    "autoprefixer": "^7.1.6",
     "babel": "^6.23.0",
+    "babel-preset-env": "^1.6.1",
     "babel-preset-node5": "^12.0.1",
     "cssnano": "^3.10.0",
     "datatables": "^1.10.13",
@@ -19,14 +20,14 @@
     "gulp-concat": "^2.6.1",
     "gulp-postcss": "^6.4.0",
     "gulp-sass": "^3.1.0",
-    "gulp-uglify": "^2.1.2",
-    "jquery": "^2.2.4",
+    "gulp-uglify": "^3.0.0",
+    "jquery": "^3.2.1",
     "jquery-datetimepicker": "^2.5.11",
     "material-design-icons": "^3.0.1",
-    "materialize-css": "^0.98.2",
+    "materialize-css": "^0.100.2",
     "merge-stream": "^1.0.1",
-    "perfect-scrollbar": "^0.7.0",
+    "perfect-scrollbar": "^1.1.0",
     "pump": "^1.0.2",
-    "turbolinks": "^5.0.2"
+    "turbolinks": "^5.0.3"
   }
 }
