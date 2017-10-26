@@ -3,7 +3,7 @@ import re
 from django import forms
 
 
-ORDER_RE = re.compile('datatable-order\[(\d+)\]\[(\w+)\]')
+ORDER_RE = re.compile(r'datatable-order\[(\d+)\]\[(\w+)\]')
 
 
 class DatatableRequestForm(forms.Form):

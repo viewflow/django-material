@@ -19,7 +19,7 @@ class Test(WebTest):
 
         response = form.submit()
 
-        self.assertEquals(302, response.status_code)
+        self.assertEqual(302, response.status_code)
 
     def test_post_invalid_data(self):
         page = self.app.get('/demo/login/')
@@ -30,8 +30,8 @@ class Test(WebTest):
 
         response = form.submit()
 
-        self.assertEquals('Enter a valid email address.', response.pyquery('#id_email_container .errors').text())
-        self.assertEquals('This field is required.', response.pyquery('#id_password_container .errors').text())
+        self.assertEqual('Enter a valid email address.', response.pyquery('#id_email_container .errors').text())
+        self.assertEqual('This field is required.', response.pyquery('#id_password_container .errors').text())
 
 urlpatterns = [
     url(r'^demo/login/$', generic.FormView.as_view(

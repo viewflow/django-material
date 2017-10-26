@@ -28,7 +28,7 @@ class Test(WebTest):
         form['card_exp_year'] = '1970'
 
         response = form.submit()
-        self.assertEquals(302, response.status_code)
+        self.assertEqual(302, response.status_code)
 
     def test_post_invalid_data(self):
         page = self.app.get('/demo/checkout/')
@@ -40,20 +40,20 @@ class Test(WebTest):
         form['card_exp_year'] = 'john'
 
         response = form.submit()
-        self.assertEquals('This field is required.', response.pyquery('#id_first_name_container .errors').text())
-        self.assertEquals('This field is required.', response.pyquery('#id_last_name_container .errors').text())
-        self.assertEquals('Enter a valid email address.', response.pyquery('#id_email_container .errors').text())
-        self.assertEquals('This field is required.', response.pyquery('#id_country_container .errors').text())
-        self.assertEquals('This field is required.', response.pyquery('#id_phone_container .errors').text())
-        self.assertEquals('This field is required.', response.pyquery('#id_city_container .errors').text())
-        self.assertEquals('This field is required.', response.pyquery('#id_post_code_container .errors').text())
-        self.assertEquals('This field is required.', response.pyquery('#id_address_container .errors').text())
-        self.assertEquals('This field is required.', response.pyquery('#id_additional_info_container .errors').text())
-        self.assertEquals('This field is required.', response.pyquery('#id_card_type_container .errors').text())
-        self.assertEquals('This field is required.', response.pyquery('#id_card_holder_container .errors').text())
-        self.assertEquals('This field is required.', response.pyquery('#id_card_number_container .errors').text())
-        self.assertEquals('Enter a whole number.', response.pyquery('#id_card_ccv2_container .errors').text())
-        self.assertEquals('Enter a whole number.', response.pyquery('#id_card_exp_year_container .errors').text())
+        self.assertEqual('This field is required.', response.pyquery('#id_first_name_container .errors').text())
+        self.assertEqual('This field is required.', response.pyquery('#id_last_name_container .errors').text())
+        self.assertEqual('Enter a valid email address.', response.pyquery('#id_email_container .errors').text())
+        self.assertEqual('This field is required.', response.pyquery('#id_country_container .errors').text())
+        self.assertEqual('This field is required.', response.pyquery('#id_phone_container .errors').text())
+        self.assertEqual('This field is required.', response.pyquery('#id_city_container .errors').text())
+        self.assertEqual('This field is required.', response.pyquery('#id_post_code_container .errors').text())
+        self.assertEqual('This field is required.', response.pyquery('#id_address_container .errors').text())
+        self.assertEqual('This field is required.', response.pyquery('#id_additional_info_container .errors').text())
+        self.assertEqual('This field is required.', response.pyquery('#id_card_type_container .errors').text())
+        self.assertEqual('This field is required.', response.pyquery('#id_card_holder_container .errors').text())
+        self.assertEqual('This field is required.', response.pyquery('#id_card_number_container .errors').text())
+        self.assertEqual('Enter a whole number.', response.pyquery('#id_card_ccv2_container .errors').text())
+        self.assertEqual('Enter a whole number.', response.pyquery('#id_card_exp_year_container .errors').text())
 
 
 urlpatterns = [

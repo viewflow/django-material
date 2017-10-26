@@ -19,7 +19,7 @@ class Test(WebTest):
 
         response = form.submit()
 
-        self.assertEquals(302, response.status_code)
+        self.assertEqual(302, response.status_code)
 
     def test_post_invalid_data(self):
         page = self.app.get('/demo/contact/')
@@ -29,10 +29,10 @@ class Test(WebTest):
 
         response = form.submit()
 
-        self.assertEquals('This field is required.', response.pyquery('#id_name_container .errors').text())
-        self.assertEquals('Enter a valid email address.', response.pyquery('#id_email_container .errors').text())
-        self.assertEquals('This field is required.', response.pyquery('#id_subject_container .errors').text())
-        self.assertEquals('This field is required.', response.pyquery('#id_subject_container .errors').text())
+        self.assertEqual('This field is required.', response.pyquery('#id_name_container .errors').text())
+        self.assertEqual('Enter a valid email address.', response.pyquery('#id_email_container .errors').text())
+        self.assertEqual('This field is required.', response.pyquery('#id_subject_container .errors').text())
+        self.assertEqual('This field is required.', response.pyquery('#id_subject_container .errors').text())
 
 
 urlpatterns = [

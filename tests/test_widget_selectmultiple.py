@@ -33,7 +33,7 @@ class Test(WebTest):
 
         self.assertIn('cleaned_data', response)
         self.assertIn('test_field', response['cleaned_data'])
-        self.assertEquals(['V', 'P'], response['cleaned_data']['test_field'])
+        self.assertEqual(['V', 'P'], response['cleaned_data']['test_field'])
 
     def test_missing_value_error(self):
         form = self.app.get(self.test_missing_value_error.url).form
