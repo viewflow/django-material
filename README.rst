@@ -84,13 +84,14 @@ Django Material Pro with additional features has a commercial-friendly license. 
 Changelog
 =========
 
-1.0.0 2017-05-29 - Stable
+1.1.0 2017-10-27 - Stable
 -------------------------
 
-- Django 1.11 support
-- Update MaterializeCSS to 0.98.2
-- Fix missing badges in shipped MaterializeCSS build
-- Localization added: German/French/Spainish/Korean/Chinese
-- Forms - Fix allows to use html in a `help_text` of widgets
-- Frontend - Improved Login/Logout/403/404/500 service screen templates
-- Admin - fix application list layout
+- Update MaterializeCSS to 0.100.2
+- Forms - Localize DateTime picker
+- Forms - Add clear button on ajax autocomplete fields
+- Frontend - Allow to set ordering in the list view from viewset
+- Frontend - Fix permission check for the create view
+- Admin - Fix inline formset errors
+- Admin - Add file download link on the file fields
+
