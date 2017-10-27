@@ -37,8 +37,30 @@ form .error {
   .input-field .prefix ~ .errors .error {
     margin-left: 3rem; }
 
+.input-field .input-field-action {
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: #555;
+  padding: 0 0.75rem;
+  line-height: 3rem;
+  background: white; }
+  .input-field .input-field-action i.material-icons {
+    vertical-align: middle; }
+
 .input-field input[type=number] {
   -moz-appearance: textfield; }
+
+.input-field .input-field-action {
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: #555;
+  padding: 0 0.75rem;
+  line-height: 3rem;
+  background: white; }
+  .input-field .input-field-action i.material-icons {
+    vertical-align: middle; }
 
 .input-field ::-webkit-inner-spin-button {
   -webkit-appearance: none; }
