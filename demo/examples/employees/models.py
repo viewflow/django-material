@@ -27,6 +27,7 @@ class DeptEmp(models.Model):
     department = models.ForeignKey(Department, on_delete=models.CASCADE, db_column='dept_no', verbose_name=_('department'))
     from_date = models.DateField(_('from'))
     to_date = models.DateField(_('to'))
+    avatar = models.FileField(_('Avatar'), blank=True, null=True)
 
     objects = TemporalQuerySet.as_manager()
 

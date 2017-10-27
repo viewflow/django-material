@@ -156,7 +156,9 @@ urlpatterns = [
 
 urlpatterns += [
     url(r'^static/(?P<path>.*)$', static.serve,
-        {'document_root': settings.STATIC_ROOT, 'show_indexes': True})
+        {'document_root': settings.STATIC_ROOT, 'show_indexes': True}),
+    url(r'^deploy/(?P<path>.*)$', static.serve,
+        {'document_root': settings.MEDIA_ROOT, 'show_indexes': True}),
 ]
 
 if 'material.frontend' not in settings.INSTALLED_APPS:
