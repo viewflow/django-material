@@ -5,14 +5,15 @@ from material import Site
 from .forms import widgets, demo
 from .atlas.urls import Atlas
 
-frontend = Site([
-    Atlas,
+frontend = Site(apps=[
+    Atlas(),
 ])
 
-urlpatterns = [
-    path('', [frontend.urls, 'frontend', 'frontend']),
 
-    # widets
+urlpatterns = [
+    path('', frontend.urls),
+
+    # widgets
     path('widget/checkboxinput/', FormView.as_view(
         template_name='form.html',
         form_class=widgets.CheckboxInputForm)),

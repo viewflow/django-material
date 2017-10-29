@@ -1,6 +1,6 @@
 from .layout import Layout, Row, Column, Fieldset, Span
 from .viewset import Viewset
-from .site import Site, Application
+from .sites import Site, Application
 
 
 __title__ = 'Django-Material'
