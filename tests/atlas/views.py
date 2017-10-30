@@ -13,3 +13,9 @@ class CityViewset(ModelViewset):
         generic.TemplateView.as_view(template_name='material/base.html'),
         name="detail"
     )
+
+    list_view = path(
+        '',
+        generic.TemplateView.as_view(template_name='material/base.html'),
+        name="list"
+    )

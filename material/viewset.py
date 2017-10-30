@@ -1,6 +1,6 @@
 from django.views import generic
 from django.urls import URLPattern, URLResolver, path, include
-from django.urls.resolvers import RegexPattern
+from django.urls.resolvers import RoutePattern
 
 from material.utils import strip_suffixes, camel_case_to_underscore
 
@@ -137,21 +137,20 @@ def _get_viewset_index_url(viewset):
     """
     Return first non-parameterized viewset url.
     """
-    pattern, app_name, namespace = viewset.urls
-    resolver = URLResolver(RegexPattern(r'^/'), pattern, app_name=app_name, namespace=namespace)
-
-    for url_pattern in viewset.urls[0]:
-        if isinstance(url_pattern, URLPattern):
-            couldbe_index_view = (
-                url_pattern.pattern.converters == {} and
-                not (hasattr(url_pattern.callback, 'view_class') and
-                     url_pattern.callback.view_class == IndexRedirectView)
-            )
-            if couldbe_index_view:
-                match = resolver.reverse_dict.get(url_pattern.callback, None)
-                if match:
-                    matches, _, _, _ = match
-                    return '{}'.format(matches[0][0])
+    def _get_index_url(url_patterns, prefix='./'):
+        for url_pattern in url_patterns:
+            if isinstance(url_pattern, URLPattern):
+                couldbe_index_view = (
+                    isinstance(url_pattern.pattern, RoutePattern) and
+                    url_pattern.pattern.converters == {} and
+                    not (hasattr(url_pattern.callback, 'view_class') and
+                         url_pattern.callback.view_class == IndexRedirectView)
+                )
+                if couldbe_index_view:
+                    return prefix + url_pattern.pattern._route
+            elif isinstance(url_pattern, URLResolver) and isinstance(url_pattern.pattern, RoutePattern):
+                return _get_index_url(url_pattern.url_patterns, prefix+url_pattern.pattern._route)
+    return _get_index_url(viewset.urls[0], './')
 
 
 class IndexRedirectView(generic.RedirectView):
@@ -159,7 +158,14 @@ class IndexRedirectView(generic.RedirectView):
 
     def get_redirect_url(self, *args, **kwargs):
         if self.viewset:
-            return _get_viewset_index_url(self.viewset)
+            redirect = _get_viewset_index_url(self.viewset)
+            if redirect is None:
+                raise ValueError(
+                    "Can't determine index url. "
+                    "Please remove IndexViewMixin and add an explicit"
+                    "`index_view = path('', generics.RedirectView(url='...'), name='index')`"
+                    " declaration for the viewset")
+            return redirect
         return super().get_redirect_url(*args, **kwargs)
 
 

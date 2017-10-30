@@ -1,5 +1,5 @@
 from material.viewset import Viewset, IndexViewMixin
 
 
-class ModelViewset(IndexViewMixin, Viewset):
+class ModelViewset(Viewset):
     pass

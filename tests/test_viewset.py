@@ -27,10 +27,13 @@ class Test(TestCase):
 
     def test_index_url(self):
         index_url = _get_viewset_index_url(ProbeViewset())
-        self.assertEqual('probe/', index_url)
+        self.assertEqual('./probe/', index_url)
+
+    def test_resolve_index_view(self):
+        self.assertEqual('/', reverse('probe:index'))
 
     def test_resolve_view(self):
-        self.assertEqual('/', reverse('probe:index'))
+        self.assertEqual('/probe/', reverse('probe:probe'))
 
     def test_resolve_subview(self):
         self.assertEqual('/sub/', reverse('probe:probe:index'))
