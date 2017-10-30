@@ -19,8 +19,9 @@ from material import renderers
 
 
 DEFAULTS = {
+    'AUTOREGISTER': True,
     'FORM_RENDERER': renderers.FormRenderer,
-    'WIDGET_RENDERERS': renderers.WIDGET_RENDERES,
+    'WIDGET_RENDERERS': renderers.WIDGET_RENDERERS,
     'FIELD_RENDERERS': renderers.FIELD_RENDERERS,
 }
 
@@ -33,7 +34,7 @@ class Settings(object):
 
         if 'FORM_RENDERERS' in custom:
             self.settings['FORM_RENDERERS'] = import_string(custom['FORM_RENDERERS'])
-        
+
         for key, value in custom.get('WIDGET_RENDERERS', {}):
             widget_class, renderer_class = import_string(key), import_string(value)
             self.settings['WIDGET_RENDERERS'][widget_class] = renderer_class()

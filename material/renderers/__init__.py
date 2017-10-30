@@ -8,10 +8,10 @@ from .select import SelectRenderer
 
 __all__ = (
     'get_field_renderer', 'FormRenderer',
-    'WIDGET_RENDERES', 'FIELD_RENDERERS'
+    'WIDGET_RENDERERS', 'FIELD_RENDERERS'
 )
 
-WIDGET_RENDERES = {
+WIDGET_RENDERERS = {
     widgets.CheckboxInput: CheckboxInputRenderer,
     widgets.TextInput: InputRenderer,
     widgets.EmailInput: InputRenderer,

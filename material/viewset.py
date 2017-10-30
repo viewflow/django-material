@@ -190,7 +190,7 @@ class NamedViewsetMixin:
         viewset_name = camel_case_to_underscore(
             strip_suffixes(
                 self.__class__.__name__,
-                ['Viewset', 'Admin']))
+                ['Application', 'Viewset', 'Admin']))
 
         if self.name is None:
             self.app_name = viewset_name
