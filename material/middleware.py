@@ -3,7 +3,7 @@ from django.core.exceptions import PermissionDenied
 
 class SiteMiddleware(object):
     """
-    Middleware that sets `current_site` and `current_app` attributes to request.resolver_match object.
+    Middleware that sets `site` and `app` attributes to request.resolver_match object.
     """
     def __init__(self, get_response):
         self.get_response = get_response

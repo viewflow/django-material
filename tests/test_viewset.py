@@ -8,13 +8,13 @@ from material.viewset import (
 
 
 class ProbeSubViewset(Viewset):
-    sub_view = path(
+    sub_url = path(
         '', generic.TemplateView.as_view(), name="index"
     )
 
 
 class ProbeViewset(NamedViewsetMixin, IndexViewMixin, Viewset):
-    prove_view = path(
+    probe_url = path(
         'probe/', generic.TemplateView.as_view(), name="probe"
     )
     probe_viewset = ProbeSubViewset(prefix="sub")

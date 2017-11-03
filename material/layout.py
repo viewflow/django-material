@@ -36,7 +36,7 @@ def _children_sizes(spans, grid_size=12, grid_name='desktop', keep_in_row=True):
     else:
         rest = grid_size - bound
         if rest <= 0 or grid_size % auto_count != 0:
-            raise ValueError("Can't spead {} over {} columns on a {} grid".format(
+            raise ValueError("Can't spread {} over {} columns on a {} grid".format(
                 spans, grid_size, grid_name))
         return [
             rest // auto_count if child == AUTO else child
@@ -164,9 +164,9 @@ class Span(LayoutNode):
     elements with specific sizes.
 
     On mobile and tablet if all elements in a row have auto-sizes,
-    each element would be plased in a new line. If even one element
+    each element would be placed in a new line. If even one element
     in a row has a specific size, all auto-sized elements would be
-    keeped in a single line, like on a desktop.
+    kept in a single line, like on a desktop.
 
     """
     def __init__(self, field_name, **kwargs):

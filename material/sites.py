@@ -52,9 +52,11 @@ class Application(IndexViewMixin, NamedViewsetMixin, Viewset):
 
 class Site(IndexViewMixin, Viewset):
     """Object combines set of module under in a single place."""
+    title = None
 
-    def __init__(self, *, apps=None, **kwargs):
+    def __init__(self, *, title=None, apps=None, **kwargs):
         super().__init__(**kwargs)
+        self.title = title
         self.apps = apps or []
 
     def has_perm(self, user):

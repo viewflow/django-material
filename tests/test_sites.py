@@ -5,8 +5,8 @@ from material import Site, Application
 
 
 class ProbeApplication(Application):
-    index_view = path(
-        '',
+    sample_url = path(
+        'sample/',
         generic.TemplateView.as_view(
             template_name='material/base.html')
     )

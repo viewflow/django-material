@@ -1,17 +1,21 @@
 from django.urls import path
 from django.views.generic import FormView
 from material import Site
+from material.contrib.auth import AuthViewset
 
 from .forms import widgets, demo
 from .atlas.urls import Atlas
 
-frontend = Site(apps=[
-    Atlas(),
-])
-
+site = Site(
+    title="Django Material",
+    apps=[
+        Atlas(),
+    ]
+)
 
 urlpatterns = [
-    path('', frontend.urls),
+    path('accounts/', AuthViewset().urls),
+    path('', site.urls),
 
     # widgets
     path('widget/checkboxinput/', FormView.as_view(

@@ -4,24 +4,33 @@ from django.urls.resolvers import RoutePattern
 
 from material.utils import strip_suffixes, camel_case_to_underscore
 
+DEFAULT = object()
 
-class viewset_items(dict):
+
+class _viewset_items(dict):
     """Track the order of declared views and child viewsets."""
+
     def __init__(self):
         self.items = []
 
     def __setitem__(self, key, value):
-        if key not in self:
-            if key.endswith('_view') or key.endswith('_viewset'):
-                self.items.append(key)
-        # Call superclass
+        is_item = key not in self and (
+            key.endswith('_url') or
+            key.endswith('_viewset')
+        )
+        if is_item:
+            self.items.append(key)
         dict.__setitem__(self, key, value)
 
 
 class ViewsetMetaClass(type):
+    """
+    Metaclass that tracks order of viewset attributes.
+    """
+
     @classmethod
     def __prepare__(metacls, name, bases):
-        return viewset_items()
+        return _viewset_items()
 
     def __new__(cls, name, bases, classdict):
         result = type.__new__(cls, name, bases, dict(classdict))
@@ -44,19 +53,45 @@ class ViewsetMetaClass(type):
         return result
 
 
+class viewprop(object):
+    """
+    A property that can be overridden.
+    """
+    def __init__(self, func):
+        self.__doc__ = getattr(func, '__doc__')
+        self.fget = func
+
+    def __get__(self, obj, objtype=None):
+        if obj is None:
+            return self
+        if self.fget.__name__ in obj.__dict__:
+            return obj.__dict__[self.fget.__name__]
+        return self.fget(obj)
+
+    def __set__(self, obj, value):
+        obj.__dict__[self.fget.__name__] = value
+
+    def __repr__(self):
+        return '<view_property func={}>'.format(self.fget)
+
+
 class Viewset(metaclass=ViewsetMetaClass):
     """
-    Set of views ready to include into the django url config.
+    Viewset is the urlpatterns list on steroids
 
-    Automatically collect URL patterns from `_view` and `_viewset` class attributes.
+    Viewset class automatically collect URL patterns from class attributes
+    with names ends with `_url` and auto-create url patterns from  attributes
+    with names ends with `_viewset`
 
-    For sub-viewsets attribute name used as the default value for url prefix and
-    url namepace.
+    Viewset classes could be inherited, extended, and have overridden attributes.
 
     Example::
 
         class SiteViewset(Viewset):
-            stats_view = path('stats/', DeptStatView.as_view(), name="stats")
+            index_url = path('', IndexView.as_view(), name="index")
+
+            # employees = EmployeesViewset(prefix='emp', app_name='employees')
+            # path('employees', employees.urls)
             employees_viewset = EmployeesViewset(prefix='emp')
 
         urlpatters = [
@@ -70,10 +105,11 @@ class Viewset(metaclass=ViewsetMetaClass):
         https://docs.djangoproject.com/en/1.11/topics/http/urls/#url-namespaces>`_
     """
 
+    app_name = None
     namespace = None
     prefix = None
 
-    def __init__(self, *, prefix=None, app_name=None, namespace=None):
+    def __init__(self, *, prefix=None, app_name=None, namespace=None, **initkwargs):
         """
         Instantiate a viewset instance.
 
@@ -82,9 +118,19 @@ class Viewset(metaclass=ViewsetMetaClass):
         :param namespace: instance URL namespace
         """
         self._urls = None
+
         self.prefix = prefix
         self.app_name = app_name
         self.namespace = namespace
+
+        for key, value in initkwargs.items():
+            if not hasattr(self.__class__, key):
+                raise TypeError(
+                    "{}() received an invalid keyword {}. Viewset constructor "
+                    "only accepts arguments that are already "
+                    "attributes of the class." .format(self.__name__, key))
+            setattr(self, key, value)
+
         super().__init__()
 
     def get_viewset_pattern(self, attr_name, viewset):
@@ -116,10 +162,15 @@ class Viewset(metaclass=ViewsetMetaClass):
 
         for attr_name in self._viewset_items:
             attr = getattr(self, attr_name)
-            if isinstance(attr, URLPattern):
+            if attr is None:
+                continue
+
+            if attr_name.endswith('_url') and isinstance(attr, URLPattern):
                 urlpatterns.append(attr)
-            elif isinstance(attr, Viewset):
+            elif attr_name.endswith('_viewset') and isinstance(attr, Viewset):
                 urlpatterns.append(self.get_viewset_pattern(attr_name, attr))
+            else:
+                raise ValueError('Unknown {}.{} entry type'.format(self.__class__.__name__, attr_name))
 
         return urlpatterns
 
@@ -163,7 +214,7 @@ class IndexRedirectView(generic.RedirectView):
                 raise ValueError(
                     "Can't determine index url. "
                     "Please remove IndexViewMixin and add an explicit"
-                    "`index_view = path('', generics.RedirectView(url='...'), name='index')`"
+                    "`index_url = path('', generics.RedirectView(url='...'), name='index')`"
                     " declaration for the viewset")
             return redirect
         return super().get_redirect_url(*args, **kwargs)
@@ -174,7 +225,7 @@ class IndexViewMixin(metaclass=ViewsetMetaClass):
     Redirect from / to the first non-parameterized view of the viewset.
     """
     @property
-    def index_view(self):
+    def index_url(self):
         return path('', IndexRedirectView.as_view(viewset=self), name="index")
 
 

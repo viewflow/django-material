@@ -8,13 +8,13 @@ class CountryViewset(ModelViewset):
 
 
 class CityViewset(ModelViewset):
-    detail_view = path(
+    detail_url = path(
         'detail/<int:pk>/',
         generic.TemplateView.as_view(template_name='material/base.html'),
         name="detail"
     )
 
-    list_view = path(
+    list_url = path(
         '',
         generic.TemplateView.as_view(template_name='material/base.html'),
         name="list"
