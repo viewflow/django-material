@@ -15,7 +15,7 @@
     <div class="mdc-toolbar__row">
       <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
         <a href="#" class="material-icons mdc-toolbar__icon--menu">menu</a>
-        <span class="mdc-toolbar__title">Authentification</span>
+        <span class="mdc-toolbar__title">Authentication</span>
       </section>
     </div>
   </header>
@@ -33,16 +33,8 @@
               <a class="mdc-list-item">&nbsp;</a>
             </div>
             <div class="mdc-list-divider"></div>
-            <div class="mdc-list-group">
-                <h3 class="mdc-list-group__subheader mdc-list-group__subheader--dmc">Applications</h3>
-              <a class="mdc-list-item mdc-permanent-drawer--selected" href="#">
-                <i class="material-icons mdc-list-item__start-detail" aria-hidden="true">inbox</i>Auth
-              </a>
-              <a class="mdc-list-item" href="#">
-                <i class="material-icons mdc-list-item__start-detail" aria-hidden="true">star</i>Atlas
-              </a>
-            </div>
           </nav>
+          {{ request.resolver_match.site.menu }}
         </nav>
         <main class="dmc-page__content">
 

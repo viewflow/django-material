@@ -25,6 +25,17 @@ class Test(TestCase):
     def test_viewset_named(self):
         self.assertEqual('probe', ProbeViewset().app_name)
 
+    def test_child_viewset_mount(self):
+        parent_viewset = ProbeViewset()
+        child_viewset = parent_viewset.probe_viewset
+
+        # trigger child viewset mount
+        self.assertTrue(parent_viewset.urls)
+
+        self.assertEqual(parent_viewset, child_viewset._parent)
+        self.assertEqual('probe', child_viewset.app_name)
+        self.assertEqual('probe', child_viewset.namespace)
+
     def test_index_url(self):
         index_url = _get_viewset_index_url(ProbeViewset())
         self.assertEqual('./probe/', index_url)
@@ -37,6 +48,15 @@ class Test(TestCase):
 
     def test_resolve_subview(self):
         self.assertEqual('/sub/', reverse('probe:probe:index'))
+
+    def test_reverse_child_viewset_url(self):
+        parent_viewset = ProbeViewset()
+
+        # Trigger child viewset mount
+        self.assertTrue(parent_viewset.urls)
+
+        sub_index_url = parent_viewset.probe_viewset.reverse('index')
+        self.assertEqual('/sub/', sub_index_url)
 
 
 urlpatterns = [

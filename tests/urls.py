@@ -5,11 +5,13 @@ from material.contrib.auth import AuthViewset
 
 from .forms import widgets, demo
 from .atlas.urls import Atlas
+from .employees.urls import Employees
 
 site = Site(
     title="Django Material",
     apps=[
         Atlas(),
+        Employees(),
     ]
 )
 

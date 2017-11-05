@@ -1,17 +1,17 @@
+from copy import copy
+
 from django.views import generic
-from django.urls import URLPattern, URLResolver, path, include
+from django.urls import URLPattern, URLResolver, path, include, reverse
 from django.urls.resolvers import RoutePattern
 
 from material.utils import strip_suffixes, camel_case_to_underscore
-
-DEFAULT = object()
 
 
 class _viewset_items(dict):
     """Track the order of declared views and child viewsets."""
 
     def __init__(self):
-        self.items = []
+        self.viewset_items = []
 
     def __setitem__(self, key, value):
         is_item = key not in self and (
@@ -19,7 +19,7 @@ class _viewset_items(dict):
             key.endswith('_viewset')
         )
         if is_item:
-            self.items.append(key)
+            self.viewset_items.append(key)
         dict.__setitem__(self, key, value)
 
 
@@ -35,6 +35,7 @@ class ViewsetMetaClass(type):
     def __new__(cls, name, bases, classdict):
         result = type.__new__(cls, name, bases, dict(classdict))
 
+        # keep order of declared urls and sub-viewsets
         items = []
 
         metabases = (
@@ -44,7 +45,7 @@ class ViewsetMetaClass(type):
         for metabase in metabases:
             items += metabase._viewset_items
 
-        for item in classdict.items:
+        for item in classdict.viewset_items:
             if item not in items:
                 items.append(item)
 
@@ -89,20 +90,14 @@ class Viewset(metaclass=ViewsetMetaClass):
 
         class SiteViewset(Viewset):
             index_url = path('', IndexView.as_view(), name="index")
-
-            # employees = EmployeesViewset(prefix='emp', app_name='employees')
-            # path('employees', employees.urls)
             employees_viewset = EmployeesViewset(prefix='emp')
 
         urlpatters = [
             SiteViewset(app_name="site").urls,
         ]
 
-        reverse('site:employees:index')
-
-    .. seealso::
-        `Django URL namespaces
-        https://docs.djangoproject.com/en/1.11/topics/http/urls/#url-namespaces>`_
+        >> reverse('site:employees:index')
+        /emp/
     """
 
     app_name = None
@@ -113,17 +108,34 @@ class Viewset(metaclass=ViewsetMetaClass):
         """
         Instantiate a viewset instance.
 
-        :param prefix: an URL prefix. Could be used by parent viewset.
-        :param app_name: application URL namespace
-        :param namespace: instance URL namespace
+            :param prefix: an URL prefix. Could be used by parent viewset.
+            :param app_name: application URL namespace
+            :param namespace: instance URL namespace
+
+        .. seealso::
+            `Django URL namespaces
+            https://docs.djangoproject.com/en/1.11/topics/http/urls/#url-namespaces>`_
         """
+        self._parent = None
         self._urls = None
 
         self.prefix = prefix
         self.app_name = app_name
         self.namespace = namespace
 
+        # clone shared sub-viewset nodes
+        for attr_name, attr in self.__class__.__dict__.items():
+            if isinstance(attr, Viewset):
+                sub_viewset = copy(attr)
+                sub_viewset._parent = None
+                setattr(self, attr_name, sub_viewset)
+
+        # customize instance attributes
         for key, value in initkwargs.items():
+            if key.startswith('_'):
+                raise TypeError(
+                    "You tried to pass the private {} name as a "
+                    "keyword argument to {}(). Don't do that.".format(key, self.__name__))
             if not hasattr(self.__class__, key):
                 raise TypeError(
                     "{}() received an invalid keyword {}. Viewset constructor "
@@ -133,7 +145,7 @@ class Viewset(metaclass=ViewsetMetaClass):
 
         super().__init__()
 
-    def get_viewset_pattern(self, attr_name, viewset):
+    def _mount(self, attr_name, viewset):
         prefix = viewset.prefix
         patterns, app_name, namespace = viewset.urls
         default = strip_suffixes(attr_name, ["_viewset"])
@@ -142,12 +154,18 @@ class Viewset(metaclass=ViewsetMetaClass):
             prefix = default
 
         if app_name is None:
-            name = default
+            app_name = default
 
         if namespace is None:
             namespace = default
 
-        return path('{}/'.format(prefix), include((patterns, name), namespace=namespace))
+        # sub-viewset cloned in constructor
+        assert viewset._parent is None
+        viewset._parent = self
+        viewset.app_name = app_name
+        viewset.namespace = namespace
+
+        return path('{}/'.format(prefix), include((patterns, app_name), namespace=namespace))
 
     def get_urls(self):
         """
@@ -168,11 +186,27 @@ class Viewset(metaclass=ViewsetMetaClass):
             if attr_name.endswith('_url') and isinstance(attr, URLPattern):
                 urlpatterns.append(attr)
             elif attr_name.endswith('_viewset') and isinstance(attr, Viewset):
-                urlpatterns.append(self.get_viewset_pattern(attr_name, attr))
+                urlpatterns.append(self._mount(attr_name, attr))
             else:
                 raise ValueError('Unknown {}.{} entry type'.format(self.__class__.__name__, attr_name))
 
         return urlpatterns
+
+    def reverse(self, viewname, args=None, kwargs=None, current_app=None):
+        """ Get viewset view url. """
+        viewset_namespace = ''
+
+        current_viewset = self
+        while current_viewset:
+            namespace = current_viewset.namespace or current_viewset.app_name
+            if namespace:
+                viewset_namespace = '{}:{}'.format(
+                    namespace, viewset_namespace
+                )
+            current_viewset = current_viewset._parent
+        if viewset_namespace:
+            viewname = viewset_namespace + viewname
+        return reverse(viewname, args=args, kwargs=kwargs, current_app=current_app)
 
     @property
     def urls(self):
