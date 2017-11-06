@@ -2,11 +2,11 @@
 <nav class="mdc-list">
   <div class="mdc-list-group">
     <h3 class="mdc-list-group__subheader mdc-list-group__subheader--dmc">{% trans 'Applications' %}</h3>
-    {% for app in site.apps %}
+    {% for app in site.apps %}{% if app|has_perm:user %}
     {% viewset_url app 'index' as index_url %}
     <a class="mdc-list-item" href="{{ index_url }}">
       <i class="material-icons mdc-list-item__start-detail" aria-hidden="true">inbox</i>{{ app.title }}
     </a>
-    {% endfor %}
+    {% endif %}{% endfor %}
   </div>
 </nav>

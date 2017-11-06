@@ -86,3 +86,17 @@ class ViewsetURLNode(template.Node):
             if context.autoescape:
                 url = conditional_escape(url)
             return url
+
+
+@register.filter
+def has_perm(app, user):
+    """
+    Check a user access rights for an application
+
+    Example:
+
+        {% if request.resolver_match.app|has_perm:request.user %}
+            {% include app.menu_template_name app=request.resolver_match.app only %}
+        {% endif %}
+    """
+    return app.has_perm(user)

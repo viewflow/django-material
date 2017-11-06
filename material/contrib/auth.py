@@ -25,7 +25,7 @@ class AuthViewset(Viewset):
 
     def __init__(self, *, allow_password_change=True, **kwargs):
         """
-            Initialize the vieset.
+            Initialize the viewset.
 
             :param allow_password_change=True: enable password change/reset views
         """
