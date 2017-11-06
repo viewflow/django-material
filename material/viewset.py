@@ -140,7 +140,7 @@ class Viewset(metaclass=ViewsetMetaClass):
                 raise TypeError(
                     "{}() received an invalid keyword {}. Viewset constructor "
                     "only accepts arguments that are already "
-                    "attributes of the class." .format(self.__name__, key))
+                    "attributes of the class." .format(self.__class__.__name__, key))
             setattr(self, key, value)
 
         super().__init__()

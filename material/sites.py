@@ -1,5 +1,6 @@
-from django.urls import path, URLResolver
+from django.urls import URLResolver, NoReverseMatch
 from django.urls.resolvers import RoutePattern
+
 from material.ptml import Icon
 from material.viewset import Viewset, IndexViewMixin, NamedViewsetMixin
 
@@ -25,7 +26,11 @@ class _URLResolver(URLResolver):
         result = super(_URLResolver, self).resolve(*args, **kwargs)
         if not isinstance(result.url_name, _UrlName):
             result.url_name = _UrlName(result.url_name)
-        result.url_name.extra.update(self.extra)
+
+        extra = {}
+        extra.update(self.extra)
+        extra.update(result.url_name.extra)
+        result.url_name.extra = extra
         return result
 
 
@@ -57,6 +62,7 @@ class Application(IndexViewMixin, NamedViewsetMixin, Viewset):
 class Site(IndexViewMixin, Viewset):
     """Object combines set of module under in a single place."""
     title = None
+    icon = Icon('view_comfy')
     menu_template_name = 'material/includes/site_menu.html'
 
     def __init__(self, *, title=None, apps=None, **kwargs):
@@ -72,15 +78,13 @@ class Site(IndexViewMixin, Viewset):
         self.apps.append(app_class())
 
     def get_urls(self):
-        urls = super().get_urls()
+        urlpatterns = super().get_urls()
         for app in self.apps:
-            prefix = app.prefix
-            if prefix is None:
-                prefix = app.app_name
-            urls += [
-                path('{}/'.format(prefix), app.urls)
-            ]
-        return urls
+            if app.app_name is None:
+                raise ValueError(
+                    "Site application {} should have an app_name".format(app.title or app))
+            urlpatterns.append(self._mount(app.app_name, app))
+        return urlpatterns
 
     @property
     def urls(self):
@@ -88,6 +92,13 @@ class Site(IndexViewMixin, Viewset):
         url_patterns, app_name, namespace = super().urls
         resolver = _URLResolver(pattern, url_patterns, extra={'site': self})
         return [resolver], app_name, namespace
+
+    def parent_index(self):
+        if self._parent:
+            try:
+                return self._parent.reverse('index')
+            except NoReverseMatch:
+                pass
 
 
 # This global object represents the default material site, for the common case.
