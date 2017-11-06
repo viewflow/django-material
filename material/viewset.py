@@ -246,8 +246,7 @@ class IndexRedirectView(generic.RedirectView):
             redirect = _get_viewset_index_url(self.viewset)
             if redirect is None:
                 raise ValueError(
-                    "Can't determine index url. "
-                    "Please remove IndexViewMixin and add an explicit"
+                    "Can't determine index url. Please add an explicit "
                     "`index_url = path('', generics.RedirectView(url='...'), name='index')`"
                     " declaration for the viewset")
             return redirect

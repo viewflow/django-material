@@ -1,5 +1,6 @@
 from django.urls import path, URLResolver
 from django.urls.resolvers import RoutePattern
+from material.ptml import Icon
 from material.viewset import Viewset, IndexViewMixin, NamedViewsetMixin
 
 
@@ -34,7 +35,7 @@ class Application(IndexViewMixin, NamedViewsetMixin, Viewset):
     """
 
     title = None
-    icon = None  # TODO
+    icon = Icon("view_module")
 
     def __init__(self, *, title=None, **kwargs):
         super().__init__(**kwargs)

@@ -19,3 +19,15 @@ body {
   color: rgba(0, 0, 0, 0.54);
 }
 
+.mdc-list-item--dmc>i.material-icons {
+  width: 24px;
+  height: 24px;
+  margin-left: 0;
+  margin-right: 32px;
+  color: rgba(0, 0, 0, 0.54);
+}
+
+.mdc-permanent-drawer--selected.mdc-list-item--dmc>i.material-icons {
+  color: #3f51b5;
+  color: var(--mdc-theme-primary, #3f51b5);
+}

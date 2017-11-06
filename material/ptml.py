@@ -118,3 +118,15 @@ class Svg(HtmlElement):
 class Path(HtmlElement):
     tag = 'path'
     void = True
+
+
+class Icon(HtmlElement):
+    tag = "i"
+
+    def __init__(self, name, **attrs):
+        self.attrs = {
+            'class': 'material-icons',
+            'aria-hidden': 'true'
+        }
+        self.attrs.update(attrs)
+        self.body = name
