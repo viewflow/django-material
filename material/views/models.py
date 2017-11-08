@@ -1,5 +1,5 @@
-from material.viewset import Viewset, IndexViewMixin
+from material.sites import ApplicationViewset
 
 
-class ModelViewset(Viewset):
+class ModelViewset(ApplicationViewset):
     pass

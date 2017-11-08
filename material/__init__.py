@@ -3,7 +3,7 @@ from django.conf import settings as django_settings
 from .layout import Layout, Row, Column, Fieldset, Span
 from .ptml import Icon
 from .settings import material_settings
-from .sites import Site, Application
+from .sites import Site, Application, ApplicationViewset
 from .viewset import Viewset, viewprop
 
 
@@ -25,5 +25,5 @@ if material_settings.AUTOREGISTER:
 
 __all__ = (
     'Layout', 'Row', 'Column', 'Fieldset', 'Span', 'Icon',
-    'Viewset', 'Site', 'Application', 'viewprop',
+    'Viewset', 'Site', 'Application', 'ApplicationViewset', 'viewprop',
 )

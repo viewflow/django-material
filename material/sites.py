@@ -34,6 +34,20 @@ class _URLResolver(URLResolver):
         return result
 
 
+class ApplicationViewset(NamedViewsetMixin, Viewset):
+    """
+    A top level application viewset.
+    """
+    title = None
+    icon = Icon("view_carousel")
+
+    def __init__(self, *, title=None, **kwargs):
+        super().__init__(**kwargs)
+        self.title = title
+        if self.title is None:
+            self.title = self.app_name.replace('_', '').title()
+
+
 class Application(IndexViewMixin, NamedViewsetMixin, Viewset):
     """
     Top-level group of viewsets.
@@ -41,6 +55,7 @@ class Application(IndexViewMixin, NamedViewsetMixin, Viewset):
 
     title = None
     icon = Icon("view_module")
+    menu_template_name = 'material/includes/app_menu.html'
 
     def __init__(self, *, title=None, **kwargs):
         super().__init__(**kwargs)
@@ -57,6 +72,14 @@ class Application(IndexViewMixin, NamedViewsetMixin, Viewset):
         url_patterns, app_name, namespace = super().urls
         resolver = _URLResolver(pattern, url_patterns, extra={'app': self})
         return [resolver], app_name, namespace
+
+    def viewsets(self):
+        result = []
+        for attr_name in self._viewset_items:
+            attr = getattr(self, attr_name, None)
+            if isinstance(attr, Viewset):
+                result.append(attr)
+        return result
 
 
 class Site(IndexViewMixin, Viewset):
