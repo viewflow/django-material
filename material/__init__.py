@@ -16,10 +16,12 @@ __copyright__ = 'Copyright 2017 Mikhail Podgurskiy'
 
 if material_settings.AUTOREGISTER:
     # Register site middleware
-    middleware = 'material.middleware.SiteMiddleware'
-    if middleware not in django_settings.MIDDLEWARE:
-        django_settings.MIDDLEWARE += (middleware, )
-
+    site_middleware = 'material.middleware.SiteMiddleware'
+    if site_middleware not in django_settings.MIDDLEWARE:
+        django_settings.MIDDLEWARE += (site_middleware, )
+    turbolinks_middleware = 'material.middleware.TurbolinksMiddleware'
+    if turbolinks_middleware not in django_settings.MIDDLEWARE:
+        django_settings.MIDDLEWARE += (turbolinks_middleware, )
 
 __all__ = (
     'Layout', 'Row', 'Column', 'Fieldset', 'Span', 'Icon',

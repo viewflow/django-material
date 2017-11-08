@@ -4,6 +4,14 @@ import gulp from 'gulp'
 import sass from 'gulp-sass'
 import sourcemaps from 'gulp-sourcemaps'
 
+gulp.task('3d-party.js', () => {
+  const deps = [
+    'node_modules/turbolinks/dist/turbolinks.js'
+  ]
+  return gulp.src(deps).pipe(gulp.dest('./material/static/material/js/'))
+})
+
+
 gulp.task('mdc.js', () => {
     return gulp.src([
         'node_modules/material-components-web/dist/material-components-web.js'
@@ -71,6 +79,7 @@ gulp.task('dmc.js', () => {
 
 
 gulp.task('default', [
+    '3d-party.js',
     'mdc.js',
     'mdc.css',
     'mdc.font',
