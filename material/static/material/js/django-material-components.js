@@ -16,7 +16,7 @@
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
-  exports.DMCActiveNav = exports.DMCActiveNavFoundation = undefined;
+  exports.DMCActiveNav = undefined;
 
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
@@ -66,30 +66,6 @@
     if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
   }
 
-  var DMCActiveNavFoundation = exports.DMCActiveNavFoundation = function (_base$MDCFoundation) {
-    _inherits(DMCActiveNavFoundation, _base$MDCFoundation);
-
-    function DMCActiveNavFoundation() {
-      _classCallCheck(this, DMCActiveNavFoundation);
-
-      return _possibleConstructorReturn(this, (DMCActiveNavFoundation.__proto__ || Object.getPrototypeOf(DMCActiveNavFoundation)).apply(this, arguments));
-    }
-
-    _createClass(DMCActiveNavFoundation, [{
-      key: 'init',
-      value: function init() {
-        alert(1);
-      }
-    }, {
-      key: 'destroy',
-      value: function destroy() {
-        alert(2);
-      }
-    }]);
-
-    return DMCActiveNavFoundation;
-  }(_materialComponentsWeb.base.MDCFoundation);
-
   var DMCActiveNav = exports.DMCActiveNav = function (_base$MDCComponent) {
     _inherits(DMCActiveNav, _base$MDCComponent);
 
@@ -100,14 +76,22 @@
     }
 
     _createClass(DMCActiveNav, [{
-      key: 'getDefaultFoundation',
-      value: function getDefaultFoundation() {
-        return new DMCActiveNavFoundation({});
+      key: 'initialize',
+      value: function initialize() {
+        var navItems = [].slice.call(this.root_.querySelectorAll('.mdc-list-item')).filter(function (node) {
+          return window.location.pathname.startsWith(node.pathname);
+        });
+        navItems.sort(function (a, b) {
+          return b.pathname.length - a.pathname.length;
+        });
+        if (navItems.length) {
+          navItems[0].classList.add('mdc-permanent-drawer--selected');
+        }
       }
     }], [{
       key: 'attachTo',
       value: function attachTo(root) {
-        return new DMCActiveNav(root);
+        return new DMCActiveNav(root, new _materialComponentsWeb.base.MDCFoundation());
       }
     }]);
 
