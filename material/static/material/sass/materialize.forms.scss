@@ -50,6 +50,20 @@ form .error {
         -moz-appearance: textfield;
     }
 
+    .input-field-action {
+        position: absolute;
+        top: 0;
+        right: 0;
+        color: #555;
+        padding: 0 0.75rem;
+        line-height: 3rem;
+        background: white;
+        
+        i.material-icons {
+            vertical-align: middle;
+        }
+    }
+
     ::-webkit-inner-spin-button {
         -webkit-appearance: none;
     }

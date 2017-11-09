@@ -1,3 +1,14 @@
+1.1.0 2017-10-27 - Stable
+-------------------------
+
+- Update MaterializeCSS to 0.100.2
+- Forms - Localize DateTime picker
+- Forms - Add clear button on ajax autocomplete fields
+- Frontend - Allow to set ordering in the list view from viewset
+- Frontend - Fix permission check for the create view
+- Admin - Fix inline formset errors
+- Admin - Add file download link on the file fields
+
 1.0.0 2017-05-29 - Stable
 -------------------------
 

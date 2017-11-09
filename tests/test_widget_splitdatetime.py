@@ -43,7 +43,7 @@ class Test(WebTest):
 
         self.assertIn('cleaned_data', response)
         self.assertIn('test_field', response['cleaned_data'])
-        self.assertEquals('2012-01-31T12:34:00Z', response['cleaned_data']['test_field'])
+        self.assertEqual('2012-01-31T12:34:00Z', response['cleaned_data']['test_field'])
 
     def test_missing_value_error(self):
         form = self.app.get(self.test_missing_value_error.url).form

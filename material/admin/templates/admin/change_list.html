@@ -42,11 +42,15 @@
     });
 
     $(".admin_filter").change(function() {
-      window.location.href = $(this).val();
+      if(this.tagName === 'SELECT') {
+        window.location.href = $(this).val();
+      }
     });
 
     $(".date_hierarchy").change(function() {
-      window.location.href = $(this).val();
+      if(this.tagName === 'SELECT') {
+        window.location.href = $(this).val();
+      }
     });
   });
   })(jQuery);

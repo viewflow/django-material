@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html>{% load static %}
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -24,7 +24,7 @@
           {% block content %}{% endblock %}
       </div>
       {% block js %}
-      <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+      <script src="{% static 'material/js/jquery.js' %}"></script>
       {% include 'material/includes/material_js.html' %}
       {% block extrajs %}{% endblock %}
       {% endblock %}

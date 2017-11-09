@@ -30,7 +30,7 @@ class Test(WebTest):
 
         self.assertIn('cleaned_data', response)
         self.assertIn('test_field', response['cleaned_data'])
-        self.assertEquals('InMemoryUploadedFile', response['cleaned_data']['test_field'])
+        self.assertEqual('InMemoryUploadedFile', response['cleaned_data']['test_field'])
 
     def test_invalid_value(self):
         form = self.app.get(self.test_invalid_value.url).form

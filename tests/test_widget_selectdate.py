@@ -44,7 +44,7 @@ class Test(WebTest):
 
         self.assertIn('cleaned_data', response)
         self.assertIn('test_field', response['cleaned_data'])
-        self.assertEquals('2017-01-13', response['cleaned_data']['test_field'])
+        self.assertEqual('2017-01-13', response['cleaned_data']['test_field'])
 
 
 urlpatterns = build_test_urls(Test)

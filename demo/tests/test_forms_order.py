@@ -23,7 +23,7 @@ class Test(WebTest):
 
         response = form.submit(upload_files=[('attachment', __file__)])
 
-        self.assertEquals(302, response.status_code)
+        self.assertEqual(302, response.status_code)
 
     def test_post_invalid_data(self):
         page = self.app.get('/demo/order/')
@@ -34,13 +34,13 @@ class Test(WebTest):
         form['finish_date'] = 'XXX'
 
         response = form.submit()
-        self.assertEquals('This field is required.', response.pyquery('#id_name_container .errors').text())
-        self.assertEquals('This field is required.', response.pyquery('#id_company_container .errors').text())
-        self.assertEquals('Enter a valid email address.', response.pyquery('#id_email_container .errors').text())
-        self.assertEquals('This field is required.', response.pyquery('#id_phone_container .errors').text())
-        self.assertEquals('Enter a valid date.', response.pyquery('#id_start_date_container .errors').text())
-        self.assertEquals('Enter a valid date.', response.pyquery('#id_finish_date_container .errors').text())
-        self.assertEquals('This field is required.', response.pyquery('#id_message_container .errors').text())
+        self.assertEqual('This field is required.', response.pyquery('#id_name_container .errors').text())
+        self.assertEqual('This field is required.', response.pyquery('#id_company_container .errors').text())
+        self.assertEqual('Enter a valid email address.', response.pyquery('#id_email_container .errors').text())
+        self.assertEqual('This field is required.', response.pyquery('#id_phone_container .errors').text())
+        self.assertEqual('Enter a valid date.', response.pyquery('#id_start_date_container .errors').text())
+        self.assertEqual('Enter a valid date.', response.pyquery('#id_finish_date_container .errors').text())
+        self.assertEqual('This field is required.', response.pyquery('#id_message_container .errors').text())
 
 
 urlpatterns = [

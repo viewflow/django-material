@@ -17,7 +17,7 @@ class Test(WebTest):
         form['comment'] = 'Test comment'
 
         response = form.submit()
-        self.assertEquals(302, response.status_code)
+        self.assertEqual(302, response.status_code)
 
     def test_post_invalid_data(self):
         page = self.app.get('/demo/comment/')
@@ -27,10 +27,10 @@ class Test(WebTest):
         form['website'] = '_no_way_'
 
         response = form.submit()
-        self.assertEquals('This field is required.', response.pyquery('#id_name_container .errors').text())
-        self.assertEquals('Enter a valid email address.', response.pyquery('#id_email_container .errors').text())
-        self.assertEquals('Enter a valid URL.', response.pyquery('#id_website_container .errors').text())
-        self.assertEquals('This field is required.', response.pyquery('#id_comment_container .errors').text())
+        self.assertEqual('This field is required.', response.pyquery('#id_name_container .errors').text())
+        self.assertEqual('Enter a valid email address.', response.pyquery('#id_email_container .errors').text())
+        self.assertEqual('Enter a valid URL.', response.pyquery('#id_website_container .errors').text())
+        self.assertEqual('This field is required.', response.pyquery('#id_comment_container .errors').text())
 
 
 urlpatterns = [
