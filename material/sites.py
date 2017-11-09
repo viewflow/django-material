@@ -34,7 +34,7 @@ class _URLResolver(URLResolver):
         return result
 
 
-class ApplicationViewset(NamedViewsetMixin, Viewset):
+class AppViewset(NamedViewsetMixin, Viewset):
     """
     A top level application viewset.
     """
@@ -73,11 +73,11 @@ class Application(IndexViewMixin, NamedViewsetMixin, Viewset):
         resolver = _URLResolver(pattern, url_patterns, extra={'app': self})
         return [resolver], app_name, namespace
 
-    def viewsets(self):
+    def menu_items(self):
         result = []
         for attr_name in self._viewset_items:
             attr = getattr(self, attr_name, None)
-            if isinstance(attr, Viewset):
+            if isinstance(attr, AppViewset):
                 result.append(attr)
         return result
 

@@ -3,7 +3,7 @@ from django.conf import settings as django_settings
 from .layout import Layout, Row, Column, Fieldset, Span
 from .ptml import Icon
 from .settings import material_settings
-from .sites import Site, Application, ApplicationViewset
+from .sites import Site, Application, AppViewset
 from .viewset import Viewset, viewprop
 
 

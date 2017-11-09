@@ -1,5 +1,5 @@
-from material.sites import ApplicationViewset
+from material.sites import AppViewset
 
 
-class ModelViewset(ApplicationViewset):
+class ModelViewset(AppViewset):
     pass
