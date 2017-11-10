@@ -10,7 +10,8 @@ export class DMCToggleDrawer extends base.MDCComponent {
     this.drawer_ = document.getElementById(this.root_.dataset.toggleDrawerId)
     this.onClick = (event) => {
       event.preventDefault()
-      this.drawer_.DMCResponsiveDrawer.open = !this.drawer_.DMCResponsiveDrawer.open
+      const new_state = !this.drawer_.DMCResponsiveDrawer.open
+      this.drawer_.DMCResponsiveDrawer.open = new_state
     }
     this.root_.addEventListener('click', this.onClick)
   }

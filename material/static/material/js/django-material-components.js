@@ -383,7 +383,12 @@
           this.headerContent_.classList.remove('mdc-temporary-drawer__header-content');
           this.content_.classList.remove('mdc-temporary-drawer__content');
 
-          this.root_.classList.add('mdc-persistent-drawer', 'mdc-persistent-drawer--open');
+          this.root_.classList.add('mdc-persistent-drawer');
+          if (sessionStorage.getItem('dmc_site_drawer_state') != "closed") {
+            this.root_.classList.add('mdc-persistent-drawer--open');
+          } else {
+            this.root_.classList.remove('mdc-persistent-drawer--open');
+          }
           this.drawer_.classList.add('mdc-persistent-drawer__drawer');
           this.header_.classList.add('mdc-persistent-drawer__header');
           this.headerContent_.classList.add('mdc-persistent-drawer__header-content');
@@ -403,6 +408,7 @@
       },
       set: function set(value) {
         if (this.persistentDrawer_) {
+          sessionStorage.setItem('dmc_site_drawer_state', value ? "open" : "closed");
           return this.persistentDrawer_.open = value;
         } else {
           return this.temporalDrawer_.open = value;
@@ -500,7 +506,8 @@
         this.drawer_ = document.getElementById(this.root_.dataset.toggleDrawerId);
         this.onClick = function (event) {
           event.preventDefault();
-          _this2.drawer_.DMCResponsiveDrawer.open = !_this2.drawer_.DMCResponsiveDrawer.open;
+          var new_state = !_this2.drawer_.DMCResponsiveDrawer.open;
+          _this2.drawer_.DMCResponsiveDrawer.open = new_state;
         };
         this.root_.addEventListener('click', this.onClick);
       }
