@@ -1,5 +1,6 @@
 <!DOCTYPE html>{% load static %}
 <html lang="en" class="mdc-typography" data-mdc-auto-init="DMCTurbolinks">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,9 +20,12 @@
   <script src="{% static 'material/js/material-components-init.js' %}"></script>
   {% endblock %}
 </head>
+
 <body class="mdc-typography">
   {% with site=request.resolver_match.site app=request.resolver_match.app %}
-  <aside class="mdc-persistent-drawer mdc-persistent-drawer--open" data-mdc-auto-init="DMCResponsiveDrawer">
+  <aside id="id_site_drawer"
+         class="mdc-persistent-drawer mdc-persistent-drawer--open"
+         data-mdc-auto-init="DMCResponsiveDrawer">
     <nav class="mdc-persistent-drawer__drawer">
       <header class="mdc-persistent-drawer__header">
         <div class="mdc-persistent-drawer__header-content">
@@ -36,27 +40,20 @@
   </aside>
 
   <div class="dmc-page">
-  <header class="mdc-toolbar">
-    <div class="mdc-toolbar__row">
-      <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
-        <a href="#" class="material-icons mdc-toolbar__icon--menu">menu</a>
-        <span class="mdc-toolbar__title">{{ app.title|default:site.title|default:"Django Material" }}</span>
-      </section>
-    </div>
-  </header>
+    <header class="mdc-toolbar">
+      <div class="mdc-toolbar__row">
+        <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
+          <a href="#"
+             class="material-icons mdc-toolbar__icon--menu"
+             data-mdc-auto-init="DMCToggleDrawer"
+             data-toggle-drawer-id="id_site_drawer">menu</a>
+          <span class="mdc-toolbar__title">{{ app.title|default:site.title|default:"Django Material" }}</span>
+        </section>
+      </div>
+    </header>
     <main class="dmc-page__content">{% block content %}{% endblock %}</main>
   </div>
-{% endwith %}
-
-<script type="text/javascript">
-window.addEventListener('load', function() {
-  //var drawer = document.querySelector('aside').MDCTemporaryDrawer
-  var drawer = document.querySelector('aside').MDCPersistentDrawer
-  document.querySelector('.mdc-toolbar__icon--menu').addEventListener('click', function(e) {
-    e.preventDefault()
-    drawer.open = !drawer.open
-  })
-})
-</script>
+  {% endwith %}
 </body>
+
 </html>

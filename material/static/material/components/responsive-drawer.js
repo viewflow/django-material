@@ -1,7 +1,6 @@
 import {autoInit, base, drawer} from 'material-components-web';
 
 // TODO cookie
-// TODO open
 
 export class DMCResponsiveDrawer extends base.MDCComponent {
   static attachTo(root) {
@@ -10,12 +9,13 @@ export class DMCResponsiveDrawer extends base.MDCComponent {
 
   constructor(...args) {
     super(...args)
-    this.reconcileDrawer_ = 0
-    this.temporalDrawer_ = null
-    this.persistentDrawer_ = null
   }
 
   initialize() {
+    this.reconcileDrawer_ = 0
+    this.temporalDrawer_ = null
+    this.persistentDrawer_ = null
+
     this.drawer_ = this.root_.querySelector('nav')
     this.header_ = this.drawer_.querySelector('header')
     this.headerContent_ = this.header_.querySelector('div')
@@ -31,12 +31,16 @@ export class DMCResponsiveDrawer extends base.MDCComponent {
   }
 
   destroy() {
-    window.removeEventListener(this.onResize)
+    window.removeEventListener('resize', this.onResize)
   }
 
   reconcileDrawer() {
     const rootClasses = this.root_.classList
-    if(window.innerWidth < 992 && !rootClasses.contains('mdc-temporary-drawer')) {
+    if(
+      window.innerWidth < 992 &&
+        (!rootClasses.contains('mdc-temporary-drawer') ||
+         this.temporalDrawer_ === null)
+    ) {
       if(this.persistentDrawer_) {
         this.persistentDrawer_.destroy()
         this.persistentDrawer_ = null
@@ -54,7 +58,12 @@ export class DMCResponsiveDrawer extends base.MDCComponent {
       this.headerContent_.classList.add('mdc-temporary-drawer__header-content')
       this.content_.classList.add('mdc-temporary-drawer__content')
       this.temporalDrawer_ = new drawer.MDCTemporaryDrawer(this.root_)
-    } else if(window.innerWidth >= 992 && !rootClasses.contains('mdc-persistent-drawer')) {
+      this.drawer_.removeEventListener('click', this.temporalDrawer_.foundation_.drawerClickHandler_)
+    } else if(
+      window.innerWidth >= 992 &&
+        (!rootClasses.contains('mdc-persistent-drawer') ||
+         this.persistentDrawer_ === null)
+    ) {
       if(this.temporalDrawer_) {
         this.temporalDrawer_.destroy()
         this.temporalDrawer_ = null
@@ -72,6 +81,23 @@ export class DMCResponsiveDrawer extends base.MDCComponent {
       this.headerContent_.classList.add('mdc-persistent-drawer__header-content')
       this.content_.classList.add('mdc-persistent-drawer__content')
       this.persistentDrawer_ = new drawer.MDCPersistentDrawer(this.root_)
+      this.drawer_.removeEventListener('click', this.persistentDrawer_.foundation_.drawerClickHandler_)
+    }
+  }
+
+  get open() {
+    if(this.persistentDrawer_) {
+      return this.persistentDrawer_.open
+    } else {
+      return this.temporalDrawer_ .open
+    }
+  }
+
+  set open(value) {
+    if(this.persistentDrawer_) {
+      return this.persistentDrawer_.open = value
+    } else {
+      return this.temporalDrawer_ .open = value
     }
   }
 }

@@ -33,9 +33,9 @@ export class DMCTurbolinks extends base.MDCComponent {
   }
 
   destroy() {
-    window.removeEventListener(this.onLoad)
-    window.removeEventListener(this.onBeforeCache)
-    window.removeEventListener(this.onRequestEnd)
+    window.removeEventListener('turbolinks:load', this.onLoad)
+    window.removeEventListener('turbolinks:before-cache', this.onBeforeCache)
+    window.removeEventListener('turbolinks:request-end', this.onRequestEnd)
   }
 }
 
