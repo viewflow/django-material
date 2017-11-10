@@ -67,8 +67,12 @@ gulp.task('dmc.js', () => {
         "plugins": [
           ["transform-es2015-modules-umd", {
             "globals": {
-              "material-components-web": "mdc"
+              "material-components-web": "mdc",
+              "turbolinks": "Turbolinks"
             }
+          }],
+          ["transform-class-properties", {
+            "spec": true
           }]
         ]
     }))

@@ -20,11 +20,18 @@ export class DMCResponsiveDrawer extends base.MDCComponent {
     this.header_ = this.drawer_.querySelector('header')
     this.headerContent_ = this.header_.querySelector('div')
     this.content_ = this.drawer_.querySelector('nav')
-    window.addEventListener('resize', () => {
+
+    this.onResize = () => {
       cancelAnimationFrame(this.reconcileDrawer_);
       this.reconcileDrawer_ = requestAnimationFrame(() => this.reconcileDrawer())
-    })
+    }
+
+    window.addEventListener('resize', this.onResize)
     this.reconcileDrawer()
+  }
+
+  destroy() {
+    window.removeEventListener(this.onResize)
   }
 
   reconcileDrawer() {

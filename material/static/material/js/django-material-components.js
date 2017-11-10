@@ -102,6 +102,137 @@
 });
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
+    define(['exports', 'material-components-web', 'turbolinks'], factory);
+  } else if (typeof exports !== "undefined") {
+    factory(exports, require('material-components-web'), require('turbolinks'));
+  } else {
+    var mod = {
+      exports: {}
+    };
+    factory(mod.exports, global.mdc, global.Turbolinks);
+    global.djangoTurbolinks = mod.exports;
+  }
+})(this, function (exports, _materialComponentsWeb, _turbolinks) {
+  'use strict';
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.DMCTurbolinks = undefined;
+
+  var _turbolinks2 = _interopRequireDefault(_turbolinks);
+
+  function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : {
+      default: obj
+    };
+  }
+
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError("Cannot call a class as a function");
+    }
+  }
+
+  var _createClass = function () {
+    function defineProperties(target, props) {
+      for (var i = 0; i < props.length; i++) {
+        var descriptor = props[i];
+        descriptor.enumerable = descriptor.enumerable || false;
+        descriptor.configurable = true;
+        if ("value" in descriptor) descriptor.writable = true;
+        Object.defineProperty(target, descriptor.key, descriptor);
+      }
+    }
+
+    return function (Constructor, protoProps, staticProps) {
+      if (protoProps) defineProperties(Constructor.prototype, protoProps);
+      if (staticProps) defineProperties(Constructor, staticProps);
+      return Constructor;
+    };
+  }();
+
+  function _possibleConstructorReturn(self, call) {
+    if (!self) {
+      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+    }
+
+    return call && (typeof call === "object" || typeof call === "function") ? call : self;
+  }
+
+  function _inherits(subClass, superClass) {
+    if (typeof superClass !== "function" && superClass !== null) {
+      throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
+    }
+
+    subClass.prototype = Object.create(superClass && superClass.prototype, {
+      constructor: {
+        value: subClass,
+        enumerable: false,
+        writable: true,
+        configurable: true
+      }
+    });
+    if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+  }
+
+  var DMCTurbolinks = exports.DMCTurbolinks = function (_base$MDCComponent) {
+    _inherits(DMCTurbolinks, _base$MDCComponent);
+
+    function DMCTurbolinks() {
+      _classCallCheck(this, DMCTurbolinks);
+
+      return _possibleConstructorReturn(this, (DMCTurbolinks.__proto__ || Object.getPrototypeOf(DMCTurbolinks)).apply(this, arguments));
+    }
+
+    _createClass(DMCTurbolinks, [{
+      key: 'initialize',
+      value: function initialize() {
+        this.onLoad = function () {
+          window.mdc.autoInit(document.querySelector('body'));
+        };
+
+        this.onBeforeCache = function () {
+          var nodes = document.querySelectorAll('body [data-mdc-auto-init]');
+          for (var i = 0; i < nodes.length; i++) {
+            var node = nodes[i],
+                ctorName = nodes[i].dataset.mdcAutoInit,
+                component = node[ctorName];
+            component.destroy();
+          }
+        };
+
+        this.onRequestEnd = function (event) {
+          if (event.data.xhr.status == 500) {
+            _turbolinks2.default.controller.disable();
+          }
+        };
+
+        window.addEventListener('turbolinks:load', this.onLoad);
+        window.addEventListener('turbolinks:before-cache', this.onBeforeCache);
+        window.addEventListener('turbolinks:request-end', this.onRequestEnd);
+      }
+    }, {
+      key: 'destroy',
+      value: function destroy() {
+        window.removeEventListener(this.onLoad);
+        window.removeEventListener(this.onBeforeCache);
+        window.removeEventListener(this.onRequestEnd);
+      }
+    }], [{
+      key: 'attachTo',
+      value: function attachTo(root) {
+        return new DMCTurbolinks(root, new _materialComponentsWeb.base.MDCFoundation());
+      }
+    }]);
+
+    return DMCTurbolinks;
+  }(_materialComponentsWeb.base.MDCComponent);
+
+  _materialComponentsWeb.autoInit.register('DMCTurbolinks', DMCTurbolinks);
+});
+(function (global, factory) {
+  if (typeof define === "function" && define.amd) {
     define(['exports', 'material-components-web'], factory);
   } else if (typeof exports !== "undefined") {
     factory(exports, require('material-components-web'));
@@ -204,13 +335,21 @@
         this.header_ = this.drawer_.querySelector('header');
         this.headerContent_ = this.header_.querySelector('div');
         this.content_ = this.drawer_.querySelector('nav');
-        window.addEventListener('resize', function () {
+
+        this.onResize = function () {
           cancelAnimationFrame(_this2.reconcileDrawer_);
           _this2.reconcileDrawer_ = requestAnimationFrame(function () {
             return _this2.reconcileDrawer();
           });
-        });
+        };
+
+        window.addEventListener('resize', this.onResize);
         this.reconcileDrawer();
+      }
+    }, {
+      key: 'destroy',
+      value: function destroy() {
+        window.removeEventListener(this.onResize);
       }
     }, {
       key: 'reconcileDrawer',
