@@ -25,5 +25,5 @@ if material_settings.AUTOREGISTER:
 
 __all__ = (
     'Layout', 'Row', 'Column', 'Fieldset', 'Span', 'Icon',
-    'Viewset', 'Site', 'Application', 'ApplicationViewset', 'viewprop',
+    'Viewset', 'Site', 'Application', 'AppViewset', 'viewprop',
 )

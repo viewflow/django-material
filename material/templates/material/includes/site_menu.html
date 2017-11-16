@@ -9,7 +9,7 @@
     {% endif %}{% endwith %}{% endblock %}
     {% block app_links %}{% for app in site.apps %}{% if app|has_perm:user %}
     {% viewset_url app 'index' as index_url %}
-    <a class="mdc-list-item mdc-list-item--dmc" href="{{ index_url }}">
+    <a class="mdc-list-item mdc-list-item--dmc" href="{{ index_url }}"{% if app.turbolinks_disabled %} data-turbolinks="false"{% endif %}>
       {{ app.icon }}{{ app.title }}
     </a>
     {% endif %}{% endfor %}{% endblock %}

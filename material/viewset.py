@@ -119,9 +119,14 @@ class Viewset(metaclass=ViewsetMetaClass):
         self._parent = None
         self._urls = None
 
-        self.prefix = prefix
-        self.app_name = app_name
-        self.namespace = namespace
+        if prefix is not None:
+            self.prefix = prefix
+
+        if app_name is not None:
+            self.app_name = app_name
+
+        if namespace is not None:
+            self.namespace = namespace
 
         # clone shared sub-viewset nodes
         for attr_name, attr in self.__class__.__dict__.items():
