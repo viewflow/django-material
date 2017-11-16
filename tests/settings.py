@@ -26,7 +26,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'material',
-    'tests',
+    'tests.atlas',
+    'tests.employees',
+    'tests.unit',
 ]
 
 MIDDLEWARE = [
