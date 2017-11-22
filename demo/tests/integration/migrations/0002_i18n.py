@@ -34,7 +34,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='city',
             name='country',
-            field=models.ForeignKey(related_name='cities', verbose_name='country', to='integration.Country'),
+            field=models.ForeignKey(related_name='cities', on_delete=models.CASCADE, verbose_name='country', to='integration.Country'),
         ),
         migrations.AlterField(
             model_name='city',
@@ -59,7 +59,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='continent',
             name='biggest_city',
-            field=models.OneToOneField(verbose_name='biggest city', blank=True, null=True, to='integration.City'),
+            field=models.OneToOneField(verbose_name='biggest city', on_delete=models.CASCADE, blank=True, null=True, to='integration.City'),
         ),
         migrations.AlterField(
             model_name='continent',
@@ -69,7 +69,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='continent',
             name='largest_country',
-            field=models.OneToOneField(related_name='+', verbose_name='largest country', blank=True, null=True, to='integration.Country'),
+            field=models.OneToOneField(related_name='+', on_delete=models.CASCADE, verbose_name='largest country', blank=True, null=True, to='integration.Country'),
         ),
         migrations.AlterField(
             model_name='continent',
@@ -104,7 +104,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='country',
             name='continent',
-            field=models.ForeignKey(related_name='countries', verbose_name='continent', null=True, to='integration.Continent'),
+            field=models.ForeignKey(related_name='countries', on_delete=models.CASCADE, verbose_name='continent', null=True, to='integration.Continent'),
         ),
         migrations.AlterField(
             model_name='country',
@@ -169,11 +169,11 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='sea',
             name='ocean',
-            field=models.ForeignKey(to='integration.Ocean', verbose_name='ocean'),
+            field=models.ForeignKey(to='integration.Ocean', on_delete=models.CASCADE, verbose_name='ocean'),
         ),
         migrations.AlterField(
             model_name='sea',
             name='parent',
-            field=models.ForeignKey(verbose_name='parent', blank=True, null=True, to='integration.Sea'),
+            field=models.ForeignKey(verbose_name='parent', on_delete=models.CASCADE, blank=True, null=True, to='integration.Sea'),
         ),
     ]

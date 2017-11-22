@@ -1,10 +1,10 @@
 from __future__ import unicode_literals
 
 from django.contrib.auth import get_permission_codename
-from django.core.urlresolvers import reverse
 from django.core.exceptions import PermissionDenied, ValidationError
 from django.db import models
 from django.http import Http404
+from django.urls import reverse
 from django.views import generic
 
 

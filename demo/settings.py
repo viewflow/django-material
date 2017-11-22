@@ -58,13 +58,12 @@ if 'test' not in sys.argv:
 LOGIN_REDIRECT_URL = '/integration/'
 
 
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
@@ -90,6 +89,10 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.i18n',
                 'material.frontend.context_processors.modules',
+            ],
+            'builtins': [
+                'material.templatetags.material_form',
+                'template_debug.templatetags.debug_tags'
             ],
             'debug': True,
         },
@@ -140,21 +143,6 @@ DEBUG_TOOLBAR_CONFIG = {
     },
 }
 
-# shortcut for in form templates
-try:
-    # shortcut for in form templates
-    from django.template.base import add_to_builtins
-    add_to_builtins('material.templatetags.material_form')
-    add_to_builtins('template_debug.templatetags.debug_tags')
-except ImportError:
-    """
-    Django 1.9.
-    """
-    TEMPLATES[0]['OPTIONS']['builtins'] = [
-        'material.templatetags.material_form',
-        'template_debug.templatetags.debug_tags'
-    ]
-
 STATIC_ROOT = os.path.join(BASE_DIR, 'deploy', 'static')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'deploy', 'media')
 
@@ -167,7 +155,7 @@ EMAIL_PORT = 587
 
 if os.environ.get('DEBUG_TOOLBAR'):
     INSTALLED_APPS += ('debug_toolbar',)
-    MIDDLEWARE_CLASSES += ('debug_toolbar.middleware.DebugToolbarMiddleware', )
+    MIDDLEWARE += ('debug_toolbar.middleware.DebugToolbarMiddleware', )
 
 try:
     from deploy.local_settings import *  # NOQA

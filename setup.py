@@ -7,7 +7,7 @@ except IOError:
 
 setup(
     name='django-material',
-    version='1.1.1',
+    version='1.2.0',
     description='Material design for django forms and admin',
     license='BSD',
     author='Mikhail Podgurskiy',
@@ -50,9 +50,6 @@ setup(
     ],
     classifiers=[
         'Framework :: Django',
-        "Framework :: Django :: 1.8",
-        "Framework :: Django :: 1.9",
-        "Framework :: Django :: 1.10",
         "Framework :: Django :: 1.11",
         'Development Status :: 5 - Production/Stable',
         'Environment :: Web Environment',
@@ -62,9 +59,6 @@ setup(
         'Operating System :: OS Independent',
         'Programming Language :: Python',
         'Programming Language :: Python :: 2.7',
-        'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.4',
-        'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
         'Topic :: Software Development',
         'Topic :: Software Development :: User Interfaces',

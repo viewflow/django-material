@@ -10,17 +10,16 @@ from django.contrib.auth import get_permission_codename
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import FieldDoesNotExist
 from django.core.exceptions import ImproperlyConfigured, PermissionDenied
-from django.core.urlresolvers import reverse
 from django.db.models.query import QuerySet
 from django.forms.forms import pretty_name
 from django.http import JsonResponse
+from django.urls import reverse
 from django.utils import formats, six, timezone
 from django.utils.decorators import method_decorator
 from django.utils.encoding import force_text
 from django.utils.html import format_html
 from django.views.generic import View
 from django.views.generic.base import ContextMixin, TemplateResponseMixin
-
 
 from .. import forms
 

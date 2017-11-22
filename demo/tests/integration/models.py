@@ -24,8 +24,8 @@ class Ocean(models.Model):
 @python_2_unicode_compatible
 class Sea(models.Model):
     name = models.CharField(_('name'), max_length=250)
-    parent = models.ForeignKey('self', blank=True, null=True, verbose_name=_('parent'))
-    ocean = models.ForeignKey(Ocean, verbose_name=_('ocean'))
+    parent = models.ForeignKey('self', on_delete=models.CASCADE, blank=True, null=True, verbose_name=_('parent'))
+    ocean = models.ForeignKey(Ocean, on_delete=models.CASCADE, verbose_name=_('ocean'))
 
     area = models.BigIntegerField(_('area'), help_text=mark_safe(_('km&#178;')))
     avg_depth = models.IntegerField(_('average depth'), help_text=_('meters'), null=True, blank=True)
@@ -54,9 +54,9 @@ class Continent(models.Model):
     population_density = models.DecimalField(_('population density'), decimal_places=2, max_digits=8)
 
     largest_country = models.OneToOneField(
-        'Country', related_name='+', blank=True, null=True, verbose_name=_('largest country'))
+        'Country', on_delete=models.CASCADE, related_name='+', blank=True, null=True, verbose_name=_('largest country'))
     biggest_city = models.OneToOneField(
-        'City', blank=True, null=True, verbose_name=_('biggest city'))
+        'City', on_delete=models.CASCADE, blank=True, null=True, verbose_name=_('biggest city'))
     longest_river = models.CharField(_('longest river'), max_length=250, blank=True, null=True)
     biggest_mountain = models.CharField(_('biggest mountain'), max_length=250, blank=True, null=True)
 
@@ -87,7 +87,7 @@ class Country(models.Model):
     independence_day = models.DateField(_('independence day'), null=True, blank=True)
     gay_friendly = models.NullBooleanField(_('gay friendly'))
     continent = models.ForeignKey(
-        Continent, null=True, related_name='countries', verbose_name=_('continent'))
+        Continent, on_delete=models.CASCADE, null=True, related_name='countries', verbose_name=_('continent'))
 
     class Meta:
         verbose_name = _('country')
@@ -104,7 +104,7 @@ class City(models.Model):
     is_capital = models.BooleanField(_('is capital city'), default=False)
     population = models.BigIntegerField(_('population'))
     country = models.ForeignKey(
-        Country, related_name='cities', verbose_name=_('country'))
+        Country, on_delete=models.CASCADE, related_name='cities', verbose_name=_('country'))
 
     class Meta:
         verbose_name = _('city')

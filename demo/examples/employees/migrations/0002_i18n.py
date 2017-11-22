@@ -48,12 +48,12 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='deptemp',
             name='department',
-            field=models.ForeignKey(db_column='dept_no', verbose_name='department', to='employees.Department'),
+            field=models.ForeignKey(db_column='dept_no', on_delete=models.CASCADE, verbose_name='department', to='employees.Department'),
         ),
         migrations.AlterField(
             model_name='deptemp',
             name='employee',
-            field=models.ForeignKey(db_column='emp_no', verbose_name='employee', to='employees.Employee'),
+            field=models.ForeignKey(db_column='emp_no', on_delete=models.CASCADE, verbose_name='employee', to='employees.Employee'),
         ),
         migrations.AlterField(
             model_name='deptemp',
@@ -68,12 +68,12 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='deptmanager',
             name='department',
-            field=models.ForeignKey(db_column='dept_no', verbose_name='department', to='employees.Department'),
+            field=models.ForeignKey(db_column='dept_no', on_delete=models.CASCADE, verbose_name='department', to='employees.Department'),
         ),
         migrations.AlterField(
             model_name='deptmanager',
             name='employee',
-            field=models.ForeignKey(db_column='emp_no', verbose_name='employee', to='employees.Employee'),
+            field=models.ForeignKey(db_column='emp_no', on_delete=models.CASCADE, verbose_name='employee', to='employees.Employee'),
         ),
         migrations.AlterField(
             model_name='deptmanager',
@@ -118,7 +118,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='salary',
             name='employee',
-            field=models.ForeignKey(db_column='emp_no', verbose_name='employee', to='employees.Employee'),
+            field=models.ForeignKey(db_column='emp_no', on_delete=models.CASCADE, verbose_name='employee', to='employees.Employee'),
         ),
         migrations.AlterField(
             model_name='salary',
@@ -138,7 +138,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='title',
             name='employee',
-            field=models.ForeignKey(db_column='emp_no', verbose_name='employee', to='employees.Employee'),
+            field=models.ForeignKey(db_column='emp_no', on_delete=models.CASCADE, verbose_name='employee', to='employees.Employee'),
         ),
         migrations.AlterField(
             model_name='title',

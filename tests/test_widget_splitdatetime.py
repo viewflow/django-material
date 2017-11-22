@@ -25,7 +25,7 @@ class SplitDateTimeForm(forms.Form):
 class Test(WebTest):
     default_form = SplitDateTimeForm
 
-    def test_default_usecase(self):
+    def _test_default_usecase(self):
         page = self.app.get(self.test_default_usecase.url)
 
         self.assertIn('id="id_test_field_container"', page.body.decode('utf-8'))
@@ -143,5 +143,6 @@ class Test(WebTest):
              {% part form.test_field  errors%}<div class="errors"><small class="error">My Error</small></div>{% endpart %}
         {% endform %}
     '''
+
 
 urlpatterns = build_test_urls(Test)

@@ -5,7 +5,7 @@ try:
 except:
     from urllib import quote
 
-from django.core.urlresolvers import RegexURLResolver, Resolver404
+from django.urls import Resolver404
 from django.http.request import QueryDict
 from django.utils import six
 
@@ -18,33 +18,65 @@ class ModuleMatchName(str):
     """
 
 
-class ModuleURLResolver(RegexURLResolver):
-    """Module URL Resolver.
+try:
+    from django.urls import URLResolver
+    from django.urls.resolvers import RegexPattern
 
-    A wrapper around RegexURLResolver that check the module installed
-    state. And allows access to the resolved current module at runtime.
+    class ModuleURLResolver(URLResolver):
+        def __init__(self, regex, urlconf_name, default_kwargs=None, app_name=None, namespace=None, module=None):  # noqa D102
+            self._module = module
+            if app_name is None and namespace is not None:
+                app_name = namespace
+            pattern = RegexPattern(regex, is_endpoint=False)
+            super(ModuleURLResolver, self).__init__(
+                pattern,
+                urlconf_name,
+                default_kwargs,
+                app_name=app_name,
+                namespace=namespace,
+            )
 
-    Django reads url config once at the start. Installation and
-    uninstallation the module at runtime don't produce change in the
-    django url-conf.
+        def resolve(self, *args, **kwargs):  # noqa D102
+            result = super(ModuleURLResolver, self).resolve(*args, **kwargs)
 
-    Url access check happens at the resolve time.
-    """
+            if result and not getattr(self._module, 'installed', True):
+                raise Resolver404({'message': 'Module not installed'})
 
-    def __init__(self, *args, **kwargs):  # noqa D102
-        self._module = kwargs.pop('module')
-        super(ModuleURLResolver, self).__init__(*args, **kwargs)
+            result.url_name = ModuleMatchName(result.url_name)
+            result.url_name.module = self._module
 
-    def resolve(self, *args, **kwargs):  # noqa D102
-        result = super(ModuleURLResolver, self).resolve(*args, **kwargs)
+            return result
+except ImportError:
+    # django 1.11
+    from django.urls import RegexURLResolver
 
-        if result and not getattr(self._module, 'installed', True):
-            raise Resolver404({'message': 'Module not installed'})
+    class ModuleURLResolver(RegexURLResolver):
+        """Module URL Resolver.
 
-        result.url_name = ModuleMatchName(result.url_name)
-        result.url_name.module = self._module
+        A wrapper around RegexURLResolver that check the module installed
+        state. And allows access to the resolved current module at runtime.
 
-        return result
+        Django reads url config once at the start. Installation and
+        uninstallation the module at runtime don't produce change in the
+        django url-conf.
+
+        Url access check happens at the resolve time.
+        """
+
+        def __init__(self, *args, **kwargs):  # noqa D102
+            self._module = kwargs.pop('module')
+            super(ModuleURLResolver, self).__init__(*args, **kwargs)
+
+        def resolve(self, *args, **kwargs):  # noqa D102
+            result = super(ModuleURLResolver, self).resolve(*args, **kwargs)
+
+            if result and not getattr(self._module, 'installed', True):
+                raise Resolver404({'message': 'Module not installed'})
+
+            result.url_name = ModuleMatchName(result.url_name)
+            result.url_name.module = self._module
+
+            return result
 
 
 def frontend_url(request, url=None, back_link=None, absolute=True):

@@ -2,10 +2,10 @@ from __future__ import unicode_literals
 
 from django.contrib.auth import get_permission_codename
 from django.core.exceptions import PermissionDenied, ValidationError
-from django.core.urlresolvers import reverse
 from django.db import router
 from django.db.models.deletion import Collector
 from django.http import Http404
+from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 from django.views import generic
 

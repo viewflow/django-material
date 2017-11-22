@@ -3,18 +3,18 @@ import datetime
 from importlib import import_module
 
 from django.apps import apps
-from django.contrib.admin.views.main import PAGE_VAR
-from django.contrib.admin.utils import get_fields_from_path
-from django.core.urlresolvers import reverse, NoReverseMatch
 from django.conf import settings
+from django.contrib.admin.utils import get_fields_from_path
+from django.contrib.admin.views.main import PAGE_VAR
 from django.db import models
+from django.template import Library
+from django.urls import reverse, NoReverseMatch
 from django.utils import formats, six
 from django.utils.dates import MONTHS
 from django.utils.html import format_html
 from django.utils.safestring import mark_safe
 from django.utils.text import capfirst
 from django.utils.translation import ugettext as _
-from django.template import Library
 
 from material import Layout, Fieldset, Row
 from material.compat import simple_tag
@@ -42,7 +42,7 @@ def get_admin_site():
 site = get_admin_site()
 
 
-@register.assignment_tag
+@register.simple_tag
 def get_app_list(request):
     """Django 1.8 way to get application registered at default Admin Site."""
     app_dict = {}
@@ -114,7 +114,7 @@ def get_app_list(request):
     return app_list
 
 
-@register.assignment_tag
+@register.simple_tag
 def fieldset_layout(adminform, inline_admin_formsets):
     """Generate material layout for admin inlines."""
     layout = getattr(adminform.model_admin, 'layout', None)

@@ -1,6 +1,6 @@
 import django
 import os
-import sys
+
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 # Quick-start development settings - unsuitable for production
@@ -36,13 +36,12 @@ INSTALLED_APPS = (
 )
 
 
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
@@ -69,24 +68,14 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.request',
             ],
+            'builtins': [
+                'material.templatetags.material_form',
+                'template_debug.templatetags.debug_tags'
+            ],
             'debug': True,
         },
     },
 ]
-
-try:
-    # shortcut for in form templates
-    from django.template.base import add_to_builtins
-    add_to_builtins('material.templatetags.material_form')
-    add_to_builtins('template_debug.templatetags.debug_tags')
-except ImportError:
-    """
-    Django 1.9.
-    """
-    TEMPLATES[0]['OPTIONS']['builtins'] = [
-        'material.templatetags.material_form',
-        'template_debug.templatetags.debug_tags'
-    ]
 
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
@@ -98,21 +87,7 @@ DATABASES = {
     }
 }
 
-
-class DisableMigrations(object):
-
-    def __contains__(self, item):
-        return True
-
-    def __getitem__(self, item):
-        return "notmigrations"
-
-if django.VERSION <= (1, 8):
-    MIGRATION_MODULES = DisableMigrations()
-else:
-    MIGRATION_MODULES = []
-
-
+MIGRATION_MODULES = []
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/

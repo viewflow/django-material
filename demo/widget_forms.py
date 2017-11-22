@@ -6,7 +6,7 @@ from decimal import Decimal
 from django.contrib.auth.models import Permission
 from django.core.validators import MaxLengthValidator
 from django.core.files import File
-from django.forms.extras.widgets import SelectDateWidget
+from django.forms.widgets import SelectDateWidget
 from django.template import Template
 from django.utils import timezone
 from django.utils.encoding import python_2_unicode_compatible

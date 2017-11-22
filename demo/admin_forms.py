@@ -23,7 +23,7 @@ class FilteredSelectMultipleForm(forms.Form):
     CHOICES = (
         (1, 'Apple'),
         (2, 'Orange'),
-        (3, 'Watermeloun'))
+        (3, 'Watermelon'))
 
     field1 = forms.ChoiceField(help_text='stacked', choices=CHOICES,
                                widget=widgets.FilteredSelectMultiple(
@@ -82,7 +82,7 @@ class ForeignKeyRawIdWidgetForm(forms.Form):
     field1 = forms.ModelChoiceField(
         help_text='default', queryset=Permission.objects.all(),
         widget=widgets.ForeignKeyRawIdWidget(
-            rel=Permission._meta.get_field('content_type').rel,
+            rel=Permission._meta.get_field('content_type').remote_field,
             admin_site=admin_site))
 
 
@@ -92,7 +92,7 @@ class ManyToManyRawIdWidgetForm(forms.Form):
     field1 = forms.ModelMultipleChoiceField(
         help_text='default', queryset=Permission.objects.all(),
         widget=widgets.ManyToManyRawIdWidget(
-            rel=Group._meta.get_field('permissions').rel,
+            rel=Group._meta.get_field('permissions').remote_field,
             admin_site=admin_site))
 
 
@@ -103,7 +103,7 @@ class RelatedFieldWidgetWrapperForm(forms.Form):
         help_text='default', queryset=Permission.objects.all(),
         widget=widgets.RelatedFieldWidgetWrapper(
             widget=forms.Select(),
-            rel=Permission._meta.get_field('content_type').rel,
+            rel=Permission._meta.get_field('content_type').remote_field,
             admin_site=admin_site))
 
 

@@ -33,7 +33,7 @@ class Migration(migrations.Migration):
                 ('longest_river', models.CharField(max_length=250, blank=True, null=True)),
                 ('biggest_mountain', models.CharField(max_length=250, blank=True, null=True)),
                 ('hemisphere', models.CharField(max_length=5, choices=[('NORTH', 'North'), ('SOUTH', 'South'), ('BOTH', 'Both')])),
-                ('biggest_city', models.OneToOneField(blank=True, null=True, to='integration.City')),
+                ('biggest_city', models.OneToOneField(on_delete=models.CASCADE, blank=True, null=True, to='integration.City')),
             ],
             options={
                 'ordering': ['name'],
@@ -47,7 +47,7 @@ class Migration(migrations.Migration):
                 ('name', models.CharField(max_length=250)),
                 ('independence_day', models.DateField(blank=True, null=True)),
                 ('gay_friendly', models.NullBooleanField()),
-                ('continent', models.ForeignKey(to='integration.Continent', related_name='countries', null=True)),
+                ('continent', models.ForeignKey(to='integration.Continent', on_delete=models.CASCADE, related_name='countries', null=True)),
             ],
             options={
                 'ordering': ['name'],
@@ -76,8 +76,8 @@ class Migration(migrations.Migration):
                 ('avg_depth', models.IntegerField(help_text='meters', blank=True, null=True)),
                 ('max_depth', models.IntegerField(help_text='meters', blank=True, null=True)),
                 ('basin_countries', models.ManyToManyField(to='integration.Country', blank=True, related_name='seas')),
-                ('ocean', models.ForeignKey(to='integration.Ocean')),
-                ('parent', models.ForeignKey(blank=True, null=True, to='integration.Sea')),
+                ('ocean', models.ForeignKey(to='integration.Ocean', on_delete=models.CASCADE)),
+                ('parent', models.ForeignKey(on_delete=models.CASCADE, blank=True, null=True, to='integration.Sea')),
             ],
             options={
                 'ordering': ['name'],
@@ -86,7 +86,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='continent',
             name='largest_country',
-            field=models.OneToOneField(to='integration.Country', blank=True, null=True, related_name='+'),
+            field=models.OneToOneField(to='integration.Country', on_delete=models.CASCADE, blank=True, null=True, related_name='+'),
         ),
         migrations.AddField(
             model_name='continent',
@@ -96,7 +96,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='city',
             name='country',
-            field=models.ForeignKey(to='integration.Country', related_name='cities'),
+            field=models.ForeignKey(to='integration.Country', on_delete=models.CASCADE, related_name='cities'),
         ),
         migrations.AlterUniqueTogether(
             name='city',

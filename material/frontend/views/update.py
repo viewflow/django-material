@@ -1,9 +1,9 @@
 from __future__ import unicode_literals
 
 from django.contrib.auth import get_permission_codename
-from django.core.urlresolvers import reverse
-from django.views import generic
+from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
+from django.views import generic
 
 from .mixins import MessageUserMixin, ModelViewMixin
 
