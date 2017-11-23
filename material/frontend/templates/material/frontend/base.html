@@ -18,7 +18,7 @@
         {% block body %}
         <header>
             {% block header %}
-            <ul id="slide-out" class="side-nav fixed" data-turbolinks-permanent>
+            <ul id="slide-out" class="sidenav sidenav-fixed" data-turbolinks-permanent>
                 {% block sidenav_header %}
                 <li>
                     <div class="userView">
@@ -102,7 +102,7 @@
         <script id="messages" type="text/javascript">
             $(document).one('turbolinks:load', function () {
               {% for message in messages %}
-              Materialize.toast('{{ message|capfirst }}', 10000, 'alert-{{ message.tags }}')
+              M.toast({html: '{{ message|capfirst }}', displayLength: 10000, classes:'alert-{{ message.tags }}'})
               {% endfor %}
             });
         </script>

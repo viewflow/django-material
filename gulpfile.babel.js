@@ -22,10 +22,11 @@ gulp.task('3rdparty.fonts', () => {
   return merge(
     gulp.src('./node_modules/material-design-icons/iconfont/*')
       .pipe(gulp.dest('./material/static/material/fonts/material-design-icons/')),
-    gulp.src('./node_modules/materialize-css/fonts/roboto/*')
+    gulp.src('./node_modules/roboto-npm-webfont/full/**/*')
       .pipe(gulp.dest('./material/static/material/fonts/roboto/'))
-  )
-})
+    )
+  }
+)
 
 gulp.task('3rdparty.js', () => {
   var deps = [
@@ -56,12 +57,8 @@ gulp.task('3rdparty.css', () => {
 
 gulp.task('materialize.js', () => {
   var deps = [
-    "node_modules/materialize-css/js/initial.js",
-    "node_modules/materialize-css/js/jquery.easing.1.4.js",
-    "node_modules/materialize-css/js/animation.js",
+    "node_modules/materialize-css/js/cash.js",
     "node_modules/materialize-css/js/velocity.min.js",
-    "node_modules/materialize-css/js/hammer.min.js",
-    "node_modules/materialize-css/js/jquery.hammer.js",
     "node_modules/materialize-css/js/global.js",
     "node_modules/materialize-css/js/collapsible.js",
     "node_modules/materialize-css/js/dropdown.js",
@@ -72,22 +69,22 @@ gulp.task('materialize.js', () => {
     "node_modules/materialize-css/js/tooltip.js",
     "node_modules/materialize-css/js/waves.js",
     "node_modules/materialize-css/js/toasts.js",
-    "node_modules/materialize-css/js/sideNav.js",
+    "node_modules/materialize-css/js/sidenav.js",
     "node_modules/materialize-css/js/scrollspy.js",
+    "node_modules/materialize-css/js/autocomplete.js",
     "node_modules/materialize-css/js/forms.js",
     "node_modules/materialize-css/js/slider.js",
     "node_modules/materialize-css/js/cards.js",
     "node_modules/materialize-css/js/chips.js",
     "node_modules/materialize-css/js/pushpin.js",
     "node_modules/materialize-css/js/buttons.js",
-    "node_modules/materialize-css/js/transitions.js",
-    "node_modules/materialize-css/js/scrollFire.js",
-    "node_modules/materialize-css/js/date_picker/picker.js",
-    "node_modules/materialize-css/js/date_picker/picker.date.js",
-    "node_modules/materialize-css/js/date_picker/picker.time.js",
-    "node_modules/materialize-css/js/character_counter.js",
+    "node_modules/materialize-css/js/datepicker.js",
+    "node_modules/materialize-css/js/timepicker.js",
+    "node_modules/materialize-css/js/characterCounter.js",
     "node_modules/materialize-css/js/carousel.js",
     "node_modules/materialize-css/js/tapTarget.js",
+    "node_modules/materialize-css/js/select.js",
+    "node_modules/materialize-css/js/range.js",
   ]
   return gulp.src(deps)
     .pipe(babel({presets: [
@@ -176,43 +173,7 @@ gulp.task('frontend.min.css', ['3rdparty.css', 'materialize.scss', 'materialize.
     .pipe(gulp.dest('material/static/material/css/'))
 })
 
-gulp.task('admin.min.js', ['materialize.js', '3rdparty.js'], (cb) => {
-  var deps = [
-    'material/static/material/js/jquery.datetimepicker.full.js',
-    'material/static/material/js/jquery.formset.js',
-    'material/static/material/js/jquery.dataTables.js',
-    'material/static/material/js/dataTables.responsive.js',
-    'material/static/material/js/dataTables.fixedHeader.js',
-    'material/static/material/js/perfect-scrollbar.jquery.js',
-    'material/static/material/js/materialize.js',
-    'material/static/material/js/materialize.forms.js',
-    'material/static/material/js/materialize.admin.js',
-  ]
-  pump([
-    gulp.src(deps),
-    concat('materialize.admin.min.js'),
-    uglify(),
-    gulp.dest('material/static/material/js/')], cb)
-})
 
-gulp.task('admin.min.css', ['3rdparty.css', 'materialize.scss', 'materialize.django.scss'], () => {
-  var deps = [
-    'material/static/material/css/materialize.css',
-    'material/static/material/css/materialize.forms.css',
-    'material/static/material/css/materialize.admin.css',
-    'material/static/material/css/jquery.datetimepicker.css',
-    'material/static/material/css/responsive.dataTables.css',
-    'material/static/material/css/fixedHeader.dataTables.css',
-    'material/static/material/css/perfect-scrollbar.css'
-  ]
-
-  return gulp.src(deps)
-    .pipe(concat('materialize.admin.min.css'))
-    .pipe(postcss([
-      cssnano()
-    ]))
-    .pipe(gulp.dest('material/static/material/css/'))
-})
 
 gulp.task('default', [
   '3rdparty.fonts',
@@ -222,7 +183,5 @@ gulp.task('default', [
   'materialize.django.scss',
   'materialize.js',
   'frontend.min.js',
-  'frontend.min.css',
-  'admin.min.js',
-  'admin.min.css',
+  'frontend.min.css'
 ])

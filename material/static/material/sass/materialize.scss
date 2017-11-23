@@ -1,6 +1,7 @@
 @charset "UTF-8";
 
 // Mixins
+@import "materialize-css/sass/components/mixins";
 @import "materialize-css/sass/components/color";
 
 // Variables;
@@ -16,7 +17,6 @@
 @import "materialize-css/sass/components/icons-material-design";
 @import "materialize-css/sass/components/grid";
 @import "materialize-css/sass/components/navbar";
-@import "materialize-css/sass/components/roboto";
 @import "materialize-css/sass/components/typography";
 @import "materialize-css/sass/components/transitions";
 @import "materialize-css/sass/components/cards";
@@ -32,12 +32,11 @@
 @import "materialize-css/sass/components/materialbox";
 @import "materialize-css/sass/components/forms/forms";
 @import "materialize-css/sass/components/table_of_contents";
-@import "materialize-css/sass/components/sideNav";
+@import "materialize-css/sass/components/sidenav";
 @import "materialize-css/sass/components/preloader";
 @import "materialize-css/sass/components/slider";
 @import "materialize-css/sass/components/carousel";
 @import "materialize-css/sass/components/tapTarget";
 @import "materialize-css/sass/components/pulse";
-@import "materialize-css/sass/components/date_picker/default";
-@import "materialize-css/sass/components/date_picker/default.date";
-@import "materialize-css/sass/components/date_picker/default.time";
+@import "materialize-css/sass/components/datepicker";
+@import "materialize-css/sass/components/timepicker";

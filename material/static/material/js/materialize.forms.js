@@ -13,7 +13,7 @@
       .find('select')
       .not('.disabled')
       .not('.material-ignore')
-      .material_select()
+      .select()
 
     var lang = jQuery( ":root" ).attr('lang')
     if(lang) {
@@ -61,7 +61,7 @@
       .find('select')
       .not('.disabled')
       .not('.material-ignore')
-      .material_select('destroy')
+      .select('destroy')
 
     // Date/DateTime/Time
     $container
