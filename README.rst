@@ -2,7 +2,7 @@
 Django Material
 ===============
 
-Material design for Django Forms and Admin. Template driven.
+Material design for Django.
 
 .. image:: https://img.shields.io/pypi/v/django-material.svg
     :target: https://pypi.python.org/pypi/django-material
@@ -39,8 +39,6 @@ Overview
   * Complex form layout support
 
 - Frontend - Quick starter template for modular applications development
-
-- Admin - Material-designed django admin
 
 .. image:: .screen.png
    :width: 400px
@@ -84,14 +82,8 @@ Django Material Pro with additional features has a commercial-friendly license. 
 Changelog
 =========
 
-1.1.0 2017-10-27 - Stable
--------------------------
+[GIT]
+-----
 
-- Update MaterializeCSS to 0.100.2
-- Forms - Localize DateTime picker
-- Forms - Add clear button on ajax autocomplete fields
-- Frontend - Allow to set ordering in the list view from viewset
-- Frontend - Fix permission check for the create view
-- Admin - Fix inline formset errors
-- Admin - Add file download link on the file fields
-
+- Django 2.0 support
+- Drop Material Admin

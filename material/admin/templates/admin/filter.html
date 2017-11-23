@@ -1,9 +1,0 @@
-{% load i18n %}
-<div class="col s12">
-    <label>{% blocktrans with filter_title=title %} By {{ filter_title }} {% endblocktrans %}</label>
-    <select class="admin_filter text-orange" placeholder="{% blocktrans with filter_title=title %} By {{ filter_title }} {% endblocktrans %}">
-        {% for choice in choices %}
-        <option value="{{ choice.query_string|iriencode }}"{% if choice.selected %} selected{% endif %}>{{ choice.display }}</option>
-        {% endfor %}
-    </select>
-</div>

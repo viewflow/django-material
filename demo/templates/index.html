@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,
     initial-scale=1">
-    <title>Material Design for Django Forms and Admin</title>
+    <title>Material Design for Django</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/materialize/0.95.3/css/materialize.min.css">
@@ -144,7 +144,7 @@
                                     <div class="col s12 l5">
                                         <span class="card-title
                                         black-text">Django-material</span>
-                                        <h6>Material design for django forms and admin</h6>
+                                        <h6>Material design for django</h6>
                                         <h6><a target="_blank" href="http://viewflow.io" style="text-transform:none;margin:0">viewflow.io</a></h6>
                                     </div>
                                 </div>
@@ -165,8 +165,7 @@
                                                                 <li><i class="green-text mdi-action-done"></i> Complex form layout support</li>
                                                             </ul>
                                                         </li>
-                                                        <li><a href="#frontend" style="text-transform:none">Frontend</a>&ndash; Quick starter template</li>
-                                                        <li><a href="#admin" style="text-transform:none">Admin</a>&ndash; Material-designed django admin</li>
+                                                        <li><a href="#frontend" style="text-transform:none">Frontend</a>&ndash; Quick starter template</li>  
                                                     </ul>
                                                 </h5>
                                                 </div>
@@ -192,11 +191,9 @@ And add desired apps into INSTALLED_APPS settings
 <pre><code class="python">    INSTALLED_APPS = (
         'material',
         'material.frontend',
-        'material.admin',
        ...
     )
 </code></pre>
-<b>NOTE:</b> 'material.admin' must be added before 'django.contrib.admin'
                                         </div>
                                         <div class="divider"></div>
                                         <div id="quick_start" class="section scrollspy">
@@ -292,7 +289,7 @@ And render your form with {% templatetag openblock %} form {% templatetag closeb
                                <div class="row">
                                <div class="col s8">
                                    <h4>Frontend</h4>
-                                   <h6>Quick starter template for modular ERP-like applications developent</h6>
+                                   <h6>Quick starter template for modular ERP-like applications development</h6>
                                    <h5>Quick start</h5><br/>
 Add frontend urls into global urlconf module at urls.py
 
@@ -300,7 +297,6 @@ Add frontend urls into global urlconf module at urls.py
 
     urlpatterns = [
         ...
-        url(r'^admin/', include(admin.site.urls)),
         url(r'', include(frontend_urls)),
 ]</code></pre>
 
@@ -325,75 +321,6 @@ global urls.
                        </div>
                    </div>
                    </div>
-                   <div class="col s12">
-                       <h4>Administration</h4>
-                   </div>
-                   <div id="admin" class="col s12 admin scrollspy">
-                       <div class="col s12 m12 l8">
-                           <div class="card grey lighten-4" style="padding: 0; padding-bottom: 25px; margin-top: 8px;   box-sizing: border-box;">
-                               <div class="slider">
-                                   <ul class="slides">
-                                       <li>
-                                           <a target="_blank" href="http://demo.viewflow.io/admin/"><img class="responsive-img" src="{% static 'img/admin_main.png' %}"></a>
-                                       </li>
-                                       <li>
-                                           <a target="_blank" href="http://demo.viewflow.io/admin/integration/city/"><img class="responsive-img" src="{% static 'img/admin_list.png ' %}"></a>
-                                       </li>
-                                       <li>
-                                           <a target="_blank" href="http://demo.viewflow.io/admin/integration/city/2483/"><img class="responsive-img" src="{% static 'img/admin_change.png' %}"></a>
-                                       </li>
-                                       <li>
-                                           <a target="_blank" href="http://demo.viewflow.io/admin/login/"><img class="responsive-img" src="{% static 'img/admin_login.png' %}"></a>
-                                       </li>
-                                   </ul>
-                               </div>
-                           </div>
-                           <div class="center-align">
-                               <h4><a href="http://demo.viewflow.io/admin/">Live Demo</a></h4>
-                           </div>
-                       </div>
-                       <div class="row">
-
-                           <div class="col s12 m12 l4" style="padding-right:0">
-                               <div class="col s12 m6 l6">
-                                   <div class="card">
-                                       <div class="card-image">
-                                           <a target="_blank" href="http://demo.viewflow.io/admin/">
-                                               <img src="{% static 'img/admin_main_mobile.png' %}">
-                                           </a>
-                                       </div>
-                                   </div>
-                               </div>
-                               <div class="col s12 m6 l6">
-                                   <div class="card">
-                                       <div class="card-image">
-                                           <a target="_blank" href="http://demo.viewflow.io/admin/integration/city/">
-                                               <img src="{% static 'img/admin_list_mobile.png' %}">
-                                           </a>
-                                       </div>
-                                   </div>
-                               </div>
-                               <div class="col s12 m6 l6">
-                                   <div class="card">
-                                       <div class="card-image">
-                                           <a target="_blank" href="http://demo.viewflow.io/admin/integration/city/2483/">
-                                               <img src="{% static 'img/admin_change_mobile.png' %}">
-                                           </a>
-                                       </div>
-                                   </div>
-                               </div>
-                               <div class="col s12 m6 l6">
-                                   <div class="card">
-                                       <div class="card-image">
-                                           <a target="_blank" href="http://demo.viewflow.io/admin/">
-                                               <img src="{% static 'img/admin_menu_mobile.png' %}">
-                                           </a>
-                                       </div>
-                                   </div>
-                               </div>
-                           </div>
-                       </div>
-                   </div>
                </div>
           </div>
       </main>
@@ -402,7 +329,7 @@ global urls.
               <div class="row">
                   <div class="col l5 m6 s12">
                       <h5 class="white-text">Django-material</h5>
-                      <p class="grey-text text-lighten-4">Material design for django forms and admin</p>
+                      <p class="grey-text text-lighten-4">Material design for django</p>
                       <a href="http://viewflow.io" class="white-text">viewflow.io</a>
                   </div>
                   <div class="col l3 m6 s12">
@@ -438,7 +365,6 @@ global urls.
         <li><a href="#docs">Documentation</a></li>
         <li><a href="#forms">Forms samples</a></li>
         <li><a href="#frontend">Frontend Template</a></li>
-        <li><a href="#admin">Admin</a></li>
       </ul>
 
       <div id="login_form" class="modal">
