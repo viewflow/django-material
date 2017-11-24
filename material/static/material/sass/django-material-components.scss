@@ -1,8 +1,16 @@
+.dmc-form {
+  padding: 0;
+
+  .dmc-form__visiblefields  {
+    grid-gap: 0;
+  }
+}
+
 .dmc-form-field {
     display: block;
     width: 100%;
 
-    .dmc-textfield, .dmc-textfield__input {
+    .dmc-text-field, .dmc-text-field__input {
         width: 100%
     }
 }

@@ -10,28 +10,28 @@ class InputRenderer(FieldRender):
         return None
 
     def autoinit(self):
-        return "MDCTextfield"
+        return "MDCTextField"
 
     def help_text(self):
         if self.bound_field.help_text:
-            return P(class_="mdc-textfield-helptext  mdc-textfield-helptext--persistent") / [
-                self.bound_field.help_text
+            return P(class_="mdc-text-field-helptext  mdc-text-field-helptext--persistent") / [
+                self.bound_field.help_text or " "
             ]
 
     def __str__(self):
         value = self.bound_field.value()
         textfield_classes = {
-            "mdc-textfield": True,
-            "dmc-textfield": True,
-            "mdc-textfield--upgraded": value
+            "dmc-text-field": True,
+            "mdc-text-field": True,
+            "mdc-text-field--upgraded": value
         }
         label_classes = {
-            "mdc-textfield__label": True,
-            "mdc-textfield__label--float-above": value
+            "mdc-text-field__label": True,
+            "mdc-text-field__label--float-above": value
         }
         input_attrs = {
             'checked': self.bound_field.value(),
-            'class': "mdc-textfield__input dmc-textfield__input",
+            'class': "mdc-text-field__input dmc-text-field__input",
             'disabled': self.disabled,
             'id': self.bound_field.id_for_label,
             'name': self.bound_field.html_name,
@@ -39,7 +39,7 @@ class InputRenderer(FieldRender):
             'value': self.widget.format_value(self.bound_field.value())
         }
 
-        element = Div(class_='mdc-form-field dmc-form-field') / [
+        element = Div(class_='mdc-form-field dmc-form-field', data_mcd_auto_init="MDCFormField") / [
             self.prefix(),
             Div(class_=textfield_classes, data_mdc_auto_init=self.autoinit()) / [
                 Input(**input_attrs),
@@ -58,8 +58,8 @@ class MaterialInputRenderer(InputRenderer):
 
     def prefix(self):
         if self.widget.prefix:
-            return I(class_="material-icons dmc-textfield__prefix") / [self.widget.prefix]
+            return I(class_="material-icons dmc-text-field__prefix") / [self.widget.prefix]
 
     def suffix(self):
         if self.widget.suffix:
-            return I(class_="material-icons dmc-textfield__suffix") / [self.widget.suffix]
+            return I(class_="material-icons dmc-text-field__suffix") / [self.widget.suffix]
