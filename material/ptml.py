@@ -54,6 +54,10 @@ class HtmlElement(object):
             return None
         elif isinstance(value, bool):
             return value
+        elif isinstance(value, (list, tuple)):
+            value = ' '.join(item for item in value if value)
+            if value == '':
+                return None
         elif isinstance(value, dict):
             value = ' '.join(key for key, enabled in value.items() if enabled)
             if value == '':

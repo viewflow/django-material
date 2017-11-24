@@ -17,7 +17,7 @@ class TextInputForm(forms.Form):
     field1 = forms.CharField(help_text='default')
     field2 = forms.CharField(help_text='initial value', initial="Initial value")
     field3 = forms.CharField(help_text='length between 5-10', min_length=5, max_length=10)
-    field4 = forms.CharField(help_text='disabled', disabled=True)
+    field4 = forms.CharField(help_text='disabled', disabled=True, initial='Not editable')
     field5 = forms.CharField(help_text='prefix icon')
 
 
