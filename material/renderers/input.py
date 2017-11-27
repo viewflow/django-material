@@ -16,6 +16,7 @@ class InputRenderer(FieldRender):
 
     def help_text(self, errors):
         classes = [
+            "dmc-text-field-helptext",
             "mdc-text-field-helptext",
             "mdc-text-field-helptext--persistent",
             "mdc-text-field-helptext--validation-msg"

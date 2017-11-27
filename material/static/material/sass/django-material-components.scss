@@ -7,6 +7,7 @@
 
   .dmc-form__formset-header {
     margin-top: 8px;
+    padding-bottom: 8px;
     border-bottom: 2px solid black;
   }
 }
@@ -21,6 +22,7 @@
       }
     }
 
+
     >.material-icons:before {
       content: '';
       display: inline-block;
@@ -29,7 +31,7 @@
     }
 
     >.material-icons {
-      font-size: 2rem;
+      padding-bottom: 16px;
 
       &:first-child {
         margin-right: 16px;
@@ -40,11 +42,20 @@
       }
     }
 
+    .dmc-text-field-helptext {
+      margin-bottom: 0px;
+    }
+
     .dmc-form-field__input {
       flex-grow: 1;
 
-      .dmc-text-field, .dmc-text-field__input {
-          width: 100%
+      .dmc-text-field {
+          width: 100%;
+          margin-top: 0px;
+
+          .dmc-text-field__input {
+            width: 100%;
+          }
       }
     }
 }
