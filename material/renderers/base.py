@@ -30,9 +30,9 @@ def get_field_renderer(field):
         if field_class in material_settings.FIELD_RENDERERS:
             return material_settings.FIELD_RENDERERS[field_class]
 
-    for widger_class in type(field.widget).mro()[:-2]:
-        if widger_class in material_settings.WIDGET_RENDERERS:
-            return material_settings.WIDGET_RENDERERS[widger_class]    
+    for widget_class in type(field.widget).mro()[:-2]:
+        if widget_class in material_settings.WIDGET_RENDERERS:
+            return material_settings.WIDGET_RENDERERS[widget_class]
 
     return FieldRender
 

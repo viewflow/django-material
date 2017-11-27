@@ -4,13 +4,47 @@
   .dmc-form__visiblefields  {
     grid-gap: 0;
   }
+
+  .dmc-form__formset-header {
+    margin-top: 8px;
+    border-bottom: 2px solid black;
+  }
 }
 
 .dmc-form-field {
-    display: block;
+    display: flex;
     width: 100%;
 
-    .dmc-text-field, .dmc-text-field__input {
-        width: 100%
+    &.dmc-form-field--invalid {
+      >.material-icons {
+        color: #d50000;
+      }
+    }
+
+    >.material-icons:before {
+      content: '';
+      display: inline-block;
+      vertical-align: middle;
+      height: 100%;
+    }
+
+    >.material-icons {
+      font-size: 2rem;
+
+      &:first-child {
+        margin-right: 16px;
+      }
+
+      &:last-child {
+        margin-left: 16px;
+      }
+    }
+
+    .dmc-form-field__input {
+      flex-grow: 1;
+
+      .dmc-text-field, .dmc-text-field__input {
+          width: 100%
+      }
     }
 }

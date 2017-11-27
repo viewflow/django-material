@@ -141,7 +141,7 @@ class Fieldset(Column):
 
     def render(self, form):
         element = Div(class_="dmc-form__formset") / [
-            H3(class_="mdc-typography--subheading2") / [self.title],
+            H3(class_="mdc-typography--subheading2 dmc-form__formset-header") / [self.title],
             super().render(form)
         ]
         return str(element)

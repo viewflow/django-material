@@ -5,6 +5,10 @@ from .ptml import Icon
 from .settings import material_settings
 from .sites import Site, Application, AppViewset
 from .viewset import Viewset, viewprop
+from .widgets import (
+    MaterialTextInput, MaterialNumberInput, MaterialEmailInput,
+    MaterialURLInput, MaterialPasswordInput
+)
 
 
 __title__ = 'Django-Material'
@@ -26,4 +30,6 @@ if material_settings.AUTOREGISTER:
 __all__ = (
     'Layout', 'Row', 'Column', 'Fieldset', 'Span', 'Icon',
     'Viewset', 'Site', 'Application', 'AppViewset', 'viewprop',
+    'MaterialTextInput', 'MaterialNumberInput', 'MaterialEmailInput',
+    'MaterialURLInput', 'MaterialPasswordInput'
 )

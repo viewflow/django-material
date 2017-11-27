@@ -1,4 +1,5 @@
 from django import forms
+from material import Icon, MaterialTextInput
 
 
 class CheckboxInputForm(forms.Form):
@@ -18,8 +19,14 @@ class TextInputForm(forms.Form):
     field2 = forms.CharField(help_text='initial value', initial="Initial value")
     field3 = forms.CharField(help_text='length between 5-10', min_length=5, max_length=10)
     field4 = forms.CharField(help_text='disabled', disabled=True, initial='Not editable')
-    field5 = forms.CharField(help_text='prefix icon')
-
+    field5 = forms.CharField(
+        help_text='prefix icon',
+        widget=MaterialTextInput(prefix=Icon('edit'))
+    )
+    field6 = forms.CharField(
+        help_text='suffix icon',
+        widget=MaterialTextInput(suffix=Icon('remove_red_eye'))
+    )
 
 class SelectForm(forms.Form):
     title = "Select"
@@ -29,7 +36,7 @@ class SelectForm(forms.Form):
         (None, 'Select a fruit'),
         (1, 'Apple'),
         (2, 'Orange'),
-        (3, 'Watermeloun'))
+        (3, 'Watermelon'))
     FLOAT_CHOICES = (
         (1.1, 'Perfect'),
         (1.0, 'Good'),

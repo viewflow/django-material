@@ -36,7 +36,10 @@ class InputRenderer(FieldRender):
         errors = self.bound_field.errors
 
         wrapper_attrs = {
-            'class': 'dmc-form-field',
+            'class': {
+                'dmc-form-field': True,
+                'dmc-form-field--invalid': bool(errors)
+            },
             'title': self.bound_field.help_text
         }
         textfield_classes = {
@@ -61,11 +64,14 @@ class InputRenderer(FieldRender):
 
         element = Div(**wrapper_attrs) / [
             self.prefix(),
-            Div(class_=textfield_classes, data_mdc_auto_init=self.autoinit()) / [
-                Input(**input_attrs),
-                Label(for_=self.bound_field.id_for_label, class_=label_classes) / [self.bound_field.label],
+            Div(class_="dmc-form-field__input") / [
+                Div(class_=textfield_classes, data_mdc_auto_init=self.autoinit()) / [
+                    Input(**input_attrs),
+                    Label(for_=self.bound_field.id_for_label, class_=label_classes) / [self.bound_field.label],
+                    Div(class_="mdc-text-field__bottom-line")
+                ],
+                self.help_text(errors),
             ],
-            self.help_text(errors),
             self.suffix()
         ]
 
@@ -78,7 +84,7 @@ class MaterialInputRenderer(InputRenderer):
 
     def prefix(self):
         if self.widget.prefix:
-            return I(class_="material-icons dmc-text-field__prefix") / [self.widget.prefix]
+            return self.widget.prefix
 
     def suffix(self):
         if self.widget.suffix:
