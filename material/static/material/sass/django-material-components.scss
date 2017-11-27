@@ -42,16 +42,13 @@
       }
     }
 
-    .dmc-text-field-helptext {
-      margin-bottom: 0px;
-    }
-
     .dmc-form-field__input {
       flex-grow: 1;
 
       .dmc-text-field {
           width: 100%;
           margin-top: 0px;
+          margin-bottom: 0px;
 
           .dmc-text-field__input {
             width: 100%;

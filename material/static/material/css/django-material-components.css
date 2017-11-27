@@ -23,12 +23,11 @@
       margin-right: 16px; }
     .dmc-form-field > .material-icons:last-child {
       margin-left: 16px; }
-  .dmc-form-field .dmc-text-field-helptext {
-    margin-bottom: 0px; }
   .dmc-form-field .dmc-form-field__input {
     flex-grow: 1; }
     .dmc-form-field .dmc-form-field__input .dmc-text-field {
       width: 100%;
-      margin-top: 0px; }
+      margin-top: 0px;
+      margin-bottom: 0px; }
       .dmc-form-field .dmc-form-field__input .dmc-text-field .dmc-text-field__input {
         width: 100%; }
