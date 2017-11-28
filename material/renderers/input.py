@@ -105,8 +105,14 @@ class PasswordRenderer(InputRenderer):
         return "DMCPasswordField"
 
     def control(self, value):
+        toggle_attrs = {
+            'class': 'material-icons dmc-password-field__toggle',
+            'href': '#',
+            'tabindex': '-1',
+            'aria-hidden': 'true'
+        }
         return super().control(value) + [
-            A(class_="material-icons dmc-password-field__toggle", href="#") / ["visibility"]
+            A(**toggle_attrs) / ["visibility"]
         ]
 
 

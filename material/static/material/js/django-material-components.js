@@ -318,9 +318,6 @@
         this.toggle_ = this.root_.querySelector('.dmc-password-field__toggle');
 
         this.onToggle = function (event) {
-          if (event.type === "keypress" && event.keyCode !== 13 && event.charCode !== 32) {
-            return;
-          }
           event.preventDefault();
           if (_this2.input_.type === "password") {
             _this2.input_.type = "text";
@@ -329,12 +326,10 @@
             _this2.input_.type = "password";
             _this2.toggle_.text = "visibility";
           }
-          if (event.type !== "keypress") {
-            _this2.input_.selectionStart = _this2.input_.selectionEnd = _this2.input_.value.length;
-            _this2.input_.focus();
-          }
+
+          _this2.input_.selectionStart = _this2.input_.selectionEnd = _this2.input_.value.length;
+          _this2.input_.focus();
         };
-        this.toggle_.addEventListener('keypress', this.onToggle);
         this.toggle_.addEventListener('click', this.onToggle);
       }
     }, {
@@ -344,7 +339,6 @@
           this.textField_.destroy();
         }
         this.toggle_.removeEventListener('click', this.onToggle);
-        this.toggle_.removeEventListener('keypress', this.onToggle);
       }
     }], [{
       key: 'attachTo',
