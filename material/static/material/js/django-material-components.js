@@ -318,6 +318,9 @@
         this.toggle_ = this.root_.querySelector('.dmc-password-field__toggle');
 
         this.onToggle = function (event) {
+          if (event.type === "keypress" && event.keyCode !== 13 && event.charCode !== 32) {
+            return;
+          }
           event.preventDefault();
           if (_this2.input_.type === "password") {
             _this2.input_.type = "text";
@@ -331,8 +334,8 @@
             _this2.input_.focus();
           }
         };
-        this.toggle_.addEventListener('click', this.onToggle);
         this.toggle_.addEventListener('keypress', this.onToggle);
+        this.toggle_.addEventListener('click', this.onToggle);
       }
     }, {
       key: 'destroy',

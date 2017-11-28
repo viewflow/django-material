@@ -26,16 +26,24 @@ urlpatterns = [
     # widgets
     path('widget/checkboxinput/', FormView.as_view(
         template_name='form.html',
-        form_class=widgets.CheckboxInputForm)),
+        form_class=widgets.CheckboxInputForm,
+        success_url='.')
+    ),
     path('widget/textinput/', FormView.as_view(
         template_name='form.html',
-        form_class=widgets.TextInputForm)),
+        form_class=widgets.TextInputForm,
+        success_url='.')
+    ),
     path('widget/passwordinput/', FormView.as_view(
         template_name='form.html',
-        form_class=widgets.PasswordInputForm)),
+        form_class=widgets.PasswordInputForm,
+        success_url='.')
+    ),
     path('widget/select/', FormView.as_view(
         template_name='form.html',
-        form_class=widgets.SelectForm)),
+        form_class=widgets.SelectForm,
+        success_url='.')
+    ),
 
     # demo forms
     path('demo/registration/', FormView.as_view(

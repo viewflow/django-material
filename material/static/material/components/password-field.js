@@ -12,6 +12,9 @@ export class DMCPasswordField extends base.MDCComponent {
     this.toggle_ = this.root_.querySelector('.dmc-password-field__toggle')
 
     this.onToggle = (event) => {
+      if(event.type === "keypress" && event.keyCode !== 13 && event.charCode !== 32) {
+        return
+      }
       event.preventDefault()
       if(this.input_.type === "password") {
         this.input_.type = "text";
@@ -25,8 +28,8 @@ export class DMCPasswordField extends base.MDCComponent {
         this.input_.focus()
       }
     }
-    this.toggle_.addEventListener('click', this.onToggle)
     this.toggle_.addEventListener('keypress', this.onToggle)
+    this.toggle_.addEventListener('click', this.onToggle)
   }
 
   destroy() {

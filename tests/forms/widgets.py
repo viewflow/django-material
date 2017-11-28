@@ -24,7 +24,7 @@ class TextInputForm(forms.Form):
     )
     field5 = forms.CharField(
         help_text='suffix icon',
-        widget=MaterialTextInput(suffix=Icon('remove_red_eye'))
+        widget=MaterialTextInput(suffix=Icon('perm_contact_calendar'))
     )
     field6 = forms.CharField(help_text='disabled', disabled=True, initial='Not editable')
 
@@ -33,11 +33,13 @@ class PasswordInputForm(forms.Form):
     title = "PasswordInput"
     subtitle = 'Widget options demo'
 
-    field1 = forms.CharField(help_text='default', widget=forms.PasswordInput)
+    field1 = forms.CharField(
+        help_text='default',
+        widget=forms.PasswordInput)
     field2 = forms.CharField(
         help_text='prefix icon',
         initial="Initial value",
-        widget=MaterialPasswordInput(prefix=Icon('edit'))
+        widget=MaterialPasswordInput(prefix=Icon('lock'))
     )
 
 
