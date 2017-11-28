@@ -31,3 +31,15 @@
       margin-bottom: 0px; }
       .dmc-form-field .dmc-form-field__input .dmc-text-field .dmc-text-field__input {
         width: 100%; }
+
+.dmc-password-field .dmc-text-field__input {
+  padding-right: 24px; }
+
+.dmc-password-field .dmc-password-field__toggle {
+  position: absolute;
+  right: 0;
+  font-size: 18px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  text-decoration: none;
+  color: inherit; }

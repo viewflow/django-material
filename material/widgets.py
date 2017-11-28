@@ -33,4 +33,4 @@ class MaterialURLInput(_IconMixin, _AutoInitMixin, widgets.URLInput):
 
 
 class MaterialPasswordInput(_IconMixin, _AutoInitMixin, widgets.PasswordInput):
-    autoinit = "MDCTextField"
+    autoinit = "DMCPasswordField"

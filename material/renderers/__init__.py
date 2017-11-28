@@ -5,7 +5,10 @@ from material import widgets as material_widgets
 from .base import get_field_renderer
 from .form import FormRenderer
 from .checkbox import CheckboxInputRenderer
-from .input import InputRenderer, MaterialInputRenderer
+from .input import (
+    InputRenderer, MaterialInputRenderer, PasswordRenderer,
+    MaterialPasswordRenderer
+)
 from .select import SelectRenderer
 
 
@@ -23,8 +26,8 @@ WIDGET_RENDERERS = {
     widgets.EmailInput: InputRenderer,
     material_widgets.MaterialEmailInput: MaterialInputRenderer,
 
-    widgets.PasswordInput: InputRenderer,
-    material_widgets.MaterialPasswordInput: MaterialInputRenderer,
+    widgets.PasswordInput: PasswordRenderer,
+    material_widgets.MaterialPasswordInput: MaterialPasswordRenderer,
 
     widgets.Select: SelectRenderer,
 }

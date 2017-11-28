@@ -56,3 +56,19 @@
       }
     }
 }
+
+.dmc-password-field {
+  .dmc-text-field__input{
+    padding-right: 24px;
+  }
+
+  .dmc-password-field__toggle {
+    position: absolute;
+    right: 0;
+    font-size: 18px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    text-decoration: none;
+    color: inherit;
+  }
+}

@@ -94,6 +94,10 @@ class I(HtmlElement):
     tag = 'i'
 
 
+class A(HtmlElement):
+    tag = 'A'
+
+
 class P(HtmlElement):
     tag = 'p'
 

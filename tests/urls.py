@@ -30,6 +30,9 @@ urlpatterns = [
     path('widget/textinput/', FormView.as_view(
         template_name='form.html',
         form_class=widgets.TextInputForm)),
+    path('widget/passwordinput/', FormView.as_view(
+        template_name='form.html',
+        form_class=widgets.PasswordInputForm)),
     path('widget/select/', FormView.as_view(
         template_name='form.html',
         form_class=widgets.SelectForm)),

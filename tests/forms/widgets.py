@@ -1,5 +1,5 @@
 from django import forms
-from material import Icon, MaterialTextInput
+from material import Icon, MaterialTextInput, MaterialPasswordInput
 
 
 class CheckboxInputForm(forms.Form):
@@ -18,15 +18,28 @@ class TextInputForm(forms.Form):
     field1 = forms.CharField(help_text='default')
     field2 = forms.CharField(help_text='initial value', initial="Initial value")
     field3 = forms.CharField(help_text='length between 5-10', min_length=5, max_length=10)
-    field4 = forms.CharField(help_text='disabled', disabled=True, initial='Not editable')
-    field5 = forms.CharField(
+    field4 = forms.CharField(
         help_text='prefix icon',
         widget=MaterialTextInput(prefix=Icon('edit'))
     )
-    field6 = forms.CharField(
+    field5 = forms.CharField(
         help_text='suffix icon',
         widget=MaterialTextInput(suffix=Icon('remove_red_eye'))
     )
+    field6 = forms.CharField(help_text='disabled', disabled=True, initial='Not editable')
+
+
+class PasswordInputForm(forms.Form):
+    title = "PasswordInput"
+    subtitle = 'Widget options demo'
+
+    field1 = forms.CharField(help_text='default', widget=forms.PasswordInput)
+    field2 = forms.CharField(
+        help_text='prefix icon',
+        initial="Initial value",
+        widget=MaterialPasswordInput(prefix=Icon('edit'))
+    )
+
 
 class SelectForm(forms.Form):
     title = "Select"

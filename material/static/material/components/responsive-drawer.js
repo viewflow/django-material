@@ -32,6 +32,12 @@ export class DMCResponsiveDrawer extends base.MDCComponent {
 
   destroy() {
     window.removeEventListener('resize', this.onResize)
+    if(this.temporalDrawer_) {
+      this.temporalDrawer_.destroy()
+    }
+    if(this.persistentDrawer_) {
+      this.persistentDrawer_.destroy()
+    }
   }
 
   reconcileDrawer() {
