@@ -1,5 +1,8 @@
 from django import forms
-from material import Icon, MaterialTextInput, MaterialPasswordInput
+from material import (
+    Icon, Layout, Row, Span,
+    MaterialTextInput, MaterialPasswordInput
+)
 
 
 class CheckboxInputForm(forms.Form):
@@ -9,6 +12,18 @@ class CheckboxInputForm(forms.Form):
     field1 = forms.BooleanField(help_text='default')
     field2 = forms.BooleanField(help_text='initial value', initial=True)
     field3 = forms.BooleanField(help_text='disabled', disabled=True)
+    field4 = forms.BooleanField(help_text='on a row with textfield')
+    textfield = forms.CharField(
+        help_text='with boolean',
+        widget=MaterialTextInput(prefix=Icon('edit'))
+    )
+
+    layout = Layout(
+        'field1',
+        'field2',
+        'field3',
+        Row('textfield', Span('field4', desktop=3))
+    )
 
 
 class TextInputForm(forms.Form):

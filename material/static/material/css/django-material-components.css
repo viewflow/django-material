@@ -25,12 +25,17 @@
       margin-left: 8px; }
   .dmc-form-field .dmc-form-field__input {
     flex-grow: 1; }
-    .dmc-form-field .dmc-form-field__input .dmc-text-field {
-      width: 100%;
-      margin-top: 0px;
-      margin-bottom: 0px; }
-      .dmc-form-field .dmc-form-field__input .dmc-text-field .dmc-text-field__input {
-        width: 100%; }
+
+.dmc-text-field {
+  width: 100%;
+  margin-top: 0px !important;
+  margin-bottom: 2px; }
+  .dmc-text-field .dmc-text-field__input {
+    width: 100%; }
+
+.dmc-text-field-helptext {
+  font-size: 11px;
+  margin-bottom: 6px !important; }
 
 .dmc-password-field .dmc-text-field__input {
   padding-right: 24px; }
@@ -43,4 +48,20 @@
   padding-top: 8px;
   padding-bottom: 8px;
   text-decoration: none;
-  color: inherit; }
+  color: inherit;
+  opacity: 0.8; }
+
+.dmc-checkbox-field {
+  margin-top: 12px;
+  margin-bottom: 7px; }
+  .dmc-checkbox-field.dmc-form-field--invalid .dmc-text-field-helptext,
+  .dmc-checkbox-field.dmc-form-field--invalid label {
+    opacity: 1;
+    color: #d50000; }
+  .dmc-checkbox-field.dmc-form-field--invalid .mdc-checkbox__background {
+    border-color: rgba(213, 0, 0, 0.54) !important; }
+  .dmc-checkbox-field .dmc-text-field-helptext {
+    margin-bottom: 0px !important;
+    margin-top: -3px;
+    margin-left: 40px;
+    padding-left: 4px; }
