@@ -1,4 +1,4 @@
-from django.utils.html import mark_safe, conditional_escape
+from django.utils.html import conditional_escape
 
 from material.ptml import Div, Input, Svg, P, Path, Label
 from .base import FieldRender
@@ -24,13 +24,14 @@ class CheckboxInputRenderer(FieldRender):
             "mdc-text-field-helptext--validation-msg"
         ]
 
-        text = mark_safe('&nbsp;')
+        text = None
         if errors:
             text = '<br/>'.join(conditional_escape(error) for error in errors)
         elif self.bound_field.help_text:
             text = self.bound_field.help_text
 
-        return P(class_=classes) / [
+        if text:
+            return P(class_=classes) / [
                 text
             ]
 

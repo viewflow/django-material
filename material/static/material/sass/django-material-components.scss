@@ -43,6 +43,8 @@
 
     .dmc-form-field__input {
       flex-grow: 1;
+      display: flex;
+      flex-direction: column;
     }
 }
 
@@ -98,5 +100,28 @@
     margin-top: -3px;
     margin-left: 40px;
     padding-left: 4px;
+  }
+}
+
+.dmc-select-field {
+  .dmc-form-field__input {
+    overflow: hidden;
+  }
+
+  .mdc-select {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+  }
+
+  .dmc-select-field__label {
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 10px;
+    line-height: 15px;
+  }
+
+  .dmc-select-field__helptext {
+    margin: 0 0 8px 0;
+    color: rgba(0, 0, 0, 0.38);
+    color: var(--mdc-theme-text-hint-on-light, rgba(0, 0, 0, 0.38));
+    font-size: 11px;
   }
 }

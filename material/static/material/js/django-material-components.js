@@ -558,6 +558,165 @@
       exports: {}
     };
     factory(mod.exports, global.mdc);
+    global.selectField = mod.exports;
+  }
+})(this, function (exports, _materialComponentsWeb) {
+  'use strict';
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.DMCSelect = undefined;
+
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError("Cannot call a class as a function");
+    }
+  }
+
+  var _createClass = function () {
+    function defineProperties(target, props) {
+      for (var i = 0; i < props.length; i++) {
+        var descriptor = props[i];
+        descriptor.enumerable = descriptor.enumerable || false;
+        descriptor.configurable = true;
+        if ("value" in descriptor) descriptor.writable = true;
+        Object.defineProperty(target, descriptor.key, descriptor);
+      }
+    }
+
+    return function (Constructor, protoProps, staticProps) {
+      if (protoProps) defineProperties(Constructor.prototype, protoProps);
+      if (staticProps) defineProperties(Constructor, staticProps);
+      return Constructor;
+    };
+  }();
+
+  function _possibleConstructorReturn(self, call) {
+    if (!self) {
+      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+    }
+
+    return call && (typeof call === "object" || typeof call === "function") ? call : self;
+  }
+
+  var _get = function get(object, property, receiver) {
+    if (object === null) object = Function.prototype;
+    var desc = Object.getOwnPropertyDescriptor(object, property);
+
+    if (desc === undefined) {
+      var parent = Object.getPrototypeOf(object);
+
+      if (parent === null) {
+        return undefined;
+      } else {
+        return get(parent, property, receiver);
+      }
+    } else if ("value" in desc) {
+      return desc.value;
+    } else {
+      var getter = desc.get;
+
+      if (getter === undefined) {
+        return undefined;
+      }
+
+      return getter.call(receiver);
+    }
+  };
+
+  function _inherits(subClass, superClass) {
+    if (typeof superClass !== "function" && superClass !== null) {
+      throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
+    }
+
+    subClass.prototype = Object.create(superClass && superClass.prototype, {
+      constructor: {
+        value: subClass,
+        enumerable: false,
+        writable: true,
+        configurable: true
+      }
+    });
+    if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+  }
+
+  var MDCSelect = function (_select$MDCSelect) {
+    _inherits(MDCSelect, _select$MDCSelect);
+
+    function MDCSelect() {
+      _classCallCheck(this, MDCSelect);
+
+      return _possibleConstructorReturn(this, (MDCSelect.__proto__ || Object.getPrototypeOf(MDCSelect)).apply(this, arguments));
+    }
+
+    _createClass(MDCSelect, [{
+      key: 'getDefaultFoundation',
+      value: function getDefaultFoundation() {
+        var foundation = _get(MDCSelect.prototype.__proto__ || Object.getPrototypeOf(MDCSelect.prototype), 'getDefaultFoundation', this).call(this),
+            super_setMenuStyle = foundation.setMenuStylesForOpenAtIndex_;
+
+        foundation.resize = function () {
+          /* no action here */
+        };
+
+        foundation.setMenuStylesForOpenAtIndex_ = function (index) {
+          super_setMenuStyle.call(foundation, index);
+
+          var rect = foundation.adapter_.computeBoundingRect();
+          foundation.adapter_.setMenuElStyle('width', rect.width + 'px');
+        };
+
+        return foundation;
+      }
+    }]);
+
+    return MDCSelect;
+  }(_materialComponentsWeb.select.MDCSelect);
+
+  var DMCSelect = exports.DMCSelect = function (_base$MDCComponent) {
+    _inherits(DMCSelect, _base$MDCComponent);
+
+    function DMCSelect() {
+      _classCallCheck(this, DMCSelect);
+
+      return _possibleConstructorReturn(this, (DMCSelect.__proto__ || Object.getPrototypeOf(DMCSelect)).apply(this, arguments));
+    }
+
+    _createClass(DMCSelect, [{
+      key: 'initialize',
+      value: function initialize() {
+        this.selectField_ = new MDCSelect(this.root_);
+      }
+    }, {
+      key: 'destroy',
+      value: function destroy() {
+        if (this.selectField_) {
+          this.selectField_.destroy();
+        }
+      }
+    }], [{
+      key: 'attachTo',
+      value: function attachTo(root) {
+        return new DMCSelect(root, new _materialComponentsWeb.base.MDCFoundation());
+      }
+    }]);
+
+    return DMCSelect;
+  }(_materialComponentsWeb.base.MDCComponent);
+
+  _materialComponentsWeb.autoInit.register('DMCSelect', DMCSelect);
+});
+(function (global, factory) {
+  if (typeof define === "function" && define.amd) {
+    define(['exports', 'material-components-web'], factory);
+  } else if (typeof exports !== "undefined") {
+    factory(exports, require('material-components-web'));
+  } else {
+    var mod = {
+      exports: {}
+    };
+    factory(mod.exports, global.mdc);
     global.toggleDrawer = mod.exports;
   }
 })(this, function (exports, _materialComponentsWeb) {
