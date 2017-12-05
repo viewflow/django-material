@@ -9,7 +9,7 @@ from .input import (
     InputRenderer, MaterialInputRenderer, PasswordRenderer,
     MaterialPasswordRenderer
 )
-from .select import SelectRenderer
+from .select import SelectRenderer, MaterialSelectRenderer
 
 
 __all__ = (
@@ -30,6 +30,7 @@ WIDGET_RENDERERS = {
     material_widgets.MaterialPasswordInput: MaterialPasswordRenderer,
 
     widgets.Select: SelectRenderer,
+    material_widgets.MaterialSelect: MaterialSelectRenderer
 }
 
 

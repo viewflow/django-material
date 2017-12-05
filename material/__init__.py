@@ -7,7 +7,7 @@ from .sites import Site, Application, AppViewset
 from .viewset import Viewset, viewprop
 from .widgets import (
     MaterialTextInput, MaterialNumberInput, MaterialEmailInput,
-    MaterialURLInput, MaterialPasswordInput
+    MaterialURLInput, MaterialPasswordInput, MaterialSelect
 )
 
 
@@ -31,5 +31,5 @@ __all__ = (
     'Layout', 'Row', 'Column', 'Fieldset', 'Span', 'Icon',
     'Viewset', 'Site', 'Application', 'AppViewset', 'viewprop',
     'MaterialTextInput', 'MaterialNumberInput', 'MaterialEmailInput',
-    'MaterialURLInput', 'MaterialPasswordInput'
+    'MaterialURLInput', 'MaterialPasswordInput', 'MaterialSelect',
 )

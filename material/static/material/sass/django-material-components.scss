@@ -104,6 +104,16 @@
 }
 
 .dmc-select-field {
+  &.dmc-form-field--invalid {
+    .mdc-select {
+      color: #d50000;
+      border-bottom: 1px solid #d50000;
+    }
+    .dmc-select-field__helptext {
+      color: #d50000;
+    }
+  }
+
   .dmc-form-field__input {
     overflow: hidden;
   }

@@ -10,6 +10,12 @@ class SelectRenderer(FieldRender):
     def autoinit(self):
         return "DMCSelect"
 
+    def prefix(self):
+        return None
+
+    def suffix(self):
+        return None
+
     def help_text(self, errors):
         classes = [
             "dmc-select-field__helptext",
@@ -25,6 +31,24 @@ class SelectRenderer(FieldRender):
                 text
             ]
 
+    def selected_text(self):
+        value = self.widget.format_value(self.bound_field.value())
+
+        selected = []
+        for _, group_choices, _ in self.widget.optgroups(self.bound_field.name, value):
+            for option in group_choices:
+                if option['selected']:
+                    selected.append(option)
+        if selected:
+            return ','.join(option['label'] for option in selected)
+        else:
+            first_choice = next(iter(self.widget.choices), None)
+            if first_choice is not None:
+                _, label = first_choice
+                if isinstance(label, (list, tuple)):
+                    label = label[0][1]
+                return label
+
     def list_items(self):
         optgroup_classes = [
             'mdc-list-group__subheader',
@@ -37,6 +61,8 @@ class SelectRenderer(FieldRender):
                 yield H3(class_=optgroup_classes) / [group_name]
 
             for option in group_choices:
+                if option['value'] == '':
+                    continue
                 option_attrs = {
                     'class': "mdc-list-item",
                     'role': "option",
@@ -49,7 +75,7 @@ class SelectRenderer(FieldRender):
 
     def control(self, value):
         return Div(class_="mdc-select", role="listbox", tabindex="0", data_mdc_auto_init="DMCSelect") / [
-            Span(class_="mdc-select__selected-text") / ["Pick a food group"],
+            Span(class_="mdc-select__selected-text") / [self.selected_text()],
             Div(class_="mdc-simple-menu mdc-select__menu") / [
                 Ul(class_="mdc-list mdc-simple-menu__items") / list(self.list_items())
             ]
@@ -76,11 +102,24 @@ class SelectRenderer(FieldRender):
         }
 
         element = Div(**wrapper_attrs) / [
+            self.prefix(),
             Div(class_="dmc-form-field__input") / [
                 Label(**label_attrs) / [self.bound_field.label],
                 self.control(value),
                 self.help_text(errors),
-            ]
+            ],
+            self.suffix()
         ]
 
         return str(element)
+
+
+class MaterialSelectRenderer(SelectRenderer):
+    def autoinit(self):
+        return self.widget.autoinit
+
+    def prefix(self):
+        return self.widget.prefix
+
+    def suffix(self):
+        return self.widget.suffix

@@ -1,7 +1,7 @@
 from django import forms
 from material import (
     Icon, Layout, Row, Span,
-    MaterialTextInput, MaterialPasswordInput
+    MaterialTextInput, MaterialPasswordInput, MaterialSelect
 )
 
 
@@ -85,7 +85,11 @@ class SelectForm(forms.Form):
     field4 = forms.ChoiceField(help_text='groups', choices=GROUPED_CHOICES)
     field5 = forms.ChoiceField(help_text='long choices list', choices=LONG_CHOICES)
     field6 = forms.TypedChoiceField(help_text='coerce to int', coerce=int, choices=CHOICES)
-    field7 = forms.ChoiceField(help_text='prefix', choices=CHOICES)
+    field7 = forms.ChoiceField(
+        help_text='prefix',
+        choices=CHOICES,
+        widget=MaterialSelect(prefix=Icon('account_box'))
+    )
     field8 = forms.ChoiceField(help_text='on a row with textfield', choices=CHOICES)
     textfield = forms.CharField(
         help_text='with select',

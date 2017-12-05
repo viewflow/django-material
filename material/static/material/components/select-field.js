@@ -1,4 +1,4 @@
-import {autoInit, base, select} from 'material-components-web';
+  import {autoInit, base, select} from 'material-components-web';
 
 
 class MDCSelect extends select.MDCSelect {
