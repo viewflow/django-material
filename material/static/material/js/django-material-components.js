@@ -686,13 +686,36 @@
     _createClass(DMCSelect, [{
       key: 'initialize',
       value: function initialize() {
-        this.selectField_ = new MDCSelect(this.root_);
+        var _this3 = this;
+
+        this.customSelect_ = new MDCSelect(this.root_.querySelector('.mdc-select[role="listbox"]'));
+        this.nativeSelect_ = this.root_.querySelector('select.mdc-select');
+        this.changeHandler = function (_ref) {
+          var type = _ref.type;
+
+          var changedSelect = void 0,
+              selectToUpdate = void 0,
+              value = void 0;
+          if (type === 'MDCSelect:change') {
+            changedSelect = _this3.customSelect_;
+            selectToUpdate = _this3.nativeSelect_;
+          } else {
+            changedSelect = _this3.nativeSelect_;
+            selectToUpdate = _this3.customSelect_;
+          }
+          selectToUpdate.selectedIndex = changedSelect.selectedIndex;
+        };
+        this.customSelect_.listen('MDCSelect:change', this.changeHandler);
+        this.nativeSelect_.addEventListener('change', this.changeHandler);
       }
     }, {
       key: 'destroy',
       value: function destroy() {
-        if (this.selectField_) {
-          this.selectField_.destroy();
+        if (this.customSelect_) {
+          this.customSelect_.destroy();
+        }
+        if (this.nativeSelect_) {
+          this.nativeSelect_.removeEventListener('change', this.changeHandler);
         }
       }
     }], [{

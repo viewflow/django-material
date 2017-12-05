@@ -41,7 +41,7 @@ class SelectRenderer(FieldRender):
                 if option['selected']:
                     selected.append(option)
         if selected:
-            return ','.join(option['label'] for option in selected)
+            return ','.join(str(option['label']) for option in selected)
         else:
             first_choice = next(iter(self.widget.choices), None)
             if first_choice is not None:
@@ -89,7 +89,6 @@ class SelectRenderer(FieldRender):
             },
             'role': "listbox",
             'tabindex': "-1" if self.disabled else "0",
-            'data-mdc-auto-init': self.autoinit()
         }
 
         return Div(**control_attrs) / [
@@ -148,7 +147,7 @@ class SelectRenderer(FieldRender):
 
         element = Div(**wrapper_attrs) / [
             self.prefix(),
-            Div(class_="dmc-form-field__input") / [
+            Div(class_="dmc-form-field__input", data_mdc_auto_init=self.autoinit()) / [
                 Label(**label_attrs) / [self.bound_field.label],
                 self.control(options),
                 self.native_control(options),
