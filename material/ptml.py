@@ -119,6 +119,18 @@ class Input(HtmlElement):
     void = True
 
 
+class Select(HtmlElement):
+    tag = 'select'
+
+
+class Option(HtmlElement):
+    tag = 'option'
+
+
+class Optgroup(HtmlElement):
+    tag = 'optgroup'
+
+
 class Svg(HtmlElement):
     tag = 'svg'
 

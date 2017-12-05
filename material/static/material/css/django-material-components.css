@@ -37,7 +37,8 @@
 
 .dmc-text-field-helptext {
   font-size: 11px;
-  margin-bottom: 6px !important; }
+  margin-bottom: 6px !important;
+  margin-top: 0px; }
 
 .dmc-password-field .dmc-text-field__input {
   padding-right: 24px; }
@@ -77,6 +78,14 @@
 
 .dmc-select-field .dmc-form-field__input {
   overflow: hidden; }
+  .dmc-select-field .dmc-form-field__input select.mdc-select {
+    display: none;
+    max-width: 100%; }
+  @media (max-width: 600px) and (pointer: coarse) {
+    .dmc-select-field .dmc-form-field__input .mdc-select[role="listbox"] {
+      display: none; }
+    .dmc-select-field .dmc-form-field__input select.mdc-select {
+      display: block; } }
 
 .dmc-select-field .mdc-select {
   border-bottom: 1px solid rgba(0, 0, 0, 0.5); }
@@ -91,3 +100,16 @@
   color: rgba(0, 0, 0, 0.38);
   color: var(--mdc-theme-text-hint-on-light, rgba(0, 0, 0, 0.38));
   font-size: 11px; }
+
+.dmc-select-field .dmc-select-field__group {
+  margin-top: 0px;
+  padding: 0px; }
+  .dmc-select-field .dmc-select-field__group .mdc-list-item {
+    padding-left: 32px;
+    color: rgba(0, 0, 0, 0.54);
+    color: var(--mdc-theme-text-secondary-on-light, rgba(0, 0, 0, 0.54)); }
+  .dmc-select-field .dmc-select-field__group .mdc-list-item[aria-selected="true"] {
+    color: rgba(0, 0, 0, 0.87);
+    color: var(--mdc-theme-text-primary-on-light, rgba(0, 0, 0, 0.87)); }
+  .dmc-select-field .dmc-select-field__group .dmc-select-field__groupheader {
+    padding-left: 16px; }

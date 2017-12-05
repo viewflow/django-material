@@ -14,7 +14,7 @@
     "gulp-concat": "^2.6.1",
     "gulp-sass": "^3.1.0",
     "gulp-sourcemaps": "^2.6.1",
-    "material-components-web": "^0.25.0",
+    "material-components-web": "^0.26.0",
     "material-design-icons": "^3.0.1",
     "roboto-npm-webfont": "^1.0.1",
     "turbolinks": "^5.0.3"

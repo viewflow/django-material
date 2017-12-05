@@ -61,6 +61,7 @@
 .dmc-text-field-helptext {
   font-size: 11px;
   margin-bottom: 6px !important;
+  margin-top: 0px;
 }
 
 .dmc-password-field {
@@ -116,6 +117,21 @@
 
   .dmc-form-field__input {
     overflow: hidden;
+
+    select.mdc-select {
+      display: none;
+      max-width: 100%;
+    }
+
+    @media (max-width: 600px) and (pointer: coarse) {
+      .mdc-select[role="listbox"] {
+        display: none;
+      }
+
+      select.mdc-select {
+        display: block;
+      }
+    }
   }
 
   .mdc-select {
@@ -133,5 +149,25 @@
     color: rgba(0, 0, 0, 0.38);
     color: var(--mdc-theme-text-hint-on-light, rgba(0, 0, 0, 0.38));
     font-size: 11px;
+  }
+
+  .dmc-select-field__group {
+    margin-top: 0px;
+    padding: 0px;
+
+    .mdc-list-item {
+      padding-left: 32px;
+      color: rgba(0, 0, 0, 0.54);
+      color: var(--mdc-theme-text-secondary-on-light, rgba(0, 0, 0, 0.54));
+    }
+
+    .mdc-list-item[aria-selected="true"] {
+      color: rgba(0, 0, 0, 0.87);
+      color: var(--mdc-theme-text-primary-on-light, rgba(0, 0, 0, 0.87));
+    }
+
+    .dmc-select-field__groupheader {
+      padding-left: 16px;
+    }
   }
 }

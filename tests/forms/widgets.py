@@ -95,6 +95,12 @@ class SelectForm(forms.Form):
         help_text='with select',
         widget=MaterialTextInput(prefix=Icon('edit'))
     )
+    field9 = forms.ChoiceField(
+        help_text='disabled',
+        disabled=True,
+        choices=CHOICES,
+        initial=3
+    )
 
     layout = Layout(
         'field1',
@@ -104,5 +110,6 @@ class SelectForm(forms.Form):
         'field5',
         'field6',
         'field7',
-        Row('textfield', Span('field8', desktop=3))
+        Row('textfield', Span('field8', desktop=3)),
+        'field9'
     )
