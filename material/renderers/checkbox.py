@@ -19,9 +19,9 @@ class CheckboxInputRenderer(FieldRender):
     def help_text(self, errors):
         classes = [
             "dmc-text-field-helptext",
-            "mdc-text-field-helptext",
-            "mdc-text-field-helptext--persistent",
-            "mdc-text-field-helptext--validation-msg"
+            "mdc-text-field-helper-text",
+            "mdc-text-field-helper-text--persistent",
+            "mdc-text-field-helper-text--validation-msg"
         ]
 
         text = None
