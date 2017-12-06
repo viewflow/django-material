@@ -1,0 +1,24 @@
+{% extends 'material/base_site.html' %}
+
+{% block body %}
+<div class="dmc-lockscreen">
+  <div class="dmc-lockscreen__sidebar mdc-elevation--z20">
+    {% block sidebar %}
+    <div class="dmc-lockscreen__card">
+        <h1 class="mdc-typography--headline dmc-lockscreen__headline">
+            {% block branding %}{{ block.super }}{% endblock %}
+        </h1>
+        <h2 class="mdc-typography--subheading2 dmc-lockscreen__subheading">
+          {% block page-title %}{% endblock %}
+        </h2>
+        {% block sidebar-content %}{% endblock %}
+    </div>
+    {% endblock %}
+  </div>
+  <div class="dmc-lockscreen__content">
+    {% block content %}
+    <div class="dmc-lockscreen__icon">{% block icon %}{% endblock %}</div>
+    {% endblock content %}
+  </div>
+</div>
+{% endblock body %}

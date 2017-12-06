@@ -1,1 +1,18 @@
-TODO
+{% extends 'registration/base_site.html' %}
+{% load i18n material_form %}
+
+{% block title %}{% trans 'Log in' %} - {{ block.super }}{% endblock %}
+
+{% block page-title %}{% trans 'Log in' %}{% endblock %}
+
+{% block sidebar-content %}
+<form method="POST">
+  {% csrf_token %}
+  {% material form %}
+  <button type="submit" class="mdc-button mdc-button--raised dmc-lockscreen__action" data-mdc-auto-init="MDCRipple">
+      {% trans 'Log in' %}
+  </button>
+</form>
+{% endblock %}
+
+{% block icon %}<i class="logo__icon material-icons">account_circle</i>{% endblock %}

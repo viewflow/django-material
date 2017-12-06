@@ -37,5 +37,5 @@ class CRUDViewset(AppViewset):
         return self.create_view_klass.as_view(**self.get_create_view_kwargs())
 
     @property
-    def create_url(self):
+    def create_url_(self):
         return path('add/', self.create_view, name='login')

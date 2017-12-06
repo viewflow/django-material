@@ -6,25 +6,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>{% block title %}Django Material{% endblock %}</title>
-  {% block global_css %}
-  <link href="{% static 'material/css/material-components-web.css' %}" rel="stylesheet">
-  <link href="{% static 'material/css/django-material-components.css' %}" rel="stylesheet">
-  <link href="{% static 'material/css/django-material-frontend.css' %}" rel="stylesheet">
-  <link href="{% static 'material/fonts/material-design-icons/material-icons.css' %}" rel="stylesheet">
-  <link href="{% static 'material/fonts/roboto/style.css' %}" rel="stylesheet">
-  {% endblock %}
-  {% block global_js %}
-  <script src="{% static 'material/js/turbolinks.js' %}"></script>
-  <script src="{% static 'material/js/material-components-web.js' %}"></script>
-  <script src="{% static 'material/js/django-material-components.js' %}"></script>
-  <script src="{% static 'material/js/material-components-init.js' %}"></script>
-  {% endblock %}
+  {% block css %}{% include 'material/includes/material_css.html' %}{% endblock css %}
+  {% block js %}{% include 'material/includes/material_js.html' %}{% endblock js %}
+  {% block extrahead %}{% endblock %}
 </head>
 
 <body class="mdc-typography">
+  {% block body %}
   {% with site=request.resolver_match.site app=request.resolver_match.app %}
   <aside id="id_site_drawer"
-         class="mdc-persistent-drawer"
+         class="mdc-persistent-drawer dmc-responsive-drawer"
          data-mdc-auto-init="DMCResponsiveDrawer">
     <nav class="mdc-persistent-drawer__drawer">
       <header class="mdc-persistent-drawer__header">
@@ -54,6 +45,7 @@
     <main class="dmc-page__content">{% block content %}{% endblock %}</main>
   </div>
   {% endwith %}
+  {% endblock body %}
 </body>
 
 </html>

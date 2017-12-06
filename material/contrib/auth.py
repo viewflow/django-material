@@ -1,8 +1,24 @@
-from django.contrib.auth import views
+from django.contrib.auth import views, forms
 from django.views import generic
 from django.urls import path
 
-from material import Viewset, viewprop
+from material import (
+    Viewset, viewprop, Icon,
+    MaterialTextInput, MaterialPasswordInput
+)
+
+
+class AuthenticationForm(forms.AuthenticationForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.fields['username'].widget = MaterialTextInput(
+            attrs={'autofocus': True},
+            prefix=Icon('account_box')
+        )
+        self.fields['password'].widget = MaterialPasswordInput(
+            prefix=Icon('lock')
+        )
 
 
 class ProfileView(generic.TemplateView):
@@ -38,7 +54,11 @@ class AuthViewset(Viewset):
     login_view_class = views.LoginView
 
     def get_login_view_kwargs(self, **kwargs):
-        return kwargs
+        result = {
+            'form_class': AuthenticationForm
+        }
+        result.update(kwargs)
+        return result
 
     @viewprop
     def login_view(self):
