@@ -47,7 +47,8 @@ body {
     opacity: 0.95;
     display: flex;
     flex-direction: column;
-    justify-content: center; }
+    justify-content: center;
+    overflow: auto; }
   .dmc-lockscreen .dmc-lockscreen__card {
     padding: 16px;
     margin-top: -130px; }
@@ -55,7 +56,7 @@ body {
       margin-bottom: 0px; }
     .dmc-lockscreen .dmc-lockscreen__card .dmc-lockscreen__subheading {
       margin-top: 0px;
-      margin-bottom: 32px; }
+      margin-bottom: 24px; }
   .dmc-lockscreen .dmc-lockscreen__action {
     width: 100%; }
   .dmc-lockscreen .dmc-lockscreen__content {
@@ -70,3 +71,16 @@ body {
       .dmc-lockscreen .dmc-lockscreen__content .dmc-lockscreen__icon > i.material-icons {
         color: white;
         font-size: 20rem; }
+  @media (max-width: 600px) {
+    .dmc-lockscreen .dmc-lockscreen__card {
+      margin-top: 0px; }
+    .dmc-lockscreen .dmc-lockscreen__sidebar {
+      width: 100%;
+      justify-content: flex-start; }
+    .dmc-lockscreen .dmc-lockscreen__content {
+      display: none; } }
+  @media (max-height: 400px) {
+    .dmc-lockscreen .dmc-lockscreen__card {
+      margin-top: 0px; }
+    .dmc-lockscreen .dmc-lockscreen__content .dmc-lockscreen__icon > i.material-icons {
+      font-size: 5rem; } }
