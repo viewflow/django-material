@@ -46,7 +46,19 @@ urlpatterns = [
     ),
 
     # demo forms
+    path('demo/login/', FormView.as_view(
+        template_name='form.html',
+        form_class=demo.LoginForm,
+        success_url='.')
+    ),
+    path('demo/contact/', FormView.as_view(
+        template_name='form.html',
+        form_class=demo.ContactForm,
+        success_url='.')
+    ),
     path('demo/registration/', FormView.as_view(
         template_name='form.html',
-        form_class=demo.RegistrationForm)),
+        form_class=demo.RegistrationForm,
+        success_url='.')
+    ),
 ]

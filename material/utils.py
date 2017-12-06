@@ -1,4 +1,5 @@
 import re
+from django.contrib import auth
 
 
 def camel_case_to_underscore(name):

@@ -1,5 +1,5 @@
-from .models import ModelViewset
+from .models import CRUDViewset
 
 __all__ = (
-    'ModelViewset',
+    'CRUDViewset',
 )
