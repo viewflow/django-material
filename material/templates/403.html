@@ -1,0 +1,23 @@
+{% extends "material/base_lockscreen.html" %}
+{% load i18n %}
+
+{% block title %}403 {% trans 'Access Forbidden' %} - {{ block.super }}{% endblock %}
+
+{% block page-title %}403 {% trans 'Access Forbidden' %}{% endblock %}
+
+{% block sidebar-content %}
+<div class="mdc-typography--subheading2 mdc-typography--adjust-margin">
+  {% if request.user.is_anonymous %}
+    {% trans 'You are not logged in' %}
+  {% else %}
+    {% blocktrans with user=request.user.get_full_name|default:"You" %}{{ user }} have no rights to access this page{% endblocktrans %}
+  {% endif %}
+</div>
+
+{% url 'login' as login_url %}
+{% if login_url %}
+<a href="{% url 'login' %}?next={{ request.path }}" class="mdc-button mdc-button--raised dmc-lockscreen__action">{% trans 'Log in as another user' %}</a>
+{% endif %}
+{% endblock %}
+
+{% block icon %}<i class="material-icons">lock</i>{% endblock %}

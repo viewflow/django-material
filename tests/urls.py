@@ -1,5 +1,5 @@
 from django.urls import path
-from django.views.generic import FormView
+from django.views.generic import FormView, TemplateView
 
 from material import Site
 from material.contrib.auth import AuthViewset
@@ -60,5 +60,22 @@ urlpatterns = [
         template_name='form.html',
         form_class=demo.RegistrationForm,
         success_url='.')
+    ),
+
+    # pages
+    path('page/logged_out/', TemplateView.as_view(
+        template_name='registration/logged_out.html')
+    ),
+    path('page/400/', TemplateView.as_view(
+        template_name='400.html')
+    ),
+    path('page/403/', TemplateView.as_view(
+        template_name='403.html')
+    ),
+    path('page/404/', TemplateView.as_view(
+        template_name='404.html')
+    ),
+    path('page/500/', TemplateView.as_view(
+        template_name='500.html')
     ),
 ]

@@ -1,0 +1,15 @@
+{% extends "material/base_lockscreen.html" %}
+{% load i18n %}
+
+{% block title %}500 {% trans 'Server error' %} - {{ block.super }}{% endblock %}
+{% block page-title %}500 {% trans 'Server error' %}{% endblock %}
+
+{% block sidebar-content %}
+<div class="mdc-typography--subheading2 mdc-typography--adjust-margin">
+  {% trans "There's been an error. It's been reported to the site administrators via email and should be fixed shortly. Thanks for your patience." %}
+</div>
+
+<a href="/" class="mdc-button mdc-button--raised dmc-lockscreen__action">{% trans 'View site' %}</a>
+{% endblock %}
+
+{% block icon %}<i class="material-icons">error_outline</i>{% endblock %}

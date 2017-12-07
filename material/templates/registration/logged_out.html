@@ -1,0 +1,15 @@
+{% extends 'registration/base_site.html' %}
+{% load i18n material_form %}
+
+{% block sidebar-content %}
+<div class="mdc-typography--subheading2 mdc-typography--adjust-margin">
+  {% trans "Thanks for spending some quality time with the Web site today." %}
+</div>
+
+{% url 'login' as login_url %}
+{% if login_url %}
+<a href="{% url 'login' %}" class="mdc-button mdc-button--raised dmc-lockscreen__action">{% trans 'Log in again' %}</a>
+{% endif %}
+{% endblock %}
+
+{% block icon %}<i class="material-icons">thumb_up</i>{% endblock %}

@@ -1,0 +1,16 @@
+{% extends "material/base_lockscreen.html" %}
+{% load i18n %}
+
+{% block title %}404 {% trans 'Page not found' %} - {{ block.super }}{% endblock %}
+
+{% block page-title %}404 {% trans 'Page not found' %}{% endblock %}
+
+{% block sidebar-content %}
+<div class="mdc-typography--subheading2 mdc-typography--adjust-margin">
+    {% trans "We're sorry, but the requested page could not be found." %}
+</div>
+
+<a href="/" class="mdc-button mdc-button--raised dmc-lockscreen__action">{% trans 'View site' %}</a>
+{% endblock %}
+
+{% block icon %}<i class="material-icons">not_interested</i>{% endblock %}
