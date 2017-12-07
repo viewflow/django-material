@@ -837,4 +837,166 @@
 
   _materialComponentsWeb.autoInit.register('DMCToggleDrawer', DMCToggleDrawer);
 });
+(function (global, factory) {
+  if (typeof define === "function" && define.amd) {
+    define(['exports', 'material-components-web'], factory);
+  } else if (typeof exports !== "undefined") {
+    factory(exports, require('material-components-web'));
+  } else {
+    var mod = {
+      exports: {}
+    };
+    factory(mod.exports, global.mdc);
+    global.turbolinksForm = mod.exports;
+  }
+})(this, function (exports, _materialComponentsWeb) {
+  'use strict';
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.DMCTurbolinksForm = undefined;
+
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError("Cannot call a class as a function");
+    }
+  }
+
+  var _createClass = function () {
+    function defineProperties(target, props) {
+      for (var i = 0; i < props.length; i++) {
+        var descriptor = props[i];
+        descriptor.enumerable = descriptor.enumerable || false;
+        descriptor.configurable = true;
+        if ("value" in descriptor) descriptor.writable = true;
+        Object.defineProperty(target, descriptor.key, descriptor);
+      }
+    }
+
+    return function (Constructor, protoProps, staticProps) {
+      if (protoProps) defineProperties(Constructor.prototype, protoProps);
+      if (staticProps) defineProperties(Constructor, staticProps);
+      return Constructor;
+    };
+  }();
+
+  function _possibleConstructorReturn(self, call) {
+    if (!self) {
+      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+    }
+
+    return call && (typeof call === "object" || typeof call === "function") ? call : self;
+  }
+
+  function _inherits(subClass, superClass) {
+    if (typeof superClass !== "function" && superClass !== null) {
+      throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
+    }
+
+    subClass.prototype = Object.create(superClass && superClass.prototype, {
+      constructor: {
+        value: subClass,
+        enumerable: false,
+        writable: true,
+        configurable: true
+      }
+    });
+    if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+  }
+
+  var DMCTurbolinksForm = exports.DMCTurbolinksForm = function (_base$MDCComponent) {
+    _inherits(DMCTurbolinksForm, _base$MDCComponent);
+
+    function DMCTurbolinksForm() {
+      _classCallCheck(this, DMCTurbolinksForm);
+
+      return _possibleConstructorReturn(this, (DMCTurbolinksForm.__proto__ || Object.getPrototypeOf(DMCTurbolinksForm)).apply(this, arguments));
+    }
+
+    _createClass(DMCTurbolinksForm, [{
+      key: 'performPostRequest',
+      value: function performPostRequest() {
+        // disable all form buttons
+        this.root_.querySelectorAll('button').forEach(function (button) {
+          return button.disabled = true;
+        });
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', window.location.search, true);
+        xhr.setRequestHeader('Turbolinks-Referrer', window.location);
+
+        xhr.onload = function (event) {
+          var location = xhr.getResponseHeader('turbolinks-location');
+          var snapshot = window.Turbolinks.Snapshot.wrap(xhr.response);
+
+          if (!location) {
+            location = window.location.href;
+          }
+
+          window.Turbolinks.controller.adapter.hideProgressBar();
+          window.Turbolinks.controller.cache.put(location, snapshot);
+          window.Turbolinks.visit(location, { action: 'restore' });
+
+          if (xhr.status > 299) {
+            Turbolinks.controller.disable();
+          }
+        };
+
+        window.Turbolinks.controller.adapter.showProgressBarAfterDelay();
+        xhr.send(new FormData(this.root_));
+      }
+    }, {
+      key: 'performGetRequest',
+      value: function performGetRequest() {
+        var formData = Array.from(new FormData(this.root_).entries(), function (entry) {
+          return entry.map(encodeURIComponent).join('=');
+        }).join('&');
+
+        window.Turbolinks.visit(this.root_.action + (this.root_.action.indexOf('?') == -1 ? '?' : '&') + formData);
+      }
+    }, {
+      key: 'initialize',
+      value: function initialize() {
+        var _this2 = this;
+
+        if (!window.Turbolinks) {
+          return false;
+        }
+
+        if (this.root_.method == 'post') {
+          this.onSubmit = function (event) {
+            event.preventDefault();
+            _this2.performPostRequest();
+          };
+
+          this.root_.addEventListener('submit', this.onSubmit);
+        } else {
+          this.onSubmit = function (event) {
+            event.preventDefault();
+            _this2.performGetRequest();
+          };
+
+          this.root_.addEventListener('submit', this.onSubmit);
+        }
+      }
+    }, {
+      key: 'destroy',
+      value: function destroy() {
+        if (this.onSubmit) {
+          this.root_.removeEventListener('click', this.onSubmit);
+        }
+      }
+    }], [{
+      key: 'attachTo',
+      value: function attachTo(root) {
+        return new DMCTurbolinksForm(root, new _materialComponentsWeb.base.MDCFoundation());
+      }
+    }]);
+
+    return DMCTurbolinksForm;
+  }(_materialComponentsWeb.base.MDCComponent);
+
+  _materialComponentsWeb.autoInit.register('DMCTurbolinksForm', DMCTurbolinksForm);
+});
 //# sourceMappingURL=django-material-components.js.map

@@ -13,6 +13,7 @@
 
 <body class="mdc-typography">
   {% block body %}
+  <div class="dmc-page">
   {% with site=request.resolver_match.site app=request.resolver_match.app %}
   <aside id="id_site_drawer"
          class="mdc-persistent-drawer dmc-responsive-drawer"
@@ -30,7 +31,7 @@
     </nav>
   </aside>
 
-  <div class="dmc-page">
+  <div class="dmc-page__content">
     <header class="mdc-toolbar">
       <div class="mdc-toolbar__row">
         <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
@@ -45,6 +46,7 @@
     <main class="dmc-page__content">{% block content %}{% endblock %}</main>
   </div>
   {% endwith %}
+</div>
   {% endblock body %}
 </body>
 

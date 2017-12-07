@@ -53,6 +53,11 @@ class TurbolinksMiddleware(object):
         if is_turbolinks:
             if is_response_redirect:
                 location = response['Location']
+                prev_location = request.session.pop('_turbolinks_redirect_to', None)
+                if prev_location is not None:
+                    # relative subsequent redirect
+                    if location.startswith('.'):
+                        location = prev_location.split('?')[0] + location
                 request.session['_turbolinks_redirect_to'] = location
             else:
                 if request.session.get('_turbolinks_redirect_to'):

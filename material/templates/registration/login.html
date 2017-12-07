@@ -1,15 +1,17 @@
 {% extends 'registration/base_site.html' %}
 {% load i18n material_form %}
 
+{% block extrahead %}<meta name="turbolinks-cache-control" content="no-cache">{% endblock %}
+
 {% block title %}{% trans 'Log in' %} - {{ block.super }}{% endblock %}
 
 {% block page-title %}{% trans 'Log in' %}{% endblock %}
 
 {% block sidebar-content %}
-<form method="POST">
+<form method="POST" data-mdc-auto-init="DMCTurbolinksForm">
   {% csrf_token %}
   {% material form %}
-  <button type="submit" class="mdc-button mdc-button--raised dmc-lockscreen__action" data-mdc-auto-init="MDCRipple">
+  <button type="submit" class="mdc-button mdc-button--raised dmc-action-button dmc-lockscreen__action" data-mdc-auto-init="MDCRipple">
       {% trans 'Log in' %}
   </button>
 </form>
