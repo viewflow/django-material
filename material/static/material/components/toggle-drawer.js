@@ -7,17 +7,17 @@ export class DMCToggleDrawer extends base.MDCComponent {
   }
 
   initialize() {
-    this.drawer_ = document.getElementById(this.root_.dataset.toggleDrawerId)
+    this.drawer_ = document.getElementById(this.root_.dataset.toggleDrawerId);
     this.onClick = (event) => {
-      event.preventDefault()
-      const new_state = !this.drawer_.DMCResponsiveDrawer.open
-      this.drawer_.DMCResponsiveDrawer.open = new_state
-    }
-    this.root_.addEventListener('click', this.onClick)
+      event.preventDefault();
+      const newState = !this.drawer_.DMCResponsiveDrawer.open;
+      this.drawer_.DMCResponsiveDrawer.open = newState;
+    };
+    this.root_.addEventListener('click', this.onClick);
   }
 
   destroy() {
-    this.root_.removeEventListener('click', this.onClick)
+    this.root_.removeEventListener('click', this.onClick);
   }
 }
 

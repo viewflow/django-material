@@ -81,9 +81,11 @@
         var navItems = [].slice.call(this.root_.querySelectorAll('.mdc-list-item')).filter(function (node) {
           return window.location.pathname.startsWith(node.pathname);
         });
+
         navItems.sort(function (a, b) {
           return b.pathname.length - a.pathname.length;
         });
+
         if (navItems.length) {
           navItems[0].classList.add('mdc-permanent-drawer--selected');
         }
@@ -195,9 +197,9 @@
         this.onBeforeCache = function () {
           var nodes = document.querySelectorAll('body [data-mdc-auto-init]');
           for (var i = 0; i < nodes.length; i++) {
-            var node = nodes[i],
-                ctorName = nodes[i].dataset.mdcAutoInit,
-                component = node[ctorName];
+            var node = nodes[i];
+            var ctorName = node.dataset.mdcAutoInit;
+            var component = node[ctorName];
             component.destroy();
           }
         };
@@ -319,12 +321,12 @@
 
         this.onToggle = function (event) {
           event.preventDefault();
-          if (_this2.input_.type === "password") {
-            _this2.input_.type = "text";
-            _this2.toggle_.text = "visibility_off";
+          if (_this2.input_.type === 'password') {
+            _this2.input_.type = 'text';
+            _this2.toggle_.text = 'visibility_off';
           } else {
-            _this2.input_.type = "password";
-            _this2.toggle_.text = "visibility";
+            _this2.input_.type = 'password';
+            _this2.toggle_.text = 'visibility';
           }
 
           _this2.input_.selectionStart = _this2.input_.selectionEnd = _this2.input_.value.length;
@@ -511,7 +513,7 @@
           this.content_.classList.remove('mdc-temporary-drawer__content');
 
           this.root_.classList.add('mdc-persistent-drawer');
-          if (sessionStorage.getItem('dmc_site_drawer_state') != "closed") {
+          if (sessionStorage.getItem('dmc_site_drawer_state') != 'closed') {
             this.root_.classList.add('mdc-persistent-drawer--open');
           } else {
             this.root_.classList.remove('mdc-persistent-drawer--open');
@@ -535,7 +537,7 @@
       },
       set: function set(value) {
         if (this.persistentDrawer_) {
-          sessionStorage.setItem('dmc_site_drawer_state', value ? "open" : "closed");
+          sessionStorage.setItem('dmc_site_drawer_state', value ? 'open' : 'closed');
           return this.persistentDrawer_.open = value;
         } else {
           return this.temporalDrawer_.open = value;
@@ -653,15 +655,15 @@
     _createClass(MDCSelect, [{
       key: 'getDefaultFoundation',
       value: function getDefaultFoundation() {
-        var foundation = _get(MDCSelect.prototype.__proto__ || Object.getPrototypeOf(MDCSelect.prototype), 'getDefaultFoundation', this).call(this),
-            super_setMenuStyle = foundation.setMenuStylesForOpenAtIndex_;
+        var foundation = _get(MDCSelect.prototype.__proto__ || Object.getPrototypeOf(MDCSelect.prototype), 'getDefaultFoundation', this).call(this);
+        var superSetMenuStyle = foundation.setMenuStylesForOpenAtIndex_;
 
         foundation.resize = function () {
           /* no action here */
         };
 
         foundation.setMenuStylesForOpenAtIndex_ = function (index) {
-          super_setMenuStyle.call(foundation, index);
+          superSetMenuStyle.call(foundation, index);
 
           var rect = foundation.adapter_.computeBoundingRect();
           foundation.adapter_.setMenuElStyle('width', rect.width + 'px');
@@ -693,9 +695,9 @@
         this.changeHandler = function (_ref) {
           var type = _ref.type;
 
-          var changedSelect = void 0,
-              selectToUpdate = void 0,
-              value = void 0;
+          var changedSelect = void 0;
+          var selectToUpdate = void 0;
+
           if (type === 'MDCSelect:change') {
             changedSelect = _this3.customSelect_;
             selectToUpdate = _this3.nativeSelect_;
@@ -815,8 +817,8 @@
         this.drawer_ = document.getElementById(this.root_.dataset.toggleDrawerId);
         this.onClick = function (event) {
           event.preventDefault();
-          var new_state = !_this2.drawer_.DMCResponsiveDrawer.open;
-          _this2.drawer_.DMCResponsiveDrawer.open = new_state;
+          var newState = !_this2.drawer_.DMCResponsiveDrawer.open;
+          _this2.drawer_.DMCResponsiveDrawer.open = newState;
         };
         this.root_.addEventListener('click', this.onClick);
       }

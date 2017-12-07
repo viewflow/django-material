@@ -11,10 +11,12 @@ export class DMCActiveNav extends base.MDCComponent {
       this.root_.querySelectorAll('.mdc-list-item')
     ).filter(
       (node) => window.location.pathname.startsWith(node.pathname)
-    )
-    navItems.sort((a, b) => b.pathname.length - a.pathname.length)
-    if(navItems.length) {
-      navItems[0].classList.add('mdc-permanent-drawer--selected')
+    );
+
+    navItems.sort((a, b) => b.pathname.length - a.pathname.length);
+
+    if (navItems.length) {
+      navItems[0].classList.add('mdc-permanent-drawer--selected');
     }
   }
 }
