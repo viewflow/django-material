@@ -1,25 +1,16 @@
-from django.urls import path
-from django.views import generic
-from material.views import CRUDViewset
+from material.views import ModelViewSet
+
+from . import models
+
+class CityViewset(ModelViewSet):
+    model = models.City
+    list_display = ('name', 'country', 'population')
 
 
-class CountryViewset(CRUDViewset):
-    index_url = path(
-        '',
-        generic.TemplateView.as_view(template_name='material/base.html'),
-        name="index"
-    )
+class ContinentViewSet(ModelViewSet):
+    model = models.Continent
 
 
-class CityViewset(CRUDViewset):
-    detail_url = path(
-        'detail/<int:pk>/',
-        generic.TemplateView.as_view(template_name='material/base.html'),
-        name="detail"
-    )
+class CountryViewset(ModelViewSet):
+    model = models.Country
 
-    index_url = path(
-        '',
-        generic.TemplateView.as_view(template_name='material/base.html'),
-        name="index"
-    )

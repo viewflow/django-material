@@ -9,21 +9,8 @@ body {
   width: 100%;
 }
 
-.dmc-page {
-  display: flex;
-  flex-direction: row;
-  box-sizing: border-box;
-  height: 100%;
-  width: 100%;
-}
-
-.dmc-page__content {
-  display: inline-flex;
-  flex-direction: column;
-  flex-grow: 1;
-  height: 100%;
-  box-sizing: border-box;
-}
+@import 'frontend/dmc-page';
+@import 'frontend/dmc-table';
 
 .dmc-action-button {
   &[type=submit]:disabled {
@@ -153,4 +140,10 @@ body {
       }
     }
   }
+}
+
+.dmc-list {
+  margin: 8px;
+  background: #fff;
+  background: var(--mdc-theme-background, #fff);
 }

@@ -1,0 +1,16 @@
+
+.dmc-page {
+  display: flex;
+  flex-direction: row;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 100%;
+  background: #eee;
+
+  .dmc-page__body {
+    flex-grow: 1;
+  }
+
+  .dmc-page__content {
+  }
+}

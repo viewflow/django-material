@@ -1,0 +1,69 @@
+{% extends 'material/base_site.html' %}
+{% load material_site %}
+
+{% block content %}
+<div class="mdc-card dmc-list">
+  <section class="mdc-card__primary">
+      <h1 class="mdc-card__title mdc-card__title--large">{{ view.model|verbose_name_plural|title }} </h1>
+    <h2 class="mdc-card__subtitle"><a href="#">Atlas</a> > {{ view.model|verbose_name_plural|title }}</a></h2>
+  </section>
+  <section class="mdc-card__supporting-text">
+    <table class="dmc-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Country</th>
+          <th>Population</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Aalborg</td><td>Denmark</td><td>112194</td>
+        </tr>
+        <tr>
+          <td>Aalst</td><td>Belgium</td><td>77534</td>
+        </tr>
+        <tr>
+          <td>Aarhus</td><td>Denmark</td><td>237551</td>
+        </tr>
+        <tr>
+            <td>Aasiaat</td><td>Gibraltar</td><td>3005</td>
+        </tr>
+        <tr>
+            <td>Aba</td><td>Nigeria</td><td>897560</td>
+        </tr>
+        <tr>
+            <td>Abadan</td><td>Turkmenistan</td><td>39481</td>
+        </tr>
+        <tr>
+            <td>Abéché</td><td>Chad</td><td>74188</td>
+        </tr>
+        <tr>
+            <td>Abidjan</td><td>Ivory Coast</td><td>3677115</td>
+        </tr>
+        <tr>
+            <td>Abobo</td><td>Ivory Coast</td><td>900000</td>
+        </tr>
+        <tr>
+            <td>Abomey</td><td>Benin</td><td>82154</td>
+        </tr>
+        <tr>
+          <td>Abomey-Calavi</td><td>Benin</td><td>385755</td>
+        </tr>
+        <tr>
+          <td>Abovyan</td><td>Armenia</td><td>35673</td>
+        </tr>
+        <tr>
+          <td>Abu Dhabi</td><td>United Arab Emirates</td><td>603492</td>
+        </tr>
+        <tr>
+          <td>Abu Ghraib</td><td>Iraq</td><td>900000</td>
+        </tr>
+        <tr>
+          <td>Abuja</td><td>Nigeria</td><td>778567</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+</div>
+{% endblock %}

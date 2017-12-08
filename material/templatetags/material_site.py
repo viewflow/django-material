@@ -1,6 +1,7 @@
 import re
 
 from django import template
+from django.db import models
 from django.urls import NoReverseMatch
 from django.utils.encoding import force_text
 from django.utils.html import conditional_escape
@@ -100,3 +101,19 @@ def has_perm(app, user):
         {% endif %}
     """
     return app.has_perm(user)
+
+
+@register.filter
+def verbose_name(obj):
+    """Return model verbose name."""
+    if isinstance(obj, models.Model):
+        type(obj)._meta.verbose_name
+    return obj._meta.verbose_name
+
+
+@register.filter
+def verbose_name_plural(obj):
+    """Return model verbose name in plural mode."""
+    if isinstance(obj, models.Model):
+        type(obj)._meta.verbose_name_plural
+    return obj._meta.verbose_name_plural

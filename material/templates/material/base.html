@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  {% block turbolinks-cache-control %}<meta name="turbolinks-cache-control" content="no-cache">{% endblock %}
   <title>{% block title %}Django Material{% endblock %}</title>
   {% block css %}{% include 'material/includes/material_css.html' %}{% endblock css %}
   {% block js %}{% include 'material/includes/material_js.html' %}{% endblock js %}
@@ -31,7 +32,7 @@
     </nav>
   </aside>
 
-  <div class="dmc-page__content">
+  <div class="dmc-page__body">
     <header class="mdc-toolbar">
       <div class="mdc-toolbar__row">
         <section class="mdc-toolbar__section mdc-toolbar__section--align-start">

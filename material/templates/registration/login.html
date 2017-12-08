@@ -1,7 +1,7 @@
 {% extends 'registration/base_site.html' %}
 {% load i18n material_form %}
 
-{% block extrahead %}<meta name="turbolinks-cache-control" content="no-cache">{% endblock %}
+{% block turbolinks-cache-control %}<meta name="turbolinks-cache-control" content="no-cache">{% endblock %}
 
 {% block title %}{% trans 'Log in' %} - {{ block.super }}{% endblock %}
 

@@ -1,0 +1,20 @@
+.dmc-table {
+  width:100%;
+  display: table;
+  border-collapse: collapse;
+  border-spacing: 0;
+
+  thead > tr,
+  tbody > tr {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);;
+  }
+
+  td, th{
+    padding: 15px 5px;
+    display: table-cell;
+    text-align: left;
+    vertical-align: middle;
+    border-radius: 2px;
+  }
+
+}
