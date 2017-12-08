@@ -45,9 +45,9 @@ class ViewsetMetaClass(type):
         for metabase in metabases:
             items += metabase._viewset_items
 
-        for item in classdict.viewset_items:
+        for item in reversed(classdict.viewset_items):
             if item not in items:
-                items.append(item)
+                items.insert(0, item)
 
         result._viewset_items = items
 
