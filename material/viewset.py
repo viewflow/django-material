@@ -223,7 +223,7 @@ class Viewset(metaclass=ViewsetMetaClass):
         return self._urls, self.app_name, namespace
 
 
-def _get_viewset_index_url(viewset):
+def _get_viewset_index_redirect_url(viewset):
     """
     Return first non-parameterized viewset url.
     """
@@ -248,7 +248,7 @@ class IndexRedirectView(generic.RedirectView):
 
     def get_redirect_url(self, *args, **kwargs):
         if self.viewset:
-            redirect = _get_viewset_index_url(self.viewset)
+            redirect = _get_viewset_index_redirect_url(self.viewset)
             if redirect is None:
                 raise ValueError(
                     "Can't determine index url. Please add an explicit "

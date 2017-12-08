@@ -3,7 +3,7 @@ from django.views import generic
 from django.test import TestCase, override_settings
 from material.viewset import (
     Viewset, IndexViewMixin, NamedViewsetMixin,
-    _get_viewset_index_url
+    _get_viewset_index_redirect_url
 )
 
 
@@ -37,7 +37,7 @@ class Test(TestCase):
         self.assertEqual('probe', child_viewset.namespace)
 
     def test_index_url(self):
-        index_url = _get_viewset_index_url(ProbeViewset())
+        index_url = _get_viewset_index_redirect_url(ProbeViewset())
         self.assertEqual('./probe/', index_url)
 
     def test_resolve_index_view(self):
