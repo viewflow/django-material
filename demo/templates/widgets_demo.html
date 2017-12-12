@@ -56,7 +56,7 @@
 
 
 {% block sidebar %}
-<a class="hide-on-small-only dropdown-button btn-floating btn-large waves-effect waves-light green" href='#' data-activates="dropdown1" data-constrainwidth style="position:absolute;right:30px; top: 30px"><i class="material-icons">view_headline</i></a>
+<a class="hide-on-small-only dropdown-button dropdown-trigger btn-floating btn-large waves-effect waves-light green" href='#' data-target="dropdown1" data-constrainwidth style="position:absolute;right:30px; top: 30px"><i class="material-icons">view_headline</i></a>
 
 <ul id="dropdown1" class="dropdown-content">
     <li><a href="/demo/widget/boolean/">BooleanField</a></li>
@@ -98,5 +98,6 @@
 {% block extrajs %}
 <script type="text/javascript">
   $('.modal').modal();
+  $('.dropdown-trigger').dropdown({constrainWidth: false});
 </script>
 {% endblock %}

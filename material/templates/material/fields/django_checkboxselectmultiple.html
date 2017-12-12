@@ -14,7 +14,7 @@
         <div class="row">
             {% for group, items in bound_field|select_options %}{% for col_span, choices in items|split_choices_by_columns:columns %}<div class="col l{{ col_span }}">
                 {% for choice, value, selected, position in choices %}
-                <div class="checkbox" id="id_{{ bound_field.html_name }}">
+                <div class="checkbox" id="id_{{ bound_field.html_name }}"><label>
                     <input{% attrs bound_field 'widget' default field.widget.attrs %}
                         id="id_{{ bound_field.html_name }}_{{ position }}"
                         name="{{ bound_field.html_name }}"
@@ -23,8 +23,8 @@
                         value="{{ value|unlocalize }}"
                         {% if selected %}checked{% endif %}
                     {% endattrs %}/>
-                    <label for="id_{{ bound_field.html_name }}_{{ position }}">{{ choice }}</label>
-                </div>
+                    <span for="id_{{ bound_field.html_name }}_{{ position }}">{{ choice }}</span>
+                </label></div>
             {% endfor %}</div>{% endfor %}{% endfor %}
         </div>
         {% endpart %}{% part field help_text %}{% if field.help_text %}

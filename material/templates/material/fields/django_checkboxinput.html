@@ -5,6 +5,7 @@
         class="checkbox-field col s12{% if field.required %} required{% endif %}{% if bound_field.errors %} has-error{% endif %}"
     {% endattrs %}>
         {% part field prefix %}{% endpart %}{% part field control %}
+        <label>
         <input{% attrs bound_field 'widget' default field.widget.attrs %}
             id="id_{{ bound_field.html_name }}"
             name="{{ bound_field.html_name }}"
@@ -12,9 +13,9 @@
             class="filled-in {% if bound_field.errors %} invalid{% endif %}"
             {% if bound_field.value %}checked{% endif %}
         {% endattrs %}>{% endpart %}{% part field label %}
-        <label{% attrs bound_field 'label' %}
+        <span{% attrs bound_field 'label' %}
             for="{{ bound_field.id_for_label }}"
-        {% endattrs %}>{{ bound_field.label }}</label>{% endpart %}
+        {% endattrs %}>{{ bound_field.label }}</span></label>{% endpart %}
         {% part field help_text %}{% part field errors %}
         {% if bound_field.errors %}
             {% include  'material/field_errors.html' %}

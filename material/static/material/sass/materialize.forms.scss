@@ -23,10 +23,11 @@ form .error {
 
 /* INPUT FIELD */
 .input-field {
+    margin-bottom: 0;
     label {
         white-space: nowrap;
         text-overflow: ellipsis;
-        width: calc(100% - 21px);
+        // width: calc(100% - 21px);
         overflow: hidden;
     }
 
@@ -75,7 +76,7 @@ form .error {
 
 input:-webkit-autofill {
     +label {
-        font-size: 0.8rem;
+        // font-size: 0.8rem;
         transform: translateY(-140%);
     }
 }
@@ -111,6 +112,10 @@ select.material-ignore {
 
         input.select-dropdown {
             margin-top: -7px;
+        }
+
+        .caret {
+            z-index: 0;
         }
     }
 }

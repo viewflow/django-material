@@ -8,7 +8,7 @@
         class="col s12{% if field.required %} required{% endif %}{% if bound_field.errors %} has-error{% endif %}"
     {% endattrs %}>
         {% part field control %}
-        {% for group, items in bound_field|select_options %}{% for choice, value, selected in items %}<div class="radio" id="id_{{ bound_field.html_name }}">
+        {% for group, items in bound_field|select_options %}{% for choice, value, selected in items %}<div class="radio" id="id_{{ bound_field.html_name }}"><label>
             <input{% attrs bound_field 'widget' default field.widget.attrs %}
                 id="id_{{ bound_field.html_name }}_{{ forloop.counter0 }}"
                 name="{{ bound_field.html_name }}"
@@ -17,11 +17,11 @@
                 value="{{ value|unlocalize }}"
                 {% if selected %}checked{% endif %}
             {% endattrs %}/>
-            <label{% attrs bound_field 'label' %}
+            <span{% attrs bound_field 'label' %}
                      for="id_{{ bound_field.html_name }}_{{ forloop.counter0 }}"
                      class="item-label"
-            {% endattrs %}>{{ choice }}</label>
-        </div>
+            {% endattrs %}>{{ choice }}</span>
+        </label></div>
         {% endfor %}{% endfor %}{% endpart %}{% part field help_text %}{% if field.help_text %}
         <div class="help-block">{{ bound_field.help_text|safe }}</div>
         {% endif %}{% part field errors %}

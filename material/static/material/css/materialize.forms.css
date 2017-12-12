@@ -19,45 +19,40 @@ form .error {
   color: #F44336; }
 
 /* INPUT FIELD */
-.input-field label {
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  width: calc(100% - 21px);
-  overflow: hidden; }
-
-.input-field.has-error .prefix {
-  color: #F44336; }
-
-.input-field .prefix {
-  line-height: 45px; }
-  .input-field .prefix ~ label {
-    width: calc(100% - 21px - 3rem); }
-  .input-field .prefix ~ .errors .error {
-    margin-left: 3rem; }
-
-.input-field input[type=number] {
-  -moz-appearance: textfield; }
-
-.input-field .input-field-action {
-  position: absolute;
-  top: 0;
-  right: 0;
-  color: #555;
-  padding: 0 0.75rem;
-  line-height: 3rem;
-  background: white; }
-  .input-field .input-field-action i.material-icons {
-    vertical-align: middle; }
-
-.input-field ::-webkit-inner-spin-button {
-  -webkit-appearance: none; }
-
-.input-field ::-webkit-outer-spin-button {
-  -webkit-appearance: none; }
+.input-field {
+  margin-bottom: 0; }
+  .input-field label {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden; }
+  .input-field.has-error .prefix {
+    color: #F44336; }
+  .input-field .prefix {
+    line-height: 45px; }
+    .input-field .prefix ~ label {
+      width: calc(100% - 21px - 3rem); }
+    .input-field .prefix ~ .errors .error {
+      margin-left: 3rem; }
+  .input-field input[type=number] {
+    -moz-appearance: textfield; }
+  .input-field .input-field-action {
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: #555;
+    padding: 0 0.75rem;
+    line-height: 3rem;
+    background: white; }
+    .input-field .input-field-action i.material-icons {
+      vertical-align: middle; }
+  .input-field ::-webkit-inner-spin-button {
+    -webkit-appearance: none; }
+  .input-field ::-webkit-outer-spin-button {
+    -webkit-appearance: none; }
 
 input:-webkit-autofill + label {
-  font-size: 0.8rem;
-  transform: translateY(-140%); }
+  -webkit-transform: translateY(-140%);
+          transform: translateY(-140%); }
 
 /* SELECT FIELD */
 select.material-ignore {
@@ -68,18 +63,22 @@ select.material-ignore {
   width: 3rem;
   font-size: 2rem;
   margin-top: 25px;
+  -webkit-transition: color .2s;
   transition: color .2s; }
   .select-field .prefix ~ label {
     margin-left: 3rem; }
 
 .select-field.has-error input {
   border-bottom: 1px solid #F44336;
+  -webkit-box-shadow: 0 1px 0 0 #F44336;
   box-shadow: 0 1px 0 0 #F44336; }
 
 .select-field .select-wrapper {
   margin-top: 0px; }
   .select-field .select-wrapper input.select-dropdown {
     margin-top: -7px; }
+  .select-field .select-wrapper .caret {
+    z-index: 0; }
 
 /* CHECHBOX FIELD */
 .checkbox-field {

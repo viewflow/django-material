@@ -7,15 +7,15 @@ $(document).on('turbolinks:load', function () {
   // Sidenav
   // http://materializecss.com/side-nav.html
   // https://github.com/noraesae/perfect-scrollbar#how-to-use
-  $('.button-collapse').sidenav()
+  $('.sidenav').sidenav()
   $(document).activeNavigation('#slide-out')
   $('#slide-out').perfectScrollbar()
 })
 
 $(document).on('turbolinks:before-cache', function () {
   // Sidenav
-  $('.button-collapse').sidenav('destroy')
-  $('#sidenav-overlay').remove()
+  $('.sidenav').sidenav('destroy')
+  $('.sidenav').css('transform', '')
   $('.drag-target').remove()
   $('#slide-out').perfectScrollbar('destroy')
   // Toasts

@@ -1,6 +1,11 @@
-"use strict";
+/*!
+ * Materialize v1.0.0-alpha.2 (http://materializecss.com)
+ * Copyright 2014-2017 Materialize
+ * MIT License (https://raw.githubusercontent.com/Dogfalo/materialize/master/LICENSE)
+ */
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /*! cash-dom 1.3.5, https://github.com/kenwheeler/cash @license MIT */
 (function (factory) {
@@ -10,16 +15,16 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       win = window,
       ArrayProto = Array.prototype,
       slice = ArrayProto.slice,
-      _filter = ArrayProto.filter,
+      filter = ArrayProto.filter,
       push = ArrayProto.push;
 
-  var noop = function noop() {},
-      isFunction = function isFunction(item) {
+  var noop = function () {},
+      isFunction = function (item) {
     // @see https://crbug.com/568448
-    return (typeof item === "undefined" ? "undefined" : _typeof(item)) === (typeof noop === "undefined" ? "undefined" : _typeof(noop)) && item.call;
+    return typeof item === typeof noop && item.call;
   },
-      isString = function isString(item) {
-    return (typeof item === "undefined" ? "undefined" : _typeof(item)) === _typeof("");
+      isString = function (item) {
+    return typeof item === typeof "";
   };
 
   var idMatch = /^#[\w-]*$/,
@@ -27,7 +32,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       htmlMatch = /<.+>/,
       singlet = /^\w+$/;
 
-  function _find(selector, context) {
+  function find(selector, context) {
     context = context || doc;
     var elems = classMatch.test(selector) ? context.getElementsByClassName(selector.slice(1)) : singlet.test(selector) ? context.getElementsByTagName(selector) : context.querySelectorAll(selector);
     return elems;
@@ -76,7 +81,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       // If HTML, parse it into real elements
       parseHTML(selector) :
       // else use `find`
-      _find(selector, context);
+      find(selector, context);
 
       // If function, use as shortcut for DOM ready
     } else if (isFunction(selector)) {
@@ -148,7 +153,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     return target;
   };
 
-  function _each(collection, callback) {
+  function each(collection, callback) {
     var l = collection.length,
         i = 0;
 
@@ -186,7 +191,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   }
 
   cash.extend({
-    merge: function merge(first, second) {
+    merge: function (first, second) {
       var len = +second.length,
           i = first.length,
           j = 0;
@@ -199,11 +204,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       return first;
     },
 
-    each: _each,
+    each: each,
     matches: matches,
     unique: unique,
     isArray: Array.isArray,
-    isNumeric: function isNumeric(n) {
+    isNumeric: function (n) {
       return !isNaN(parseFloat(n)) && isFinite(n);
     }
 
@@ -227,7 +232,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     return c[key];
   }
 
-  function _removeData(node, key) {
+  function removeData(node, key) {
     var c = getDataCache(node);
     if (c) {
       delete c[key];
@@ -239,7 +244,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   }
 
   fn.extend({
-    data: function data(name, value) {
+    data: function (name, value) {
       if (isString(name)) {
         return value === undefined ? getData(this[0], name) : this.each(function (v) {
           return setData(v, name, value);
@@ -253,9 +258,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       return this;
     },
 
-    removeData: function removeData(key) {
+    removeData: function (key) {
       return this.each(function (v) {
-        return _removeData(v, key);
+        return removeData(v, key);
       });
     }
 
@@ -267,11 +272,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     return isString(c) && c.match(notWhiteMatch);
   }
 
-  function _hasClass(v, c) {
+  function hasClass(v, c) {
     return v.classList ? v.classList.contains(c) : new RegExp("(^| )" + c + "( |$)", "gi").test(v.className);
   }
 
-  function _addClass(v, c, spacedName) {
+  function addClass(v, c, spacedName) {
     if (v.classList) {
       v.classList.add(c);
     } else if (spacedName.indexOf(" " + c + " ")) {
@@ -279,7 +284,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     }
   }
 
-  function _removeClass(v, c) {
+  function removeClass(v, c) {
     if (v.classList) {
       v.classList.remove(c);
     } else {
@@ -288,18 +293,18 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   }
 
   fn.extend({
-    addClass: function addClass(c) {
+    addClass: function (c) {
       var classes = getClasses(c);
 
       return classes ? this.each(function (v) {
         var spacedName = " " + v.className + " ";
-        _each(classes, function (c) {
-          _addClass(v, c, spacedName);
+        each(classes, function (c) {
+          addClass(v, c, spacedName);
         });
       }) : this;
     },
 
-    attr: function attr(name, value) {
+    attr: function (name, value) {
       if (!name) {
         return undefined;
       }
@@ -325,19 +330,19 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       return this;
     },
 
-    hasClass: function hasClass(c) {
+    hasClass: function (c) {
       var check = false,
           classes = getClasses(c);
       if (classes && classes.length) {
         this.each(function (v) {
-          check = _hasClass(v, classes[0]);
+          check = hasClass(v, classes[0]);
           return !check;
         });
       }
       return check;
     },
 
-    prop: function prop(name, value) {
+    prop: function (name, value) {
       if (isString(name)) {
         return value === undefined ? this[0][name] : this.each(function (v) {
           v[name] = value;
@@ -351,7 +356,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       return this;
     },
 
-    removeAttr: function removeAttr(name) {
+    removeAttr: function (name) {
       return this.each(function (v) {
         if (v.removeAttribute) {
           v.removeAttribute(name);
@@ -361,85 +366,85 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       });
     },
 
-    removeClass: function removeClass(c) {
+    removeClass: function (c) {
       if (!arguments.length) {
         return this.attr("class", "");
       }
       var classes = getClasses(c);
       return classes ? this.each(function (v) {
-        _each(classes, function (c) {
-          _removeClass(v, c);
+        each(classes, function (c) {
+          removeClass(v, c);
         });
       }) : this;
     },
 
-    removeProp: function removeProp(name) {
+    removeProp: function (name) {
       return this.each(function (v) {
         delete v[name];
       });
     },
 
-    toggleClass: function toggleClass(c, state) {
+    toggleClass: function (c, state) {
       if (state !== undefined) {
         return this[state ? "addClass" : "removeClass"](c);
       }
       var classes = getClasses(c);
       return classes ? this.each(function (v) {
         var spacedName = " " + v.className + " ";
-        _each(classes, function (c) {
-          if (_hasClass(v, c)) {
-            _removeClass(v, c);
+        each(classes, function (c) {
+          if (hasClass(v, c)) {
+            removeClass(v, c);
           } else {
-            _addClass(v, c, spacedName);
+            addClass(v, c, spacedName);
           }
         });
       }) : this;
     } });
 
   fn.extend({
-    add: function add(selector, context) {
+    add: function (selector, context) {
       return unique(cash.merge(this, cash(selector, context)));
     },
 
-    each: function each(callback) {
-      _each(this, callback);
+    each: function (callback) {
+      each(this, callback);
       return this;
     },
 
-    eq: function eq(index) {
+    eq: function (index) {
       return cash(this.get(index));
     },
 
-    filter: function filter(selector) {
+    filter: function (selector) {
       if (!selector) {
         return this;
       }
 
       var comparator = isFunction(selector) ? selector : getCompareFunction(selector);
 
-      return cash(_filter.call(this, function (e) {
+      return cash(filter.call(this, function (e) {
         return comparator(e, selector);
       }));
     },
 
-    first: function first() {
+    first: function () {
       return this.eq(0);
     },
 
-    get: function get(index) {
+    get: function (index) {
       if (index === undefined) {
         return slice.call(this);
       }
       return index < 0 ? this[index + this.length] : this[index];
     },
 
-    index: function index(elem) {
+    index: function (elem) {
       var child = elem ? cash(elem)[0] : this[0],
           collection = elem ? this : cash(child).parent().children();
       return slice.call(collection).indexOf(child);
     },
 
-    last: function last() {
+    last: function () {
       return this.eq(-1);
     }
 
@@ -471,7 +476,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
           prefixes = ["webkit", "moz", "ms", "o"],
           props = (prop + " " + prefixes.join(ucProp + " ") + ucProp).split(" ");
 
-      _each(props, function (p) {
+      each(props, function (p) {
         if (p in style) {
           cache[p] = prop = cache[prop] = p;
           return false;
@@ -486,7 +491,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   cash.camelCase = camelCase;
 
   fn.extend({
-    css: function css(prop, value) {
+    css: function (prop, value) {
       if (isString(prop)) {
         prop = getPrefixedProp(prop);
         return arguments.length > 1 ? this.each(function (v) {
@@ -507,7 +512,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     return parseInt(win.getComputedStyle(el[0], null)[prop], 10) || 0;
   }
 
-  _each(["Width", "Height"], function (v) {
+  each(["Width", "Height"], function (v) {
     var lower = v.toLowerCase();
 
     fn[lower] = function () {
@@ -546,7 +551,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         eventCache.splice(index, 1);
       }
     } else {
-      _each(eventCache, function (event) {
+      each(eventCache, function (event) {
         node.removeEventListener(eventName, event);
       });
       eventCache = [];
@@ -554,17 +559,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   }
 
   fn.extend({
-    off: function off(eventName, callback) {
+    off: function (eventName, callback) {
       return this.each(function (v) {
         return removeEvent(v, eventName, callback);
       });
     },
 
-    on: function on(eventName, delegate, callback, runOnce) {
+    on: function (eventName, delegate, callback, runOnce) {
       // jshint ignore:line
-
       var originalCallback;
-
       if (!isString(eventName)) {
         for (var key in eventName) {
           this.on(key, delegate, eventName[key]);
@@ -584,13 +587,13 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
       if (delegate) {
         originalCallback = callback;
-        callback = function callback(e) {
+        callback = function (e) {
           var t = e.target;
-
           while (!matches(t, delegate)) {
-            if (t === this) {
+            if (t === this || t === null) {
               return t = false;
             }
+
             t = t.parentNode;
           }
 
@@ -601,18 +604,18 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       }
 
       return this.each(function (v) {
-        var _finalCallback = callback;
+        var finalCallback = callback;
         if (runOnce) {
-          _finalCallback = function finalCallback() {
+          finalCallback = function () {
             callback.apply(this, arguments);
-            removeEvent(v, eventName, _finalCallback);
+            removeEvent(v, eventName, finalCallback);
           };
         }
-        registerEvent(v, eventName, _finalCallback);
+        registerEvent(v, eventName, finalCallback);
       });
     },
 
-    one: function one(eventName, delegate, callback) {
+    one: function (eventName, delegate, callback) {
       return this.on(eventName, delegate, callback, true);
     },
 
@@ -624,7 +627,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * @param String eventName
      * @param Object data - Add properties to event object
      */
-    trigger: function trigger(eventName, data) {
+    trigger: function (eventName, data) {
       if (document.createEvent) {
         var evt = document.createEvent('HTMLEvents');
         evt.initEvent(eventName, true, false);
@@ -643,7 +646,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
   function getSelectMultiple_(el) {
     var values = [];
-    _each(el.options, function (o) {
+    each(el.options, function (o) {
       if (o.selected) {
         values.push(o.value);
       }
@@ -676,10 +679,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   }
 
   fn.extend({
-    serialize: function serialize() {
+    serialize: function () {
       var query = "";
 
-      _each(this[0].elements || this, function (el) {
+      each(this[0].elements || this, function (el) {
         if (el.disabled || el.tagName === "FIELDSET") {
           return;
         }
@@ -693,7 +696,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
           case "select-multiple":
             var values = getValue(el);
             if (values !== null) {
-              _each(values, function (value) {
+              each(values, function (value) {
                 query += encode(name, value);
               });
             }
@@ -709,7 +712,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       return query.substr(1);
     },
 
-    val: function val(value) {
+    val: function (value) {
       if (value === undefined) {
         return getValue(this[0]);
       } else {
@@ -734,13 +737,13 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     var str = isString(child);
 
     if (!str && child.length) {
-      _each(child, function (v) {
+      each(child, function (v) {
         return insertContent(parent, v, prepend);
       });
       return;
     }
 
-    _each(parent, str ? function (v) {
+    each(parent, str ? function (v) {
       return v.insertAdjacentHTML(prepend ? "afterbegin" : "beforeend", child);
     } : function (v, i) {
       return insertElement(v, i === 0 ? child : child.cloneNode(true), prepend);
@@ -748,38 +751,38 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   }
 
   fn.extend({
-    after: function after(selector) {
+    after: function (selector) {
       cash(selector).insertAfter(this);
       return this;
     },
 
-    append: function append(content) {
+    append: function (content) {
       insertContent(this, content);
       return this;
     },
 
-    appendTo: function appendTo(parent) {
+    appendTo: function (parent) {
       insertContent(cash(parent), this);
       return this;
     },
 
-    before: function before(selector) {
+    before: function (selector) {
       cash(selector).insertBefore(this);
       return this;
     },
 
-    clone: function clone() {
+    clone: function () {
       return cash(this.map(function (v) {
         return v.cloneNode(true);
       }));
     },
 
-    empty: function empty() {
+    empty: function () {
       this.html("");
       return this;
     },
 
-    html: function html(content) {
+    html: function (content) {
       if (content === undefined) {
         return this[0].innerHTML;
       }
@@ -789,7 +792,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       });
     },
 
-    insertAfter: function insertAfter(selector) {
+    insertAfter: function (selector) {
       var _this = this;
 
       cash(selector).each(function (el, i) {
@@ -803,7 +806,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       return this;
     },
 
-    insertBefore: function insertBefore(selector) {
+    insertBefore: function (selector) {
       var _this2 = this;
       cash(selector).each(function (el, i) {
         var parent = el.parentNode;
@@ -814,17 +817,17 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       return this;
     },
 
-    prepend: function prepend(content) {
+    prepend: function (content) {
       insertContent(this, content, true);
       return this;
     },
 
-    prependTo: function prependTo(parent) {
+    prependTo: function (parent) {
       insertContent(cash(parent), this, true);
       return this;
     },
 
-    remove: function remove() {
+    remove: function () {
       return this.each(function (v) {
         if (!!v.parentNode) {
           return v.parentNode.removeChild(v);
@@ -832,7 +835,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       });
     },
 
-    text: function text(content) {
+    text: function (content) {
       if (content === undefined) {
         return this[0].textContent;
       }
@@ -846,7 +849,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   var docEl = doc.documentElement;
 
   fn.extend({
-    position: function position() {
+    position: function () {
       var el = this[0];
       return {
         left: el.offsetLeft,
@@ -854,7 +857,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       };
     },
 
-    offset: function offset() {
+    offset: function () {
       var rect = this[0].getBoundingClientRect();
       return {
         top: rect.top + win.pageYOffset - docEl.clientTop,
@@ -862,14 +865,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       };
     },
 
-    offsetParent: function offsetParent() {
+    offsetParent: function () {
       return cash(this[0].offsetParent);
     }
 
   });
 
   fn.extend({
-    children: function children(selector) {
+    children: function (selector) {
       var elems = [];
       this.each(function (el) {
         push.apply(elems, el.children);
@@ -881,7 +884,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       });
     },
 
-    closest: function closest(selector) {
+    closest: function (selector) {
       if (!selector || this.length < 1) {
         return cash();
       }
@@ -891,7 +894,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       return this.parent().closest(selector);
     },
 
-    is: function is(selector) {
+    is: function (selector) {
       if (!selector) {
         return false;
       }
@@ -907,22 +910,22 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       return match;
     },
 
-    find: function find(selector) {
+    find: function (selector) {
       if (!selector || selector.nodeType) {
         return cash(selector && this.has(selector).length ? selector : null);
       }
 
       var elems = [];
       this.each(function (el) {
-        push.apply(elems, _find(selector, el));
+        push.apply(elems, find(selector, el));
       });
 
       return unique(elems);
     },
 
-    has: function has(selector) {
+    has: function (selector) {
       var comparator = isString(selector) ? function (el) {
-        return _find(selector, el).length !== 0;
+        return find(selector, el).length !== 0;
       } : function (el) {
         return el.contains(selector);
       };
@@ -930,11 +933,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       return this.filter(comparator);
     },
 
-    next: function next() {
+    next: function () {
       return cash(this[0].nextElementSibling);
     },
 
-    not: function not(selector) {
+    not: function (selector) {
       if (!selector) {
         return this;
       }
@@ -946,7 +949,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       });
     },
 
-    parent: function parent() {
+    parent: function () {
       var result = [];
 
       this.each(function (item) {
@@ -958,7 +961,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       return unique(result);
     },
 
-    parents: function parents(selector) {
+    parents: function (selector) {
       var last,
           result = [];
 
@@ -977,11 +980,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       return unique(result);
     },
 
-    prev: function prev() {
+    prev: function () {
       return cash(this[0].previousElementSibling);
     },
 
-    siblings: function siblings(selector) {
+    siblings: function (selector) {
       var collection = this.parent().children(selector),
           el = this[0];
 
@@ -994,797 +997,424 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
   return cash;
 });
-"use strict";
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-/*! VelocityJS.org (1.4.2). (C) 2014 Julian Shapiro. MIT @license: en.wikipedia.org/wiki/MIT_License */
-/*! VelocityJS.org jQuery Shim (1.0.1). (C) 2014 The jQuery Foundation. MIT @license: en.wikipedia.org/wiki/MIT_License. */
-!function (a) {
-  "use strict";
-  function b(a) {
-    var b = a.length,
-        d = c.type(a);return "function" !== d && !c.isWindow(a) && (!(1 !== a.nodeType || !b) || "array" === d || 0 === b || "number" == typeof b && b > 0 && b - 1 in a);
-  }if (!a.jQuery) {
-    var c = function c(a, b) {
-      return new c.fn.init(a, b);
-    };c.isWindow = function (a) {
-      return a && a === a.window;
-    }, c.type = function (a) {
-      return a ? "object" == (typeof a === "undefined" ? "undefined" : _typeof(a)) || "function" == typeof a ? e[g.call(a)] || "object" : typeof a === "undefined" ? "undefined" : _typeof(a) : a + "";
-    }, c.isArray = Array.isArray || function (a) {
-      return "array" === c.type(a);
-    }, c.isPlainObject = function (a) {
-      var b;if (!a || "object" !== c.type(a) || a.nodeType || c.isWindow(a)) return !1;try {
-        if (a.constructor && !f.call(a, "constructor") && !f.call(a.constructor.prototype, "isPrototypeOf")) return !1;
-      } catch (d) {
-        return !1;
-      }for (b in a) {}return void 0 === b || f.call(a, b);
-    }, c.each = function (a, c, d) {
-      var e,
-          f = 0,
-          g = a.length,
-          h = b(a);if (d) {
-        if (h) for (; f < g && (e = c.apply(a[f], d), e !== !1); f++) {} else for (f in a) {
-          if (a.hasOwnProperty(f) && (e = c.apply(a[f], d), e === !1)) break;
-        }
-      } else if (h) for (; f < g && (e = c.call(a[f], f, a[f]), e !== !1); f++) {} else for (f in a) {
-        if (a.hasOwnProperty(f) && (e = c.call(a[f], f, a[f]), e === !1)) break;
-      }return a;
-    }, c.data = function (a, b, e) {
-      if (void 0 === e) {
-        var f = a[c.expando],
-            g = f && d[f];if (void 0 === b) return g;if (g && b in g) return g[b];
-      } else if (void 0 !== b) {
-        var h = a[c.expando] || (a[c.expando] = ++c.uuid);return d[h] = d[h] || {}, d[h][b] = e, e;
-      }
-    }, c.removeData = function (a, b) {
-      var e = a[c.expando],
-          f = e && d[e];f && (b ? c.each(b, function (a, b) {
-        delete f[b];
-      }) : delete d[e]);
-    }, c.extend = function () {
-      var a,
-          b,
-          d,
-          e,
-          f,
-          g,
-          h = arguments[0] || {},
-          i = 1,
-          j = arguments.length,
-          k = !1;for ("boolean" == typeof h && (k = h, h = arguments[i] || {}, i++), "object" != (typeof h === "undefined" ? "undefined" : _typeof(h)) && "function" !== c.type(h) && (h = {}), i === j && (h = this, i--); i < j; i++) {
-        if (f = arguments[i]) for (e in f) {
-          f.hasOwnProperty(e) && (a = h[e], d = f[e], h !== d && (k && d && (c.isPlainObject(d) || (b = c.isArray(d))) ? (b ? (b = !1, g = a && c.isArray(a) ? a : []) : g = a && c.isPlainObject(a) ? a : {}, h[e] = c.extend(k, g, d)) : void 0 !== d && (h[e] = d)));
-        }
-      }return h;
-    }, c.queue = function (a, d, e) {
-      function f(a, c) {
-        var d = c || [];return a && (b(Object(a)) ? !function (a, b) {
-          for (var c = +b.length, d = 0, e = a.length; d < c;) {
-            a[e++] = b[d++];
-          }if (c !== c) for (; void 0 !== b[d];) {
-            a[e++] = b[d++];
-          }return a.length = e, a;
-        }(d, "string" == typeof a ? [a] : a) : [].push.call(d, a)), d;
-      }if (a) {
-        d = (d || "fx") + "queue";var g = c.data(a, d);return e ? (!g || c.isArray(e) ? g = c.data(a, d, f(e)) : g.push(e), g) : g || [];
-      }
-    }, c.dequeue = function (a, b) {
-      c.each(a.nodeType ? [a] : a, function (a, d) {
-        b = b || "fx";var e = c.queue(d, b),
-            f = e.shift();"inprogress" === f && (f = e.shift()), f && ("fx" === b && e.unshift("inprogress"), f.call(d, function () {
-          c.dequeue(d, b);
-        }));
-      });
-    }, c.fn = c.prototype = { init: function init(a) {
-        if (a.nodeType) return this[0] = a, this;throw new Error("Not a DOM node.");
-      }, offset: function offset() {
-        var b = this[0].getBoundingClientRect ? this[0].getBoundingClientRect() : { top: 0, left: 0 };return { top: b.top + (a.pageYOffset || document.scrollTop || 0) - (document.clientTop || 0), left: b.left + (a.pageXOffset || document.scrollLeft || 0) - (document.clientLeft || 0) };
-      }, position: function position() {
-        function a(a) {
-          for (var b = a.offsetParent; b && "html" !== b.nodeName.toLowerCase() && b.style && "static" === b.style.position;) {
-            b = b.offsetParent;
-          }return b || document;
-        }var b = this[0],
-            d = a(b),
-            e = this.offset(),
-            f = /^(?:body|html)$/i.test(d.nodeName) ? { top: 0, left: 0 } : c(d).offset();return e.top -= parseFloat(b.style.marginTop) || 0, e.left -= parseFloat(b.style.marginLeft) || 0, d.style && (f.top += parseFloat(d.style.borderTopWidth) || 0, f.left += parseFloat(d.style.borderLeftWidth) || 0), { top: e.top - f.top, left: e.left - f.left };
-      } };var d = {};c.expando = "velocity" + new Date().getTime(), c.uuid = 0;for (var e = {}, f = e.hasOwnProperty, g = e.toString, h = "Boolean Number String Function Array Date RegExp Object Error".split(" "), i = 0; i < h.length; i++) {
-      e["[object " + h[i] + "]"] = h[i].toLowerCase();
-    }c.fn.init.prototype = c.fn, a.Velocity = { Utilities: c };
+; /*
+  v2.2.0
+  2017 Julian Garnier
+  Released under the MIT license
+  */
+var $jscomp = { scope: {} };$jscomp.defineProperty = "function" == typeof Object.defineProperties ? Object.defineProperty : function (e, r, p) {
+  if (p.get || p.set) throw new TypeError("ES3 does not support getters and setters.");e != Array.prototype && e != Object.prototype && (e[r] = p.value);
+};$jscomp.getGlobal = function (e) {
+  return "undefined" != typeof window && window === e ? e : "undefined" != typeof global && null != global ? global : e;
+};$jscomp.global = $jscomp.getGlobal(this);$jscomp.SYMBOL_PREFIX = "jscomp_symbol_";
+$jscomp.initSymbol = function () {
+  $jscomp.initSymbol = function () {};$jscomp.global.Symbol || ($jscomp.global.Symbol = $jscomp.Symbol);
+};$jscomp.symbolCounter_ = 0;$jscomp.Symbol = function (e) {
+  return $jscomp.SYMBOL_PREFIX + (e || "") + $jscomp.symbolCounter_++;
+};
+$jscomp.initSymbolIterator = function () {
+  $jscomp.initSymbol();var e = $jscomp.global.Symbol.iterator;e || (e = $jscomp.global.Symbol.iterator = $jscomp.global.Symbol("iterator"));"function" != typeof Array.prototype[e] && $jscomp.defineProperty(Array.prototype, e, { configurable: !0, writable: !0, value: function () {
+      return $jscomp.arrayIterator(this);
+    } });$jscomp.initSymbolIterator = function () {};
+};$jscomp.arrayIterator = function (e) {
+  var r = 0;return $jscomp.iteratorPrototype(function () {
+    return r < e.length ? { done: !1, value: e[r++] } : { done: !0 };
+  });
+};
+$jscomp.iteratorPrototype = function (e) {
+  $jscomp.initSymbolIterator();e = { next: e };e[$jscomp.global.Symbol.iterator] = function () {
+    return this;
+  };return e;
+};$jscomp.array = $jscomp.array || {};$jscomp.iteratorFromArray = function (e, r) {
+  $jscomp.initSymbolIterator();e instanceof String && (e += "");var p = 0,
+      m = { next: function () {
+      if (p < e.length) {
+        var u = p++;return { value: r(u, e[u]), done: !1 };
+      }m.next = function () {
+        return { done: !0, value: void 0 };
+      };return m.next();
+    } };m[Symbol.iterator] = function () {
+    return m;
+  };return m;
+};
+$jscomp.polyfill = function (e, r, p, m) {
+  if (r) {
+    p = $jscomp.global;e = e.split(".");for (m = 0; m < e.length - 1; m++) {
+      var u = e[m];u in p || (p[u] = {});p = p[u];
+    }e = e[e.length - 1];m = p[e];r = r(m);r != m && null != r && $jscomp.defineProperty(p, e, { configurable: !0, writable: !0, value: r });
   }
-}(window), function (a) {
-  "use strict";
-  "object" == (typeof module === "undefined" ? "undefined" : _typeof(module)) && "object" == _typeof(module.exports) ? module.exports = a() : "function" == typeof define && define.amd ? define(a) : a();
-}(function () {
-  "use strict";
-  return function (a, b, c, d) {
-    function e(a) {
-      for (var b = -1, c = a ? a.length : 0, d = []; ++b < c;) {
-        var e = a[b];e && d.push(e);
-      }return d;
+};$jscomp.polyfill("Array.prototype.keys", function (e) {
+  return e ? e : function () {
+    return $jscomp.iteratorFromArray(this, function (e) {
+      return e;
+    });
+  };
+}, "es6-impl", "es3");var $jscomp$this = this;
+(function (e, r) {
+  e.anime = r();
+})(this, function () {
+  function e(a) {
+    if (!h.col(a)) try {
+      return document.querySelectorAll(a);
+    } catch (c) {}
+  }function r(a, c) {
+    for (var d = a.length, b = 2 <= arguments.length ? arguments[1] : void 0, f = [], n = 0; n < d; n++) {
+      if (n in a) {
+        var k = a[n];c.call(b, k, n, a) && f.push(k);
+      }
+    }return f;
+  }function p(a) {
+    return a.reduce(function (a, d) {
+      return a.concat(h.arr(d) ? p(d) : d);
+    }, []);
+  }function m(a) {
+    if (h.arr(a)) return a;
+    h.str(a) && (a = e(a) || a);return a instanceof NodeList || a instanceof HTMLCollection ? [].slice.call(a) : [a];
+  }function u(a, c) {
+    return a.some(function (a) {
+      return a === c;
+    });
+  }function C(a) {
+    var c = {},
+        d;for (d in a) {
+      c[d] = a[d];
+    }return c;
+  }function D(a, c) {
+    var d = C(a),
+        b;for (b in a) {
+      d[b] = c.hasOwnProperty(b) ? c[b] : a[b];
+    }return d;
+  }function z(a, c) {
+    var d = C(a),
+        b;for (b in c) {
+      d[b] = h.und(a[b]) ? c[b] : a[b];
+    }return d;
+  }function T(a) {
+    a = a.replace(/^#?([a-f\d])([a-f\d])([a-f\d])$/i, function (a, c, d, k) {
+      return c + c + d + d + k + k;
+    });var c = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(a);
+    a = parseInt(c[1], 16);var d = parseInt(c[2], 16),
+        c = parseInt(c[3], 16);return "rgba(" + a + "," + d + "," + c + ",1)";
+  }function U(a) {
+    function c(a, c, b) {
+      0 > b && (b += 1);1 < b && --b;return b < 1 / 6 ? a + 6 * (c - a) * b : .5 > b ? c : b < 2 / 3 ? a + (c - a) * (2 / 3 - b) * 6 : a;
+    }var d = /hsl\((\d+),\s*([\d.]+)%,\s*([\d.]+)%\)/g.exec(a) || /hsla\((\d+),\s*([\d.]+)%,\s*([\d.]+)%,\s*([\d.]+)\)/g.exec(a);a = parseInt(d[1]) / 360;var b = parseInt(d[2]) / 100,
+        f = parseInt(d[3]) / 100,
+        d = d[4] || 1;if (0 == b) f = b = a = f;else {
+      var n = .5 > f ? f * (1 + b) : f + b - f * b,
+          k = 2 * f - n,
+          f = c(k, n, a + 1 / 3),
+          b = c(k, n, a);a = c(k, n, a - 1 / 3);
+    }return "rgba(" + 255 * f + "," + 255 * b + "," + 255 * a + "," + d + ")";
+  }function y(a) {
+    if (a = /([\+\-]?[0-9#\.]+)(%|px|pt|em|rem|in|cm|mm|ex|ch|pc|vw|vh|vmin|vmax|deg|rad|turn)?$/.exec(a)) return a[2];
+  }function V(a) {
+    if (-1 < a.indexOf("translate") || "perspective" === a) return "px";if (-1 < a.indexOf("rotate") || -1 < a.indexOf("skew")) return "deg";
+  }function I(a, c) {
+    return h.fnc(a) ? a(c.target, c.id, c.total) : a;
+  }function E(a, c) {
+    if (c in a.style) return getComputedStyle(a).getPropertyValue(c.replace(/([a-z])([A-Z])/g, "$1-$2").toLowerCase()) || "0";
+  }function J(a, c) {
+    if (h.dom(a) && u(W, c)) return "transform";if (h.dom(a) && (a.getAttribute(c) || h.svg(a) && a[c])) return "attribute";if (h.dom(a) && "transform" !== c && E(a, c)) return "css";if (null != a[c]) return "object";
+  }function X(a, c) {
+    var d = V(c),
+        d = -1 < c.indexOf("scale") ? 1 : 0 + d;a = a.style.transform;if (!a) return d;for (var b = [], f = [], n = [], k = /(\w+)\((.+?)\)/g; b = k.exec(a);) {
+      f.push(b[1]), n.push(b[2]);
+    }a = r(n, function (a, b) {
+      return f[b] === c;
+    });return a.length ? a[0] : d;
+  }function K(a, c) {
+    switch (J(a, c)) {case "transform":
+        return X(a, c);case "css":
+        return E(a, c);case "attribute":
+        return a.getAttribute(c);}return a[c] || 0;
+  }function L(a, c) {
+    var d = /^(\*=|\+=|-=)/.exec(a);if (!d) return a;var b = y(a) || 0;c = parseFloat(c);a = parseFloat(a.replace(d[0], ""));switch (d[0][0]) {case "+":
+        return c + a + b;case "-":
+        return c - a + b;case "*":
+        return c * a + b;}
+  }function F(a, c) {
+    return Math.sqrt(Math.pow(c.x - a.x, 2) + Math.pow(c.y - a.y, 2));
+  }function M(a) {
+    a = a.points;for (var c = 0, d, b = 0; b < a.numberOfItems; b++) {
+      var f = a.getItem(b);0 < b && (c += F(d, f));d = f;
+    }return c;
+  }function N(a) {
+    if (a.getTotalLength) return a.getTotalLength();switch (a.tagName.toLowerCase()) {case "circle":
+        return 2 * Math.PI * a.getAttribute("r");case "rect":
+        return 2 * a.getAttribute("width") + 2 * a.getAttribute("height");case "line":
+        return F({ x: a.getAttribute("x1"), y: a.getAttribute("y1") }, { x: a.getAttribute("x2"), y: a.getAttribute("y2") });case "polyline":
+        return M(a);case "polygon":
+        var c = a.points;return M(a) + F(c.getItem(c.numberOfItems - 1), c.getItem(0));}
+  }function Y(a, c) {
+    function d(b) {
+      b = void 0 === b ? 0 : b;return a.el.getPointAtLength(1 <= c + b ? c + b : 0);
+    }var b = d(),
+        f = d(-1),
+        n = d(1);switch (a.property) {case "x":
+        return b.x;case "y":
+        return b.y;
+      case "angle":
+        return 180 * Math.atan2(n.y - f.y, n.x - f.x) / Math.PI;}
+  }function O(a, c) {
+    var d = /-?\d*\.?\d+/g,
+        b;b = h.pth(a) ? a.totalLength : a;if (h.col(b)) {
+      if (h.rgb(b)) {
+        var f = /rgb\((\d+,\s*[\d]+,\s*[\d]+)\)/g.exec(b);b = f ? "rgba(" + f[1] + ",1)" : b;
+      } else b = h.hex(b) ? T(b) : h.hsl(b) ? U(b) : void 0;
+    } else f = (f = y(b)) ? b.substr(0, b.length - f.length) : b, b = c && !/\s/g.test(b) ? f + c : f;b += "";return { original: b, numbers: b.match(d) ? b.match(d).map(Number) : [0], strings: h.str(a) || c ? b.split(d) : [] };
+  }function P(a) {
+    a = a ? p(h.arr(a) ? a.map(m) : m(a)) : [];return r(a, function (a, d, b) {
+      return b.indexOf(a) === d;
+    });
+  }function Z(a) {
+    var c = P(a);return c.map(function (a, b) {
+      return { target: a, id: b, total: c.length };
+    });
+  }function aa(a, c) {
+    var d = C(c);if (h.arr(a)) {
+      var b = a.length;2 !== b || h.obj(a[0]) ? h.fnc(c.duration) || (d.duration = c.duration / b) : a = { value: a };
+    }return m(a).map(function (a, b) {
+      b = b ? 0 : c.delay;a = h.obj(a) && !h.pth(a) ? a : { value: a };h.und(a.delay) && (a.delay = b);return a;
+    }).map(function (a) {
+      return z(a, d);
+    });
+  }function ba(a, c) {
+    var d = {},
+        b;for (b in a) {
+      var f = I(a[b], c);h.arr(f) && (f = f.map(function (a) {
+        return I(a, c);
+      }), 1 === f.length && (f = f[0]));d[b] = f;
+    }d.duration = parseFloat(d.duration);d.delay = parseFloat(d.delay);return d;
+  }function ca(a) {
+    return h.arr(a) ? A.apply(this, a) : Q[a];
+  }function da(a, c) {
+    var d;return a.tweens.map(function (b) {
+      b = ba(b, c);var f = b.value,
+          e = K(c.target, a.name),
+          k = d ? d.to.original : e,
+          k = h.arr(f) ? f[0] : k,
+          w = L(h.arr(f) ? f[1] : f, k),
+          e = y(w) || y(k) || y(e);b.from = O(k, e);b.to = O(w, e);b.start = d ? d.end : a.offset;b.end = b.start + b.delay + b.duration;b.easing = ca(b.easing);b.elasticity = (1E3 - Math.min(Math.max(b.elasticity, 1), 999)) / 1E3;b.isPath = h.pth(f);b.isColor = h.col(b.from.original);b.isColor && (b.round = 1);return d = b;
+    });
+  }function ea(a, c) {
+    return r(p(a.map(function (a) {
+      return c.map(function (b) {
+        var c = J(a.target, b.name);if (c) {
+          var d = da(b, a);b = { type: c, property: b.name, animatable: a, tweens: d, duration: d[d.length - 1].end, delay: d[0].delay };
+        } else b = void 0;return b;
+      });
+    })), function (a) {
+      return !h.und(a);
+    });
+  }function R(a, c, d, b) {
+    var f = "delay" === a;return c.length ? (f ? Math.min : Math.max).apply(Math, c.map(function (b) {
+      return b[a];
+    })) : f ? b.delay : d.offset + b.delay + b.duration;
+  }function fa(a) {
+    var c = D(ga, a),
+        d = D(S, a),
+        b = Z(a.targets),
+        f = [],
+        e = z(c, d),
+        k;for (k in a) {
+      e.hasOwnProperty(k) || "targets" === k || f.push({ name: k, offset: e.offset, tweens: aa(a[k], d) });
+    }a = ea(b, f);return z(c, { children: [], animatables: b, animations: a, duration: R("duration", a, c, d), delay: R("delay", a, c, d) });
+  }function q(a) {
+    function c() {
+      return window.Promise && new Promise(function (a) {
+        return p = a;
+      });
+    }function d(a) {
+      return g.reversed ? g.duration - a : a;
+    }function b(a) {
+      for (var b = 0, c = {}, d = g.animations, f = d.length; b < f;) {
+        var e = d[b],
+            k = e.animatable,
+            h = e.tweens,
+            n = h.length - 1,
+            l = h[n];n && (l = r(h, function (b) {
+          return a < b.end;
+        })[0] || l);for (var h = Math.min(Math.max(a - l.start - l.delay, 0), l.duration) / l.duration, w = isNaN(h) ? 1 : l.easing(h, l.elasticity), h = l.to.strings, p = l.round, n = [], m = void 0, m = l.to.numbers.length, t = 0; t < m; t++) {
+          var x = void 0,
+              x = l.to.numbers[t],
+              q = l.from.numbers[t],
+              x = l.isPath ? Y(l.value, w * x) : q + w * (x - q);p && (l.isColor && 2 < t || (x = Math.round(x * p) / p));n.push(x);
+        }if (l = h.length) for (m = h[0], w = 0; w < l; w++) {
+          p = h[w + 1], t = n[w], isNaN(t) || (m = p ? m + (t + p) : m + (t + " "));
+        } else m = n[0];ha[e.type](k.target, e.property, m, c, k.id);e.currentValue = m;b++;
+      }if (b = Object.keys(c).length) for (d = 0; d < b; d++) {
+        H || (H = E(document.body, "transform") ? "transform" : "-webkit-transform"), g.animatables[d].target.style[H] = c[d].join(" ");
+      }g.currentTime = a;g.progress = a / g.duration * 100;
     }function f(a) {
-      return t.isWrapped(a) ? a = s.call(a) : t.isNode(a) && (a = [a]), a;
-    }function g(a) {
-      var b = o.data(a, "velocity");return null === b ? d : b;
-    }function h(a, b) {
-      var c = g(a);c && c.delayTimer && !c.delayPaused && (c.delayRemaining = c.delay - b + c.delayBegin, c.delayPaused = !0, clearTimeout(c.delayTimer.setTimeout));
-    }function i(a, b) {
-      var c = g(a);c && c.delayTimer && c.delayPaused && (c.delayPaused = !1, c.delayTimer.setTimeout = setTimeout(c.delayTimer.next, c.delayRemaining));
-    }function j(a) {
-      return function (b) {
-        return Math.round(b * a) * (1 / a);
-      };
-    }function k(a, c, d, e) {
-      function f(a, b) {
-        return 1 - 3 * b + 3 * a;
-      }function g(a, b) {
-        return 3 * b - 6 * a;
-      }function h(a) {
-        return 3 * a;
-      }function i(a, b, c) {
-        return ((f(b, c) * a + g(b, c)) * a + h(b)) * a;
-      }function j(a, b, c) {
-        return 3 * f(b, c) * a * a + 2 * g(b, c) * a + h(b);
-      }function k(b, c) {
-        for (var e = 0; e < p; ++e) {
-          var f = j(c, a, d);if (0 === f) return c;var g = i(c, a, d) - b;c -= g / f;
-        }return c;
-      }function l() {
-        for (var b = 0; b < t; ++b) {
-          x[b] = i(b * u, a, d);
+      if (g[a]) g[a](g);
+    }function e() {
+      g.remaining && !0 !== g.remaining && g.remaining--;
+    }function k(a) {
+      var k = g.duration,
+          n = g.offset,
+          w = n + g.delay,
+          r = g.currentTime,
+          x = g.reversed,
+          q = d(a);if (g.children.length) {
+        var u = g.children,
+            v = u.length;
+        if (q >= g.currentTime) for (var G = 0; G < v; G++) {
+          u[G].seek(q);
+        } else for (; v--;) {
+          u[v].seek(q);
         }
-      }function m(b, c, e) {
-        var f,
-            g,
-            h = 0;do {
-          g = c + (e - c) / 2, f = i(g, a, d) - b, f > 0 ? e = g : c = g;
-        } while (Math.abs(f) > r && ++h < s);return g;
-      }function n(b) {
-        for (var c = 0, e = 1, f = t - 1; e !== f && x[e] <= b; ++e) {
-          c += u;
-        }--e;var g = (b - x[e]) / (x[e + 1] - x[e]),
-            h = c + g * u,
-            i = j(h, a, d);return i >= q ? k(b, h) : 0 === i ? h : m(b, c, c + u);
-      }function o() {
-        y = !0, a === c && d === e || l();
-      }var p = 4,
-          q = .001,
-          r = 1e-7,
-          s = 10,
-          t = 11,
-          u = 1 / (t - 1),
-          v = "Float32Array" in b;if (4 !== arguments.length) return !1;for (var w = 0; w < 4; ++w) {
-        if ("number" != typeof arguments[w] || isNaN(arguments[w]) || !isFinite(arguments[w])) return !1;
-      }a = Math.min(a, 1), d = Math.min(d, 1), a = Math.max(a, 0), d = Math.max(d, 0);var x = v ? new Float32Array(t) : new Array(t),
-          y = !1,
-          z = function z(b) {
-        return y || o(), a === c && d === e ? b : 0 === b ? 0 : 1 === b ? 1 : i(n(b), c, e);
-      };z.getControlPoints = function () {
-        return [{ x: a, y: c }, { x: d, y: e }];
-      };var A = "generateBezier(" + [a, c, d, e] + ")";return z.toString = function () {
-        return A;
-      }, z;
-    }function l(a, b) {
-      var c = a;return t.isString(a) ? x.Easings[a] || (c = !1) : c = t.isArray(a) && 1 === a.length ? j.apply(null, a) : t.isArray(a) && 2 === a.length ? y.apply(null, a.concat([b])) : !(!t.isArray(a) || 4 !== a.length) && k.apply(null, a), c === !1 && (c = x.Easings[x.defaults.easing] ? x.defaults.easing : w), c;
-    }function m(a) {
-      if (a) {
-        var b = x.timestamp && a !== !0 ? a : r.now(),
-            c = x.State.calls.length;c > 1e4 && (x.State.calls = e(x.State.calls), c = x.State.calls.length);for (var f = 0; f < c; f++) {
-          if (x.State.calls[f]) {
-            var h = x.State.calls[f],
-                i = h[0],
-                j = h[2],
-                k = h[3],
-                l = !!k,
-                q = null,
-                s = h[5],
-                u = h[6];if (k || (k = x.State.calls[f][3] = b - 16), s) {
-              if (s.resume !== !0) continue;k = h[3] = Math.round(b - u - 16), h[5] = null;
-            }u = h[6] = b - k;for (var v = Math.min(u / j.duration, 1), w = 0, y = i.length; w < y; w++) {
-              var A = i[w],
-                  C = A.element;if (g(C)) {
-                var D = !1;if (j.display !== d && null !== j.display && "none" !== j.display) {
-                  if ("flex" === j.display) {
-                    var E = ["-webkit-box", "-moz-box", "-ms-flexbox", "-webkit-flex"];o.each(E, function (a, b) {
-                      z.setPropertyValue(C, "display", b);
-                    });
-                  }z.setPropertyValue(C, "display", j.display);
-                }j.visibility !== d && "hidden" !== j.visibility && z.setPropertyValue(C, "visibility", j.visibility);for (var F in A) {
-                  if (A.hasOwnProperty(F) && "element" !== F) {
-                    var G,
-                        H = A[F],
-                        I = t.isString(H.easing) ? x.Easings[H.easing] : H.easing;if (t.isString(H.pattern)) {
-                      var J = 1 === v ? function (a, b, c) {
-                        var d = H.endValue[b];return c ? Math.round(d) : d;
-                      } : function (a, b, c) {
-                        var d = H.startValue[b],
-                            e = H.endValue[b] - d,
-                            f = d + e * I(v, j, e);return c ? Math.round(f) : f;
-                      };G = H.pattern.replace(/{(\d+)(!)?}/g, J);
-                    } else if (1 === v) G = H.endValue;else {
-                      var K = H.endValue - H.startValue;G = H.startValue + K * I(v, j, K);
-                    }if (!l && G === H.currentValue) continue;if (H.currentValue = G, "tween" === F) q = G;else {
-                      var L;if (z.Hooks.registered[F]) {
-                        L = z.Hooks.getRoot(F);var M = g(C).rootPropertyValueCache[L];M && (H.rootPropertyValue = M);
-                      }var N = z.setPropertyValue(C, F, H.currentValue + (p < 9 && 0 === parseFloat(G) ? "" : H.unitType), H.rootPropertyValue, H.scrollData);z.Hooks.registered[F] && (z.Normalizations.registered[L] ? g(C).rootPropertyValueCache[L] = z.Normalizations.registered[L]("extract", null, N[1]) : g(C).rootPropertyValueCache[L] = N[1]), "transform" === N[0] && (D = !0);
-                    }
-                  }
-                }j.mobileHA && g(C).transformCache.translate3d === d && (g(C).transformCache.translate3d = "(0px, 0px, 0px)", D = !0), D && z.flushTransformCache(C);
-              }
-            }j.display !== d && "none" !== j.display && (x.State.calls[f][2].display = !1), j.visibility !== d && "hidden" !== j.visibility && (x.State.calls[f][2].visibility = !1), j.progress && j.progress.call(h[1], h[1], v, Math.max(0, k + j.duration - b), k, q), 1 === v && n(f);
-          }
-        }
-      }x.State.isTicking && B(m);
-    }function n(a, b) {
-      if (!x.State.calls[a]) return !1;for (var c = x.State.calls[a][0], e = x.State.calls[a][1], f = x.State.calls[a][2], h = x.State.calls[a][4], i = !1, j = 0, k = c.length; j < k; j++) {
-        var l = c[j].element;b || f.loop || ("none" === f.display && z.setPropertyValue(l, "display", f.display), "hidden" === f.visibility && z.setPropertyValue(l, "visibility", f.visibility));var m = g(l);if (f.loop !== !0 && (o.queue(l)[1] === d || !/\.velocityQueueEntryFlag/i.test(o.queue(l)[1])) && m) {
-          m.isAnimating = !1, m.rootPropertyValueCache = {};var n = !1;o.each(z.Lists.transforms3D, function (a, b) {
-            var c = /^scale/.test(b) ? 1 : 0,
-                e = m.transformCache[b];m.transformCache[b] !== d && new RegExp("^\\(" + c + "[^.]").test(e) && (n = !0, delete m.transformCache[b]);
-          }), f.mobileHA && (n = !0, delete m.transformCache.translate3d), n && z.flushTransformCache(l), z.Values.removeClass(l, "velocity-animating");
-        }if (!b && f.complete && !f.loop && j === k - 1) try {
-          f.complete.call(e, e);
-        } catch (p) {
-          setTimeout(function () {
-            throw p;
-          }, 1);
-        }h && f.loop !== !0 && h(e), m && f.loop === !0 && !b && (o.each(m.tweensContainer, function (a, b) {
-          if (/^rotate/.test(a) && (parseFloat(b.startValue) - parseFloat(b.endValue)) % 360 === 0) {
-            var c = b.startValue;b.startValue = b.endValue, b.endValue = c;
-          }/^backgroundPosition/.test(a) && 100 === parseFloat(b.endValue) && "%" === b.unitType && (b.endValue = 0, b.startValue = 100);
-        }), x(l, "reverse", { loop: !0, delay: f.delay })), f.queue !== !1 && o.dequeue(l, f.queue);
-      }x.State.calls[a] = !1;for (var q = 0, r = x.State.calls.length; q < r; q++) {
-        if (x.State.calls[q] !== !1) {
-          i = !0;break;
-        }
-      }i === !1 && (x.State.isTicking = !1, delete x.State.calls, x.State.calls = []);
-    }var o,
-        p = function () {
-      if (c.documentMode) return c.documentMode;for (var a = 7; a > 4; a--) {
-        var b = c.createElement("div");if (b.innerHTML = "<!--[if IE " + a + "]><span></span><![endif]-->", b.getElementsByTagName("span").length) return b = null, a;
-      }return d;
-    }(),
-        q = function () {
-      var a = 0;return b.webkitRequestAnimationFrame || b.mozRequestAnimationFrame || function (b) {
-        var c,
-            d = new Date().getTime();return c = Math.max(0, 16 - (d - a)), a = d + c, setTimeout(function () {
-          b(d + c);
-        }, c);
-      };
-    }(),
-        r = function () {
-      var a = b.performance || {};if (!Object.prototype.hasOwnProperty.call(a, "now")) {
-        var c = a.timing && a.timing.domComplete ? a.timing.domComplete : new Date().getTime();a.now = function () {
-          return new Date().getTime() - c;
+      }if (q >= w || !k) g.began || (g.began = !0, f("begin")), f("run");if (q > n && q < k) b(q);else if (q <= n && 0 !== r && (b(0), x && e()), q >= k && r !== k || !k) b(k), x || e();f("update");a >= k && (g.remaining ? (t = h, "alternate" === g.direction && (g.reversed = !g.reversed)) : (g.pause(), g.completed || (g.completed = !0, f("complete"), "Promise" in window && (p(), m = c()))), l = 0);
+    }a = void 0 === a ? {} : a;var h,
+        t,
+        l = 0,
+        p = null,
+        m = c(),
+        g = fa(a);g.reset = function () {
+      var a = g.direction,
+          c = g.loop;g.currentTime = 0;g.progress = 0;g.paused = !0;g.began = !1;g.completed = !1;g.reversed = "reverse" === a;g.remaining = "alternate" === a && 1 === c ? 2 : c;b(0);for (a = g.children.length; a--;) {
+        g.children[a].reset();
+      }
+    };g.tick = function (a) {
+      h = a;t || (t = h);k((l + h - t) * q.speed);
+    };g.seek = function (a) {
+      k(d(a));
+    };g.pause = function () {
+      var a = v.indexOf(g);-1 < a && v.splice(a, 1);g.paused = !0;
+    };g.play = function () {
+      g.paused && (g.paused = !1, t = 0, l = d(g.currentTime), v.push(g), B || ia());
+    };g.reverse = function () {
+      g.reversed = !g.reversed;t = 0;l = d(g.currentTime);
+    };g.restart = function () {
+      g.pause();
+      g.reset();g.play();
+    };g.finished = m;g.reset();g.autoplay && g.play();return g;
+  }var ga = { update: void 0, begin: void 0, run: void 0, complete: void 0, loop: 1, direction: "normal", autoplay: !0, offset: 0 },
+      S = { duration: 1E3, delay: 0, easing: "easeOutElastic", elasticity: 500, round: 0 },
+      W = "translateX translateY translateZ rotate rotateX rotateY rotateZ scale scaleX scaleY scaleZ skewX skewY perspective".split(" "),
+      H,
+      h = { arr: function (a) {
+      return Array.isArray(a);
+    }, obj: function (a) {
+      return -1 < Object.prototype.toString.call(a).indexOf("Object");
+    },
+    pth: function (a) {
+      return h.obj(a) && a.hasOwnProperty("totalLength");
+    }, svg: function (a) {
+      return a instanceof SVGElement;
+    }, dom: function (a) {
+      return a.nodeType || h.svg(a);
+    }, str: function (a) {
+      return "string" === typeof a;
+    }, fnc: function (a) {
+      return "function" === typeof a;
+    }, und: function (a) {
+      return "undefined" === typeof a;
+    }, hex: function (a) {
+      return (/(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(a)
+      );
+    }, rgb: function (a) {
+      return (/^rgb/.test(a)
+      );
+    }, hsl: function (a) {
+      return (/^hsl/.test(a)
+      );
+    }, col: function (a) {
+      return h.hex(a) || h.rgb(a) || h.hsl(a);
+    } },
+      A = function () {
+    function a(a, d, b) {
+      return (((1 - 3 * b + 3 * d) * a + (3 * b - 6 * d)) * a + 3 * d) * a;
+    }return function (c, d, b, f) {
+      if (0 <= c && 1 >= c && 0 <= b && 1 >= b) {
+        var e = new Float32Array(11);if (c !== d || b !== f) for (var k = 0; 11 > k; ++k) {
+          e[k] = a(.1 * k, c, b);
+        }return function (k) {
+          if (c === d && b === f) return k;if (0 === k) return 0;if (1 === k) return 1;for (var h = 0, l = 1; 10 !== l && e[l] <= k; ++l) {
+            h += .1;
+          }--l;var l = h + (k - e[l]) / (e[l + 1] - e[l]) * .1,
+              n = 3 * (1 - 3 * b + 3 * c) * l * l + 2 * (3 * b - 6 * c) * l + 3 * c;if (.001 <= n) {
+            for (h = 0; 4 > h; ++h) {
+              n = 3 * (1 - 3 * b + 3 * c) * l * l + 2 * (3 * b - 6 * c) * l + 3 * c;if (0 === n) break;var m = a(l, c, b) - k,
+                  l = l - m / n;
+            }k = l;
+          } else if (0 === n) k = l;else {
+            var l = h,
+                h = h + .1,
+                g = 0;do {
+              m = l + (h - l) / 2, n = a(m, c, b) - k, 0 < n ? h = m : l = m;
+            } while (1e-7 < Math.abs(n) && 10 > ++g);k = m;
+          }return a(k, d, f);
         };
-      }return a;
-    }(),
-        s = function () {
-      var a = Array.prototype.slice;try {
-        a.call(c.documentElement);
-      } catch (b) {
-        a = function a() {
-          for (var a = this.length, b = []; --a > 0;) {
-            b[a] = this[a];
-          }return cloned;
+      }
+    };
+  }(),
+      Q = function () {
+    function a(a, b) {
+      return 0 === a || 1 === a ? a : -Math.pow(2, 10 * (a - 1)) * Math.sin(2 * (a - 1 - b / (2 * Math.PI) * Math.asin(1)) * Math.PI / b);
+    }var c = "Quad Cubic Quart Quint Sine Expo Circ Back Elastic".split(" "),
+        d = { In: [[.55, .085, .68, .53], [.55, .055, .675, .19], [.895, .03, .685, .22], [.755, .05, .855, .06], [.47, 0, .745, .715], [.95, .05, .795, .035], [.6, .04, .98, .335], [.6, -.28, .735, .045], a], Out: [[.25, .46, .45, .94], [.215, .61, .355, 1], [.165, .84, .44, 1], [.23, 1, .32, 1], [.39, .575, .565, 1], [.19, 1, .22, 1], [.075, .82, .165, 1], [.175, .885, .32, 1.275], function (b, c) {
+        return 1 - a(1 - b, c);
+      }], InOut: [[.455, .03, .515, .955], [.645, .045, .355, 1], [.77, 0, .175, 1], [.86, 0, .07, 1], [.445, .05, .55, .95], [1, 0, 0, 1], [.785, .135, .15, .86], [.68, -.55, .265, 1.55], function (b, c) {
+        return .5 > b ? a(2 * b, c) / 2 : 1 - a(-2 * b + 2, c) / 2;
+      }] },
+        b = { linear: A(.25, .25, .75, .75) },
+        f = {},
+        e;for (e in d) {
+      f.type = e, d[f.type].forEach(function (a) {
+        return function (d, f) {
+          b["ease" + a.type + c[f]] = h.fnc(d) ? d : A.apply($jscomp$this, d);
         };
-      }return a;
-    }(),
-        t = { isNumber: function isNumber(a) {
-        return "number" == typeof a;
-      }, isString: function isString(a) {
-        return "string" == typeof a;
-      }, isArray: Array.isArray || function (a) {
-        return "[object Array]" === Object.prototype.toString.call(a);
-      }, isFunction: function isFunction(a) {
-        return "[object Function]" === Object.prototype.toString.call(a);
-      }, isNode: function isNode(a) {
-        return a && a.nodeType;
-      }, isWrapped: function isWrapped(a) {
-        return a && t.isNumber(a.length) && !t.isString(a) && !t.isFunction(a) && !t.isNode(a) && (0 === a.length || t.isNode(a[0]));
-      }, isSVG: function isSVG(a) {
-        return b.SVGElement && a instanceof b.SVGElement;
-      }, isEmptyObject: function isEmptyObject(a) {
-        for (var b in a) {
-          if (a.hasOwnProperty(b)) return !1;
-        }return !0;
-      } },
-        u = !1;if (a.fn && a.fn.jquery ? (o = a, u = !0) : o = b.Velocity.Utilities, p <= 8 && !u) throw new Error("Velocity: IE8 and below require jQuery to be loaded before Velocity.");if (p <= 7) return void (jQuery.fn.velocity = jQuery.fn.animate);var v = 400,
-        w = "swing",
-        x = { State: { isMobile: /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent), isAndroid: /Android/i.test(navigator.userAgent), isGingerbread: /Android 2\.3\.[3-7]/i.test(navigator.userAgent), isChrome: b.chrome, isFirefox: /Firefox/i.test(navigator.userAgent), prefixElement: c.createElement("div"), prefixMatches: {}, scrollAnchor: null, scrollPropertyLeft: null, scrollPropertyTop: null, isTicking: !1, calls: [], delayedElements: { count: 0 } }, CSS: {}, Utilities: o, Redirects: {}, Easings: {}, Promise: b.Promise, defaults: { queue: "", duration: v, easing: w, begin: d, complete: d, progress: d, display: d, visibility: d, loop: !1, delay: !1, mobileHA: !0, _cacheValues: !0, promiseRejectEmpty: !0 }, init: function init(a) {
-        o.data(a, "velocity", { isSVG: t.isSVG(a), isAnimating: !1, computedStyle: null, tweensContainer: null, rootPropertyValueCache: {}, transformCache: {} });
-      }, hook: null, mock: !1, version: { major: 1, minor: 4, patch: 2 }, debug: !1, timestamp: !0, pauseAll: function pauseAll(a) {
-        var b = new Date().getTime();o.each(x.State.calls, function (b, c) {
-          if (c) {
-            if (a !== d && (c[2].queue !== a || c[2].queue === !1)) return !0;c[5] = { resume: !1 };
-          }
-        }), o.each(x.State.delayedElements, function (a, c) {
-          c && h(c, b);
-        });
-      }, resumeAll: function resumeAll(a) {
-        var b = new Date().getTime();o.each(x.State.calls, function (b, c) {
-          if (c) {
-            if (a !== d && (c[2].queue !== a || c[2].queue === !1)) return !0;c[5] && (c[5].resume = !0);
-          }
-        }), o.each(x.State.delayedElements, function (a, c) {
-          c && i(c, b);
-        });
-      } };b.pageYOffset !== d ? (x.State.scrollAnchor = b, x.State.scrollPropertyLeft = "pageXOffset", x.State.scrollPropertyTop = "pageYOffset") : (x.State.scrollAnchor = c.documentElement || c.body.parentNode || c.body, x.State.scrollPropertyLeft = "scrollLeft", x.State.scrollPropertyTop = "scrollTop");var y = function () {
-      function a(a) {
-        return -a.tension * a.x - a.friction * a.v;
-      }function b(b, c, d) {
-        var e = { x: b.x + d.dx * c, v: b.v + d.dv * c, tension: b.tension, friction: b.friction };return { dx: e.v, dv: a(e) };
-      }function c(c, d) {
-        var e = { dx: c.v, dv: a(c) },
-            f = b(c, .5 * d, e),
-            g = b(c, .5 * d, f),
-            h = b(c, d, g),
-            i = 1 / 6 * (e.dx + 2 * (f.dx + g.dx) + h.dx),
-            j = 1 / 6 * (e.dv + 2 * (f.dv + g.dv) + h.dv);return c.x = c.x + i * d, c.v = c.v + j * d, c;
-      }return function d(a, b, e) {
-        var f,
-            g,
-            h,
-            i = { x: -1, v: 0, tension: null, friction: null },
-            j = [0],
-            k = 0,
-            l = 1e-4,
-            m = .016;for (a = parseFloat(a) || 500, b = parseFloat(b) || 20, e = e || null, i.tension = a, i.friction = b, f = null !== e, f ? (k = d(a, b), g = k / e * m) : g = m;;) {
-          if (h = c(h || i, g), j.push(1 + h.x), k += 16, !(Math.abs(h.x) > l && Math.abs(h.v) > l)) break;
-        }return f ? function (a) {
-          return j[a * (j.length - 1) | 0];
-        } : k;
-      };
-    }();x.Easings = { linear: function linear(a) {
-        return a;
-      }, swing: function swing(a) {
-        return .5 - Math.cos(a * Math.PI) / 2;
-      }, spring: function spring(a) {
-        return 1 - Math.cos(4.5 * a * Math.PI) * Math.exp(6 * -a);
-      } }, o.each([["ease", [.25, .1, .25, 1]], ["ease-in", [.42, 0, 1, 1]], ["ease-out", [0, 0, .58, 1]], ["ease-in-out", [.42, 0, .58, 1]], ["easeInSine", [.47, 0, .745, .715]], ["easeOutSine", [.39, .575, .565, 1]], ["easeInOutSine", [.445, .05, .55, .95]], ["easeInQuad", [.55, .085, .68, .53]], ["easeOutQuad", [.25, .46, .45, .94]], ["easeInOutQuad", [.455, .03, .515, .955]], ["easeInCubic", [.55, .055, .675, .19]], ["easeOutCubic", [.215, .61, .355, 1]], ["easeInOutCubic", [.645, .045, .355, 1]], ["easeInQuart", [.895, .03, .685, .22]], ["easeOutQuart", [.165, .84, .44, 1]], ["easeInOutQuart", [.77, 0, .175, 1]], ["easeInQuint", [.755, .05, .855, .06]], ["easeOutQuint", [.23, 1, .32, 1]], ["easeInOutQuint", [.86, 0, .07, 1]], ["easeInExpo", [.95, .05, .795, .035]], ["easeOutExpo", [.19, 1, .22, 1]], ["easeInOutExpo", [1, 0, 0, 1]], ["easeInCirc", [.6, .04, .98, .335]], ["easeOutCirc", [.075, .82, .165, 1]], ["easeInOutCirc", [.785, .135, .15, .86]]], function (a, b) {
-      x.Easings[b[0]] = k.apply(null, b[1]);
-    });var z = x.CSS = { RegEx: { isHex: /^#([A-f\d]{3}){1,2}$/i, valueUnwrap: /^[A-z]+\((.*)\)$/i, wrappedValueAlreadyExtracted: /[0-9.]+ [0-9.]+ [0-9.]+( [0-9.]+)?/, valueSplit: /([A-z]+\(.+\))|(([A-z0-9#-.]+?)(?=\s|$))/gi }, Lists: { colors: ["fill", "stroke", "stopColor", "color", "backgroundColor", "borderColor", "borderTopColor", "borderRightColor", "borderBottomColor", "borderLeftColor", "outlineColor"], transformsBase: ["translateX", "translateY", "scale", "scaleX", "scaleY", "skewX", "skewY", "rotateZ"], transforms3D: ["transformPerspective", "translateZ", "scaleZ", "rotateX", "rotateY"], units: ["%", "em", "ex", "ch", "rem", "vw", "vh", "vmin", "vmax", "cm", "mm", "Q", "in", "pc", "pt", "px", "deg", "grad", "rad", "turn", "s", "ms"], colorNames: { aliceblue: "240,248,255", antiquewhite: "250,235,215", aquamarine: "127,255,212", aqua: "0,255,255", azure: "240,255,255", beige: "245,245,220", bisque: "255,228,196", black: "0,0,0", blanchedalmond: "255,235,205", blueviolet: "138,43,226", blue: "0,0,255", brown: "165,42,42", burlywood: "222,184,135", cadetblue: "95,158,160", chartreuse: "127,255,0", chocolate: "210,105,30", coral: "255,127,80", cornflowerblue: "100,149,237", cornsilk: "255,248,220", crimson: "220,20,60", cyan: "0,255,255", darkblue: "0,0,139", darkcyan: "0,139,139", darkgoldenrod: "184,134,11", darkgray: "169,169,169", darkgrey: "169,169,169", darkgreen: "0,100,0", darkkhaki: "189,183,107", darkmagenta: "139,0,139", darkolivegreen: "85,107,47", darkorange: "255,140,0", darkorchid: "153,50,204", darkred: "139,0,0", darksalmon: "233,150,122", darkseagreen: "143,188,143", darkslateblue: "72,61,139", darkslategray: "47,79,79", darkturquoise: "0,206,209", darkviolet: "148,0,211", deeppink: "255,20,147", deepskyblue: "0,191,255", dimgray: "105,105,105", dimgrey: "105,105,105", dodgerblue: "30,144,255", firebrick: "178,34,34", floralwhite: "255,250,240", forestgreen: "34,139,34", fuchsia: "255,0,255", gainsboro: "220,220,220", ghostwhite: "248,248,255", gold: "255,215,0", goldenrod: "218,165,32", gray: "128,128,128", grey: "128,128,128", greenyellow: "173,255,47", green: "0,128,0", honeydew: "240,255,240", hotpink: "255,105,180", indianred: "205,92,92", indigo: "75,0,130", ivory: "255,255,240", khaki: "240,230,140", lavenderblush: "255,240,245", lavender: "230,230,250", lawngreen: "124,252,0", lemonchiffon: "255,250,205", lightblue: "173,216,230", lightcoral: "240,128,128", lightcyan: "224,255,255", lightgoldenrodyellow: "250,250,210", lightgray: "211,211,211", lightgrey: "211,211,211", lightgreen: "144,238,144", lightpink: "255,182,193", lightsalmon: "255,160,122", lightseagreen: "32,178,170", lightskyblue: "135,206,250", lightslategray: "119,136,153", lightsteelblue: "176,196,222", lightyellow: "255,255,224", limegreen: "50,205,50", lime: "0,255,0", linen: "250,240,230", magenta: "255,0,255", maroon: "128,0,0", mediumaquamarine: "102,205,170", mediumblue: "0,0,205", mediumorchid: "186,85,211", mediumpurple: "147,112,219", mediumseagreen: "60,179,113", mediumslateblue: "123,104,238", mediumspringgreen: "0,250,154", mediumturquoise: "72,209,204", mediumvioletred: "199,21,133", midnightblue: "25,25,112", mintcream: "245,255,250", mistyrose: "255,228,225", moccasin: "255,228,181", navajowhite: "255,222,173", navy: "0,0,128", oldlace: "253,245,230", olivedrab: "107,142,35", olive: "128,128,0", orangered: "255,69,0", orange: "255,165,0", orchid: "218,112,214", palegoldenrod: "238,232,170", palegreen: "152,251,152", paleturquoise: "175,238,238", palevioletred: "219,112,147", papayawhip: "255,239,213", peachpuff: "255,218,185", peru: "205,133,63", pink: "255,192,203", plum: "221,160,221", powderblue: "176,224,230", purple: "128,0,128", red: "255,0,0", rosybrown: "188,143,143", royalblue: "65,105,225", saddlebrown: "139,69,19", salmon: "250,128,114", sandybrown: "244,164,96", seagreen: "46,139,87", seashell: "255,245,238", sienna: "160,82,45", silver: "192,192,192", skyblue: "135,206,235", slateblue: "106,90,205", slategray: "112,128,144", snow: "255,250,250", springgreen: "0,255,127", steelblue: "70,130,180", tan: "210,180,140", teal: "0,128,128", thistle: "216,191,216", tomato: "255,99,71", turquoise: "64,224,208", violet: "238,130,238", wheat: "245,222,179", whitesmoke: "245,245,245", white: "255,255,255", yellowgreen: "154,205,50", yellow: "255,255,0" } }, Hooks: { templates: { textShadow: ["Color X Y Blur", "black 0px 0px 0px"], boxShadow: ["Color X Y Blur Spread", "black 0px 0px 0px 0px"], clip: ["Top Right Bottom Left", "0px 0px 0px 0px"], backgroundPosition: ["X Y", "0% 0%"], transformOrigin: ["X Y Z", "50% 50% 0px"], perspectiveOrigin: ["X Y", "50% 50%"] }, registered: {}, register: function register() {
-          for (var a = 0; a < z.Lists.colors.length; a++) {
-            var b = "color" === z.Lists.colors[a] ? "0 0 0 1" : "255 255 255 1";z.Hooks.templates[z.Lists.colors[a]] = ["Red Green Blue Alpha", b];
-          }var c, d, e;if (p) for (c in z.Hooks.templates) {
-            if (z.Hooks.templates.hasOwnProperty(c)) {
-              d = z.Hooks.templates[c], e = d[0].split(" ");var f = d[1].match(z.RegEx.valueSplit);"Color" === e[0] && (e.push(e.shift()), f.push(f.shift()), z.Hooks.templates[c] = [e.join(" "), f.join(" ")]);
-            }
-          }for (c in z.Hooks.templates) {
-            if (z.Hooks.templates.hasOwnProperty(c)) {
-              d = z.Hooks.templates[c], e = d[0].split(" ");for (var g in e) {
-                if (e.hasOwnProperty(g)) {
-                  var h = c + e[g],
-                      i = g;z.Hooks.registered[h] = [c, i];
-                }
-              }
-            }
-          }
-        }, getRoot: function getRoot(a) {
-          var b = z.Hooks.registered[a];return b ? b[0] : a;
-        }, getUnit: function getUnit(a, b) {
-          var c = (a.substr(b || 0, 5).match(/^[a-z%]+/) || [])[0] || "";return c && z.Lists.units.indexOf(c) >= 0 ? c : "";
-        }, fixColors: function fixColors(a) {
-          return a.replace(/(rgba?\(\s*)?(\b[a-z]+\b)/g, function (a, b, c) {
-            return z.Lists.colorNames.hasOwnProperty(c) ? (b ? b : "rgba(") + z.Lists.colorNames[c] + (b ? "" : ",1)") : b + c;
-          });
-        }, cleanRootPropertyValue: function cleanRootPropertyValue(a, b) {
-          return z.RegEx.valueUnwrap.test(b) && (b = b.match(z.RegEx.valueUnwrap)[1]), z.Values.isCSSNullValue(b) && (b = z.Hooks.templates[a][1]), b;
-        }, extractValue: function extractValue(a, b) {
-          var c = z.Hooks.registered[a];if (c) {
-            var d = c[0],
-                e = c[1];return b = z.Hooks.cleanRootPropertyValue(d, b), b.toString().match(z.RegEx.valueSplit)[e];
-          }return b;
-        }, injectValue: function injectValue(a, b, c) {
-          var d = z.Hooks.registered[a];if (d) {
-            var e,
-                f,
-                g = d[0],
-                h = d[1];return c = z.Hooks.cleanRootPropertyValue(g, c), e = c.toString().match(z.RegEx.valueSplit), e[h] = b, f = e.join(" ");
-          }return c;
-        } }, Normalizations: { registered: { clip: function clip(a, b, c) {
-            switch (a) {case "name":
-                return "clip";case "extract":
-                var d;return z.RegEx.wrappedValueAlreadyExtracted.test(c) ? d = c : (d = c.toString().match(z.RegEx.valueUnwrap), d = d ? d[1].replace(/,(\s+)?/g, " ") : c), d;case "inject":
-                return "rect(" + c + ")";}
-          }, blur: function blur(a, b, c) {
-            switch (a) {case "name":
-                return x.State.isFirefox ? "filter" : "-webkit-filter";case "extract":
-                var d = parseFloat(c);if (!d && 0 !== d) {
-                  var e = c.toString().match(/blur\(([0-9]+[A-z]+)\)/i);d = e ? e[1] : 0;
-                }return d;case "inject":
-                return parseFloat(c) ? "blur(" + c + ")" : "none";}
-          }, opacity: function opacity(a, b, c) {
-            if (p <= 8) switch (a) {case "name":
-                return "filter";case "extract":
-                var d = c.toString().match(/alpha\(opacity=(.*)\)/i);return c = d ? d[1] / 100 : 1;case "inject":
-                return b.style.zoom = 1, parseFloat(c) >= 1 ? "" : "alpha(opacity=" + parseInt(100 * parseFloat(c), 10) + ")";} else switch (a) {case "name":
-                return "opacity";case "extract":
-                return c;case "inject":
-                return c;}
-          } }, register: function register() {
-          function a(a, b, c) {
-            var d = "border-box" === z.getPropertyValue(b, "boxSizing").toString().toLowerCase();if (d === (c || !1)) {
-              var e,
-                  f,
-                  g = 0,
-                  h = "width" === a ? ["Left", "Right"] : ["Top", "Bottom"],
-                  i = ["padding" + h[0], "padding" + h[1], "border" + h[0] + "Width", "border" + h[1] + "Width"];for (e = 0; e < i.length; e++) {
-                f = parseFloat(z.getPropertyValue(b, i[e])), isNaN(f) || (g += f);
-              }return c ? -g : g;
-            }return 0;
-          }function b(b, c) {
-            return function (d, e, f) {
-              switch (d) {case "name":
-                  return b;case "extract":
-                  return parseFloat(f) + a(b, e, c);case "inject":
-                  return parseFloat(f) - a(b, e, c) + "px";}
-            };
-          }p && !(p > 9) || x.State.isGingerbread || (z.Lists.transformsBase = z.Lists.transformsBase.concat(z.Lists.transforms3D));for (var c = 0; c < z.Lists.transformsBase.length; c++) {
-            !function () {
-              var a = z.Lists.transformsBase[c];z.Normalizations.registered[a] = function (b, c, e) {
-                switch (b) {case "name":
-                    return "transform";case "extract":
-                    return g(c) === d || g(c).transformCache[a] === d ? /^scale/i.test(a) ? 1 : 0 : g(c).transformCache[a].replace(/[()]/g, "");case "inject":
-                    var f = !1;switch (a.substr(0, a.length - 1)) {case "translate":
-                        f = !/(%|px|em|rem|vw|vh|\d)$/i.test(e);break;case "scal":case "scale":
-                        x.State.isAndroid && g(c).transformCache[a] === d && e < 1 && (e = 1), f = !/(\d)$/i.test(e);break;case "skew":
-                        f = !/(deg|\d)$/i.test(e);break;case "rotate":
-                        f = !/(deg|\d)$/i.test(e);}return f || (g(c).transformCache[a] = "(" + e + ")"), g(c).transformCache[a];}
-              };
-            }();
-          }for (var e = 0; e < z.Lists.colors.length; e++) {
-            !function () {
-              var a = z.Lists.colors[e];z.Normalizations.registered[a] = function (b, c, e) {
-                switch (b) {case "name":
-                    return a;case "extract":
-                    var f;if (z.RegEx.wrappedValueAlreadyExtracted.test(e)) f = e;else {
-                      var g,
-                          h = { black: "rgb(0, 0, 0)", blue: "rgb(0, 0, 255)", gray: "rgb(128, 128, 128)", green: "rgb(0, 128, 0)", red: "rgb(255, 0, 0)", white: "rgb(255, 255, 255)" };/^[A-z]+$/i.test(e) ? g = h[e] !== d ? h[e] : h.black : z.RegEx.isHex.test(e) ? g = "rgb(" + z.Values.hexToRgb(e).join(" ") + ")" : /^rgba?\(/i.test(e) || (g = h.black), f = (g || e).toString().match(z.RegEx.valueUnwrap)[1].replace(/,(\s+)?/g, " ");
-                    }return (!p || p > 8) && 3 === f.split(" ").length && (f += " 1"), f;case "inject":
-                    return (/^rgb/.test(e) ? e : (p <= 8 ? 4 === e.split(" ").length && (e = e.split(/\s+/).slice(0, 3).join(" ")) : 3 === e.split(" ").length && (e += " 1"), (p <= 8 ? "rgb" : "rgba") + "(" + e.replace(/\s+/g, ",").replace(/\.(\d)+(?=,)/g, "") + ")")
-                    );}
-              };
-            }();
-          }z.Normalizations.registered.innerWidth = b("width", !0), z.Normalizations.registered.innerHeight = b("height", !0), z.Normalizations.registered.outerWidth = b("width"), z.Normalizations.registered.outerHeight = b("height");
-        } }, Names: { camelCase: function camelCase(a) {
-          return a.replace(/-(\w)/g, function (a, b) {
-            return b.toUpperCase();
-          });
-        }, SVGAttribute: function SVGAttribute(a) {
-          var b = "width|height|x|y|cx|cy|r|rx|ry|x1|x2|y1|y2";return (p || x.State.isAndroid && !x.State.isChrome) && (b += "|transform"), new RegExp("^(" + b + ")$", "i").test(a);
-        }, prefixCheck: function prefixCheck(a) {
-          if (x.State.prefixMatches[a]) return [x.State.prefixMatches[a], !0];for (var b = ["", "Webkit", "Moz", "ms", "O"], c = 0, d = b.length; c < d; c++) {
-            var e;if (e = 0 === c ? a : b[c] + a.replace(/^\w/, function (a) {
-              return a.toUpperCase();
-            }), t.isString(x.State.prefixElement.style[e])) return x.State.prefixMatches[a] = e, [e, !0];
-          }return [a, !1];
-        } }, Values: { hexToRgb: function hexToRgb(a) {
-          var b,
-              c = /^#?([a-f\d])([a-f\d])([a-f\d])$/i,
-              d = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i;return a = a.replace(c, function (a, b, c, d) {
-            return b + b + c + c + d + d;
-          }), b = d.exec(a), b ? [parseInt(b[1], 16), parseInt(b[2], 16), parseInt(b[3], 16)] : [0, 0, 0];
-        }, isCSSNullValue: function isCSSNullValue(a) {
-          return !a || /^(none|auto|transparent|(rgba\(0, ?0, ?0, ?0\)))$/i.test(a);
-        }, getUnitType: function getUnitType(a) {
-          return (/^(rotate|skew)/i.test(a) ? "deg" : /(^(scale|scaleX|scaleY|scaleZ|alpha|flexGrow|flexHeight|zIndex|fontWeight)$)|((opacity|red|green|blue|alpha)$)/i.test(a) ? "" : "px"
-          );
-        }, getDisplayType: function getDisplayType(a) {
-          var b = a && a.tagName.toString().toLowerCase();return (/^(b|big|i|small|tt|abbr|acronym|cite|code|dfn|em|kbd|strong|samp|var|a|bdo|br|img|map|object|q|script|span|sub|sup|button|input|label|select|textarea)$/i.test(b) ? "inline" : /^(li)$/i.test(b) ? "list-item" : /^(tr)$/i.test(b) ? "table-row" : /^(table)$/i.test(b) ? "table" : /^(tbody)$/i.test(b) ? "table-row-group" : "block"
-          );
-        }, addClass: function addClass(a, b) {
-          if (a) if (a.classList) a.classList.add(b);else if (t.isString(a.className)) a.className += (a.className.length ? " " : "") + b;else {
-            var c = a.getAttribute(p <= 7 ? "className" : "class") || "";a.setAttribute("class", c + (c ? " " : "") + b);
-          }
-        }, removeClass: function removeClass(a, b) {
-          if (a) if (a.classList) a.classList.remove(b);else if (t.isString(a.className)) a.className = a.className.toString().replace(new RegExp("(^|\\s)" + b.split(" ").join("|") + "(\\s|$)", "gi"), " ");else {
-            var c = a.getAttribute(p <= 7 ? "className" : "class") || "";a.setAttribute("class", c.replace(new RegExp("(^|s)" + b.split(" ").join("|") + "(s|$)", "gi"), " "));
-          }
-        } }, getPropertyValue: function getPropertyValue(a, c, e, f) {
-        function h(a, c) {
-          var e = 0;if (p <= 8) e = o.css(a, c);else {
-            var i = !1;/^(width|height)$/.test(c) && 0 === z.getPropertyValue(a, "display") && (i = !0, z.setPropertyValue(a, "display", z.Values.getDisplayType(a)));var j = function j() {
-              i && z.setPropertyValue(a, "display", "none");
-            };if (!f) {
-              if ("height" === c && "border-box" !== z.getPropertyValue(a, "boxSizing").toString().toLowerCase()) {
-                var k = a.offsetHeight - (parseFloat(z.getPropertyValue(a, "borderTopWidth")) || 0) - (parseFloat(z.getPropertyValue(a, "borderBottomWidth")) || 0) - (parseFloat(z.getPropertyValue(a, "paddingTop")) || 0) - (parseFloat(z.getPropertyValue(a, "paddingBottom")) || 0);return j(), k;
-              }if ("width" === c && "border-box" !== z.getPropertyValue(a, "boxSizing").toString().toLowerCase()) {
-                var l = a.offsetWidth - (parseFloat(z.getPropertyValue(a, "borderLeftWidth")) || 0) - (parseFloat(z.getPropertyValue(a, "borderRightWidth")) || 0) - (parseFloat(z.getPropertyValue(a, "paddingLeft")) || 0) - (parseFloat(z.getPropertyValue(a, "paddingRight")) || 0);return j(), l;
-              }
-            }var m;m = g(a) === d ? b.getComputedStyle(a, null) : g(a).computedStyle ? g(a).computedStyle : g(a).computedStyle = b.getComputedStyle(a, null), "borderColor" === c && (c = "borderTopColor"), e = 9 === p && "filter" === c ? m.getPropertyValue(c) : m[c], "" !== e && null !== e || (e = a.style[c]), j();
-          }if ("auto" === e && /^(top|right|bottom|left)$/i.test(c)) {
-            var n = h(a, "position");("fixed" === n || "absolute" === n && /top|left/i.test(c)) && (e = o(a).position()[c] + "px");
-          }return e;
-        }var i;if (z.Hooks.registered[c]) {
-          var j = c,
-              k = z.Hooks.getRoot(j);e === d && (e = z.getPropertyValue(a, z.Names.prefixCheck(k)[0])), z.Normalizations.registered[k] && (e = z.Normalizations.registered[k]("extract", a, e)), i = z.Hooks.extractValue(j, e);
-        } else if (z.Normalizations.registered[c]) {
-          var l, m;l = z.Normalizations.registered[c]("name", a), "transform" !== l && (m = h(a, z.Names.prefixCheck(l)[0]), z.Values.isCSSNullValue(m) && z.Hooks.templates[c] && (m = z.Hooks.templates[c][1])), i = z.Normalizations.registered[c]("extract", a, m);
-        }if (!/^[\d-]/.test(i)) {
-          var n = g(a);if (n && n.isSVG && z.Names.SVGAttribute(c)) {
-            if (/^(height|width)$/i.test(c)) try {
-              i = a.getBBox()[c];
-            } catch (q) {
-              i = 0;
-            } else i = a.getAttribute(c);
-          } else i = h(a, z.Names.prefixCheck(c)[0]);
-        }return z.Values.isCSSNullValue(i) && (i = 0), x.debug >= 2 && console.log("Get " + c + ": " + i), i;
-      }, setPropertyValue: function setPropertyValue(a, c, d, e, f) {
-        var h = c;if ("scroll" === c) f.container ? f.container["scroll" + f.direction] = d : "Left" === f.direction ? b.scrollTo(d, f.alternateValue) : b.scrollTo(f.alternateValue, d);else if (z.Normalizations.registered[c] && "transform" === z.Normalizations.registered[c]("name", a)) z.Normalizations.registered[c]("inject", a, d), h = "transform", d = g(a).transformCache[c];else {
-          if (z.Hooks.registered[c]) {
-            var i = c,
-                j = z.Hooks.getRoot(c);e = e || z.getPropertyValue(a, j), d = z.Hooks.injectValue(i, d, e), c = j;
-          }if (z.Normalizations.registered[c] && (d = z.Normalizations.registered[c]("inject", a, d), c = z.Normalizations.registered[c]("name", a)), h = z.Names.prefixCheck(c)[0], p <= 8) try {
-            a.style[h] = d;
-          } catch (k) {
-            x.debug && console.log("Browser does not support [" + d + "] for [" + h + "]");
-          } else {
-            var l = g(a);l && l.isSVG && z.Names.SVGAttribute(c) ? a.setAttribute(c, d) : a.style[h] = d;
-          }x.debug >= 2 && console.log("Set " + c + " (" + h + "): " + d);
-        }return [h, d];
-      }, flushTransformCache: function flushTransformCache(a) {
-        var b = "",
-            c = g(a);if ((p || x.State.isAndroid && !x.State.isChrome) && c && c.isSVG) {
-          var d = function d(b) {
-            return parseFloat(z.getPropertyValue(a, b));
-          },
-              e = { translate: [d("translateX"), d("translateY")], skewX: [d("skewX")], skewY: [d("skewY")], scale: 1 !== d("scale") ? [d("scale"), d("scale")] : [d("scaleX"), d("scaleY")], rotate: [d("rotateZ"), 0, 0] };o.each(g(a).transformCache, function (a) {
-            /^translate/i.test(a) ? a = "translate" : /^scale/i.test(a) ? a = "scale" : /^rotate/i.test(a) && (a = "rotate"), e[a] && (b += a + "(" + e[a].join(" ") + ") ", delete e[a]);
-          });
-        } else {
-          var f, h;o.each(g(a).transformCache, function (c) {
-            return f = g(a).transformCache[c], "transformPerspective" === c ? (h = f, !0) : (9 === p && "rotateZ" === c && (c = "rotate"), void (b += c + f + " "));
-          }), h && (b = "perspective" + h + " " + b);
-        }z.setPropertyValue(a, "transform", b);
-      } };z.Hooks.register(), z.Normalizations.register(), x.hook = function (a, b, c) {
-      var e;return a = f(a), o.each(a, function (a, f) {
-        if (g(f) === d && x.init(f), c === d) e === d && (e = z.getPropertyValue(f, b));else {
-          var h = z.setPropertyValue(f, b, c);"transform" === h[0] && x.CSS.flushTransformCache(f), e = h;
-        }
-      }), e;
-    };var A = function A() {
-      function a() {
-        return k ? y.promise || null : p;
-      }function e(a, e) {
-        function f(f) {
-          var k, n;if (i.begin && 0 === C) try {
-            i.begin.call(r, r);
-          } catch (p) {
-            setTimeout(function () {
-              throw p;
-            }, 1);
-          }if ("scroll" === F) {
-            var q,
-                v,
-                w,
-                A = /^x$/i.test(i.axis) ? "Left" : "Top",
-                D = parseFloat(i.offset) || 0;i.container ? t.isWrapped(i.container) || t.isNode(i.container) ? (i.container = i.container[0] || i.container, q = i.container["scroll" + A], w = q + o(a).position()[A.toLowerCase()] + D) : i.container = null : (q = x.State.scrollAnchor[x.State["scrollProperty" + A]], v = x.State.scrollAnchor[x.State["scrollProperty" + ("Left" === A ? "Top" : "Left")]], w = o(a).offset()[A.toLowerCase()] + D), j = { scroll: { rootPropertyValue: !1, startValue: q, currentValue: q, endValue: w, unitType: "", easing: i.easing, scrollData: { container: i.container, direction: A, alternateValue: v } }, element: a }, x.debug && console.log("tweensContainer (scroll): ", j.scroll, a);
-          } else if ("reverse" === F) {
-            if (k = g(a), !k) return;if (!k.tweensContainer) return void o.dequeue(a, i.queue);"none" === k.opts.display && (k.opts.display = "auto"), "hidden" === k.opts.visibility && (k.opts.visibility = "visible"), k.opts.loop = !1, k.opts.begin = null, k.opts.complete = null, u.easing || delete i.easing, u.duration || delete i.duration, i = o.extend({}, k.opts, i), n = o.extend(!0, {}, k ? k.tweensContainer : null);for (var E in n) {
-              if (n.hasOwnProperty(E) && "element" !== E) {
-                var G = n[E].startValue;n[E].startValue = n[E].currentValue = n[E].endValue, n[E].endValue = G, t.isEmptyObject(u) || (n[E].easing = i.easing), x.debug && console.log("reverse tweensContainer (" + E + "): " + JSON.stringify(n[E]), a);
-              }
-            }j = n;
-          } else if ("start" === F) {
-            k = g(a), k && k.tweensContainer && k.isAnimating === !0 && (n = k.tweensContainer);var H = function H(b, c) {
-              var d, f, g;return t.isFunction(b) && (b = b.call(a, e, B)), t.isArray(b) ? (d = b[0], !t.isArray(b[1]) && /^[\d-]/.test(b[1]) || t.isFunction(b[1]) || z.RegEx.isHex.test(b[1]) ? g = b[1] : t.isString(b[1]) && !z.RegEx.isHex.test(b[1]) && x.Easings[b[1]] || t.isArray(b[1]) ? (f = c ? b[1] : l(b[1], i.duration), g = b[2]) : g = b[1] || b[2]) : d = b, c || (f = f || i.easing), t.isFunction(d) && (d = d.call(a, e, B)), t.isFunction(g) && (g = g.call(a, e, B)), [d || 0, f, g];
-            },
-                I = function I(e, f) {
-              var g,
-                  l = z.Hooks.getRoot(e),
-                  m = !1,
-                  p = f[0],
-                  q = f[1],
-                  r = f[2];
-              if (!(k && k.isSVG || "tween" === l || z.Names.prefixCheck(l)[1] !== !1 || z.Normalizations.registered[l] !== d)) return void (x.debug && console.log("Skipping [" + l + "] due to a lack of browser support."));(i.display !== d && null !== i.display && "none" !== i.display || i.visibility !== d && "hidden" !== i.visibility) && /opacity|filter/.test(e) && !r && 0 !== p && (r = 0), i._cacheValues && n && n[e] ? (r === d && (r = n[e].endValue + n[e].unitType), m = k.rootPropertyValueCache[l]) : z.Hooks.registered[e] ? r === d ? (m = z.getPropertyValue(a, l), r = z.getPropertyValue(a, e, m)) : m = z.Hooks.templates[l][1] : r === d && (r = z.getPropertyValue(a, e));var s,
-                  u,
-                  v,
-                  w = !1,
-                  y = function y(a, b) {
-                var c, d;return d = (b || "0").toString().toLowerCase().replace(/[%A-z]+$/, function (a) {
-                  return c = a, "";
-                }), c || (c = z.Values.getUnitType(a)), [d, c];
-              };if (r !== p && t.isString(r) && t.isString(p)) {
-                g = "";var A = 0,
-                    B = 0,
-                    C = [],
-                    D = [],
-                    E = 0,
-                    F = 0,
-                    G = 0;for (r = z.Hooks.fixColors(r), p = z.Hooks.fixColors(p); A < r.length && B < p.length;) {
-                  var H = r[A],
-                      I = p[B];if (/[\d\.]/.test(H) && /[\d\.]/.test(I)) {
-                    for (var J = H, K = I, M = ".", N = "."; ++A < r.length;) {
-                      if (H = r[A], H === M) M = "..";else if (!/\d/.test(H)) break;J += H;
-                    }for (; ++B < p.length;) {
-                      if (I = p[B], I === N) N = "..";else if (!/\d/.test(I)) break;K += I;
-                    }var O = z.Hooks.getUnit(r, A),
-                        P = z.Hooks.getUnit(p, B);if (A += O.length, B += P.length, O === P) J === K ? g += J + O : (g += "{" + C.length + (F ? "!" : "") + "}" + O, C.push(parseFloat(J)), D.push(parseFloat(K)));else {
-                      var Q = parseFloat(J),
-                          R = parseFloat(K);g += (E < 5 ? "calc" : "") + "(" + (Q ? "{" + C.length + (F ? "!" : "") + "}" : "0") + O + " + " + (R ? "{" + (C.length + (Q ? 1 : 0)) + (F ? "!" : "") + "}" : "0") + P + ")", Q && (C.push(Q), D.push(0)), R && (C.push(0), D.push(R));
-                    }
-                  } else {
-                    if (H !== I) {
-                      E = 0;break;
-                    }g += H, A++, B++, 0 === E && "c" === H || 1 === E && "a" === H || 2 === E && "l" === H || 3 === E && "c" === H || E >= 4 && "(" === H ? E++ : (E && E < 5 || E >= 4 && ")" === H && --E < 5) && (E = 0), 0 === F && "r" === H || 1 === F && "g" === H || 2 === F && "b" === H || 3 === F && "a" === H || F >= 3 && "(" === H ? (3 === F && "a" === H && (G = 1), F++) : G && "," === H ? ++G > 3 && (F = G = 0) : (G && F < (G ? 5 : 4) || F >= (G ? 4 : 3) && ")" === H && --F < (G ? 5 : 4)) && (F = G = 0);
-                  }
-                }A === r.length && B === p.length || (x.debug && console.error('Trying to pattern match mis-matched strings ["' + p + '", "' + r + '"]'), g = d), g && (C.length ? (x.debug && console.log('Pattern found "' + g + '" -> ', C, D, "[" + r + "," + p + "]"), r = C, p = D, u = v = "") : g = d);
-              }g || (s = y(e, r), r = s[0], v = s[1], s = y(e, p), p = s[0].replace(/^([+-\/*])=/, function (a, b) {
-                return w = b, "";
-              }), u = s[1], r = parseFloat(r) || 0, p = parseFloat(p) || 0, "%" === u && (/^(fontSize|lineHeight)$/.test(e) ? (p /= 100, u = "em") : /^scale/.test(e) ? (p /= 100, u = "") : /(Red|Green|Blue)$/i.test(e) && (p = p / 100 * 255, u = "")));var S = function S() {
-                var d = { myParent: a.parentNode || c.body, position: z.getPropertyValue(a, "position"), fontSize: z.getPropertyValue(a, "fontSize") },
-                    e = d.position === L.lastPosition && d.myParent === L.lastParent,
-                    f = d.fontSize === L.lastFontSize;L.lastParent = d.myParent, L.lastPosition = d.position, L.lastFontSize = d.fontSize;var g = 100,
-                    h = {};if (f && e) h.emToPx = L.lastEmToPx, h.percentToPxWidth = L.lastPercentToPxWidth, h.percentToPxHeight = L.lastPercentToPxHeight;else {
-                  var i = k && k.isSVG ? c.createElementNS("http://www.w3.org/2000/svg", "rect") : c.createElement("div");x.init(i), d.myParent.appendChild(i), o.each(["overflow", "overflowX", "overflowY"], function (a, b) {
-                    x.CSS.setPropertyValue(i, b, "hidden");
-                  }), x.CSS.setPropertyValue(i, "position", d.position), x.CSS.setPropertyValue(i, "fontSize", d.fontSize), x.CSS.setPropertyValue(i, "boxSizing", "content-box"), o.each(["minWidth", "maxWidth", "width", "minHeight", "maxHeight", "height"], function (a, b) {
-                    x.CSS.setPropertyValue(i, b, g + "%");
-                  }), x.CSS.setPropertyValue(i, "paddingLeft", g + "em"), h.percentToPxWidth = L.lastPercentToPxWidth = (parseFloat(z.getPropertyValue(i, "width", null, !0)) || 1) / g, h.percentToPxHeight = L.lastPercentToPxHeight = (parseFloat(z.getPropertyValue(i, "height", null, !0)) || 1) / g, h.emToPx = L.lastEmToPx = (parseFloat(z.getPropertyValue(i, "paddingLeft")) || 1) / g, d.myParent.removeChild(i);
-                }return null === L.remToPx && (L.remToPx = parseFloat(z.getPropertyValue(c.body, "fontSize")) || 16), null === L.vwToPx && (L.vwToPx = parseFloat(b.innerWidth) / 100, L.vhToPx = parseFloat(b.innerHeight) / 100), h.remToPx = L.remToPx, h.vwToPx = L.vwToPx, h.vhToPx = L.vhToPx, x.debug >= 1 && console.log("Unit ratios: " + JSON.stringify(h), a), h;
-              };if (/[\/*]/.test(w)) u = v;else if (v !== u && 0 !== r) if (0 === p) u = v;else {
-                h = h || S();var T = /margin|padding|left|right|width|text|word|letter/i.test(e) || /X$/.test(e) || "x" === e ? "x" : "y";switch (v) {case "%":
-                    r *= "x" === T ? h.percentToPxWidth : h.percentToPxHeight;break;case "px":
-                    break;default:
-                    r *= h[v + "ToPx"];}switch (u) {case "%":
-                    r *= 1 / ("x" === T ? h.percentToPxWidth : h.percentToPxHeight);break;case "px":
-                    break;default:
-                    r *= 1 / h[u + "ToPx"];}
-              }switch (w) {case "+":
-                  p = r + p;break;case "-":
-                  p = r - p;break;case "*":
-                  p *= r;break;case "/":
-                  p = r / p;}j[e] = { rootPropertyValue: m, startValue: r, currentValue: r, endValue: p, unitType: u, easing: q }, g && (j[e].pattern = g), x.debug && console.log("tweensContainer (" + e + "): " + JSON.stringify(j[e]), a);
-            };for (var J in s) {
-              if (s.hasOwnProperty(J)) {
-                var K = z.Names.camelCase(J),
-                    N = H(s[J]);if (z.Lists.colors.indexOf(K) >= 0) {
-                  var O = N[0],
-                      P = N[1],
-                      Q = N[2];if (z.RegEx.isHex.test(O)) {
-                    for (var R = ["Red", "Green", "Blue"], S = z.Values.hexToRgb(O), T = Q ? z.Values.hexToRgb(Q) : d, U = 0; U < R.length; U++) {
-                      var V = [S[U]];P && V.push(P), T !== d && V.push(T[U]), I(K + R[U], V);
-                    }continue;
-                  }
-                }I(K, N);
-              }
-            }j.element = a;
-          }j.element && (z.Values.addClass(a, "velocity-animating"), M.push(j), k = g(a), k && ("" === i.queue && (k.tweensContainer = j, k.opts = i), k.isAnimating = !0), C === B - 1 ? (x.State.calls.push([M, r, i, null, y.resolver, null, 0]), x.State.isTicking === !1 && (x.State.isTicking = !0, m())) : C++);
-        }var h,
-            i = o.extend({}, x.defaults, u),
-            j = {};switch (g(a) === d && x.init(a), parseFloat(i.delay) && i.queue !== !1 && o.queue(a, i.queue, function (b) {
-          x.velocityQueueEntryFlag = !0;var c = x.State.delayedElements.count++;x.State.delayedElements[c] = a;var d = function (a) {
-            return function () {
-              x.State.delayedElements[a] = !1, b();
-            };
-          }(c);g(a).delayBegin = new Date().getTime(), g(a).delay = parseFloat(i.delay), g(a).delayTimer = { setTimeout: setTimeout(b, parseFloat(i.delay)), next: d };
-        }), i.duration.toString().toLowerCase()) {case "fast":
-            i.duration = 200;break;case "normal":
-            i.duration = v;break;case "slow":
-            i.duration = 600;break;default:
-            i.duration = parseFloat(i.duration) || 1;}if (x.mock !== !1 && (x.mock === !0 ? i.duration = i.delay = 1 : (i.duration *= parseFloat(x.mock) || 1, i.delay *= parseFloat(x.mock) || 1)), i.easing = l(i.easing, i.duration), i.begin && !t.isFunction(i.begin) && (i.begin = null), i.progress && !t.isFunction(i.progress) && (i.progress = null), i.complete && !t.isFunction(i.complete) && (i.complete = null), i.display !== d && null !== i.display && (i.display = i.display.toString().toLowerCase(), "auto" === i.display && (i.display = x.CSS.Values.getDisplayType(a))), i.visibility !== d && null !== i.visibility && (i.visibility = i.visibility.toString().toLowerCase()), i.mobileHA = i.mobileHA && x.State.isMobile && !x.State.isGingerbread, i.queue === !1) {
-          if (i.delay) {
-            var k = x.State.delayedElements.count++;x.State.delayedElements[k] = a;var n = function (a) {
-              return function () {
-                x.State.delayedElements[a] = !1, f();
-              };
-            }(k);g(a).delayBegin = new Date().getTime(), g(a).delay = parseFloat(i.delay), g(a).delayTimer = { setTimeout: setTimeout(f, parseFloat(i.delay)), next: n };
-          } else f();
-        } else o.queue(a, i.queue, function (a, b) {
-          return b === !0 ? (y.promise && y.resolver(r), !0) : (x.velocityQueueEntryFlag = !0, void f(a));
-        });"" !== i.queue && "fx" !== i.queue || "inprogress" === o.queue(a)[0] || o.dequeue(a);
-      }var j,
-          k,
-          p,
-          q,
-          r,
-          s,
-          u,
-          w = arguments[0] && (arguments[0].p || o.isPlainObject(arguments[0].properties) && !arguments[0].properties.names || t.isString(arguments[0].properties));t.isWrapped(this) ? (k = !1, q = 0, r = this, p = this) : (k = !0, q = 1, r = w ? arguments[0].elements || arguments[0].e : arguments[0]);var y = { promise: null, resolver: null, rejecter: null };if (k && x.Promise && (y.promise = new x.Promise(function (a, b) {
-        y.resolver = a, y.rejecter = b;
-      })), w ? (s = arguments[0].properties || arguments[0].p, u = arguments[0].options || arguments[0].o) : (s = arguments[q], u = arguments[q + 1]), r = f(r), !r) return void (y.promise && (s && u && u.promiseRejectEmpty === !1 ? y.resolver() : y.rejecter()));var B = r.length,
-          C = 0;if (!/^(stop|finish|finishAll|pause|resume)$/i.test(s) && !o.isPlainObject(u)) {
-        var D = q + 1;u = {};for (var E = D; E < arguments.length; E++) {
-          t.isArray(arguments[E]) || !/^(fast|normal|slow)$/i.test(arguments[E]) && !/^\d/.test(arguments[E]) ? t.isString(arguments[E]) || t.isArray(arguments[E]) ? u.easing = arguments[E] : t.isFunction(arguments[E]) && (u.complete = arguments[E]) : u.duration = arguments[E];
-        }
-      }var F;switch (s) {case "scroll":
-          F = "scroll";break;case "reverse":
-          F = "reverse";break;case "pause":
-          var G = new Date().getTime();return o.each(r, function (a, b) {
-            h(b, G);
-          }), o.each(x.State.calls, function (a, b) {
-            var c = !1;b && o.each(b[1], function (a, e) {
-              var f = u === d ? "" : u;return f !== !0 && b[2].queue !== f && (u !== d || b[2].queue !== !1) || (o.each(r, function (a, d) {
-                if (d === e) return b[5] = { resume: !1 }, c = !0, !1;
-              }), !c && void 0);
-            });
-          }), a();case "resume":
-          return o.each(r, function (a, b) {
-            i(b, G);
-          }), o.each(x.State.calls, function (a, b) {
-            var c = !1;b && o.each(b[1], function (a, e) {
-              var f = u === d ? "" : u;return f !== !0 && b[2].queue !== f && (u !== d || b[2].queue !== !1) || !b[5] || (o.each(r, function (a, d) {
-                if (d === e) return b[5].resume = !0, c = !0, !1;
-              }), !c && void 0);
-            });
-          }), a();case "finish":case "finishAll":case "stop":
-          o.each(r, function (a, b) {
-            g(b) && g(b).delayTimer && (clearTimeout(g(b).delayTimer.setTimeout), g(b).delayTimer.next && g(b).delayTimer.next(), delete g(b).delayTimer), "finishAll" !== s || u !== !0 && !t.isString(u) || (o.each(o.queue(b, t.isString(u) ? u : ""), function (a, b) {
-              t.isFunction(b) && b();
-            }), o.queue(b, t.isString(u) ? u : "", []));
-          });var H = [];return o.each(x.State.calls, function (a, b) {
-            b && o.each(b[1], function (c, e) {
-              var f = u === d ? "" : u;return f !== !0 && b[2].queue !== f && (u !== d || b[2].queue !== !1) || void o.each(r, function (c, d) {
-                if (d === e) if ((u === !0 || t.isString(u)) && (o.each(o.queue(d, t.isString(u) ? u : ""), function (a, b) {
-                  t.isFunction(b) && b(null, !0);
-                }), o.queue(d, t.isString(u) ? u : "", [])), "stop" === s) {
-                  var h = g(d);h && h.tweensContainer && f !== !1 && o.each(h.tweensContainer, function (a, b) {
-                    b.endValue = b.currentValue;
-                  }), H.push(a);
-                } else "finish" !== s && "finishAll" !== s || (b[2].duration = 1);
-              });
-            });
-          }), "stop" === s && (o.each(H, function (a, b) {
-            n(b, !0);
-          }), y.promise && y.resolver(r)), a();default:
-          if (!o.isPlainObject(s) || t.isEmptyObject(s)) {
-            if (t.isString(s) && x.Redirects[s]) {
-              j = o.extend({}, u);var I = j.duration,
-                  J = j.delay || 0;return j.backwards === !0 && (r = o.extend(!0, [], r).reverse()), o.each(r, function (a, b) {
-                parseFloat(j.stagger) ? j.delay = J + parseFloat(j.stagger) * a : t.isFunction(j.stagger) && (j.delay = J + j.stagger.call(b, a, B)), j.drag && (j.duration = parseFloat(I) || (/^(callout|transition)/.test(s) ? 1e3 : v), j.duration = Math.max(j.duration * (j.backwards ? 1 - a / B : (a + 1) / B), .75 * j.duration, 200)), x.Redirects[s].call(b, b, j || {}, a, B, r, y.promise ? y : d);
-              }), a();
-            }var K = "Velocity: First argument (" + s + ") was not a property map, a known action, or a registered redirect. Aborting.";return y.promise ? y.rejecter(new Error(K)) : console.log(K), a();
-          }F = "start";}var L = { lastParent: null, lastPosition: null, lastFontSize: null, lastPercentToPxWidth: null, lastPercentToPxHeight: null, lastEmToPx: null, remToPx: null, vwToPx: null, vhToPx: null },
-          M = [];o.each(r, function (a, b) {
-        t.isNode(b) && e(b, a);
-      }), j = o.extend({}, x.defaults, u), j.loop = parseInt(j.loop, 10);var N = 2 * j.loop - 1;if (j.loop) for (var O = 0; O < N; O++) {
-        var P = { delay: j.delay, progress: j.progress };O === N - 1 && (P.display = j.display, P.visibility = j.visibility, P.complete = j.complete), A(r, "reverse", P);
-      }return a();
-    };x = o.extend(A, x), x.animate = A;var B = b.requestAnimationFrame || q;if (!x.State.isMobile && c.hidden !== d) {
-      var C = function C() {
-        c.hidden ? (B = function B(a) {
-          return setTimeout(function () {
-            a(!0);
-          }, 16);
-        }, m()) : B = b.requestAnimationFrame || q;
-      };C(), c.addEventListener("visibilitychange", C);
-    }return a.Velocity = x, a !== b && (a.fn.velocity = A, a.fn.velocity.defaults = x.defaults), o.each(["Down", "Up"], function (a, b) {
-      x.Redirects["slide" + b] = function (a, c, e, f, g, h) {
-        var i = o.extend({}, c),
-            j = i.begin,
-            k = i.complete,
-            l = {},
-            m = { height: "", marginTop: "", marginBottom: "", paddingTop: "", paddingBottom: "" };i.display === d && (i.display = "Down" === b ? "inline" === x.CSS.Values.getDisplayType(a) ? "inline-block" : "block" : "none"), i.begin = function () {
-          0 === e && j && j.call(g, g);for (var c in m) {
-            if (m.hasOwnProperty(c)) {
-              l[c] = a.style[c];var d = z.getPropertyValue(a, c);m[c] = "Down" === b ? [d, 0] : [0, d];
-            }
-          }l.overflow = a.style.overflow, a.style.overflow = "hidden";
-        }, i.complete = function () {
-          for (var b in l) {
-            l.hasOwnProperty(b) && (a.style[b] = l[b]);
-          }e === f - 1 && (k && k.call(g, g), h && h.resolver(g));
-        }, x(a, m, i);
-      };
-    }), o.each(["In", "Out"], function (a, b) {
-      x.Redirects["fade" + b] = function (a, c, e, f, g, h) {
-        var i = o.extend({}, c),
-            j = i.complete,
-            k = { opacity: "In" === b ? 1 : 0 };0 !== e && (i.begin = null), e !== f - 1 ? i.complete = null : i.complete = function () {
-          j && j.call(g, g), h && h.resolver(g);
-        }, i.display === d && (i.display = "In" === b ? "auto" : "none"), x(this, k, i);
-      };
-    }), x;
-  }(window.jQuery || window.Zepto || window, window, window ? window.document : void 0);
+      }(f)), f = { type: f.type };
+    }return b;
+  }(),
+      ha = { css: function (a, c, d) {
+      return a.style[c] = d;
+    }, attribute: function (a, c, d) {
+      return a.setAttribute(c, d);
+    }, object: function (a, c, d) {
+      return a[c] = d;
+    }, transform: function (a, c, d, b, f) {
+      b[f] || (b[f] = []);b[f].push(c + "(" + d + ")");
+    } },
+      v = [],
+      B = 0,
+      ia = function () {
+    function a() {
+      B = requestAnimationFrame(c);
+    }function c(c) {
+      var b = v.length;if (b) {
+        for (var d = 0; d < b;) {
+          v[d] && v[d].tick(c), d++;
+        }a();
+      } else cancelAnimationFrame(B), B = 0;
+    }return a;
+  }();q.version = "2.2.0";q.speed = 1;q.running = v;q.remove = function (a) {
+    a = P(a);for (var c = v.length; c--;) {
+      for (var d = v[c], b = d.animations, f = b.length; f--;) {
+        u(a, b[f].animatable.target) && (b.splice(f, 1), b.length || d.pause());
+      }
+    }
+  };q.getValue = K;q.path = function (a, c) {
+    var d = h.str(a) ? e(a)[0] : a,
+        b = c || 100;return function (a) {
+      return { el: d, property: a, totalLength: N(d) * (b / 100) };
+    };
+  };q.setDashoffset = function (a) {
+    var c = N(a);a.setAttribute("stroke-dasharray", c);return c;
+  };q.bezier = A;q.easings = Q;q.timeline = function (a) {
+    var c = q(a);c.pause();c.duration = 0;c.add = function (d) {
+      c.children.forEach(function (a) {
+        a.began = !0;a.completed = !0;
+      });m(d).forEach(function (b) {
+        var d = z(b, D(S, a || {}));d.targets = d.targets || a.targets;b = c.duration;var e = d.offset;d.autoplay = !1;d.direction = c.direction;d.offset = h.und(e) ? b : L(e, b);c.began = !0;c.completed = !0;c.seek(d.offset);d = q(d);d.began = !0;d.completed = !0;d.duration > b && (c.duration = d.duration);c.children.push(d);
+      });c.seek(0);c.reset();c.autoplay && c.restart();return c;
+    };return c;
+  };q.random = function (a, c) {
+    return Math.floor(Math.random() * (c - a + 1)) + a;
+  };return q;
 });
-"use strict";
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-// Required for Meteor package, the use of window prevents export by Meteor
+; // Required for Meteor package, the use of window prevents export by Meteor
 (function (window) {
   if (window.Package) {
     M = {};
@@ -1819,6 +1449,23 @@ M.keys = {
 };
 
 /**
+ * TabPress Keydown handler
+ */
+M.tabPressed = false;
+var docHandleKeydown = function (e) {
+  if (e.which === M.keys.TAB) {
+    M.tabPressed = true;
+  }
+};
+var docHandleKeyup = function (e) {
+  if (e.which === M.keys.TAB) {
+    M.tabPressed = false;
+  }
+};
+document.addEventListener('keydown', docHandleKeydown);
+document.addEventListener('keyup', docHandleKeyup);
+
+/**
  * Initialize jQuery wrapper for plugin
  * @param {Class} plugin  javascript class
  * @param {string} pluginName  jQuery plugin name
@@ -1844,7 +1491,7 @@ M.initializeJqueryWrapper = function (plugin, pluginName, classRef) {
       }
 
       // Initialize plugin if options or no argument is passed in
-    } else if ((typeof methodOrOptions === "undefined" ? "undefined" : _typeof(methodOrOptions)) === 'object' || !methodOrOptions) {
+    } else if (typeof methodOrOptions === 'object' || !methodOrOptions) {
       plugin.init(this, arguments[0]);
       return this;
 
@@ -2098,7 +1745,7 @@ M.throttle = function (func, wait, options) {
   var timeout = null;
   var previous = 0;
   options || (options = {});
-  var later = function later() {
+  var later = function () {
     previous = options.leading === false ? 0 : getTime();
     timeout = null;
     result = func.apply(context, args);
@@ -2122,28 +1769,7 @@ M.throttle = function (func, wait, options) {
     return result;
   };
 };
-
-// Velocity has conflicts when loaded with jQuery, this will check for it
-// First, check if in noConflict mode
-var Vel = void 0;
-if (M.jQueryLoaded) {
-  Vel = jQuery.Velocity;
-} else {
-  Vel = Velocity;
-}
-
-if (Vel) {
-  M.Vel = Vel;
-} else {
-  M.Vel = Velocity;
-}
-'use strict';
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-(function ($, Vel) {
+;(function ($, anim) {
   'use strict';
 
   var _defaults = {
@@ -2207,7 +1833,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }
 
     _createClass(Collapsible, [{
-      key: 'destroy',
+      key: "destroy",
 
 
       /**
@@ -2223,7 +1849,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_setupEventHandlers',
+      key: "_setupEventHandlers",
       value: function _setupEventHandlers() {
         this._handleCollapsibleClickBound = this._handleCollapsibleClick.bind(this);
         this.el.addEventListener('click', this._handleCollapsibleClickBound);
@@ -2234,7 +1860,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_removeEventHandlers',
+      key: "_removeEventHandlers",
       value: function _removeEventHandlers() {
         this.el.removeEventListener('click', this._handleCollapsibleClickBound);
       }
@@ -2245,7 +1871,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_handleCollapsibleClick',
+      key: "_handleCollapsibleClick",
       value: function _handleCollapsibleClick(e) {
         var $header = $(e.target).closest('.collapsible-header');
         if (e.target && $header.length) {
@@ -2271,26 +1897,52 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_animateIn',
+      key: "_animateIn",
       value: function _animateIn(index) {
-        var _this = this;
+        var _this3 = this;
 
         var $collapsibleLi = this.$el.children('li').eq(index);
         if ($collapsibleLi.length) {
           var $body = $collapsibleLi.children('.collapsible-body');
-          Vel($body[0], 'stop');
-          Vel($body[0], 'slideDown', { duration: this.options.inDuration, easing: 'easeInOutCubic', queue: false,
-            complete: function complete() {
-              $body[0].style.height = '';
-              $body[0].style.overflow = '';
-              $body[0].style.padding = '';
-              $body[0].style.margin = '';
+
+          anim.remove($body[0]);
+          $body.css({
+            display: 'block',
+            overflow: 'hidden',
+            height: 0,
+            paddingTop: '',
+            paddingBottom: ''
+          });
+
+          var pTop = $body.css('padding-top');
+          var pBottom = $body.css('padding-bottom');
+          var finalHeight = $body[0].scrollHeight;
+          $body.css({
+            paddingTop: 0,
+            paddingBottom: 0
+          });
+
+          anim({
+            targets: $body[0],
+            height: finalHeight,
+            paddingTop: pTop,
+            paddingBottom: pBottom,
+            duration: this.options.inDuration,
+            easing: 'easeInOutCubic',
+            complete: function (anim) {
+              $body.css({
+                overflow: '',
+                paddingTop: '',
+                paddingBottom: '',
+                height: ''
+              });
 
               // onOpenEnd callback
-              if (typeof _this.options.onOpenEnd === 'function') {
-                _this.options.onOpenEnd.call(_this, $collapsibleLi[0]);
+              if (typeof _this3.options.onOpenEnd === 'function') {
+                _this3.options.onOpenEnd.call(_this3, $collapsibleLi[0]);
               }
-            } });
+            }
+          });
         }
       }
 
@@ -2300,26 +1952,36 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_animateOut',
+      key: "_animateOut",
       value: function _animateOut(index) {
-        var _this2 = this;
+        var _this4 = this;
 
         var $collapsibleLi = this.$el.children('li').eq(index);
         if ($collapsibleLi.length) {
           var $body = $collapsibleLi.children('.collapsible-body');
-          Vel($body[0], 'stop');
-          Vel($body[0], 'slideUp', { duration: this.options.outDuration, easing: 'easeInOutCubic', queue: false,
-            complete: function complete() {
-              $body[0].style.height = '';
-              $body[0].style.overflow = '';
-              $body[0].style.padding = '';
-              $body[0].style.margin = '';
+          anim.remove($body[0]);
+          $body.css('overflow', 'hidden');
+          anim({
+            targets: $body[0],
+            height: 0,
+            paddingTop: 0,
+            paddingBottom: 0,
+            duration: this.options.outDuration,
+            easing: 'easeInOutCubic',
+            complete: function () {
+              $body.css({
+                height: '',
+                overflow: '',
+                padding: '',
+                display: ''
+              });
 
               // onCloseEnd callback
-              if (typeof _this2.options.onCloseEnd === 'function') {
-                _this2.options.onCloseEnd.call(_this2, $collapsibleLi[0]);
+              if (typeof _this4.options.onCloseEnd === 'function') {
+                _this4.options.onCloseEnd.call(_this4, $collapsibleLi[0]);
               }
-            } });
+            }
+          });
         }
       }
 
@@ -2329,9 +1991,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: 'open',
+      key: "open",
       value: function open(index) {
-        var _this3 = this;
+        var _this5 = this;
 
         var $collapsibleLi = this.$el.children('li').eq(index);
         if ($collapsibleLi.length && !$collapsibleLi[0].classList.contains('active')) {
@@ -2347,7 +2009,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             var $activeLis = this.$el.children('li.active');
             $activeLis.each(function (el) {
               var index = $collapsibleLis.index($(el));
-              _this3.close(index);
+              _this5.close(index);
             });
           }
 
@@ -2363,7 +2025,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: 'close',
+      key: "close",
       value: function close(index) {
         var $collapsibleLi = this.$el.children('li').eq(index);
         if ($collapsibleLi.length && $collapsibleLi[0].classList.contains('active')) {
@@ -2379,7 +2041,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }
       }
     }], [{
-      key: 'init',
+      key: "init",
       value: function init($els, options) {
         var arr = [];
         $els.each(function () {
@@ -2393,14 +2055,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: 'getInstance',
+      key: "getInstance",
       value: function getInstance(el) {
         var domElem = !!el.jquery ? el[0] : el;
         return domElem.M_Collapsible;
       }
     }, {
-      key: 'defaults',
-      get: function get() {
+      key: "defaults",
+      get: function () {
         return _defaults;
       }
     }]);
@@ -2413,14 +2075,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   if (M.jQueryLoaded) {
     M.initializeJqueryWrapper(Collapsible, 'collapsible', 'M_Collapsible');
   }
-})(cash, M.Vel);
-'use strict';
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-(function ($, Vel) {
+})(cash, anime);
+;(function ($, anim) {
   'use strict';
 
   var _defaults = {
@@ -2475,7 +2131,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
       this.isOpen = false;
 
-      this.focusedIndex = null;
+      this.focusedIndex = -1;
       this.filterQuery = [];
 
       // Move dropdown-content after dropdown-trigger
@@ -2490,7 +2146,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }
 
     _createClass(Dropdown, [{
-      key: 'destroy',
+      key: "destroy",
 
 
       /**
@@ -2508,7 +2164,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_setupEventHandlers',
+      key: "_setupEventHandlers",
       value: function _setupEventHandlers() {
         // Trigger keydown handler
         this.el.addEventListener('keydown', this._handleTriggerKeydownBound);
@@ -2533,7 +2189,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_removeEventHandlers',
+      key: "_removeEventHandlers",
       value: function _removeEventHandlers() {
         // Trigger keydown handler
         this.el.removeEventListener('keydown', this._handleTriggerKeydownBound);
@@ -2547,32 +2203,32 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }
       }
     }, {
-      key: '_setupTemporaryEventHandlers',
+      key: "_setupTemporaryEventHandlers",
       value: function _setupTemporaryEventHandlers() {
         // Use capture phase event handler to prevent click
         document.body.addEventListener('click', this._handleDocumentClickBound, true);
         this.dropdownEl.addEventListener('keydown', this._handleDropdownKeydownBound);
       }
     }, {
-      key: '_removeTemporaryEventHandlers',
+      key: "_removeTemporaryEventHandlers",
       value: function _removeTemporaryEventHandlers() {
         // Use capture phase event handler to prevent click
         document.body.removeEventListener('click', this._handleDocumentClickBound, true);
         this.dropdownEl.removeEventListener('keydown', this._handleDropdownKeydownBound);
       }
     }, {
-      key: '_handleClick',
+      key: "_handleClick",
       value: function _handleClick(e) {
         e.preventDefault();
         this.open();
       }
     }, {
-      key: '_handleMouseEnter',
+      key: "_handleMouseEnter",
       value: function _handleMouseEnter() {
         this.open();
       }
     }, {
-      key: '_handleMouseLeave',
+      key: "_handleMouseLeave",
       value: function _handleMouseLeave(e) {
         var toEl = e.toElement || e.relatedTarget;
         var leaveToDropdownContent = !!$(toEl).closest('.dropdown-content').length;
@@ -2589,27 +2245,27 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }
       }
     }, {
-      key: '_handleDocumentClick',
+      key: "_handleDocumentClick",
       value: function _handleDocumentClick(e) {
-        var _this = this;
+        var _this6 = this;
 
         var $target = $(e.target);
         if (this.options.closeOnClick && $target.closest('.dropdown-content').length) {
           setTimeout(function () {
-            _this.close();
+            _this6.close();
           }, 0);
         } else if ($target.closest('.dropdown-trigger').length) {
           setTimeout(function () {
-            _this.close();
+            _this6.close();
           }, 0);
         } else if (!$target.closest('.dropdown-content').length) {
           setTimeout(function () {
-            _this.close();
+            _this6.close();
           }, 0);
         }
       }
     }, {
-      key: '_handleTriggerKeydown',
+      key: "_handleTriggerKeydown",
       value: function _handleTriggerKeydown(e) {
         // ARROW DOWN OR ENTER WHEN SELECT IS CLOSED - open Dropdown
         if ((e.which === M.keys.ARROW_DOWN || e.which === M.keys.ENTER) && !this.isOpen) {
@@ -2624,7 +2280,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_handleDropdownKeydown',
+      key: "_handleDropdownKeydown",
       value: function _handleDropdownKeydown(e) {
         if (e.which === M.keys.TAB) {
           e.preventDefault();
@@ -2677,12 +2333,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_resetFilterQuery',
+      key: "_resetFilterQuery",
       value: function _resetFilterQuery() {
         this.filterQuery = [];
       }
     }, {
-      key: '_resetDropdownStyles',
+      key: "_resetDropdownStyles",
       value: function _resetDropdownStyles() {
         this.$dropdownEl.css({
           display: '',
@@ -2696,7 +2352,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         });
       }
     }, {
-      key: '_makeDropdownFocusable',
+      key: "_makeDropdownFocusable",
       value: function _makeDropdownFocusable() {
         if (this.dropdownEl.tabIndex === -1) {
           this.dropdownEl.tabIndex = 0;
@@ -2705,12 +2361,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         $(this.dropdownEl).children().attr('tabindex', 0);
       }
     }, {
-      key: '_focusFocusedItem',
+      key: "_focusFocusedItem",
       value: function _focusFocusedItem() {
-        this.dropdownEl.children[this.focusedIndex].focus();
+        if (this.focusedIndex >= 0 && this.focusedIndex < this.dropdownEl.children.length) {
+          this.dropdownEl.children[this.focusedIndex].focus();
+        }
       }
     }, {
-      key: '_getDropdownPosition',
+      key: "_getDropdownPosition",
       value: function _getDropdownPosition() {
         var offsetParentBRect = this.el.offsetParent.getBoundingClientRect();
         var triggerOffset = { left: this.el.offsetLeft, top: this.el.offsetTop, width: this.el.offsetWidth, height: this.el.offsetHeight };
@@ -2789,30 +2447,35 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_animateIn',
+      key: "_animateIn",
       value: function _animateIn(positionInfo) {
-        var _this2 = this;
+        var _this7 = this;
 
         // Place dropdown
         this.dropdownEl.style.left = positionInfo.x + 'px';
         this.dropdownEl.style.top = positionInfo.y + 'px';
         this.dropdownEl.style.height = positionInfo.height + 'px';
         this.dropdownEl.style.width = positionInfo.width + 'px';
-        this.dropdownEl.style.transformOrigin = (positionInfo.horizontalAlignment === 'left' ? '0' : '100%') + ' ' + (positionInfo.verticalAlignment === 'top' ? '0' : '100%');
+        this.dropdownEl.style.transformOrigin = (positionInfo.horizontalAlignment === 'left' ? '0' : '100%') + " " + (positionInfo.verticalAlignment === 'top' ? '0' : '100%');
 
-        Vel(this.dropdownEl, {
-          opacity: [1, 'easeOutQuad'],
-          scaleX: [1, .3],
-          scaleY: [1, .3] }, {
+        anim.remove(this.dropdownEl);
+        anim({
+          targets: this.dropdownEl,
+          opacity: {
+            value: [0, 1],
+            easing: 'easeOutQuad'
+          },
+          scaleX: [.3, 1],
+          scaleY: [.3, 1],
           duration: this.options.inDuration,
-          queue: false,
           easing: 'easeOutQuint',
-          complete: function complete() {
-            _this2._focusFocusedItem();
+          complete: function (anim) {
+            _this7.dropdownEl.focus();
 
             // onOpenEnd callback
-            if (typeof _this2.options.onOpenEnd === 'function') {
-              _this2.options.onOpenEnd.call(_this2, _this2.el);
+            if (typeof _this7.options.onOpenEnd === 'function') {
+              var elem = anim.animatables[0].target;
+              _this7.options.onOpenEnd.call(elem, _this7.el);
             }
           }
         });
@@ -2823,23 +2486,28 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_animateOut',
+      key: "_animateOut",
       value: function _animateOut() {
-        var _this3 = this;
+        var _this8 = this;
 
-        Vel(this.dropdownEl, {
-          opacity: [0, 'easeOutQuint'],
-          scaleX: [.3, 1],
-          scaleY: [.3, 1] }, {
+        anim.remove(this.dropdownEl);
+        anim({
+          targets: this.dropdownEl,
+          opacity: {
+            value: 0,
+            easing: 'easeOutQuint'
+          },
+          scaleX: .3,
+          scaleY: .3,
           duration: this.options.outDuration,
-          queue: false,
           easing: 'easeOutQuint',
-          complete: function complete() {
-            _this3._resetDropdownStyles();
+          complete: function (anim) {
+            _this8._resetDropdownStyles();
 
             // onCloseEnd callback
-            if (typeof _this3.options.onCloseEnd === 'function') {
-              _this3.options.onCloseEnd.call(_this3, _this3.el);
+            if (typeof _this8.options.onCloseEnd === 'function') {
+              var elem = anim.animatables[0].target;
+              _this8.options.onCloseEnd.call(_this8, _this8.el);
             }
           }
         });
@@ -2850,27 +2518,21 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: 'open',
+      key: "open",
       value: function open() {
         if (this.isOpen) {
           return;
         }
         this.isOpen = true;
 
-        // Highlight focused item
-        if (this.focusedIndex === null) {
-          this.focusedIndex = 0;
-        }
-
         // onOpenStart callback
         if (typeof this.options.onOpenStart === 'function') {
           this.options.onOpenStart.call(this, this.el);
         }
 
-        // Stop any previous animation
-        Vel(this.dropdownEl, 'stop');
+        // Reset styles
         this._resetDropdownStyles();
-        Vel.hook(this.dropdownEl, 'display', 'block');
+        this.dropdownEl.style.display = 'block';
 
         // Set width before calculating positionInfo
         var idealWidth = this.options.constrainWidth ? this.el.getBoundingClientRect().width : this.dropdownEl.getBoundingClientRect().width;
@@ -2886,12 +2548,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: 'close',
+      key: "close",
       value: function close() {
         if (!this.isOpen) {
           return;
         }
         this.isOpen = false;
+        this.focusedIndex = -1;
 
         // onCloseStart callback
         if (typeof this.options.onCloseStart === 'function') {
@@ -2903,7 +2566,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.el.focus();
       }
     }], [{
-      key: 'init',
+      key: "init",
       value: function init($els, options) {
         var arr = [];
         $els.each(function () {
@@ -2917,14 +2580,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: 'getInstance',
+      key: "getInstance",
       value: function getInstance(el) {
         var domElem = !!el.jquery ? el[0] : el;
         return domElem.M_Dropdown;
       }
     }, {
-      key: 'defaults',
-      get: function get() {
+      key: "defaults",
+      get: function () {
         return _defaults;
       }
     }]);
@@ -2945,14 +2608,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   if (M.jQueryLoaded) {
     M.initializeJqueryWrapper(Dropdown, 'dropdown', 'M_Dropdown');
   }
-})(cash, M.Vel);
-'use strict';
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-(function ($, Vel) {
+})(cash, anime);
+;(function ($, anim) {
   'use strict';
 
   var _defaults = {
@@ -3022,7 +2679,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }
 
     _createClass(Modal, [{
-      key: 'destroy',
+      key: "destroy",
 
 
       /**
@@ -3041,7 +2698,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_setupEventHandlers',
+      key: "_setupEventHandlers",
       value: function _setupEventHandlers() {
         this._handleOverlayClickBound = this._handleOverlayClick.bind(this);
         this._handleModalCloseClickBound = this._handleModalCloseClick.bind(this);
@@ -3058,7 +2715,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_removeEventHandlers',
+      key: "_removeEventHandlers",
       value: function _removeEventHandlers() {
         if (Modal._count === 0) {
           document.body.removeEventListener('click', this._handleTriggerClick);
@@ -3073,7 +2730,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_handleTriggerClick',
+      key: "_handleTriggerClick",
       value: function _handleTriggerClick(e) {
         var $trigger = $(e.target).closest('.modal-trigger');
         if ($trigger.length) {
@@ -3091,7 +2748,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_handleOverlayClick',
+      key: "_handleOverlayClick",
       value: function _handleOverlayClick() {
         if (this.options.dismissible) {
           this.close();
@@ -3104,7 +2761,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_handleModalCloseClick',
+      key: "_handleModalCloseClick",
       value: function _handleModalCloseClick(e) {
         var $closeTrigger = $(e.target).closest('.modal-close');
         if ($closeTrigger.length) {
@@ -3118,7 +2775,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_handleKeydown',
+      key: "_handleKeydown",
       value: function _handleKeydown(e) {
         // ESC key
         if (e.keyCode === 27 && this.options.dismissible) {
@@ -3131,9 +2788,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_animateIn',
+      key: "_animateIn",
       value: function _animateIn() {
-        var _this = this;
+        var _this9 = this;
 
         // Set initial styles
         $.extend(this.el.style, {
@@ -3146,31 +2803,43 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         });
 
         // Animate overlay
-        Vel(this.$overlay[0], { opacity: this.options.opacity }, { duration: this.options.inDuration, queue: false, ease: 'easeOutCubic' });
+        anim({
+          targets: this.$overlay[0],
+          opacity: this.options.opacity,
+          duration: this.options.inDuration,
+          easing: 'easeOutQuad'
+        });
 
         // Define modal animation options
-        var enterVelocityOptions = {
+        var enterAnimOptions = {
+          targets: this.el,
           duration: this.options.inDuration,
-          queue: false,
-          ease: 'easeOutCubic',
+          easing: 'easeOutCubic',
           // Handle modal ready callback
-          complete: function complete() {
-            if (typeof _this.options.ready === 'function') {
-              _this.options.ready.call(_this, _this.el, _this._openingTrigger);
+          complete: function () {
+            if (typeof _this9.options.ready === 'function') {
+              _this9.options.ready.call(_this9, _this9.el, _this9._openingTrigger);
             }
           }
         };
 
         // Bottom sheet animation
         if (this.el.classList.contains('bottom-sheet')) {
-          Vel(this.el, { bottom: 0, opacity: 1 }, enterVelocityOptions);
+          $.extend(enterAnimOptions, {
+            bottom: 0,
+            opacity: 1
+          });
+          anim(enterAnimOptions);
 
           // Normal modal animation
         } else {
-          Vel.hook(this.el, 'scaleX', 0.8);
-          Vel.hook(this.el, 'scaleY', 0.8);
-          this.el.style.top = this.options.startingTop;
-          Vel(this.el, { top: this.options.endingTop, opacity: 1, scaleX: 1, scaleY: 1 }, enterVelocityOptions);
+          $.extend(enterAnimOptions, {
+            top: [this.options.startingTop, this.options.endingTop],
+            opacity: 1,
+            scaleX: [.8, 1],
+            scaleY: [.8, 1]
+          });
+          anim(enterAnimOptions);
         }
       }
 
@@ -3179,36 +2848,51 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_animateOut',
+      key: "_animateOut",
       value: function _animateOut() {
-        var _this2 = this;
+        var _this10 = this;
 
         // Animate overlay
-        Vel(this.$overlay[0], { opacity: 0 }, { duration: this.options.outDuration, queue: false, ease: 'easeOutQuart' });
+        anim({
+          targets: this.$overlay[0],
+          opacity: 0,
+          duration: this.options.outDuration,
+          easing: 'easeOutQuart'
+        });
 
         // Define modal animation options
-        var exitVelocityOptions = {
+        var exitAnimOptions = {
+          targets: this.el,
           duration: this.options.outDuration,
-          queue: false,
-          ease: 'easeOutCubic',
+          easing: 'easeOutCubic',
           // Handle modal ready callback
-          complete: function complete() {
-            _this2.el.style.display = 'none';
+          complete: function () {
+            _this10.el.style.display = 'none';
             // Call complete callback
-            if (typeof _this2.options.complete === 'function') {
-              _this2.options.complete.call(_this2, _this2.$el);
+            if (typeof _this10.options.complete === 'function') {
+              _this10.options.complete.call(_this10, _this10.el);
             }
-            _this2.$overlay.remove();
+            _this10.$overlay.remove();
           }
         };
 
         // Bottom sheet animation
         if (this.el.classList.contains('bottom-sheet')) {
-          Vel(this.el, { bottom: '-100%', opacity: 0 }, exitVelocityOptions);
+          $.extend(exitAnimOptions, {
+            bottom: '-100%',
+            opacity: 0
+          });
+          anim(exitAnimOptions);
 
           // Normal modal animation
         } else {
-          Vel(this.el, { top: this.options.startingTop, opacity: 0, scaleX: 0.8, scaleY: 0.8 }, exitVelocityOptions);
+          $.extend(exitAnimOptions, {
+            top: [this.options.endingTop, this.options.startingTop],
+            opacity: 0,
+            scaleX: 0.8,
+            scaleY: 0.8
+          });
+          anim(exitAnimOptions);
         }
       }
 
@@ -3218,7 +2902,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: 'open',
+      key: "open",
       value: function open($trigger) {
         if (this.isOpen) {
           return;
@@ -3231,13 +2915,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         body.appendChild(this.$overlay[0]);
 
         // Set opening trigger, undefined indicates modal was opened by javascript
-        this._openingTrigger = !!$trigger ? $trigger : undefined;
+        this._openingTrigger = !!$trigger ? $trigger[0] : undefined;
 
         if (this.options.dismissible) {
           this._handleKeydownBound = this._handleKeydown.bind(this);
           document.addEventListener('keydown', this._handleKeydownBound);
         }
 
+        anim.remove(this.el);
+        anim.remove(this.$overlay[0]);
         this._animateIn();
         return this;
       }
@@ -3247,7 +2933,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: 'close',
+      key: "close",
       value: function close() {
         if (!this.isOpen) {
           return;
@@ -3261,11 +2947,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           document.removeEventListener('keydown', this._handleKeydownBound);
         }
 
+        anim.remove(this.el);
+        anim.remove(this.$overlay[0]);
         this._animateOut();
         return this;
       }
     }], [{
-      key: 'init',
+      key: "init",
       value: function init($els, options) {
         var arr = [];
         $els.each(function () {
@@ -3279,14 +2967,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: 'getInstance',
+      key: "getInstance",
       value: function getInstance(el) {
         var domElem = !!el.jquery ? el[0] : el;
         return domElem.M_Modal;
       }
     }, {
-      key: 'defaults',
-      get: function get() {
+      key: "defaults",
+      get: function () {
         return _defaults;
       }
     }]);
@@ -3313,14 +3001,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   if (M.jQueryLoaded) {
     M.initializeJqueryWrapper(Modal, 'modal', 'M_Modal');
   }
-})(cash, M.Vel);
-'use strict';
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-(function ($, Vel) {
+})(cash, anime);
+;(function ($, anim) {
   'use strict';
 
   var _defaults = {
@@ -3376,7 +3058,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }
 
     _createClass(Materialbox, [{
-      key: 'destroy',
+      key: "destroy",
 
 
       /**
@@ -3392,7 +3074,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_setupEventHandlers',
+      key: "_setupEventHandlers",
       value: function _setupEventHandlers() {
         this._handleMaterialboxClickBound = this._handleMaterialboxClick.bind(this);
         this.el.addEventListener('click', this._handleMaterialboxClickBound);
@@ -3403,7 +3085,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: 'removeEventHandlers',
+      key: "removeEventHandlers",
       value: function removeEventHandlers() {
         this.el.removeEventListener('click', this._handleMaterialboxClickBound);
       }
@@ -3414,7 +3096,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_handleMaterialboxClick',
+      key: "_handleMaterialboxClick",
       value: function _handleMaterialboxClick(e) {
         // If already modal, return to original
         if (this.doneAnimating === false || this.overlayActive && this.doneAnimating) {
@@ -3429,7 +3111,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_handleWindowScroll',
+      key: "_handleWindowScroll",
       value: function _handleWindowScroll() {
         if (this.overlayActive) {
           this.close();
@@ -3441,7 +3123,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_handleWindowResize',
+      key: "_handleWindowResize",
       value: function _handleWindowResize() {
         if (this.overlayActive) {
           this.close();
@@ -3454,7 +3136,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_handleWindowEscape',
+      key: "_handleWindowEscape",
       value: function _handleWindowEscape(e) {
         // ESC key
         if (e.keyCode === 27 && this.doneAnimating && this.overlayActive) {
@@ -3467,7 +3149,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_makeAncestorsOverflowVisible',
+      key: "_makeAncestorsOverflowVisible",
       value: function _makeAncestorsOverflowVisible() {
         this.ancestorsChanged = $();
         var ancestor = this.placeholder[0].parentNode;
@@ -3490,35 +3172,32 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_animateImageIn',
+      key: "_animateImageIn",
       value: function _animateImageIn() {
-        var _this = this;
+        var _this11 = this;
 
-        var velocityOptions = {
-          duration: this.options.inDuration,
-          queue: false,
-          ease: 'easeOutQuad',
-          complete: function complete() {
-            _this.doneAnimating = true;
-          }
-        };
-
-        var velocityProperties = {
+        var animOptions = {
+          targets: this.el,
           height: this.newHeight,
           width: this.newWidth,
           left: M.getDocumentScrollLeft() + this.windowWidth / 2 - this.placeholder.offset().left - this.newWidth / 2,
-          top: M.getDocumentScrollTop() + this.windowHeight / 2 - this.placeholder.offset().top - this.newHeight / 2
+          top: M.getDocumentScrollTop() + this.windowHeight / 2 - this.placeholder.offset().top - this.newHeight / 2,
+          duration: this.options.inDuration,
+          easing: 'easeOutQuad',
+          complete: function () {
+            _this11.doneAnimating = true;
+          }
         };
 
         if (this.$el.hasClass('responsive-img')) {
-          velocityProperties.maxWidth = [this.newWidth, this.newWidth];
-          velocityProperties.width = [velocityProperties.width, this.originalWidth];
+          animOptions.maxWidth = this.newWidth;
+          animOptions.width = [this.originalWidth, animOptions.width];
         } else {
-          velocityProperties.left = [velocityProperties.left, 0];
-          velocityProperties.top = [velocityProperties.top, 0];
+          animOptions.left = [animOptions.left, 0];
+          animOptions.top = [animOptions.top, 0];
         }
 
-        Vel(this.el, velocityProperties, velocityOptions);
+        anim(animOptions);
       }
 
       /**
@@ -3526,16 +3205,20 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_animateImageOut',
+      key: "_animateImageOut",
       value: function _animateImageOut() {
-        var _this2 = this;
+        var _this12 = this;
 
-        var velocityOptions = {
+        var animOptions = {
+          targets: this.el,
+          width: this.originalWidth,
+          height: this.originalHeight,
+          left: 0,
+          top: 0,
           duration: this.options.outDuration,
-          queue: false,
-          ease: 'easeOutQuad',
-          complete: function complete() {
-            _this2.placeholder.css({
+          easing: 'easeOutQuad',
+          complete: function () {
+            _this12.placeholder.css({
               height: '',
               width: '',
               position: '',
@@ -3543,26 +3226,21 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               left: ''
             });
 
-            _this2.$el.removeAttr('style');
-            _this2.$el.attr('style', _this2.originInlineStyles);
+            _this12.$el.removeAttr('style');
+            _this12.$el.attr('style', _this12.originInlineStyles);
 
             // Remove class
-            _this2.$el.removeClass('active');
-            _this2.doneAnimating = true;
+            _this12.$el.removeClass('active');
+            _this12.doneAnimating = true;
 
             // Remove overflow overrides on ancestors
-            if (_this2.ancestorsChanged.length) {
-              _this2.ancestorsChanged.css('overflow', '');
+            if (_this12.ancestorsChanged.length) {
+              _this12.ancestorsChanged.css('overflow', '');
             }
           }
         };
 
-        Vel(this.el, {
-          width: this.originalWidth,
-          height: this.originalHeight,
-          left: 0,
-          top: 0
-        }, velocityOptions);
+        anim(animOptions);
       }
 
       /**
@@ -3570,7 +3248,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_updateVars',
+      key: "_updateVars",
       value: function _updateVars() {
         this.windowWidth = window.innerWidth;
         this.windowHeight = window.innerHeight;
@@ -3582,9 +3260,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: 'open',
+      key: "open",
       value: function open() {
-        var _this3 = this;
+        var _this13 = this;
 
         this._updateVars();
         this.originalWidth = this.el.getBoundingClientRect().width;
@@ -3617,8 +3295,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.$overlay = $('<div id="materialbox-overlay"></div>').css({
           opacity: 0
         }).one('click', function () {
-          if (_this3.doneAnimating) {
-            _this3.close();
+          if (_this13.doneAnimating) {
+            _this13.close();
           }
         });
 
@@ -3634,8 +3312,20 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           top: -1 * overlayOffset.top + 'px'
         });
 
+        anim.remove(this.el);
+        anim.remove(this.$overlay[0]);
+
+        if (this.caption !== "") {
+          anim.remove(this.$photoCaption[0]);
+        }
+
         // Animate Overlay
-        Vel(this.$overlay[0], { opacity: 1 }, { duration: this.options.inDuration, queue: false, ease: 'easeOutQuad' });
+        anim({
+          targets: this.$overlay[0],
+          opacity: 1,
+          duration: this.options.inDuration,
+          easing: 'easeOutQuad'
+        });
 
         // Add and animate caption if it exists
         if (this.caption !== "") {
@@ -3643,7 +3333,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           this.$photoCaption.text(this.caption);
           $('body').append(this.$photoCaption);
           this.$photoCaption.css({ "display": "inline" });
-          Vel(this.$photoCaption[0], { opacity: 1 }, { duration: this.options.inDuration, queue: false, ease: 'easeOutQuad' });
+
+          anim({
+            targets: this.$photoCaption[0],
+            opacity: 1,
+            duration: this.options.inDuration,
+            easing: 'easeOutQuad'
+          });
         }
 
         // Resize Image
@@ -3680,17 +3376,18 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: 'close',
+      key: "close",
       value: function close() {
-        var _this4 = this;
+        var _this14 = this;
 
         this._updateVars();
         this.doneAnimating = false;
 
-        Vel(this.el, 'stop');
-        Vel(this.$overlay[0], 'stop');
+        anim.remove(this.el);
+        anim.remove(this.$overlay[0]);
+
         if (this.caption !== "") {
-          Vel(this.$photoCaption[0], 'stop');
+          anim.remove(this.$photoCaption[0]);
         }
 
         // disable exit handlers
@@ -3698,22 +3395,34 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         window.removeEventListener('resize', this._handleWindowResizeBound);
         window.removeEventListener('keyup', this._handleWindowEscapeBound);
 
-        Vel(this.$overlay[0], { opacity: 0 }, { duration: this.options.outDuration, queue: false, ease: 'easeOutQuad', complete: function complete() {
-            _this4.overlayActive = false;
-            _this4.$overlay.remove();
-          } });
+        anim({
+          targets: this.$overlay[0],
+          opacity: 0,
+          duration: this.options.outDuration,
+          easing: 'easeOutQuad',
+          complete: function () {
+            _this14.overlayActive = false;
+            _this14.$overlay.remove();
+          }
+        });
 
         this._animateImageOut();
 
         // Remove Caption + reset css settings on image
         if (this.caption !== "") {
-          Vel(this.$photoCaption[0], { opacity: 0 }, { duration: this.options.outDuration, queue: false, ease: 'easeOutQuad', complete: function complete() {
-              _this4.$photoCaption.remove();
-            } });
+          anim({
+            targets: this.$photoCaption[0],
+            opacity: 0,
+            duration: this.options.outDuration,
+            easing: 'easeOutQuad',
+            complete: function () {
+              _this14.$photoCaption.remove();
+            }
+          });
         }
       }
     }], [{
-      key: 'init',
+      key: "init",
       value: function init($els, options) {
         var arr = [];
         $els.each(function () {
@@ -3727,14 +3436,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: 'getInstance',
+      key: "getInstance",
       value: function getInstance(el) {
         var domElem = !!el.jquery ? el[0] : el;
         return domElem.M_Materialbox;
       }
     }, {
-      key: 'defaults',
-      get: function get() {
+      key: "defaults",
+      get: function () {
         return _defaults;
       }
     }]);
@@ -3747,14 +3456,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   if (M.jQueryLoaded) {
     M.initializeJqueryWrapper(Materialbox, 'materialbox', 'M_Materialbox');
   }
-})(cash, M.Vel);
-'use strict';
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-(function ($) {
+})(cash, anime);
+;(function ($) {
   'use strict';
 
   var _defaults = {};
@@ -3783,7 +3486,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }
 
     _createClass(Parallax, [{
-      key: 'destroy',
+      key: "destroy",
 
 
       /**
@@ -3791,7 +3494,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
       value: function destroy() {}
     }, {
-      key: '_setupEventHandlers',
+      key: "_setupEventHandlers",
       value: function _setupEventHandlers() {
         this._handleImageLoadBound = this._handleImageLoad.bind(this);
         this.$img[0].addEventListener('load', this._handleImageLoadBound);
@@ -3802,12 +3505,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }
       }
     }, {
-      key: '_setupStyles',
+      key: "_setupStyles",
       value: function _setupStyles() {
         this.$img[0].style.opacity = 1;
       }
     }, {
-      key: '_handleImageLoad',
+      key: "_handleImageLoad",
       value: function _handleImageLoad() {
         this._updateParallax();
         this.$img.each(function () {
@@ -3816,7 +3519,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         });
       }
     }, {
-      key: '_updateParallax',
+      key: "_updateParallax",
       value: function _updateParallax() {
         var containerHeight = this.$el.height() > 0 ? this.el.parentNode.offsetHeight : 500;
         var imgHeight = this.$img[0].offsetHeight;
@@ -3830,11 +3533,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         var parallax = parallaxDist * percentScrolled;
 
         if (bottom > scrollTop && top < scrollTop + windowHeight) {
-          this.$img[0].style.transform = 'translate3D(-50%, ' + parallax + 'px, 0)';
+          this.$img[0].style.transform = "translate3D(-50%, " + parallax + "px, 0)";
         }
       }
     }], [{
-      key: 'init',
+      key: "init",
       value: function init($els, options) {
         var arr = [];
         $els.each(function () {
@@ -3848,13 +3551,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: 'getInstance',
+      key: "getInstance",
       value: function getInstance(el) {
         var domElem = !!el.jquery ? el[0] : el;
         return domElem.M_Parallax;
       }
     }, {
-      key: '_handleScroll',
+      key: "_handleScroll",
       value: function _handleScroll() {
         for (var i = 0; i < Parallax._parallaxes.length; i++) {
           var parallaxInstance = Parallax._parallaxes[i];
@@ -3862,8 +3565,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }
       }
     }, {
-      key: 'defaults',
-      get: function get() {
+      key: "defaults",
+      get: function () {
         return _defaults;
       }
     }]);
@@ -3885,13 +3588,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     M.initializeJqueryWrapper(Parallax, 'parallax', 'M_Parallax');
   }
 })(cash);
-'use strict';
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-(function ($, Vel) {
+;(function ($, anim) {
   'use strict';
 
   var _defaults = {
@@ -3930,7 +3627,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       this.el = el;
 
       /**
-       * Options for the carousel
+       * Options for the Tabs
        * @member Tabs#options
        * @prop {Number} duration
        * @prop {Function} onShow
@@ -3958,7 +3655,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }
 
     _createClass(Tabs, [{
-      key: 'destroy',
+      key: "destroy",
 
 
       /**
@@ -3982,7 +3679,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_setupEventHandlers',
+      key: "_setupEventHandlers",
       value: function _setupEventHandlers() {
         this._handleWindowResizeBound = this._handleWindowResize.bind(this);
         window.addEventListener('resize', this._handleWindowResizeBound);
@@ -3996,7 +3693,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_removeEventHandlers',
+      key: "_removeEventHandlers",
       value: function _removeEventHandlers() {
         window.removeEventListener('resize', this._handleWindowResizeBound);
         this.el.removeEventListener('click', this._handleTabClickBound);
@@ -4007,7 +3704,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_handleWindowResize',
+      key: "_handleWindowResize",
       value: function _handleWindowResize() {
         this._setTabsAndTabWidth();
 
@@ -4023,9 +3720,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_handleTabClick',
+      key: "_handleTabClick",
       value: function _handleTabClick(e) {
-        var _this = this;
+        var _this15 = this;
 
         var tab = $(e.target).closest('li.tab');
         var tabLink = $(e.target).closest('a');
@@ -4065,20 +3762,20 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         if (this.options.swipeable) {
           if (this._tabsCarousel) {
             this._tabsCarousel.set(this.index, function () {
-              if (typeof _this.options.onShow === "function") {
-                _this.options.onShow.call(_this, _this.$content[0]);
+              if (typeof _this15.options.onShow === "function") {
+                _this15.options.onShow.call(_this15, _this15.$content[0]);
               }
             });
           }
         } else {
-          if (this.$content !== undefined) {
+          if (this.$content.length) {
             this.$content[0].style.display = 'block';
             this.$content.addClass('active');
             if (typeof this.options.onShow === 'function') {
               this.options.onShow.call(this, this.$content[0]);
             }
 
-            if ($oldContent !== undefined && !$oldContent.is(this.$content)) {
+            if ($oldContent.length && !$oldContent.is(this.$content)) {
               $oldContent[0].style.display = 'none';
               $oldContent.removeClass('active');
             }
@@ -4097,9 +3794,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_createIndicator',
+      key: "_createIndicator",
       value: function _createIndicator() {
-        var _this2 = this;
+        var _this16 = this;
 
         var indicator = document.createElement('li');
         indicator.classList.add('indicator');
@@ -4108,8 +3805,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this._indicator = indicator;
 
         setTimeout(function () {
-          _this2._indicator.style.left = _this2._calcLeftPos(_this2.$activeTabLink) + 'px';
-          _this2._indicator.style.right = _this2._calcRightPos(_this2.$activeTabLink) + 'px';
+          _this16._indicator.style.left = _this16._calcLeftPos(_this16.$activeTabLink) + 'px';
+          _this16._indicator.style.right = _this16._calcRightPos(_this16.$activeTabLink) + 'px';
         }, 0);
       }
 
@@ -4118,7 +3815,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_setupActiveTabLink',
+      key: "_setupActiveTabLink",
       value: function _setupActiveTabLink() {
         // If the location.hash matches one of the links, use that as the active tab.
         this.$activeTabLink = $(this.$tabLinks.filter('[href="' + location.hash + '"]'));
@@ -4147,12 +3844,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_setupSwipeableTabs',
+      key: "_setupSwipeableTabs",
       value: function _setupSwipeableTabs() {
-        var _this3 = this;
+        var _this17 = this;
 
         // Change swipeable according to responsive threshold
-        if (window.innerWidth > options.responsiveThreshold) {
+        if (window.innerWidth > this.options.responsiveThreshold) {
           this.options.swipeable = false;
         }
 
@@ -4171,15 +3868,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this._tabsCarousel = new M.Carousel($tabsWrapper[0], {
           fullWidth: true,
           noWrap: true,
-          onCycleTo: function onCycleTo(item) {
-            var prevIndex = _this3.index;
-            _this3.index = $(item).index();
-            _this3.$activeTabLink.removeClass('active');
-            _this3.$activeTabLink = _this3.$tabLinks.eq(_this3.index);
-            _this3.$activeTabLink.addClass('active');
-            _this3._animateIndicator(prevIndex);
-            if (typeof _this3.options.onShow === "function") {
-              _this3.options.onShow.call(_this3, _this3.$content);
+          onCycleTo: function (item) {
+            var prevIndex = _this17.index;
+            _this17.index = $(item).index();
+            _this17.$activeTabLink.removeClass('active');
+            _this17.$activeTabLink = _this17.$tabLinks.eq(_this17.index);
+            _this17.$activeTabLink.addClass('active');
+            _this17._animateIndicator(prevIndex);
+            if (typeof _this17.options.onShow === "function") {
+              _this17.options.onShow.call(_this17, _this17.$content[0]);
             }
           }
         });
@@ -4190,7 +3887,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_teardownSwipeableTabs',
+      key: "_teardownSwipeableTabs",
       value: function _teardownSwipeableTabs() {
         var $tabsWrapper = this._tabsCarousel.$el;
         this._tabsCarousel.destroy();
@@ -4205,7 +3902,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_setupNormalTabs',
+      key: "_setupNormalTabs",
       value: function _setupNormalTabs() {
         // Hide Tabs Content
         this.$tabLinks.not(this.$activeTabLink).each(function (link) {
@@ -4223,7 +3920,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_teardownNormalTabs',
+      key: "_teardownNormalTabs",
       value: function _teardownNormalTabs() {
         // show Tabs Content
         this.$tabLinks.each(function (link) {
@@ -4241,7 +3938,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_setTabsAndTabWidth',
+      key: "_setTabsAndTabWidth",
       value: function _setTabsAndTabWidth() {
         this.tabsWidth = this.$el.width();
         this.tabWidth = Math.max(this.tabsWidth, this.el.scrollWidth) / this.$tabLinks.length;
@@ -4249,24 +3946,29 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
       /**
        * Finds right attribute for indicator based on active tab.
-       * @param {jQuery} el
+       * @param {cash} el
        */
 
     }, {
-      key: '_calcRightPos',
+      key: "_calcRightPos",
       value: function _calcRightPos(el) {
         return Math.ceil(this.tabsWidth - el.position().left - el[0].getBoundingClientRect().width);
       }
 
       /**
        * Finds left attribute for indicator based on active tab.
-       * @param {jQuery} el
+       * @param {cash} el
        */
 
     }, {
-      key: '_calcLeftPos',
+      key: "_calcLeftPos",
       value: function _calcLeftPos(el) {
         return Math.floor(el.position().left);
+      }
+    }, {
+      key: "updateTabIndicator",
+      value: function updateTabIndicator() {
+        this._animateIndicator(this.index);
       }
 
       /**
@@ -4275,27 +3977,33 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_animateIndicator',
+      key: "_animateIndicator",
       value: function _animateIndicator(prevIndex) {
-        var velOptions = {
-          duration: this.options.duration,
-          queue: false,
-          easing: 'easeOutQuad'
-        };
-        var velOptionsLeft = void 0,
-            velOptionsRight = void 0;
+        var leftDelay = 0,
+            rightDelay = 0;
 
         if (this.index - prevIndex >= 0) {
-          velOptionsLeft = $.extend({}, velOptions, { delay: 90 });
-          velOptionsRight = velOptions;
+          leftDelay = 90;
         } else {
-          velOptionsLeft = velOptions;
-          velOptionsRight = $.extend({}, velOptions, { delay: 90 });
+          rightDelay = 90;
         }
 
-        // Animate with velocity
-        Vel(this._indicator, { left: this._calcLeftPos(this.$activeTabLink) }, velOptionsLeft);
-        Vel(this._indicator, { right: this._calcRightPos(this.$activeTabLink) }, velOptionsRight);
+        // Animate
+        var animOptions = {
+          targets: this._indicator,
+          left: {
+            value: this._calcLeftPos(this.$activeTabLink),
+            delay: leftDelay
+          },
+          right: {
+            value: this._calcRightPos(this.$activeTabLink),
+            delay: rightDelay
+          },
+          duration: this.options.duration,
+          easing: 'easeOutQuad'
+        };
+        anim.remove(this._indicator);
+        anim(animOptions);
       }
 
       /**
@@ -4304,15 +4012,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: 'select',
+      key: "select",
       value: function select(tabId) {
         var tab = this.$tabLinks.filter('[href="#' + tabId + '"]');
         if (tab.length) {
+          4;
           tab.trigger('click');
         }
       }
     }], [{
-      key: 'init',
+      key: "init",
       value: function init($els, options) {
         var arr = [];
         $els.each(function () {
@@ -4326,14 +4035,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: 'getInstance',
+      key: "getInstance",
       value: function getInstance(el) {
         var domElem = !!el.jquery ? el[0] : el;
         return domElem.M_Tabs;
       }
     }, {
-      key: 'defaults',
-      get: function get() {
+      key: "defaults",
+      get: function () {
         return _defaults;
       }
     }]);
@@ -4346,14 +4055,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   if (M.jQueryLoaded) {
     M.initializeJqueryWrapper(Tabs, 'tabs', 'M_Tabs');
   }
-})(cash, M.Vel);
-'use strict';
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-(function ($, Vel) {
+})(cash, anime);
+;(function ($, anim) {
   'use strict';
 
   var _defaults = {
@@ -4361,8 +4064,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     enterDelay: 0,
     html: null,
     margin: 5,
-    inDuration: 300,
-    outDuration: 250,
+    inDuration: 250,
+    outDuration: 200,
     position: 'bottom',
     transitionMovement: 10
   };
@@ -4399,7 +4102,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }
 
     _createClass(Tooltip, [{
-      key: 'destroy',
+      key: "destroy",
 
 
       /**
@@ -4411,7 +4114,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.$el[0].M_Tooltip = undefined;
       }
     }, {
-      key: '_appendTooltipEl',
+      key: "_appendTooltipEl",
       value: function _appendTooltipEl() {
         var tooltipEl = document.createElement('div');
         tooltipEl.classList.add('material-tooltip');
@@ -4424,12 +4127,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         document.body.appendChild(tooltipEl);
       }
     }, {
-      key: '_updateTooltipContent',
+      key: "_updateTooltipContent",
       value: function _updateTooltipContent() {
         this.tooltipEl.querySelector('.tooltip-content').innerHTML = this.options.html;
       }
     }, {
-      key: '_setupEventHandlers',
+      key: "_setupEventHandlers",
       value: function _setupEventHandlers() {
         this.handleMouseEnterBound = this._handleMouseEnter.bind(this);
         this.handleMouseLeaveBound = this._handleMouseLeave.bind(this);
@@ -4437,13 +4140,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.$el[0].addEventListener('mouseleave', this.handleMouseLeaveBound);
       }
     }, {
-      key: '_removeEventHandlers',
+      key: "_removeEventHandlers",
       value: function _removeEventHandlers() {
         this.$el[0].removeEventListener('mouseenter', this.handleMouseEnterBound);
         this.$el[0].removeEventListener('mouseleave', this.handleMouseLeaveBound);
       }
     }, {
-      key: 'open',
+      key: "open",
       value: function open() {
         if (this.isOpen) {
           return;
@@ -4456,7 +4159,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this._setEnterDelayTimeout();
       }
     }, {
-      key: 'close',
+      key: "close",
       value: function close() {
         if (!this.isOpen) {
           return;
@@ -4471,17 +4174,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         */
 
     }, {
-      key: '_setExitDelayTimeout',
+      key: "_setExitDelayTimeout",
       value: function _setExitDelayTimeout() {
-        var _this = this;
+        var _this18 = this;
 
         clearTimeout(this._exitDelayTimeout);
 
         this._exitDelayTimeout = setTimeout(function () {
-          if (_this.isHovered) {
+          if (_this18.isHovered) {
             return;
           } else {
-            _this._animateOut();
+            _this18._animateOut();
           }
         }, this.options.exitDelay);
       }
@@ -4491,22 +4194,22 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_setEnterDelayTimeout',
+      key: "_setEnterDelayTimeout",
       value: function _setEnterDelayTimeout() {
-        var _this2 = this;
+        var _this19 = this;
 
         clearTimeout(this._enterDelayTimeout);
 
         this._enterDelayTimeout = setTimeout(function () {
-          if (!_this2.isHovered) {
+          if (!_this19.isHovered) {
             return;
           } else {
-            _this2._animateIn();
+            _this19._animateIn();
           }
         }, this.options.enterDelay);
       }
     }, {
-      key: '_positionTooltip',
+      key: "_positionTooltip",
       value: function _positionTooltip() {
         var origin = this.$el[0],
             tooltip = this.tooltipEl,
@@ -4521,8 +4224,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         this.xMovement = 0, this.yMovement = 0;
 
-        targetTop = origin.offsetTop;
-        targetLeft = origin.offsetLeft;
+        targetTop = origin.getBoundingClientRect().top + M.getDocumentScrollTop();
+        targetLeft = origin.getBoundingClientRect().left + M.getDocumentScrollLeft();
 
         if (this.options.position === 'top') {
           targetTop += -tooltipHeight - margin;
@@ -4549,7 +4252,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         });
       }
     }, {
-      key: '_repositionWithinScreen',
+      key: "_repositionWithinScreen",
       value: function _repositionWithinScreen(x, y, width, height) {
         var scrollLeft = M.getDocumentScrollLeft();
         var scrollTop = M.getDocumentScrollTop();
@@ -4581,49 +4284,47 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         return { x: newX + scrollLeft, y: newY + scrollTop };
       }
     }, {
-      key: '_animateIn',
+      key: "_animateIn",
       value: function _animateIn() {
         this._positionTooltip();
         this.tooltipEl.style.visibility = 'visible';
-        Vel(this.tooltipEl, 'stop');
-        Vel(this.tooltipEl, {
+        anim.remove(this.tooltipEl);
+        anim({
+          targets: this.tooltipEl,
           opacity: 1,
           translateX: this.xMovement,
-          translateY: this.yMovement
-        }, {
+          translateY: this.yMovement,
           duration: this.options.inDuration,
-          easing: 'easeOutCubic',
-          queue: false
+          easing: 'easeOutCubic'
         });
       }
     }, {
-      key: '_animateOut',
+      key: "_animateOut",
       value: function _animateOut() {
-        Vel(this.tooltipEl, 'stop');
-        Vel(this.tooltipEl, {
+        anim.remove(this.tooltipEl);
+        anim({
+          targets: this.tooltipEl,
           opacity: 0,
           translateX: 0,
-          translateY: 0
-        }, {
+          translateY: 0,
           duration: this.options.outDuration,
-          easing: 'easeOutCubic',
-          queue: false
+          easing: 'easeOutCubic'
         });
       }
     }, {
-      key: '_handleMouseEnter',
+      key: "_handleMouseEnter",
       value: function _handleMouseEnter() {
         this.isHovered = true;
         this.open();
       }
     }, {
-      key: '_handleMouseLeave',
+      key: "_handleMouseLeave",
       value: function _handleMouseLeave() {
         this.isHovered = false;
         this.close();
       }
     }, {
-      key: '_getAttributeOptions',
+      key: "_getAttributeOptions",
       value: function _getAttributeOptions() {
         var attributeOptions = {};
         var tooltipTextOption = this.$el[0].getAttribute('data-tooltip');
@@ -4639,7 +4340,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         return attributeOptions;
       }
     }], [{
-      key: 'init',
+      key: "init",
       value: function init($els, options) {
         var arr = [];
         $els.each(function () {
@@ -4653,14 +4354,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: 'getInstance',
+      key: "getInstance",
       value: function getInstance(el) {
         var domElem = !!el.jquery ? el[0] : el;
         return domElem.M_Tooltip;
       }
     }, {
-      key: 'defaults',
-      get: function get() {
+      key: "defaults",
+      get: function () {
         return _defaults;
       }
     }]);
@@ -4673,353 +4374,341 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   if (M.jQueryLoaded) {
     M.initializeJqueryWrapper(Tooltip, 'tooltip', 'M_Tooltip');
   }
-})(cash, M.Vel);
-'use strict';
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-/*!
- * Waves v0.6.4
- * http://fian.my.id/Waves
- *
- * Copyright 2014 Alfiana E. Sibuea and other contributors
- * Released under the MIT license
- * https://github.com/fians/Waves/blob/master/LICENSE
- */
+})(cash, anime);
+; /*!
+  * Waves v0.6.4
+  * http://fian.my.id/Waves
+  *
+  * Copyright 2014 Alfiana E. Sibuea and other contributors
+  * Released under the MIT license
+  * https://github.com/fians/Waves/blob/master/LICENSE
+  */
 
 ;(function (window) {
-    'use strict';
+  'use strict';
 
-    var Waves = Waves || {};
-    var $$ = document.querySelectorAll.bind(document);
+  var Waves = Waves || {};
+  var $$ = document.querySelectorAll.bind(document);
 
-    // Find exact position of element
-    function isWindow(obj) {
-        return obj !== null && obj === obj.window;
+  // Find exact position of element
+  function isWindow(obj) {
+    return obj !== null && obj === obj.window;
+  }
+
+  function getWindow(elem) {
+    return isWindow(elem) ? elem : elem.nodeType === 9 && elem.defaultView;
+  }
+
+  function offset(elem) {
+    var docElem,
+        win,
+        box = { top: 0, left: 0 },
+        doc = elem && elem.ownerDocument;
+
+    docElem = doc.documentElement;
+
+    if (typeof elem.getBoundingClientRect !== typeof undefined) {
+      box = elem.getBoundingClientRect();
+    }
+    win = getWindow(doc);
+    return {
+      top: box.top + win.pageYOffset - docElem.clientTop,
+      left: box.left + win.pageXOffset - docElem.clientLeft
+    };
+  }
+
+  function convertStyle(obj) {
+    var style = '';
+
+    for (var a in obj) {
+      if (obj.hasOwnProperty(a)) {
+        style += a + ':' + obj[a] + ';';
+      }
     }
 
-    function getWindow(elem) {
-        return isWindow(elem) ? elem : elem.nodeType === 9 && elem.defaultView;
-    }
+    return style;
+  }
 
-    function offset(elem) {
-        var docElem,
-            win,
-            box = { top: 0, left: 0 },
-            doc = elem && elem.ownerDocument;
+  var Effect = {
 
-        docElem = doc.documentElement;
+    // Effect delay
+    duration: 750,
 
-        if (_typeof(elem.getBoundingClientRect) !== (typeof undefined === 'undefined' ? 'undefined' : _typeof(undefined))) {
-            box = elem.getBoundingClientRect();
-        }
-        win = getWindow(doc);
-        return {
-            top: box.top + win.pageYOffset - docElem.clientTop,
-            left: box.left + win.pageXOffset - docElem.clientLeft
+    show: function (e, element) {
+
+      // Disable right click
+      if (e.button === 2) {
+        return false;
+      }
+
+      var el = element || this;
+
+      // Create ripple
+      var ripple = document.createElement('div');
+      ripple.className = 'waves-ripple';
+      el.appendChild(ripple);
+
+      // Get click coordinate and element witdh
+      var pos = offset(el);
+      var relativeY = e.pageY - pos.top;
+      var relativeX = e.pageX - pos.left;
+      var scale = 'scale(' + el.clientWidth / 100 * 10 + ')';
+
+      // Support for touch devices
+      if ('touches' in e) {
+        relativeY = e.touches[0].pageY - pos.top;
+        relativeX = e.touches[0].pageX - pos.left;
+      }
+
+      // Attach data to element
+      ripple.setAttribute('data-hold', Date.now());
+      ripple.setAttribute('data-scale', scale);
+      ripple.setAttribute('data-x', relativeX);
+      ripple.setAttribute('data-y', relativeY);
+
+      // Set ripple position
+      var rippleStyle = {
+        'top': relativeY + 'px',
+        'left': relativeX + 'px'
+      };
+
+      ripple.className = ripple.className + ' waves-notransition';
+      ripple.setAttribute('style', convertStyle(rippleStyle));
+      ripple.className = ripple.className.replace('waves-notransition', '');
+
+      // Scale the ripple
+      rippleStyle['-webkit-transform'] = scale;
+      rippleStyle['-moz-transform'] = scale;
+      rippleStyle['-ms-transform'] = scale;
+      rippleStyle['-o-transform'] = scale;
+      rippleStyle.transform = scale;
+      rippleStyle.opacity = '1';
+
+      rippleStyle['-webkit-transition-duration'] = Effect.duration + 'ms';
+      rippleStyle['-moz-transition-duration'] = Effect.duration + 'ms';
+      rippleStyle['-o-transition-duration'] = Effect.duration + 'ms';
+      rippleStyle['transition-duration'] = Effect.duration + 'ms';
+
+      rippleStyle['-webkit-transition-timing-function'] = 'cubic-bezier(0.250, 0.460, 0.450, 0.940)';
+      rippleStyle['-moz-transition-timing-function'] = 'cubic-bezier(0.250, 0.460, 0.450, 0.940)';
+      rippleStyle['-o-transition-timing-function'] = 'cubic-bezier(0.250, 0.460, 0.450, 0.940)';
+      rippleStyle['transition-timing-function'] = 'cubic-bezier(0.250, 0.460, 0.450, 0.940)';
+
+      ripple.setAttribute('style', convertStyle(rippleStyle));
+    },
+
+    hide: function (e) {
+      TouchHandler.touchup(e);
+
+      var el = this;
+      var width = el.clientWidth * 1.4;
+
+      // Get first ripple
+      var ripple = null;
+      var ripples = el.getElementsByClassName('waves-ripple');
+      if (ripples.length > 0) {
+        ripple = ripples[ripples.length - 1];
+      } else {
+        return false;
+      }
+
+      var relativeX = ripple.getAttribute('data-x');
+      var relativeY = ripple.getAttribute('data-y');
+      var scale = ripple.getAttribute('data-scale');
+
+      // Get delay beetween mousedown and mouse leave
+      var diff = Date.now() - Number(ripple.getAttribute('data-hold'));
+      var delay = 350 - diff;
+
+      if (delay < 0) {
+        delay = 0;
+      }
+
+      // Fade out ripple after delay
+      setTimeout(function () {
+        var style = {
+          'top': relativeY + 'px',
+          'left': relativeX + 'px',
+          'opacity': '0',
+
+          // Duration
+          '-webkit-transition-duration': Effect.duration + 'ms',
+          '-moz-transition-duration': Effect.duration + 'ms',
+          '-o-transition-duration': Effect.duration + 'ms',
+          'transition-duration': Effect.duration + 'ms',
+          '-webkit-transform': scale,
+          '-moz-transform': scale,
+          '-ms-transform': scale,
+          '-o-transform': scale,
+          'transform': scale
         };
+
+        ripple.setAttribute('style', convertStyle(style));
+
+        setTimeout(function () {
+          try {
+            el.removeChild(ripple);
+          } catch (e) {
+            return false;
+          }
+        }, Effect.duration);
+      }, delay);
+    },
+
+    // Little hack to make <input> can perform waves effect
+    wrapInput: function (elements) {
+      for (var a = 0; a < elements.length; a++) {
+        var el = elements[a];
+
+        if (el.tagName.toLowerCase() === 'input') {
+          var parent = el.parentNode;
+
+          // If input already have parent just pass through
+          if (parent.tagName.toLowerCase() === 'i' && parent.className.indexOf('waves-effect') !== -1) {
+            continue;
+          }
+
+          // Put element class and style to the specified parent
+          var wrapper = document.createElement('i');
+          wrapper.className = el.className + ' waves-input-wrapper';
+
+          var elementStyle = el.getAttribute('style');
+
+          if (!elementStyle) {
+            elementStyle = '';
+          }
+
+          wrapper.setAttribute('style', elementStyle);
+
+          el.className = 'waves-button-input';
+          el.removeAttribute('style');
+
+          // Put element as child
+          parent.replaceChild(wrapper, el);
+          wrapper.appendChild(el);
+        }
+      }
+    }
+  };
+
+  /**
+   * Disable mousedown event for 500ms during and after touch
+   */
+  var TouchHandler = {
+    /* uses an integer rather than bool so there's no issues with
+     * needing to clear timeouts if another touch event occurred
+     * within the 500ms. Cannot mouseup between touchstart and
+     * touchend, nor in the 500ms after touchend. */
+    touches: 0,
+    allowEvent: function (e) {
+      var allow = true;
+
+      if (e.type === 'touchstart') {
+        TouchHandler.touches += 1; //push
+      } else if (e.type === 'touchend' || e.type === 'touchcancel') {
+        setTimeout(function () {
+          if (TouchHandler.touches > 0) {
+            TouchHandler.touches -= 1; //pop after 500ms
+          }
+        }, 500);
+      } else if (e.type === 'mousedown' && TouchHandler.touches > 0) {
+        allow = false;
+      }
+
+      return allow;
+    },
+    touchup: function (e) {
+      TouchHandler.allowEvent(e);
+    }
+  };
+
+  /**
+   * Delegated click handler for .waves-effect element.
+   * returns null when .waves-effect element not in "click tree"
+   */
+  function getWavesEffectElement(e) {
+    if (TouchHandler.allowEvent(e) === false) {
+      return null;
     }
 
-    function convertStyle(obj) {
-        var style = '';
+    var element = null;
+    var target = e.target || e.srcElement;
 
-        for (var a in obj) {
-            if (obj.hasOwnProperty(a)) {
-                style += a + ':' + obj[a] + ';';
-            }
-        }
+    while (target.parentNode !== null) {
+      if (!(target instanceof SVGElement) && target.className.indexOf('waves-effect') !== -1) {
+        element = target;
+        break;
+      }
+      target = target.parentNode;
+    }
+    return element;
+  }
 
-        return style;
+  /**
+   * Bubble the click and show effect if .waves-effect elem was found
+   */
+  function showEffect(e) {
+    var element = getWavesEffectElement(e);
+
+    if (element !== null) {
+      Effect.show(e, element);
+
+      if ('ontouchstart' in window) {
+        element.addEventListener('touchend', Effect.hide, false);
+        element.addEventListener('touchcancel', Effect.hide, false);
+      }
+
+      element.addEventListener('mouseup', Effect.hide, false);
+      element.addEventListener('mouseleave', Effect.hide, false);
+      element.addEventListener('dragend', Effect.hide, false);
+    }
+  }
+
+  Waves.displayEffect = function (options) {
+    options = options || {};
+
+    if ('duration' in options) {
+      Effect.duration = options.duration;
     }
 
-    var Effect = {
+    //Wrap input inside <i> tag
+    Effect.wrapInput($$('.waves-effect'));
 
-        // Effect delay
-        duration: 750,
-
-        show: function show(e, element) {
-
-            // Disable right click
-            if (e.button === 2) {
-                return false;
-            }
-
-            var el = element || this;
-
-            // Create ripple
-            var ripple = document.createElement('div');
-            ripple.className = 'waves-ripple';
-            el.appendChild(ripple);
-
-            // Get click coordinate and element witdh
-            var pos = offset(el);
-            var relativeY = e.pageY - pos.top;
-            var relativeX = e.pageX - pos.left;
-            var scale = 'scale(' + el.clientWidth / 100 * 10 + ')';
-
-            // Support for touch devices
-            if ('touches' in e) {
-                relativeY = e.touches[0].pageY - pos.top;
-                relativeX = e.touches[0].pageX - pos.left;
-            }
-
-            // Attach data to element
-            ripple.setAttribute('data-hold', Date.now());
-            ripple.setAttribute('data-scale', scale);
-            ripple.setAttribute('data-x', relativeX);
-            ripple.setAttribute('data-y', relativeY);
-
-            // Set ripple position
-            var rippleStyle = {
-                'top': relativeY + 'px',
-                'left': relativeX + 'px'
-            };
-
-            ripple.className = ripple.className + ' waves-notransition';
-            ripple.setAttribute('style', convertStyle(rippleStyle));
-            ripple.className = ripple.className.replace('waves-notransition', '');
-
-            // Scale the ripple
-            rippleStyle['-webkit-transform'] = scale;
-            rippleStyle['-moz-transform'] = scale;
-            rippleStyle['-ms-transform'] = scale;
-            rippleStyle['-o-transform'] = scale;
-            rippleStyle.transform = scale;
-            rippleStyle.opacity = '1';
-
-            rippleStyle['-webkit-transition-duration'] = Effect.duration + 'ms';
-            rippleStyle['-moz-transition-duration'] = Effect.duration + 'ms';
-            rippleStyle['-o-transition-duration'] = Effect.duration + 'ms';
-            rippleStyle['transition-duration'] = Effect.duration + 'ms';
-
-            rippleStyle['-webkit-transition-timing-function'] = 'cubic-bezier(0.250, 0.460, 0.450, 0.940)';
-            rippleStyle['-moz-transition-timing-function'] = 'cubic-bezier(0.250, 0.460, 0.450, 0.940)';
-            rippleStyle['-o-transition-timing-function'] = 'cubic-bezier(0.250, 0.460, 0.450, 0.940)';
-            rippleStyle['transition-timing-function'] = 'cubic-bezier(0.250, 0.460, 0.450, 0.940)';
-
-            ripple.setAttribute('style', convertStyle(rippleStyle));
-        },
-
-        hide: function hide(e) {
-            TouchHandler.touchup(e);
-
-            var el = this;
-            var width = el.clientWidth * 1.4;
-
-            // Get first ripple
-            var ripple = null;
-            var ripples = el.getElementsByClassName('waves-ripple');
-            if (ripples.length > 0) {
-                ripple = ripples[ripples.length - 1];
-            } else {
-                return false;
-            }
-
-            var relativeX = ripple.getAttribute('data-x');
-            var relativeY = ripple.getAttribute('data-y');
-            var scale = ripple.getAttribute('data-scale');
-
-            // Get delay beetween mousedown and mouse leave
-            var diff = Date.now() - Number(ripple.getAttribute('data-hold'));
-            var delay = 350 - diff;
-
-            if (delay < 0) {
-                delay = 0;
-            }
-
-            // Fade out ripple after delay
-            setTimeout(function () {
-                var style = {
-                    'top': relativeY + 'px',
-                    'left': relativeX + 'px',
-                    'opacity': '0',
-
-                    // Duration
-                    '-webkit-transition-duration': Effect.duration + 'ms',
-                    '-moz-transition-duration': Effect.duration + 'ms',
-                    '-o-transition-duration': Effect.duration + 'ms',
-                    'transition-duration': Effect.duration + 'ms',
-                    '-webkit-transform': scale,
-                    '-moz-transform': scale,
-                    '-ms-transform': scale,
-                    '-o-transform': scale,
-                    'transform': scale
-                };
-
-                ripple.setAttribute('style', convertStyle(style));
-
-                setTimeout(function () {
-                    try {
-                        el.removeChild(ripple);
-                    } catch (e) {
-                        return false;
-                    }
-                }, Effect.duration);
-            }, delay);
-        },
-
-        // Little hack to make <input> can perform waves effect
-        wrapInput: function wrapInput(elements) {
-            for (var a = 0; a < elements.length; a++) {
-                var el = elements[a];
-
-                if (el.tagName.toLowerCase() === 'input') {
-                    var parent = el.parentNode;
-
-                    // If input already have parent just pass through
-                    if (parent.tagName.toLowerCase() === 'i' && parent.className.indexOf('waves-effect') !== -1) {
-                        continue;
-                    }
-
-                    // Put element class and style to the specified parent
-                    var wrapper = document.createElement('i');
-                    wrapper.className = el.className + ' waves-input-wrapper';
-
-                    var elementStyle = el.getAttribute('style');
-
-                    if (!elementStyle) {
-                        elementStyle = '';
-                    }
-
-                    wrapper.setAttribute('style', elementStyle);
-
-                    el.className = 'waves-button-input';
-                    el.removeAttribute('style');
-
-                    // Put element as child
-                    parent.replaceChild(wrapper, el);
-                    wrapper.appendChild(el);
-                }
-            }
-        }
-    };
-
-    /**
-     * Disable mousedown event for 500ms during and after touch
-     */
-    var TouchHandler = {
-        /* uses an integer rather than bool so there's no issues with
-         * needing to clear timeouts if another touch event occurred
-         * within the 500ms. Cannot mouseup between touchstart and
-         * touchend, nor in the 500ms after touchend. */
-        touches: 0,
-        allowEvent: function allowEvent(e) {
-            var allow = true;
-
-            if (e.type === 'touchstart') {
-                TouchHandler.touches += 1; //push
-            } else if (e.type === 'touchend' || e.type === 'touchcancel') {
-                setTimeout(function () {
-                    if (TouchHandler.touches > 0) {
-                        TouchHandler.touches -= 1; //pop after 500ms
-                    }
-                }, 500);
-            } else if (e.type === 'mousedown' && TouchHandler.touches > 0) {
-                allow = false;
-            }
-
-            return allow;
-        },
-        touchup: function touchup(e) {
-            TouchHandler.allowEvent(e);
-        }
-    };
-
-    /**
-     * Delegated click handler for .waves-effect element.
-     * returns null when .waves-effect element not in "click tree"
-     */
-    function getWavesEffectElement(e) {
-        if (TouchHandler.allowEvent(e) === false) {
-            return null;
-        }
-
-        var element = null;
-        var target = e.target || e.srcElement;
-
-        while (target.parentNode !== null) {
-            if (!(target instanceof SVGElement) && target.className.indexOf('waves-effect') !== -1) {
-                element = target;
-                break;
-            }
-            target = target.parentNode;
-        }
-        return element;
+    if ('ontouchstart' in window) {
+      document.body.addEventListener('touchstart', showEffect, false);
     }
 
-    /**
-     * Bubble the click and show effect if .waves-effect elem was found
-     */
-    function showEffect(e) {
-        var element = getWavesEffectElement(e);
+    document.body.addEventListener('mousedown', showEffect, false);
+  };
 
-        if (element !== null) {
-            Effect.show(e, element);
-
-            if ('ontouchstart' in window) {
-                element.addEventListener('touchend', Effect.hide, false);
-                element.addEventListener('touchcancel', Effect.hide, false);
-            }
-
-            element.addEventListener('mouseup', Effect.hide, false);
-            element.addEventListener('mouseleave', Effect.hide, false);
-            element.addEventListener('dragend', Effect.hide, false);
-        }
+  /**
+   * Attach Waves to an input element (or any element which doesn't
+   * bubble mouseup/mousedown events).
+   *   Intended to be used with dynamically loaded forms/inputs, or
+   * where the user doesn't want a delegated click handler.
+   */
+  Waves.attach = function (element) {
+    //FUTURE: automatically add waves classes and allow users
+    // to specify them with an options param? Eg. light/classic/button
+    if (element.tagName.toLowerCase() === 'input') {
+      Effect.wrapInput([element]);
+      element = element.parentNode;
     }
 
-    Waves.displayEffect = function (options) {
-        options = options || {};
+    if ('ontouchstart' in window) {
+      element.addEventListener('touchstart', showEffect, false);
+    }
 
-        if ('duration' in options) {
-            Effect.duration = options.duration;
-        }
+    element.addEventListener('mousedown', showEffect, false);
+  };
 
-        //Wrap input inside <i> tag
-        Effect.wrapInput($$('.waves-effect'));
+  window.Waves = Waves;
 
-        if ('ontouchstart' in window) {
-            document.body.addEventListener('touchstart', showEffect, false);
-        }
-
-        document.body.addEventListener('mousedown', showEffect, false);
-    };
-
-    /**
-     * Attach Waves to an input element (or any element which doesn't
-     * bubble mouseup/mousedown events).
-     *   Intended to be used with dynamically loaded forms/inputs, or
-     * where the user doesn't want a delegated click handler.
-     */
-    Waves.attach = function (element) {
-        //FUTURE: automatically add waves classes and allow users
-        // to specify them with an options param? Eg. light/classic/button
-        if (element.tagName.toLowerCase() === 'input') {
-            Effect.wrapInput([element]);
-            element = element.parentNode;
-        }
-
-        if ('ontouchstart' in window) {
-            element.addEventListener('touchstart', showEffect, false);
-        }
-
-        element.addEventListener('mousedown', showEffect, false);
-    };
-
-    window.Waves = Waves;
-
-    document.addEventListener('DOMContentLoaded', function () {
-        Waves.displayEffect();
-    }, false);
+  document.addEventListener('DOMContentLoaded', function () {
+    Waves.displayEffect();
+  }, false);
 })(window);
-'use strict';
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-(function ($, Vel) {
+;(function ($, anim) {
   'use strict';
 
   var _defaults = {
@@ -5068,7 +4757,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }
 
     _createClass(Toast, [{
-      key: '_createToast',
+      key: "_createToast",
 
 
       /**
@@ -5084,7 +4773,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }
 
         // Set content
-        if ((typeof HTMLElement === 'undefined' ? 'undefined' : _typeof(HTMLElement)) === 'object' ? this.message instanceof HTMLElement : this.message && _typeof(this.message) === 'object' && this.message !== null && this.message.nodeType === 1 && typeof this.message.nodeName === 'string') {
+        if (typeof HTMLElement === 'object' ? this.message instanceof HTMLElement : this.message && typeof this.message === 'object' && this.message !== null && this.message.nodeType === 1 && typeof this.message.nodeName === 'string') {
           toast.appendChild(this.message);
 
           // Check if it is jQuery object
@@ -5106,13 +4795,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_animateIn',
+      key: "_animateIn",
       value: function _animateIn() {
         // Animate toast in
-        Vel(this.el, { top: 0, opacity: 1 }, {
+        anim({
+          targets: this.el,
+          top: 0,
+          opacity: 1,
           duration: 300,
-          easing: 'easeOutCubic',
-          queue: false
+          easing: 'easeOutCubic'
         });
       }
 
@@ -5122,20 +4813,20 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_setTimer',
+      key: "_setTimer",
       value: function _setTimer() {
-        var _this = this;
+        var _this20 = this;
 
         if (this.timeRemaining !== Infinity) {
           this.counterInterval = setInterval(function () {
             // If toast is not being dragged, decrease its time remaining
-            if (!_this.panning) {
-              _this.timeRemaining -= 20;
+            if (!_this20.panning) {
+              _this20.timeRemaining -= 20;
             }
 
             // Animate toast out
-            if (_this.timeRemaining <= 0) {
-              _this.dismiss();
+            if (_this20.timeRemaining <= 0) {
+              _this20.dismiss();
             }
           }, 20);
         }
@@ -5146,31 +4837,33 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: 'dismiss',
+      key: "dismiss",
       value: function dismiss() {
-        var _this2 = this;
+        var _this21 = this;
 
         window.clearInterval(this.counterInterval);
         var activationDistance = this.el.offsetWidth * this.options.activationPercent;
 
         if (this.wasSwiped) {
           this.el.style.transition = 'transform .05s, opacity .05s';
-          this.el.style.transform = 'translateX(' + activationDistance + 'px)';
+          this.el.style.transform = "translateX(" + activationDistance + "px)";
           this.el.style.opacity = 0;
         }
 
-        Vel(this.el, { opacity: 0, marginTop: '-40px' }, {
+        anim({
+          targets: this.el,
+          opacity: 0,
+          marginTop: -40,
           duration: this.options.outDuration,
           easing: 'easeOutExpo',
-          queue: false,
-          complete: function complete() {
+          complete: function () {
             // Call the optional callback
-            if (typeof _this2.options.completeCallback === 'function') {
-              _this2.options.completeCallback();
+            if (typeof _this21.options.completeCallback === 'function') {
+              _this21.options.completeCallback();
             }
             // Remove toast from DOM
-            _this2.el.parentNode.removeChild(_this2.el);
-            Toast._toasts.splice(Toast._toasts.indexOf(_this2), 1);
+            _this21.el.parentNode.removeChild(_this21.el);
+            Toast._toasts.splice(Toast._toasts.indexOf(_this21), 1);
             if (Toast._toasts.length === 0) {
               Toast._removeContainer();
             }
@@ -5178,7 +4871,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         });
       }
     }], [{
-      key: 'getInstance',
+      key: "getInstance",
 
 
       /**
@@ -5194,7 +4887,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_createContainer',
+      key: "_createContainer",
       value: function _createContainer() {
         var container = document.createElement('div');
         container.setAttribute('id', 'toast-container');
@@ -5217,7 +4910,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_removeContainer',
+      key: "_removeContainer",
       value: function _removeContainer() {
         // Add event handler
         document.removeEventListener('mousemove', Toast._onDragMove);
@@ -5233,7 +4926,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_onDragStart',
+      key: "_onDragStart",
       value: function _onDragStart(e) {
         if (e.target && $(e.target).closest('.toast').length) {
           var $toast = $(e.target).closest('.toast');
@@ -5254,7 +4947,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_onDragMove',
+      key: "_onDragMove",
       value: function _onDragMove(e) {
         if (!!Toast._draggedToast) {
           e.preventDefault();
@@ -5266,7 +4959,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
           var totalDeltaX = toast.xPos - toast.startingXPos;
           var activationDistance = toast.el.offsetWidth * toast.options.activationPercent;
-          toast.el.style.transform = 'translateX(' + totalDeltaX + 'px)';
+          toast.el.style.transform = "translateX(" + totalDeltaX + "px)";
           toast.el.style.opacity = 1 - Math.abs(totalDeltaX / activationDistance);
         }
       }
@@ -5276,7 +4969,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_onDragEnd',
+      key: "_onDragEnd",
       value: function _onDragEnd() {
         if (!!Toast._draggedToast) {
           var toast = Toast._draggedToast;
@@ -5308,7 +5001,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_xPos',
+      key: "_xPos",
       value: function _xPos(e) {
         if (e.targetTouches && e.targetTouches.length >= 1) {
           return e.targetTouches[0].clientX;
@@ -5322,15 +5015,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: 'dismissAll',
+      key: "dismissAll",
       value: function dismissAll() {
         for (var toastIndex in Toast._toasts) {
           Toast._toasts[toastIndex].dismiss();
         }
       }
     }, {
-      key: 'defaults',
-      get: function get() {
+      key: "defaults",
+      get: function () {
         return _defaults;
       }
     }]);
@@ -5364,14 +5057,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   M.toast = function (options) {
     return new Toast(options);
   };
-})(cash, M.Vel);
-'use strict';
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-(function ($, Vel) {
+})(cash, anime);
+;(function ($, anim) {
   'use strict';
 
   var _defaults = {
@@ -5451,7 +5138,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }
 
     _createClass(Sidenav, [{
-      key: 'destroy',
+      key: "destroy",
 
 
       /**
@@ -5469,7 +5156,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }
       }
     }, {
-      key: '_createOverlay',
+      key: "_createOverlay",
       value: function _createOverlay() {
         var overlay = document.createElement('div');
         this._closeBound = this.close.bind(this);
@@ -5481,7 +5168,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this._overlay = overlay;
       }
     }, {
-      key: '_setupEventHandlers',
+      key: "_setupEventHandlers",
       value: function _setupEventHandlers() {
         if (Sidenav._sidenavs.length === 0) {
           document.body.addEventListener('click', this._handleTriggerClick);
@@ -5508,7 +5195,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }
       }
     }, {
-      key: '_removeEventHandlers',
+      key: "_removeEventHandlers",
       value: function _removeEventHandlers() {
         if (Sidenav._sidenavs.length === 1) {
           document.body.removeEventListener('click', this._handleTriggerClick);
@@ -5534,7 +5221,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_handleTriggerClick',
+      key: "_handleTriggerClick",
       value: function _handleTriggerClick(e) {
         var $trigger = $(e.target).closest('.sidenav-trigger');
         if (e.target && $trigger.length) {
@@ -5550,12 +5237,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
       /**
        * Set variables needed at the beggining of drag
-       * and stop any current Velocity transition.
+       * and stop any current transition.
        * @param {Event} e
        */
 
     }, {
-      key: '_startDrag',
+      key: "_startDrag",
       value: function _startDrag(e) {
         var clientX = e.targetTouches[0].clientX;
         this.isDragged = true;
@@ -5564,8 +5251,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this._time = Date.now();
         this._width = this.el.getBoundingClientRect().width;
         this._overlay.style.display = 'block';
-        Vel(this.el, 'stop');
-        Vel(this._overlay, 'stop');
+        anim.remove(this.el);
+        anim.remove(this._overlay);
       }
 
       /**
@@ -5574,7 +5261,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_dragMoveUpdate',
+      key: "_dragMoveUpdate",
       value: function _dragMoveUpdate(e) {
         var clientX = e.targetTouches[0].clientX;
         this.deltaX = Math.abs(this._xPos - clientX);
@@ -5589,7 +5276,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_handleDragTargetDrag',
+      key: "_handleDragTargetDrag",
       value: function _handleDragTargetDrag(e) {
         // If not being dragged, set initial drag start variables
         if (!this.isDragged) {
@@ -5627,7 +5314,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.percentOpen = Math.min(1, totalDeltaX / this._width);
 
         // Set transform and opacity styles
-        this.el.style.transform = transformPrefix + ' translateX(' + transformX + 'px)';
+        this.el.style.transform = transformPrefix + " translateX(" + transformX + "px)";
         this._overlay.style.opacity = this.percentOpen;
       }
 
@@ -5636,7 +5323,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_handleDragTargetRelease',
+      key: "_handleDragTargetRelease",
       value: function _handleDragTargetRelease() {
         if (this.isDragged) {
           if (this.percentOpen > .5) {
@@ -5655,7 +5342,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_handleCloseDrag',
+      key: "_handleCloseDrag",
       value: function _handleCloseDrag(e) {
         if (this.isOpen) {
 
@@ -5688,7 +5375,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           this.percentOpen = Math.min(1, 1 - totalDeltaX / this._width);
 
           // Set transform and opacity styles
-          this.el.style.transform = 'translateX(' + transformX + 'px)';
+          this.el.style.transform = "translateX(" + transformX + "px)";
           this._overlay.style.opacity = this.percentOpen;
         }
       }
@@ -5698,7 +5385,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_handleCloseRelease',
+      key: "_handleCloseRelease",
       value: function _handleCloseRelease() {
         if (this.isOpen && this.isDragged) {
           if (this.percentOpen > .5) {
@@ -5716,7 +5403,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_handleCloseTriggerClick',
+      key: "_handleCloseTriggerClick",
       value: function _handleCloseTriggerClick(e) {
         var $closeTrigger = $(e.target).closest('.sidenav-close');
         if ($closeTrigger.length) {
@@ -5729,7 +5416,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_handleWindowResize',
+      key: "_handleWindowResize",
       value: function _handleWindowResize() {
         if (window.innerWidth > 992) {
           this.open();
@@ -5738,7 +5425,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }
       }
     }, {
-      key: '_setupClasses',
+      key: "_setupClasses",
       value: function _setupClasses() {
         if (this.options.edge === 'right') {
           this.el.classList.add('right-aligned');
@@ -5746,20 +5433,20 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }
       }
     }, {
-      key: '_removeClasses',
+      key: "_removeClasses",
       value: function _removeClasses() {
         this.el.classList.remove('right-aligned');
         this.dragTarget.classList.remove('right-aligned');
       }
     }, {
-      key: '_setupFixed',
+      key: "_setupFixed",
       value: function _setupFixed() {
         if (this.isFixed && window.innerWidth > 992) {
           this.open();
         }
       }
     }, {
-      key: '_createDragTarget',
+      key: "_createDragTarget",
       value: function _createDragTarget() {
         var dragTarget = document.createElement('div');
         dragTarget.classList.add('drag-target');
@@ -5767,19 +5454,19 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.dragTarget = dragTarget;
       }
     }, {
-      key: '_preventBodyScrolling',
+      key: "_preventBodyScrolling",
       value: function _preventBodyScrolling() {
         var body = document.body;
         body.style.overflow = 'hidden';
       }
     }, {
-      key: '_enableBodyScrolling',
+      key: "_enableBodyScrolling",
       value: function _enableBodyScrolling() {
         var body = document.body;
         body.style.overflow = '';
       }
     }, {
-      key: 'open',
+      key: "open",
       value: function open() {
         if (this.isOpen === true) {
           return;
@@ -5794,8 +5481,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         // Handle fixed Sidenav
         if (this.isFixed && window.innerWidth > 992) {
-          Vel(this.el, 'stop');
-          Vel(this.el, { translateX: 0 }, { duration: 0, queue: false });
+          anim.remove(this.el);
+          anim({
+            targets: this.el,
+            translateX: 0,
+            duration: 0,
+            easing: 'easeOutQuad'
+          });
           this._enableBodyScrolling();
           this._overlay.style.display = 'none';
 
@@ -5809,7 +5501,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }
       }
     }, {
-      key: 'close',
+      key: "close",
       value: function close() {
         if (this.isOpen === false) {
           return;
@@ -5825,7 +5517,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         // Handle fixed Sidenav
         if (this.isFixed && window.innerWidth > 992) {
           var transformX = this.options.edge === 'left' ? '-105%' : '105%';
-          this.el.style.transform = 'translateX(' + transformX + ')';
+          this.el.style.transform = "translateX(" + transformX + ")";
 
           // Handle non-fixed Sidenav
         } else {
@@ -5839,52 +5531,65 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }
       }
     }, {
-      key: '_animateIn',
+      key: "_animateIn",
       value: function _animateIn() {
         this._animateSidenavIn();
         this._animateOverlayIn();
       }
     }, {
-      key: '_animateSidenavIn',
+      key: "_animateSidenavIn",
       value: function _animateSidenavIn() {
-        var _this = this;
+        var _this22 = this;
 
         var slideOutPercent = this.options.edge === 'left' ? -1 : 1;
         if (this.isDragged) {
           slideOutPercent = this.options.edge === 'left' ? slideOutPercent + this.percentOpen : slideOutPercent - this.percentOpen;
         }
 
-        Vel(this.el, 'stop');
-        Vel(this.el, { 'translateX': [0, slideOutPercent * 100 + '%'] }, { duration: this.options.inDuration, queue: false, easing: 'easeOutQuad', complete: function complete() {
+        anim.remove(this.el);
+        anim({
+          targets: this.el,
+          translateX: [slideOutPercent * 100 + "%", 0],
+          duration: this.options.inDuration,
+          easing: 'easeOutQuad',
+          complete: function () {
             // Run onOpenEnd callback
-            if (typeof _this.options.onOpenEnd === 'function') {
-              _this.options.onOpenEnd.call(_this, _this.el);
+            if (typeof _this22.options.onOpenEnd === 'function') {
+              _this22.options.onOpenEnd.call(_this22, _this22.el);
             }
-          } });
+          }
+        });
       }
     }, {
-      key: '_animateOverlayIn',
+      key: "_animateOverlayIn",
       value: function _animateOverlayIn() {
         var start = 0;
         if (this.isDragged) {
           start = this.percentOpen;
         } else {
-          Vel.hook(this._overlay, 'display', 'block');
+          $(this._overlay).css({
+            display: 'block'
+          });
         }
 
-        Vel(this._overlay, 'stop');
-        Vel(this._overlay, { opacity: [1, start] }, { duration: this.options.inDuration, queue: false, easing: 'easeOutQuad' });
+        anim.remove(this._overlay);
+        anim({
+          targets: this._overlay,
+          opacity: [start, 1],
+          duration: this.options.inDuration,
+          easing: 'easeOutQuad'
+        });
       }
     }, {
-      key: '_animateOut',
+      key: "_animateOut",
       value: function _animateOut() {
         this._animateSidenavOut();
         this._animateOverlayOut();
       }
     }, {
-      key: '_animateSidenavOut',
+      key: "_animateSidenavOut",
       value: function _animateSidenavOut() {
-        var _this2 = this;
+        var _this23 = this;
 
         var endPercent = this.options.edge === 'left' ? -1 : 1;
         var slideOutPercent = 0;
@@ -5892,22 +5597,38 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           slideOutPercent = this.options.edge === 'left' ? endPercent + this.percentOpen : endPercent - this.percentOpen;
         }
 
-        Vel(this.el, 'stop');
-        Vel(this.el, { 'translateX': [endPercent * 105 + '%', slideOutPercent * 100 + '%'] }, { duration: this.options.outDuration, queue: false, easing: 'easeOutQuad', complete: function complete() {
+        anim.remove(this.el);
+        anim({
+          targets: this.el,
+          translateX: [slideOutPercent * 100 + "%", endPercent * 105 + "%"],
+          duration: this.options.outDuration,
+          easing: 'easeOutQuad',
+          complete: function () {
             // Run onOpenEnd callback
-            if (typeof _this2.options.onCloseEnd === 'function') {
-              _this2.options.onCloseEnd.call(_this2, _this2.el);
+            if (typeof _this23.options.onCloseEnd === 'function') {
+              _this23.options.onCloseEnd.call(_this23, _this23.el);
             }
-          } });
+          }
+        });
       }
     }, {
-      key: '_animateOverlayOut',
+      key: "_animateOverlayOut",
       value: function _animateOverlayOut() {
-        Vel(this._overlay, 'stop');
-        Vel(this._overlay, 'fadeOut', { duration: this.options.outDuration, queue: false, easing: 'easeOutQuad' });
+        var _this24 = this;
+
+        anim.remove(this._overlay);
+        anim({
+          targets: this._overlay,
+          opacity: 0,
+          duration: this.options.outDuration,
+          easing: 'easeOutQuad',
+          complete: function () {
+            $(_this24._overlay).css('display', 'none');
+          }
+        });
       }
     }], [{
-      key: 'init',
+      key: "init",
       value: function init($els, options) {
         var arr = [];
         $els.each(function () {
@@ -5921,14 +5642,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: 'getInstance',
+      key: "getInstance",
       value: function getInstance(el) {
         var domElem = !!el.jquery ? el[0] : el;
         return domElem.M_Sidenav;
       }
     }, {
-      key: 'defaults',
-      get: function get() {
+      key: "defaults",
+      get: function () {
         return _defaults;
       }
     }]);
@@ -5950,21 +5671,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   if (M.jQueryLoaded) {
     M.initializeJqueryWrapper(Sidenav, 'sidenav', 'M_Sidenav');
   }
-})(cash, M.Vel);
-'use strict';
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-(function ($, Vel) {
+})(cash, anime);
+;(function ($, anim) {
   'use strict';
 
   var _defaults = {
     throttle: 100,
     scrollOffset: 200, // offset - 200 allows elements near bottom of page to scroll
     activeClass: 'active',
-    getActiveElement: function getActiveElement(id) {
+    getActiveElement: function (id) {
       return 'a[href="#' + id + '"]';
     }
   };
@@ -6014,7 +5729,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }
 
     _createClass(ScrollSpy, [{
-      key: 'destroy',
+      key: "destroy",
 
 
       /**
@@ -6035,7 +5750,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_setupEventHandlers',
+      key: "_setupEventHandlers",
       value: function _setupEventHandlers() {
         var throttledResize = M.throttle(this._handleWindowScroll, 200);
         this._handleThrottledResizeBound = throttledResize.bind(this);
@@ -6052,7 +5767,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_removeEventHandlers',
+      key: "_removeEventHandlers",
       value: function _removeEventHandlers() {
         if (ScrollSpy._count === 0) {
           window.removeEventListener('scroll', this._handleWindowScrollBound);
@@ -6067,7 +5782,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_handleTriggerClick',
+      key: "_handleTriggerClick",
       value: function _handleTriggerClick(e) {
         var $trigger = $(e.target);
         for (var i = ScrollSpy._elements.length - 1; i >= 0; i--) {
@@ -6075,7 +5790,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           if ($trigger.is('a[href="#' + scrollspy.$el.attr('id') + '"]')) {
             e.preventDefault();
             var offset = scrollspy.$el.offset().top + 1;
-            Vel(document.body, 'scroll', { duration: 400, offset: offset - scrollspy.options.scrollOffset, easing: 'easeOutCubic' });
+
+            anim({
+              targets: [document.documentElement, document.body],
+              scrollTop: offset - scrollspy.options.scrollOffset,
+              duration: 400,
+              easing: 'easeOutCubic'
+            });
             break;
           }
         }
@@ -6086,7 +5807,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_handleWindowScroll',
+      key: "_handleWindowScroll",
       value: function _handleWindowScroll() {
         // unique tick id
         ScrollSpy._ticks++;
@@ -6135,7 +5856,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_enter',
+      key: "_enter",
       value: function _enter() {
         ScrollSpy._visibleElements = ScrollSpy._visibleElements.filter(function (value) {
           return value.height() != 0;
@@ -6155,9 +5876,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         $(this.options.getActiveElement(ScrollSpy._visibleElements[0].attr('id'))).addClass(this.options.activeClass);
       }
     }, {
-      key: '_exit',
+      key: "_exit",
       value: function _exit() {
-        var _this = this;
+        var _this25 = this;
 
         ScrollSpy._visibleElements = ScrollSpy._visibleElements.filter(function (value) {
           return value.height() != 0;
@@ -6167,7 +5888,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           $(this.options.getActiveElement(ScrollSpy._visibleElements[0].attr('id'))).removeClass(this.options.activeClass);
 
           ScrollSpy._visibleElements = ScrollSpy._visibleElements.filter(function (el) {
-            return el.attr('id') != _this.$el.attr('id');
+            return el.attr('id') != _this25.$el.attr('id');
           });
           if (ScrollSpy._visibleElements[0]) {
             // Check if empty
@@ -6176,7 +5897,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }
       }
     }], [{
-      key: 'init',
+      key: "init",
       value: function init($els, options) {
         var arr = [];
         $els.each(function () {
@@ -6190,13 +5911,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: 'getInstance',
+      key: "getInstance",
       value: function getInstance(el) {
         var domElem = !!el.jquery ? el[0] : el;
         return domElem.M_ScrollSpy;
       }
     }, {
-      key: '_findElements',
+      key: "_findElements",
       value: function _findElements(top, right, bottom, left) {
         var hits = [];
         for (var i = 0; i < ScrollSpy._elements.length; i++) {
@@ -6219,8 +5940,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         return hits;
       }
     }, {
-      key: 'defaults',
-      get: function get() {
+      key: "defaults",
+      get: function () {
         return _defaults;
       }
     }]);
@@ -6274,14 +5995,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   if (M.jQueryLoaded) {
     M.initializeJqueryWrapper(ScrollSpy, 'scrollSpy', 'M_ScrollSpy');
   }
-})(cash, M.Vel);
-'use strict';
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-(function ($) {
+})(cash, anime);
+;(function ($) {
   'use strict';
 
   var _defaults = {
@@ -6289,7 +6004,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     limit: Infinity, // Limit of results the autocomplete shows
     onAutocomplete: null, // Callback for when autocompleted
     minLength: 1, // Min characters before autocomplete starts
-    sortFunction: function sortFunction(a, b, inputString) {
+    sortFunction: function (a, b, inputString) {
       // Sort function for sorting autocomplete results
       return a.indexOf(inputString) - b.indexOf(inputString);
     }
@@ -6346,7 +6061,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }
 
     _createClass(Autocomplete, [{
-      key: 'destroy',
+      key: "destroy",
 
 
       /**
@@ -6363,7 +6078,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_setupEventHandlers',
+      key: "_setupEventHandlers",
       value: function _setupEventHandlers() {
         this._handleInputBlurBound = this._handleInputBlur.bind(this);
         this._handleInputKeyupAndFocusBound = this._handleInputKeyupAndFocus.bind(this);
@@ -6386,7 +6101,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_removeEventHandlers',
+      key: "_removeEventHandlers",
       value: function _removeEventHandlers() {
         this.el.removeEventListener('blur', this._handleInputBlurBound);
         this.el.removeEventListener('keyup', this._handleInputKeyupAndFocusBound);
@@ -6404,7 +6119,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_setupDropdown',
+      key: "_setupDropdown",
       value: function _setupDropdown() {
         this.container = document.createElement('ul');
         $(this.container).addClass('autocomplete-content dropdown-content');
@@ -6416,7 +6131,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_removeDropdown',
+      key: "_removeDropdown",
       value: function _removeDropdown() {
         this.container.parentNode.removeChild(this.container);
       }
@@ -6426,7 +6141,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_handleInputBlur',
+      key: "_handleInputBlur",
       value: function _handleInputBlur() {
         this._removeAutocomplete();
       }
@@ -6437,7 +6152,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_handleInputKeyupAndFocus',
+      key: "_handleInputKeyupAndFocus",
       value: function _handleInputKeyupAndFocus(e) {
         if (e.type === 'keyup') {
           Autocomplete._keydown = false;
@@ -6471,7 +6186,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_handleInputKeydown',
+      key: "_handleInputKeydown",
       value: function _handleInputKeydown(e) {
         Autocomplete._keydown = true;
 
@@ -6516,7 +6231,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_handleContainerMousedownAndTouchstart',
+      key: "_handleContainerMousedownAndTouchstart",
       value: function _handleContainerMousedownAndTouchstart(e) {
         var $autocompleteOption = $(e.target).closest('li');
         this.selectOption($autocompleteOption);
@@ -6527,7 +6242,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_highlight',
+      key: "_highlight",
       value: function _highlight(string, $el) {
         var img = $el.find('img');
         var matchStart = $el.text().toLowerCase().indexOf("" + string.toLowerCase() + ""),
@@ -6546,7 +6261,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_resetCurrentElement',
+      key: "_resetCurrentElement",
       value: function _resetCurrentElement() {
         this.activeIndex = -1;
         this.$active.removeClass('active');
@@ -6557,7 +6272,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_removeAutocomplete',
+      key: "_removeAutocomplete",
       value: function _removeAutocomplete() {
         $(this.container).empty();
         this._resetCurrentElement();
@@ -6571,7 +6286,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: 'selectOption',
+      key: "selectOption",
       value: function selectOption(el) {
         var text = el.text().trim();
         this.el.value = text;
@@ -6591,9 +6306,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_renderDropdown',
+      key: "_renderDropdown",
       value: function _renderDropdown(data, val) {
-        var _this = this;
+        var _this26 = this;
 
         this._removeAutocomplete();
 
@@ -6618,8 +6333,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }
 
         // Sort
-        var sortFunctionBound = function sortFunctionBound(a, b) {
-          return _this.options.sortFunction(a.key.toLowerCase(), b.key.toLowerCase(), val.toLowerCase());
+        var sortFunctionBound = function (a, b) {
+          return _this26.options.sortFunction(a.key.toLowerCase(), b.key.toLowerCase(), val.toLowerCase());
         };
         matchingData.sort(sortFunctionBound);
 
@@ -6644,7 +6359,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: 'updateData',
+      key: "updateData",
       value: function updateData(data) {
         var val = this.el.value.toLowerCase();
         this.options.data = data;
@@ -6654,7 +6369,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }
       }
     }], [{
-      key: 'init',
+      key: "init",
       value: function init($els, options) {
         var arr = [];
         $els.each(function () {
@@ -6668,14 +6383,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: 'getInstance',
+      key: "getInstance",
       value: function getInstance(el) {
         var domElem = !!el.jquery ? el[0] : el;
         return domElem.M_Autocomplete;
       }
     }, {
-      key: 'defaults',
-      get: function get() {
+      key: "defaults",
+      get: function () {
         return _defaults;
       }
     }]);
@@ -6697,9 +6412,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     M.initializeJqueryWrapper(Autocomplete, 'autocomplete', 'M_Autocomplete');
   }
 })(cash);
-'use strict';
-
-(function ($) {
+;(function ($) {
   // Function to update labels of text fields
   M.updateTextFields = function () {
     var input_selector = 'input[type=text], input[type=password], input[type=email], input[type=url], input[type=tel], input[type=number], input[type=search], textarea';
@@ -6751,7 +6464,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var fontFamily = $textarea.css('font-family');
     var fontSize = $textarea.css('font-size');
     var lineHeight = $textarea.css('line-height');
-    var padding = $textarea.css('padding');
+
+    // Firefox can't handle padding shorthand.
+    var paddingTop = $textarea.css('padding-top');
+    var paddingRight = $textarea.css('padding-right');
+    var paddingBottom = $textarea.css('padding-bottom');
+    var paddingLeft = $textarea.css('padding-left');
 
     if (fontSize) {
       hiddenDiv.css('font-size', fontSize);
@@ -6762,8 +6480,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     if (lineHeight) {
       hiddenDiv.css('line-height', lineHeight);
     }
-    if (padding) {
-      hiddenDiv.css('padding', padding);
+    if (paddingTop) {
+      hiddenDiv.css('padding-top', paddingTop);
+    }
+    if (paddingRight) {
+      hiddenDiv.css('padding-right', paddingRight);
+    }
+    if (paddingBottom) {
+      hiddenDiv.css('padding-bottom', paddingBottom);
+    }
+    if (paddingLeft) {
+      hiddenDiv.css('padding-left', paddingLeft);
     }
 
     // Set original-height, if none
@@ -6922,13 +6649,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     });
   }); // End of $(document).ready
 })(cash);
-'use strict';
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-(function ($, Vel) {
+;(function ($, anim) {
   'use strict';
 
   var _defaults = {
@@ -6951,7 +6672,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
      * @param {Object} options
      */
     function Slider(el, options) {
-      var _this = this;
+      var _this27 = this;
 
       _classCallCheck(this, Slider);
 
@@ -6986,7 +6707,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
       // Set initial positions of captions
       this.$slides.find('.caption').each(function (el) {
-        _this._animateCaptionIn(el, 0);
+        _this27._animateCaptionIn(el, 0);
       });
 
       // Move img src into background-image
@@ -7005,7 +6726,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.$active.css('display', 'block');
       } else {
         this.$slides.first().addClass('active');
-        Vel(this.$slides.first()[0], { opacity: 1 }, { duration: this.options.duration, queue: false, easing: 'easeOutQuad' });
+        anim({
+          targets: this.$slides.first()[0],
+          opacity: 1,
+          duration: this.options.duration,
+          easing: 'easeOutQuad'
+        });
 
         this.activeIndex = 0;
         this.$active = this.$slides.eq(this.activeIndex);
@@ -7018,7 +6744,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
       // Adjust height to current slide
       this.$active.find('img').each(function (el) {
-        Vel(_this.$active.find('.caption')[0], { opacity: 1, translateX: 0, translateY: 0 }, { duration: _this.options.duration, queue: false, easing: 'easeOutQuad' });
+        anim({
+          targets: _this27.$active.find('.caption')[0],
+          opacity: 1,
+          translateX: 0,
+          translateY: 0,
+          duration: _this27.options.duration,
+          easing: 'easeOutQuad'
+        });
       });
 
       this._setupEventHandlers();
@@ -7028,7 +6761,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }
 
     _createClass(Slider, [{
-      key: 'destroy',
+      key: "destroy",
 
 
       /**
@@ -7046,16 +6779,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_setupEventHandlers',
+      key: "_setupEventHandlers",
       value: function _setupEventHandlers() {
-        var _this2 = this;
+        var _this28 = this;
 
         this._handleIntervalBound = this._handleInterval.bind(this);
         this._handleIndicatorClickBound = this._handleIndicatorClick.bind(this);
 
         if (this.options.indicators) {
           this.$indicators.each(function (el) {
-            el.addEventListener('click', _this2._handleIndicatorClickBound);
+            el.addEventListener('click', _this28._handleIndicatorClickBound);
           });
         }
       }
@@ -7065,13 +6798,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_removeEventHandlers',
+      key: "_removeEventHandlers",
       value: function _removeEventHandlers() {
-        var _this3 = this;
+        var _this29 = this;
 
         if (this.options.indicators) {
           this.$indicators.each(function (el) {
-            el.removeEventListener('click', _this3._handleIndicatorClickBound);
+            el.removeEventListener('click', _this29._handleIndicatorClickBound);
           });
         }
       }
@@ -7082,7 +6815,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_handleIndicatorClick',
+      key: "_handleIndicatorClick",
       value: function _handleIndicatorClick(e) {
         var currIndex = $(e.target).index();
         this.set(currIndex);
@@ -7093,7 +6826,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_handleInterval',
+      key: "_handleInterval",
       value: function _handleInterval() {
         var newActiveIndex = this.$slider.find('.active').index();
         if (this.$slides.length === newActiveIndex + 1) newActiveIndex = 0; // loop to start
@@ -7109,21 +6842,24 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_animateCaptionIn',
+      key: "_animateCaptionIn",
       value: function _animateCaptionIn(caption, duration) {
-        var velocityOptions = {
-          opacity: 0
+        var animOptions = {
+          targets: caption,
+          opacity: 0,
+          duration: duration,
+          easing: 'easeOutQuad'
         };
 
         if ($(caption).hasClass('center-align')) {
-          velocityOptions.translateY = -100;
+          animOptions.translateY = -100;
         } else if ($(caption).hasClass('right-align')) {
-          velocityOptions.translateX = 100;
+          animOptions.translateX = 100;
         } else if ($(caption).hasClass('left-align')) {
-          velocityOptions.translateX = -100;
+          animOptions.translateX = -100;
         }
 
-        Vel(caption, velocityOptions, { duration: duration, queue: false });
+        anim(animOptions);
       }
 
       /**
@@ -7131,7 +6867,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_setSliderHeight',
+      key: "_setSliderHeight",
       value: function _setSliderHeight() {
         // If fullscreen, do nothing
         if (!this.$el.hasClass('fullscreen')) {
@@ -7150,15 +6886,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_setupIndicators',
+      key: "_setupIndicators",
       value: function _setupIndicators() {
-        var _this4 = this;
+        var _this30 = this;
 
         if (this.options.indicators) {
           this.$indicators = $('<ul class="indicators"></ul>');
           this.$slides.each(function (el, index) {
             var $indicator = $('<li class="indicator-item"></li>');
-            _this4.$indicators.append($indicator[0]);
+            _this30.$indicators.append($indicator[0]);
           });
           this.$el.append(this.$indicators[0]);
           this.$indicators = this.$indicators.children('li.indicator-item');
@@ -7170,7 +6906,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_removeIndicators',
+      key: "_removeIndicators",
       value: function _removeIndicators() {
         this.$el.find('ul.indicators').remove();
       }
@@ -7181,9 +6917,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: 'set',
+      key: "set",
       value: function set(index) {
-        var _this5 = this;
+        var _this31 = this;
 
         // Wrap around indices.
         if (index >= this.$slides.length) index = 0;else if (index < 0) index = this.$slides.length - 1;
@@ -7192,14 +6928,25 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         if (this.activeIndex != index) {
           this.$active = this.$slides.eq(this.activeIndex);
           var $caption = this.$active.find('.caption');
-
           this.$active.removeClass('active');
-          Vel(this.$active[0], { opacity: 0 }, { duration: this.options.duration, queue: false, easing: 'easeOutQuad',
+
+          anim({
+            targets: this.$active[0],
+            opacity: 0,
+            duration: this.options.duration,
+            easing: 'easeOutQuad',
             complete: function () {
-              _this5.$slides.not('.active').each(function (el) {
-                Vel(el, { opacity: 0, translateX: 0, translateY: 0 }, { duration: 0, queue: false });
+              _this31.$slides.not('.active').each(function (el) {
+                anim({
+                  targets: el,
+                  opacity: 0,
+                  translateX: 0,
+                  translateY: 0,
+                  duration: 0,
+                  easing: 'easeOutQuad'
+                });
               });
-            }.bind(this)
+            }
           });
 
           this._animateCaptionIn($caption[0], this.options.duration);
@@ -7210,8 +6957,22 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             this.$indicators.eq(index).addClass('active');
           }
 
-          Vel(this.$slides.eq(index)[0], { opacity: 1 }, { duration: this.options.duration, queue: false, easing: 'easeOutQuad' });
-          Vel(this.$slides.eq(index).find('.caption')[0], { opacity: 1, translateX: 0, translateY: 0 }, { duration: this.options.duration, delay: this.options.duration, queue: false, easing: 'easeOutQuad' });
+          anim({
+            targets: this.$slides.eq(index)[0],
+            opacity: 1,
+            duration: this.options.duration,
+            easing: 'easeOutQuad'
+          });
+
+          anim({
+            targets: this.$slides.eq(index).find('.caption')[0],
+            opacity: 1,
+            translateX: 0,
+            translateY: 0,
+            duration: this.options.duration,
+            delay: this.options.duration,
+            easing: 'easeOutQuad'
+          });
 
           this.$slides.eq(index).addClass('active');
           this.activeIndex = index;
@@ -7226,7 +6987,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: 'pause',
+      key: "pause",
       value: function pause() {
         clearInterval(this.interval);
       }
@@ -7236,7 +6997,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: 'start',
+      key: "start",
       value: function start() {
         clearInterval(this.interval);
         this.interval = setInterval(this._handleIntervalBound, this.options.duration + this.options.interval);
@@ -7247,7 +7008,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: 'next',
+      key: "next",
       value: function next() {
         var newIndex = this.activeIndex + 1;
 
@@ -7262,7 +7023,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: 'prev',
+      key: "prev",
       value: function prev() {
         var newIndex = this.activeIndex - 1;
 
@@ -7272,7 +7033,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.set(newIndex);
       }
     }], [{
-      key: 'init',
+      key: "init",
       value: function init($els, options) {
         var arr = [];
         $els.each(function () {
@@ -7286,14 +7047,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: 'getInstance',
+      key: "getInstance",
       value: function getInstance(el) {
         var domElem = !!el.jquery ? el[0] : el;
         return domElem.M_Slider;
       }
     }, {
-      key: 'defaults',
-      get: function get() {
+      key: "defaults",
+      get: function () {
         return _defaults;
       }
     }]);
@@ -7306,10 +7067,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   if (M.jQueryLoaded) {
     M.initializeJqueryWrapper(Slider, 'slider', 'M_Slider');
   }
-})(cash, M.Vel);
-'use strict';
-
-(function ($, Vel) {
+})(cash, anime);
+;(function ($, anim) {
   $(document).on('click', '.card', function (e) {
     if ($(this).children('.card-reveal').length) {
       var $card = $(e.target).closest('.card');
@@ -7319,31 +7078,31 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var $cardReveal = $(this).find('.card-reveal');
       if ($(e.target).is($('.card-reveal .card-title')) || $(e.target).is($('.card-reveal .card-title i'))) {
         // Make Reveal animate down and display none
-        Vel($cardReveal, { translateY: 0 }, {
+        anim({
+          targets: $cardReveal[0],
+          translateY: 0,
           duration: 225,
-          queue: false,
           easing: 'easeInOutQuad',
-          complete: function complete() {
-            $(this).css({ display: 'none' });
+          complete: function (anim) {
+            var el = anim.animatables[0].target;
+            $(el).css({ display: 'none' });
             $card.css('overflow', $card.data('initialOverflow'));
           }
         });
       } else if ($(e.target).is($('.card .activator')) || $(e.target).is($('.card .activator i'))) {
         $card.css('overflow', 'hidden');
         $cardReveal.css({ display: 'block' });
-        Vel($cardReveal, 'stop');
-        Vel($cardReveal, { translateY: '-100%' }, { duration: 300, queue: false, easing: 'easeInOutQuad' });
+        anim({
+          targets: $cardReveal[0],
+          translateY: '-100%',
+          duration: 300,
+          easing: 'easeInOutQuad'
+        });
       }
     }
   });
-})(cash, M.Vel);
-'use strict';
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-(function ($, Vel) {
+})(cash, anime);
+;(function ($) {
   'use strict';
 
   var _defaults = {
@@ -7400,8 +7159,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       this.$el.addClass('chips input-field');
       this.chipsData = [];
       this.$chips = $();
-      this.$input = this.$el.find('input');
-      this.$input.addClass('input');
+      this._setupInput();
       this.hasAutocomplete = Object.keys(this.options.autocompleteOptions).length > 0;
 
       // Set input id
@@ -7426,7 +7184,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }
 
     _createClass(Chips, [{
-      key: 'getData',
+      key: "getData",
 
 
       /**
@@ -7441,7 +7199,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: 'destroy',
+      key: "destroy",
       value: function destroy() {
         this._removeEventHandlers();
         this.$chips.remove();
@@ -7453,7 +7211,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_setupEventHandlers',
+      key: "_setupEventHandlers",
       value: function _setupEventHandlers() {
         this._handleChipClickBound = this._handleChipClick.bind(this);
         this._handleInputKeydownBound = this._handleInputKeydown.bind(this);
@@ -7474,7 +7232,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_removeEventHandlers',
+      key: "_removeEventHandlers",
       value: function _removeEventHandlers() {
         this.el.removeEventListener('click', this._handleChipClickBound);
         document.removeEventListener('keydown', Chips._handleChipsKeydown);
@@ -7491,7 +7249,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_handleChipClick',
+      key: "_handleChipClick",
       value: function _handleChipClick(e) {
         var $chip = $(e.target).closest('.chip');
         var clickedClose = $(e.target).is('.close');
@@ -7518,7 +7276,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_handleInputFocus',
+      key: "_handleInputFocus",
 
 
       /**
@@ -7533,7 +7291,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_handleInputBlur',
+      key: "_handleInputBlur",
       value: function _handleInputBlur() {
         this.$el.removeClass('focus');
       }
@@ -7544,7 +7302,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_handleInputKeydown',
+      key: "_handleInputKeydown",
       value: function _handleInputKeydown(e) {
         Chips._keydown = true;
 
@@ -7573,7 +7331,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_renderChip',
+      key: "_renderChip",
       value: function _renderChip(chip) {
         if (!chip.tag) {
           return;
@@ -7603,7 +7361,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_renderChips',
+      key: "_renderChips",
       value: function _renderChips() {
         this.$chips.remove();
         for (var i = 0; i < this.chipsData.length; i++) {
@@ -7613,7 +7371,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }
 
         // move input to end
-        this.$el.append(this.$input);
+        this.$el.append(this.$input[0]);
       }
 
       /**
@@ -7621,17 +7379,33 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_setupAutocomplete',
+      key: "_setupAutocomplete",
       value: function _setupAutocomplete() {
-        var _this = this;
+        var _this32 = this;
 
         this.options.autocompleteOptions.onAutocomplete = function (val) {
-          _this.addChip({ tag: val });
-          _this.$input[0].value = '';
-          _this.$input[0].focus();
+          _this32.addChip({ tag: val });
+          _this32.$input[0].value = '';
+          _this32.$input[0].focus();
         };
 
         this.autocomplete = M.Autocomplete.init(this.$input, this.options.autocompleteOptions)[0];
+      }
+
+      /**
+       * Setup Input
+       */
+
+    }, {
+      key: "_setupInput",
+      value: function _setupInput() {
+        this.$input = this.$el.find('input');
+        if (!this.$input.length) {
+          this.$input = $('<input></input>');
+          this.$el.append(this.$input);
+        }
+
+        this.$input.addClass('input');
       }
 
       /**
@@ -7639,7 +7413,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_setupLabel',
+      key: "_setupLabel",
       value: function _setupLabel() {
         this.$label = this.$el.find('label');
         if (this.$label.length) {
@@ -7652,7 +7426,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_setPlaceholder',
+      key: "_setPlaceholder",
       value: function _setPlaceholder() {
         if (this.chipsData !== undefined && !this.chipsData.length && this.options.placeholder) {
           $(this.$input).prop('placeholder', this.options.placeholder);
@@ -7667,7 +7441,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_isValid',
+      key: "_isValid",
       value: function _isValid(chip) {
         if (chip.hasOwnProperty('tag') && chip.tag !== '') {
           var exists = false;
@@ -7689,7 +7463,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: 'addChip',
+      key: "addChip",
       value: function addChip(chip) {
         if (!this._isValid(chip) || this.chipsData.length >= this.options.limit) {
           return;
@@ -7713,9 +7487,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: 'deleteChip',
+      key: "deleteChip",
       value: function deleteChip(chipIndex) {
-        // let chip = this.chips[chipIndex];
+        var $chip = this.$chips.eq(chipIndex);
         this.$chips.eq(chipIndex).remove();
         this.$chips = this.$chips.filter(function (el) {
           return $(el).index() >= 0;
@@ -7725,7 +7499,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         // fire chipDelete callback
         if (typeof this.options.onChipDelete === 'function') {
-          this.options.onChipDelete.call(this, this.$el, this.$chip);
+          this.options.onChipDelete.call(this, this.$el, $chip[0]);
         }
       }
 
@@ -7735,7 +7509,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: 'selectChip',
+      key: "selectChip",
       value: function selectChip(chipIndex) {
         var $chip = this.$chips.eq(chipIndex);
         this._selectedChip = $chip;
@@ -7743,23 +7517,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         // fire chipSelect callback
         if (typeof this.options.onChipSelect === 'function') {
-          this.options.onChipSelect.call(this, this.$el, this.$chip);
+          this.options.onChipSelect.call(this, this.$el, $chip[0]);
         }
       }
-
-      /**
-       * Deselect chip
-       * @param {Number} chip
-       */
-
-    }, {
-      key: 'deselectChip',
-      value: function deselectChip(chipIndex) {
-        var $chip = this.$chips.eq(chipIndex);
-        this._selectedChip = null;
-      }
     }], [{
-      key: 'init',
+      key: "init",
       value: function init($els, options) {
         var arr = [];
         $els.each(function () {
@@ -7773,13 +7535,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: 'getInstance',
+      key: "getInstance",
       value: function getInstance(el) {
         var domElem = !!el.jquery ? el[0] : el;
         return domElem.M_Chips;
       }
     }, {
-      key: '_handleChipsKeydown',
+      key: "_handleChipsKeydown",
       value: function _handleChipsKeydown(e) {
         Chips._keydown = true;
 
@@ -7839,7 +7601,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_handleChipsKeyup',
+      key: "_handleChipsKeyup",
       value: function _handleChipsKeyup(e) {
         Chips._keydown = false;
       }
@@ -7850,7 +7612,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_handleChipsBlur',
+      key: "_handleChipsBlur",
       value: function _handleChipsBlur(e) {
         if (!Chips._keydown) {
           var $chips = $(e.target).closest('.chips');
@@ -7860,8 +7622,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }
       }
     }, {
-      key: 'defaults',
-      get: function get() {
+      key: "defaults",
+      get: function () {
         return _defaults;
       }
     }]);
@@ -7894,13 +7656,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     });
   });
 })(cash);
-'use strict';
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-(function ($) {
+;(function ($) {
   'use strict';
 
   var _defaults = {
@@ -7946,7 +7702,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }
 
     _createClass(Pushpin, [{
-      key: 'destroy',
+      key: "destroy",
 
 
       /**
@@ -7962,24 +7718,24 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         Pushpin._pushpins.splice(index, 1);
       }
     }, {
-      key: '_setupEventHandlers',
+      key: "_setupEventHandlers",
       value: function _setupEventHandlers() {
         document.addEventListener('scroll', Pushpin._updateElements);
       }
     }, {
-      key: '_removeEventHandlers',
+      key: "_removeEventHandlers",
       value: function _removeEventHandlers() {
         document.removeEventListener('scroll', Pushpin._updateElements);
       }
     }, {
-      key: '_updatePosition',
+      key: "_updatePosition",
       value: function _updatePosition() {
         var scrolled = M.getDocumentScrollTop() + this.options.offset;
 
         if (this.options.top <= scrolled && this.options.bottom >= scrolled && !this.el.classList.contains('pinned')) {
           this._removePinClasses();
 
-          this.el.style.top = this.options.offset + 'px';
+          this.el.style.top = this.options.offset + "px";
           this.el.classList.add('pinned');
         }
 
@@ -7994,16 +7750,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         if (scrolled > this.options.bottom && !this.el.classList.contains('pin-bottom')) {
           this._removePinClasses();
           this.el.classList.add('pin-bottom');
-          this.el.style.top = this.options.bottom - this.originalOffset + 'px';
+          this.el.style.top = this.options.bottom - this.originalOffset + "px";
         }
       }
     }, {
-      key: '_removePinClasses',
+      key: "_removePinClasses",
       value: function _removePinClasses() {
         this.el.classList.remove('pin-top', 'pinned', 'pin-bottom');
       }
     }], [{
-      key: 'init',
+      key: "init",
       value: function init($els, options) {
         var arr = [];
         $els.each(function () {
@@ -8017,13 +7773,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: 'getInstance',
+      key: "getInstance",
       value: function getInstance(el) {
         var domElem = !!el.jquery ? el[0] : el;
         return domElem.M_Pushpin;
       }
     }, {
-      key: '_updateElements',
+      key: "_updateElements",
       value: function _updateElements() {
         for (var elIndex in Pushpin._pushpins) {
           var pInstance = Pushpin._pushpins[elIndex];
@@ -8031,8 +7787,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }
       }
     }, {
-      key: 'defaults',
-      get: function get() {
+      key: "defaults",
+      get: function () {
         return _defaults;
       }
     }]);
@@ -8054,13 +7810,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     M.initializeJqueryWrapper(Pushpin, 'pushpin', 'M_Pushpin');
   }
 })(cash);
-'use strict';
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-(function ($, Vel) {
+;(function ($, anim) {
   'use strict';
 
   var _defaults = {
@@ -8109,6 +7859,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       this.$menu = this.$el.children('ul').first();
       this.$floatingBtns = this.$el.find('ul .btn-floating');
       this.$floatingBtnsReverse = this.$el.find('ul .btn-floating').reverse();
+      this.offsetY = 0;
+      this.offsetX = 0;
       if (this.options.direction === 'top') {
         this.$el.addClass('direction-top');
         this.offsetY = 40;
@@ -8126,7 +7878,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }
 
     _createClass(FloatingActionButton, [{
-      key: 'destroy',
+      key: "destroy",
 
 
       /**
@@ -8142,7 +7894,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_setupEventHandlers',
+      key: "_setupEventHandlers",
       value: function _setupEventHandlers() {
         this._handleFABClickBound = this._handleFABClick.bind(this);
         this._handleOpenBound = this.open.bind(this);
@@ -8161,7 +7913,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_removeEventHandlers',
+      key: "_removeEventHandlers",
       value: function _removeEventHandlers() {
         if (this.options.hoverEnabled && !this.options.toolbarEnabled) {
           this.el.removeEventListener('mouseenter', this._handleOpenBound);
@@ -8176,7 +7928,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_handleFABClick',
+      key: "_handleFABClick",
       value: function _handleFABClick() {
         if (this.isOpen) {
           this.close();
@@ -8191,7 +7943,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_handleDocumentClick',
+      key: "_handleDocumentClick",
       value: function _handleDocumentClick(e) {
         if (!$(e.target).closest(this.$menu).length) {
           this.close();
@@ -8203,7 +7955,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: 'open',
+      key: "open",
       value: function open() {
         if (this.isOpen) {
           return;
@@ -8222,7 +7974,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: 'close',
+      key: "close",
       value: function close() {
         if (!this.isOpen) {
           return;
@@ -8243,17 +7995,24 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_animateInFAB',
+      key: "_animateInFAB",
       value: function _animateInFAB() {
+        var _this33 = this;
+
         this.$el.addClass('active');
-        Vel.hook(this.$floatingBtns, 'scaleX', 0.4);
-        Vel.hook(this.$floatingBtns, 'scaleY', 0.4);
-        Vel.hook(this.$floatingBtns, 'translateY', this.offsetY + 'px');
-        Vel.hook(this.$floatingBtns, 'translateX', this.offsetX + 'px');
 
         var time = 0;
-        this.$floatingBtnsReverse.each(function () {
-          Vel(this, { opacity: "1", scaleX: 1, scaleY: 1, translateY: 0, translateX: 0 }, { duration: 80, delay: time });
+        this.$floatingBtnsReverse.each(function (el) {
+          anim({
+            targets: el,
+            opacity: 1,
+            scale: [.4, 1],
+            translateY: [_this33.offsetY, 0],
+            translateX: [_this33.offsetX, 0],
+            duration: 275,
+            delay: time,
+            easing: 'easeInOutQuad'
+          });
           time += 40;
         });
       }
@@ -8263,11 +8022,25 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_animateOutFAB',
+      key: "_animateOutFAB",
       value: function _animateOutFAB() {
-        this.$el.removeClass('active');
-        Vel(this.$floatingBtns, 'stop');
-        Vel(this.$floatingBtns, { opacity: "0", scaleX: .4, scaleY: .4, translateY: this.offsetY, translateX: this.offsetX }, { duration: 80 });
+        var _this34 = this;
+
+        this.$floatingBtnsReverse.each(function (el) {
+          anim.remove(el);
+          anim({
+            targets: el,
+            opacity: 0,
+            scale: .4,
+            translateY: _this34.offsetY,
+            translateX: _this34.offsetX,
+            duration: 175,
+            easing: 'easeOutQuad',
+            complete: function () {
+              _this34.$el.removeClass('active');
+            }
+          });
+        });
       }
 
       /**
@@ -8275,9 +8048,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_animateInToolbar',
+      key: "_animateInToolbar",
       value: function _animateInToolbar() {
-        var _this = this;
+        var _this35 = this;
 
         var scaleFactor = void 0;
         var windowWidth = window.innerWidth;
@@ -8313,18 +8086,18 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         });
 
         setTimeout(function () {
-          _this.$el.css({
+          _this35.$el.css({
             transform: '',
             transition: 'transform .2s cubic-bezier(0.550, 0.085, 0.680, 0.530), background-color 0s linear .2s'
           });
-          _this.$anchor.css({
+          _this35.$anchor.css({
             overflow: 'visible',
             transform: '',
             transition: 'transform .2s'
           });
 
           setTimeout(function () {
-            _this.$el.css({
+            _this35.$el.css({
               overflow: 'hidden',
               'background-color': fabColor
             });
@@ -8332,14 +8105,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               transform: 'scale(' + scaleFactor + ')',
               transition: 'transform .2s cubic-bezier(0.550, 0.055, 0.675, 0.190)'
             });
-            _this.$menu.children('li').children('a').css({
+            _this35.$menu.children('li').children('a').css({
               opacity: 1
             });
 
             // Scroll to close.
-            _this._handleDocumentClickBound = _this._handleDocumentClick.bind(_this);
-            window.addEventListener('scroll', _this._handleCloseBound, true);
-            document.body.addEventListener('click', _this._handleDocumentClickBound, true);
+            _this35._handleDocumentClickBound = _this35._handleDocumentClick.bind(_this35);
+            window.addEventListener('scroll', _this35._handleCloseBound, true);
+            document.body.addEventListener('click', _this35._handleDocumentClickBound, true);
           }, 100);
         }, 0);
       }
@@ -8349,9 +8122,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_animateOutToolbar',
+      key: "_animateOutToolbar",
       value: function _animateOutToolbar() {
-        var _this2 = this;
+        var _this36 = this;
 
         var windowWidth = window.innerWidth;
         var windowHeight = window.innerHeight;
@@ -8382,26 +8155,26 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           backdrop.remove();
 
           // Set initial state.
-          _this2.$el.css({
+          _this36.$el.css({
             'text-align': '',
             width: '',
             bottom: '',
             left: '',
             overflow: '',
             'background-color': '',
-            transform: 'translate3d(' + -_this2.offsetX + 'px,0,0)'
+            transform: 'translate3d(' + -_this36.offsetX + 'px,0,0)'
           });
-          _this2.$anchor.css({
+          _this36.$anchor.css({
             overflow: '',
-            transform: 'translate3d(0,' + _this2.offsetY + 'px,0)'
+            transform: 'translate3d(0,' + _this36.offsetY + 'px,0)'
           });
 
           setTimeout(function () {
-            _this2.$el.css({
+            _this36.$el.css({
               transform: 'translate3d(0,0,0)',
               transition: 'transform .2s'
             });
-            _this2.$anchor.css({
+            _this36.$anchor.css({
               transform: 'translate3d(0,0,0)',
               transition: 'transform .2s cubic-bezier(0.550, 0.055, 0.675, 0.190)'
             });
@@ -8409,7 +8182,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }, 200);
       }
     }], [{
-      key: 'init',
+      key: "init",
       value: function init($els, options) {
         var arr = [];
         $els.each(function () {
@@ -8423,14 +8196,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: 'getInstance',
+      key: "getInstance",
       value: function getInstance(el) {
         var domElem = !!el.jquery ? el[0] : el;
         return domElem.M_FloatingActionButton;
       }
     }, {
-      key: 'defaults',
-      get: function get() {
+      key: "defaults",
+      get: function () {
         return _defaults;
       }
     }]);
@@ -8443,24 +8216,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   if (M.jQueryLoaded) {
     M.initializeJqueryWrapper(FloatingActionButton, 'floatingActionButton', 'M_FloatingActionButton');
   }
-})(cash, M.Vel);
-'use strict';
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-(function ($, Vel) {
+})(cash, anime);
+;(function ($) {
   'use strict';
 
   var _defaults = {
 
     // the default output format for the input field value
-    format: 'YYYY-MM-DD',
-
-    // the toString function which gets passed a current date object and format
-    // and returns a string
-    toString: null,
+    format: 'mmm dd, yyyy',
 
     // Used to create date object from current input string
     parse: null,
@@ -8556,6 +8319,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
       this.options = $.extend({}, Datepicker.defaults, options);
 
+      // Remove time component from minDate and maxDate options
+      if (this.options.minDate) this.options.minDate.setHours(0, 0, 0, 0);
+      if (this.options.maxDate) this.options.maxDate.setHours(0, 0, 0, 0);
+
       this.id = M.guid();
 
       this._setupVariables();
@@ -8589,7 +8356,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }
 
     _createClass(Datepicker, [{
-      key: 'destroy',
+      key: "destroy",
 
 
       /**
@@ -8597,7 +8364,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
       value: function destroy() {}
     }, {
-      key: '_insertHTMLIntoDOM',
+      key: "_insertHTMLIntoDOM",
       value: function _insertHTMLIntoDOM() {
         this.clearBtn.innerHTML = this.options.i18n.clear;
         this.todayBtn.innerHTML = this.options.i18n.today;
@@ -8611,31 +8378,39 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }
       }
     }, {
-      key: '_setupModal',
+      key: "_setupModal",
       value: function _setupModal() {
-        var _this = this;
+        var _this37 = this;
 
         this.modalEl.id = 'modal-' + this.id;
         this.modal = new M.Modal(this.modalEl, {
-          complete: function complete() {
-            _this.isOpen = false;
+          complete: function () {
+            _this37.isOpen = false;
           }
         });
       }
     }, {
-      key: 'toString',
+      key: "toString",
       value: function toString(format) {
+        var _this38 = this;
+
         format = format || this.options.format;
         if (!Datepicker._isDate(this.date)) {
           return '';
         }
-        if (this.options.toString) {
-          return this.options.toString(this.date, format);
-        }
-        return this.date.toDateString();
+
+        var formatArray = format.split(/(d{1,4}|m{1,4}|y{4}|yy|!.)/g);
+        var formattedDate = formatArray.map(function (label) {
+          if (_this38.formats[label]) {
+            return _this38.formats[label]();
+          } else {
+            return label;
+          }
+        }).join('');
+        return formattedDate;
       }
     }, {
-      key: 'setDate',
+      key: "setDate",
       value: function setDate(date, preventOnSelect) {
         if (!date) {
           this.date = null;
@@ -8666,17 +8441,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.gotoDate(this.date);
 
         if (!preventOnSelect && typeof this.options.onSelect === 'function') {
-          this.options.onSelect.call(this, this.getDate());
+          this.options.onSelect.call(this, this.date);
         }
       }
     }, {
-      key: 'setInputValue',
+      key: "setInputValue",
       value: function setInputValue() {
         this.el.value = this.toString();
         this.$el.trigger('change', { firedBy: this });
       }
     }, {
-      key: '_renderDateDisplay',
+      key: "_renderDateDisplay",
       value: function _renderDateDisplay() {
         var displayDate = Datepicker._isDate(this.date) ? this.date : new Date();
         var i18n = this.options.i18n;
@@ -8684,7 +8459,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         var month = i18n.monthsShort[displayDate.getMonth()];
         var date = displayDate.getDate();
         this.yearTextEl.innerHTML = displayDate.getFullYear();
-        this.dateTextEl.innerHTML = day + ', ' + month + ' ' + date;
+        this.dateTextEl.innerHTML = day + ", " + month + " " + date;
       }
 
       /**
@@ -8692,7 +8467,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: 'gotoDate',
+      key: "gotoDate",
       value: function gotoDate(date) {
         var newCalendar = true;
 
@@ -8723,7 +8498,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.adjustCalendars();
       }
     }, {
-      key: 'adjustCalendars',
+      key: "adjustCalendars",
       value: function adjustCalendars() {
         this.calendars[0] = this.adjustCalendar(this.calendars[0]);
         // for (let c = 1; c < this.options.numberOfMonths; c++) {
@@ -8735,7 +8510,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.draw();
       }
     }, {
-      key: 'adjustCalendar',
+      key: "adjustCalendar",
       value: function adjustCalendar(calendar) {
         if (calendar.month < 0) {
           calendar.year -= Math.ceil(Math.abs(calendar.month) / 12);
@@ -8748,19 +8523,19 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         return calendar;
       }
     }, {
-      key: 'nextMonth',
+      key: "nextMonth",
       value: function nextMonth() {
         this.calendars[0].month++;
         this.adjustCalendars();
       }
     }, {
-      key: 'prevMonth',
+      key: "prevMonth",
       value: function prevMonth() {
         this.calendars[0].month--;
         this.adjustCalendars();
       }
     }, {
-      key: 'render',
+      key: "render",
       value: function render(year, month, randId) {
         var opts = this.options,
             now = new Date(),
@@ -8840,7 +8615,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         return this.renderTable(opts, data, randId);
       }
     }, {
-      key: 'renderDay',
+      key: "renderDay",
       value: function renderDay(opts) {
         var arr = [];
         var ariaSelected = 'false';
@@ -8878,17 +8653,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         return '<td data-day="' + opts.day + '" class="' + arr.join(' ') + '" aria-selected="' + ariaSelected + '">' + '<button class="datepicker-day-button" type="button" ' + 'data-pika-year="' + opts.year + '" data-pika-month="' + opts.month + '" data-pika-day="' + opts.day + '">' + opts.day + '</button>' + '</td>';
       }
     }, {
-      key: 'renderRow',
+      key: "renderRow",
       value: function renderRow(days, isRTL, isRowSelected) {
         return '<tr class="pika-row' + (isRowSelected ? ' is-selected' : '') + '">' + (isRTL ? days.reverse() : days).join('') + '</tr>';
       }
     }, {
-      key: 'renderTable',
+      key: "renderTable",
       value: function renderTable(opts, data, randId) {
         return '<div class="datepicker-table-wrapper"><table cellpadding="0" cellspacing="0" class="datepicker-table" role="grid" aria-labelledby="' + randId + '">' + this.renderHead(opts) + this.renderBody(data) + '</table></div>';
       }
     }, {
-      key: 'renderHead',
+      key: "renderHead",
       value: function renderHead(opts) {
         var i = void 0,
             arr = [];
@@ -8898,12 +8673,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         return '<thead><tr>' + (opts.isRTL ? arr.reverse() : arr).join('') + '</tr></thead>';
       }
     }, {
-      key: 'renderBody',
+      key: "renderBody",
       value: function renderBody(rows) {
         return '<tbody>' + rows.join('') + '</tbody>';
       }
     }, {
-      key: 'renderTitle',
+      key: "renderTitle",
       value: function renderTitle(instance, c, year, month, refYear, randId) {
         var i = void 0,
             j = void 0,
@@ -8921,7 +8696,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           arr.push('<option value="' + (year === refYear ? i - c : 12 + i - c) + '"' + (i === month ? ' selected="selected"' : '') + (isMinYear && i < opts.minMonth || isMaxYear && i > opts.maxMonth ? 'disabled="disabled"' : '') + '>' + opts.i18n.months[i] + '</option>');
         }
 
-        // monthHtml = '<div class="pika-label">' + opts.i18n.months[month] + '<select class="pika-select pika-select-month" tabindex="-1">' + arr.join('') + '</select></div>';
         monthHtml = '<select class="pika-select pika-select-month" tabindex="-1">' + arr.join('') + '</select>';
 
         if ($.isArray(opts.yearRange)) {
@@ -8937,7 +8711,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             arr.push('<option value="' + i + '"' + (i === year ? ' selected="selected"' : '') + '>' + i + '</option>');
           }
         }
-        // yearHtml = '<div class="pika-label">' + year + opts.yearSuffix + '<select class="pika-select pika-select-year" tabindex="-1">' + arr.join('') + '</select></div>';
+
         yearHtml = '<select class="pika-select pika-select-year" tabindex="-1">' + arr.join('') + '</select>';
 
         var leftArrow = '<svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M15.41 16.09l-4.58-4.59 4.58-4.59L14 5.5l-6 6 6 6z"/><path d="M0-.5h24v24H0z" fill="none"/></svg>';
@@ -8972,7 +8746,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: 'draw',
+      key: "draw",
       value: function draw(force) {
         if (!this.isOpen && !force) {
           return;
@@ -9008,8 +8782,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.calendarEl.innerHTML = html;
 
         // Init Materialize Select
-        new M.Select(this.calendarEl.querySelector('.pika-select-year'), { classes: 'select-year' });
-        new M.Select(this.calendarEl.querySelector('.pika-select-month'), { classes: 'select-month' });
+        var yearSelect = this.calendarEl.querySelector('.pika-select-year');
+        var monthSelect = this.calendarEl.querySelector('.pika-select-month');
+        new M.Select(yearSelect, { classes: 'select-year' });
+        new M.Select(monthSelect, { classes: 'select-month' });
+
+        // Add change handlers for select
+        yearSelect.addEventListener('change', this._handleYearChange.bind(this));
+        monthSelect.addEventListener('change', this._handleMonthChange.bind(this));
 
         if (typeof this.options.onDraw === 'function') {
           this.options.onDraw(this);
@@ -9021,7 +8801,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_setupEventHandlers',
+      key: "_setupEventHandlers",
       value: function _setupEventHandlers() {
         this._handleInputKeydownBound = this._handleInputKeydown.bind(this);
         this._handleInputClickBound = this._handleInputClick.bind(this);
@@ -9030,6 +8810,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this._finishSelectionBound = this._finishSelection.bind(this);
         this._handleTodayClickBound = this._handleTodayClick.bind(this);
         this._handleClearClickBound = this._handleClearClick.bind(this);
+        this._handleMonthChange = this._handleMonthChange.bind(this);
 
         this.el.addEventListener('click', this._handleInputClickBound);
         this.el.addEventListener('keydown', this._handleInputKeydownBound);
@@ -9040,8 +8821,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.clearBtn.addEventListener('click', this._handleClearClickBound);
       }
     }, {
-      key: '_setupVariables',
+      key: "_setupVariables",
       value: function _setupVariables() {
+        var _this39 = this;
+
         this.$modalEl = $(Datepicker._template);
         this.modalEl = this.$modalEl[0];
 
@@ -9052,6 +8835,34 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.clearBtn = this.modalEl.querySelector('.datepicker-clear');
         this.todayBtn = this.modalEl.querySelector('.datepicker-today');
         this.doneBtn = this.modalEl.querySelector('.datepicker-done');
+
+        this.formats = {
+
+          dd: function () {
+            return _this39.date.getDate();
+          },
+          ddd: function () {
+            return _this39.options.i18n.weekdaysShort[_this39.date.getDay()];
+          },
+          dddd: function () {
+            return _this39.options.i18n.weekdays[_this39.date.getDay()];
+          },
+          mm: function () {
+            return _this39.date.getMonth() + 1;
+          },
+          mmm: function () {
+            return _this39.options.i18n.monthsShort[_this39.date.getMonth()];
+          },
+          mmmm: function () {
+            return _this39.options.i18n.monthsShort[_this39.date.getMonth()];
+          },
+          yy: function () {
+            return _this39.date.getFullYear().slice(2);
+          },
+          yyyy: function () {
+            return _this39.date.getFullYear();
+          }
+        };
       }
 
       /**
@@ -9059,7 +8870,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_removeEventHandlers',
+      key: "_removeEventHandlers",
       value: function _removeEventHandlers() {
         this.el.removeEventListener('click', this._handleInputClickBound);
         this.el.removeEventListener('keydown', this._handleInputKeydownBound);
@@ -9067,12 +8878,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.calendarEl.removeEventListener('click', this._handleCalendarClickBound);
       }
     }, {
-      key: '_handleInputClick',
+      key: "_handleInputClick",
       value: function _handleInputClick() {
         this.open();
       }
     }, {
-      key: '_handleInputKeydown',
+      key: "_handleInputKeydown",
       value: function _handleInputKeydown(e) {
         if (e.which === M.keys.ENTER) {
           e.preventDefault();
@@ -9080,7 +8891,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }
       }
     }, {
-      key: '_handleCalendarClick',
+      key: "_handleCalendarClick",
       value: function _handleCalendarClick(e) {
         if (!this.isOpen) {
           return;
@@ -9109,65 +8920,57 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         // }
       }
     }, {
-      key: '_handleTodayClick',
+      key: "_handleTodayClick",
       value: function _handleTodayClick() {
         this.date = new Date();
         this.setInputValue();
         this.close();
       }
     }, {
-      key: '_handleClearClick',
+      key: "_handleClearClick",
       value: function _handleClearClick() {
         this.date = null;
         this.setInputValue();
         this.close();
       }
+    }, {
+      key: "_handleMonthChange",
+      value: function _handleMonthChange(e) {
+        this.gotoMonth(e.target.value);
+      }
+    }, {
+      key: "_handleYearChange",
+      value: function _handleYearChange(e) {
+        this.gotoYear(e.target.value);
+      }
 
-      // _onChange(e) {
-      //   e = e || window.event;
-      //   let target = e.target || e.srcElement;
-      //   if (!target) {
-      //     return;
-      //   }
-      //   if (hasClass(target, 'pika-select-month')) {
-      //     self.gotoMonth(target.value);
-      //   }
-      //   else if (hasClass(target, 'pika-select-year')) {
-      //     self.gotoYear(target.value);
-      //   }
-      // }
-
-      // _onKeyChange(e) {
-      //   e = e || window.event;
-
-      //   if (self.isVisible()) {
-
-      //     switch(e.keyCode){
-      //     case 13:
-      //     case 27:
-      //       if (opts.field) {
-      //         opts.field.blur();
-      //       }
-      //       break;
-      //     case 37:
-      //       e.preventDefault();
-      //       self.adjustDate('subtract', 1);
-      //       break;
-      //     case 38:
-      //       self.adjustDate('subtract', 7);
-      //       break;
-      //     case 39:
-      //       self.adjustDate('add', 1);
-      //       break;
-      //     case 40:
-      //       self.adjustDate('add', 7);
-      //       break;
-      //     }
-      //   }
-      // }
+      /**
+       * change view to a specific month (zero-index, e.g. 0: January)
+       */
 
     }, {
-      key: '_handleInputChange',
+      key: "gotoMonth",
+      value: function gotoMonth(month) {
+        if (!isNaN(month)) {
+          this.calendars[0].month = parseInt(month, 10);
+          this.adjustCalendars();
+        }
+      }
+
+      /**
+       * change view to a specific full year (e.g. "2012")
+       */
+
+    }, {
+      key: "gotoYear",
+      value: function gotoYear(year) {
+        if (!isNaN(year)) {
+          this.calendars[0].year = parseInt(year, 10);
+          this.adjustCalendars();
+        }
+      }
+    }, {
+      key: "_handleInputChange",
       value: function _handleInputChange(e) {
         var date = void 0;
 
@@ -9188,28 +8991,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         //   self.show();
         // }
       }
-
-      // _onInputBlur() {
-      //   // IE allows pika div to gain focus; catch blur the input field
-      //   let pEl = document.activeElement;
-      //   do {
-      //     if (hasClass(pEl, 'pika-single')) {
-      //       return;
-      //     }
-      //   }
-      //   while ((pEl = pEl.parentNode));
-
-      //   if (!self._c) {
-      //     self._b = sto(function() {
-      //       self.hide();
-      //     }, 50);
-      //   }
-      //   self._c = false;
-      // }
-
-
     }, {
-      key: 'renderDayName',
+      key: "renderDayName",
       value: function renderDayName(opts, day, abbr) {
         day += opts.firstDay;
         while (day >= 7) {
@@ -9223,7 +9006,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_finishSelection',
+      key: "_finishSelection",
       value: function _finishSelection() {
         this.setInputValue();
         this.close();
@@ -9234,7 +9017,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: 'open',
+      key: "open",
       value: function open() {
         if (this.isOpen) {
           return;
@@ -9254,7 +9037,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: 'close',
+      key: "close",
       value: function close() {
         if (!this.isOpen) {
           return;
@@ -9268,7 +9051,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         return this;
       }
     }], [{
-      key: 'init',
+      key: "init",
       value: function init($els, options) {
         var arr = [];
         $els.each(function () {
@@ -9277,41 +9060,41 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         return arr;
       }
     }, {
-      key: '_isDate',
+      key: "_isDate",
       value: function _isDate(obj) {
         return (/Date/.test(Object.prototype.toString.call(obj)) && !isNaN(obj.getTime())
         );
       }
     }, {
-      key: '_isWeekend',
+      key: "_isWeekend",
       value: function _isWeekend(date) {
         var day = date.getDay();
         return day === 0 || day === 6;
       }
     }, {
-      key: '_setToStartOfDay',
+      key: "_setToStartOfDay",
       value: function _setToStartOfDay(date) {
         if (Datepicker._isDate(date)) date.setHours(0, 0, 0, 0);
       }
     }, {
-      key: '_getDaysInMonth',
+      key: "_getDaysInMonth",
       value: function _getDaysInMonth(year, month) {
         return [31, Datepicker._isLeapYear(year) ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][month];
       }
     }, {
-      key: '_isLeapYear',
+      key: "_isLeapYear",
       value: function _isLeapYear(year) {
         // solution by Matti Virkkunen: http://stackoverflow.com/a/4881951
         return year % 4 === 0 && year % 100 !== 0 || year % 400 === 0;
       }
     }, {
-      key: '_compareDates',
+      key: "_compareDates",
       value: function _compareDates(a, b) {
         // weak date comparison (use setToStartOfDay(date) to ensure correct result)
         return a.getTime() === b.getTime();
       }
     }, {
-      key: '_setToStartOfDay',
+      key: "_setToStartOfDay",
       value: function _setToStartOfDay(date) {
         if (Datepicker._isDate(date)) date.setHours(0, 0, 0, 0);
       }
@@ -9321,14 +9104,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: 'getInstance',
+      key: "getInstance",
       value: function getInstance(el) {
         var domElem = !!el.jquery ? el[0] : el;
         return domElem.M_Datepicker;
       }
     }, {
-      key: 'defaults',
-      get: function get() {
+      key: "defaults",
+      get: function () {
         return _defaults;
       }
     }]);
@@ -9343,632 +9126,622 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   if (M.jQueryLoaded) {
     M.initializeJqueryWrapper(Datepicker, 'datepicker', 'M_Datepicker');
   }
-})(cash, M.Vel);
-'use strict';
+})(cash);
+;(function ($) {
+  'use strict';
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+  var _defaults = {
+    dialRadius: 135,
+    outerRadius: 105,
+    innerRadius: 70,
+    tickRadius: 20,
+    duration: 350,
+    container: null,
+    defaultTime: 'now', // default time, 'now' or '13:14' e.g.
+    fromnow: 0, // Millisecond offset from the defaultTime
+    doneText: 'Ok', // done button text
+    clearText: 'Clear',
+    cancelText: 'Cancel',
+    autoClose: false, // auto close when minute is selected
+    twelveHour: true, // change to 12 hour AM/PM clock from 24 hour
+    vibrate: true // vibrate the device when dragging clock hand
+  };
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-(function ($, Vel) {
-		'use strict';
-
-		var _defaults = {
-				dialRadius: 135,
-				outerRadius: 105,
-				innerRadius: 70,
-				tickRadius: 20,
-				duration: 350,
-				container: null,
-				defaultTime: 'now', // default time, 'now' or '13:14' e.g.
-				fromnow: 0, // Millisecond offset from the defaultTime
-				doneText: 'Ok', // done button text
-				clearText: 'Clear',
-				cancelText: 'Cancel',
-				autoClose: false, // auto close when minute is selected
-				twelveHour: true, // change to 12 hour AM/PM clock from 24 hour
-				vibrate: true // vibrate the device when dragging clock hand
-		};
-
-		/**
+  /**
    * @class
    *
    */
 
-		var Timepicker = function () {
-				function Timepicker(el, options) {
-						_classCallCheck(this, Timepicker);
+  var Timepicker = function () {
+    function Timepicker(el, options) {
+      _classCallCheck(this, Timepicker);
 
-						// If exists, destroy and reinitialize
-						if (!!el.M_Timepicker) {
-								el.M_Timepicker.destroy();
-						}
+      // If exists, destroy and reinitialize
+      if (!!el.M_Timepicker) {
+        el.M_Timepicker.destroy();
+      }
 
-						this.el = el;
-						this.$el = $(el);
-						this.el.M_Timepicker = this;
+      this.el = el;
+      this.$el = $(el);
+      this.el.M_Timepicker = this;
 
-						this.options = $.extend({}, Timepicker.defaults, options);
+      this.options = $.extend({}, Timepicker.defaults, options);
 
-						this.id = M.guid();
-						this._insertHTMLIntoDOM();
-						this._setupModal();
-						this._setupVariables();
-						this._setupEventHandlers();
+      this.id = M.guid();
+      this._insertHTMLIntoDOM();
+      this._setupModal();
+      this._setupVariables();
+      this._setupEventHandlers();
 
-						this._clockSetup();
-						this._pickerSetup();
-				}
+      this._clockSetup();
+      this._pickerSetup();
+    }
 
-				_createClass(Timepicker, [{
-						key: 'destroy',
+    _createClass(Timepicker, [{
+      key: "destroy",
 
 
-						/**
+      /**
        * Teardown component
        */
-						value: function destroy() {
-								this._removeEventHandlers();
-								this.modal.destroy();
-								$(this.modalEl).remove();
-								this.el.M_Timepicker = undefined;
-						}
+      value: function destroy() {
+        this._removeEventHandlers();
+        this.modal.destroy();
+        $(this.modalEl).remove();
+        this.el.M_Timepicker = undefined;
+      }
 
-						/**
+      /**
        * Setup Event Handlers
        */
 
-				}, {
-						key: '_setupEventHandlers',
-						value: function _setupEventHandlers() {
-								this._handleInputKeydownBound = this._handleInputKeydown.bind(this);
-								this._handleInputClickBound = this._handleInputClick.bind(this);
-								this._handleClockClickStartBound = this._handleClockClickStart.bind(this);
-								this._handleDocumentClickMoveBound = this._handleDocumentClickMove.bind(this);
-								this._handleDocumentClickEndBound = this._handleDocumentClickEnd.bind(this);
+    }, {
+      key: "_setupEventHandlers",
+      value: function _setupEventHandlers() {
+        this._handleInputKeydownBound = this._handleInputKeydown.bind(this);
+        this._handleInputClickBound = this._handleInputClick.bind(this);
+        this._handleClockClickStartBound = this._handleClockClickStart.bind(this);
+        this._handleDocumentClickMoveBound = this._handleDocumentClickMove.bind(this);
+        this._handleDocumentClickEndBound = this._handleDocumentClickEnd.bind(this);
 
-								this.el.addEventListener('click', this._handleInputClickBound);
-								this.el.addEventListener('keydown', this._handleInputKeydownBound);
-								this.plate.addEventListener('mousedown', this._handleClockClickStartBound);
-								this.plate.addEventListener('touchstart', this._handleClockClickStartBound);
+        this.el.addEventListener('click', this._handleInputClickBound);
+        this.el.addEventListener('keydown', this._handleInputKeydownBound);
+        this.plate.addEventListener('mousedown', this._handleClockClickStartBound);
+        this.plate.addEventListener('touchstart', this._handleClockClickStartBound);
 
-								$(this.spanHours).on('click', this.showView.bind(this, 'hours'));
-								$(this.spanMinutes).on('click', this.showView.bind(this, 'minutes'));
-						}
-				}, {
-						key: '_removeEventHandlers',
-						value: function _removeEventHandlers() {
-								this.el.removeEventListener('click', this._handleInputClickBound);
-								this.el.removeEventListener('keydown', this._handleInputKeydownBound);
-						}
-				}, {
-						key: '_handleInputClick',
-						value: function _handleInputClick() {
-								this.open();
-						}
-				}, {
-						key: '_handleInputKeydown',
-						value: function _handleInputKeydown(e) {
-								if (e.which === M.keys.ENTER) {
-										e.preventDefault();
-										this.open();
-								}
-						}
-				}, {
-						key: '_handleClockClickStart',
-						value: function _handleClockClickStart(e) {
-								e.preventDefault();
-								var clockPlateBR = this.plate.getBoundingClientRect();
-								var offset = { x: clockPlateBR.left, y: clockPlateBR.top };
+        $(this.spanHours).on('click', this.showView.bind(this, 'hours'));
+        $(this.spanMinutes).on('click', this.showView.bind(this, 'minutes'));
+      }
+    }, {
+      key: "_removeEventHandlers",
+      value: function _removeEventHandlers() {
+        this.el.removeEventListener('click', this._handleInputClickBound);
+        this.el.removeEventListener('keydown', this._handleInputKeydownBound);
+      }
+    }, {
+      key: "_handleInputClick",
+      value: function _handleInputClick() {
+        this.open();
+      }
+    }, {
+      key: "_handleInputKeydown",
+      value: function _handleInputKeydown(e) {
+        if (e.which === M.keys.ENTER) {
+          e.preventDefault();
+          this.open();
+        }
+      }
+    }, {
+      key: "_handleClockClickStart",
+      value: function _handleClockClickStart(e) {
+        e.preventDefault();
+        var clockPlateBR = this.plate.getBoundingClientRect();
+        var offset = { x: clockPlateBR.left, y: clockPlateBR.top };
 
-								this.x0 = offset.x + this.options.dialRadius;
-								this.y0 = offset.y + this.options.dialRadius;
-								this.moved = false;
-								var clickPos = Timepicker._Pos(e);
-								this.dx = clickPos.x - this.x0;
-								this.dy = clickPos.y - this.y0;
+        this.x0 = offset.x + this.options.dialRadius;
+        this.y0 = offset.y + this.options.dialRadius;
+        this.moved = false;
+        var clickPos = Timepicker._Pos(e);
+        this.dx = clickPos.x - this.x0;
+        this.dy = clickPos.y - this.y0;
 
-								// Set clock hands
-								this.setHand(this.dx, this.dy, false);
+        // Set clock hands
+        this.setHand(this.dx, this.dy, false);
 
-								// Mousemove on document
-								document.addEventListener('mousemove', this._handleDocumentClickMoveBound);
-								document.addEventListener('touchmove', this._handleDocumentClickMoveBound);
+        // Mousemove on document
+        document.addEventListener('mousemove', this._handleDocumentClickMoveBound);
+        document.addEventListener('touchmove', this._handleDocumentClickMoveBound);
 
-								// Mouseup on document
-								document.addEventListener('mouseup', this._handleDocumentClickEndBound);
-								document.addEventListener('touchend', this._handleDocumentClickEndBound);
-						}
-				}, {
-						key: '_handleDocumentClickMove',
-						value: function _handleDocumentClickMove(e) {
-								e.preventDefault();
-								var clickPos = Timepicker._Pos(e);
-								var x = clickPos.x - this.x0;
-								var y = clickPos.y - this.y0;
-								this.moved = true;
-								this.setHand(x, y, false, true);
-						}
-				}, {
-						key: '_handleDocumentClickEnd',
-						value: function _handleDocumentClickEnd(e) {
-								e.preventDefault();
-								document.removeEventListener('mouseup', this._handleDocumentClickEndBound);
-								document.removeEventListener('touchend', this._handleDocumentClickEndBound);
-								var clickPos = Timepicker._Pos(e);
-								var x = clickPos.x - this.x0;
-								var y = clickPos.y - this.y0;
-								if (this.moved && x === this.dx && y === this.dy) {
-										this.setHand(x, y);
-								}
+        // Mouseup on document
+        document.addEventListener('mouseup', this._handleDocumentClickEndBound);
+        document.addEventListener('touchend', this._handleDocumentClickEndBound);
+      }
+    }, {
+      key: "_handleDocumentClickMove",
+      value: function _handleDocumentClickMove(e) {
+        e.preventDefault();
+        var clickPos = Timepicker._Pos(e);
+        var x = clickPos.x - this.x0;
+        var y = clickPos.y - this.y0;
+        this.moved = true;
+        this.setHand(x, y, false, true);
+      }
+    }, {
+      key: "_handleDocumentClickEnd",
+      value: function _handleDocumentClickEnd(e) {
+        e.preventDefault();
+        document.removeEventListener('mouseup', this._handleDocumentClickEndBound);
+        document.removeEventListener('touchend', this._handleDocumentClickEndBound);
+        var clickPos = Timepicker._Pos(e);
+        var x = clickPos.x - this.x0;
+        var y = clickPos.y - this.y0;
+        if (this.moved && x === this.dx && y === this.dy) {
+          this.setHand(x, y);
+        }
 
-								if (this.currentView === 'hours') {
-										this.showView('minutes', this.options.duration / 2);
-								} else if (this.options.autoClose) {
-										this.minutesView.addClass('timepicker-dial-out');
-										setTimeout(function () {
-												this.done();
-										}, this.options.duration / 2);
-								}
+        if (this.currentView === 'hours') {
+          this.showView('minutes', this.options.duration / 2);
+        } else if (this.options.autoClose) {
+          this.minutesView.addClass('timepicker-dial-out');
+          setTimeout(function () {
+            this.done();
+          }, this.options.duration / 2);
+        }
 
-								// Unbind mousemove event
-								document.removeEventListener('mousemove', this._handleDocumentClickMoveBound);
-								document.removeEventListener('touchmove', this._handleDocumentClickMoveBound);
-						}
-				}, {
-						key: '_insertHTMLIntoDOM',
-						value: function _insertHTMLIntoDOM() {
-								this.$modalEl = $(Timepicker._template);
-								this.modalEl = this.$modalEl[0];
-								this.modalEl.id = 'modal-' + this.id;
+        // Unbind mousemove event
+        document.removeEventListener('mousemove', this._handleDocumentClickMoveBound);
+        document.removeEventListener('touchmove', this._handleDocumentClickMoveBound);
+      }
+    }, {
+      key: "_insertHTMLIntoDOM",
+      value: function _insertHTMLIntoDOM() {
+        this.$modalEl = $(Timepicker._template);
+        this.modalEl = this.$modalEl[0];
+        this.modalEl.id = 'modal-' + this.id;
 
-								// Append popover to input by default
-								var containerEl = document.querySelector(this.options.container);
-								if (this.options.container && !!containerEl) {
-										this.$modalEl.appendTo(containerEl);
-								} else {
-										this.$modalEl.insertBefore(this.el);
-								}
-						}
-				}, {
-						key: '_setupModal',
-						value: function _setupModal() {
-								var _this = this;
+        // Append popover to input by default
+        var containerEl = document.querySelector(this.options.container);
+        if (this.options.container && !!containerEl) {
+          this.$modalEl.appendTo(containerEl);
+        } else {
+          this.$modalEl.insertBefore(this.el);
+        }
+      }
+    }, {
+      key: "_setupModal",
+      value: function _setupModal() {
+        var _this40 = this;
 
-								this.modal = new M.Modal(this.modalEl, {
-										complete: function complete() {
-												_this.isOpen = false;
-										}
-								});
-						}
-				}, {
-						key: '_setupVariables',
-						value: function _setupVariables() {
-								this.currentView = 'hours';
-								this.vibrate = navigator.vibrate ? 'vibrate' : navigator.webkitVibrate ? 'webkitVibrate' : null;
+        this.modal = new M.Modal(this.modalEl, {
+          complete: function () {
+            _this40.isOpen = false;
+          }
+        });
+      }
+    }, {
+      key: "_setupVariables",
+      value: function _setupVariables() {
+        this.currentView = 'hours';
+        this.vibrate = navigator.vibrate ? 'vibrate' : navigator.webkitVibrate ? 'webkitVibrate' : null;
 
-								this._canvas = this.modalEl.querySelector('.timepicker-canvas');
-								this.plate = this.modalEl.querySelector('.timepicker-plate');
+        this._canvas = this.modalEl.querySelector('.timepicker-canvas');
+        this.plate = this.modalEl.querySelector('.timepicker-plate');
 
-								this.hoursView = this.modalEl.querySelector('.timepicker-hours');
-								this.minutesView = this.modalEl.querySelector('.timepicker-minutes');
-								this.spanHours = this.modalEl.querySelector('.timepicker-span-hours');
-								this.spanMinutes = this.modalEl.querySelector('.timepicker-span-minutes');
-								this.spanAmPm = this.modalEl.querySelector('.timepicker-span-am-pm');
-								this.footer = this.modalEl.querySelector('.timepicker-footer');
-								this.amOrPm = 'PM';
-						}
-				}, {
-						key: '_pickerSetup',
-						value: function _pickerSetup() {
-								$('<button class="btn-flat timepicker-clear waves-effect" type="button" tabindex="' + (this.options.twelveHour ? '3' : '1') + '">' + this.options.clearText + '</button>').appendTo(this.footer).on('click', this.clear.bind(this));
+        this.hoursView = this.modalEl.querySelector('.timepicker-hours');
+        this.minutesView = this.modalEl.querySelector('.timepicker-minutes');
+        this.spanHours = this.modalEl.querySelector('.timepicker-span-hours');
+        this.spanMinutes = this.modalEl.querySelector('.timepicker-span-minutes');
+        this.spanAmPm = this.modalEl.querySelector('.timepicker-span-am-pm');
+        this.footer = this.modalEl.querySelector('.timepicker-footer');
+        this.amOrPm = 'PM';
+      }
+    }, {
+      key: "_pickerSetup",
+      value: function _pickerSetup() {
+        $('<button class="btn-flat timepicker-clear waves-effect" type="button" tabindex="' + (this.options.twelveHour ? '3' : '1') + '">' + this.options.clearText + '</button>').appendTo(this.footer).on('click', this.clear.bind(this));
 
-								var confirmationBtnsContainer = $('<div class="confirmation-btns"></div>');
-								$('<button class="btn-flat timepicker-close waves-effect" type="button" tabindex="' + (this.options.twelveHour ? '3' : '1') + '">' + this.options.cancelText + '</button>').appendTo(confirmationBtnsContainer).on('click', this.close.bind(this));
-								$('<button class="btn-flat timepicker-close waves-effect" type="button" tabindex="' + (this.options.twelveHour ? '3' : '1') + '">' + this.options.doneText + '</button>').appendTo(confirmationBtnsContainer).on('click', this.done.bind(this));
-								confirmationBtnsContainer.appendTo(this.footer);
-						}
-				}, {
-						key: '_clockSetup',
-						value: function _clockSetup() {
-								if (this.options.twelveHour) {
-										this.$amBtn = $('<div class="am-btn">AM</div>');
-										this.$pmBtn = $('<div class="pm-btn">PM</div>');
-										this.$amBtn.on('click', this._handleAmPmClick.bind(this)).appendTo(this.spanAmPm);
-										this.$pmBtn.on('click', this._handleAmPmClick.bind(this)).appendTo(this.spanAmPm);
-								}
+        var confirmationBtnsContainer = $('<div class="confirmation-btns"></div>');
+        $('<button class="btn-flat timepicker-close waves-effect" type="button" tabindex="' + (this.options.twelveHour ? '3' : '1') + '">' + this.options.cancelText + '</button>').appendTo(confirmationBtnsContainer).on('click', this.close.bind(this));
+        $('<button class="btn-flat timepicker-close waves-effect" type="button" tabindex="' + (this.options.twelveHour ? '3' : '1') + '">' + this.options.doneText + '</button>').appendTo(confirmationBtnsContainer).on('click', this.done.bind(this));
+        confirmationBtnsContainer.appendTo(this.footer);
+      }
+    }, {
+      key: "_clockSetup",
+      value: function _clockSetup() {
+        if (this.options.twelveHour) {
+          this.$amBtn = $('<div class="am-btn">AM</div>');
+          this.$pmBtn = $('<div class="pm-btn">PM</div>');
+          this.$amBtn.on('click', this._handleAmPmClick.bind(this)).appendTo(this.spanAmPm);
+          this.$pmBtn.on('click', this._handleAmPmClick.bind(this)).appendTo(this.spanAmPm);
+        }
 
-								this._buildHoursView();
-								this._buildMinutesView();
-								this._buildSVGClock();
-						}
-				}, {
-						key: '_buildSVGClock',
-						value: function _buildSVGClock() {
-								// Draw clock hands and others
-								var dialRadius = this.options.dialRadius;
-								var tickRadius = this.options.tickRadius;
-								var diameter = dialRadius * 2;
+        this._buildHoursView();
+        this._buildMinutesView();
+        this._buildSVGClock();
+      }
+    }, {
+      key: "_buildSVGClock",
+      value: function _buildSVGClock() {
+        // Draw clock hands and others
+        var dialRadius = this.options.dialRadius;
+        var tickRadius = this.options.tickRadius;
+        var diameter = dialRadius * 2;
 
-								var svg = Timepicker._createSVGEl('svg');
-								svg.setAttribute('class', 'timepicker-svg');
-								svg.setAttribute('width', diameter);
-								svg.setAttribute('height', diameter);
-								var g = Timepicker._createSVGEl('g');
-								g.setAttribute('transform', 'translate(' + dialRadius + ',' + dialRadius + ')');
-								var bearing = Timepicker._createSVGEl('circle');
-								bearing.setAttribute('class', 'timepicker-canvas-bearing');
-								bearing.setAttribute('cx', 0);
-								bearing.setAttribute('cy', 0);
-								bearing.setAttribute('r', 4);
-								var hand = Timepicker._createSVGEl('line');
-								hand.setAttribute('x1', 0);
-								hand.setAttribute('y1', 0);
-								var bg = Timepicker._createSVGEl('circle');
-								bg.setAttribute('class', 'timepicker-canvas-bg');
-								bg.setAttribute('r', tickRadius);
-								g.appendChild(hand);
-								g.appendChild(bg);
-								g.appendChild(bearing);
-								svg.appendChild(g);
-								this._canvas.appendChild(svg);
+        var svg = Timepicker._createSVGEl('svg');
+        svg.setAttribute('class', 'timepicker-svg');
+        svg.setAttribute('width', diameter);
+        svg.setAttribute('height', diameter);
+        var g = Timepicker._createSVGEl('g');
+        g.setAttribute('transform', 'translate(' + dialRadius + ',' + dialRadius + ')');
+        var bearing = Timepicker._createSVGEl('circle');
+        bearing.setAttribute('class', 'timepicker-canvas-bearing');
+        bearing.setAttribute('cx', 0);
+        bearing.setAttribute('cy', 0);
+        bearing.setAttribute('r', 4);
+        var hand = Timepicker._createSVGEl('line');
+        hand.setAttribute('x1', 0);
+        hand.setAttribute('y1', 0);
+        var bg = Timepicker._createSVGEl('circle');
+        bg.setAttribute('class', 'timepicker-canvas-bg');
+        bg.setAttribute('r', tickRadius);
+        g.appendChild(hand);
+        g.appendChild(bg);
+        g.appendChild(bearing);
+        svg.appendChild(g);
+        this._canvas.appendChild(svg);
 
-								this.hand = hand;
-								this.bg = bg;
-								this.bearing = bearing;
-								this.g = g;
-						}
-				}, {
-						key: '_buildHoursView',
-						value: function _buildHoursView() {
-								var $tick = $('<div class="timepicker-tick"></div>');
-								// Hours view
-								if (this.options.twelveHour) {
-										for (var i = 1; i < 13; i += 1) {
-												var tick = $tick.clone();
-												var radian = i / 6 * Math.PI;
-												var radius = this.options.outerRadius;
-												tick.css({
-														left: this.options.dialRadius + Math.sin(radian) * radius - this.options.tickRadius + 'px',
-														top: this.options.dialRadius - Math.cos(radian) * radius - this.options.tickRadius + 'px'
-												});
-												tick.html(i === 0 ? '00' : i);
-												this.hoursView.appendChild(tick[0]);
-												// tick.on(mousedownEvent, mousedown);
-										}
-								} else {
-										for (var _i = 0; _i < 24; _i += 1) {
-												var _tick = $tick.clone();
-												var _radian = _i / 6 * Math.PI;
-												var inner = _i > 0 && _i < 13;
-												var _radius = inner ? this.options.innerRadius : this.options.outerRadius;
-												_tick.css({
-														left: this.options.dialRadius + Math.sin(_radian) * _radius - this.options.tickRadius + 'px',
-														top: this.options.dialRadius - Math.cos(_radian) * _radius - this.options.tickRadius + 'px'
-												});
-												_tick.html(_i === 0 ? '00' : _i);
-												this.hoursView.appendChild(_tick[0]);
-												// tick.on(mousedownEvent, mousedown);
-										}
-								}
-						}
-				}, {
-						key: '_buildMinutesView',
-						value: function _buildMinutesView() {
-								var $tick = $('<div class="timepicker-tick"></div>');
-								// Minutes view
-								for (var i = 0; i < 60; i += 5) {
-										var tick = $tick.clone();
-										var radian = i / 30 * Math.PI;
-										tick.css({
-												left: this.options.dialRadius + Math.sin(radian) * this.options.outerRadius - this.options.tickRadius + 'px',
-												top: this.options.dialRadius - Math.cos(radian) * this.options.outerRadius - this.options.tickRadius + 'px'
-										});
-										tick.html(Timepicker._addLeadingZero(i));
-										this.minutesView.appendChild(tick[0]);
-								}
-						}
-				}, {
-						key: '_handleAmPmClick',
-						value: function _handleAmPmClick(e) {
-								var $btnClicked = $(e.target);
-								this.amOrPm = $btnClicked.hasClass('am-btn') ? 'AM' : 'PM';
-								this._updateAmPmView();
-						}
-				}, {
-						key: '_updateAmPmView',
-						value: function _updateAmPmView() {
-								this.$amBtn.toggleClass('text-primary', this.amOrPm === 'AM');
-								this.$pmBtn.toggleClass('text-primary', this.amOrPm === 'PM');
-						}
-				}, {
-						key: '_updateTimeFromInput',
-						value: function _updateTimeFromInput() {
-								// Get the time
-								var value = ((this.el.value || this.options.defaultTime || '') + '').split(':');
-								if (this.options.twelveHour && !(typeof value[1] === 'undefined')) {
-										if (value[1].indexOf("AM") > 0) {
-												this.amOrPm = 'AM';
-										} else {
-												this.amOrPm = 'PM';
-										}
-										value[1] = value[1].replace("AM", "").replace("PM", "");
-								}
-								if (value[0] === 'now') {
-										var now = new Date(+new Date() + this.options.fromnow);
-										value = [now.getHours(), now.getMinutes()];
-										if (this.options.twelveHour) {
-												this.amOrPm = value[0] >= 12 && value[0] < 24 ? 'PM' : 'AM';
-										}
-								}
-								this.hours = +value[0] || 0;
-								this.minutes = +value[1] || 0;
-								this.spanHours.innerHTML = this.hours;
-								this.spanMinutes.innerHTML = Timepicker._addLeadingZero(this.minutes);
+        this.hand = hand;
+        this.bg = bg;
+        this.bearing = bearing;
+        this.g = g;
+      }
+    }, {
+      key: "_buildHoursView",
+      value: function _buildHoursView() {
+        var $tick = $('<div class="timepicker-tick"></div>');
+        // Hours view
+        if (this.options.twelveHour) {
+          for (var i = 1; i < 13; i += 1) {
+            var tick = $tick.clone();
+            var radian = i / 6 * Math.PI;
+            var radius = this.options.outerRadius;
+            tick.css({
+              left: this.options.dialRadius + Math.sin(radian) * radius - this.options.tickRadius + 'px',
+              top: this.options.dialRadius - Math.cos(radian) * radius - this.options.tickRadius + 'px'
+            });
+            tick.html(i === 0 ? '00' : i);
+            this.hoursView.appendChild(tick[0]);
+            // tick.on(mousedownEvent, mousedown);
+          }
+        } else {
+          for (var _i2 = 0; _i2 < 24; _i2 += 1) {
+            var _tick = $tick.clone();
+            var _radian = _i2 / 6 * Math.PI;
+            var inner = _i2 > 0 && _i2 < 13;
+            var _radius = inner ? this.options.innerRadius : this.options.outerRadius;
+            _tick.css({
+              left: this.options.dialRadius + Math.sin(_radian) * _radius - this.options.tickRadius + 'px',
+              top: this.options.dialRadius - Math.cos(_radian) * _radius - this.options.tickRadius + 'px'
+            });
+            _tick.html(_i2 === 0 ? '00' : _i2);
+            this.hoursView.appendChild(_tick[0]);
+            // tick.on(mousedownEvent, mousedown);
+          }
+        }
+      }
+    }, {
+      key: "_buildMinutesView",
+      value: function _buildMinutesView() {
+        var $tick = $('<div class="timepicker-tick"></div>');
+        // Minutes view
+        for (var i = 0; i < 60; i += 5) {
+          var tick = $tick.clone();
+          var radian = i / 30 * Math.PI;
+          tick.css({
+            left: this.options.dialRadius + Math.sin(radian) * this.options.outerRadius - this.options.tickRadius + 'px',
+            top: this.options.dialRadius - Math.cos(radian) * this.options.outerRadius - this.options.tickRadius + 'px'
+          });
+          tick.html(Timepicker._addLeadingZero(i));
+          this.minutesView.appendChild(tick[0]);
+        }
+      }
+    }, {
+      key: "_handleAmPmClick",
+      value: function _handleAmPmClick(e) {
+        var $btnClicked = $(e.target);
+        this.amOrPm = $btnClicked.hasClass('am-btn') ? 'AM' : 'PM';
+        this._updateAmPmView();
+      }
+    }, {
+      key: "_updateAmPmView",
+      value: function _updateAmPmView() {
+        if (this.options.twelveHour) {
+          this.$amBtn.toggleClass('text-primary', this.amOrPm === 'AM');
+          this.$pmBtn.toggleClass('text-primary', this.amOrPm === 'PM');
+        }
+      }
+    }, {
+      key: "_updateTimeFromInput",
+      value: function _updateTimeFromInput() {
+        // Get the time
+        var value = ((this.el.value || this.options.defaultTime || '') + '').split(':');
+        if (this.options.twelveHour && !(typeof value[1] === 'undefined')) {
+          if (value[1].indexOf("AM") > 0) {
+            this.amOrPm = 'AM';
+          } else {
+            this.amOrPm = 'PM';
+          }
+          value[1] = value[1].replace("AM", "").replace("PM", "");
+        }
+        if (value[0] === 'now') {
+          var now = new Date(+new Date() + this.options.fromnow);
+          value = [now.getHours(), now.getMinutes()];
+          if (this.options.twelveHour) {
+            this.amOrPm = value[0] >= 12 && value[0] < 24 ? 'PM' : 'AM';
+          }
+        }
+        this.hours = +value[0] || 0;
+        this.minutes = +value[1] || 0;
+        this.spanHours.innerHTML = this.hours;
+        this.spanMinutes.innerHTML = Timepicker._addLeadingZero(this.minutes);
 
-								this._updateAmPmView();
-						}
-				}, {
-						key: 'showView',
-						value: function showView(view, delay) {
-								if (view === 'minutes' && $(this.hoursView).css("visibility") === "visible") {
-										// raiseCallback(this.options.beforeHourSelect);
-								}
-								var isHours = view === 'hours',
-								    nextView = isHours ? this.hoursView : this.minutesView,
-								    hideView = isHours ? this.minutesView : this.hoursView;
-								this.currentView = view;
+        this._updateAmPmView();
+      }
+    }, {
+      key: "showView",
+      value: function showView(view, delay) {
+        if (view === 'minutes' && $(this.hoursView).css("visibility") === "visible") {
+          // raiseCallback(this.options.beforeHourSelect);
+        }
+        var isHours = view === 'hours',
+            nextView = isHours ? this.hoursView : this.minutesView,
+            hideView = isHours ? this.minutesView : this.hoursView;
+        this.currentView = view;
 
-								$(this.spanHours).toggleClass('text-primary', isHours);
-								$(this.spanMinutes).toggleClass('text-primary', !isHours);
+        $(this.spanHours).toggleClass('text-primary', isHours);
+        $(this.spanMinutes).toggleClass('text-primary', !isHours);
 
-								// Transition view
-								hideView.classList.add('timepicker-dial-out');
-								$(nextView).css('visibility', 'visible').removeClass('timepicker-dial-out');
+        // Transition view
+        hideView.classList.add('timepicker-dial-out');
+        $(nextView).css('visibility', 'visible').removeClass('timepicker-dial-out');
 
-								// Reset clock hand
-								this.resetClock(delay);
+        // Reset clock hand
+        this.resetClock(delay);
 
-								// After transitions ended
-								clearTimeout(this.toggleViewTimer);
-								this.toggleViewTimer = setTimeout(function () {
-										$(hideView).css('visibility', 'hidden');
-								}, this.options.duration);
-						}
-				}, {
-						key: 'resetClock',
-						value: function resetClock(delay) {
-								var view = this.currentView,
-								    value = this[view],
-								    isHours = view === 'hours',
-								    unit = Math.PI / (isHours ? 6 : 30),
-								    radian = value * unit,
-								    radius = isHours && value > 0 && value < 13 ? this.options.innerRadius : this.options.outerRadius,
-								    x = Math.sin(radian) * radius,
-								    y = -Math.cos(radian) * radius,
-								    self = this;
+        // After transitions ended
+        clearTimeout(this.toggleViewTimer);
+        this.toggleViewTimer = setTimeout(function () {
+          $(hideView).css('visibility', 'hidden');
+        }, this.options.duration);
+      }
+    }, {
+      key: "resetClock",
+      value: function resetClock(delay) {
+        var view = this.currentView,
+            value = this[view],
+            isHours = view === 'hours',
+            unit = Math.PI / (isHours ? 6 : 30),
+            radian = value * unit,
+            radius = isHours && value > 0 && value < 13 ? this.options.innerRadius : this.options.outerRadius,
+            x = Math.sin(radian) * radius,
+            y = -Math.cos(radian) * radius,
+            self = this;
 
-								if (delay) {
-										$(this.canvas).addClass('timepicker-canvas-out');
-										setTimeout(function () {
-												$(self.canvas).removeClass('timepicker-canvas-out');
-												self.setHand(x, y);
-										}, delay);
-								} else {
-										this.setHand(x, y);
-								}
-						}
-				}, {
-						key: 'setHand',
-						value: function setHand(x, y, roundBy5) {
-								var _this2 = this;
+        if (delay) {
+          $(this.canvas).addClass('timepicker-canvas-out');
+          setTimeout(function () {
+            $(self.canvas).removeClass('timepicker-canvas-out');
+            self.setHand(x, y);
+          }, delay);
+        } else {
+          this.setHand(x, y);
+        }
+      }
+    }, {
+      key: "setHand",
+      value: function setHand(x, y, roundBy5) {
+        var _this41 = this;
 
-								var radian = Math.atan2(x, -y),
-								    isHours = this.currentView === 'hours',
-								    unit = Math.PI / (isHours || roundBy5 ? 6 : 30),
-								    z = Math.sqrt(x * x + y * y),
-								    inner = isHours && z < (this.options.outerRadius + this.options.innerRadius) / 2,
-								    radius = inner ? this.options.innerRadius : this.options.outerRadius;
+        var radian = Math.atan2(x, -y),
+            isHours = this.currentView === 'hours',
+            unit = Math.PI / (isHours || roundBy5 ? 6 : 30),
+            z = Math.sqrt(x * x + y * y),
+            inner = isHours && z < (this.options.outerRadius + this.options.innerRadius) / 2,
+            radius = inner ? this.options.innerRadius : this.options.outerRadius;
 
-								if (this.options.twelveHour) {
-										radius = this.options.outerRadius;
-								}
+        if (this.options.twelveHour) {
+          radius = this.options.outerRadius;
+        }
 
-								// Radian should in range [0, 2PI]
-								if (radian < 0) {
-										radian = Math.PI * 2 + radian;
-								}
+        // Radian should in range [0, 2PI]
+        if (radian < 0) {
+          radian = Math.PI * 2 + radian;
+        }
 
-								// Get the round value
-								var value = Math.round(radian / unit);
+        // Get the round value
+        var value = Math.round(radian / unit);
 
-								// Get the round radian
-								radian = value * unit;
+        // Get the round radian
+        radian = value * unit;
 
-								// Correct the hours or minutes
-								if (this.options.twelveHour) {
-										if (isHours) {
-												if (value === 0) value = 12;
-										} else {
-												if (roundBy5) value *= 5;
-												if (value === 60) value = 0;
-										}
-								} else {
-										if (isHours) {
-												if (value === 12) {
-														value = 0;
-												}
-												value = inner ? value === 0 ? 12 : value : value === 0 ? 0 : value + 12;
-										} else {
-												if (roundBy5) {
-														value *= 5;
-												}
-												if (value === 60) {
-														value = 0;
-												}
-										}
-								}
+        // Correct the hours or minutes
+        if (this.options.twelveHour) {
+          if (isHours) {
+            if (value === 0) value = 12;
+          } else {
+            if (roundBy5) value *= 5;
+            if (value === 60) value = 0;
+          }
+        } else {
+          if (isHours) {
+            if (value === 12) {
+              value = 0;
+            }
+            value = inner ? value === 0 ? 12 : value : value === 0 ? 0 : value + 12;
+          } else {
+            if (roundBy5) {
+              value *= 5;
+            }
+            if (value === 60) {
+              value = 0;
+            }
+          }
+        }
 
-								// Once hours or minutes changed, vibrate the device
-								if (this[this.currentView] !== value) {
-										if (this.vibrate && this.options.vibrate) {
-												// Do not vibrate too frequently
-												if (!this.vibrateTimer) {
-														navigator[this.vibrate](10);
-														this.vibrateTimer = setTimeout(function () {
-																_this2.vibrateTimer = null;
-														}, 100);
-												}
-										}
-								}
+        // Once hours or minutes changed, vibrate the device
+        if (this[this.currentView] !== value) {
+          if (this.vibrate && this.options.vibrate) {
+            // Do not vibrate too frequently
+            if (!this.vibrateTimer) {
+              navigator[this.vibrate](10);
+              this.vibrateTimer = setTimeout(function () {
+                _this41.vibrateTimer = null;
+              }, 100);
+            }
+          }
+        }
 
-								this[this.currentView] = value;
-								if (isHours) {
-										this['spanHours'].innerHTML = value;
-								} else {
-										this['spanMinutes'].innerHTML = Timepicker._addLeadingZero(value);
-								}
+        this[this.currentView] = value;
+        if (isHours) {
+          this['spanHours'].innerHTML = value;
+        } else {
+          this['spanMinutes'].innerHTML = Timepicker._addLeadingZero(value);
+        }
 
-								// Set clock hand and others' position
-								var cx1 = Math.sin(radian) * (radius - this.options.tickRadius),
-								    cy1 = -Math.cos(radian) * (radius - this.options.tickRadius),
-								    cx2 = Math.sin(radian) * radius,
-								    cy2 = -Math.cos(radian) * radius;
-								this.hand.setAttribute('x2', cx1);
-								this.hand.setAttribute('y2', cy1);
-								this.bg.setAttribute('cx', cx2);
-								this.bg.setAttribute('cy', cy2);
-						}
-				}, {
-						key: 'open',
-						value: function open() {
-								if (this.isOpen) {
-										return;
-								}
+        // Set clock hand and others' position
+        var cx1 = Math.sin(radian) * (radius - this.options.tickRadius),
+            cy1 = -Math.cos(radian) * (radius - this.options.tickRadius),
+            cx2 = Math.sin(radian) * radius,
+            cy2 = -Math.cos(radian) * radius;
+        this.hand.setAttribute('x2', cx1);
+        this.hand.setAttribute('y2', cy1);
+        this.bg.setAttribute('cx', cx2);
+        this.bg.setAttribute('cy', cy2);
+      }
+    }, {
+      key: "open",
+      value: function open() {
+        if (this.isOpen) {
+          return;
+        }
 
-								this.isOpen = true;
-								this._updateTimeFromInput();
-								this.showView('hours');
-								this.modal.open();
-						}
-				}, {
-						key: 'close',
-						value: function close() {
-								if (!this.isOpen) {
-										return;
-								}
+        this.isOpen = true;
+        this._updateTimeFromInput();
+        this.showView('hours');
+        this.modal.open();
+      }
+    }, {
+      key: "close",
+      value: function close() {
+        if (!this.isOpen) {
+          return;
+        }
 
-								this.isOpen = false;
-								this.modal.close();
-						}
+        this.isOpen = false;
+        this.modal.close();
+      }
 
-						/**
+      /**
        * Finish timepicker selection.
        */
 
-				}, {
-						key: 'done',
-						value: function done(e, clearValue) {
-								// Set input value
-								var last = this.el.value;
-								var value = clearValue ? '' : Timepicker._addLeadingZero(this.hours) + ':' + Timepicker._addLeadingZero(this.minutes);
-								this.time = value;
-								if (!clearValue && this.options.twelveHour) {
-										value = value + ' ' + this.amOrPm;
-								}
-								this.el.value = value;
+    }, {
+      key: "done",
+      value: function done(e, clearValue) {
+        // Set input value
+        var last = this.el.value;
+        var value = clearValue ? '' : Timepicker._addLeadingZero(this.hours) + ':' + Timepicker._addLeadingZero(this.minutes);
+        this.time = value;
+        if (!clearValue && this.options.twelveHour) {
+          value = value + " " + this.amOrPm;
+        }
+        this.el.value = value;
 
-								// Trigger change event
-								if (value !== last) {
-										this.$el.trigger('change');
-								}
+        // Trigger change event
+        if (value !== last) {
+          this.$el.trigger('change');
+        }
 
-								this.close();
-								this.el.focus();
-						}
-				}, {
-						key: 'clear',
-						value: function clear() {
-								this.done(null, true);
-						}
-				}], [{
-						key: 'init',
-						value: function init($els, options) {
-								var arr = [];
-								$els.each(function () {
-										arr.push(new Timepicker(this, options));
-								});
-								return arr;
-						}
-				}, {
-						key: '_addLeadingZero',
-						value: function _addLeadingZero(num) {
-								return (num < 10 ? '0' : '') + num;
-						}
-				}, {
-						key: '_createSVGEl',
-						value: function _createSVGEl(name) {
-								var svgNS = 'http://www.w3.org/2000/svg';
-								return document.createElementNS(svgNS, name);
-						}
+        this.close();
+        this.el.focus();
+      }
+    }, {
+      key: "clear",
+      value: function clear() {
+        this.done(null, true);
+      }
+    }], [{
+      key: "init",
+      value: function init($els, options) {
+        var arr = [];
+        $els.each(function () {
+          arr.push(new Timepicker(this, options));
+        });
+        return arr;
+      }
+    }, {
+      key: "_addLeadingZero",
+      value: function _addLeadingZero(num) {
+        return (num < 10 ? '0' : '') + num;
+      }
+    }, {
+      key: "_createSVGEl",
+      value: function _createSVGEl(name) {
+        var svgNS = 'http://www.w3.org/2000/svg';
+        return document.createElementNS(svgNS, name);
+      }
 
-						/**
+      /**
        * @typedef {Object} Point
        * @property {number} x The X Coordinate
        * @property {number} y The Y Coordinate
        */
 
-						/**
+      /**
        * Get x position of mouse or touch event
        * @param {Event} e
        * @return {Point} x and y location
        */
 
-				}, {
-						key: '_Pos',
-						value: function _Pos(e) {
-								if (e.targetTouches && e.targetTouches.length >= 1) {
-										return { x: e.targetTouches[0].clientX, y: e.targetTouches[0].clientY };
-								}
-								// mouse event
-								return { x: e.clientX, y: e.clientY };
-						}
+    }, {
+      key: "_Pos",
+      value: function _Pos(e) {
+        if (e.targetTouches && e.targetTouches.length >= 1) {
+          return { x: e.targetTouches[0].clientX, y: e.targetTouches[0].clientY };
+        }
+        // mouse event
+        return { x: e.clientX, y: e.clientY };
+      }
 
-						/**
+      /**
        * Get Instance
        */
 
-				}, {
-						key: 'getInstance',
-						value: function getInstance(el) {
-								var domElem = !!el.jquery ? el[0] : el;
-								return domElem.M_Timepicker;
-						}
-				}, {
-						key: 'defaults',
-						get: function get() {
-								return _defaults;
-						}
-				}]);
+    }, {
+      key: "getInstance",
+      value: function getInstance(el) {
+        var domElem = !!el.jquery ? el[0] : el;
+        return domElem.M_Timepicker;
+      }
+    }, {
+      key: "defaults",
+      get: function () {
+        return _defaults;
+      }
+    }]);
 
-				return Timepicker;
-		}();
+    return Timepicker;
+  }();
 
-		Timepicker._template = ['<div class= "modal timepicker-modal">', '<div class="modal-content timepicker-container">', '<div class="timepicker-digital-display">', '<div class="timepicker-text-container">', '<div class="timepicker-display-column">', '<span class="timepicker-span-hours text-primary"></span>', ':', '<span class="timepicker-span-minutes"></span>', '</div>', '<div class="timepicker-display-column timepicker-display-am-pm">', '<div class="timepicker-span-am-pm"></div>', '</div>', '</div>', '</div>', '<div class="timepicker-analog-display">', '<div class="timepicker-plate">', '<div class="timepicker-canvas"></div>', '<div class="timepicker-dial timepicker-hours"></div>', '<div class="timepicker-dial timepicker-minutes timepicker-dial-out"></div>', '</div>', '<div class="timepicker-footer"></div>', '</div>', '</div>', '</div>'].join('');
+  Timepicker._template = ['<div class= "modal timepicker-modal">', '<div class="modal-content timepicker-container">', '<div class="timepicker-digital-display">', '<div class="timepicker-text-container">', '<div class="timepicker-display-column">', '<span class="timepicker-span-hours text-primary"></span>', ':', '<span class="timepicker-span-minutes"></span>', '</div>', '<div class="timepicker-display-column timepicker-display-am-pm">', '<div class="timepicker-span-am-pm"></div>', '</div>', '</div>', '</div>', '<div class="timepicker-analog-display">', '<div class="timepicker-plate">', '<div class="timepicker-canvas"></div>', '<div class="timepicker-dial timepicker-hours"></div>', '<div class="timepicker-dial timepicker-minutes timepicker-dial-out"></div>', '</div>', '<div class="timepicker-footer"></div>', '</div>', '</div>', '</div>'].join('');
 
-		M.Timepicker = Timepicker;
+  M.Timepicker = Timepicker;
 
-		if (M.jQueryLoaded) {
-				M.initializeJqueryWrapper(Timepicker, 'timepicker', 'M_Timepicker');
-		}
-})(cash, M.Vel);
-'use strict';
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-(function ($) {
+  if (M.jQueryLoaded) {
+    M.initializeJqueryWrapper(Timepicker, 'timepicker', 'M_Timepicker');
+  }
+})(cash);
+;(function ($) {
   'use strict';
 
   var _defaults = {};
@@ -10009,7 +9782,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }
 
     _createClass(CharacterCounter, [{
-      key: 'destroy',
+      key: "destroy",
 
 
       /**
@@ -10026,7 +9799,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_setupEventHandlers',
+      key: "_setupEventHandlers",
       value: function _setupEventHandlers() {
         this._handleUpdateCounterBound = this.updateCounter.bind(this);
 
@@ -10039,7 +9812,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_removeEventHandlers',
+      key: "_removeEventHandlers",
       value: function _removeEventHandlers() {
         this.el.removeEventListener('focus', this._handleUpdateCounterBound, true);
         this.el.removeEventListener('input', this._handleUpdateCounterBound, true);
@@ -10050,7 +9823,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_setupCounter',
+      key: "_setupCounter",
       value: function _setupCounter() {
         this.counterEl = document.createElement('span');
         $(this.counterEl).addClass('character-counter').css({
@@ -10067,7 +9840,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_removeCounter',
+      key: "_removeCounter",
       value: function _removeCounter() {
         $(this.counterEl).remove();
       }
@@ -10077,7 +9850,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: 'updateCounter',
+      key: "updateCounter",
       value: function updateCounter() {
         var maxLength = +this.$el.attr('data-length'),
             actualLength = this.el.value.length;
@@ -10097,7 +9870,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_validateInput',
+      key: "_validateInput",
       value: function _validateInput() {
         if (this.isValidLength && this.isInvalid) {
           this.isInvalid = false;
@@ -10109,7 +9882,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }
       }
     }], [{
-      key: 'init',
+      key: "init",
       value: function init($els, options) {
         var arr = [];
         $els.each(function () {
@@ -10123,14 +9896,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: 'getInstance',
+      key: "getInstance",
       value: function getInstance(el) {
         var domElem = !!el.jquery ? el[0] : el;
         return domElem.M_CharacterCounter;
       }
     }, {
-      key: 'defaults',
-      get: function get() {
+      key: "defaults",
+      get: function () {
         return _defaults;
       }
     }]);
@@ -10144,13 +9917,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     M.initializeJqueryWrapper(CharacterCounter, 'characterCounter', 'M_CharacterCounter');
   }
 })(cash);
-'use strict';
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-(function ($) {
+;(function ($) {
   'use strict';
 
   var _defaults = {
@@ -10177,7 +9944,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
      * @param {Object} options
      */
     function Carousel(el, options) {
-      var _this = this;
+      var _this42 = this;
 
       _classCallCheck(this, Carousel);
 
@@ -10232,8 +9999,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       // Iterate through slides
       this.$indicators = $('<ul class="indicators"></ul>');
       this.$el.find('.carousel-item').each(function (el, i) {
-        _this.images.push(el);
-        if (_this.showIndicators) {
+        _this42.images.push(el);
+        if (_this42.showIndicators) {
           var $indicator = $('<li class="indicator-item"></li>');
 
           // Add active to first by default.
@@ -10241,7 +10008,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             $indicator[0].classList.add('active');
           }
 
-          _this.$indicators.append($indicator);
+          _this42.$indicators.append($indicator);
         }
       });
       if (this.showIndicators) {
@@ -10254,7 +10021,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       ['webkit', 'Moz', 'O', 'ms'].every(function (prefix) {
         var e = prefix + 'Transform';
         if (typeof document.body.style[e] !== 'undefined') {
-          _this.xform = e;
+          _this42.xform = e;
           return false;
         }
         return true;
@@ -10265,7 +10032,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }
 
     _createClass(Carousel, [{
-      key: 'destroy',
+      key: "destroy",
 
 
       /**
@@ -10281,9 +10048,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_setupEventHandlers',
+      key: "_setupEventHandlers",
       value: function _setupEventHandlers() {
-        var _this2 = this;
+        var _this43 = this;
 
         this._handleCarouselTapBound = this._handleCarouselTap.bind(this);
         this._handleCarouselDragBound = this._handleCarouselDrag.bind(this);
@@ -10305,7 +10072,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         if (this.showIndicators && this.$indicators) {
           this._handleIndicatorClickBound = this._handleIndicatorClick.bind(this);
           this.$indicators.find('.indicator-item').each(function (el, i) {
-            el.addEventListener('click', _this2._handleIndicatorClickBound);
+            el.addEventListener('click', _this43._handleIndicatorClickBound);
           });
         }
 
@@ -10321,9 +10088,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_removeEventHandlers',
+      key: "_removeEventHandlers",
       value: function _removeEventHandlers() {
-        var _this3 = this;
+        var _this44 = this;
 
         if (typeof window.ontouchstart !== 'undefined') {
           this.el.removeEventListener('touchstart', this._handleCarouselTapBound);
@@ -10338,7 +10105,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         if (this.showIndicators && this.$indicators) {
           this.$indicators.find('.indicator-item').each(function (el, i) {
-            el.removeEventListener('click', _this3._handleIndicatorClickBound);
+            el.removeEventListener('click', _this44._handleIndicatorClickBound);
           });
         }
 
@@ -10351,7 +10118,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_handleCarouselTap',
+      key: "_handleCarouselTap",
       value: function _handleCarouselTap(e) {
         // Fixes firefox draggable image bug
         if (e.type === 'mousedown' && $(e.target).is('img')) {
@@ -10376,7 +10143,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_handleCarouselDrag',
+      key: "_handleCarouselDrag",
       value: function _handleCarouselDrag(e) {
         var x = void 0,
             y = void 0,
@@ -10419,7 +10186,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_handleCarouselRelease',
+      key: "_handleCarouselRelease",
       value: function _handleCarouselRelease(e) {
         if (this.pressed) {
           this.pressed = false;
@@ -10460,7 +10227,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_handleCarouselClick',
+      key: "_handleCarouselClick",
       value: function _handleCarouselClick(e) {
         // Disable clicks if carousel was dragged.
         if (this.dragged) {
@@ -10486,7 +10253,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_handleIndicatorClick',
+      key: "_handleIndicatorClick",
       value: function _handleIndicatorClick(e) {
         e.stopPropagation();
 
@@ -10502,7 +10269,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_handleResize',
+      key: "_handleResize",
       value: function _handleResize(e) {
         if (this.options.fullWidth) {
           this.itemWidth = this.$el.find('.carousel-item').first().innerWidth();
@@ -10522,9 +10289,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_setCarouselHeight',
+      key: "_setCarouselHeight",
       value: function _setCarouselHeight(imageOnly) {
-        var _this4 = this;
+        var _this45 = this;
 
         var firstSlide = this.$el.find('.carousel-item.active').length ? this.$el.find('.carousel-item.active').first() : this.$el.find('.carousel-item').first();
         var firstImage = firstSlide.find('img').first();
@@ -10544,7 +10311,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           } else {
             // Get height when image is loaded normally
             firstImage.one('load', function (el, i) {
-              _this4.$el.css('height', el.offsetHeight + 'px');
+              _this45.$el.css('height', el.offsetHeight + 'px');
             });
           }
         } else if (!imageOnly) {
@@ -10559,7 +10326,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_xpos',
+      key: "_xpos",
       value: function _xpos(e) {
         // touch event
         if (e.targetTouches && e.targetTouches.length >= 1) {
@@ -10576,7 +10343,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_ypos',
+      key: "_ypos",
       value: function _ypos(e) {
         // touch event
         if (e.targetTouches && e.targetTouches.length >= 1) {
@@ -10593,7 +10360,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_wrap',
+      key: "_wrap",
       value: function _wrap(x) {
         return x >= this.count ? x % this.count : x < 0 ? this._wrap(this.count + x % this.count) : x;
       }
@@ -10603,7 +10370,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_track',
+      key: "_track",
       value: function _track() {
         var now = void 0,
             elapsed = void 0,
@@ -10625,7 +10392,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_autoScroll',
+      key: "_autoScroll",
       value: function _autoScroll() {
         var elapsed = void 0,
             delta = void 0;
@@ -10648,9 +10415,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_scroll',
+      key: "_scroll",
       value: function _scroll(x) {
-        var _this5 = this;
+        var _this46 = this;
 
         // Track scrolling state
         if (!this.$el.hasClass('scrolling')) {
@@ -10660,7 +10427,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           window.clearTimeout(this.scrollingTimeout);
         }
         this.scrollingTimeout = window.setTimeout(function () {
-          _this5.$el.removeClass('scrolling');
+          _this46.$el.removeClass('scrolling');
         }, this.options.duration);
 
         // Start actual scroll
@@ -10791,7 +10558,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_cycleTo',
+      key: "_cycleTo",
       value: function _cycleTo(n, callback) {
         var diff = this.center % this.count - n;
 
@@ -10837,7 +10604,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: 'next',
+      key: "next",
       value: function next(n) {
         if (n === undefined || isNaN(n)) {
           n = 1;
@@ -10860,7 +10627,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: 'prev',
+      key: "prev",
       value: function prev(n) {
         if (n === undefined || isNaN(n)) {
           n = 1;
@@ -10885,7 +10652,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: 'set',
+      key: "set",
       value: function set(n, callback) {
         if (n === undefined || isNaN(n)) {
           n = 0;
@@ -10902,7 +10669,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this._cycleTo(n, callback);
       }
     }], [{
-      key: 'init',
+      key: "init",
       value: function init($els, options) {
         var arr = [];
         $els.each(function () {
@@ -10916,14 +10683,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: 'getInstance',
+      key: "getInstance",
       value: function getInstance(el) {
         var domElem = !!el.jquery ? el[0] : el;
         return domElem.M_Carousel;
       }
     }, {
-      key: 'defaults',
-      get: function get() {
+      key: "defaults",
+      get: function () {
         return _defaults;
       }
     }]);
@@ -10937,13 +10704,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     M.initializeJqueryWrapper(Carousel, 'carousel', 'M_Carousel');
   }
 })(cash);
-'use strict';
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-(function ($) {
+;(function ($) {
   'use strict';
 
   var _defaults = {};
@@ -10989,7 +10750,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }
 
     _createClass(FeatureDiscovery, [{
-      key: 'destroy',
+      key: "destroy",
 
 
       /**
@@ -11005,7 +10766,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_setupEventHandlers',
+      key: "_setupEventHandlers",
       value: function _setupEventHandlers() {
         this._handleDocumentClickBound = this._handleDocumentClick.bind(this);
         this._handleTargetClickBound = this._handleTargetClick.bind(this);
@@ -11026,7 +10787,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_removeEventHandlers',
+      key: "_removeEventHandlers",
       value: function _removeEventHandlers() {
         this.el.removeEventListener('click', this._handleTargetClickBound);
         this.originEl.removeEventListener('click', this._handleOriginClickBound);
@@ -11039,7 +10800,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_handleTargetClick',
+      key: "_handleTargetClick",
       value: function _handleTargetClick(e) {
         this.open();
       }
@@ -11050,7 +10811,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_handleOriginClick',
+      key: "_handleOriginClick",
       value: function _handleOriginClick(e) {
         this.close();
       }
@@ -11061,7 +10822,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_handleResize',
+      key: "_handleResize",
       value: function _handleResize(e) {
         this._calculatePositioning();
       }
@@ -11072,7 +10833,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_handleDocumentClick',
+      key: "_handleDocumentClick",
       value: function _handleDocumentClick(e) {
         if (!$(e.target).closest('.tap-target-wrapper').length) {
           this.close();
@@ -11086,7 +10847,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_setup',
+      key: "_setup",
       value: function _setup() {
         // Creating tap target
         this.wrapper = this.$el.parent()[0];
@@ -11133,7 +10894,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_calculatePositioning',
+      key: "_calculatePositioning",
       value: function _calculatePositioning() {
         // Element or parent is fixed position?
         var isFixed = this.$origin.css('position') === 'fixed';
@@ -11222,7 +10983,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: 'open',
+      key: "open",
       value: function open() {
         if (this.isOpen) {
           return;
@@ -11239,7 +11000,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: 'close',
+      key: "close",
       value: function close() {
         if (!this.isOpen) {
           return;
@@ -11251,7 +11012,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         document.body.removeEventListener('click', this._handleDocumentClickBound, true);
       }
     }], [{
-      key: 'init',
+      key: "init",
       value: function init($els, options) {
         var arr = [];
         $els.each(function () {
@@ -11265,14 +11026,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: 'getInstance',
+      key: "getInstance",
       value: function getInstance(el) {
         var domElem = !!el.jquery ? el[0] : el;
         return domElem.M_FeatureDiscovery;
       }
     }, {
-      key: 'defaults',
-      get: function get() {
+      key: "defaults",
+      get: function () {
         return _defaults;
       }
     }]);
@@ -11286,13 +11047,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     M.initializeJqueryWrapper(FeatureDiscovery, 'featureDiscovery', 'M_FeatureDiscovery');
   }
 })(cash);
-'use strict';
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-(function ($) {
+;(function ($) {
   'use strict';
 
   var _defaults = {
@@ -11332,15 +11087,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       this.isMultiple = this.$el.prop('multiple');
 
       // Setup
-      this.valuesSelected = [];
-      this.$selectedOptions = $();
+      this._keysSelected = {};
+      this._valueDict = {}; // Maps key to original and generated option element.
       this._setupDropdown();
 
       this._setupEventHandlers();
     }
 
     _createClass(Select, [{
-      key: 'destroy',
+      key: "destroy",
 
 
       /**
@@ -11357,16 +11112,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_setupEventHandlers',
+      key: "_setupEventHandlers",
       value: function _setupEventHandlers() {
-        var _this = this;
+        var _this47 = this;
 
         this._handleSelectChangeBound = this._handleSelectChange.bind(this);
         this._handleOptionClickBound = this._handleOptionClick.bind(this);
         this._handleInputClickBound = this._handleInputClick.bind(this);
 
         $(this.dropdownOptions).find('li:not(.optgroup)').each(function (el) {
-          el.addEventListener('click', _this._handleOptionClickBound);
+          el.addEventListener('click', _this47._handleOptionClickBound);
         });
         this.el.addEventListener('change', this._handleSelectChangeBound);
         this.input.addEventListener('click', this._handleInputClickBound);
@@ -11377,12 +11132,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_removeEventHandlers',
+      key: "_removeEventHandlers",
       value: function _removeEventHandlers() {
-        var _this2 = this;
+        var _this48 = this;
 
         $(this.dropdownOptions).find('li:not(.optgroup)').each(function (el) {
-          el.removeEventListener('click', _this2._handleOptionClickBound);
+          el.removeEventListener('click', _this48._handleOptionClickBound);
         });
         this.el.removeEventListener('change', this._handleSelectChangeBound);
         this.input.removeEventListener('click', this._handleInputClickBound);
@@ -11395,7 +11150,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_handleSelectChange',
+      key: "_handleSelectChange",
       value: function _handleSelectChange(e) {
         this._setValueToInput();
       }
@@ -11406,18 +11161,18 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_handleOptionClick',
+      key: "_handleOptionClick",
       value: function _handleOptionClick(e) {
         e.preventDefault();
         var option = $(e.target).closest('li')[0];
-        var optionIndex = $(this.dropdownOptions).find('li:not(.optgroup)').index(option);
-        if (!$(option).hasClass('disabled') && !$(option).hasClass('optgroup')) {
+        var key = option.id;
+        if (!$(option).hasClass('disabled') && !$(option).hasClass('optgroup') && key.length) {
           var selected = true;
 
           if (this.isMultiple) {
             var checkbox = $(option).find('input[type="checkbox"]');
             checkbox.prop('checked', !checkbox.prop('checked'));
-            selected = this._toggleEntryFromArray(optionIndex);
+            selected = this._toggleEntryFromArray(key);
           } else {
             $(this.dropdownOptions).find('li').removeClass('active');
             $(option).toggleClass('active');
@@ -11425,7 +11180,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           }
 
           this._activateOption($(this.dropdownOptions), option);
-          this.$el.find('option').eq(optionIndex).prop('selected', selected);
+          $(this._valueDict[key].el).prop('selected', selected);
           this.$el.trigger('change');
         }
 
@@ -11437,7 +11192,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_handleInputClick',
+      key: "_handleInputClick",
       value: function _handleInputClick() {
         if (this.dropdown && this.dropdown.isOpen) {
           this._setValueToInput();
@@ -11450,9 +11205,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_setupDropdown',
+      key: "_setupDropdown",
       value: function _setupDropdown() {
-        var _this3 = this;
+        var _this49 = this;
 
         this.wrapper = document.createElement('div');
         this.wrapper.classList.add();
@@ -11467,7 +11222,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         // Create dropdown
         this.$selectOptions = this.$el.children('option, optgroup');
         this.dropdownOptions = document.createElement('ul');
-        this.dropdownOptions.id = 'select-options-' + M.guid();
+        this.dropdownOptions.id = "select-options-" + M.guid();
         $(this.dropdownOptions).addClass('dropdown-content select-dropdown ' + (this.isMultiple ? 'multiple-select-dropdown' : ''));
 
         // Create dropdown structure.
@@ -11476,25 +11231,21 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             if ($(el).is('option')) {
               // Direct descendant option.
               var optionEl = void 0;
-              if (_this3.isMultiple) {
-                optionEl = _this3._appendOptionWithIcon(_this3.$el, el, 'multiple');
+              if (_this49.isMultiple) {
+                optionEl = _this49._appendOptionWithIcon(_this49.$el, el, 'multiple');
               } else {
-                optionEl = _this3._appendOptionWithIcon(_this3.$el, el);
+                optionEl = _this49._appendOptionWithIcon(_this49.$el, el);
               }
 
-              if ($(el).prop('selected')) {
-                _this3.$selectedOptions.add(optionEl);
-              }
+              _this49._addOptionToValueDict(el, optionEl);
             } else if ($(el).is('optgroup')) {
               // Optgroup.
               var selectOptions = $(el).children('option');
-              $(_this3.dropdownOptions).append($('<li class="optgroup"><span>' + el.getAttribute('label') + '</span></li>')[0]);
+              $(_this49.dropdownOptions).append($('<li class="optgroup"><span>' + el.getAttribute('label') + '</span></li>')[0]);
 
               selectOptions.each(function (el) {
-                var optionEl = _this3._appendOptionWithIcon(_this3.$el, el, 'optgroup-option');
-                if ($(el).prop('selected')) {
-                  _this3.$selectedOptions.add(optionEl);
-                }
+                var optionEl = _this49._appendOptionWithIcon(_this49.$el, el, 'optgroup-option');
+                _this49._addOptionToValueDict(el, optionEl);
               });
             }
           });
@@ -11516,7 +11267,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this._setValueToInput();
 
         // Add caret
-        var dropdownIcon = $('<svg class="caret" fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');
+        var dropdownIcon = $('<svg class="caret" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');
         this.$el.before(dropdownIcon[0]);
 
         // Initialize dropdown
@@ -11533,11 +11284,30 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }
 
       /**
+       * Add option to value dict
+       * @param {Element} el  original option element
+       * @param {Element} optionEl  generated option element
+       */
+
+    }, {
+      key: "_addOptionToValueDict",
+      value: function _addOptionToValueDict(el, optionEl) {
+        var index = Object.keys(this._valueDict).length;
+        var key = this.dropdownOptions.id + index;
+        var obj = {};
+        optionEl.id = key;
+
+        obj.el = el;
+        obj.optionEl = optionEl;
+        this._valueDict[key] = obj;
+      }
+
+      /**
        * Remove dropdown
        */
 
     }, {
-      key: '_removeDropdown',
+      key: "_removeDropdown",
       value: function _removeDropdown() {
         $(this.wrapper).find('.caret').remove();
         $(this.input).remove();
@@ -11555,16 +11325,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_appendOptionWithIcon',
+      key: "_appendOptionWithIcon",
       value: function _appendOptionWithIcon(select, option, type) {
         // Add disabled attr if disabled
         var disabledClass = option.disabled ? 'disabled ' : '';
         var optgroupClass = type === 'optgroup-option' ? 'optgroup-option ' : '';
-        var multipleCheckbox = this.isMultiple ? '<label><input type="checkbox"' + disabledClass + '"/><span>' + option.innerHTML + '</span></label>' : option.innerHTML;
+        var multipleCheckbox = this.isMultiple ? "<label><input type=\"checkbox\"" + disabledClass + "\"/><span>" + option.innerHTML + "</span></label>" : option.innerHTML;
         var liEl = $('<li></li>');
         var spanEl = $('<span></span>');
         spanEl.html(multipleCheckbox);
-        liEl.addClass(disabledClass + ' ' + optgroupClass);
+        liEl.addClass(disabledClass + " " + optgroupClass);
         liEl.append(spanEl);
 
         // add icons
@@ -11582,26 +11352,24 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
       /**
        * Toggle entry from option
-       * @param {Number} entryIndex
+       * @param {String} key  Option key
        * @return {Boolean}  if entry was added or removed
        */
 
     }, {
-      key: '_toggleEntryFromArray',
-      value: function _toggleEntryFromArray(entryIndex) {
-        var index = this.valuesSelected.indexOf(entryIndex),
-            notAdded = index === -1;
-
+      key: "_toggleEntryFromArray",
+      value: function _toggleEntryFromArray(key) {
+        var notAdded = !this._keysSelected.hasOwnProperty(key);
         if (notAdded) {
-          this.valuesSelected.push(entryIndex);
+          this._keysSelected[key] = true;
         } else {
-          this.valuesSelected.splice(index, 1);
+          delete this._keysSelected[key];
         }
 
-        $(this.dropdownOptions).find('li:not(.optgroup)').eq(entryIndex).toggleClass('active');
+        $(this._valueDict[key].optionEl).toggleClass('active');
 
         // use notAdded instead of true (to detect if the option is selected or not)
-        this.$el.find('option').eq(entryIndex).prop('selected', notAdded);
+        $(this._valueDict[key].el).prop('selected', notAdded);
 
         return notAdded;
       }
@@ -11611,12 +11379,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_setValueToInput',
+      key: "_setValueToInput",
       value: function _setValueToInput() {
         var value = '';
         var options = this.$el.find('option');
 
-        options.each(function (el, i) {
+        options.each(function (el) {
           if ($(el).prop('selected')) {
             var text = $(el).text();
             value === '' ? value += text : value += ', ' + text;
@@ -11638,24 +11406,21 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_setSelectedStates',
+      key: "_setSelectedStates",
       value: function _setSelectedStates() {
-        var _this4 = this;
+        this._keysSelected = {};
 
-        this.valuesSelected = [];
-        var $onlyOptions = $(this.dropdownOptions).find('li:not(.optgroup)');
-        this.$el.find('option').each(function (el, i) {
-          var option = $onlyOptions.eq(i);
-
-          if ($(el).prop('selected')) {
-            option.find('input[type="checkbox"]').prop("checked", true);
-            _this4._activateOption($(_this4.dropdownOptions), option);
-            _this4.valuesSelected.push(i);
+        for (var key in this._valueDict) {
+          var option = this._valueDict[key];
+          if ($(option.el).prop('selected')) {
+            $(option.optionEl).find('input[type="checkbox"]').prop("checked", true);
+            this._activateOption($(this.dropdownOptions), $(option.optionEl));
+            this._keysSelected[key] = true;
           } else {
-            option.find('input[type="checkbox"]').prop("checked", false);
-            option.removeClass('selected');
+            $(option.optionEl).find('input[type="checkbox"]').prop("checked", false);
+            $(option.optionEl).removeClass('selected');
           }
-        });
+        }
       }
 
       /**
@@ -11665,7 +11430,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_activateOption',
+      key: "_activateOption",
       value: function _activateOption(collection, newOption) {
         if (newOption) {
           if (!this.isMultiple) {
@@ -11676,8 +11441,23 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           option.addClass('selected');
         }
       }
+
+      /**
+       * Get Selected Values
+       * @return {Array}  Array of selected values
+       */
+
+    }, {
+      key: "getSelectedValues",
+      value: function getSelectedValues() {
+        var selectedValues = [];
+        for (var key in this._keysSelected) {
+          selectedValues.push(this._valueDict[key].el.value);
+        }
+        return selectedValues;
+      }
     }], [{
-      key: 'init',
+      key: "init",
       value: function init($els, options) {
         var arr = [];
         $els.each(function () {
@@ -11693,14 +11473,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: 'getInstance',
+      key: "getInstance",
       value: function getInstance(el) {
         var domElem = !!el.jquery ? el[0] : el;
         return domElem.M_Select;
       }
     }, {
-      key: 'defaults',
-      get: function get() {
+      key: "defaults",
+      get: function () {
         return _defaults;
       }
     }]);
@@ -11714,13 +11494,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     M.initializeJqueryWrapper(Select, 'select', 'M_Select');
   }
 })(cash);
-'use strict';
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-(function ($, Vel) {
+;(function ($, anim) {
   'use strict';
 
   var _defaults = {};
@@ -11764,7 +11538,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }
 
     _createClass(Range, [{
-      key: 'destroy',
+      key: "destroy",
 
 
       /**
@@ -11781,15 +11555,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_setupEventHandlers',
+      key: "_setupEventHandlers",
       value: function _setupEventHandlers() {
         this._handleRangeChangeBound = this._handleRangeChange.bind(this);
+        this._handleRangeFocusBound = this._handleRangeFocus.bind(this);
         this._handleRangeMousedownTouchstartBound = this._handleRangeMousedownTouchstart.bind(this);
         this._handleRangeInputMousemoveTouchmoveBound = this._handleRangeInputMousemoveTouchmove.bind(this);
         this._handleRangeMouseupTouchendBound = this._handleRangeMouseupTouchend.bind(this);
         this._handleRangeBlurMouseoutTouchleaveBound = this._handleRangeBlurMouseoutTouchleave.bind(this);
 
         this.el.addEventListener('change', this._handleRangeChangeBound);
+        this.el.addEventListener('focus', this._handleRangeFocusBound);
 
         this.el.addEventListener('mousedown', this._handleRangeMousedownTouchstartBound);
         this.el.addEventListener('touchstart', this._handleRangeMousedownTouchstartBound);
@@ -11811,9 +11587,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_removeEventHandlers',
+      key: "_removeEventHandlers",
       value: function _removeEventHandlers() {
         this.el.removeEventListener('change', this._handleRangeChangeBound);
+        this.el.removeEventListener('focus', this._handleRangeFocusBound);
 
         this.el.removeEventListener('mousedown', this._handleRangeMousedownTouchstartBound);
         this.el.removeEventListener('touchstart', this._handleRangeMousedownTouchstartBound);
@@ -11836,7 +11613,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_handleRangeChange',
+      key: "_handleRangeChange",
       value: function _handleRangeChange() {
         $(this.value).html(this.$el.val());
 
@@ -11849,12 +11626,25 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }
 
       /**
+       * Handle Range Focus
+       * @param {Event} e
+       */
+
+    }, {
+      key: "_handleRangeFocus",
+      value: function _handleRangeFocus() {
+        if (M.tabPressed) {
+          this.$el.addClass('focused');
+        }
+      }
+
+      /**
        * Handle Range Mousedown and Touchstart
        * @param {Event} e
        */
 
     }, {
-      key: '_handleRangeMousedownTouchstart',
+      key: "_handleRangeMousedownTouchstart",
       value: function _handleRangeMousedownTouchstart(e) {
         // Set indicator value
         $(this.value).html(this.$el.val());
@@ -11877,7 +11667,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_handleRangeInputMousemoveTouchmove',
+      key: "_handleRangeInputMousemoveTouchmove",
       value: function _handleRangeInputMousemoveTouchmove() {
         if (this._mousedown) {
           if (!$(this.thumb).hasClass('active')) {
@@ -11895,7 +11685,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_handleRangeMouseupTouchend',
+      key: "_handleRangeMouseupTouchend",
       value: function _handleRangeMouseupTouchend() {
         this._mousedown = false;
         this.$el.removeClass('active');
@@ -11906,20 +11696,24 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_handleRangeBlurMouseoutTouchleave',
+      key: "_handleRangeBlurMouseoutTouchleave",
       value: function _handleRangeBlurMouseoutTouchleave() {
         if (!this._mousedown) {
+          this.$el.removeClass('focused');
           var paddingLeft = parseInt(this.$el.css('padding-left'));
           var marginLeft = 7 + paddingLeft + 'px';
 
           if ($(this.thumb).hasClass('active')) {
-            Vel(this.thumb, 'stop');
-            Vel(this.thumb, {
-              height: '0px',
-              width: '0px',
-              top: '10px',
-              marginLeft: marginLeft
-            }, { duration: 100 });
+            anim.remove(this.thumb);
+            anim({
+              targets: this.thumb,
+              height: 0,
+              width: 0,
+              top: 10,
+              easing: 'easeOutQuad',
+              marginLeft: marginLeft,
+              duration: 100
+            });
           }
           $(this.thumb).removeClass('active');
         }
@@ -11930,7 +11724,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_setupThumb',
+      key: "_setupThumb",
       value: function _setupThumb() {
         this.thumb = document.createElement('span');
         this.value = document.createElement('span');
@@ -11945,7 +11739,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_removeThumb',
+      key: "_removeThumb",
       value: function _removeThumb() {
         $(this.thumb).remove();
       }
@@ -11955,16 +11749,20 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_showRangeBubble',
+      key: "_showRangeBubble",
       value: function _showRangeBubble() {
         var paddingLeft = parseInt($(this.thumb).parent().css('padding-left'));
         var marginLeft = -7 + paddingLeft + 'px'; // TODO: fix magic number?
-        Vel(this.thumb, {
-          height: "30px",
-          width: "30px",
-          top: "-30px",
-          marginLeft: marginLeft
-        }, { duration: 300, easing: 'easeOutExpo' });
+        anim.remove(this.thumb);
+        anim({
+          targets: this.thumb,
+          height: 30,
+          width: 30,
+          top: -30,
+          marginLeft: marginLeft,
+          duration: 300,
+          easing: 'easeOutQuint'
+        });
       }
 
       /**
@@ -11973,7 +11771,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: '_calcRangeOffset',
+      key: "_calcRangeOffset",
       value: function _calcRangeOffset() {
         var width = this.$el.width() - 15;
         var max = parseFloat(this.$el.attr('max'));
@@ -11982,7 +11780,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         return percent * width;
       }
     }], [{
-      key: 'init',
+      key: "init",
       value: function init($els, options) {
         var arr = [];
         $els.each(function () {
@@ -11998,14 +11796,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: 'getInstance',
+      key: "getInstance",
       value: function getInstance(el) {
         var domElem = !!el.jquery ? el[0] : el;
         return domElem.M_Range;
       }
     }, {
-      key: 'defaults',
-      get: function get() {
+      key: "defaults",
+      get: function () {
         return _defaults;
       }
     }]);
@@ -12019,5 +11817,5 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     M.initializeJqueryWrapper(Range, 'range', 'M_Range');
   }
 
-  Range.init($('input[type=range'));
-})(cash, M.Vel);
+  Range.init($('input[type=range]'));
+})(cash, anime);

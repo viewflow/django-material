@@ -10,6 +10,7 @@ import sass from 'gulp-sass'
 import uglify from 'gulp-uglify'
 
 var supportedBrowsers = [
+  'last 2 versions',
   'Chrome >= 50',
   'Firefox >= 46',
   'Explorer >= 11',
@@ -57,45 +58,61 @@ gulp.task('3rdparty.css', () => {
 
 gulp.task('materialize.js', () => {
   var deps = [
+    'node_modules/materialize-css/dist/js/materialize.js'
+  ]
+
+  return gulp.src(deps)
+    .pipe(gulp.dest('./material/static/material/js/'))
+  /*
+  var deps = [
+    "node_modules/materialize-css/js/anime.min.js",
+    "node_modules/materialize-css/js/autocomplete.js",
+    "node_modules/materialize-css/js/buttons.js",
+    "node_modules/materialize-css/js/cards.js",
+    "node_modules/materialize-css/js/carousel.js",
     "node_modules/materialize-css/js/cash.js",
-    "node_modules/materialize-css/js/velocity.min.js",
-    "node_modules/materialize-css/js/global.js",
+    "node_modules/materialize-css/js/characterCounter.js",
+    "node_modules/materialize-css/js/chips.js",
     "node_modules/materialize-css/js/collapsible.js",
+    "node_modules/materialize-css/js/datepicker.js",
     "node_modules/materialize-css/js/dropdown.js",
-    "node_modules/materialize-css/js/modal.js",
+    "node_modules/materialize-css/js/forms.js",
+    "node_modules/materialize-css/js/global.js",
+    "node_modules/materialize-css/js/jquery.timeago.min.js",
     "node_modules/materialize-css/js/materialbox.js",
+    "node_modules/materialize-css/js/modal.js",
     "node_modules/materialize-css/js/parallax.js",
+    "node_modules/materialize-css/js/prism.js",
+    "node_modules/materialize-css/js/pushpin.js",
+    "node_modules/materialize-css/js/range.js",
+    "node_modules/materialize-css/js/scrollspy.js",
+    "node_modules/materialize-css/js/select.js",
+    "node_modules/materialize-css/js/sidenav.js",
+    "node_modules/materialize-css/js/slider.js",
     "node_modules/materialize-css/js/tabs.js",
+    "node_modules/materialize-css/js/tapTarget.js",
+    "node_modules/materialize-css/js/timepicker.js",
+    "node_modules/materialize-css/js/toasts.js",
     "node_modules/materialize-css/js/tooltip.js",
     "node_modules/materialize-css/js/waves.js",
-    "node_modules/materialize-css/js/toasts.js",
-    "node_modules/materialize-css/js/sidenav.js",
-    "node_modules/materialize-css/js/scrollspy.js",
-    "node_modules/materialize-css/js/autocomplete.js",
-    "node_modules/materialize-css/js/forms.js",
-    "node_modules/materialize-css/js/slider.js",
-    "node_modules/materialize-css/js/cards.js",
-    "node_modules/materialize-css/js/chips.js",
-    "node_modules/materialize-css/js/pushpin.js",
-    "node_modules/materialize-css/js/buttons.js",
-    "node_modules/materialize-css/js/datepicker.js",
-    "node_modules/materialize-css/js/timepicker.js",
-    "node_modules/materialize-css/js/characterCounter.js",
-    "node_modules/materialize-css/js/carousel.js",
-    "node_modules/materialize-css/js/tapTarget.js",
-    "node_modules/materialize-css/js/select.js",
-    "node_modules/materialize-css/js/range.js",
   ]
   return gulp.src(deps)
     .pipe(babel({presets: [
       ['env', {
         "targets": {
           "browsers": supportedBrowsers
-        }
+        },
+        "plugins": [
+          'transform-es2015-arrow-functions',
+          'transform-es2015-block-scoping',
+          'transform-es2015-classes',
+          'transform-es2015-template-literals'
+        ]
       }]
     ]}))
     .pipe(concat('materialize.js'))
     .pipe(gulp.dest('./material/static/material/js/'));
+    */
 })
 
 gulp.task('materialize.scss', () => {
