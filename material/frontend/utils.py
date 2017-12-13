@@ -1,7 +1,10 @@
 from django.db import router
-from django.core.urlresolvers import NoReverseMatch, reverse
 from django.db.models.deletion import Collector
 
+try:
+    from django.urls import NoReverseMatch, reverse  # Django 1.10+
+except ImportError:
+    from django.core.urlresolvers import NoReverseMatch, reverse
 
 def get_deleted_objects(root):
     """Collect linked objects required to be deleted.
