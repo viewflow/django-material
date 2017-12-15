@@ -107,7 +107,7 @@ class ModelViewSet(BaseViewset):
     queryset = DEFAULT
     list_display = DEFAULT
     list_display_links = DEFAULT
-    ordering = None
+    ordering = DEFAULT
 
     layout = DEFAULT
     form_class = DEFAULT
