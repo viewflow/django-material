@@ -1,6 +1,6 @@
 from django.db import router
-from django.core.urlresolvers import NoReverseMatch, reverse
 from django.db.models.deletion import Collector
+from django.urls import NoReverseMatch, reverse
 
 
 def get_deleted_objects(root):
