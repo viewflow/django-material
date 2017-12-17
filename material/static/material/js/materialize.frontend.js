@@ -6,9 +6,10 @@ $(document).on('turbolinks:before-render', function (event) {
 $(document).on('turbolinks:load', function () {
   // Sidenav
   // http://materializecss.com/side-nav.html
-  // https://github.com/noraesae/perfect-scrollbar#how-to-use
   $('.sidenav').sidenav()
   $(document).activeNavigation('#slide-out')
+
+  // https://github.com/noraesae/perfect-scrollbar#how-to-use
   $('#slide-out').perfectScrollbar()
 })
 
@@ -18,9 +19,11 @@ $(document).on('turbolinks:before-cache', function () {
   $('.sidenav').css('transform', '')
   $('.drag-target').remove()
   $('#slide-out').perfectScrollbar('destroy')
+
   // Toasts
   $('script#messages').remove()
-  $('div#toast-container').remove()
+  M.Toast.dismissAll();
+  $('div#toast-container').css('display', 'none')
 })
 
 // submit GET forms with turbolinks
