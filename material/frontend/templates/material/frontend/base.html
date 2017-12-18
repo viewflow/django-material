@@ -22,7 +22,9 @@
                 {% block sidenav_header %}
                 <li>
                     <div class="user-view">
-                        <img class="background" src="{% static 'material/imgs/sidenav.svg' %}">
+                        <div class="background" >
+                          <img src="{% static 'material/imgs/sidenav.svg' %}">
+                        </div>
                         {% block userphoto %}
                         {% if user.photo.url %}
                         <a href="#"><img class="circle" src="{{ user.photo.url }}"></a>
