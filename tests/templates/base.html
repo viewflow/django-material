@@ -1,11 +1,14 @@
-<!DOCTYPE html>{% load static %}{% load render_bundle from webpack_loader %}
+<!DOCTYPE html>{% load static %}
 <html lang="en" class="mdc-typography">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>{% block title %}Material Design for Django{% endblock %}</title>
-  {% render_bundle 'material' 'css' %}
+  <link href="{% static 'material/css/material-components-web.css' %}" rel="stylesheet">
+  <link href="{% static 'material/css/django-material-components.css' %}" rel="stylesheet">
+  <link href="{% static 'material/fonts/roboto/style.css' %}" rel="stylesheet">
+  <link href="{% static 'material/fonts/material-design-icons/material-icons.css' %}" rel="stylesheet">
   <style>
     body {
       display: flex;
@@ -22,6 +25,8 @@
   <div class="page">
     {% block content %}{% endblock %}
   </div>
-  {% render_bundle 'material' 'js' %}
+  <script src="{% static 'material/js/material-components-web.js' %}"></script>
+  <script src="{% static 'material/js/django-material-components.js' %}"></script>
+  <script src="{% static 'material/js/material-components-init.js' %}"></script>
 </body>
 </html>
