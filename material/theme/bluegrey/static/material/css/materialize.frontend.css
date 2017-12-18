@@ -124,38 +124,59 @@ th {
     display: none; } }
 
 /* SIDEBAR */
-.side-nav.fixed {
+.sidenav-fixed {
   overflow-y: hidden; }
-  .side-nav.fixed .userView {
-    min-height: 175px; }
-  .side-nav.fixed li {
+  .sidenav-fixed .userView {
+    min-height: 175px;
+    position: relative;
+    padding: 32px 32px 0;
+    margin-bottom: 8px; }
+    .sidenav-fixed .userView .background {
+      overflow: hidden;
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: -1; }
+    .sidenav-fixed .userView .circle {
+      height: 64px;
+      width: 64px;
+      display: block; }
+    .sidenav-fixed .userView .name, .sidenav-fixed .userView .email {
+      font-size: 14px;
+      line-height: 20px;
+      margin-top: 10px;
+      font-weight: 500;
+      display: block; }
+  .sidenav-fixed li {
     min-height: 48px; }
-  .side-nav.fixed > li.last {
+  .sidenav-fixed > li.last {
     padding-bottom: 58px; }
-  .side-nav.fixed .collapsible-body {
+  .sidenav-fixed .collapsible-body {
     padding: 0; }
-    .side-nav.fixed .collapsible-body li a {
+    .sidenav-fixed .collapsible-body li a {
       padding-left: 70px; }
-    .side-nav.fixed .collapsible-body li .collapsible li.active {
+    .sidenav-fixed .collapsible-body li .collapsible li.active {
       background-color: rgba(0, 0, 0, 0.05); }
-      .side-nav.fixed .collapsible-body li .collapsible li.active a {
+      .sidenav-fixed .collapsible-body li .collapsible li.active a {
         color: rgba(0, 0, 0, 0.87); }
-    .side-nav.fixed .collapsible-body li:not(.active) > a.collapsible-header {
+    .sidenav-fixed .collapsible-body li:not(.active) > a.collapsible-header {
       color: rgba(0, 0, 0, 0.87); }
-    .side-nav.fixed .collapsible-body li .collapsible-body li.active {
+    .sidenav-fixed .collapsible-body li .collapsible-body li.active {
       background-color: #37474f; }
-      .side-nav.fixed .collapsible-body li .collapsible-body li.active a {
+      .sidenav-fixed .collapsible-body li .collapsible-body li.active a {
         color: #fff; }
-    .side-nav.fixed .collapsible-body li .collapsible-body li a {
+    .sidenav-fixed .collapsible-body li .collapsible-body li a {
       color: rgba(0, 0, 0, 0.87);
       padding-left: 90px; }
-    .side-nav.fixed .collapsible-body .collapsible li.active > a.active {
+    .sidenav-fixed .collapsible-body .collapsible li.active > a.active {
       color: rgba(0, 0, 0, 0.87); }
-    .side-nav.fixed .collapsible-body .submenu.active {
+    .sidenav-fixed .collapsible-body .submenu.active {
       background-color: rgba(0, 0, 0, 0.05) !important; }
-      .side-nav.fixed .collapsible-body .submenu.active .collapsible li.active > a.active,
-      .side-nav.fixed .collapsible-body .submenu.active .collapsible li.active > .collapsible-header,
-      .side-nav.fixed .collapsible-body .submenu.active .collapsible > li > .collapsible-header {
+      .sidenav-fixed .collapsible-body .submenu.active .collapsible li.active > a.active,
+      .sidenav-fixed .collapsible-body .submenu.active .collapsible li.active > .collapsible-header,
+      .sidenav-fixed .collapsible-body .submenu.active .collapsible > li > .collapsible-header {
         color: rgba(0, 0, 0, 0.87); }
 
 /* TOPBAR */
