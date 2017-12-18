@@ -139,37 +139,6 @@ th {
 .sidenav-fixed {
     // managed by perfect-scrollbar
     overflow-y: hidden;
-
-    .userView {
-        min-height: 175px;
-        position: relative;
-        padding: 32px 32px 0;
-        margin-bottom: 8px;
-
-        .background {
-            overflow: hidden;
-            position: absolute;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            z-index: -1;
-        }
-
-        .circle {
-            height: 64px;
-            width: 64px;
-            display: block;
-        }
-
-        .name, .email {
-            font-size: 14px;
-            line-height: 20px;
-            margin-top: 10px;
-            font-weight: 500;
-            display: block;
-        }
-    }
     
     li {
         min-height: 48px;

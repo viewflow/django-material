@@ -118,29 +118,6 @@ th {
 /* SIDEBAR */
 .sidenav-fixed {
   overflow-y: hidden; }
-  .sidenav-fixed .userView {
-    min-height: 175px;
-    position: relative;
-    padding: 32px 32px 0;
-    margin-bottom: 8px; }
-    .sidenav-fixed .userView .background {
-      overflow: hidden;
-      position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      z-index: -1; }
-    .sidenav-fixed .userView .circle {
-      height: 64px;
-      width: 64px;
-      display: block; }
-    .sidenav-fixed .userView .name, .sidenav-fixed .userView .email {
-      font-size: 14px;
-      line-height: 20px;
-      margin-top: 10px;
-      font-weight: 500;
-      display: block; }
   .sidenav-fixed li {
     min-height: 48px; }
   .sidenav-fixed > li.last {
