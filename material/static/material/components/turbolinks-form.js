@@ -1,4 +1,5 @@
 import {autoInit, base} from 'material-components-web';
+import Turbolinks from 'turbolinks':
 
 
 export class DMCTurbolinksForm extends base.MDCComponent {
@@ -18,22 +19,22 @@ export class DMCTurbolinksForm extends base.MDCComponent {
 
     xhr.onload = (event) => {
       let location = xhr.getResponseHeader('turbolinks-location');
-      let snapshot = window.Turbolinks.Snapshot.wrap(xhr.response);
+      let snapshot = Turbolinks.Snapshot.wrap(xhr.response);
 
       if (!location) {
         location = window.location.href;
       }
 
-      window.Turbolinks.controller.adapter.hideProgressBar();
-      window.Turbolinks.controller.cache.put(location, snapshot);
-      window.Turbolinks.visit(location, {action: 'restore'});
+      Turbolinks.controller.adapter.hideProgressBar();
+      Turbolinks.controller.cache.put(location, snapshot);
+      Turbolinks.visit(location, {action: 'restore'});
 
       if (xhr.status > 299) {
         Turbolinks.controller.disable();
       }
     };
 
-    window.Turbolinks.controller.adapter.showProgressBarAfterDelay();
+    Turbolinks.controller.adapter.showProgressBarAfterDelay();
     xhr.send(new FormData(this.root_));
   }
 
@@ -43,7 +44,7 @@ export class DMCTurbolinksForm extends base.MDCComponent {
       (entry) => entry.map(encodeURIComponent).join('=')
     ).join('&');
 
-    window.Turbolinks.visit(
+    Turbolinks.visit(
       this.root_.action +
         (this.root_.action.indexOf('?') == -1 ? '?' : '&') +
         formData
@@ -51,7 +52,7 @@ export class DMCTurbolinksForm extends base.MDCComponent {
   }
 
   initialize() {
-    if (!window.Turbolinks) {
+    if (!Turbolinks) {
       return false;
     }
 

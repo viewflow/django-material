@@ -1,4 +1,4 @@
-<!DOCTYPE html>{% load static %}
+<!DOCTYPE html>{% load static %}{% load render_bundle from webpack_loader %}
 <html lang="en" class="mdc-typography" data-mdc-auto-init="DMCTurbolinks">
 
 <head>
@@ -7,8 +7,8 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   {% block turbolinks-cache-control %}<meta name="turbolinks-cache-control" content="no-cache">{% endblock %}
   <title>{% block title %}Django Material{% endblock %}</title>
-  {% block css %}{% include 'material/includes/material_css.html' %}{% endblock css %}
-  {% block js %}{% include 'material/includes/material_js.html' %}{% endblock js %}
+  {% block css %}{% render_bundle 'django_material' 'css' %}{% endblock css %}
+  {% block js %}{% render_bundle 'django_material' 'js' %}{% endblock js %}
   {% block extrahead %}{% endblock %}
 </head>
 

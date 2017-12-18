@@ -31,6 +31,8 @@ INSTALLED_APPS = [
     'tests.atlas',
     'tests.employees',
     'tests.unit',
+
+    'webpack_loader',
 ]
 
 MIDDLEWARE = [
