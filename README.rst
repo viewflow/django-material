@@ -20,9 +20,12 @@ Material design for Django.
    :alt: Join the chat at https://gitter.im/viewflow/django-material
    :target: https://gitter.im/viewflow/django-material?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
 
-Django-Material works with Django 1.8/1.9/1.10/1.11
+
+- Django-Material 1.2.x compatible Django 1.11/2.0
+- Django-Material 1.1.x compatible Django 1.8/1.9/1.10/1.11
 
 Django-Material 1.x branch going to be supported till Django 1.8 lifetime (April 2018)
+
 
 Tested with:
 
@@ -38,7 +41,7 @@ Overview
   * Easy redefinition of particular fields rendering
   * Complex form layout support
 
-- Frontend - Quick starter template for modular applications development
+- Frontend - Quick starter template for modular admin-line applications development
 
 .. image:: .screen.png
    :width: 400px
@@ -82,8 +85,10 @@ Django Material Pro with additional features has a commercial-friendly license. 
 Changelog
 =========
 
-[GIT]
------
+1.2.0 2017-12-20
+----------------
 
+- Materialize 1.0.0.alpha2
 - Django 2.0 support
+- Drop compatibility with Django 1.8/1.9/1.10
 - Drop Material Admin

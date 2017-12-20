@@ -1,5 +1,14 @@
-1.1.0 2017-10-27 - Stable
--------------------------
+1.2.0 2017-12-20
+----------------
+
+- Materialize 1.0.0.alpha2
+- Django 2.0 support
+- Drop compatibility with Django 1.8/1.9/1.10
+- Drop Material Admin
+
+
+1.1.0 2017-10-27
+----------------
 
 - Update MaterializeCSS to 0.100.2
 - Forms - Localize DateTime picker
@@ -9,8 +18,8 @@
 - Admin - Fix inline formset errors
 - Admin - Add file download link on the file fields
 
-1.0.0 2017-05-29 - Stable
--------------------------
+1.0.0 2017-05-29
+----------------
 
 - Django 1.11 support
 - Update MaterializeCSS to 0.98.2
