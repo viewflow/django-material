@@ -3,67 +3,66 @@
 
 {% block content %}
 <div class="mdc-card dmc-list">
+
+  {% block list-header %}
   <section class="mdc-card__primary">
       <h1 class="mdc-card__title mdc-card__title--large">{{ view.model|verbose_name_plural|title }} </h1>
     <h2 class="mdc-card__subtitle"><a href="#">Atlas</a> > {{ view.model|verbose_name_plural|title }}</a></h2>
   </section>
-  <section class="mdc-card__supporting-text">
-    <table class="dmc-table">
+  {% endblock list-header %}
+
+  {% block list-content %}
+  <section>
+    <table class="dmc-list-table">
       <thead>
         <tr>
-          <th>Name</th>
-          <th>Country</th>
-          <th>Population</th>
+          {% for column in view.list_columns %}
+          <th class="dmc-list-table__header-{{ column.column_type }}">{{ column.header }}</th>
+          {% endfor %}
         </tr>
       </thead>
       <tbody>
+        {% for row in page_obj|default:object_list|list_page_data:view %}
         <tr>
-          <td>Aalborg</td><td>Denmark</td><td>112194</td>
+          {% for column, value in row %}<td class="dmc-list-table__cell-{{ column.column_type }}">{{ value }}</td>{% endfor %}
         </tr>
-        <tr>
-          <td>Aalst</td><td>Belgium</td><td>77534</td>
-        </tr>
-        <tr>
-          <td>Aarhus</td><td>Denmark</td><td>237551</td>
-        </tr>
-        <tr>
-            <td>Aasiaat</td><td>Gibraltar</td><td>3005</td>
-        </tr>
-        <tr>
-            <td>Aba</td><td>Nigeria</td><td>897560</td>
-        </tr>
-        <tr>
-            <td>Abadan</td><td>Turkmenistan</td><td>39481</td>
-        </tr>
-        <tr>
-            <td>Abéché</td><td>Chad</td><td>74188</td>
-        </tr>
-        <tr>
-            <td>Abidjan</td><td>Ivory Coast</td><td>3677115</td>
-        </tr>
-        <tr>
-            <td>Abobo</td><td>Ivory Coast</td><td>900000</td>
-        </tr>
-        <tr>
-            <td>Abomey</td><td>Benin</td><td>82154</td>
-        </tr>
-        <tr>
-          <td>Abomey-Calavi</td><td>Benin</td><td>385755</td>
-        </tr>
-        <tr>
-          <td>Abovyan</td><td>Armenia</td><td>35673</td>
-        </tr>
-        <tr>
-          <td>Abu Dhabi</td><td>United Arab Emirates</td><td>603492</td>
-        </tr>
-        <tr>
-          <td>Abu Ghraib</td><td>Iraq</td><td>900000</td>
-        </tr>
-        <tr>
-          <td>Abuja</td><td>Nigeria</td><td>778567</td>
-        </tr>
+        {% endfor %}
       </tbody>
     </table>
   </section>
+  {% endblock list-content %}
+
+  {% block list-pagination %}
+  <section id="pagination" class="dmc-list-pagination">
+    <span class="dmc-list-pagination__summary">
+      {{ page_obj.start_index }}-{{ page_obj.end_index }} of {{ paginator.count }}
+    </span>
+    <ul class="dmc-list-pagination-container" role="navigation">
+      {% if page_obj.has_previous %}
+        <li class="dmc-list-pagination-item">
+          <a href="?page={{ page_obj.previous_page_number }}#pagination">
+              <i class="material-icons">navigate_before</i>
+          </a>
+        </li>
+      {% else %}
+      <li class="dmc-list-pagination-item dmc-list-pagination-item--disabled" aria-hidden="true">
+        <i class="material-icons">navigate_before</i>
+      </li>
+      {% endif %}
+      {% if page_obj.has_next %}
+      <li class="dmc-list-pagination-item">
+        <a href="?page={{ page_obj.next_page_number }}#pagination">
+            <i class="material-icons">navigate_next</i>
+        </a>
+      </li>
+      {% else %}
+      <li class="dmc-list-pagination-item dmc-list-pagination-item--disabled" aria-hidden="true">
+          <i class="material-icons">navigate_next</i>
+      </li>
+      {% endif %}
+    </ul>
+  </section>
+  {% endblock list-pagination %}
+
 </div>
 {% endblock %}

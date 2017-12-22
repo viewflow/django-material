@@ -105,11 +105,11 @@ class BaseModelViewSet(AppViewset):
 
 
 class ModelViewSet(BaseModelViewSet):
-    list_display = DEFAULT
+    list_columns = DEFAULT
 
     def get_list_view_kwargs(self, **kwargs):
         view_kwargs = {
-            'list_display': self.list_display,
+            'columns': self.list_columns,
             **kwargs
         }
         return super().get_list_view_kwargs(**view_kwargs)

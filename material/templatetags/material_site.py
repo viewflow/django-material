@@ -117,3 +117,13 @@ def verbose_name_plural(obj):
     if isinstance(obj, models.Model):
         type(obj)._meta.verbose_name_plural
     return obj._meta.verbose_name_plural
+
+
+@register.filter
+def list_page_data(page, list_view):
+    """Formated page data for a table.
+
+       Returned data is a list of list of cell values zipped with column definitions.
+       [[(column, value), (column, value), ...], ...]
+    """
+    return list_view.get_page_data(page)

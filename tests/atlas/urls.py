@@ -7,4 +7,7 @@ class Atlas(Application):
     icon = Icon('beach_access')
 
     city_viewset = views.CityViewset()
+    continent_viewset = views.ContinentViewset()
     country_viewset = views.CountryViewset()
+    ocean_viewset = views.OceanViewset()
+    sea_viewset = views.SeaViewset()

@@ -134,7 +134,7 @@ class Continent(models.Model):
 
     def countries_count(self):
         return self.countries.count()
-    countries_count.short_description = _('countries count')
+    countries_count.short_description = _('Countries count')
 
 
 class Country(models.Model):
