@@ -10,6 +10,7 @@ from django.utils.functional import cached_property
 from django.views import generic
 
 from material.ptml import Icon
+from material.viewset import viewprop
 
 
 def _get_method_attr(data_source, method_name, attr_name, default=None):
@@ -220,6 +221,12 @@ class ListModelView(generic.ListView):
 
     def format_value(self, column, value):
         return column.format_value(value)
+
+    @viewprop
+    def queryset(self):
+        if self.viewset is not None and hasattr(self.viewset, 'get_queryset'):
+            return self.viewset.get_queryset(self.request)
+        return None
 
     def get_template_names(self):
         """

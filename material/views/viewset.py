@@ -1,7 +1,8 @@
 from django.contrib import auth
 from django.urls import path
 
-from material import AppViewset, viewprop
+from material.sites import AppViewset
+from material.viewset import viewprop
 
 from .create import CreateModelView
 from .list import ListModelView

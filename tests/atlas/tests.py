@@ -63,7 +63,8 @@ class Test(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_sea_list_view(self):
-        response = self.client.get(reverse('atlas:sea:index'))
+        with self.assertNumQueries(2):  # count & select list
+            response = self.client.get(reverse('atlas:sea:index'))
         self.assertEqual(response.status_code, 200)
 
     def test_continent_list_view(self):

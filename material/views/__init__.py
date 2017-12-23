@@ -1,5 +1,5 @@
 from .list import ListModelView
-from .models import ModelViewSet
+from .viewset import ModelViewSet
 
 __all__ = (
     'ModelViewSet', 'ListModelView',

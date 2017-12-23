@@ -58,3 +58,6 @@ class SeaViewset(ModelViewSet):
         return None if sea.area == 0 else sea.area
     sea_area.empty_value = '-'
     sea_area.column_type = 'numeric'
+
+    def get_queryset(self, request):
+        return self.model._default_manager.select_related('ocean', 'parent')
