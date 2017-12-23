@@ -4,7 +4,7 @@ from . import views
 
 class Atlas(Application):
     title = 'Atlas'
-    icon = Icon('beach_access')
+    icon = Icon('public')
 
     city_viewset = views.CityViewset()
     continent_viewset = views.ContinentViewset()

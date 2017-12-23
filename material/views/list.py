@@ -9,6 +9,8 @@ from django.utils.encoding import force_text
 from django.utils.functional import cached_property
 from django.views import generic
 
+from material.ptml import Icon
+
 
 def _get_attr_header(obj_class, attr_name):
     attr = getattr(obj_class, attr_name)
@@ -41,8 +43,18 @@ def _get_attr_empty_value(obj_class, attr_name):
         return attr.align
     elif isinstance(attr, property) and hasattr(attr, "fget"):
         if hasattr(attr.fget, "empty_value"):
-            return attr.fget.align
+            return attr.fget.empty_value
     return None
+
+
+def _get_attr_boolean(obj_class, attr_name):
+    attr = getattr(obj_class, attr_name)
+    if hasattr(attr, "boolean"):
+        return attr.boolean
+    elif isinstance(attr, property) and hasattr(attr, "fget"):
+        if hasattr(attr.fget, "boolean"):
+            return attr.fget.boolean
+    return False
 
 
 class BaseColumn(object):
@@ -104,9 +116,19 @@ class ModelFieldColumn(BaseColumn):
         return 'text'
 
     def format_value(self, value):
+        boolean_field_types = (models.BooleanField, models.NullBooleanField)
+
         if getattr(self.model_field, 'flatchoices', None):
             return dict(self.model_field.flatchoices).get(value, '')
-        return super().format_value(value)
+        elif isinstance(self.model_field, boolean_field_types):
+            if value is None:
+                return Icon('indeterminate_check_box')
+            elif value is True:
+                return Icon('check_box')
+            else:
+                return Icon('check_box_outline_blank')
+        else:
+            return super().format_value(value)
 
 
 class ObjectAttrColumn(BaseColumn):
@@ -135,6 +157,17 @@ class ObjectAttrColumn(BaseColumn):
     def column_type(self):
         return _get_attr_type(self.obj_class, self.attr_name)
 
+    def format_value(self, value):
+        if _get_attr_boolean(self.obj_class, self.attr_name):
+            if value is None:
+                return Icon('indeterminate_check_box')
+            elif value is True:
+                return Icon('check_box')
+            else:
+                return Icon('check_box_outline_blank')
+        else:
+            return super().format_value(value)
+
 
 class DataSourceColumn(BaseColumn):
     """
@@ -159,6 +192,17 @@ class DataSourceColumn(BaseColumn):
 
     def column_type(self):
         return _get_attr_type(self.data_source, self.attr_name)
+
+    def format_value(self, value):
+        if _get_attr_boolean(self.data_source, self.attr_name):
+            if value is None:
+                return Icon('indeterminate_check_box')
+            elif value is True:
+                return Icon('check_box')
+            else:
+                return Icon('check_box_outline_blank')
+        else:
+            return super().format_value(value)
 
 
 class ListModelView(generic.ListView):
