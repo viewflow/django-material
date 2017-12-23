@@ -12,51 +12,6 @@ from django.views import generic
 from material.ptml import Icon
 
 
-def _get_attr_header(obj_class, attr_name):
-    attr = getattr(obj_class, attr_name)
-    if hasattr(attr, "short_description"):
-        return attr.short_description
-    elif isinstance(attr, property) and hasattr(attr, "fget"):
-        if hasattr(attr.fget, "short_description"):
-            return attr.fget.short_description
-        else:
-            return pretty_name(attr.fget.__name__)
-    elif callable(attr):
-        return "--" if attr.__name__ == "<lambda>" else pretty_name(attr.__name__)
-    else:
-        return pretty_name(attr_name)
-
-
-def _get_attr_type(obj_class, attr_name):
-    attr = getattr(obj_class, attr_name)
-    if hasattr(attr, "column_type"):
-        return attr.align
-    elif isinstance(attr, property) and hasattr(attr, "fget"):
-        if hasattr(attr.fget, "column_type"):
-            return attr.fget.align
-    return 'text'
-
-
-def _get_attr_empty_value(obj_class, attr_name):
-    attr = getattr(obj_class, attr_name)
-    if hasattr(attr, "empty_value"):
-        return attr.align
-    elif isinstance(attr, property) and hasattr(attr, "fget"):
-        if hasattr(attr.fget, "empty_value"):
-            return attr.fget.empty_value
-    return None
-
-
-def _get_attr_boolean(obj_class, attr_name):
-    attr = getattr(obj_class, attr_name)
-    if hasattr(attr, "boolean"):
-        return attr.boolean
-    elif isinstance(attr, property) and hasattr(attr, "fget"):
-        if hasattr(attr.fget, "boolean"):
-            return attr.fget.boolean
-    return False
-
-
 class BaseColumn(object):
     def __init__(self, attr_name):
         self.attr_name = attr_name
@@ -131,44 +86,6 @@ class ModelFieldColumn(BaseColumn):
             return super().format_value(value)
 
 
-class ObjectAttrColumn(BaseColumn):
-    """
-    Retrieve attribute value from a model instance.
-
-    If object attribute is a callable, to get the value it would be
-    called without any arguments.
-    """
-    def __init__(self, obj_class, attr_name, header=None):
-        super().__init__(attr_name)
-        self.obj_class = obj_class
-        self._header = header
-
-    def get_value(self, obj):
-        attr = getattr(obj, self.attr_name)
-        if callable(attr):
-            return attr()
-        return attr
-
-    def header(self):
-        if self._header:
-            return self._header
-        return _get_attr_header(self.obj_class, self.attr_name)
-
-    def column_type(self):
-        return _get_attr_type(self.obj_class, self.attr_name)
-
-    def format_value(self, value):
-        if _get_attr_boolean(self.obj_class, self.attr_name):
-            if value is None:
-                return Icon('indeterminate_check_box')
-            elif value is True:
-                return Icon('check_box')
-            else:
-                return Icon('check_box_outline_blank')
-        else:
-            return super().format_value(value)
-
-
 class DataSourceColumn(BaseColumn):
     """
     Retrieve attribute value from external data source.
@@ -181,20 +98,57 @@ class DataSourceColumn(BaseColumn):
         super().__init__(attr_name)
         self.data_source = data_source
 
+    def _get_attr_boolean(self):
+        attr = getattr(self.data_source, self.attr_name)
+        if hasattr(attr, "boolean"):
+            return attr.boolean
+        elif isinstance(attr, property) and hasattr(attr, "fget"):
+            if hasattr(attr.fget, "boolean"):
+                return attr.fget.boolean
+        return False
+
+    def _get_attr_empty_value(self):
+        attr = getattr(self.data_source, self.attr_name)
+        if hasattr(attr, "empty_value"):
+            return attr.empty_value
+        elif isinstance(attr, property) and hasattr(attr, "fget"):
+            if hasattr(attr.fget, "empty_value"):
+                return attr.fget.empty_value
+        return None
+
     def get_value(self, obj):
         attr = getattr(self.data_source, self.attr_name)
         if callable(attr):
-            return attr(obj)
+            attr = attr(obj)
+        if attr is None:
+            attr = self._get_attr_empty_value()
         return attr
 
     def header(self):
-        return _get_attr_header(self.data_source, self.attr_name)
+        attr = getattr(self.data_source, self.attr_name)
+        if hasattr(attr, "short_description"):
+            return attr.short_description
+        elif isinstance(attr, property) and hasattr(attr, "fget"):
+            if hasattr(attr.fget, "short_description"):
+                return attr.fget.short_description
+            else:
+                return pretty_name(attr.fget.__name__)
+        elif callable(attr):
+            return "--" if attr.__name__ == "<lambda>" else pretty_name(attr.__name__)
+        else:
+            return pretty_name(self.attr_name)
 
     def column_type(self):
-        return _get_attr_type(self.data_source, self.attr_name)
+        attr = getattr(self.data_source, self.attr_name)
+        if hasattr(attr, "column_type"):
+            return attr.column_type
+        elif isinstance(attr, property) and hasattr(attr, "fget"):
+            if hasattr(attr.fget, "column_type"):
+                return attr.fget.column_type
+        return 'text'
 
     def format_value(self, value):
-        if _get_attr_boolean(self.data_source, self.attr_name):
+        if self._get_attr_boolean():
             if value is None:
                 return Icon('indeterminate_check_box')
             elif value is True:
@@ -203,6 +157,20 @@ class DataSourceColumn(BaseColumn):
                 return Icon('check_box_outline_blank')
         else:
             return super().format_value(value)
+
+
+class ObjectAttrColumn(DataSourceColumn):
+    """
+    Retrieve attribute value from a model instance.
+
+    If object attribute is a callable, to get the value it would be
+    called without any arguments.
+    """
+    def get_value(self, obj):
+        attr = getattr(obj, self.attr_name)
+        if callable(attr):
+            return attr()
+        return attr
 
 
 class ListModelView(generic.ListView):
