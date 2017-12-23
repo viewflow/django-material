@@ -12,6 +12,16 @@ from django.views import generic
 from material.ptml import Icon
 
 
+def _get_method_attr(data_source, method_name, attr_name, default=None):
+    attr = getattr(data_source, method_name)
+    try:
+        return getattr(attr, attr_name)
+    except AttributeError:
+        if isinstance(attr, property) and hasattr(attr, "fget"):
+            return getattr(attr.fget, attr_name, default)
+    return default
+
+
 class BaseColumn(object):
     def __init__(self, attr_name):
         self.attr_name = attr_name
@@ -99,22 +109,10 @@ class DataSourceColumn(BaseColumn):
         self.data_source = data_source
 
     def _get_attr_boolean(self):
-        attr = getattr(self.data_source, self.attr_name)
-        if hasattr(attr, "boolean"):
-            return attr.boolean
-        elif isinstance(attr, property) and hasattr(attr, "fget"):
-            if hasattr(attr.fget, "boolean"):
-                return attr.fget.boolean
-        return False
+        return _get_method_attr(self.data_source, self.attr_name, 'boolean', False)
 
     def _get_attr_empty_value(self):
-        attr = getattr(self.data_source, self.attr_name)
-        if hasattr(attr, "empty_value"):
-            return attr.empty_value
-        elif isinstance(attr, property) and hasattr(attr, "fget"):
-            if hasattr(attr.fget, "empty_value"):
-                return attr.fget.empty_value
-        return None
+        return _get_method_attr(self.data_source, self.attr_name, 'empty_value')
 
     def get_value(self, obj):
         attr = getattr(self.data_source, self.attr_name)
@@ -139,13 +137,7 @@ class DataSourceColumn(BaseColumn):
             return pretty_name(self.attr_name)
 
     def column_type(self):
-        attr = getattr(self.data_source, self.attr_name)
-        if hasattr(attr, "column_type"):
-            return attr.column_type
-        elif isinstance(attr, property) and hasattr(attr, "fget"):
-            if hasattr(attr.fget, "column_type"):
-                return attr.fget.column_type
-        return 'text'
+        return _get_method_attr(self.data_source, self.attr_name, 'column_type', 'text')
 
     def format_value(self, value):
         if self._get_attr_boolean():
