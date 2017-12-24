@@ -1,3 +1,4 @@
 *.js.map binary
 *.min.js binary
 *.min.css binary
+material/static/webpack_bundles/django_material-*.js binary
