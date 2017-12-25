@@ -8,6 +8,7 @@ class CityViewset(ModelViewSet):
     icon = Icon('location_city')
     model = models.City
     list_columns = ('name', 'country', 'population')
+    queryset = model._default_manager.select_related('country')
 
 
 class ContinentViewset(ModelViewSet):
@@ -31,6 +32,7 @@ class CountryViewset(ModelViewSet):
         'became_independent_in_20_century',
         'gay_friendly'
     )
+    queryset = model._default_manager.select_related('continent')
 
     def tld(self, country):
         return '.' + country.code.lower()

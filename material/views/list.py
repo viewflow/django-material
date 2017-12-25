@@ -243,3 +243,5 @@ class ListModelView(generic.ListView):
                 'material/views/list.html',
             ]
         return [self.template_name]
+
+    # TODO View permission check

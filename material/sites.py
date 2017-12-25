@@ -56,6 +56,7 @@ class Application(IndexViewMixin, NamedViewsetMixin, Viewset):
     title = None
     icon = Icon("view_module")
     menu_template_name = 'material/includes/app_menu.html'
+    base_template_name = 'material/base_site.html'
 
     def __init__(self, *, title=None, **kwargs):
         super().__init__(**kwargs)

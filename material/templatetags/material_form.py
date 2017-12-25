@@ -32,8 +32,7 @@ class MaterialFormNode(template.Node):
 
     def render(self, context):
         form = self.form_expr.resolve(context)
-
-        if not isinstance(form, forms.Form):
+        if not isinstance(form, forms.BaseForm):
             raise template.TemplateSyntaxError("material tag first argument must be a form")
 
         layout = None

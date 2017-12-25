@@ -7,12 +7,30 @@
   .mdc-card__primary {
     padding-left: 24px;
     padding-bottom: 8px;
+    position: relative;
   }
 }
 
 @media (max-width: 600px) {
   .dmc-list {
     margin: 0px;
+  }
+}
+
+.dmc-list__menu {
+  position: absolute;
+  right: 8px;
+  top: 16px;
+}
+
+.dmc-list__menu-trigger {
+  padding-left: 8px;
+  padding-right: 8px;
+  min-width: auto;
+  display: inline-flex;
+
+  &:not(:disabled) {
+    color: black;
   }
 }
 

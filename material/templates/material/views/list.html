@@ -1,4 +1,4 @@
-{% extends 'material/base_site.html' %}
+{% extends request.resolver_match.app.base_template_name|default:'material/base_site.html' %}
 {% load material_site %}
 
 {% block content %}
@@ -6,8 +6,23 @@
 
   {% block list-header %}
   <section class="mdc-card__primary">
-      <h1 class="mdc-card__title mdc-card__title--large">{{ view.model|verbose_name_plural|title }} </h1>
+    <h1 class="mdc-card__title mdc-card__title--large">{{ view.model|verbose_name_plural|title }} </h1>
     <h2 class="mdc-card__subtitle"><a href="#">Atlas</a> > {{ view.model|verbose_name_plural|title }}</a></h2>
+    <div class="dmc-list__menu mdc-menu-anchor" data-mdc-auto-init="DMCActionMenu">
+      <button class="mdc-button dmc-list__menu-trigger">
+        <i class="material-icons">more_vert</i>
+      </button>
+      <div class="mdc-simple-menu" tabindex="-1">
+        <ul class="mdc-simple-menu__items mdc-list" role="menu" aria-hidden="true">
+          <li class="mdc-list-item" role="menuitem" tabindex="0" data-dmc-menu-href="{% url 'atlas:city:add' %}">
+            A Menu Item
+          </li>
+          <li class="mdc-list-item" role="menuitem" tabindex="0">
+            Another Menu Item
+          </li>
+        </ul>
+      </div>
+    </div>
   </section>
   {% endblock list-header %}
 

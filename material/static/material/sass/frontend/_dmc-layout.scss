@@ -32,11 +32,11 @@ body {
   .mdc-temporary-drawer__header {
     color: white;
     color: var(--mdc-theme-text-primary-on-secondary-dark, white);
-    background: linear-gradient(110deg, #f80054 60%, #ff87b0 60%);
+    background: linear-gradient(110deg, #3f51b5, 60%, #6f7dcd 60%);
     background: linear-gradient(
       110deg,
-      var(--mdc-theme-secondary-dark, #f80054) 60%,
-      var(--mdc-theme-secondary-light, #ff87b0) 60%
+      var(--mdc-theme-primary, #3f51b5) 60%,
+      var(--mdc-theme-primary-dark, #6f7dcd) 60%
     );
   }
 }

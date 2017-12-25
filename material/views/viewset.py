@@ -80,7 +80,7 @@ class BaseModelViewSet(AppViewset):
             **self.create_view_kwargs,
             **kwargs
         }
-        return self.filter_kwargs(self.create_view_class, view_kwargs)
+        return self.filter_kwargs(self.create_view_class, **view_kwargs)
 
     @viewprop
     def create_view_kwargs(self):
@@ -91,8 +91,8 @@ class BaseModelViewSet(AppViewset):
         return self.create_view_class.as_view(**self.get_create_view_kwargs())
 
     @property
-    def create_url_(self):
-        return path('add/', self.create_view, name='login')
+    def create_url(self):
+        return path('add/', self.create_view, name='add')
 
     """
     Update
@@ -114,3 +114,9 @@ class ModelViewSet(BaseModelViewSet):
             **kwargs
         }
         return super().get_list_view_kwargs(**view_kwargs)
+
+    def get_object_link(self, obj):
+        pass
+
+    def get_next_location(self, request, action=None, obj=None):
+        return ''
