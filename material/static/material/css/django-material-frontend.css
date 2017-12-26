@@ -5,7 +5,8 @@ body {
   margin: 0;
   padding: 0;
   height: 100%;
-  width: 100%; }
+  width: 100%;
+  overflow-y: scroll; }
 
 .dmc-responsive-drawer .mdc-list-group__subheader--dmc {
   padding-left: 16px;
@@ -59,6 +60,15 @@ body {
   position: absolute;
   right: 8px;
   top: 16px; }
+  .dmc-list__menu .mdc-list {
+    padding-right: 0;
+    padding-left: 0; }
+    .dmc-list__menu .mdc-list i.material-icons {
+      margin-right: 16px; }
+    .dmc-list__menu .mdc-list .mdc-list-item {
+      padding-left: 56px; }
+    .dmc-list__menu .mdc-list .mdc-list-item--with-icon {
+      padding-left: 16px; }
 
 .dmc-list__menu-trigger {
   padding-left: 8px;

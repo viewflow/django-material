@@ -7,7 +7,19 @@ export class DMCActionMenu extends base.MDCComponent {
   }
 
   initialize() {
-    this.menu_ = new menu.MDCSimpleMenu(this.root_.querySelector('.mdc-simple-menu'));
+    this.menuEl_ = this.root_.querySelector('.mdc-simple-menu');
+    this.menu_ = new menu.MDCSimpleMenu(this.menuEl_);
+    this.menuEl_.addEventListener('MDCSimpleMenu:selected', function(evt) {
+      let itemData = evt.detail.item.dataset;
+      if (itemData.dmcMenuHref) {
+        if (window.Turbolinks) {
+          Turbolinks.visit(itemData.dmcMenuHref);
+        } else {
+          window.location = itemData.dmcMenuHref;
+        }
+      }
+    });
+
     this.trigger_ = this.root_.querySelector('.dmc-list__menu-trigger');
     this.onClick = (event) => {
       this.menu_.open = !this.menu_.open;

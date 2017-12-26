@@ -21,6 +21,23 @@
   position: absolute;
   right: 8px;
   top: 16px;
+
+  .mdc-list {
+    padding-right: 0;
+    padding-left: 0;
+
+    i.material-icons {
+      margin-right: 16px;
+    }
+
+    .mdc-list-item {
+      padding-left: 56px;
+    }
+
+    .mdc-list-item--with-icon {
+      padding-left: 16px;
+    }
+  }
 }
 
 .dmc-list__menu-trigger {

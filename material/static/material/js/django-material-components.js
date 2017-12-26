@@ -80,7 +80,19 @@
       value: function initialize() {
         var _this2 = this;
 
-        this.menu_ = new _materialComponentsWeb.menu.MDCSimpleMenu(this.root_.querySelector('.mdc-simple-menu'));
+        this.menuEl_ = this.root_.querySelector('.mdc-simple-menu');
+        this.menu_ = new _materialComponentsWeb.menu.MDCSimpleMenu(this.menuEl_);
+        this.menuEl_.addEventListener('MDCSimpleMenu:selected', function (evt) {
+          var itemData = evt.detail.item.dataset;
+          if (itemData.dmcMenuHref) {
+            if (window.Turbolinks) {
+              Turbolinks.visit(itemData.dmcMenuHref);
+            } else {
+              window.location = itemData.dmcMenuHref;
+            }
+          }
+        });
+
         this.trigger_ = this.root_.querySelector('.dmc-list__menu-trigger');
         this.onClick = function (event) {
           _this2.menu_.open = !_this2.menu_.open;

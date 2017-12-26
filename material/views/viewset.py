@@ -1,6 +1,7 @@
 from django.contrib import auth
 from django.urls import path
 
+from material.ptml import Icon
 from material.sites import AppViewset
 from material.viewset import viewprop
 
@@ -69,7 +70,7 @@ class BaseModelViewSet(AppViewset):
     def get_list_page_actions(self, request, *actions):
         if self.has_add_permission(request):
             actions = (
-                Action(name="Add", url=self.reverse('add')),
+                Action(name="Add new", url=self.reverse('add'), icon=Icon('add')),
                 *actions
             )
 
