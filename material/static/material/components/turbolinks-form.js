@@ -27,6 +27,7 @@ export class DMCTurbolinksForm extends base.MDCComponent {
       window.Turbolinks.controller.adapter.hideProgressBar();
       window.Turbolinks.controller.cache.put(location, snapshot);
       window.Turbolinks.visit(location, {action: 'restore'});
+      window.Turbolinks.clearCache();
 
       if (xhr.status > 299) {
         Turbolinks.controller.disable();
