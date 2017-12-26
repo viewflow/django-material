@@ -6,23 +6,26 @@
 
   {% block list-header %}
   <section class="mdc-card__primary">
-    <h1 class="mdc-card__title mdc-card__title--large">{{ view.model|verbose_name_plural|title }} </h1>
-    <h2 class="mdc-card__subtitle"><a href="#">Atlas</a> > {{ view.model|verbose_name_plural|title }}</a></h2>
+    {% block list-header-title %}<h1 class="mdc-card__title mdc-card__title--large">{{ view.model|verbose_name_plural|title }} </h1>{% endblock %}
+    {% block list-header-subtitle %}<h2 class="mdc-card__subtitle"><a href="#">Atlas</a> > {{ view.model|verbose_name_plural|title }}</a></h2>{% endblock %}
+    {% block list-header-menu %}
+    {% with actions=view.get_page_actions %}{% if actions %}
     <div class="dmc-list__menu mdc-menu-anchor" data-mdc-auto-init="DMCActionMenu">
       <button class="mdc-button dmc-list__menu-trigger">
         <i class="material-icons">more_vert</i>
       </button>
       <div class="mdc-simple-menu" tabindex="-1">
         <ul class="mdc-simple-menu__items mdc-list" role="menu" aria-hidden="true">
-          <li class="mdc-list-item" role="menuitem" tabindex="0" data-dmc-menu-href="{% url 'atlas:city:add' %}">
-            A Menu Item
-          </li>
-          <li class="mdc-list-item" role="menuitem" tabindex="0">
-            Another Menu Item
-          </li>
+          {% for action in actions %}
+          <li class="mdc-list-item" role="menuitem" tabindex="0" {% if action.url %}data-dmc-menu-href="{{ action.url }}"{% endif %}>
+              {{ action.name }}
+            </li>
+          {% endfor %}
         </ul>
       </div>
     </div>
+    {% endif %}{% endwith %}
+    {% endblock list-header-menu %}
   </section>
   {% endblock list-header %}
 

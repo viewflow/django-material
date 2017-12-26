@@ -4,6 +4,7 @@ from django.urls import path
 from material.sites import AppViewset
 from material.viewset import viewprop
 
+from .base import Action
 from .create import CreateModelView
 from .list import ListModelView
 
@@ -65,6 +66,15 @@ class BaseModelViewSet(AppViewset):
     def list_url(self):
         return path('', self.list_view, name='list')
 
+    def get_list_page_actions(self, request, *actions):
+        if self.has_add_permission(request):
+            actions = (
+                Action(name="Add", url=self.reverse('add')),
+                *actions
+            )
+
+        return actions
+
     """
     Create
     """
@@ -107,6 +117,7 @@ class BaseModelViewSet(AppViewset):
 
 class ModelViewSet(BaseModelViewSet):
     list_columns = DEFAULT
+    list_page_actions = DEFAULT
 
     def get_list_view_kwargs(self, **kwargs):
         view_kwargs = {
@@ -114,6 +125,14 @@ class ModelViewSet(BaseModelViewSet):
             **kwargs
         }
         return super().get_list_view_kwargs(**view_kwargs)
+
+    def get_list_page_actions(self, request, *actions):
+        if self.list_page_actions is not DEFAULT:
+            actions = (
+                *self.list_page_actions,
+                *actions
+            )
+        return super().get_list_page_actions(request, *actions)
 
     def get_object_link(self, obj):
         pass

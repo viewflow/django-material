@@ -4,10 +4,10 @@ from django.views import generic
 
 from material.viewset import viewprop
 
-from .mixins import ViewFormLayoutMixin
+from .base import FormLayoutMixin
 
 
-class CreateModelView(ViewFormLayoutMixin, generic.CreateView):
+class CreateModelView(FormLayoutMixin, generic.CreateView):
     viewset = None
     layout = None
     template_name_suffix = '_create'

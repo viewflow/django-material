@@ -171,6 +171,8 @@ class ListModelView(generic.ListView):
     columns = None
     paginate_by = 25
 
+    page_actions = None
+
     empty_value_display = ""
 
     def get_columns(self):
@@ -207,6 +209,9 @@ class ListModelView(generic.ListView):
     def list_columns(self):
         return [self.get_column(column_name) for column_name in self.get_columns()]
 
+    def format_value(self, column, value):
+        return column.format_value(value)
+
     def get_page_data(self, page):
         """"Formated page data for a table.
 
@@ -219,8 +224,12 @@ class ListModelView(generic.ListView):
                 for column in self.list_columns
             ]
 
-    def format_value(self, column, value):
-        return column.format_value(value)
+    def get_page_actions(self, *actions):
+        if self.viewset:
+            actions = self.viewset.get_list_page_actions(self.request) + actions
+        if self.page_actions:
+            actions = self.page_actions + actions
+        return actions
 
     @viewprop
     def queryset(self):
