@@ -5,6 +5,7 @@ from . import views
 class Atlas(Application):
     title = 'Atlas'
     icon = Icon('public')
+    base_template_name = 'atlas/base_site.html'
 
     city_viewset = views.CityViewset()
     continent_viewset = views.ContinentViewset()
