@@ -2,9 +2,9 @@
 {% load material_form material_site %}
 
 {% block content %}
-<div class="mdc-card">
+<div class="mdc-card dmc-form-page">
   <section class="mdc-card__primary">
-    <h1 class="mdc-card__title mdc-card__title--large">{{ view.model|verbose_name_plural|title }} </h1>
+    <h1 class="mdc-card__title mdc-card__title--large">Add {{ view.model|verbose_name|title }} </h1>
     <h2 class="mdc-card__subtitle">
       <a href="#">Atlas</a> >
       <a href="#">{{ view.model|verbose_name_plural|title }}</a> >
@@ -12,10 +12,14 @@
     </h2>
   </section>
 
-  <section>
-    <form method="POST">
+  <form method="POST" data-mdc-auto-init="DMCTurbolinksForm">
+    {% csrf_token %}
+    <section class="dmc-form-page__form">
       {% material form %}
-    </form>
-  </section>
+    </section>
+    <section class="mdc-card__actions dmc-form-page__actions">
+      <button class="mdc-button mdc-button--raised" type="submit">Save</button>
+    </section>
+  </form>
 </div>
 {% endblock content %}

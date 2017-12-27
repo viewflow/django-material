@@ -1,0 +1,25 @@
+.dmc-form-page {
+  overflow: initial;
+  margin: 8px;
+  background: #fff;
+  background: var(--mdc-theme-background, #fff);
+  max-width: 1200px;
+
+  .mdc-card__primary {
+    padding-left: 24px;
+    padding-bottom: 8px;
+    position: relative;
+  }
+}
+
+
+.dmc-form-page__form {
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+.dmc-form-page__actions {
+  justify-content: flex-end;
+  padding: 24px;
+  padding-bottom: 12px;
+}
