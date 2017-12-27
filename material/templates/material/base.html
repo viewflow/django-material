@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  {% block favicon %}<link rel="icon" href="{% static 'material/favicon.png' %}" type="image/png" />{% endblock %}
   {% block turbolinks-cache-control %}<meta name="turbolinks-cache-control" content="no-cache">{% endblock %}
   <title>{% block title %}Django Material{% endblock %}</title>
   {% block css %}{% include 'material/includes/material_css.html' %}{% endblock css %}
