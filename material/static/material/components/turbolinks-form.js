@@ -34,6 +34,18 @@ export class DMCTurbolinksForm extends base.MDCComponent {
       }
     };
 
+    xhr.onerror = (event) => {
+      window.Turbolinks.controller.adapter.hideProgressBar();
+      this.root_.querySelectorAll('button').forEach(
+        (button) => button.disabled=false
+      );
+
+      let snackbarEvent = new CustomEvent('DMCSnackbar:show', {
+        'detail': {message: 'Request error'},
+      });
+      window.dispatchEvent(snackbarEvent);
+    };
+
     window.Turbolinks.controller.adapter.showProgressBarAfterDelay();
     xhr.send(new FormData(this.root_));
   }

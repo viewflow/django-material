@@ -860,6 +860,120 @@
       exports: {}
     };
     factory(mod.exports, global.mdc);
+    global.snackbar = mod.exports;
+  }
+})(this, function (exports, _materialComponentsWeb) {
+  'use strict';
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.DMCSnackbar = undefined;
+
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError("Cannot call a class as a function");
+    }
+  }
+
+  var _createClass = function () {
+    function defineProperties(target, props) {
+      for (var i = 0; i < props.length; i++) {
+        var descriptor = props[i];
+        descriptor.enumerable = descriptor.enumerable || false;
+        descriptor.configurable = true;
+        if ("value" in descriptor) descriptor.writable = true;
+        Object.defineProperty(target, descriptor.key, descriptor);
+      }
+    }
+
+    return function (Constructor, protoProps, staticProps) {
+      if (protoProps) defineProperties(Constructor.prototype, protoProps);
+      if (staticProps) defineProperties(Constructor, staticProps);
+      return Constructor;
+    };
+  }();
+
+  function _possibleConstructorReturn(self, call) {
+    if (!self) {
+      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+    }
+
+    return call && (typeof call === "object" || typeof call === "function") ? call : self;
+  }
+
+  function _inherits(subClass, superClass) {
+    if (typeof superClass !== "function" && superClass !== null) {
+      throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
+    }
+
+    subClass.prototype = Object.create(superClass && superClass.prototype, {
+      constructor: {
+        value: subClass,
+        enumerable: false,
+        writable: true,
+        configurable: true
+      }
+    });
+    if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+  }
+
+  var DMCSnackbar = exports.DMCSnackbar = function (_base$MDCComponent) {
+    _inherits(DMCSnackbar, _base$MDCComponent);
+
+    function DMCSnackbar() {
+      _classCallCheck(this, DMCSnackbar);
+
+      return _possibleConstructorReturn(this, (DMCSnackbar.__proto__ || Object.getPrototypeOf(DMCSnackbar)).apply(this, arguments));
+    }
+
+    _createClass(DMCSnackbar, [{
+      key: 'initialize',
+      value: function initialize() {
+        var _this2 = this;
+
+        this.snackbar_ = _materialComponentsWeb.snackbar.MDCSnackbar.attachTo(this.root_);
+
+        var initialText = this.root_.querySelector('.mdc-snackbar__text');
+
+        if (initialText && initialText.textContent) {
+          this.snackbar_.show({ message: initialText.textContent });
+        }
+
+        this.showSnackbar_ = function (event) {
+          _this2.snackbar_.show(event.detail);
+        };
+
+        window.addEventListener('DMCSnackbar:show', this.showSnackbar_, false);
+      }
+    }, {
+      key: 'destroy',
+      value: function destroy() {
+        this.snackbar_.destroy();
+        window.removeEventListener('DMCSnackbar:show', this.showSnackbar_);
+      }
+    }], [{
+      key: 'attachTo',
+      value: function attachTo(root) {
+        return new DMCSnackbar(root, new _materialComponentsWeb.base.MDCFoundation());
+      }
+    }]);
+
+    return DMCSnackbar;
+  }(_materialComponentsWeb.base.MDCComponent);
+
+  _materialComponentsWeb.autoInit.register('DMCSnackbar', DMCSnackbar);
+});
+(function (global, factory) {
+  if (typeof define === "function" && define.amd) {
+    define(['exports', 'material-components-web'], factory);
+  } else if (typeof exports !== "undefined") {
+    factory(exports, require('material-components-web'));
+  } else {
+    var mod = {
+      exports: {}
+    };
+    factory(mod.exports, global.mdc);
     global.toggleDrawer = mod.exports;
   }
 })(this, function (exports, _materialComponentsWeb) {
@@ -1037,6 +1151,8 @@
     _createClass(DMCTurbolinksForm, [{
       key: 'performPostRequest',
       value: function performPostRequest() {
+        var _this2 = this;
+
         // disable all form buttons
         this.root_.querySelectorAll('button').forEach(function (button) {
           return button.disabled = true;
@@ -1064,6 +1180,18 @@
           }
         };
 
+        xhr.onerror = function (event) {
+          window.Turbolinks.controller.adapter.hideProgressBar();
+          _this2.root_.querySelectorAll('button').forEach(function (button) {
+            return button.disabled = false;
+          });
+
+          var snackbarEvent = new CustomEvent('DMCSnackbar:show', {
+            'detail': { message: 'Request error' }
+          });
+          window.dispatchEvent(snackbarEvent);
+        };
+
         window.Turbolinks.controller.adapter.showProgressBarAfterDelay();
         xhr.send(new FormData(this.root_));
       }
@@ -1079,7 +1207,7 @@
     }, {
       key: 'initialize',
       value: function initialize() {
-        var _this2 = this;
+        var _this3 = this;
 
         if (!window.Turbolinks) {
           return false;
@@ -1088,14 +1216,14 @@
         if (this.root_.method == 'post') {
           this.onSubmit = function (event) {
             event.preventDefault();
-            _this2.performPostRequest();
+            _this3.performPostRequest();
           };
 
           this.root_.addEventListener('submit', this.onSubmit);
         } else {
           this.onSubmit = function (event) {
             event.preventDefault();
-            _this2.performGetRequest();
+            _this3.performGetRequest();
           };
 
           this.root_.addEventListener('submit', this.onSubmit);
