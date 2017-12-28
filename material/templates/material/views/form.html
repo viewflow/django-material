@@ -15,7 +15,7 @@
   <form method="POST" data-mdc-auto-init="DMCTurbolinksForm">
     {% csrf_token %}
     <section class="dmc-form-page__form">
-      {% material form %}
+      {% material form view.layout %}
     </section>
     <section class="mdc-card__actions dmc-form-page__actions">
       <button class="mdc-button mdc-button--raised" type="submit">Save</button>

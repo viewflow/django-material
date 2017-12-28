@@ -18,6 +18,10 @@
   padding: 24px;
   padding-bottom: 12px; }
 
+@media (max-width: 600px) {
+  .dmc-form-page {
+    margin: 0px; } }
+
 html {
   height: 100%; }
 

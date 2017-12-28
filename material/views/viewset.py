@@ -13,6 +13,13 @@ from .list import ListModelView
 DEFAULT = object()
 
 
+def _first_not_default(*args):
+    for arg in args:
+        if arg is not DEFAULT:
+            return arg
+    return arg
+
+
 class BaseModelViewSet(AppViewset):
     model = DEFAULT
     queryset = DEFAULT
@@ -120,12 +127,19 @@ class ModelViewSet(BaseModelViewSet):
     list_columns = DEFAULT
     list_page_actions = DEFAULT
 
+    form_layout = DEFAULT
+    form_class = DEFAULT
+    form_widgets = DEFAULT
+
+    create_form_layout = DEFAULT
+    create_form_class = DEFAULT
+    create_form_widgets = DEFAULT
+
     def get_list_view_kwargs(self, **kwargs):
-        view_kwargs = {
+        return super().get_list_view_kwargs(**{
             'columns': self.list_columns,
             **kwargs
-        }
-        return super().get_list_view_kwargs(**view_kwargs)
+        })
 
     def get_list_page_actions(self, request, *actions):
         if self.list_page_actions is not DEFAULT:
@@ -134,6 +148,14 @@ class ModelViewSet(BaseModelViewSet):
                 *actions
             )
         return super().get_list_page_actions(request, *actions)
+
+    def get_create_view_kwargs(self, **kwargs):
+        return super().get_create_view_kwargs(**{
+            'form_class': _first_not_default(self.create_form_class, self.form_class),
+            'form_widgets': _first_not_default(self.create_form_widgets, self.form_widgets),
+            'layout': _first_not_default(self.create_form_layout, self.form_layout),
+            **kwargs
+        })
 
     def get_object_link(self, obj):
         pass

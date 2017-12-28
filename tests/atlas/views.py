@@ -1,5 +1,5 @@
 from django.utils.translation import ugettext_lazy as _
-from material import Icon, ModelViewSet
+from material import Icon, ModelViewSet, Layout, Fieldset, Row
 
 from . import models
 
@@ -17,6 +17,20 @@ class ContinentViewset(ModelViewSet):
     list_columns = (
         'name', 'surrounded_oceans', 'countries_count',
         'area', 'population',
+    )
+    form_layout = Layout(
+        'name',
+        Fieldset(
+            _('Details'),
+            'area',
+            Row('oceans', 'hemisphere'),
+            Row('population', 'population_density')
+        ),
+        Fieldset(
+            _('Fun facts'),
+            Row('largest_country', 'biggest_mountain'),
+            Row('biggest_city', 'longest_river')
+        )
     )
 
     def surrounded_oceans(self, contintent):
@@ -55,6 +69,12 @@ class SeaViewset(ModelViewSet):
     icon = Icon('beach_access')
     model = models.Sea
     list_columns = ('name', 'parent', 'ocean', 'sea_area', )
+    form_layout = Layout(
+        Row('name', 'parent'),
+        'ocean',
+        Row('area', 'avg_depth', 'max_depth'),
+        'basin_countries'
+    )
 
     def sea_area(self, sea):
         return None if sea.area == 0 else sea.area

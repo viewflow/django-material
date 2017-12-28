@@ -6,8 +6,8 @@ def _collect_elements(parent, container=None):
     if container is None:
         container = []
 
-    if hasattr(parent, 'elements'):
-        for element in parent.elements:
+    if hasattr(parent, 'children'):
+        for element in parent.children:
             _collect_elements(element, container=container)
 
     if isinstance(parent, Span):
@@ -27,9 +27,9 @@ class FormLayoutMixin(object):
     def fields(self):
         if self.form_class is None:
             if self.layout is not None:
-                self.fields = _collect_elements(self.layout)
+                return _collect_elements(self.layout)
             else:
-                self.fields = '__all__'
+                return '__all__'
 
 
 class Action(object):
