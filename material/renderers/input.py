@@ -35,6 +35,11 @@ class InputRenderer(FieldRender):
             ]
 
     def control(self, value):
+        is_required = (
+            self.widget.use_required_attribute(self.bound_field.initial) and
+            self.field.required and
+            self.bound_field.form.use_required_attribute
+        )
         input_attrs = {
             'class': "mdc-text-field__input dmc-text-field__input",
             'disabled': self.disabled,
@@ -42,6 +47,7 @@ class InputRenderer(FieldRender):
             'name': self.bound_field.html_name,
             'type': self.widget.input_type,
             'value': self.widget.format_value(value),
+            'required': is_required,
             **self.field.widget.attrs
         }
 
