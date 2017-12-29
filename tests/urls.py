@@ -62,6 +62,11 @@ urlpatterns = [
         success_url='.')
     ),
 
+    # components
+    path('components/snackbar/', TemplateView.as_view(
+        template_name='components/snackbar.html')
+    ),
+
     # pages
     path('page/logged_out/', TemplateView.as_view(
         template_name='registration/logged_out.html')

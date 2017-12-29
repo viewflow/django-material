@@ -936,8 +936,35 @@
 
         var initialText = this.root_.querySelector('.mdc-snackbar__text');
 
-        if (initialText && initialText.textContent) {
-          this.snackbar_.show({ message: initialText.textContent });
+        if (initialText) {
+          var actionText = void 0;
+          var actionHandler = void 0;
+
+          var message = Array.prototype.filter.call(initialText.childNodes, function (element) {
+            return element.nodeType === Node.TEXT_NODE;
+          }).map(function (element) {
+            return element.textContent.trim();
+          }).join(' ');
+
+          var link = initialText.querySelector('a');
+          if (link) {
+            actionText = link.textContent;
+            actionHandler = function actionHandler() {
+              if (window.Turbolinks) {
+                window.Turbolinks.visit(link.href);
+              } else {
+                window.location = link.href;
+              }
+            };
+          }
+
+          if (message) {
+            this.snackbar_.show({
+              message: message,
+              actionText: actionText,
+              actionHandler: actionHandler
+            });
+          }
         }
 
         this.showSnackbar_ = function (event) {
