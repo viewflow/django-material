@@ -34,11 +34,15 @@ export class DMCSnackbar extends base.MDCComponent {
       }
 
       if (message) {
-        this.snackbar_.show({
-          message: message,
-          actionText: actionText,
-          actionHandler: actionHandler,
-        });
+        setTimeout( () => {
+          this.snackbar_.show({
+            message: message,
+            actionText: actionText,
+            actionHandler: actionHandler,
+            multiline: true,
+            timeout: 4500,
+          });
+        }, 300);
       }
     }
 

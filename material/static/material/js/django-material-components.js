@@ -959,11 +959,15 @@
           }
 
           if (message) {
-            this.snackbar_.show({
-              message: message,
-              actionText: actionText,
-              actionHandler: actionHandler
-            });
+            setTimeout(function () {
+              _this2.snackbar_.show({
+                message: message,
+                actionText: actionText,
+                actionHandler: actionHandler,
+                multiline: true,
+                timeout: 4500
+              });
+            }, 300);
           }
         }
 

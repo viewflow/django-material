@@ -49,12 +49,12 @@
     {% endwith %}
   </div>
   {% block snackbar %}
-  <div class="mdc-snackbar mdc-snackbar--align-start dmc-snackbar"
+  <div class="mdc-snackbar dmc-snackbar"
       aria-live="assertive"
       aria-atomic="true"
       aria-hidden="true"
       data-mdc-auto-init="DMCSnackbar">
-    <div class="mdc-snackbar__text">{{ messages.last }}</div>
+    <div class="mdc-snackbar__text">{% for message in messages %}{% if forloop.last %}{{ message }}{% endif %}{% endfor %}</div>
     <div class="mdc-snackbar__action-wrapper">
       <button type="button" class="mdc-snackbar__action-button"></button>
     </div>

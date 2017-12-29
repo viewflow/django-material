@@ -1,6 +1,8 @@
 from django.contrib import auth, messages
-from django.core.exceptions import PermissionDenied
+from django.contrib.admin.utils import unquote
+from django.core.exceptions import PermissionDenied, ValidationError
 from django.forms.models import modelform_factory
+from django.http import Http404
 from django.utils.html import format_html
 from django.utils.http import urlquote
 from django.utils.translation import ugettext_lazy as _
@@ -11,30 +13,27 @@ from material.viewset import viewprop
 from .base import FormLayoutMixin
 
 
-class CreateModelView(FormLayoutMixin, generic.CreateView):
+class UpdateModelView(FormLayoutMixin, generic.UpdateView):
     viewset = None
     layout = None
     form_widgets = None
 
-    template_name_suffix = '_create'
-
-    def has_add_permission(self, request):
+    def has_change_permission(self, request, obj=None):
         if self.viewset is not None:
-            return self.viewset.has_add_permission(request)
+            return self.viewset.has_change_permission(request, obj=obj)
         else:
-            return request.user.has_perm(
-                auth.get_permission_codename('add', self.model._meta)
-            )
+            change_perm = auth.get_permission_codename('change', self.model._meta)
+
+            if request.user.has_perm(change_perm):
+                return True
+            else:
+                return request.user.has_perm(change_perm, obj=obj)
 
     def get_object_url(self, obj):
         if self.viewset is not None and hasattr(self.viewset, 'get_object_link'):
             return self.viewset.get_object_link(self.request, obj)
         elif hasattr(obj, 'get_absolute_url'):
-            change_perm = auth.get_permission_codename('change', self.model._meta)
-            has_change_perm = self.request.user.has_perm(change_perm)
-            if not has_change_perm:
-                has_change_perm = self.request.user.has_perm(change_perm, obj=obj)
-            if has_change_perm:
+            if self.has_change_permission(self.request, obj):
                 return obj.get_absolute_url()
 
     def message_user(self):
@@ -44,7 +43,7 @@ class CreateModelView(FormLayoutMixin, generic.CreateView):
             link = format_html('<a href="{}">{}</a>', urlquote(url), _('View'))
 
         message = format_html(
-            _("The {obj} was added successfully. {link}"),
+            _("The {obj} was changed successfully. {link}"),
             obj=str(self.object),
             link=link
         )
@@ -60,6 +59,21 @@ class CreateModelView(FormLayoutMixin, generic.CreateView):
         if self.form_class is None:
             return modelform_factory(self.model, fields=self.fields, widgets=self.form_widgets)
         return self.form_class
+
+    def get_object(self):
+        pk = self.kwargs.get(self.pk_url_kwarg)
+        if pk is not None:
+            pk = unquote(pk)
+            try:
+                self.kwargs[self.pk_url_kwarg] = self.model._meta.pk.to_python(pk)
+            except (ValidationError, ValueError):
+                raise Http404
+        obj = super().get_object()
+
+        if not self.has_change_permission(self.request, obj):
+            raise PermissionDenied
+
+        return obj
 
     def get_template_names(self):
         """
@@ -78,15 +92,9 @@ class CreateModelView(FormLayoutMixin, generic.CreateView):
             ]
 
     def form_valid(self, *args, **kwargs):
-        response = super(CreateModelView, self).form_valid(*args, **kwargs)
+        response = super(UpdateModelView, self).form_valid(*args, **kwargs)
         self.message_user()
         return response
 
     def get_success_url(self):
         return '/'  # TODO
-
-    def dispatch(self, request, *args, **kwargs):
-        if not self.has_add_permission(self.request):
-            raise PermissionDenied
-
-        return super(CreateModelView, self).dispatch(request, *args, **kwargs)

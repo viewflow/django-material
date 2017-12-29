@@ -7,6 +7,7 @@ from material.viewset import viewprop
 
 from .base import Action
 from .create import CreateModelView
+from .update import UpdateModelView
 from .list import ListModelView
 
 
@@ -115,12 +116,37 @@ class BaseModelViewSet(AppViewset):
     """
     Update
     """
+    update_view_class = UpdateModelView
+
     def has_change_permission(self, request, obj=None):
         change_perm = auth.get_permission_codename('change', self.model._meta)
 
         if request.user.has_perm(change_perm):
             return True
         return request.user.has_perm(change_perm, obj=obj)
+
+    def get_update_view_kwargs(self, **kwargs):
+        view_kwargs = {
+            **self.update_view_kwargs,
+            **kwargs
+        }
+        return self.filter_kwargs(self.update_view_class, **view_kwargs)
+
+    @viewprop
+    def update_view_kwargs(self):
+        return {}
+
+    @viewprop
+    def update_view(self):
+        return self.update_view_class.as_view(**self.get_update_view_kwargs())
+
+    @property
+    def update_url(self):
+        return path('<path:pk>/change/', self.update_view, name='change')
+
+    """
+    Delete
+    """
 
 
 class ModelViewSet(BaseModelViewSet):
@@ -157,8 +183,17 @@ class ModelViewSet(BaseModelViewSet):
             **kwargs
         })
 
-    def get_object_link(self, obj):
-        pass
+    def get_update_view_kwargs(self, **kwargs):
+        return super().get_create_view_kwargs(**{
+            'form_class': self.form_class,
+            'form_widgets': self.form_widgets,
+            'layout': self.form_layout,
+            **kwargs
+        })
+
+    def get_object_link(self, request, obj):
+        if self.has_change_permission(request, obj):
+            return self.reverse('change', args=[obj.pk])
 
     def get_next_location(self, request, action=None, obj=None):
         return ''
