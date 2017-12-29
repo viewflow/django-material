@@ -204,10 +204,14 @@ class ModelViewSet(BaseModelViewSet):
         return super().get_list_page_actions(request, *actions)
 
     def get_create_view_kwargs(self, **kwargs):
+        layout = self.create_form_layout
+        if self.create_form_class is DEFAULT:
+            layout = _first_not_default(self.create_form_layout, self.form_layout)
+
         return super().get_create_view_kwargs(**{
             'form_class': _first_not_default(self.create_form_class, self.form_class),
             'form_widgets': _first_not_default(self.create_form_widgets, self.form_widgets),
-            'layout': _first_not_default(self.create_form_layout, self.form_layout),
+            'layout': layout,
             **kwargs
         })
 
