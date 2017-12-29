@@ -1,0 +1,31 @@
+{% extends request.resolver_match.app.base_template_name|default:'material/base_site.html' %}
+{% load material_site %}
+
+{% block content %}
+<div class="mdc-card dmc-form-page">
+  <section class="mdc-card__primary">
+    <h1 class="mdc-card__title mdc-card__title--large">Are you sure you want to delete the {{ object }} and related items?</h1>
+    <h2 class="mdc-card__subtitle">
+      <a href="#">Atlas</a> >
+      <a href="#">{{ view.model|verbose_name_plural|title }}</a> >
+      Delete
+    </h2>
+  </section>
+
+  <form method="POST" data-mdc-auto-init="DMCTurbolinksForm">
+    {% csrf_token %}
+    <section class="dmc-form-page__form">
+      {% for model, items in view.get_deleted_objects.items %}
+        <h3 class="mdc-typography--title">{{ model|verbose_name_plural|title }}</h3>
+        {% for item in items %}
+          {# url item|frontend_urlname:'detail' item.pk as details_url #}
+          {% if details_url %}<a href="{{ details_url }}">{{ item }}</a>{% else %}{{ item }}{% endif %}{% if not forloop.last %},&nbsp;{% endif %}
+        {% endfor %}
+      {% endfor %}
+    </section>
+    <section class="mdc-card__actions dmc-form-page__actions">
+      <button class="mdc-button mdc-button--raised dmc-action-button" type="submit">Delete</button>
+    </section>
+  </form>
+</div>
+{% endblock content %}

@@ -7,8 +7,9 @@ from material.viewset import viewprop
 
 from .base import Action
 from .create import CreateModelView
-from .update import UpdateModelView
+from .delete import DeleteModelView
 from .list import ListModelView
+from .update import UpdateModelView
 
 
 DEFAULT = object()
@@ -147,6 +148,33 @@ class BaseModelViewSet(AppViewset):
     """
     Delete
     """
+    delete_view_class = DeleteModelView
+
+    def has_delete_permission(self, request, obj=None):
+        delete_perm = auth.get_permission_codename('delete', self.model._meta)
+
+        if request.user.has_perm(delete_perm):
+            return True
+        return request.user.has_perm(delete_perm, obj=obj)
+
+    def get_delete_view_kwargs(self, **kwargs):
+        view_kwargs = {
+            **self.delete_view_kwargs,
+            **kwargs
+        }
+        return self.filter_kwargs(self.delete_view_class, **view_kwargs)
+
+    @viewprop
+    def delete_view_kwargs(self):
+        return {}
+
+    @viewprop
+    def delete_view(self):
+        return self.delete_view_class.as_view(**self.get_delete_view_kwargs())
+
+    @property
+    def delete_url(self):
+        return path('<path:pk>/delete/', self.delete_view, name='delete')
 
 
 class ModelViewSet(BaseModelViewSet):

@@ -21,7 +21,11 @@ class FormLayoutMixin(object):
     Mixin for FormView to infer View.fields definition from form Layout.
     """
     form_class = None
-    layout = None
+
+    @viewprop
+    def layout(self):
+        if self.form_class is None and hasattr(self.form_class, 'layout'):
+            return self.form_class.layout
 
     @viewprop
     def fields(self):
