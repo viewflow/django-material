@@ -5,7 +5,7 @@ class Test(LiveTestCase):
     fixtures = ['users.json']
 
     def test_active_navigation(self):
-        self.login(username='admin', password='admin')
+        self.assertTrue(self.login(username='admin', password='admin'))
 
         # initial non-turbolinks page load
         self.browser.get(f"{self.live_server_url}/atlas/city/")

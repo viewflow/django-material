@@ -7,7 +7,6 @@ from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from selenium import webdriver
 
 
-
 @unittest.skipUnless(os.environ.get('SELENIUM'), 'Set SELENIUM=1 to run this test')
 class LiveTestCase(StaticLiveServerTestCase):
     @classmethod

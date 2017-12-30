@@ -7,7 +7,11 @@ from . import models
 
 
 class Test(TestCase):
+    fixtures = ['users.json']
+
     def setUp(self):
+        self.assertTrue(self.client.login(username='admin', password='admin'))
+
         self.ocean = models.Ocean.objects.create(
             name="Atlantic",
             area=100,
@@ -62,8 +66,31 @@ class Test(TestCase):
         response = self.client.get(reverse('atlas:ocean:index'))
         self.assertEqual(response.status_code, 200)
 
+    def test_ocean_create_view(self):
+        response = self.client.get(reverse('atlas:ocean:add'))
+        self.assertEqual(response.status_code, 200)
+
+        test_data = {
+            'name': 'Test',
+            'area': 100,
+            'slug': 'test',
+            'description': ('A long description ' * 100).strip(),
+            'map_url': 'http://lorempixel.com/output/abstract-q-c-640-480-1.jpg'
+        }
+        response = self.client.post(reverse('atlas:ocean:add'), test_data)
+        self.assertEqual(response.status_code, 302)
+        models.Ocean.objects.get(**test_data)
+
+    def test_ocean_change_view(self):
+        # TODO implement test
+        pass
+
+    def test_ocean_delete_view(self):
+        # TODO implement test
+        pass
+
     def test_sea_list_view(self):
-        with self.assertNumQueries(2):  # count & select list
+        with self.assertNumQueries(4):  # count & select list + session & user
             response = self.client.get(reverse('atlas:sea:index'))
         self.assertEqual(response.status_code, 200)
 
