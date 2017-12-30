@@ -120,3 +120,10 @@ LOGGING = {
         }
     }
 }
+
+# Fixtures
+# https://docs.djangoproject.com/en/2.0/howto/initial-data/
+
+FIXTURE_DIRS = (
+    os.path.join(BASE_DIR, 'fixtures'),
+)

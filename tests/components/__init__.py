@@ -2,9 +2,9 @@ import os
 import shutil
 import unittest
 
+from django.conf import settings
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from selenium import webdriver
-
 
 
 
@@ -23,6 +23,20 @@ class LiveTestCase(StaticLiveServerTestCase):
     def tearDownClass(cls):
         cls.browser.quit()
         super().tearDownClass()
+
+    def login(self, **credentials):
+        self.browser.get(self.live_server_url)
+        logged_in = self.client.login(**credentials)
+        if logged_in:
+            auth_cookie = {
+                **self.client.cookies[settings.SESSION_COOKIE_NAME],
+                'name': settings.SESSION_COOKIE_NAME,
+                'value': self.client.session.session_key,
+                'secure': settings.SESSION_COOKIE_SECURE or False,
+            }
+            self.browser.add_cookie(auth_cookie)
+
+        return logged_in
 
     def assertNoJsErrors(self):
         errors = self.browser.execute_script('return window.errors')
