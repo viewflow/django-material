@@ -225,9 +225,9 @@ class ListModelView(generic.ListView):
         if hasattr(self.object_list.model, attr_name):
             return ObjectAttrColumn(self.model, attr_name)
 
-    def get_object_link(self, obj):
-        if self.viewset is not None and hasattr(self.viewset, 'get_object_link'):
-            return self.viewset.get_object_link(self.request, obj)
+    def get_object_url(self, obj):
+        if self.viewset is not None and hasattr(self.viewset, 'get_object_url'):
+            return self.viewset.get_object_url(self.request, obj)
         else:
             if hasattr(obj, 'get_absolute_url') and self.has_view_perm(self.request, obj):
                 return obj.get_absolute_url()
@@ -239,9 +239,9 @@ class ListModelView(generic.ListView):
     def format_value(self, obj, column, value):
         result = column.format_value(obj, value)
         if column.attr_name in self.get_object_link_columns():
-            link = self.get_object_link(obj)
-            if link:
-                result = format_html('<a href="{}">{}</a>', link, result)
+            url = self.get_object_url(obj)
+            if url:
+                result = format_html('<a href="{}">{}</a>', url, result)
         return result
 
     def get_page_data(self, page):

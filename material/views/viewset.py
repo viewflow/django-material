@@ -165,6 +165,7 @@ class BaseModelViewSet(AppViewset):
 
 class ModelViewSet(BaseModelViewSet):
     list_columns = DEFAULT
+    list_object_link_columns = DEFAULT
     list_page_actions = DEFAULT
 
     form_layout = DEFAULT
@@ -178,6 +179,7 @@ class ModelViewSet(BaseModelViewSet):
     def get_list_view_kwargs(self, **kwargs):
         return super().get_list_view_kwargs(**{
             'columns': self.list_columns,
+            'object_link_columns': self.list_object_link_columns,
             **kwargs
         })
 

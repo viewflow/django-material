@@ -46,6 +46,7 @@ class CountryViewset(ModelViewSet):
         'became_independent_in_20_century',
         'gay_friendly'
     )
+    list_object_link_columns = ('tld', 'name')
     queryset = model._default_manager.select_related('continent')
 
     def tld(self, country):
