@@ -1,13 +1,12 @@
-import os
 import shutil
-import unittest
 
 from django.conf import settings
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
+from django.test import tag
 from selenium import webdriver
 
 
-@unittest.skipUnless(os.environ.get('SELENIUM'), 'Set SELENIUM=1 to run this test')
+@tag('selenium')
 class LiveTestCase(StaticLiveServerTestCase):
     @classmethod
     def setUpClass(cls):
