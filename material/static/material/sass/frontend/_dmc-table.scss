@@ -103,6 +103,10 @@
   }
 
   tbody {
+    tr:hover {
+      background-color: #eee;
+    }
+
     td {
       color: rgba(0, 0, 0, 0.87);
       font-size: 14px;

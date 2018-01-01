@@ -138,6 +138,8 @@ body {
       padding-left: 24px; }
     .dmc-list-table thead tr > th:last-child {
       padding-right: 24px; }
+  .dmc-list-table tbody tr:hover {
+    background-color: #eee; }
   .dmc-list-table tbody td {
     color: rgba(0, 0, 0, 0.87);
     font-size: 14px;
