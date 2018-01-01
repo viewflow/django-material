@@ -1,12 +1,15 @@
 import datetime
 import decimal
+from functools import lru_cache
 
+from django.contrib import auth
 from django.core.exceptions import FieldDoesNotExist
 from django.db import models
 from django.forms.forms import pretty_name
 from django.utils import formats, timezone
 from django.utils.encoding import force_text
 from django.utils.functional import cached_property
+from django.utils.html import format_html
 from django.views import generic
 
 from material.ptml import Icon
@@ -36,7 +39,7 @@ class BaseColumn(object):
     def column_type(self):
         raise NotImplementedError('subclasses must implement this method')
 
-    def format_value(self, value):
+    def format_value(self, obj, value):
         if value is None:
             return ''
         elif isinstance(value, datetime.datetime):
@@ -81,7 +84,7 @@ class ModelFieldColumn(BaseColumn):
             return 'numeric'
         return 'text'
 
-    def format_value(self, value):
+    def format_value(self, obj, value):
         boolean_field_types = (models.BooleanField, models.NullBooleanField)
 
         if getattr(self.model_field, 'flatchoices', None):
@@ -94,7 +97,7 @@ class ModelFieldColumn(BaseColumn):
             else:
                 return Icon('check_box_outline_blank')
         else:
-            return super().format_value(value)
+            return super().format_value(obj, value)
 
 
 class DataSourceColumn(BaseColumn):
@@ -140,7 +143,7 @@ class DataSourceColumn(BaseColumn):
     def column_type(self):
         return _get_method_attr(self.data_source, self.attr_name, 'column_type', 'text')
 
-    def format_value(self, value):
+    def format_value(self, obj, value):
         if self._get_attr_boolean():
             if value is None:
                 return Icon('indeterminate_check_box')
@@ -149,7 +152,7 @@ class DataSourceColumn(BaseColumn):
             else:
                 return Icon('check_box_outline_blank')
         else:
-            return super().format_value(value)
+            return super().format_value(obj, value)
 
 
 class ObjectAttrColumn(DataSourceColumn):
@@ -169,16 +172,38 @@ class ObjectAttrColumn(DataSourceColumn):
 class ListModelView(generic.ListView):
     viewset = None
     columns = None
+    object_link_columns = None
     paginate_by = 25
 
     page_actions = None
 
     empty_value_display = ""
 
+    def has_view_permission(self, request, obj=None):
+        if self.viewset is not None:
+            return self.viewset.has_delete_permission(request, obj=obj)
+        else:
+            view_perm = auth.get_permission_codename('view', self.model._meta)
+            if request.user.has_perm(view_perm):
+                return True
+            elif obj is not None and request.user.has_perm(view_perm, obj=obj):
+                return True
+
+            change_perm = auth.get_permission_codename('view', self.model._meta)
+            if request.user.has_perm(change_perm):
+                return True
+            return obj is not None and request.user.has_perm(change_perm, obj=obj)
+
     def get_columns(self):
         if self.columns is None:
             return ['__str__']
         return self.columns
+
+    @lru_cache(maxsize=None)
+    def get_object_link_columns(self):
+        if self.object_link_columns is None:
+            return self.columns[0]
+        return self.object_link_columns
 
     def get_column(self, attr_name):
         opts = self.model._meta
@@ -205,12 +230,24 @@ class ListModelView(generic.ListView):
         if hasattr(self.object_list.model, attr_name):
             return ObjectAttrColumn(self.model, attr_name)
 
+    def get_object_link(self, obj):
+        if self.viewset is not None and hasattr(self.viewset, 'get_object_link'):
+            return self.viewset.get_object_link(self.request, obj)
+        else:
+            if hasattr(obj, 'get_absolute_url') and self.has_view_perm(self.request, obj):
+                return obj.get_absolute_url()
+
     @cached_property
     def list_columns(self):
         return [self.get_column(column_name) for column_name in self.get_columns()]
 
-    def format_value(self, column, value):
-        return column.format_value(value)
+    def format_value(self, obj, column, value):
+        result = column.format_value(obj, value)
+        if column.attr_name in self.get_object_link_columns():
+            link = self.get_object_link(obj)
+            if link:
+                result = format_html('<a href="{}">{}</a>', link, result)
+        return result
 
     def get_page_data(self, page):
         """"Formated page data for a table.
@@ -220,7 +257,7 @@ class ListModelView(generic.ListView):
         """
         for obj in page:
             yield [
-                (column, self.format_value(column, column.get_value(obj)))
+                (column, self.format_value(obj, column, column.get_value(obj)))
                 for column in self.list_columns
             ]
 
@@ -253,4 +290,8 @@ class ListModelView(generic.ListView):
             ]
         return [self.template_name]
 
-    # TODO View permission check
+    def dispatch(self, request, *args, **kwargs):
+        if not self.has_view_permission(self.request):
+            raise PermissionDenied
+
+        return super(ListModelView, self).dispatch(request, *args, **kwargs)

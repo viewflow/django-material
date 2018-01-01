@@ -146,6 +146,9 @@ body {
     overflow: hidden; }
     .dmc-list-table tbody td i.material-icons {
       color: rgba(0, 0, 0, 0.7); }
+    .dmc-list-table tbody td a {
+      text-decoration: none;
+      color: var(--mdc-theme-primary, #3f51b5); }
   .dmc-list-table tbody tr > td:first-child {
     padding-left: 24px; }
   .dmc-list-table tbody tr > td:last-child {

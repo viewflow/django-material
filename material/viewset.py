@@ -15,7 +15,7 @@ class _viewset_items(dict):
 
     def __setitem__(self, key, value):
         is_item = key not in self and (
-            key.endswith('_url') or
+            (key.endswith('_url') and not key.startswith('get_')) or
             key.endswith('_viewset')
         )
         if is_item:
