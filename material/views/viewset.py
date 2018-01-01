@@ -1,11 +1,10 @@
-from django.contrib import auth
 from django.urls import path
 
 from material.ptml import Icon
 from material.sites import AppViewset
 from material.viewset import viewprop
 
-from .base import Action
+from .base import Action, has_object_perm
 from .create import CreateModelView
 from .delete import DeleteModelView
 from .list import ListModelView
@@ -49,13 +48,10 @@ class BaseModelViewSet(AppViewset):
     list_view_class = ListModelView
 
     def has_view_permission(self, request, obj=None):
-        view_perm = auth.get_permission_codename('view', self.model._meta)
-
-        if request.user.has_perm(view_perm):
-            return True
-        elif request.user.has_perm(view_perm, obj=obj):
-            return True
-        return self.has_change_permission(request, obj=obj)
+        return (
+            has_object_perm(request.user, 'view', self.model, obj=obj) or
+            self.has_change_permission(request, obj=obj)
+        )
 
     def get_list_view_kwargs(self, **kwargs):
         view_kwargs = {
@@ -91,9 +87,7 @@ class BaseModelViewSet(AppViewset):
     create_view_class = CreateModelView
 
     def has_add_permission(self, request):
-        return request.user.has_perm(
-            auth.get_permission_codename('add', self.model._meta)
-        )
+        return has_object_perm(request.user, 'add', self.model)
 
     def get_create_view_kwargs(self, **kwargs):
         view_kwargs = {
@@ -120,11 +114,7 @@ class BaseModelViewSet(AppViewset):
     update_view_class = UpdateModelView
 
     def has_change_permission(self, request, obj=None):
-        change_perm = auth.get_permission_codename('change', self.model._meta)
-
-        if request.user.has_perm(change_perm):
-            return True
-        return request.user.has_perm(change_perm, obj=obj)
+        return has_object_perm(request.user, 'change', self.model, obj=obj)
 
     def get_update_view_kwargs(self, **kwargs):
         view_kwargs = {
@@ -151,11 +141,7 @@ class BaseModelViewSet(AppViewset):
     delete_view_class = DeleteModelView
 
     def has_delete_permission(self, request, obj=None):
-        delete_perm = auth.get_permission_codename('delete', self.model._meta)
-
-        if request.user.has_perm(delete_perm):
-            return True
-        return request.user.has_perm(delete_perm, obj=obj)
+        return has_object_perm(request.user, 'delete', self.model, obj=obj)
 
     def get_delete_view_kwargs(self, **kwargs):
         view_kwargs = {
@@ -223,7 +209,7 @@ class ModelViewSet(BaseModelViewSet):
             **kwargs
         })
 
-    def get_object_link(self, request, obj):
+    def get_object_url(self, request, obj):
         if self.has_change_permission(request, obj):
             return self.reverse('change', args=[obj.pk])
 

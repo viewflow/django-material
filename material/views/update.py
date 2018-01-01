@@ -1,4 +1,4 @@
-from django.contrib import auth, messages
+from django.contrib import messages
 from django.contrib.admin.utils import unquote
 from django.core.exceptions import PermissionDenied, ValidationError
 from django.forms.models import modelform_factory
@@ -10,7 +10,7 @@ from django.views import generic
 
 from material.viewset import viewprop
 
-from .base import FormLayoutMixin
+from .base import FormLayoutMixin, has_object_perm
 
 
 class UpdateModelView(FormLayoutMixin, generic.UpdateView):
@@ -22,16 +22,11 @@ class UpdateModelView(FormLayoutMixin, generic.UpdateView):
         if self.viewset is not None:
             return self.viewset.has_change_permission(request, obj=obj)
         else:
-            change_perm = auth.get_permission_codename('change', self.model._meta)
-
-            if request.user.has_perm(change_perm):
-                return True
-            else:
-                return request.user.has_perm(change_perm, obj=obj)
+            return has_object_perm(request.user, 'change', self.model, obj=obj)
 
     def get_object_url(self, obj):
-        if self.viewset is not None and hasattr(self.viewset, 'get_object_link'):
-            return self.viewset.get_object_link(self.request, obj)
+        if self.viewset is not None and hasattr(self.viewset, 'get_object_url'):
+            return self.viewset.get_object_url(self.request, obj)
         elif hasattr(obj, 'get_absolute_url'):
             if self.has_change_permission(self.request, obj):
                 return obj.get_absolute_url()

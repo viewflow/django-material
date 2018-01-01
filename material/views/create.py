@@ -1,4 +1,4 @@
-from django.contrib import auth, messages
+from django.contrib import messages
 from django.core.exceptions import PermissionDenied
 from django.forms.models import modelform_factory
 from django.utils.html import format_html
@@ -8,7 +8,7 @@ from django.views import generic
 
 from material.viewset import viewprop
 
-from .base import FormLayoutMixin
+from .base import FormLayoutMixin, has_object_perm
 
 
 class CreateModelView(FormLayoutMixin, generic.CreateView):
@@ -22,19 +22,13 @@ class CreateModelView(FormLayoutMixin, generic.CreateView):
         if self.viewset is not None:
             return self.viewset.has_add_permission(request)
         else:
-            return request.user.has_perm(
-                auth.get_permission_codename('add', self.model._meta)
-            )
+            return has_object_perm(request.user, 'add', self.model)
 
     def get_object_url(self, obj):
-        if self.viewset is not None and hasattr(self.viewset, 'get_object_link'):
-            return self.viewset.get_object_link(self.request, obj)
+        if self.viewset is not None and hasattr(self.viewset, 'get_object_url'):
+            return self.viewset.get_object_url(self.request, obj)
         elif hasattr(obj, 'get_absolute_url'):
-            change_perm = auth.get_permission_codename('change', self.model._meta)
-            has_change_perm = self.request.user.has_perm(change_perm)
-            if not has_change_perm:
-                has_change_perm = self.request.user.has_perm(change_perm, obj=obj)
-            if has_change_perm:
+            if has_object_perm(self.request.user, 'change', obj):
                 return obj.get_absolute_url()
 
     def message_user(self):

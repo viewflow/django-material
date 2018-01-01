@@ -1,3 +1,5 @@
+from django.contrib import auth
+
 from material.layout import Span
 from material.viewset import viewprop
 
@@ -14,6 +16,14 @@ def _collect_elements(parent, container=None):
         container.append(parent.field_name)
 
     return container
+
+
+def has_object_perm(user, short_perm_name, model, obj=None):
+    perm_name = auth.get_permission_codename(short_perm_name, model._meta)
+    has_perm = user.has_perm(perm_name)
+    if not has_perm and obj is not None:
+        has_perm = user.has_perm(perm_name, obj=obj)
+    return has_perm
 
 
 class FormLayoutMixin(object):

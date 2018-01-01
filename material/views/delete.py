@@ -1,4 +1,4 @@
-from django.contrib import auth, messages
+from django.contrib import messages
 from django.contrib.admin.utils import unquote
 from django.core.exceptions import PermissionDenied, ValidationError
 from django.db import router
@@ -10,6 +10,8 @@ from django.utils.translation import ugettext_lazy as _
 
 from material.viewset import viewprop
 
+from .base import has_object_perm
+
 
 class DeleteModelView(generic.DeleteView):
     viewset = None
@@ -18,12 +20,7 @@ class DeleteModelView(generic.DeleteView):
         if self.viewset is not None:
             return self.viewset.has_delete_permission(request, obj=obj)
         else:
-            delete_perm = auth.get_permission_codename('delete', self.model._meta)
-
-            if request.user.has_perm(delete_perm):
-                return True
-            else:
-                return request.user.has_perm(delete_perm, obj=obj)
+            return has_object_perm(request.user, 'delete', self.model, obj=obj)
 
     def get_deleted_objects(self):
         collector = Collector(using=router.db_for_write(self.object))

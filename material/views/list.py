@@ -2,8 +2,7 @@ import datetime
 import decimal
 from functools import lru_cache
 
-from django.contrib import auth
-from django.core.exceptions import FieldDoesNotExist
+from django.core.exceptions import FieldDoesNotExist, PermissionDenied
 from django.db import models
 from django.forms.forms import pretty_name
 from django.utils import formats, timezone
@@ -14,6 +13,8 @@ from django.views import generic
 
 from material.ptml import Icon
 from material.viewset import viewprop
+
+from .base import has_object_perm
 
 
 def _get_method_attr(data_source, method_name, attr_name, default=None):
@@ -181,18 +182,12 @@ class ListModelView(generic.ListView):
 
     def has_view_permission(self, request, obj=None):
         if self.viewset is not None:
-            return self.viewset.has_delete_permission(request, obj=obj)
+            return self.viewset.has_view_permission(request, obj=obj)
         else:
-            view_perm = auth.get_permission_codename('view', self.model._meta)
-            if request.user.has_perm(view_perm):
-                return True
-            elif obj is not None and request.user.has_perm(view_perm, obj=obj):
-                return True
-
-            change_perm = auth.get_permission_codename('view', self.model._meta)
-            if request.user.has_perm(change_perm):
-                return True
-            return obj is not None and request.user.has_perm(change_perm, obj=obj)
+            return (
+                has_object_perm(request.user, 'view', self.model, obj=obj) or
+                has_object_perm(request.user, 'change', self.model, obj=obj)
+            )
 
     def get_columns(self):
         if self.columns is None:
