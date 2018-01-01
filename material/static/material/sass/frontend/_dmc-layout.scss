@@ -10,6 +10,11 @@ body {
   overflow-y: scroll;
 }
 
+.turbolinks-progress-bar {
+  background-color: #ff4081;
+  background-color: var(--mdc-theme-secondary,#ff4081);
+}
+
 .dmc-responsive-drawer {
   .mdc-list-group__subheader--dmc {
     padding-left: 16px;
