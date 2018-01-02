@@ -9,6 +9,7 @@
       <a href="#">Atlas</a> >
       <a href="#">{{ view.model|verbose_name_plural|title }}</a> > {{ object }}
     </h2>
+    {% block list-header-menu %}{% include 'material/includes/view_action_menu.html' with view=view only %}{% endblock %}
   </section>
   <section>
     <table class="dmc-list-table">

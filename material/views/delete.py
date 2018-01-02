@@ -78,5 +78,5 @@ class DeleteModelView(generic.DeleteView):
 
     def get_success_url(self):
         if self.viewset and hasattr(self.viewset, 'get_success_url'):
-            return self.viewset.get_success_url(self.request, obj=self.object)
+            return self.viewset.get_success_url(self.request)
         return '../'

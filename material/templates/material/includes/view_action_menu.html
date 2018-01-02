@@ -1,0 +1,16 @@
+{% with actions=view.get_page_actions %}{% if actions %}
+<div class="dmc-list__menu mdc-menu-anchor" data-mdc-auto-init="DMCActionMenu">
+  <button class="mdc-button dmc-list__menu-trigger">
+    <i class="material-icons">more_vert</i>
+  </button>
+  <div class="mdc-simple-menu" tabindex="-1">
+    <ul class="mdc-simple-menu__items mdc-list" role="menu" aria-hidden="true">
+      {% for action in actions %}
+      <li class="mdc-list-item{% if action.icon %} mdc-list-item--with-icon{% endif %}" role="menuitem" tabindex="0" {% if action.url %}data-dmc-menu-href="{{ action.url }}"{% endif %}>
+          {{ action.icon|default:'' }} {{ action.name }}
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+{% endif %}{% endwith %}

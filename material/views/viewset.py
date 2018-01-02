@@ -106,6 +106,7 @@ class ModelViewset(BaseModelViewset):
     Update
     """
     update_view_class = UpdateModelView
+    update_page_actions = DEFAULT
     form_layout = DEFAULT
     form_class = DEFAULT
     form_widgets = DEFAULT
@@ -135,6 +136,18 @@ class ModelViewset(BaseModelViewset):
     def update_url(self):
         return path('<path:pk>/change/', self.update_view, name='change')
 
+    def get_update_page_actions(self, request, obj, *actions):
+        if self.has_delete_permission(request):
+            actions = (
+                Action(name="Delete", url=self.reverse('delete', args=[obj.pk]), icon=Icon('delete')),
+                *actions
+            )
+        if self.update_page_actions is not DEFAULT:
+            actions = (
+                *self.update_page_actions,
+                *actions
+            )
+        return actions
     """
     Create
     """
@@ -214,6 +227,7 @@ class DetailViewsetMixin(metaclass=ViewsetMetaClass):
     Detail
     """
     detail_view_class = DetailModelView
+    detail_page_actions = DEFAULT
 
     def get_detail_view_kwargs(self, **kwargs):
         view_kwargs = {
@@ -234,13 +248,17 @@ class DetailViewsetMixin(metaclass=ViewsetMetaClass):
     def detail_url(self):
         return path('<path:pk>/detail/', self.detail_view, name='detail')
 
-    def get_detail_page_actions(self, request, *actions):
-        if self.has_delete_permission(request):
+    def get_detail_page_actions(self, request, obj, *actions):
+        if hasattr(self, 'has_delete_permission') and self.has_delete_permission(request):
             actions = (
-                Action(name="Delete", url=self.reverse('delete'), icon=Icon('remove')),
+                Action(name="Delete", url=self.reverse('delete', args=[obj.pk]), icon=Icon('delete')),
                 *actions
             )
-
+        if self.detail_page_actions is not DEFAULT:
+            actions = (
+                *self.detail_page_actions,
+                *actions
+            )
         return actions
 
 

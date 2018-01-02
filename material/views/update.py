@@ -17,6 +17,7 @@ class UpdateModelView(FormLayoutMixin, generic.UpdateView):
     viewset = None
     layout = None
     form_widgets = None
+    page_actions = None
 
     def has_change_permission(self, request, obj=None):
         if self.viewset is not None:
@@ -30,6 +31,13 @@ class UpdateModelView(FormLayoutMixin, generic.UpdateView):
         elif hasattr(obj, 'get_absolute_url'):
             if self.has_change_permission(self.request, obj):
                 return obj.get_absolute_url()
+
+    def get_page_actions(self, *actions):
+        if self.viewset:
+            actions = self.viewset.get_update_page_actions(self.request, self.object) + actions
+        if self.page_actions:
+            actions = self.page_actions + actions
+        return actions
 
     def message_user(self):
         url = self.get_object_url(self.object)

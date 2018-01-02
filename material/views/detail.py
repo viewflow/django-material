@@ -41,7 +41,7 @@ class DetailModelView(generic.DetailView):
 
     def get_page_actions(self, *actions):
         if self.viewset:
-            actions = self.viewset.get_detail_page_actions(self.request) + actions
+            actions = self.viewset.get_detail_page_actions(self.request, self.object) + actions
         if self.page_actions:
             actions = self.page_actions + actions
         return actions
