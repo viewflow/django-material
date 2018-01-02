@@ -4,10 +4,11 @@ from .layout import Layout, Row, Column, Fieldset, Span
 from .ptml import Icon
 from .settings import material_settings
 from .sites import Site, Application, AppViewset
-from .viewset import Viewset, viewprop
+from .viewset import Viewset, ViewsetMetaClass, viewprop
 from .views import (
     ModelViewset, ListModelView, CreateModelView,
-    DeleteModelView, DetailModelView, UpdateModelView
+    DeleteModelView, DetailModelView, UpdateModelView,
+    DetailViewsetMixin, ReadonlyModelViewset
 )
 from .widgets import (
     MaterialTextInput, MaterialNumberInput, MaterialEmailInput,
@@ -33,10 +34,11 @@ if material_settings.AUTOREGISTER:
 
 
 __all__ = (
-    'Layout', 'Row', 'Column', 'Fieldset', 'Span', 'Icon',
-    'Viewset', 'Site', 'Application', 'AppViewset', 'viewprop',
+    'Layout', 'Row', 'Column', 'Fieldset', 'Span', 'Icon', 'Viewset',
+    'ViewsetMetaClass', 'Site', 'Application', 'AppViewset', 'viewprop',
     'MaterialTextInput', 'MaterialNumberInput', 'MaterialEmailInput',
     'MaterialURLInput', 'MaterialPasswordInput', 'MaterialSelect',
     'ModelViewset', 'ListModelView', 'CreateModelView',
     'DeleteModelView', 'DetailModelView', 'UpdateModelView',
+    'DetailViewsetMixin', 'ReadonlyModelViewset',
 )

@@ -107,7 +107,7 @@
       background-color: #eee;
     }
 
-    td {
+    th, td {
       color: rgba(0, 0, 0, 0.87);
       font-size: 14px;
       white-space: nowrap;
@@ -124,6 +124,7 @@
       }
     }
 
+    tr>th:first-child,
     tr>td:first-child {
       padding-left: 24px;
     }

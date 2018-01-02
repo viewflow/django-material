@@ -85,6 +85,7 @@ class UpdateModelView(FormLayoutMixin, generic.UpdateView):
                 '{}/{}_form.html'.format(opts.app_label, opts.model_name),
                 'material/views/form.html',
             ]
+        return [self.template_name]
 
     def form_valid(self, *args, **kwargs):
         response = super(UpdateModelView, self).form_valid(*args, **kwargs)

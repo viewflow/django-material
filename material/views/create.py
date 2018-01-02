@@ -70,6 +70,7 @@ class CreateModelView(FormLayoutMixin, generic.CreateView):
                 '{}/{}_form.html'.format(opts.app_label, opts.model_name),
                 'material/views/form.html',
             ]
+        return [self.template_name]
 
     def form_valid(self, *args, **kwargs):
         response = super(CreateModelView, self).form_valid(*args, **kwargs)

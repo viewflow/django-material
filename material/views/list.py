@@ -257,7 +257,7 @@ class ListModelView(generic.ListView):
             ]
 
     def get_page_actions(self, *actions):
-        if self.viewset:
+        if self.viewset is not None and hasattr(self.viewset, 'get_list_page_actions'):
             actions = self.viewset.get_list_page_actions(self.request) + actions
         if self.page_actions:
             actions = self.page_actions + actions

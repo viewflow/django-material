@@ -144,17 +144,18 @@ body {
       padding-right: 24px; }
   .dmc-list-table tbody tr:hover {
     background-color: #eee; }
-  .dmc-list-table tbody td {
+  .dmc-list-table tbody th, .dmc-list-table tbody td {
     color: rgba(0, 0, 0, 0.87);
     font-size: 14px;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden; }
-    .dmc-list-table tbody td i.material-icons {
+    .dmc-list-table tbody th i.material-icons, .dmc-list-table tbody td i.material-icons {
       color: rgba(0, 0, 0, 0.7); }
-    .dmc-list-table tbody td a {
+    .dmc-list-table tbody th a, .dmc-list-table tbody td a {
       text-decoration: none;
       color: var(--mdc-theme-primary, #3f51b5); }
+  .dmc-list-table tbody tr > th:first-child,
   .dmc-list-table tbody tr > td:first-child {
     padding-left: 24px; }
   .dmc-list-table tbody tr > td:last-child {

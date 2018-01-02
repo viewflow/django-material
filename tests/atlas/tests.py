@@ -66,38 +66,6 @@ class Test(TestCase):
         response = self.client.get(reverse('atlas:ocean:index'))
         self.assertEqual(response.status_code, 200)
 
-    def test_ocean_create_view(self):
-        response = self.client.get(reverse('atlas:ocean:add'))
-        self.assertEqual(response.status_code, 200)
-
-        test_data = {
-            'name': 'Test',
-            'area': 100,
-            'slug': 'test',
-            'description': ('A long description ' * 100).strip(),
-            'map_url': 'http://lorempixel.com/output/abstract-q-c-640-480-1.jpg'
-        }
-        response = self.client.post(reverse('atlas:ocean:add'), test_data)
-        self.assertEqual(response.status_code, 302)
-        models.Ocean.objects.get(**test_data)
-
-    def test_ocean_change_view(self):
-        test_data = {
-            'name': 'Test',
-            'area': 100,
-            'slug': 'test',
-            'description': ('A long description ' * 100).strip(),
-            'map_url': 'http://lorempixel.com/output/abstract-q-c-640-480-1.jpg'
-        }
-        response = self.client.post(reverse('atlas:ocean:change', args=[self.ocean.pk]), test_data)
-        self.assertEqual(response.status_code, 302)
-        models.Ocean.objects.get(**test_data)
-
-    def test_ocean_delete_view(self):
-        response = self.client.post(reverse('atlas:ocean:delete', args=[self.ocean.pk]))
-        self.assertEqual(response.status_code, 302)
-        self.assertFalse(models.Ocean.objects.filter(pk=self.ocean.pk))
-
     def test_sea_list_view(self):
         with self.assertNumQueries(4):  # count & select list + session & user
             response = self.client.get(reverse('atlas:sea:index'))
@@ -240,6 +208,10 @@ class Test(TestCase):
 
     def test_city_list_view(self):
         response = self.client.get(reverse('atlas:city:index'))
+        self.assertEqual(response.status_code, 200)
+
+    def test_city_detail_view(self):
+        response = self.client.get(reverse('atlas:city:detail', args=[self.city.pk]))
         self.assertEqual(response.status_code, 200)
 
     def test_city_add_view(self):

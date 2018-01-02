@@ -947,7 +947,7 @@
           }).join(' ');
 
           var link = initialText.querySelector('a');
-          if (link) {
+          if (link && window.location.href !== link.href) {
             actionText = link.textContent;
             actionHandler = function actionHandler() {
               if (window.Turbolinks) {

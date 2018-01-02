@@ -61,6 +61,7 @@ class DeleteModelView(generic.DeleteView):
                 '{}/{}{}.html'.format(opts.app_label, opts.model_name, self.template_name_suffix),
                 'material/views/confirm_delete.html',
             ]
+        return [self.template_name]
 
     def delete(self, request, *args, **kwargs):
         self.object = self.get_object()

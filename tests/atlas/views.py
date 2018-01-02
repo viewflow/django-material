@@ -1,10 +1,13 @@
 from django.utils.translation import ugettext_lazy as _
-from material import Icon, ModelViewset, Layout, Fieldset, Row
+from material import (
+    Icon, Layout, Fieldset, Row,
+    ModelViewset, DetailViewsetMixin, ReadonlyModelViewset
+)
 
 from . import models
 
 
-class CityViewset(ModelViewset):
+class CityViewset(DetailViewsetMixin, ModelViewset):
     icon = Icon('location_city')
     model = models.City
     list_columns = ('name', 'country', 'population')
@@ -60,7 +63,7 @@ class CountryViewset(ModelViewset):
     became_independent_in_20_century.boolean = True
 
 
-class OceanViewset(ModelViewset):
+class OceanViewset(ReadonlyModelViewset):
     icon = Icon('directions_boat')
     model = models.Ocean
     list_columns = ('name', 'area', )

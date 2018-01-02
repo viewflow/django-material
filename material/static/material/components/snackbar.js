@@ -22,7 +22,7 @@ export class DMCSnackbar extends base.MDCComponent {
       }).join(' ');
 
       const link = initialText.querySelector('a');
-      if (link) {
+      if (link && window.location.href !== link.href) {
         actionText = link.textContent;
         actionHandler = () => {
           if (window.Turbolinks) {
