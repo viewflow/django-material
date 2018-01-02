@@ -312,7 +312,7 @@
           window.mdc.autoInit(document.querySelector('body'));
         };
 
-        this.onBeforeCache = function () {
+        this.onBeforeRender = function () {
           var nodes = document.querySelectorAll('body [data-mdc-auto-init]');
           for (var i = 0; i < nodes.length; i++) {
             var node = nodes[i];
@@ -329,14 +329,14 @@
         };
 
         window.addEventListener('turbolinks:load', this.onLoad);
-        window.addEventListener('turbolinks:before-cache', this.onBeforeCache);
+        window.addEventListener('turbolinks:before-render', this.onBeforeRender);
         window.addEventListener('turbolinks:request-end', this.onRequestEnd);
       }
     }, {
       key: 'destroy',
       value: function destroy() {
         window.removeEventListener('turbolinks:load', this.onLoad);
-        window.removeEventListener('turbolinks:before-cache', this.onBeforeCache);
+        window.removeEventListener('turbolinks:before-render', this.onBeforeRender);
         window.removeEventListener('turbolinks:request-end', this.onRequestEnd);
       }
     }], [{

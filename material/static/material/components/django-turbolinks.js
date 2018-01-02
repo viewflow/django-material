@@ -11,7 +11,7 @@ export class DMCTurbolinks extends base.MDCComponent {
       window.mdc.autoInit(document.querySelector('body'));
     };
 
-    this.onBeforeCache = () => {
+    this.onBeforeRender = () => {
       const nodes = document.querySelectorAll('body [data-mdc-auto-init]');
       for (let i=0; i<nodes.length; i++) {
         const node = nodes[i];
@@ -28,13 +28,13 @@ export class DMCTurbolinks extends base.MDCComponent {
     };
 
     window.addEventListener('turbolinks:load', this.onLoad);
-    window.addEventListener('turbolinks:before-cache', this.onBeforeCache);
+    window.addEventListener('turbolinks:before-render', this.onBeforeRender);
     window.addEventListener('turbolinks:request-end', this.onRequestEnd);
   }
 
   destroy() {
     window.removeEventListener('turbolinks:load', this.onLoad);
-    window.removeEventListener('turbolinks:before-cache', this.onBeforeCache);
+    window.removeEventListener('turbolinks:before-render', this.onBeforeRender);
     window.removeEventListener('turbolinks:request-end', this.onRequestEnd);
   }
 }
