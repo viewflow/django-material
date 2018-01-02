@@ -113,8 +113,6 @@ class Test(TestCase):
             'area': 30370000,
             'population': 11000000000,
             'population_density': '4.2',
-            'longest_river': 'Irtysh',
-            'biggest_mountain': 'Neverest',
             'hemisphere': 'BOTH',
             'oceans': [self.ocean.pk]
         }
@@ -125,8 +123,6 @@ class Test(TestCase):
             area=30370000,
             population=11000000000,
             population_density='4.2',
-            longest_river='Irtysh',
-            biggest_mountain='Neverest',
             hemisphere='BOTH',
         )
         self.assertEqual(

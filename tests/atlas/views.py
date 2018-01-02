@@ -21,6 +21,15 @@ class ContinentViewset(ModelViewset):
         'name', 'surrounded_oceans', 'countries_count',
         'area', 'population',
     )
+    create_form_layout = Layout(
+        'name',
+        Fieldset(
+            _('Details'),
+            'area',
+            Row('oceans', 'hemisphere'),
+            Row('population', 'population_density')
+        ),
+    )
     form_layout = Layout(
         'name',
         Fieldset(
