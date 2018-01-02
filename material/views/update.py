@@ -92,4 +92,6 @@ class UpdateModelView(FormLayoutMixin, generic.UpdateView):
         return response
 
     def get_success_url(self):
-        return '/'  # TODO
+        if self.viewset and hasattr(self.viewset, 'get_success_url'):
+            return self.viewset.get_success_url(self.request, obj=self.object)
+        return '../'

@@ -7,6 +7,7 @@ from material.viewset import viewprop
 from .base import Action, has_object_perm
 from .create import CreateModelView
 from .delete import DeleteModelView
+from .detail import DetailModelView
 from .list import ListModelView
 from .update import UpdateModelView
 
@@ -21,7 +22,7 @@ def _first_not_default(*args):
     return arg
 
 
-class BaseModelViewSet(AppViewset):
+class BaseModelViewset(AppViewset):
     model = DEFAULT
     queryset = DEFAULT
 
@@ -163,7 +164,7 @@ class BaseModelViewSet(AppViewset):
         return path('<path:pk>/delete/', self.delete_view, name='delete')
 
 
-class ModelViewSet(BaseModelViewSet):
+class ModelViewset(BaseModelViewset):
     list_columns = DEFAULT
     list_object_link_columns = DEFAULT
     list_page_actions = DEFAULT
@@ -215,5 +216,37 @@ class ModelViewSet(BaseModelViewSet):
         if self.has_change_permission(request, obj):
             return self.reverse('change', args=[obj.pk])
 
-    def get_next_location(self, request, action=None, obj=None):
-        return ''
+    def get_success_url(self, request, obj=None):
+        return self.reverse('index')
+
+
+class DetailViewsetMixin(object):
+    detail_view_class = DetailModelView
+
+    def get_detail_view_kwargs(self, **kwargs):
+        view_kwargs = {
+            **self.detail_view_kwargs,
+            **kwargs
+        }
+        return self.filter_kwargs(self.detail_view_class, **view_kwargs)
+
+    @viewprop
+    def detail_view_kwargs(self):
+        return {}
+
+    @viewprop
+    def detail_view(self):
+        return self.detail_view_class.as_view(**self.get_detail_view_kwargs())
+
+    @property
+    def detail_url(self):
+        return path('', self.list_view, name='list')
+
+    def get_object_url(self, request, obj):
+        if self.has_change_permission(request, obj):
+            return self.reverse('detail', args=[obj.pk])
+
+    def get_success_url(self, request, obj=None):
+        if obj is not None:
+            return self.reverse('detail', args=[obj.pk])
+        return super().get_success_url(request, obj=obj)

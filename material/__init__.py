@@ -5,7 +5,10 @@ from .ptml import Icon
 from .settings import material_settings
 from .sites import Site, Application, AppViewset
 from .viewset import Viewset, viewprop
-from .views import ModelViewSet, ListModelView
+from .views import (
+    ModelViewset, ListModelView, CreateModelView,
+    DeleteModelView, DetailModelView, UpdateModelView
+)
 from .widgets import (
     MaterialTextInput, MaterialNumberInput, MaterialEmailInput,
     MaterialURLInput, MaterialPasswordInput, MaterialSelect
@@ -34,5 +37,6 @@ __all__ = (
     'Viewset', 'Site', 'Application', 'AppViewset', 'viewprop',
     'MaterialTextInput', 'MaterialNumberInput', 'MaterialEmailInput',
     'MaterialURLInput', 'MaterialPasswordInput', 'MaterialSelect',
-    'ModelViewSet', 'ListModelView',
+    'ModelViewset', 'ListModelView', 'CreateModelView',
+    'DeleteModelView', 'DetailModelView', 'UpdateModelView',
 )

@@ -1,6 +1,11 @@
+from .create import CreateModelView
+from .delete import DeleteModelView
+from .detail import DetailModelView
 from .list import ListModelView
-from .viewset import ModelViewSet
+from .update import UpdateModelView
+from .viewset import ModelViewset
 
 __all__ = (
-    'ModelViewSet', 'ListModelView',
+    'ModelViewset', 'ListModelView', 'CreateModelView',
+    'DeleteModelView', 'DetailModelView', 'UpdateModelView'
 )

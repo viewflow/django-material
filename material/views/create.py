@@ -77,7 +77,9 @@ class CreateModelView(FormLayoutMixin, generic.CreateView):
         return response
 
     def get_success_url(self):
-        return '/'  # TODO
+        if self.viewset and hasattr(self.viewset, 'get_success_url'):
+            return self.viewset.get_success_url(self.request, obj=self.object)
+        return '../'
 
     def dispatch(self, request, *args, **kwargs):
         if not self.has_add_permission(self.request):

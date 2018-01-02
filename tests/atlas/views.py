@@ -1,17 +1,17 @@
 from django.utils.translation import ugettext_lazy as _
-from material import Icon, ModelViewSet, Layout, Fieldset, Row
+from material import Icon, ModelViewset, Layout, Fieldset, Row
 
 from . import models
 
 
-class CityViewset(ModelViewSet):
+class CityViewset(ModelViewset):
     icon = Icon('location_city')
     model = models.City
     list_columns = ('name', 'country', 'population')
     queryset = model._default_manager.select_related('country')
 
 
-class ContinentViewset(ModelViewSet):
+class ContinentViewset(ModelViewset):
     icon = Icon('terrain')
     model = models.Continent
     list_columns = (
@@ -38,7 +38,7 @@ class ContinentViewset(ModelViewSet):
     surrounded_oceans.short_description = _('Surrounded oceans')
 
 
-class CountryViewset(ModelViewSet):
+class CountryViewset(ModelViewset):
     icon = Icon('nature_people')
     model = models.Country
     list_columns = (
@@ -60,13 +60,13 @@ class CountryViewset(ModelViewSet):
     became_independent_in_20_century.boolean = True
 
 
-class OceanViewset(ModelViewSet):
+class OceanViewset(ModelViewset):
     icon = Icon('directions_boat')
     model = models.Ocean
     list_columns = ('name', 'area', )
 
 
-class SeaViewset(ModelViewSet):
+class SeaViewset(ModelViewset):
     icon = Icon('beach_access')
     model = models.Sea
     list_columns = ('name', 'parent', 'ocean', 'sea_area', )
