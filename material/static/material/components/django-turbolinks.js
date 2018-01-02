@@ -22,7 +22,7 @@ export class DMCTurbolinks extends base.MDCComponent {
     };
 
     this.onRequestEnd = (event) => {
-      if (event.data.xhr.status==500) {
+      if (event.data.xhr.status>=400) {
         Turbolinks.controller.disable();
       }
     };

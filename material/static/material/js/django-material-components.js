@@ -323,7 +323,7 @@
         };
 
         this.onRequestEnd = function (event) {
-          if (event.data.xhr.status == 500) {
+          if (event.data.xhr.status >= 400) {
             _turbolinks2.default.controller.disable();
           }
         };
