@@ -1,5 +1,6 @@
 from django.urls import URLResolver, NoReverseMatch
 from django.urls.resolvers import RoutePattern
+from django.utils.functional import cached_property
 
 from material.ptml import Icon
 from material.viewset import Viewset, IndexViewMixin, NamedViewsetMixin
@@ -123,6 +124,30 @@ class Site(IndexViewMixin, Viewset):
                 return self._parent.reverse('index')
             except NoReverseMatch:
                 pass
+
+    @cached_property
+    def _viewset_models(self):
+        result = {}
+
+        queue = list(self.apps)
+        while queue:
+            viewset = queue.pop(0)
+            if hasattr(viewset, 'model') and viewset.model not in result:
+                result[viewset.model] = viewset
+            for attr_name in viewset._viewset_items:
+                attr = getattr(viewset, attr_name)
+                if attr is None:
+                    continue
+                if attr_name.endswith('_viewset') and isinstance(attr, Viewset):
+                    queue.append(attr)
+        return result
+
+    def get_object_url(self, request, obj):
+        model = type(obj)
+        if model in self._viewset_models:
+            return self._viewset_models[model].get_object_url(request, obj)
+        else:
+            raise NoReverseMatch('Viewset for {} not found'.format(model.__name__))
 
 
 # This global object represents the default material site, for the common case.

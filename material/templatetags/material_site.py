@@ -5,13 +5,44 @@ from django.db import models
 from django.urls import NoReverseMatch
 from django.utils.encoding import force_text
 from django.utils.html import conditional_escape
-from material import Viewset
+
+from material.sites import Site
+from material.viewset import Viewset
 
 
 register = template.Library()
 
 
 KWARG_RE = re.compile(r"(?:(\w+)=)?(.+)")
+
+
+def _parse_var_and_args(tagname, parser, bits):
+    variable_name, args, kwargs = None, [], {}
+    if len(bits) >= 2 and bits[-2] == 'as':
+        variable_name = bits[-1]
+        bits = bits[:-2]
+
+    if len(bits):
+        for bit in bits:
+            match = KWARG_RE.match(bit)
+            if not match:
+                raise template.TemplateSyntaxError("Malformed arguments for {} tag".format(tagname))
+            name, value = match.groups()
+            if name:
+                kwargs[name] = parser.compile_filter(value)
+            else:
+                args.append(parser.compile_filter(value))
+
+    return variable_name, args, kwargs
+
+
+def _resolve_args(context, args, kwargs):
+    args = [arg.resolve(context) for arg in args]
+    kwargs = {
+        force_text(key, 'ascii'): value.resolve(context)
+        for key, value in kwargs.items()
+    }
+    return args, kwargs
 
 
 @register.tag('viewset_url')
@@ -32,32 +63,12 @@ class ViewsetURLNode(template.Node):
 
         self.viewset = parser.compile_filter(bits[1])
         self.view_name = parser.compile_filter(bits[2])
-
-        self.args = []
-        self.kwargs = {}
-        self.variable_name = None
-        bits = bits[3:]
-        if len(bits) >= 2 and bits[-2] == 'as':
-            self.variable_name = bits[-1]
-            bits = bits[:-2]
-
-        if len(bits):
-            for bit in bits:
-                match = KWARG_RE.match(bit)
-                if not match:
-                    raise template.TemplateSyntaxError("Malformed arguments to viewset_url tag")
-                name, value = match.groups()
-                if name:
-                    self.kwargs[name] = parser.compile_filter(value)
-                else:
-                    self.args.append(parser.compile_filter(value))
+        self.variable_name, self.args, self.kwargs = _parse_var_and_args(
+            'viewset_url', parser, bits[3:]
+        )
 
     def render(self, context):
-        args = [arg.resolve(context) for arg in self.args]
-        kwargs = {
-            force_text(key, 'ascii'): value.resolve(context)
-            for key, value in self.kwargs.items()
-        }
+        args, kwargs = _resolve_args(context, self.args, self.kwargs)
 
         viewset = self.viewset.resolve(context)
         if not isinstance(viewset, Viewset):
@@ -76,6 +87,52 @@ class ViewsetURLNode(template.Node):
         url = ''
         try:
             url = viewset.reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+        except NoReverseMatch:
+            if self.variable_name is None:
+                raise
+
+        if self.variable_name:
+            context[self.variable_name] = url
+            return ''
+        else:
+            if context.autoescape:
+                url = conditional_escape(url)
+            return url
+
+
+@register.tag('site_object_url')
+class SiteObjectURLNode(template.Node):
+    """
+    Call viewset.get_object_url for an object from site
+
+    Example::
+        {% site_object_url site view.object %}
+    """
+
+    def __init__(self, parser, token):
+        bits = token.split_contents()
+        if len(bits) < 3:
+            raise template.TemplateSyntaxError(
+                "viewset_url takes at least two arguments, a "
+                "site and an object.")
+
+        self.site = parser.compile_filter(bits[1])
+        self.object = parser.compile_filter(bits[2])
+        if len(bits) >= 2 and bits[-2] == 'as':
+            self.variable_name = bits[-1]
+
+    def render(self, context):
+        site = self.site.resolve(context)
+        if not isinstance(site, Site):
+            raise template.TemplateSyntaxError("site_url first argument must be a site instance")
+
+        obj = self.object.resolve(context)
+        if not isinstance(obj, models.Model):
+            raise template.TemplateSyntaxError("site_url third argument must be a model instance")
+
+        url = ''
+        try:
+            url = site.get_object_url(context.request, obj)
         except NoReverseMatch:
             if self.variable_name is None:
                 raise

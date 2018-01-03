@@ -8,6 +8,9 @@
     padding-left: 24px;
     padding-bottom: 8px;
     position: relative; }
+  .dmc-form-page a {
+    text-decoration: none;
+    color: var(--mdc-theme-primary, #3f51b5); }
 
 .dmc-form-page__form {
   padding-left: 24px;
