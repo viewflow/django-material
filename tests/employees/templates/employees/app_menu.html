@@ -1,0 +1,9 @@
+{% extends 'material/includes/app_menu.html' %}
+{% load material_site i18n %}
+
+{% block viewset_links %}
+{{ block.super }}
+<a class="mdc-list-item mdc-list-item--dmc" href="{% viewset_url app 'employee:add' %}">
+    <i class="material-icons">person_add</i> {% trans 'Add new' %}
+</a>
+{% endblock %}

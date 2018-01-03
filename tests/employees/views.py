@@ -1,12 +1,13 @@
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
-from material import ModelViewset
+from material import Icon, ModelViewset, DetailViewsetMixin
 
 from . import models
 
 
-class EmployeeViewset(ModelViewset):
+class EmployeeViewset(DetailViewsetMixin, ModelViewset):
+    icon = Icon('person_outline')
     model = models.Employee
     list_columns = (
         'no', 'first_name', 'last_name',
@@ -23,6 +24,7 @@ class EmployeeViewset(ModelViewset):
 
 
 class DepartmentViewset(ModelViewset):
+    icon = Icon('people_outline')
     model = models.Department
     list_columns = (
         'dept_no', 'dept_name', 'manager', 'employees'
