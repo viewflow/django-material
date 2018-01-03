@@ -1,4 +1,5 @@
 from django.utils.translation import ugettext_lazy as _
+
 from material import (
     Icon, Layout, Fieldset, Row,
     ModelViewset, DetailViewsetMixin, ReadonlyModelViewset
@@ -75,7 +76,7 @@ class CountryViewset(ModelViewset):
 class OceanViewset(ReadonlyModelViewset):
     icon = Icon('directions_boat')
     model = models.Ocean
-    list_columns = ('name', 'area', )
+    list_columns = ('name', 'area',)
 
 
 class SeaViewset(ModelViewset):
