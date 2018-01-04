@@ -1,0 +1,20 @@
+{% load static %}
+<div class="dmc-header">
+  <img class="dmc-header__avatar" src="{% static 'material/img/user.png' %}">
+  <div class="dmc-header__info">
+    <div class="dmc-header__user">
+      {% block user-info %}
+      <div class="dmc-header__title">
+        {{ request.user.get_full_name|default:request.user.get_username }}
+      </div>
+      {% if request.user.email != request.user.get_username %}
+      <div class="dmc-header__subtitle">{{ request.user.email}}</div>
+      {% endif %} {% endblock %}
+    </div>
+    <div class="dmc-header__menu" data-mdc-auto-init="DMCHeaderMenu" data-toggle-menu="id_site_drawer_menu">
+      <button class="mdc-button">
+        <i class="material-icons">arrow_drop_down</i>
+      </button>
+    </div>
+  </div>
+</div>

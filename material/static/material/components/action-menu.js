@@ -20,7 +20,7 @@ export class DMCActionMenu extends base.MDCComponent {
       }
     });
 
-    this.trigger_ = this.root_.querySelector('.dmc-list__menu-trigger');
+    this.trigger_ = this.root_.querySelector('button.mdc-button');
     this.onClick = (event) => {
       this.menu_.open = !this.menu_.open;
     };

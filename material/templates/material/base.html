@@ -22,12 +22,17 @@
       <nav class="mdc-persistent-drawer__drawer">
         <header class="mdc-persistent-drawer__header">
           <div class="mdc-persistent-drawer__header-content">
-            Header here
+            {% include 'material/includes/sidebar_header.html' %}
           </div>
         </header>
-        <nav class="mdc-persistent-drawer__content mdc-list">
-          {% if app %}{% include app.menu_template_name with app=app %}{% endif %}
-          {% if site %}{% include site.menu_template_name with site=site user=request.user only %}{% endif %}
+        <nav class="mdc-persistent-drawer__content mdc-list" id="id_site_drawer_menu">
+          <div class="dmc-header-menu__primary">
+            {% if app %}{% include app.menu_template_name with app=app %}{% endif %}
+            {% if site %}{% include site.menu_template_name with site=site user=request.user only %}{% endif %}
+          </div>
+          <div class="dmc-header-menu__secondary">
+              {% include 'material/includes/sidebar_menu.html' %}
+          </div>
         </nav>
       </nav>
     </aside>
