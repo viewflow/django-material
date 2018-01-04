@@ -1,4 +1,4 @@
-<!DOCTYPE html>{% load static %}
+<!DOCTYPE html>{% load i18n static %}
 <html lang="en" class="mdc-typography" data-mdc-auto-init="DMCTurbolinks">
 
 <head>
@@ -22,7 +22,27 @@
       <nav class="mdc-persistent-drawer__drawer">
         <header class="mdc-persistent-drawer__header">
           <div class="mdc-persistent-drawer__header-content">
-            {% include 'material/includes/sidebar_header.html' %}
+            {% block sidebar-header %}
+            <div class="dmc-header">
+                <img class="dmc-header__avatar" src="{% static 'material/img/user.png' %}">
+                <div class="dmc-header__info">
+                  <div class="dmc-header__user">
+                    {% block user-info %}
+                    <div class="dmc-header__title">
+                      {{ request.user.get_full_name|default:request.user.get_username }}
+                    </div>
+                    {% if request.user.email != request.user.get_username %}
+                    <div class="dmc-header__subtitle">{{ request.user.email}}</div>
+                    {% endif %} {% endblock %}
+                  </div>
+                  <div class="dmc-header__menu" data-mdc-auto-init="DMCHeaderMenu" data-toggle-menu="id_site_drawer_menu">
+                    <button class="mdc-button">
+                      <i class="material-icons">arrow_drop_down</i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              {% endblock sidebar-header %}
           </div>
         </header>
         <nav class="mdc-persistent-drawer__content mdc-list" id="id_site_drawer_menu">
@@ -31,7 +51,18 @@
             {% if site %}{% include site.menu_template_name with site=site user=request.user only %}{% endif %}
           </div>
           <div class="dmc-header-menu__secondary">
-              {% include 'material/includes/sidebar_menu.html' %}
+              {% block sidebar-user-menu %}
+              <nav class="mdc-list">
+                  {% block sidebar-user-menu-actions %}
+                  {% url 'logout' as logout_url %}
+                  {% if logout_url %}
+                  <a class="mdc-list-item mdc-list-item--dmc" href="{{ logout_url }}">
+                    <i class="material-icons">exit_to_app</i> {% trans 'Log out' %}
+                  </a>
+                  {% endif %}
+                  {% endblock %}
+                </nav>
+              {% endblock sidebar-user-menu %}
           </div>
         </nav>
       </nav>

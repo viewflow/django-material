@@ -10,6 +10,7 @@ export class DMCHeaderMenu extends base.MDCComponent {
     this.menuContainer_ = document.getElementById(this.root_.dataset.toggleMenu);
     this.trigger_ = this.root_.querySelector('button.mdc-button');
     this.onClick = (event) => {
+      event.stopPropagation();
       this.menuContainer_.classList.toggle('dmc-header-secondary-shown');
       this.trigger_.classList.toggle('dmc-header-secondary-shown');
     };

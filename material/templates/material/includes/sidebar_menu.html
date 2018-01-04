@@ -1,9 +1,0 @@
-{% load i18n %}
-<nav class="mdc-list">
-  {% url 'logout' as logout_url %}
-  {% if logout_url %}
-  <a class="mdc-list-item mdc-list-item--dmc" href="{{ logout_url }}">
-    <i class="material-icons">exit_to_app</i> {% trans 'Log out' %}
-  </a>
-  {% endif %}
-</nav>
