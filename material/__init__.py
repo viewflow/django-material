@@ -8,7 +8,7 @@ from .viewset import Viewset, ViewsetMetaClass, viewprop
 from .views import (
     ModelViewset, ListModelView, CreateModelView,
     DeleteModelView, DetailModelView, UpdateModelView,
-    DetailViewsetMixin, ReadonlyModelViewset
+    DetailViewsetMixin, DeleteViewsetMixin, ReadonlyModelViewset
 )
 from .widgets import (
     MaterialTextInput, MaterialNumberInput, MaterialEmailInput,
@@ -40,5 +40,5 @@ __all__ = (
     'MaterialURLInput', 'MaterialPasswordInput', 'MaterialSelect',
     'ModelViewset', 'ListModelView', 'CreateModelView',
     'DeleteModelView', 'DetailModelView', 'UpdateModelView',
-    'DetailViewsetMixin', 'ReadonlyModelViewset',
+    'DetailViewsetMixin', 'DeleteViewsetMixin', 'ReadonlyModelViewset',
 )

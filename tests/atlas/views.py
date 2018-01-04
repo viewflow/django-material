@@ -2,13 +2,14 @@ from django.utils.translation import ugettext_lazy as _
 
 from material import (
     Icon, Layout, Fieldset, Row,
-    ModelViewset, DetailViewsetMixin, ReadonlyModelViewset
+    ModelViewset, DetailViewsetMixin, DeleteViewsetMixin,
+    ReadonlyModelViewset
 )
 
 from . import models
 
 
-class CityViewset(DetailViewsetMixin, ModelViewset):
+class CityViewset(DetailViewsetMixin, DeleteViewsetMixin, ModelViewset):
     icon = Icon('location_city')
     model = models.City
     list_columns = ('name', 'country', 'population')
@@ -51,7 +52,7 @@ class ContinentViewset(ModelViewset):
     surrounded_oceans.short_description = _('Surrounded oceans')
 
 
-class CountryViewset(ModelViewset):
+class CountryViewset(DeleteViewsetMixin, ModelViewset):
     icon = Icon('nature_people')
     model = models.Country
     list_columns = (
@@ -79,7 +80,7 @@ class OceanViewset(ReadonlyModelViewset):
     list_columns = ('name', 'area',)
 
 
-class SeaViewset(ModelViewset):
+class SeaViewset(DeleteViewsetMixin, ModelViewset):
     icon = Icon('beach_access')
     model = models.Sea
     list_columns = ('name', 'parent', 'ocean', 'sea_area', )

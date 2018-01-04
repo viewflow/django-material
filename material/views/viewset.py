@@ -137,11 +137,6 @@ class ModelViewset(BaseModelViewset):
         return path('<path:pk>/change/', self.update_view, name='change')
 
     def get_update_page_actions(self, request, obj, *actions):
-        if self.has_delete_permission(request):
-            actions = (
-                Action(name="Delete", url=self.reverse('delete', args=[obj.pk]), icon=Icon('delete')),
-                *actions
-            )
         if self.update_page_actions is not DEFAULT:
             actions = (
                 *self.update_page_actions,
@@ -185,9 +180,8 @@ class ModelViewset(BaseModelViewset):
     def create_url(self):
         return path('add/', self.create_view, name='add')
 
-    """
-    Delete
-    """
+
+class DeleteViewsetMixin(metaclass=ViewsetMetaClass):
     delete_view_class = DeleteModelView
 
     def has_delete_permission(self, request, obj=None):
@@ -211,6 +205,14 @@ class ModelViewset(BaseModelViewset):
     @property
     def delete_url(self):
         return path('<path:pk>/delete/', self.delete_view, name='delete')
+
+    def get_update_page_actions(self, request, obj, *actions):
+        if self.has_delete_permission(request):
+            actions = (
+                Action(name="Delete", url=self.reverse('delete', args=[obj.pk]), icon=Icon('delete')),
+                *actions
+            )
+        return super().get_update_page_actions(request, obj, *actions)
 
 
 class DetailViewsetMixin(metaclass=ViewsetMetaClass):

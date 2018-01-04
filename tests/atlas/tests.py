@@ -152,11 +152,6 @@ class Test(TestCase):
             hemisphere='BOTH',
         )
 
-    def test_continent_delete_view(self):
-        response = self.client.post(reverse('atlas:continent:delete', args=[self.continent.pk]))
-        self.assertEqual(response.status_code, 302)
-        self.assertFalse(models.Continent.objects.filter(pk=self.continent.pk))
-
     def test_country_list_view(self):
         response = self.client.get(reverse('atlas:country:index'))
         self.assertEqual(response.status_code, 200)
