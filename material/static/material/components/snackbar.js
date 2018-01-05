@@ -1,7 +1,8 @@
-import {autoInit, base, snackbar} from 'material-components-web';
+import {base, snackbar} from 'material-components-web';
+import {register} from 'django-material-registry';
 
 
-export class DMCSnackbar extends base.MDCComponent {
+class DMCSnackbar extends base.MDCComponent {
   static attachTo(root) {
     return new DMCSnackbar(root, new base.MDCFoundation());
   }
@@ -59,4 +60,4 @@ export class DMCSnackbar extends base.MDCComponent {
   }
 }
 
-autoInit.register('DMCSnackbar', DMCSnackbar);
+register('DMCSnackbar', DMCSnackbar);

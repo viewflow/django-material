@@ -1,22 +1,17 @@
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
-    define(['exports', 'material-components-web'], factory);
+    define(['material-components-web', 'django-material-registry'], factory);
   } else if (typeof exports !== "undefined") {
-    factory(exports, require('material-components-web'));
+    factory(require('material-components-web'), require('django-material-registry'));
   } else {
     var mod = {
       exports: {}
     };
-    factory(mod.exports, global.mdc);
+    factory(global.mdc, global.djangoMaterialRegistry);
     global.actionMenu = mod.exports;
   }
-})(this, function (exports, _materialComponentsWeb) {
+})(this, function (_materialComponentsWeb, _djangoMaterialRegistry) {
   'use strict';
-
-  Object.defineProperty(exports, "__esModule", {
-    value: true
-  });
-  exports.DMCActionMenu = undefined;
 
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
@@ -66,7 +61,7 @@
     if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
   }
 
-  var DMCActionMenu = exports.DMCActionMenu = function (_base$MDCComponent) {
+  var DMCActionMenu = function (_base$MDCComponent) {
     _inherits(DMCActionMenu, _base$MDCComponent);
 
     function DMCActionMenu() {
@@ -114,27 +109,22 @@
     return DMCActionMenu;
   }(_materialComponentsWeb.base.MDCComponent);
 
-  _materialComponentsWeb.autoInit.register('DMCActionMenu', DMCActionMenu);
+  (0, _djangoMaterialRegistry.register)('DMCActionMenu', DMCActionMenu);
 });
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
-    define(['exports', 'material-components-web'], factory);
+    define(['material-components-web', 'django-material-registry'], factory);
   } else if (typeof exports !== "undefined") {
-    factory(exports, require('material-components-web'));
+    factory(require('material-components-web'), require('django-material-registry'));
   } else {
     var mod = {
       exports: {}
     };
-    factory(mod.exports, global.mdc);
+    factory(global.mdc, global.djangoMaterialRegistry);
     global.activeNavigation = mod.exports;
   }
-})(this, function (exports, _materialComponentsWeb) {
+})(this, function (_materialComponentsWeb, _djangoMaterialRegistry) {
   'use strict';
-
-  Object.defineProperty(exports, "__esModule", {
-    value: true
-  });
-  exports.DMCActiveNav = undefined;
 
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
@@ -184,7 +174,7 @@
     if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
   }
 
-  var DMCActiveNav = exports.DMCActiveNav = function (_base$MDCComponent) {
+  var DMCActiveNav = function (_base$MDCComponent) {
     _inherits(DMCActiveNav, _base$MDCComponent);
 
     function DMCActiveNav() {
@@ -218,158 +208,22 @@
     return DMCActiveNav;
   }(_materialComponentsWeb.base.MDCComponent);
 
-  _materialComponentsWeb.autoInit.register('DMCActiveNav', DMCActiveNav);
+  (0, _djangoMaterialRegistry.register)('DMCActiveNav', DMCActiveNav);
 });
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
-    define(['exports', 'material-components-web', 'turbolinks'], factory);
+    define(['material-components-web', 'django-material-registry'], factory);
   } else if (typeof exports !== "undefined") {
-    factory(exports, require('material-components-web'), require('turbolinks'));
+    factory(require('material-components-web'), require('django-material-registry'));
   } else {
     var mod = {
       exports: {}
     };
-    factory(mod.exports, global.mdc, global.Turbolinks);
-    global.djangoTurbolinks = mod.exports;
-  }
-})(this, function (exports, _materialComponentsWeb, _turbolinks) {
-  'use strict';
-
-  Object.defineProperty(exports, "__esModule", {
-    value: true
-  });
-  exports.DMCTurbolinks = undefined;
-
-  var _turbolinks2 = _interopRequireDefault(_turbolinks);
-
-  function _interopRequireDefault(obj) {
-    return obj && obj.__esModule ? obj : {
-      default: obj
-    };
-  }
-
-  function _classCallCheck(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError("Cannot call a class as a function");
-    }
-  }
-
-  var _createClass = function () {
-    function defineProperties(target, props) {
-      for (var i = 0; i < props.length; i++) {
-        var descriptor = props[i];
-        descriptor.enumerable = descriptor.enumerable || false;
-        descriptor.configurable = true;
-        if ("value" in descriptor) descriptor.writable = true;
-        Object.defineProperty(target, descriptor.key, descriptor);
-      }
-    }
-
-    return function (Constructor, protoProps, staticProps) {
-      if (protoProps) defineProperties(Constructor.prototype, protoProps);
-      if (staticProps) defineProperties(Constructor, staticProps);
-      return Constructor;
-    };
-  }();
-
-  function _possibleConstructorReturn(self, call) {
-    if (!self) {
-      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-    }
-
-    return call && (typeof call === "object" || typeof call === "function") ? call : self;
-  }
-
-  function _inherits(subClass, superClass) {
-    if (typeof superClass !== "function" && superClass !== null) {
-      throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
-    }
-
-    subClass.prototype = Object.create(superClass && superClass.prototype, {
-      constructor: {
-        value: subClass,
-        enumerable: false,
-        writable: true,
-        configurable: true
-      }
-    });
-    if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
-  }
-
-  var DMCTurbolinks = exports.DMCTurbolinks = function (_base$MDCComponent) {
-    _inherits(DMCTurbolinks, _base$MDCComponent);
-
-    function DMCTurbolinks() {
-      _classCallCheck(this, DMCTurbolinks);
-
-      return _possibleConstructorReturn(this, (DMCTurbolinks.__proto__ || Object.getPrototypeOf(DMCTurbolinks)).apply(this, arguments));
-    }
-
-    _createClass(DMCTurbolinks, [{
-      key: 'initialize',
-      value: function initialize() {
-        this.onLoad = function () {
-          window.mdc.autoInit(document.querySelector('body'));
-        };
-
-        this.onBeforeRender = function () {
-          var nodes = document.querySelectorAll('body [data-mdc-auto-init]');
-          for (var i = 0; i < nodes.length; i++) {
-            var node = nodes[i];
-            var ctorName = node.dataset.mdcAutoInit;
-            var component = node[ctorName];
-            component.destroy();
-          }
-        };
-
-        this.onRequestEnd = function (event) {
-          if (event.data.xhr.status >= 400) {
-            _turbolinks2.default.controller.disable();
-          }
-        };
-
-        window.addEventListener('turbolinks:load', this.onLoad);
-        window.addEventListener('turbolinks:before-render', this.onBeforeRender);
-        window.addEventListener('turbolinks:request-end', this.onRequestEnd);
-      }
-    }, {
-      key: 'destroy',
-      value: function destroy() {
-        window.removeEventListener('turbolinks:load', this.onLoad);
-        window.removeEventListener('turbolinks:before-render', this.onBeforeRender);
-        window.removeEventListener('turbolinks:request-end', this.onRequestEnd);
-      }
-    }], [{
-      key: 'attachTo',
-      value: function attachTo(root) {
-        return new DMCTurbolinks(root, new _materialComponentsWeb.base.MDCFoundation());
-      }
-    }]);
-
-    return DMCTurbolinks;
-  }(_materialComponentsWeb.base.MDCComponent);
-
-  _materialComponentsWeb.autoInit.register('DMCTurbolinks', DMCTurbolinks);
-});
-(function (global, factory) {
-  if (typeof define === "function" && define.amd) {
-    define(['exports', 'material-components-web'], factory);
-  } else if (typeof exports !== "undefined") {
-    factory(exports, require('material-components-web'));
-  } else {
-    var mod = {
-      exports: {}
-    };
-    factory(mod.exports, global.mdc);
+    factory(global.mdc, global.djangoMaterialRegistry);
     global.headerMenu = mod.exports;
   }
-})(this, function (exports, _materialComponentsWeb) {
+})(this, function (_materialComponentsWeb, _djangoMaterialRegistry) {
   'use strict';
-
-  Object.defineProperty(exports, "__esModule", {
-    value: true
-  });
-  exports.DMCHeaderMenu = undefined;
 
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
@@ -419,7 +273,7 @@
     if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
   }
 
-  var DMCHeaderMenu = exports.DMCHeaderMenu = function (_base$MDCComponent) {
+  var DMCHeaderMenu = function (_base$MDCComponent) {
     _inherits(DMCHeaderMenu, _base$MDCComponent);
 
     function DMCHeaderMenu() {
@@ -436,6 +290,7 @@
         this.menuContainer_ = document.getElementById(this.root_.dataset.toggleMenu);
         this.trigger_ = this.root_.querySelector('button.mdc-button');
         this.onClick = function (event) {
+          event.stopPropagation();
           _this2.menuContainer_.classList.toggle('dmc-header-secondary-shown');
           _this2.trigger_.classList.toggle('dmc-header-secondary-shown');
         };
@@ -456,27 +311,22 @@
     return DMCHeaderMenu;
   }(_materialComponentsWeb.base.MDCComponent);
 
-  _materialComponentsWeb.autoInit.register('DMCHeaderMenu', DMCHeaderMenu);
+  (0, _djangoMaterialRegistry.register)('DMCHeaderMenu', DMCHeaderMenu);
 });
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
-    define(['exports', 'material-components-web'], factory);
+    define(['material-components-web', 'django-material-registry'], factory);
   } else if (typeof exports !== "undefined") {
-    factory(exports, require('material-components-web'));
+    factory(require('material-components-web'), require('django-material-registry'));
   } else {
     var mod = {
       exports: {}
     };
-    factory(mod.exports, global.mdc);
+    factory(global.mdc, global.djangoMaterialRegistry);
     global.passwordField = mod.exports;
   }
-})(this, function (exports, _materialComponentsWeb) {
+})(this, function (_materialComponentsWeb, _djangoMaterialRegistry) {
   'use strict';
-
-  Object.defineProperty(exports, "__esModule", {
-    value: true
-  });
-  exports.DMCPasswordField = undefined;
 
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
@@ -526,7 +376,7 @@
     if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
   }
 
-  var DMCPasswordField = exports.DMCPasswordField = function (_base$MDCComponent) {
+  var DMCPasswordField = function (_base$MDCComponent) {
     _inherits(DMCPasswordField, _base$MDCComponent);
 
     function DMCPasswordField() {
@@ -577,27 +427,22 @@
     return DMCPasswordField;
   }(_materialComponentsWeb.base.MDCComponent);
 
-  _materialComponentsWeb.autoInit.register('DMCPasswordField', DMCPasswordField);
+  (0, _djangoMaterialRegistry.register)('DMCPasswordField', DMCPasswordField);
 });
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
-    define(['exports', 'material-components-web'], factory);
+    define(['material-components-web', 'django-material-registry'], factory);
   } else if (typeof exports !== "undefined") {
-    factory(exports, require('material-components-web'));
+    factory(require('material-components-web'), require('django-material-registry'));
   } else {
     var mod = {
       exports: {}
     };
-    factory(mod.exports, global.mdc);
+    factory(global.mdc, global.djangoMaterialRegistry);
     global.responsiveDrawer = mod.exports;
   }
-})(this, function (exports, _materialComponentsWeb) {
+})(this, function (_materialComponentsWeb, _djangoMaterialRegistry) {
   'use strict';
-
-  Object.defineProperty(exports, "__esModule", {
-    value: true
-  });
-  exports.DMCResponsiveDrawer = undefined;
 
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
@@ -647,7 +492,7 @@
     if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
   }
 
-  var DMCResponsiveDrawer = exports.DMCResponsiveDrawer = function (_base$MDCComponent) {
+  var DMCResponsiveDrawer = function (_base$MDCComponent) {
     _inherits(DMCResponsiveDrawer, _base$MDCComponent);
 
     _createClass(DMCResponsiveDrawer, null, [{
@@ -773,21 +618,21 @@
     return DMCResponsiveDrawer;
   }(_materialComponentsWeb.base.MDCComponent);
 
-  _materialComponentsWeb.autoInit.register('DMCResponsiveDrawer', DMCResponsiveDrawer);
+  (0, _djangoMaterialRegistry.register)('DMCResponsiveDrawer', DMCResponsiveDrawer);
 });
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
-    define(['exports', 'material-components-web'], factory);
+    define(['exports', 'material-components-web', 'django-material-registry'], factory);
   } else if (typeof exports !== "undefined") {
-    factory(exports, require('material-components-web'));
+    factory(exports, require('material-components-web'), require('django-material-registry'));
   } else {
     var mod = {
       exports: {}
     };
-    factory(mod.exports, global.mdc);
+    factory(mod.exports, global.mdc, global.djangoMaterialRegistry);
     global.selectField = mod.exports;
   }
-})(this, function (exports, _materialComponentsWeb) {
+})(this, function (exports, _materialComponentsWeb, _djangoMaterialRegistry) {
   'use strict';
 
   Object.defineProperty(exports, "__esModule", {
@@ -955,27 +800,22 @@
     return DMCSelect;
   }(_materialComponentsWeb.base.MDCComponent);
 
-  _materialComponentsWeb.autoInit.register('DMCSelect', DMCSelect);
+  (0, _djangoMaterialRegistry.register)('DMCSelect', DMCSelect);
 });
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
-    define(['exports', 'material-components-web'], factory);
+    define(['material-components-web', 'django-material-registry'], factory);
   } else if (typeof exports !== "undefined") {
-    factory(exports, require('material-components-web'));
+    factory(require('material-components-web'), require('django-material-registry'));
   } else {
     var mod = {
       exports: {}
     };
-    factory(mod.exports, global.mdc);
+    factory(global.mdc, global.djangoMaterialRegistry);
     global.snackbar = mod.exports;
   }
-})(this, function (exports, _materialComponentsWeb) {
+})(this, function (_materialComponentsWeb, _djangoMaterialRegistry) {
   'use strict';
-
-  Object.defineProperty(exports, "__esModule", {
-    value: true
-  });
-  exports.DMCSnackbar = undefined;
 
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
@@ -1025,7 +865,7 @@
     if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
   }
 
-  var DMCSnackbar = exports.DMCSnackbar = function (_base$MDCComponent) {
+  var DMCSnackbar = function (_base$MDCComponent) {
     _inherits(DMCSnackbar, _base$MDCComponent);
 
     function DMCSnackbar() {
@@ -1100,27 +940,22 @@
     return DMCSnackbar;
   }(_materialComponentsWeb.base.MDCComponent);
 
-  _materialComponentsWeb.autoInit.register('DMCSnackbar', DMCSnackbar);
+  (0, _djangoMaterialRegistry.register)('DMCSnackbar', DMCSnackbar);
 });
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
-    define(['exports', 'material-components-web'], factory);
+    define(['material-components-web', 'django-material-registry'], factory);
   } else if (typeof exports !== "undefined") {
-    factory(exports, require('material-components-web'));
+    factory(require('material-components-web'), require('django-material-registry'));
   } else {
     var mod = {
       exports: {}
     };
-    factory(mod.exports, global.mdc);
+    factory(global.mdc, global.djangoMaterialRegistry);
     global.toggleDrawer = mod.exports;
   }
-})(this, function (exports, _materialComponentsWeb) {
+})(this, function (_materialComponentsWeb, _djangoMaterialRegistry) {
   'use strict';
-
-  Object.defineProperty(exports, "__esModule", {
-    value: true
-  });
-  exports.DMCToggleDrawer = undefined;
 
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
@@ -1170,7 +1005,7 @@
     if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
   }
 
-  var DMCToggleDrawer = exports.DMCToggleDrawer = function (_base$MDCComponent) {
+  var DMCToggleDrawer = function (_base$MDCComponent) {
     _inherits(DMCToggleDrawer, _base$MDCComponent);
 
     function DMCToggleDrawer() {
@@ -1207,27 +1042,22 @@
     return DMCToggleDrawer;
   }(_materialComponentsWeb.base.MDCComponent);
 
-  _materialComponentsWeb.autoInit.register('DMCToggleDrawer', DMCToggleDrawer);
+  (0, _djangoMaterialRegistry.register)('DMCToggleDrawer', DMCToggleDrawer);
 });
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
-    define(['exports', 'material-components-web'], factory);
+    define(['material-components-web', 'django-material-registry'], factory);
   } else if (typeof exports !== "undefined") {
-    factory(exports, require('material-components-web'));
+    factory(require('material-components-web'), require('django-material-registry'));
   } else {
     var mod = {
       exports: {}
     };
-    factory(mod.exports, global.mdc);
+    factory(global.mdc, global.djangoMaterialRegistry);
     global.turbolinksForm = mod.exports;
   }
-})(this, function (exports, _materialComponentsWeb) {
+})(this, function (_materialComponentsWeb, _djangoMaterialRegistry) {
   'use strict';
-
-  Object.defineProperty(exports, "__esModule", {
-    value: true
-  });
-  exports.DMCTurbolinksForm = undefined;
 
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
@@ -1277,7 +1107,7 @@
     if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
   }
 
-  var DMCTurbolinksForm = exports.DMCTurbolinksForm = function (_base$MDCComponent) {
+  var DMCTurbolinksForm = function (_base$MDCComponent) {
     _inherits(DMCTurbolinksForm, _base$MDCComponent);
 
     function DMCTurbolinksForm() {
@@ -1384,6 +1214,6 @@
     return DMCTurbolinksForm;
   }(_materialComponentsWeb.base.MDCComponent);
 
-  _materialComponentsWeb.autoInit.register('DMCTurbolinksForm', DMCTurbolinksForm);
+  (0, _djangoMaterialRegistry.register)('DMCTurbolinksForm', DMCTurbolinksForm);
 });
 //# sourceMappingURL=django-material-components.js.map

@@ -1,7 +1,8 @@
-import {autoInit, base} from 'material-components-web';
+import {base} from 'material-components-web';
+import {register} from 'django-material-registry';
 
 
-export class DMCToggleDrawer extends base.MDCComponent {
+class DMCToggleDrawer extends base.MDCComponent {
   static attachTo(root) {
     return new DMCToggleDrawer(root, new base.MDCFoundation());
   }
@@ -21,4 +22,4 @@ export class DMCToggleDrawer extends base.MDCComponent {
   }
 }
 
-autoInit.register('DMCToggleDrawer', DMCToggleDrawer);
+register('DMCToggleDrawer', DMCToggleDrawer);

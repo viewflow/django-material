@@ -1,6 +1,8 @@
 from django.contrib.auth import views, forms
-from django.views import generic
+from django.contrib.auth.decorators import user_passes_test
 from django.urls import path
+from django.utils.decorators import method_decorator
+from django.views import generic
 
 from material import (
     Viewset, viewprop, Icon,
@@ -21,9 +23,14 @@ class AuthenticationForm(forms.AuthenticationForm):
         )
 
 
-class ProfileView(generic.TemplateView):
-    # TODO
-    pass
+@method_decorator(
+    user_passes_test(lambda u: u.is_authenticated),
+    name='dispatch')
+class ProfileView(generic.DetailView):
+    template_name = 'registration/profile.html'
+
+    def get_object(self):
+        return self.request.user
 
 
 class AuthViewset(Viewset):
@@ -39,7 +46,7 @@ class AuthViewset(Viewset):
     ]
     """
 
-    def __init__(self, *, allow_password_change=True, **kwargs):
+    def __init__(self, *, allow_password_change=True, with_profile_view=True, **kwargs):
         """
             Initialize the viewset.
 
@@ -47,6 +54,7 @@ class AuthViewset(Viewset):
         """
         super().__init__(**kwargs)
         self.allow_password_change = allow_password_change
+        self.with_profile_view = with_profile_view
 
     """
     Login
@@ -197,3 +205,19 @@ class AuthViewset(Viewset):
             return path(
                 'reset/done/', self.pass_reset_complete_view,
                 name='password_reset_complete')
+    """
+    Profile
+    """
+    profile_view_class = ProfileView
+
+    def get_profile_view_kwargs(self, **kwargs):
+        return kwargs
+
+    @viewprop
+    def profile_view(self):
+        return self.profile_view_class.as_view(**self.get_profile_view_kwargs())
+
+    @property
+    def profile_url(self):
+        if self.with_profile_view:
+            return path('profile/', self.profile_view, name='profile')

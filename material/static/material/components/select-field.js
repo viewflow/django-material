@@ -1,4 +1,5 @@
-import {autoInit, base, select} from 'material-components-web';
+import {base, select} from 'material-components-web';
+import {register} from 'django-material-registry';
 
 
 class MDCSelect extends select.MDCSelect {
@@ -56,4 +57,4 @@ export class DMCSelect extends base.MDCComponent {
   }
 }
 
-autoInit.register('DMCSelect', DMCSelect);
+register('DMCSelect', DMCSelect);

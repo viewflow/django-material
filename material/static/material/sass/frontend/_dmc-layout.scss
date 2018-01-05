@@ -122,7 +122,9 @@ body {
   .dmc-header-menu__secondary {
     display: initial;
   }
+}
 
+button.dmc-header-secondary-shown {
   i.material-icons {
     transform: rotate( -180deg );
     transition: transform 150ms linear;

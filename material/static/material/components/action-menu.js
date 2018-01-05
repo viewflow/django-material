@@ -1,7 +1,8 @@
-import {autoInit, menu, base} from 'material-components-web';
+import {menu, base} from 'material-components-web';
+import {register} from 'django-material-registry';
 
 
-export class DMCActionMenu extends base.MDCComponent {
+class DMCActionMenu extends base.MDCComponent {
   static attachTo(root) {
     return new DMCActionMenu(root, new base.MDCFoundation());
   }
@@ -32,4 +33,4 @@ export class DMCActionMenu extends base.MDCComponent {
   }
 }
 
-autoInit.register('DMCActionMenu', DMCActionMenu);
+register('DMCActionMenu', DMCActionMenu);

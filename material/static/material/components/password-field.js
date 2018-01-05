@@ -1,7 +1,8 @@
-import {autoInit, base, textField} from 'material-components-web';
+import {base, textField} from 'material-components-web';
+import {register} from 'django-material-registry';
 
 
-export class DMCPasswordField extends base.MDCComponent {
+class DMCPasswordField extends base.MDCComponent {
   static attachTo(root) {
     return new DMCPasswordField(root, new base.MDCFoundation());
   }
@@ -35,4 +36,4 @@ export class DMCPasswordField extends base.MDCComponent {
   }
 }
 
-autoInit.register('DMCPasswordField', DMCPasswordField);
+register('DMCPasswordField', DMCPasswordField);

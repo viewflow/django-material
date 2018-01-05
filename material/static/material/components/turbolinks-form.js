@@ -1,7 +1,8 @@
-import {autoInit, base} from 'material-components-web';
+import {base} from 'material-components-web';
+import {register} from 'django-material-registry';
 
 
-export class DMCTurbolinksForm extends base.MDCComponent {
+class DMCTurbolinksForm extends base.MDCComponent {
   static attachTo(root) {
     return new DMCTurbolinksForm(root, new base.MDCFoundation());
   }
@@ -92,4 +93,4 @@ export class DMCTurbolinksForm extends base.MDCComponent {
   }
 }
 
-autoInit.register('DMCTurbolinksForm', DMCTurbolinksForm);
+register('DMCTurbolinksForm', DMCTurbolinksForm);

@@ -1,8 +1,9 @@
-import {autoInit, base, drawer} from 'material-components-web';
+import {base, drawer} from 'material-components-web';
+import {register} from 'django-material-registry';
 
 // TODO cookie
 
-export class DMCResponsiveDrawer extends base.MDCComponent {
+class DMCResponsiveDrawer extends base.MDCComponent {
   static attachTo(root) {
     return new DMCResponsiveDrawer(root, new base.MDCFoundation());
   }
@@ -114,4 +115,4 @@ export class DMCResponsiveDrawer extends base.MDCComponent {
   }
 }
 
-autoInit.register('DMCResponsiveDrawer', DMCResponsiveDrawer);
+register('DMCResponsiveDrawer', DMCResponsiveDrawer);

@@ -3,7 +3,7 @@
   <div class="mdc-list-group">
     <h3 class="mdc-list-group__subheader mdc-list-group__subheader--dmc">{% trans 'Applications' %}</h3>
     {% block back_link %}{% with parent_index=site.parent_index %}{% if parent_index %}
-    <a class="mdc-list-item mdc-list-item--dmc" href="{{ parent_index }}">
+ <a class="mdc-list-item mdc-list-item--dmc" href="{{ parent_index }}">
       <i class="material-icons">arrow_back</i> {% trans 'Back' %}
     </a>
     {% endif %}{% endwith %}{% endblock %}

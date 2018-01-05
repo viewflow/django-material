@@ -16,7 +16,13 @@
 
 {% url 'login' as login_url %}
 {% if login_url %}
-<a href="{% url 'login' %}?next={{ request.path }}" class="mdc-button mdc-button--raised dmc-lockscreen__action">{% trans 'Log in as another user' %}</a>
+<a href="{% url 'login' %}?next={{ request.path }}" class="mdc-button mdc-button--raised dmc-lockscreen__action">
+  {% if request.user.is_anonymous %}
+    {% trans 'Log in' %}
+  {% else %}
+    {% trans 'Log in as another user' %}
+  {% endif %}
+</a>
 {% endif %}
 {% endblock %}
 
