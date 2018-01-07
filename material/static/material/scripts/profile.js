@@ -5,7 +5,6 @@ class DMCProfilePage extends mdc.base.MDCComponent {
 
   initialize() {
     // TODO
-    alert('1');
   }
 }
 

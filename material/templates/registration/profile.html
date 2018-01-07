@@ -3,7 +3,7 @@
 
 {% block js %}
 {{ block.super }}
-<script src="{% static 'material/js/django-material-components-profile.js' %}"></script>
+<script src="{% static 'material/js/django-material-components-profile.js' %}" async="false"></script>
 {% endblock js %}
 
 {% block sidebar-app-menu %}
@@ -17,6 +17,43 @@
 {% endblock %}
 
 {% block content %}
+<style>
+  .dmc-profile-avatar {
+    width:112px;
+    height:112px;
+
+  }
+</style>
 <div class="mdc-card dmc-form-page" data-mdc-auto-init="DMCProfilePage">
+  <section class="mdc-card__primary">
+    <h1 class="mdc-card__title mdc-card__title--large">John Doe</h1>
+    <h2 class="mdc-card__subtitle">admin@admin.com</h2>
+  </section>
+    <!--section class="mdc-card__primary">
+        <h1 class="mdc-card__title mdc-card__title--large">John Doe</h1>
+        <h2 class="mdc-card__subtitle">admin@admin.com</h2>
+    </section-->
+    <div>
+      <!--img class="dmc-profile-avatar" src="{% static 'material/img/user.png' %}">
+      <button class="mdc-button mdc-button--raised">Change</button-->
+    </div>
+    <section>
+      <table class="dmc-list-table">
+        <tbody>
+          {% for field, field_name, value in view.get_object_data %}
+          <tr>
+            <th>{{ field_name }}</th>
+            <td>{{ value }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </section>
+    <section class="mdc-card__actions dmc-form-page__actions">
+      {% url 'password_change' as password_change_url %}
+      {% if password_change_url %}
+      <a class="mdc-button mdc-button--raised" href="{{ password_change_url }}">Change password</a>
+      {% endif %}
+    </section>
 </div>
 {% endblock content %}

@@ -21,7 +21,6 @@ var DMCProfilePage = function (_mdc$base$MDCComponen) {
     key: 'initialize',
     value: function initialize() {
       // TODO
-      alert('1');
     }
   }], [{
     key: 'attachTo',

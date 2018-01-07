@@ -1,5 +1,6 @@
 from django.contrib.auth import views, forms
 from django.contrib.auth.decorators import user_passes_test
+from django.db import models
 from django.urls import path
 from django.utils.decorators import method_decorator
 from django.views import generic
@@ -23,11 +24,28 @@ class AuthenticationForm(forms.AuthenticationForm):
         )
 
 
-@method_decorator(
-    user_passes_test(lambda u: u.is_authenticated),
-    name='dispatch')
+@method_decorator(user_passes_test(lambda u: u.is_authenticated), name='dispatch')
 class ProfileView(generic.DetailView):
     template_name = 'registration/profile.html'
+
+    def get_object_data(self):
+        """List of object fields to display.
+        Choice fields values are expanded to readable choice label.
+        """
+        for field in self.object._meta.fields:
+            if isinstance(field, models.AutoField):
+                continue
+            elif field.auto_created:
+                continue
+            else:
+                choice_display_attr = "get_{}_display".format(field.name)
+            if hasattr(self.object, choice_display_attr):
+                value = getattr(self.object, choice_display_attr)()
+            else:
+                value = getattr(self.object, field.name)
+
+            if value is not None:
+                yield (field, field.verbose_name.capitalize(), value)
 
     def get_object(self):
         return self.request.user
