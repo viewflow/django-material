@@ -18,6 +18,8 @@
     "material-components-web": "^0.26.0",
     "material-design-icons": "^3.0.1",
     "roboto-npm-webfont": "^1.0.1",
+    "smartcrop": "^1.1.1",
     "turbolinks": "^5.0.3"
-  }
+  },
+  "dependencies": {}
 }

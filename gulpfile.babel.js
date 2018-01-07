@@ -4,8 +4,8 @@ import gulp from 'gulp';
 import sass from 'gulp-sass';
 import sourcemaps from 'gulp-sourcemaps';
 
-function compileJs(src, dst) {
-  return gulp.src(src)
+function compileJs(gulpSrc, dst) {
+  return gulpSrc
     .pipe(sourcemaps.init())
     .pipe(
       babel({
@@ -77,21 +77,24 @@ gulp.task('dmc.scss', () => {
 
 gulp.task('dmc.js', () => {
   return compileJs(
-    './material/static/material/components/*.js',
+    gulp.src('./material/static/material/components/*.js'),
     'django-material-components.js'
   );
 });
 
 gulp.task('django-material-registry.js', () => {
   return compileJs(
-    './material/static/material/scripts/django-material-registry.js',
+    gulp.src('./material/static/material/scripts/django-material-registry.js'),
     'django-material-registry.js'
   );
 });
 gulp.task('profile.js', () => {
   return compileJs(
-    './material/static/material/scripts/profile.js',
-    'django-material-components-profile.js'
+    gulp.src([
+      'node_modules/smartcrop/smartcrop.js',
+      './material/static/material/scripts/profile.js',
+    ]),
+    'django-material-frontend-profile.js'
   );
 });
 

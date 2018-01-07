@@ -1,0 +1,50 @@
+.dmc-profile {
+  padding: 8px;
+}
+
+.dmc-profile-layout-grid__inner {
+  grid-gap: 8px;
+}
+
+@media (max-width: 600px) {
+  .dmc-profile {
+    padding: 0px;
+  }
+
+  .dmc-profile-layout-grid__inner {
+    grid-gap: 0px;
+  }
+
+  .dmc-profile-avatar {
+    display: none;
+  }
+}
+
+.dmc-profile-detail,
+.dmc-profile-avatar {
+  background: #fff;
+  background: var(--mdc-theme-background, #fff);
+}
+
+.dmc-profile-avatar {
+  .mdc-card__media img {
+    width: 100%;
+    height: 100%;
+    max-width: 512px;
+    max-height: 512px;
+  }
+}
+
+.dmc-profile-avatar__media {
+  position:relative;
+}
+
+.dmc-profile-avatar__shadow {
+  position: absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background: radial-gradient(transparent 60%, #3f51b5 60%);
+  background: radial-gradient(transparent 60%, var(--mdc-theme-primary, #3f51b5) 60%);
+}
