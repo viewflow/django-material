@@ -17,13 +17,6 @@ function compileJs(src, dst) {
           ],
         ],
         'plugins': [
-          ['transform-es2015-modules-umd', {
-            'globals': {
-              'material-components-web': 'mdc',
-              'django-material-registry': 'djangoMaterialRegistry',
-              'turbolinks': 'Turbolinks',
-            },
-          }],
           ['transform-class-properties', {
             'spec': true,
           }],

@@ -1,11 +1,6 @@
-import {base, drawer} from 'material-components-web';
-import {register} from 'django-material-registry';
-
-// TODO cookie
-
-class DMCResponsiveDrawer extends base.MDCComponent {
+class DMCResponsiveDrawer extends mdc.base.MDCComponent {
   static attachTo(root) {
-    return new DMCResponsiveDrawer(root, new base.MDCFoundation());
+    return new DMCResponsiveDrawer(root, new mdc.base.MDCFoundation());
   }
 
   constructor(...args) {
@@ -64,7 +59,7 @@ class DMCResponsiveDrawer extends base.MDCComponent {
       this.header_.classList.add('mdc-temporary-drawer__header');
       this.headerContent_.classList.add('mdc-temporary-drawer__header-content');
       this.content_.classList.add('mdc-temporary-drawer__content');
-      this.temporalDrawer_ = new drawer.MDCTemporaryDrawer(this.root_);
+      this.temporalDrawer_ = new mdc.drawer.MDCTemporaryDrawer(this.root_);
       this.drawer_.removeEventListener('click', this.temporalDrawer_.foundation_.drawerClickHandler_);
     } else if (
       window.innerWidth >= 992 &&
@@ -92,7 +87,7 @@ class DMCResponsiveDrawer extends base.MDCComponent {
       this.header_.classList.add('mdc-persistent-drawer__header');
       this.headerContent_.classList.add('mdc-persistent-drawer__header-content');
       this.content_.classList.add('mdc-persistent-drawer__content');
-      this.persistentDrawer_ = new drawer.MDCPersistentDrawer(this.root_);
+      this.persistentDrawer_ = new mdc.drawer.MDCPersistentDrawer(this.root_);
       this.drawer_.removeEventListener('click', this.persistentDrawer_.foundation_.drawerClickHandler_);
     }
   }
@@ -107,6 +102,7 @@ class DMCResponsiveDrawer extends base.MDCComponent {
 
   set open(value) {
     if (this.persistentDrawer_) {
+      // TODO cookie ??
       sessionStorage.setItem('dmc_site_drawer_state', value?'open':'closed');
       return this.persistentDrawer_.open = value;
     } else {
@@ -115,4 +111,4 @@ class DMCResponsiveDrawer extends base.MDCComponent {
   }
 }
 
-register('DMCResponsiveDrawer', DMCResponsiveDrawer);
+dmc.register('DMCResponsiveDrawer', DMCResponsiveDrawer);

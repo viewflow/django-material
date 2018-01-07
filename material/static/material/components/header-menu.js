@@ -1,10 +1,6 @@
-import {base} from 'material-components-web';
-import {register} from 'django-material-registry';
-
-
-class DMCHeaderMenu extends base.MDCComponent {
+class DMCHeaderMenu extends mdc.base.MDCComponent {
   static attachTo(root) {
-    return new DMCHeaderMenu(root, new base.MDCFoundation());
+    return new DMCHeaderMenu(root, new mdc.base.MDCFoundation());
   }
 
   initialize() {
@@ -23,4 +19,4 @@ class DMCHeaderMenu extends base.MDCComponent {
   }
 }
 
-register('DMCHeaderMenu', DMCHeaderMenu);
+dmc.register('DMCHeaderMenu', DMCHeaderMenu);

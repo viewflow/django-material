@@ -1,10 +1,6 @@
-import {base} from 'material-components-web';
-import {register} from 'django-material-registry';
-
-
-class DMCActiveNav extends base.MDCComponent {
+class DMCActiveNav extends mdc.base.MDCComponent {
   static attachTo(root) {
-    return new DMCActiveNav(root, new base.MDCFoundation());
+    return new DMCActiveNav(root, new mdc.base.MDCFoundation());
   }
 
   initialize() {
@@ -22,4 +18,4 @@ class DMCActiveNav extends base.MDCComponent {
   }
 }
 
-register('DMCActiveNav', DMCActiveNav);
+dmc.register('DMCActiveNav', DMCActiveNav);

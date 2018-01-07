@@ -1,15 +1,11 @@
-import {menu, base} from 'material-components-web';
-import {register} from 'django-material-registry';
-
-
-class DMCActionMenu extends base.MDCComponent {
+class DMCActionMenu extends mdc.base.MDCComponent {
   static attachTo(root) {
-    return new DMCActionMenu(root, new base.MDCFoundation());
+    return new DMCActionMenu(root, new mdc.base.MDCFoundation());
   }
 
   initialize() {
     this.menuEl_ = this.root_.querySelector('.mdc-simple-menu');
-    this.menu_ = new menu.MDCSimpleMenu(this.menuEl_);
+    this.menu_ = new mdc.menu.MDCSimpleMenu(this.menuEl_);
     this.menuEl_.addEventListener('MDCSimpleMenu:selected', function(evt) {
       let itemData = evt.detail.item.dataset;
       if (itemData.dmcMenuHref) {
@@ -33,4 +29,4 @@ class DMCActionMenu extends base.MDCComponent {
   }
 }
 
-register('DMCActionMenu', DMCActionMenu);
+dmc.register('DMCActionMenu', DMCActionMenu);

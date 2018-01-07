@@ -1,18 +1,16 @@
-import * as mdc from 'material-components-web';
-import Turbolinks from 'turbolinks';
-
 const registry = Object.create(null);
 const CONSOLE_WARN = console.warn.bind(console);
 let pageLoaded = false;
 
-export function autoInit() {
+
+function autoInit() {
   window.addEventListener('turbolinks:load', onLoad);
   window.addEventListener('turbolinks:before-render', onBeforeRender);
   window.addEventListener('turbolinks:request-end', onRequestEnd);
   initComponents();
 };
 
-export function initComponents(root = document, warn = CONSOLE_WARN, allowUnknown=false) {
+function initComponents(root = document, warn = CONSOLE_WARN, allowUnknown=false) {
   const nodes = root.querySelectorAll('[data-mdc-auto-init]');
   for (let i = 0, node; (node = nodes[i]); i++) {
     const ctorName = node.dataset.mdcAutoInit;
@@ -37,7 +35,7 @@ export function initComponents(root = document, warn = CONSOLE_WARN, allowUnknow
   }
 }
 
-export function register(ctorName, Ctor) {
+function register(ctorName, Ctor) {
     if (typeof Ctor !== 'function') {
       throw new Error(`(mdc-auto-init) Invalid Ctor value ${Ctor}. Expected function`);
     }
@@ -90,7 +88,7 @@ function onRequestEnd(event) {
   }
 };
 
-export function destroy() {
+function destroy() {
   window.removeEventListener('turbolinks:load', onLoad);
   window.removeEventListener('turbolinks:before-render', onBeforeRender);
   window.removeEventListener('turbolinks:request-end', onRequestEnd);
@@ -122,3 +120,8 @@ function browserLoad() {
   window.removeEventListener('load', browserLoad);
 }
 window.addEventListener('load', browserLoad);
+
+window.dmc = {};
+window.dmc.autoInit = autoInit;
+window.dmc.register = register;
+window.dmc.destroy = destroy;

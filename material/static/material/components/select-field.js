@@ -1,8 +1,4 @@
-import {base, select} from 'material-components-web';
-import {register} from 'django-material-registry';
-
-
-class MDCSelect extends select.MDCSelect {
+class MDCSelect extends mdc.select.MDCSelect {
   getDefaultFoundation() {
     let foundation = super.getDefaultFoundation();
     let superSetMenuStyle = foundation.setMenuStylesForOpenAtIndex_;
@@ -22,9 +18,9 @@ class MDCSelect extends select.MDCSelect {
   }
 }
 
-export class DMCSelect extends base.MDCComponent {
+class DMCSelect extends mdc.base.MDCComponent {
   static attachTo(root) {
-    return new DMCSelect(root, new base.MDCFoundation());
+    return new DMCSelect(root, new mdc.base.MDCFoundation());
   }
 
   initialize() {
@@ -57,4 +53,4 @@ export class DMCSelect extends base.MDCComponent {
   }
 }
 
-register('DMCSelect', DMCSelect);
+dmc.register('DMCSelect', DMCSelect);

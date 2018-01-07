@@ -1,14 +1,10 @@
-import {base, snackbar} from 'material-components-web';
-import {register} from 'django-material-registry';
-
-
-class DMCSnackbar extends base.MDCComponent {
+class DMCSnackbar extends mdc.base.MDCComponent {
   static attachTo(root) {
-    return new DMCSnackbar(root, new base.MDCFoundation());
+    return new DMCSnackbar(root, new mdc.base.MDCFoundation());
   }
 
   initialize() {
-    this.snackbar_ = snackbar.MDCSnackbar.attachTo(this.root_);
+    this.snackbar_ = mdc.snackbar.MDCSnackbar.attachTo(this.root_);
 
     let initialText = this.root_.querySelector('.mdc-snackbar__text');
 
@@ -60,4 +56,4 @@ class DMCSnackbar extends base.MDCComponent {
   }
 }
 
-register('DMCSnackbar', DMCSnackbar);
+dmc.register('DMCSnackbar', DMCSnackbar);

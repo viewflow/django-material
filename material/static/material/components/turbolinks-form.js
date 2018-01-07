@@ -1,10 +1,8 @@
-import {base} from 'material-components-web';
-import {register} from 'django-material-registry';
+'use strict';
 
-
-class DMCTurbolinksForm extends base.MDCComponent {
+class DMCTurbolinksForm extends mdc.base.MDCComponent {
   static attachTo(root) {
-    return new DMCTurbolinksForm(root, new base.MDCFoundation());
+    return new DMCTurbolinksForm(root, new mdc.base.MDCFoundation());
   }
 
   performPostRequest() {
@@ -93,4 +91,4 @@ class DMCTurbolinksForm extends base.MDCComponent {
   }
 }
 
-register('DMCTurbolinksForm', DMCTurbolinksForm);
+dmc.register('DMCTurbolinksForm', DMCTurbolinksForm);

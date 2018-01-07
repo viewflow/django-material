@@ -1,10 +1,6 @@
-import {base} from 'material-components-web';
-import {register} from 'django-material-registry';
-
-
-export class DMCProfilePage extends base.MDCComponent {
+class DMCProfilePage extends mdc.base.MDCComponent {
   static attachTo(root) {
-    return new DMCProfilePage(root, new base.MDCFoundation());
+    return new DMCProfilePage(root, new mdc.base.MDCFoundation());
   }
 
   initialize() {
@@ -13,4 +9,4 @@ export class DMCProfilePage extends base.MDCComponent {
   }
 }
 
-register('DMCProfilePage', DMCProfilePage);
+dmc.register('DMCProfilePage', DMCProfilePage);

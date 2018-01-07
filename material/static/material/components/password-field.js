@@ -1,14 +1,10 @@
-import {base, textField} from 'material-components-web';
-import {register} from 'django-material-registry';
-
-
-class DMCPasswordField extends base.MDCComponent {
+class DMCPasswordField extends mdc.base.MDCComponent {
   static attachTo(root) {
-    return new DMCPasswordField(root, new base.MDCFoundation());
+    return new DMCPasswordField(root, new mdc.base.MDCFoundation());
   }
 
   initialize() {
-    this.textField_ = new textField.MDCTextField(this.root_);
+    this.textField_ = new mdc.textField.MDCTextField(this.root_);
     this.input_ = this.root_.querySelector('.dmc-text-field__input');
     this.toggle_ = this.root_.querySelector('.dmc-password-field__toggle');
 
@@ -36,4 +32,4 @@ class DMCPasswordField extends base.MDCComponent {
   }
 }
 
-register('DMCPasswordField', DMCPasswordField);
+dmc.register('DMCPasswordField', DMCPasswordField);
