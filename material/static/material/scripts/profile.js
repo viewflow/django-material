@@ -1,3 +1,5 @@
+let smartcrop = exports.smartcrop;
+
 class DMCProfilePage {
   static attachTo(root) {
     return new DMCProfilePage(root);
@@ -38,7 +40,7 @@ class DMCProfilePage {
       width: 256,
       height: 256,
     };
-    return SmartCrop.crop(image, options).then((result) => {
+    return smartcrop.crop(image, options).then((result) => {
       let cropCanvas = document.createElement('canvas');
       cropCanvas.width = 256;
       cropCanvas.height = 256;

@@ -1,27 +1,30 @@
 import babel from 'gulp-babel';
 import concat from 'gulp-concat';
 import gulp from 'gulp';
+import addsrc from 'gulp-add-src';
 import sass from 'gulp-sass';
 import sourcemaps from 'gulp-sourcemaps';
+import uglify from 'gulp-uglify';
+
+let babelOpts = {
+  'presets': [
+    ['env', {
+      'targets': {
+        'browsers': ['last 2 versions'],
+      }},
+    ],
+  ],
+  'plugins': [
+    ['transform-class-properties', {
+      'spec': true,
+    }],
+  ],
+};
 
 function compileJs(gulpSrc, dst) {
   return gulpSrc
     .pipe(sourcemaps.init())
-    .pipe(
-      babel({
-        'presets': [
-          ['env', {
-            'targets': {
-              'browsers': ['last 2 versions'],
-            }},
-          ],
-        ],
-        'plugins': [
-          ['transform-class-properties', {
-            'spec': true,
-          }],
-        ],
-    }))
+    .pipe(babel(babelOpts))
     .pipe(concat(dst))
     .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('./material/static/material/js/'));
@@ -88,14 +91,22 @@ gulp.task('django-material-registry.js', () => {
     'django-material-registry.js'
   );
 });
+
+
 gulp.task('profile.js', () => {
-  return compileJs(
-    gulp.src([
-      'node_modules/smartcrop/smartcrop.js',
-      './material/static/material/scripts/profile.js',
-    ]),
-    'django-material-frontend-profile.js'
-  );
+  gulp.src('./material/static/material/scripts/profile.js')
+    .pipe(sourcemaps.init())
+    .pipe(babel(babelOpts))
+    .pipe(
+      addsrc.prepend([
+        './material/static/material/scripts/umd_local.js',
+        'node_modules/smartcrop/smartcrop.js',
+        ]))
+    .pipe(sourcemaps.init({loadMaps: true}))
+    .pipe(concat('django-material-frontend-profile.min.js'))
+    .pipe(uglify())
+    .pipe(sourcemaps.write('.'))
+    .pipe(gulp.dest('./material/static/material/js/'));
 });
 
 
