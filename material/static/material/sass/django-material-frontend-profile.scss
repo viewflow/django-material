@@ -6,7 +6,7 @@
   grid-gap: 8px;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 839px) {
   .dmc-profile {
     padding: 0px;
   }
@@ -37,6 +37,24 @@
 
 .dmc-profile-avatar__media {
   position:relative;
+  padding: 0;
+
+  >div {
+    position: absolute;
+    top:      0;
+    left:     0;
+    bottom:   0;
+    right:    0;
+    background-image: -webkit-gradient(linear, 0 0, 100% 100%, color-stop(0.25, rgba(0, 0, 0, 0.1)), color-stop(0.25, transparent), color-stop(0.5, transparent), color-stop(0.5, rgba(0, 0, 0, 0.1)), color-stop(0.75, rgba(0, 0, 0, 0.1)), color-stop(0.75, transparent), to(transparent));
+    background-size: 50px 50px;
+    animation: animate-stripes 2s linear infinite;
+  }
+}
+
+.dmc-profile-avatar__media:before {
+  content:     "";
+  display:     block;
+  padding-top: 100%;
 }
 
 .dmc-profile-avatar__shadow {
@@ -45,12 +63,15 @@
   left:0;
   width:100%;
   height:100%;
-  background: radial-gradient(transparent 60%, #3f51b5 60%);
-  background: radial-gradient(transparent 60%, var(--mdc-theme-primary, #3f51b5) 60%);
+  background: radial-gradient(transparent 70%, #3f51b5 70%);
+  background: radial-gradient(transparent 70%, var(--mdc-theme-primary, #3f51b5) 70%);
 }
 
 
 .dmc-profile-avatar__change {
+  overflow: hidden;
+  text-overflow: ellipsis;
+
   input[type=file] {
     &::-webkit-file-upload-button {
       display: none;
