@@ -539,33 +539,68 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+var DMCProfilePage = function () {
+  _createClass(DMCProfilePage, null, [{
+    key: 'attachTo',
+    value: function attachTo(root) {
+      return new DMCProfilePage(root);
+    }
+  }]);
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+  function DMCProfilePage(root) {
+    var _this = this;
 
-var DMCProfilePage = function (_mdc$base$MDCComponen) {
-  _inherits(DMCProfilePage, _mdc$base$MDCComponen);
-
-  function DMCProfilePage() {
     _classCallCheck(this, DMCProfilePage);
 
-    return _possibleConstructorReturn(this, (DMCProfilePage.__proto__ || Object.getPrototypeOf(DMCProfilePage)).apply(this, arguments));
+    this.root_ = root;
+    this.uploadButton_ = this.root_.querySelector('.dmc-profile-avatar__change');
+    this.avatar_ = this.root_.querySelector('.dmc-profile-avatar__media img');
+    this.onChange = function (event) {
+      var files = event.target.files;
+      if (files.length === 0 || files[0].type.indexOf('image') === -1) {
+        var snackbarEvent = new CustomEvent('DMCSnackbar:show', {
+          'detail': { message: 'No images selected', timeout: 2000 }
+        });
+        window.dispatchEvent(snackbarEvent);
+      }
+
+      var reader = new FileReader();
+      reader.onload = function (readerEvent) {
+        var img = new Image();
+        img.onload = function () {
+          var options = {
+            minScale: 1
+          };
+          SmartCrop.crop(img, options).then(function (result) {
+            var cropCanvas = document.createElement('canvas');
+            cropCanvas.width = 512;
+            cropCanvas.height = 512;
+            cropCanvas.getContext('2d').drawImage(img, result.topCrop.x, result.topCrop.y, result.topCrop.width, result.topCrop.height, 0, 0, 512, 512);
+            _this.avatar_.src = cropCanvas.toDataURL('image/png');
+          }).catch(function (error) {
+            var snackbarEvent = new CustomEvent('DMCSnackbar:show', {
+              'detail': { message: error.message || 'Image cropping error', timeout: 2000 }
+            });
+            window.dispatchEvent(snackbarEvent);
+          });
+        };
+        img.src = readerEvent.target.result;
+      };
+      reader.readAsDataURL(files[0]);
+    };
+
+    this.uploadButton_.addEventListener('change', this.onChange);
   }
 
   _createClass(DMCProfilePage, [{
-    key: 'initialize',
-    value: function initialize() {
-      // TODO
-    }
-  }], [{
-    key: 'attachTo',
-    value: function attachTo(root) {
-      return new DMCProfilePage(root, new mdc.base.MDCFoundation());
+    key: 'destroy',
+    value: function destroy() {
+      this.uploadButton_.removeEventListener('change', this.onChange);
     }
   }]);
 
   return DMCProfilePage;
-}(mdc.base.MDCComponent);
+}();
 
 dmc.register('DMCProfilePage', DMCProfilePage);
 //# sourceMappingURL=django-material-frontend-profile.js.map

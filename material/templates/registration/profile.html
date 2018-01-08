@@ -18,10 +18,10 @@
 {% endblock %}
 
 {% block content %}
-<div class="mdc-layout-grid dmc-profile">
+<div class="mdc-layout-grid dmc-profile" data-mdc-auto-init="DMCProfilePage">
   <div class="mdc-layout-grid__inner dmc-profile-layout-grid__inner">
     <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-10">
-      <div class="mdc-card dmc-profile-detail" data-mdc-auto-init="DMCProfilePage">
+      <div class="mdc-card dmc-profile-detail">
         <section class="mdc-card__primary">
           <h1 class="mdc-card__title mdc-card__title--large">John Doe</h1>
           <h2 class="mdc-card__subtitle">admin@admin.com</h2>
@@ -57,7 +57,10 @@
             <div class="dmc-profile-avatar__shadow"></div>
           </section>
           <section class="mdc-card__actions dmc-form-page__actions">
-              <button class="mdc-button mdc-button--raised mdc-card__action">Change</button>
+              <div class="mdc-button mdc-button--raised mdc-card__action dmc-profile-avatar__change">
+                Change
+                <input type="file">
+              </div>
           </section>
       </div>
     </div>

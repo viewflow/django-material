@@ -48,3 +48,25 @@
   background: radial-gradient(transparent 60%, #3f51b5 60%);
   background: radial-gradient(transparent 60%, var(--mdc-theme-primary, #3f51b5) 60%);
 }
+
+
+.dmc-profile-avatar__change {
+  input[type=file] {
+    &::-webkit-file-upload-button {
+      display: none;
+    }
+
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+    filter: alpha(opacity=0);
+  }
+}
