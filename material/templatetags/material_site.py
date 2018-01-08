@@ -1,6 +1,10 @@
 import re
+from urllib.parse import urljoin
 
 from django import template
+from django.apps import apps
+from django.conf import settings
+from django.core.files.storage import default_storage
 from django.db import models
 from django.urls import NoReverseMatch
 from django.utils.encoding import force_text
@@ -184,3 +188,17 @@ def list_page_data(page, list_view):
        [[(column, value), (column, value), ...], ...]
     """
     return list_view.get_page_data(page)
+
+
+@register.filter
+def user_avatar_url(user):
+    from datetime import datetime
+    file_name = 'avatars/{}.png'.format(user.pk)
+    if default_storage.exists(file_name):
+        return default_storage.url(file_name)+"?timestamp={}".format(datetime.now().timestamp())
+    else:
+        if apps.is_installed('django.contrib.staticfiles'):
+            from django.contrib.staticfiles.storage import staticfiles_storage
+            return staticfiles_storage.url('material/img/user.png')
+        else:
+            return urljoin(settings.STATIC_URL, 'material/img/user.png')

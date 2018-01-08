@@ -7,6 +7,7 @@ db*.sqlite3
 deploy
 build/
 dist/
+media/
 node_modules/
 *.egg-info/
 tests/visual/screenshots_test/

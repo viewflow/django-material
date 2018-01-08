@@ -1,5 +1,8 @@
+from django.conf import settings
+from django.conf.urls.static import static
 from django.urls import path
 from django.views.generic import FormView, TemplateView
+
 
 from material import Site
 from material.contrib.auth import AuthViewset
@@ -83,4 +86,4 @@ urlpatterns = [
     path('page/500/', TemplateView.as_view(
         template_name='500.html')
     ),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

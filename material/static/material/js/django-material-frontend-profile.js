@@ -558,33 +558,21 @@ var DMCProfilePage = function () {
     this.onChange = function (event) {
       var files = event.target.files;
       if (files.length === 0 || files[0].type.indexOf('image') === -1) {
-        var snackbarEvent = new CustomEvent('DMCSnackbar:show', {
-          'detail': { message: 'No images selected', timeout: 2000 }
-        });
-        window.dispatchEvent(snackbarEvent);
+        _this.showError('No images selected');
       }
 
       var reader = new FileReader();
       reader.onload = function (readerEvent) {
-        var img = new Image();
-        img.onload = function () {
-          var options = {
-            minScale: 1
-          };
-          SmartCrop.crop(img, options).then(function (result) {
-            var cropCanvas = document.createElement('canvas');
-            cropCanvas.width = 512;
-            cropCanvas.height = 512;
-            cropCanvas.getContext('2d').drawImage(img, result.topCrop.x, result.topCrop.y, result.topCrop.width, result.topCrop.height, 0, 0, 512, 512);
+        var image = new Image();
+        image.onload = function () {
+          _this.crop(image).then(function (cropCanvas) {
             _this.avatar_.src = cropCanvas.toDataURL('image/png');
+            _this.upload(cropCanvas);
           }).catch(function (error) {
-            var snackbarEvent = new CustomEvent('DMCSnackbar:show', {
-              'detail': { message: error.message || 'Image cropping error', timeout: 2000 }
-            });
-            window.dispatchEvent(snackbarEvent);
+            _this.showError(error.message || 'Image cropping error');
           });
         };
-        img.src = readerEvent.target.result;
+        image.src = readerEvent.target.result;
       };
       reader.readAsDataURL(files[0]);
     };
@@ -593,6 +581,75 @@ var DMCProfilePage = function () {
   }
 
   _createClass(DMCProfilePage, [{
+    key: 'crop',
+    value: function crop(image, onSuccess) {
+      var options = {
+        minScale: 1,
+        width: 256,
+        height: 256
+      };
+      return SmartCrop.crop(image, options).then(function (result) {
+        var cropCanvas = document.createElement('canvas');
+        cropCanvas.width = 256;
+        cropCanvas.height = 256;
+        cropCanvas.getContext('2d').drawImage(image, result.topCrop.x, result.topCrop.y, result.topCrop.width, result.topCrop.height, 0, 0, 256, 256);
+        return cropCanvas;
+      });
+    }
+  }, {
+    key: 'upload',
+    value: function upload(canvas) {
+      var _this2 = this;
+
+      this.uploadButton_.classList.toggle('dmc-profile-avatar__change--disabled');
+
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', window.location.search, true);
+      xhr.setRequestHeader('Turbolinks-Referrer', window.location);
+
+      xhr.onload = function (event) {
+        var location = xhr.getResponseHeader('turbolinks-location');
+        var snapshot = window.Turbolinks.Snapshot.wrap(xhr.response);
+
+        if (!location) {
+          location = window.location.href;
+        }
+
+        window.Turbolinks.controller.adapter.hideProgressBar();
+        window.Turbolinks.controller.cache.put(location, snapshot);
+        window.Turbolinks.visit(location, { action: 'restore' });
+        window.Turbolinks.clearCache();
+
+        if (xhr.status > 299) {
+          Turbolinks.controller.disable();
+        }
+      };
+
+      xhr.onerror = function (event) {
+        window.Turbolinks.controller.adapter.hideProgressBar();
+        _this2.uploadButton_.classList.toggle('dmc-profile-avatar__change--disabled');
+        _this2.showError('Request error');
+      };
+
+      window.Turbolinks.controller.adapter.showProgressBarAfterDelay();
+
+      canvas.toBlob(function (blob) {
+        var formData = new FormData(_this2.root_.querySelector('form'));
+        formData.append('avatar', blob, 'avatar.jpg');
+        xhr.send(formData);
+      });
+    }
+  }, {
+    key: 'showError',
+    value: function showError(message) {
+      var timeout = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 2000;
+
+      var snackbarEvent = new CustomEvent('DMCSnackbar:show', {
+        'detail': { message: message, timeout: timeout }
+      });
+      window.dispatchEvent(snackbarEvent);
+    }
+  }, {
     key: 'destroy',
     value: function destroy() {
       this.uploadButton_.removeEventListener('change', this.onChange);

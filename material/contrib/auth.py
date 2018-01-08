@@ -1,5 +1,10 @@
-from django.contrib.auth import views, forms
+from django import forms
+from django.contrib import messages
+from django.contrib.auth import views, forms as auth_forms
 from django.contrib.auth.decorators import user_passes_test
+from django.core.cache import cache
+from django.core.cache.utils import make_template_fragment_key
+from django.core.files.storage import default_storage
 from django.db import models
 from django.urls import path
 from django.utils.decorators import method_decorator
@@ -11,7 +16,7 @@ from material import (
 )
 
 
-class AuthenticationForm(forms.AuthenticationForm):
+class AuthenticationForm(auth_forms.AuthenticationForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -49,6 +54,21 @@ class ProfileView(generic.DetailView):
 
     def get_object(self):
         return self.request.user
+
+    def post(self, request, *args, **kwargs):
+        class AvatarForm(forms.Form):
+            avatar = forms.FileField(required=True)
+        form = AvatarForm(request.POST, request.FILES)
+        if form.is_valid():
+            file_name = 'avatars/{}.png'.format(request.user.pk)
+            if default_storage.exists(file_name):
+                default_storage.delete(file_name)
+            default_storage.save(file_name, form.cleaned_data['avatar'], max_length=512*1024)
+            key = make_template_fragment_key('django-material-avatar', [request.user.pk])
+            cache.delete(key)
+        else:
+            messages.add_message(self.request, messages.ERROR, form.errors(), fail_silently=True)
+        return self.get(request, *args, **kwargs)
 
 
 class AuthViewset(Viewset):
