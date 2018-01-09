@@ -1,22 +1,36 @@
 {% extends request.resolver_match.app.base_template_name|default:'material/base_site.html' %}
-{% load material_site %}
+{% load i18n material_site %}
 
 {% block content %}
 <div class="mdc-card dmc-form-page">
   <section class="mdc-card__primary">
-    <h1 class="mdc-card__title mdc-card__title--large">Are you sure you want to delete the {{ object }} and related items?</h1>
-    <h2 class="mdc-card__subtitle">
-      <a href="#">Atlas</a> >
-      <a href="#">{{ view.model|verbose_name_plural|title }}</a> >
-      Delete
+    <h1 class="mdc-card__title mdc-card__title--large">{{ view.object }}</h1>
+    {% block list-header-subtitle %}
+    <h2 class="mdc-card__subtitle dmc-breadcrumbs">
+      {% block breadcrumbs_items %}
+      <a href="{% viewset_url view.viewset 'list' %}">{{ view.model|verbose_name_plural|title }}</a>
+      {% if view.object.pk %}
+      {% viewset_url view.viewset 'detail' view.object.pk as detail_url %}
+      {% if detail_url  %}
+      <a href="{{ detail_url }}">{{ view.object }}</a>
+      {% else %}
+      <a href="{% viewset_url view.viewset 'change' view.object.pk %}">{{ view.object }}</a>
+      {% endif %}
+      {% endif %}
+      <a>{% trans 'Delete' %}</a>
+      {% endblock %}
     </h2>
+    {% endblock %}
   </section>
-
   <form method="POST" data-mdc-auto-init="DMCTurbolinksForm">
     {% csrf_token %}
     <section class="dmc-form-page__form">
+        <h3 class="mdc-typography--subheading2 dmc-alert">
+            {% blocktrans with escaped_object=object %}"{{ escaped_object }}" and all of the following related items will be deleted{% endblocktrans %}
+        </h3>
+
       {% for model, objects in view.get_deleted_objects.items %}
-        <h3 class="mdc-typography--title">{{ model|verbose_name_plural|title }}</h3>
+        <h3 class="mdc-typography--subheading2">{{ model|verbose_name_plural|title }}</h3>
         {% for object in objects %}
           {% site_object_url site object as object_url %}
           {% if object_url %}<a href="{{ object_url }}">{{ object }}</a>{% else %}{{ object }}{% endif %}{% if not forloop.last %},&nbsp;{% endif %}

@@ -4,11 +4,15 @@
 {% block content %}
 <div class="mdc-card dmc-form-page">
   <section class="mdc-card__primary">
-    <h1 class="mdc-card__title mdc-card__title--large">{{ view.model|verbose_name|title }} </h1>
-    <h2 class="mdc-card__subtitle">
-      <a href="#">Atlas</a> >
-      <a href="#">{{ view.model|verbose_name_plural|title }}</a> > {{ object }}
+    <h1 class="mdc-card__title mdc-card__title--large">{{ view.object }}</h1>
+    {% block list-header-subtitle %}
+    <h2 class="mdc-card__subtitle dmc-breadcrumbs">
+      {% block breadcrumbs_items %}
+      <a href="{% viewset_url view.viewset 'list' %}">{{ view.model|verbose_name_plural|title }}</a>
+      <a>{{ view.object }}</a>
+      {% endblock %}
     </h2>
+    {% endblock %}
     {% block list-header-menu %}{% include 'material/includes/view_action_menu.html' with view=view only %}{% endblock %}
   </section>
   <section>
