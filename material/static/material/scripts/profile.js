@@ -20,7 +20,6 @@ class DMCProfilePage {
         let image = new Image();
         image.onload = () => {
           this.crop(image).then((cropCanvas) => {
-            this.avatar_.src=cropCanvas.toDataURL('image/png');
             this.upload(cropCanvas);
           }).catch((error) => {
             this.showError(error.message || 'Image cropping error');

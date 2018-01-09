@@ -1,9 +1,12 @@
 import re
+from datetime import datetime
 from urllib.parse import urljoin
 
 from django import template
 from django.apps import apps
 from django.conf import settings
+from django.core.cache import cache
+from django.core.cache.utils import make_template_fragment_key
 from django.core.files.storage import default_storage
 from django.db import models
 from django.urls import NoReverseMatch
@@ -191,14 +194,25 @@ def list_page_data(page, list_view):
 
 
 @register.filter
-def user_avatar_url(user):
-    from datetime import datetime
+def _user_avatar_url(user):
+    key = make_template_fragment_key('django-material-avatar', [user.pk])
+    url = cache.get(key)
+    if url is not None:
+        return url
+
     file_name = 'avatars/{}.png'.format(user.pk)
     if default_storage.exists(file_name):
-        return default_storage.url(file_name)+"?timestamp={}".format(datetime.now().timestamp())
+        try:
+            modified = default_storage.get_modified_time(file_name)
+        except NotImplementedError:
+            modified = datetime.now()
+        url = default_storage.url(file_name)+"?timestamp={}".format(modified.timestamp())
     else:
         if apps.is_installed('django.contrib.staticfiles'):
             from django.contrib.staticfiles.storage import staticfiles_storage
-            return staticfiles_storage.url('material/img/user.png')
+            url = staticfiles_storage.url('material/img/user.png')
         else:
-            return urljoin(settings.STATIC_URL, 'material/img/user.png')
+            url = urljoin(settings.STATIC_URL, 'material/img/user.png')
+
+    cache.set(key, url)
+    return url

@@ -9,6 +9,7 @@ from django.db import models
 from django.urls import path
 from django.utils.decorators import method_decorator
 from django.views import generic
+from django.utils.translation import ugettext_lazy as _
 
 from material import (
     Viewset, viewprop, Icon,
@@ -66,6 +67,7 @@ class ProfileView(generic.DetailView):
             default_storage.save(file_name, form.cleaned_data['avatar'], max_length=512*1024)
             key = make_template_fragment_key('django-material-avatar', [request.user.pk])
             cache.delete(key)
+            messages.add_message(self.request, messages.SUCCESS, _('Avatar changed'), fail_silently=True)
         else:
             messages.add_message(self.request, messages.ERROR, form.errors(), fail_silently=True)
         return self.get(request, *args, **kwargs)

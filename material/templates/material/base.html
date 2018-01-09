@@ -1,4 +1,4 @@
-<!DOCTYPE html>{% load cache i18n static material_site %}
+<!DOCTYPE html>{% load i18n static material_site %}
 <html lang="en" class="mdc-typography">
 
 <head>
@@ -25,7 +25,7 @@
             {% block sidebar-header %}
             <div class="dmc-header">
                 {% block sidebar-avatar-image %}
-                <img class="dmc-header__avatar" src="{% cache None django-material-avatar request.user.pk %}{{ request.user|user_avatar_url }}{% endcache %}">
+                <img class="dmc-header__avatar" src="{{ request.user|_user_avatar_url }}">
                 {% endblock %}
                 <div class="dmc-header__info">
                   <div class="dmc-header__user">
@@ -86,7 +86,7 @@
               class="material-icons mdc-toolbar__menu-icon"
               data-mdc-auto-init="DMCToggleDrawer"
               data-toggle-drawer-id="id_site_drawer">menu</a>
-            <span class="mdc-toolbar__title">{{ app.title|default:site.title|default:"Django Material" }}</span>
+            <span class="mdc-toolbar__title">{% block page-title %}{{ app.title|default:site.title|default:"Django Material" }}{% endblock %}</span>
           </section>
         </div>
       </header>

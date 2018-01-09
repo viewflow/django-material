@@ -1,5 +1,5 @@
 {% extends 'material/base.html' %}
-{% load i18n cache static material_site %}
+{% load i18n static material_site %}
 
 {% block js %}
 {{ block.super }}
@@ -16,6 +16,9 @@
   </div>
 </nav>
 {% endblock %}
+
+{% block title %}{% trans 'Profile' %} - {{ block.super }}{% endblock %}
+{% block page-title %}{% trans 'Profile' %}{% endblock %}
 
 {% block content %}
 <div class="mdc-layout-grid dmc-profile" data-mdc-auto-init="DMCProfilePage">
@@ -54,7 +57,7 @@
       <div class="mdc-card dmc-profile-avatar">
         <section class="mdc-card__media dmc-profile-avatar__media">
           <div>
-            <img src="{% cache None django-material-avatar request.user.pk %}{{ request.user|user_avatar_url }}{% endcache %}">
+            <img src="{{ request.user|_user_avatar_url }}">
             <div class="dmc-profile-avatar__shadow"></div>
           </div>
         </section>
