@@ -25,6 +25,7 @@
 
 .dmc-profile-avatar__media {
   position: relative;
+  display: block;
   padding: 0; }
   .dmc-profile-avatar__media > div {
     position: absolute;

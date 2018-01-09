@@ -35,10 +35,9 @@ class ProfileView(generic.DetailView):
     template_name = 'registration/profile.html'
 
     def get_object_data(self):
-        """List of object fields to display.
-        Choice fields values are expanded to readable choice label.
-        """
         for field in self.object._meta.fields:
+            if field.name in ['password']:
+                continue
             if isinstance(field, models.AutoField):
                 continue
             elif field.auto_created:
