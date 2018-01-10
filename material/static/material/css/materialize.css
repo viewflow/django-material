@@ -2286,9 +2286,6 @@ table {
   display: table;
   border-collapse: collapse;
   border-spacing: 0; }
-  table.bordered > thead > tr,
-  table.bordered > tbody > tr {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.12); }
   table.striped tr {
     border-bottom: none; }
   table.striped > tbody > tr:nth-child(odd) {
@@ -2354,20 +2351,10 @@ td, th {
       min-height: 1.25em;
       text-align: left; }
     table.responsive-table tr {
+      border-bottom: none;
       padding: 0 10px; }
     table.responsive-table thead {
       border: 0;
-      border-right: 1px solid rgba(0, 0, 0, 0.12); }
-    table.responsive-table.bordered th {
-      border-bottom: 0;
-      border-left: 0; }
-    table.responsive-table.bordered td {
-      border-left: 0;
-      border-right: 0;
-      border-bottom: 0; }
-    table.responsive-table.bordered tr {
-      border: 0; }
-    table.responsive-table.bordered tbody tr {
       border-right: 1px solid rgba(0, 0, 0, 0.12); } }
 
 .collection {
@@ -3416,74 +3403,93 @@ small {
 .thin {
   font-weight: 200; }
 
-.flow-text {
-  font-weight: 300; }
-  @media only screen and (min-width: 360px) {
-    .flow-text {
-      font-size: 1.2rem; } }
-  @media only screen and (min-width: 390px) {
-    .flow-text {
-      font-size: 1.224rem; } }
-  @media only screen and (min-width: 420px) {
-    .flow-text {
-      font-size: 1.248rem; } }
-  @media only screen and (min-width: 450px) {
-    .flow-text {
-      font-size: 1.272rem; } }
-  @media only screen and (min-width: 480px) {
-    .flow-text {
-      font-size: 1.296rem; } }
-  @media only screen and (min-width: 510px) {
-    .flow-text {
-      font-size: 1.32rem; } }
-  @media only screen and (min-width: 540px) {
-    .flow-text {
-      font-size: 1.344rem; } }
-  @media only screen and (min-width: 570px) {
-    .flow-text {
-      font-size: 1.368rem; } }
-  @media only screen and (min-width: 600px) {
-    .flow-text {
-      font-size: 1.392rem; } }
-  @media only screen and (min-width: 630px) {
-    .flow-text {
-      font-size: 1.416rem; } }
-  @media only screen and (min-width: 660px) {
-    .flow-text {
-      font-size: 1.44rem; } }
-  @media only screen and (min-width: 690px) {
-    .flow-text {
-      font-size: 1.464rem; } }
-  @media only screen and (min-width: 720px) {
-    .flow-text {
-      font-size: 1.488rem; } }
-  @media only screen and (min-width: 750px) {
-    .flow-text {
-      font-size: 1.512rem; } }
-  @media only screen and (min-width: 780px) {
-    .flow-text {
-      font-size: 1.536rem; } }
-  @media only screen and (min-width: 810px) {
-    .flow-text {
-      font-size: 1.56rem; } }
-  @media only screen and (min-width: 840px) {
-    .flow-text {
-      font-size: 1.584rem; } }
-  @media only screen and (min-width: 870px) {
-    .flow-text {
-      font-size: 1.608rem; } }
-  @media only screen and (min-width: 900px) {
-    .flow-text {
-      font-size: 1.632rem; } }
-  @media only screen and (min-width: 930px) {
-    .flow-text {
-      font-size: 1.656rem; } }
-  @media only screen and (min-width: 960px) {
-    .flow-text {
-      font-size: 1.68rem; } }
-  @media only screen and (max-width: 360px) {
-    .flow-text {
-      font-size: 1.2rem; } }
+@media only screen and (min-width: 360px) {
+  .flow-text {
+    font-size: 1.2rem; } }
+
+@media only screen and (min-width: 390px) {
+  .flow-text {
+    font-size: 1.224rem; } }
+
+@media only screen and (min-width: 420px) {
+  .flow-text {
+    font-size: 1.248rem; } }
+
+@media only screen and (min-width: 450px) {
+  .flow-text {
+    font-size: 1.272rem; } }
+
+@media only screen and (min-width: 480px) {
+  .flow-text {
+    font-size: 1.296rem; } }
+
+@media only screen and (min-width: 510px) {
+  .flow-text {
+    font-size: 1.32rem; } }
+
+@media only screen and (min-width: 540px) {
+  .flow-text {
+    font-size: 1.344rem; } }
+
+@media only screen and (min-width: 570px) {
+  .flow-text {
+    font-size: 1.368rem; } }
+
+@media only screen and (min-width: 600px) {
+  .flow-text {
+    font-size: 1.392rem; } }
+
+@media only screen and (min-width: 630px) {
+  .flow-text {
+    font-size: 1.416rem; } }
+
+@media only screen and (min-width: 660px) {
+  .flow-text {
+    font-size: 1.44rem; } }
+
+@media only screen and (min-width: 690px) {
+  .flow-text {
+    font-size: 1.464rem; } }
+
+@media only screen and (min-width: 720px) {
+  .flow-text {
+    font-size: 1.488rem; } }
+
+@media only screen and (min-width: 750px) {
+  .flow-text {
+    font-size: 1.512rem; } }
+
+@media only screen and (min-width: 780px) {
+  .flow-text {
+    font-size: 1.536rem; } }
+
+@media only screen and (min-width: 810px) {
+  .flow-text {
+    font-size: 1.56rem; } }
+
+@media only screen and (min-width: 840px) {
+  .flow-text {
+    font-size: 1.584rem; } }
+
+@media only screen and (min-width: 870px) {
+  .flow-text {
+    font-size: 1.608rem; } }
+
+@media only screen and (min-width: 900px) {
+  .flow-text {
+    font-size: 1.632rem; } }
+
+@media only screen and (min-width: 930px) {
+  .flow-text {
+    font-size: 1.656rem; } }
+
+@media only screen and (min-width: 960px) {
+  .flow-text {
+    font-size: 1.68rem; } }
+
+@media only screen and (max-width: 360px) {
+  .flow-text {
+    font-size: 1.2rem; } }
 
 .scale-transition {
   -webkit-transition: -webkit-transform 0.3s cubic-bezier(0.53, 0.01, 0.36, 1.63) !important;
@@ -3605,8 +3611,7 @@ small {
     padding: 24px;
     border-radius: 0 0 2px 2px; }
     .card .card-content p {
-      margin: 0;
-      color: inherit; }
+      margin: 0; }
     .card .card-content .card-title {
       display: block;
       line-height: 32px;
@@ -3615,7 +3620,6 @@ small {
         line-height: 32px; }
   .card .card-action {
     position: relative;
-    background-color: inherit;
     border-top: 1px solid rgba(160, 160, 160, 0.2);
     padding: 16px 24px; }
     .card .card-action:last-child {
@@ -4405,7 +4409,7 @@ button.btn-floating {
     border: 0;
     color: rgba(0, 0, 0, 0.6);
     display: inline-block;
-    font-size: 1rem;
+    font-size: 16px;
     height: 3rem;
     line-height: 32px;
     outline: 0;
@@ -4514,15 +4518,17 @@ textarea.materialize-textarea {
   outline: none;
   height: 3rem;
   width: 100%;
-  font-size: 1rem;
+  font-size: 16px;
   margin: 0 0 15px 0;
   padding: 0;
   -webkit-box-shadow: none;
           box-shadow: none;
   -webkit-box-sizing: content-box;
           box-sizing: content-box;
-  -webkit-transition: all 0.3s;
-  transition: all 0.3s; }
+  -webkit-transition: border .3s, -webkit-box-shadow .3s;
+  transition: border .3s, -webkit-box-shadow .3s;
+  transition: box-shadow .3s, border .3s;
+  transition: box-shadow .3s, border .3s, -webkit-box-shadow .3s; }
   input:not([type]):disabled, input:not([type])[readonly="readonly"],
   input[type=text]:not(.browser-default):disabled,
   input[type=text]:not(.browser-default)[readonly="readonly"],
@@ -4974,9 +4980,7 @@ textarea {
     resize: none;
     min-height: 3rem;
     -webkit-box-sizing: border-box;
-            box-sizing: border-box;
-    -webkit-transition: none;
-    transition: none; }
+            box-sizing: border-box; }
 
 .hiddendiv {
   visibility: hidden;
@@ -5115,14 +5119,6 @@ textarea {
 
 /* Checkboxes
    ========================================================================== */
-/* CUSTOM CSS CHECKBOXES */
-form p {
-  margin-bottom: 10px;
-  text-align: left; }
-
-form p:last-child {
-  margin-bottom: 0; }
-
 /* Remove default checkbox */
 [type="checkbox"]:not(:checked),
 [type="checkbox"]:checked {
@@ -5416,14 +5412,15 @@ select {
     height: 3rem;
     line-height: 3rem;
     width: 100%;
-    font-size: 1rem;
+    font-size: 16px;
     margin: 0 0 15px 0;
     padding: 0;
     display: block;
     -webkit-user-select: none;
        -moz-user-select: none;
         -ms-user-select: none;
-            user-select: none; }
+            user-select: none;
+    z-index: 1; }
     .select-wrapper input.select-dropdown:focus {
       border-bottom: 1px solid #37474f; }
   .select-wrapper .caret {
@@ -5432,7 +5429,7 @@ select {
     top: 0;
     bottom: 0;
     margin: auto 0;
-    z-index: -1;
+    z-index: 0;
     fill: rgba(0, 0, 0, 0.87); }
   .select-wrapper + label {
     position: absolute;
