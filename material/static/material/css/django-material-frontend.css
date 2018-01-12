@@ -152,7 +152,7 @@ button.dmc-header-secondary-shown i.material-icons {
   background: var(--mdc-theme-background, #fff); }
   .dmc-list .mdc-card__primary {
     padding-left: 24px;
-    padding-bottom: 8px;
+    padding-bottom: 29px;
     position: relative; }
 
 @media (max-width: 600px) {
