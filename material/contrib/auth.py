@@ -1,3 +1,5 @@
+import random
+
 from django import forms
 from django.contrib import messages
 from django.contrib.auth import views, forms as auth_forms
@@ -66,7 +68,7 @@ class ProfileView(generic.DetailView):
             default_storage.save(file_name, form.cleaned_data['avatar'], max_length=512*1024)
             key = make_template_fragment_key('django-material-avatar', [request.user.pk])
             cache.delete(key)
-            messages.add_message(self.request, messages.SUCCESS, _('Avatar changed'), fail_silently=True)
+            messages.add_message(self.request, messages.SUCCESS, random.choice(GREETINGS), fail_silently=True)
         else:
             messages.add_message(self.request, messages.ERROR, form.errors(), fail_silently=True)
         return self.get(request, *args, **kwargs)
@@ -260,3 +262,17 @@ class AuthViewset(Viewset):
     def profile_url(self):
         if self.with_profile_view:
             return path('profile/', self.profile_view, name='profile')
+
+
+GREETINGS = [
+    _('Fantastic!'),
+    _('That looks awesome!'),
+    _('You are looking very well today!'),
+    _('I totally admire your spontaneity.'),
+    _('I like your new haircut.'),
+    _('What a beautiful costume!'),
+    _('You look very good in that suit'),
+    _('I love your style.'),
+    _('I love your hair today'),
+    _('That color looks great on you!'),
+]

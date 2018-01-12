@@ -5,10 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>{% block title %}Material Design for Django{% endblock %}</title>
-  <link href="{% static 'material/css/material-components-web.css' %}" rel="stylesheet">
-  <link href="{% static 'material/css/django-material-components.css' %}" rel="stylesheet">
-  <link href="{% static 'material/fonts/roboto/style.css' %}" rel="stylesheet">
-  <link href="{% static 'material/fonts/material-design-icons/material-icons.css' %}" rel="stylesheet">
+  {% block css %}{% include 'material/includes/material_css.html' %}{% endblock css %}
   <style>
     body {
       display: flex;
@@ -25,8 +22,6 @@
   <div class="page">
     {% block content %}{% endblock %}
   </div>
-  <script src="{% static 'material/js/material-components-web.js' %}"></script>
-  <script src="{% static 'material/js/django-material-components.js' %}"></script>
-  <script src="{% static 'material/js/material-components-init.js' %}"></script>
+  {% block js %}{% include 'material/includes/material_js.html' %}{% endblock js %}
 </body>
 </html>

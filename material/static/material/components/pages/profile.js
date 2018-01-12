@@ -1,4 +1,4 @@
-let smartcrop = exports.smartcrop;
+let smartcrop = require('smartcrop');
 
 class DMCProfilePage {
   static attachTo(root) {
