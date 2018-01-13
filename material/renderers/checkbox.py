@@ -16,7 +16,7 @@ class CheckboxInputRenderer(FieldRender):
     def suffix(self):
         return None
 
-    def help_text(self, errors):
+    def help_text(self):
         classes = [
             "dmc-text-field-helptext",
             "mdc-text-field-helper-text",
@@ -25,8 +25,8 @@ class CheckboxInputRenderer(FieldRender):
         ]
 
         text = None
-        if errors:
-            text = '<br/>'.join(conditional_escape(error) for error in errors)
+        if self.errors:
+            text = '<br/>'.join(conditional_escape(error) for error in self.errors)
         elif self.bound_field.help_text:
             text = self.bound_field.help_text
 
@@ -37,9 +37,9 @@ class CheckboxInputRenderer(FieldRender):
 
     def control(self):
         input_attrs = {
-            'checked': self.bound_field.value(),
+            'checked': self.value,
             'class': "mdc-checkbox__native-control",
-            'disabled': self.bound_field.field.disabled,
+            'disabled': self.disabled,
             'id': self.bound_field.id_for_label,
             'name': self.bound_field.html_name,
             'type': "checkbox"
@@ -59,13 +59,11 @@ class CheckboxInputRenderer(FieldRender):
         ]
 
     def __str__(self):
-        errors = self.bound_field.errors
-
         wrapper_attrs = {
             'class': {
                 'mdc-form-field': False,
                 'dmc-form-field': True,
-                'dmc-form-field--invalid': bool(errors),
+                'dmc-form-field--invalid': bool(self.errors),
                 self.wrapper_class: bool(self.wrapper_class)
             },
             'title': self.bound_field.help_text
@@ -86,7 +84,7 @@ class CheckboxInputRenderer(FieldRender):
                     Div(**control_attrs) / self.control(),
                     Label(for_=self.bound_field.id_for_label) / [self.bound_field.label],
                 ],
-                self.help_text(errors),
+                self.help_text(),
             ],
             self.suffix(),
         ]

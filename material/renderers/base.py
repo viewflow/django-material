@@ -1,4 +1,5 @@
 from functools import lru_cache
+from django.utils.functional import cached_property
 from django.test.signals import setting_changed
 
 
@@ -17,6 +18,26 @@ class FieldRender(object):
     @property
     def disabled(self):
         return self.field.disabled
+
+    @property
+    def required(self):
+        return (
+            self.widget.use_required_attribute(self.bound_field.initial) and
+            self.field.required and
+            self.bound_field.form.use_required_attribute
+        )
+
+    @cached_property
+    def value(self):
+        return self.bound_field.value()
+
+    @cached_property
+    def formatted_value(self):
+        return self.widget.format_value(self.value)
+
+    @cached_property
+    def errors(self):
+        return self.bound_field.errors
 
     def __str__(self):
         return str(self.bound_field)

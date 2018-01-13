@@ -16,7 +16,7 @@ class InputRenderer(FieldRender):
     def suffix(self):
         return None
 
-    def help_text(self, errors):
+    def help_text(self):
         classes = [
             "dmc-text-field-helptext",
             "mdc-text-field-helper-text",
@@ -25,8 +25,8 @@ class InputRenderer(FieldRender):
         ]
 
         text = mark_safe('&nbsp;')
-        if errors:
-            text = '<br/>'.join(conditional_escape(error) for error in errors)
+        if self.errors:
+            text = '<br/>'.join(conditional_escape(error) for error in self.errors)
         elif self.bound_field.help_text:
             text = self.bound_field.help_text
 
@@ -34,26 +34,21 @@ class InputRenderer(FieldRender):
                 text
             ]
 
-    def control(self, value):
-        is_required = (
-            self.widget.use_required_attribute(self.bound_field.initial) and
-            self.field.required and
-            self.bound_field.form.use_required_attribute
-        )
+    def control(self):
         input_attrs = {
             'class': "mdc-text-field__input dmc-text-field__input",
             'disabled': self.disabled,
             'id': self.bound_field.id_for_label,
             'name': self.bound_field.html_name,
             'type': self.widget.input_type,
-            'value': self.widget.format_value(value),
-            'required': is_required,
+            'value': self.widget.format_value(self.value),
+            'required': self.required,
             **self.field.widget.attrs
         }
 
         label_classes = {
             "mdc-text-field__label": True,
-            "mdc-text-field__label--float-above": bool(value)
+            "mdc-text-field__label--float-above": bool(self.value)
         }
 
         return [
@@ -63,13 +58,10 @@ class InputRenderer(FieldRender):
         ]
 
     def __str__(self):
-        value = self.bound_field.value()
-        errors = self.bound_field.errors
-
         wrapper_attrs = {
             'class': {
                 'dmc-form-field': True,
-                'dmc-form-field--invalid': bool(errors),
+                'dmc-form-field--invalid': bool(self.errors),
                 self.wrapper_class: bool(self.wrapper_class)
             },
             'title': self.bound_field.help_text
@@ -78,14 +70,14 @@ class InputRenderer(FieldRender):
             "dmc-text-field": True,
             "mdc-text-field": True,
             "mdc-text-field--upgraded": True,
-            "mdc-text-field--invalid": bool(errors),
+            "mdc-text-field--invalid": bool(self.errors),
         }
 
         element = Div(**wrapper_attrs) / [
             self.prefix(),
             Div(class_="dmc-form-field__input") / [
-                Div(class_=textfield_classes, data_mdc_auto_init=self.autoinit()) / self.control(value),
-                self.help_text(errors),
+                Div(class_=textfield_classes, data_mdc_auto_init=self.autoinit()) / self.control(),
+                self.help_text(),
             ],
             self.suffix()
         ]
@@ -110,14 +102,14 @@ class PasswordRenderer(InputRenderer):
     def autoinit(self):
         return "DMCPasswordField"
 
-    def control(self, value):
+    def control(self):
         toggle_attrs = {
             'class': 'material-icons dmc-password-field__toggle',
             'href': '#',
             'tabindex': '-1',
             'aria-hidden': 'true'
         }
-        return super().control(value) + [
+        return super().control() + [
             A(**toggle_attrs) / ["visibility"]
         ]
 

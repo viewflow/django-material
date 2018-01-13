@@ -19,14 +19,14 @@ class SelectRenderer(FieldRender):
     def suffix(self):
         return None
 
-    def help_text(self, errors):
+    def help_text(self):
         classes = [
             "dmc-select-field__helptext",
         ]
 
         text = mark_safe('&nbsp;')
-        if errors:
-            text = '<br/>'.join(conditional_escape(error) for error in errors)
+        if self.errors:
+            text = '<br/>'.join(conditional_escape(error) for error in self.errors)
         elif self.bound_field.help_text:
             text = self.bound_field.help_text
 
@@ -124,17 +124,14 @@ class SelectRenderer(FieldRender):
         return Select(class_="mdc-select", name=self.bound_field.name, **self.widget.attrs) / items
 
     def __str__(self):
-        value = self.bound_field.value()
-        formatted_value = self.widget.format_value(value)
-        errors = self.bound_field.errors
-        options = list(self.widget.optgroups(self.bound_field.name, formatted_value))
+        options = list(self.widget.optgroups(self.bound_field.name, self.formatted_value))
 
         wrapper_attrs = {
             'class': {
                 'mdc-form-field': False,
                 'data-mdc-auto-init': "MDCFormField" if self.autoinit() else False,
                 'dmc-form-field': True,
-                'dmc-form-field--invalid': bool(errors),
+                'dmc-form-field--invalid': bool(self.errors),
                 self.wrapper_class: bool(self.wrapper_class)
             },
             'title': self.bound_field.help_text
@@ -151,7 +148,7 @@ class SelectRenderer(FieldRender):
                 Label(**label_attrs) / [self.bound_field.label],
                 self.control(options),
                 self.native_control(options),
-                self.help_text(errors),
+                self.help_text(),
             ],
             self.suffix()
         ]
