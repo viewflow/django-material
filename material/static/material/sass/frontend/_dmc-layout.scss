@@ -16,6 +16,8 @@ body {
 }
 
 .dmc-responsive-drawer {
+  z-index: 1;  // improve hide/show animation
+
   .mdc-list-group__subheader--dmc {
     padding-left: 16px;
     color: rgba(0, 0, 0, 0.54);
@@ -59,6 +61,7 @@ body {
     flex-grow: 1;
 
     .mdc-toolbar {
+      z-index: 1;
       margin-left: -1px;
     }
   }
