@@ -42,7 +42,8 @@ class CheckboxInputRenderer(FieldRender):
             'disabled': self.disabled,
             'id': self.bound_field.id_for_label,
             'name': self.bound_field.html_name,
-            'type': "checkbox"
+            'type': "checkbox",
+            'required': self.required,
         }
 
         return [

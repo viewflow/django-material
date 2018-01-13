@@ -1,4 +1,4 @@
-from . import LiveTestCase
+from .. import LiveTestCase
 
 
 class Test(LiveTestCase):
