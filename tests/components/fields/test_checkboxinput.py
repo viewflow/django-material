@@ -18,3 +18,5 @@ class Test(LiveTestCase):
         self.assertFalse(checkbox.is_selected())
         label.click()
         self.assertTrue(checkbox.is_selected())
+
+        self.assertNoJsErrors()
