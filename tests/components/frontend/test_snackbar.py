@@ -6,8 +6,6 @@ from .. import LiveTestCase
 
 
 class Test(LiveTestCase):
-    fixtures = ['users.json']
-
     def test_responsive_drawer(self):
         self.browser.get(f"{self.live_server_url}/components/snackbar/")
 
