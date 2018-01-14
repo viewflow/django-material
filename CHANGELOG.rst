@@ -5,7 +5,7 @@
 - [PRO] Fix ajax multi-select widget
 
 
-2.0 2017-12-20
+1.2.0 2017-12-20
 ----------------
 
 - Materialize 1.0.0.alpha2
