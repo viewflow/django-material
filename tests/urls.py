@@ -1,14 +1,14 @@
 from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path
-from django.views.generic import FormView, TemplateView
+from django.views.generic import TemplateView
 
 
 from material import Site
 from material.contrib.auth import AuthViewset
 from material.contrib.admin import Admin
 
-from .forms import widgets, demo
+from .forms import urls as forms_urls
 from .atlas.urls import Atlas
 from .employees.urls import Employees
 
@@ -25,45 +25,6 @@ site = Site(
 urlpatterns = [
     path('accounts/', AuthViewset().urls),
     path('', site.urls),
-
-    # widgets
-    path('widget/checkboxinput/', FormView.as_view(
-        template_name='form.html',
-        form_class=widgets.CheckboxInputForm,
-        success_url='.')
-    ),
-    path('widget/textinput/', FormView.as_view(
-        template_name='form.html',
-        form_class=widgets.TextInputForm,
-        success_url='.')
-    ),
-    path('widget/passwordinput/', FormView.as_view(
-        template_name='form.html',
-        form_class=widgets.PasswordInputForm,
-        success_url='.')
-    ),
-    path('widget/select/', FormView.as_view(
-        template_name='form.html',
-        form_class=widgets.SelectForm,
-        success_url='.')
-    ),
-
-    # demo forms
-    path('demo/login/', FormView.as_view(
-        template_name='form.html',
-        form_class=demo.LoginForm,
-        success_url='.')
-    ),
-    path('demo/contact/', FormView.as_view(
-        template_name='form.html',
-        form_class=demo.ContactForm,
-        success_url='.')
-    ),
-    path('demo/registration/', FormView.as_view(
-        template_name='form.html',
-        form_class=demo.RegistrationForm,
-        success_url='.')
-    ),
 
     # components
     path('components/snackbar/', TemplateView.as_view(
@@ -86,4 +47,4 @@ urlpatterns = [
     path('page/500/', TemplateView.as_view(
         template_name='500.html')
     ),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] + forms_urls.urlpatterns + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

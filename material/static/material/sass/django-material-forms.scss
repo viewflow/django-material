@@ -48,21 +48,7 @@
     }
 }
 
-.dmc-text-field {
-  width: 100%;
-  margin-top: 0px !important;
-  margin-bottom: 2px;
-
-  .dmc-text-field__input {
-    width: 100%;
-  }
-}
-
-.dmc-text-field-helptext {
-  font-size: 11px;
-  margin-bottom: 6px !important;
-  margin-top: 0px;
-}
+@import 'forms/dmc-text-field';
 
 .dmc-password-field {
   .dmc-text-field__input{

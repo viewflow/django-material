@@ -12,7 +12,7 @@ from .views import (
 )
 from .widgets import (
     MaterialTextInput, MaterialNumberInput, MaterialEmailInput,
-    MaterialURLInput, MaterialPasswordInput, MaterialSelect
+    MaterialURLInput, MaterialPasswordInput, MaterialSelect,
 )
 
 

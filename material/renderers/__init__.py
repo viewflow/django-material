@@ -23,6 +23,9 @@ WIDGET_RENDERERS = {
     widgets.TextInput: InputRenderer,
     material_widgets.MaterialTextInput: MaterialInputRenderer,
 
+    widgets.NumberInput: InputRenderer,
+    material_widgets.MaterialNumberInput: MaterialInputRenderer,
+
     widgets.EmailInput: InputRenderer,
     material_widgets.MaterialEmailInput: MaterialInputRenderer,
 

@@ -3,7 +3,7 @@ from .. import LiveTestCase
 
 class Test(LiveTestCase):
     def test_checkboxinput(self):
-        self.browser.get(f"{self.live_server_url}/widget/checkboxinput/")
+        self.browser.get(f"{self.live_server_url}/widget/checkbox/")
 
         # check height
         fields = self.browser.find_elements_by_css_selector('.dmc-checkbox-field')
