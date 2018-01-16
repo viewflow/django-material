@@ -4,35 +4,41 @@
   dmc.registry = Object.create(null);
 
   let pageLoaded = false;
-  const CONSOLE_WARN = console.warn.bind(console);
 
-  function initComponents(root = document, warn = CONSOLE_WARN, allowUnknown=false) {
+  function initComponent(node, allowUnknown=False) {
+    const ctorName = node.dataset.mdcAutoInit;
+    if (!ctorName) {
+      throw new Error('(mdc-auto-init) Constructor name must be given.');
+    }
+    const Ctor = dmc.registry[ctorName];
+    if (typeof Ctor !== 'function') {
+      if (!allowUnknown) {
+        throw new Error(
+          `(mdc-auto-init) Could not find constructor in registry for ${ctorName}`);
+      }
+      return;
+    }
+    const component = Ctor.attachTo(node);
+    Object.defineProperty(node, ctorName, {
+      value: component,
+      writable: false,
+      enumerable: false,
+      configurable: true,
+    });
+  };
+
+  function initComponents(root = document, allowUnknown=false) {
     const nodes = root.querySelectorAll('[data-mdc-auto-init]');
     for (let i = 0, node; (node = nodes[i]); i++) {
-      const ctorName = node.dataset.mdcAutoInit;
-      if (!ctorName) {
-        throw new Error('(mdc-auto-init) Constructor name must be given.');
-      }
-      const Ctor = dmc.registry[ctorName];
-      if (typeof Ctor !== 'function') {
-        if (!allowUnknown) {
-          throw new Error(
-            `(mdc-auto-init) Could not find constructor in registry for ${ctorName}`);
-        }
-        continue;
-      }
-      const component = Ctor.attachTo(node);
-      Object.defineProperty(node, ctorName, {
-        value: component,
-        writable: false,
-        enumerable: false,
-        configurable: true,
-      });
+      initComponent(node, allowUnknown);
+    }
+    if (root.dataset && root.dataset.mdcAutoInit) {
+      initComponent(root, allowUnknown);
     }
   }
 
   function onLoad() {
-    initComponents(document.querySelector('body'), CONSOLE_WARN, true);
+    initComponents(document.querySelector('body'), true);
     pageLoaded = true;
   }
 
@@ -44,6 +50,10 @@
       const ctorName = node.dataset.mdcAutoInit;
       const component = node[ctorName];
       component.destroy();
+    }
+
+    if (document.body.dataset.mdcAutoInit) {
+      document.body[document.body.dataset.mdcAutoInit].destroy();
     }
   }
 
@@ -58,7 +68,7 @@
       throw new Error(`(mdc-auto-init) Invalid Ctor value ${Ctor}. Expected function`);
     }
     if (dmc.registry[ctorName]) {
-      warn(
+      console.warn(
         `(mdc-auto-init) Overriding registration for ${componentName} with ${Ctor}. ` +
         `Was: ${registry[componentName]}`);
     }

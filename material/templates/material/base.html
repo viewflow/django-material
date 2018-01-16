@@ -1,5 +1,5 @@
 <!DOCTYPE html>{% load i18n static material_site %}
-<html lang="en" class="mdc-typography" data-mdc-auto-init="DMCScrollLockFix">
+<html lang="en" class="mdc-typography">
 
 <head>
   <meta charset="UTF-8">
@@ -13,7 +13,7 @@
   {% block extrahead %}{% endblock %}
 </head>
 
-<body class="mdc-typography">{% block body %}
+<body class="mdc-typography" data-mdc-auto-init="DMCScrollLockFix">{% block body %}
   <div class="dmc-page">
     {% with site=request.resolver_match.site app=request.resolver_match.app %}
     <aside id="id_site_drawer"

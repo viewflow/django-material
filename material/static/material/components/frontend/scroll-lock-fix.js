@@ -36,11 +36,11 @@ class DMCScrollLockFix {
     this.observer_.observe(document.body, {attributes: true, attributeFilter: ['class']});
   }
 
-    destroy() {
+  destroy() {
       window.removeEventListener('resize', this.onResize);
       cancelAnimationFrame(this.reconcileBody_);
       this.observer_.disconnect();
-    }
   }
+}
 
 dmc.register('DMCScrollLockFix', DMCScrollLockFix);

@@ -1,5 +1,5 @@
 <!DOCTYPE html>{% load static %}
-<html lang="en" class="mdc-typography" data-mdc-auto-init="DMCScrollLockFix">
+<html lang="en" class="mdc-typography">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,7 +18,7 @@
     }
   </style>
 </head>
-<body>
+<body data-mdc-auto-init="DMCScrollLockFix">
   <div class="page">
     {% block content %}{% endblock %}
   </div>
