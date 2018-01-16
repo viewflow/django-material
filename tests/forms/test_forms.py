@@ -11,7 +11,9 @@ class Test(WebTest):
         form['keep_logged'] = 1
 
         response = form.submit()
-        self.assertEqual(302, response.status_code)
+
+        self.assertEqual(200, response.status_code)
+        self.assertTrue(response.context['form'].is_valid())
 
     def test_contact_form(self):
         page = self.app.get('/demo/contact/')
@@ -24,7 +26,9 @@ class Test(WebTest):
         form['send_copy'] = 1
 
         response = form.submit()
-        self.assertEqual(302, response.status_code)
+
+        self.assertEqual(200, response.status_code)
+        self.assertTrue(response.context['form'].is_valid())
 
     def test_registration_form(self):
         page = self.app.get('/demo/registration/')
@@ -41,4 +45,6 @@ class Test(WebTest):
         form['agree_toc'] = 1
 
         response = form.submit()
-        self.assertEqual(302, response.status_code)
+
+        self.assertEqual(200, response.status_code)
+        self.assertTrue(response.context['form'].is_valid())
