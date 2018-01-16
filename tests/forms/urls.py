@@ -7,7 +7,9 @@ from . import widgets, demo
 
 class FormView(BaseFormView):
     template_name = 'form.html'
-    success_url = '.'
+
+    def form_valid(self, form):
+        return self.render_to_response(self.get_context_data(form=form))
 
 
 urlpatterns = [
@@ -23,10 +25,10 @@ urlpatterns = [
     # path('widget/file/', FormView.as_view(form_class=widgets.FileFieldForm)),
     # path('widget/fileinput/$', FormView.as_view(form_class=widgets.FileInputForm)),
     # path('widget/filepath/', FormView.as_view(form_class=widgets.FilePathFieldForm)),
-    # path('widget/float/', FormView.as_view(form_class=widgets.FloatFieldForm)),
-    # path('widget/hidden/', FormView.as_view(form_class=widgets.HiddenInputForm)),
+    path('widget/float/', FormView.as_view(form_class=widgets.FloatFieldForm)),
+    path('widget/hidden/', FormView.as_view(form_class=widgets.HiddenInputForm)),
     # path('widget/image/', FormView.as_view(form_class=widgets.ImageFieldForm)),
-    # path('widget/integer/', FormView.as_view(form_class=widgets.IntegerFieldForm)),
+    path('widget/integer/', FormView.as_view(form_class=widgets.IntegerFieldForm)),
     # path('widget/ipaddress/', FormView.as_view(form_class=widgets.GenericIPAddressFieldForm)),
     # path('widget/modelchoice/$', FormView.as_view(form_class=widgets.ModelChoiceFieldForm)),
     # path('widget/modelmultichoice/$', FormView.as_view(form_class=widgets.ModelMultipleChoiceFieldForm)),
@@ -42,9 +44,9 @@ urlpatterns = [
     # path('widget/splithiddendatetime/', FormView.as_view(form_class=widgets.SplitHiddenDateTimeWidgetForm)),
     # path('/widget/textarea/', FormView.as_view(form_class=widgets.TextareaForm)),
     path('widget/textinput/', FormView.as_view(form_class=widgets.TextInputForm)),
-    # path('^widget/time/', FormView.as_view(form_class=widgets.TimeFieldForm)),
-    # path('^widget/url/', FormView.as_view(form_class=widgets.URLFieldForm)),
-    # path('^widget/uuid/', FormView.as_view(form_class=widgets.UUIDField)),
+    # path('widget/time/', FormView.as_view(form_class=widgets.TimeFieldForm)),
+    path('widget/url/', FormView.as_view(form_class=widgets.URLFieldForm)),
+    # path('widget/uuid/', FormView.as_view(form_class=widgets.UUIDField)),
 
     # demo forms
     path('demo/login/', FormView.as_view(form_class=demo.LoginForm)),

@@ -33,7 +33,10 @@ WIDGET_RENDERERS = {
     material_widgets.MaterialPasswordInput: MaterialPasswordRenderer,
 
     widgets.Select: SelectRenderer,
-    material_widgets.MaterialSelect: MaterialSelectRenderer
+    material_widgets.MaterialSelect: MaterialSelectRenderer,
+
+    widgets.URLInput: InputRenderer,
+    material_widgets.MaterialURLInput: MaterialInputRenderer,
 }
 
 

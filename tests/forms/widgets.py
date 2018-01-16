@@ -4,7 +4,7 @@ from django import forms
 from material import (
     Icon, Layout, Row, Span,
     MaterialTextInput, MaterialPasswordInput, MaterialSelect,
-    MaterialNumberInput, MaterialEmailInput,
+    MaterialNumberInput, MaterialEmailInput, MaterialURLInput,
 )
 
 
@@ -14,7 +14,7 @@ class CheckboxInputForm(forms.Form):
 
     field1 = forms.BooleanField(help_text='default', required=False)
     field2 = forms.BooleanField(help_text='initial value', initial=True)
-    field3 = forms.BooleanField(help_text='disabled', disabled=True)
+    field3 = forms.BooleanField(help_text='disabled', disabled=True, initial=True)
     field4 = forms.BooleanField(help_text='on a row with textfield')
     textfield = forms.CharField(
         help_text='with boolean',
@@ -54,6 +54,42 @@ class EmailFieldForm(forms.Form):
     field5 = forms.EmailField(
         help_text='prefix',
         widget=MaterialEmailInput(prefix=Icon('insert_invitation')))
+
+
+class FloatFieldForm(forms.Form):
+    title = "FloatField"
+    subtitle = 'Widget options demo'
+
+    field1 = forms.FloatField(help_text='default', required=False)
+    field2 = forms.FloatField(help_text='initial value', initial=2.718282)
+    field3 = forms.FloatField(help_text='value between 5-10', min_value=5, max_value=10)
+    field4 = forms.FloatField(help_text='disabled', disabled=True, initial=-273.15)
+    field5 = forms.FloatField(
+        help_text='prefix',
+        widget=MaterialNumberInput(prefix=Icon('insert_invitation'))
+    )
+
+
+class HiddenInputForm(forms.Form):
+    title = "HiddenInput"
+    subtitle = 'Widget options demo'
+
+    field1 = forms.CharField(help_text='default', initial="hello!", widget=forms.HiddenInput)
+
+
+class IntegerFieldForm(forms.Form):
+    title = "IntegerField"
+    subtitle = 'Widget options demo'
+
+    field1 = forms.IntegerField(help_text='default', required=False)
+    field2 = forms.IntegerField(help_text='initial value', initial=42)
+    field3 = forms.IntegerField(help_text='value between 5-10', min_value=5, max_value=10)
+    field4 = forms.IntegerField(help_text='disabled', disabled=True, initial=-1)
+    field5 = forms.IntegerField(
+        help_text='prefix',
+        widget=MaterialNumberInput(prefix=Icon('insert_invitation')))
+    field6 = forms.IntegerField(  # TODO
+        help_text="range", widget=forms.NumberInput(attrs={'type': 'range', 'min': '0', 'max': '100'}))
 
 
 class PasswordInputForm(forms.Form):
@@ -144,3 +180,16 @@ class TextInputForm(forms.Form):
         widget=MaterialTextInput(suffix=Icon('perm_contact_calendar'))
     )
     field6 = forms.CharField(help_text='disabled', disabled=True, initial='Not editable')
+
+
+class URLFieldForm(forms.Form):
+    title = "URLField"
+    subtitle = 'Widget options demo'
+
+    field1 = forms.URLField(help_text='default', required=False)
+    field2 = forms.URLField(help_text='initial value', initial="http://viewflow.io")
+    field3 = forms.URLField(help_text='length between 10-100', min_length=10, max_length=100),
+    field4 = forms.URLField(help_text='disabled', disabled=True, initial="http://viewflow.io/pro/")
+    field5 = forms.URLField(
+        help_text='prefix',
+        widget=MaterialURLInput(prefix=Icon('insert_invitation')))

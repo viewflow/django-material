@@ -20,4 +20,11 @@
   </div>
 </form>
 
+{% if form.cleaned_data %}
+<div class="mdc-card mdc-theme--background">
+  <section class="mdc-card__supporting-text">
+    <pre>{{ form.cleaned_data|pprint }}</pre>
+  </section>
+</div>
+{% endif %}
 {% endblock %}
