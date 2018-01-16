@@ -8,6 +8,7 @@ body {
   height: 100%;
   width: 100%;
   overflow-y: scroll;
+  background: #eee;
 }
 
 .turbolinks-progress-bar {
@@ -55,7 +56,6 @@ body {
   box-sizing: border-box;
   width: 100%;
   min-height: 100%;
-  background: #eee;
 
   .dmc-page__body {
     flex-grow: 1;
