@@ -1,7 +1,11 @@
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
-from material import Icon, ModelViewset, DetailViewsetMixin
+import material
+from material import (
+    Icon, ModelViewset, DetailViewsetMixin,
+    Layout, Row, Column
+)
 
 from . import models
 
@@ -13,6 +17,21 @@ class EmployeeViewset(DetailViewsetMixin, ModelViewset):
         'no', 'first_name', 'last_name',
         'birth_date', 'current_salary'
     )
+    form_layout = Layout(
+        Row(
+            Column(
+                'emp_no',
+                Row('first_name', 'last_name'),
+                'gender',
+                'birth_date',
+                desktop=8),
+            'hire_date'
+        )
+    )
+    form_widgets = {
+        'hire_date': material.InlineCalendar,
+        'birth_date': material.TextInput(suffix=Icon('insert_invitation'))
+    }
 
     def no(self, obj):
         return '#{}'.format(obj.pk)

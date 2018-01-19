@@ -134,11 +134,53 @@
     exports.dmc = dmc;
   } else if (typeof navigator !== 'undefined') {
     function browserLoad() {
-      dmc.autoInit();
-      window.removeEventListener('load', browserLoad);
-    }
+        dmc.autoInit();
+        window.removeEventListener('load', browserLoad);
+    };
+
     window.addEventListener('load', browserLoad);
     window.dmc = dmc;
+
+    // django translation stubs
+    if (!window.django || !window.django.jsi18n_initialized) {
+      window.pluralidx = (count) => (count == 1) ? 0 : 1;
+      window.gettext = (msg) => msg;
+      window.ngettext = (singular, plural, count) => (count == 1) ? singular : plural;
+      window.gettext_noop = (msg) => msg;
+      window.pgettext = (context, msg) => msg;
+      window.npgettext = (context, singular, plural, count) => (count == 1) ? singular : plural;
+      let formats = {
+        'DATETIME_FORMAT': 'N j, Y, P',
+        'DATETIME_INPUT_FORMATS': [
+          '%Y-%m-%d %H:%M:%S',
+        ],
+        'DATE_FORMAT': 'N j, Y',
+        'DATE_INPUT_FORMATS': [
+          '%Y-%m-%d',
+        ],
+        'DECIMAL_SEPARATOR': '.',
+        'FIRST_DAY_OF_WEEK': 0,
+        'MONTH_DAY_FORMAT': 'F j',
+        'NUMBER_GROUPING': 3,
+        'SHORT_DATETIME_FORMAT': 'm/d/Y P',
+        'SHORT_DATE_FORMAT': 'm/d/Y',
+        'THOUSAND_SEPARATOR': ',',
+        'TIME_FORMAT': 'P',
+        'TIME_INPUT_FORMATS': [
+          '%H:%M:%S',
+        ],
+        'YEAR_MONTH_FORMAT': 'F Y',
+      };
+
+      window.get_format = (formatType) => {
+        let value = formats[formatType];
+        if (typeof(value) == 'undefined') {
+          return formatType;
+        } else {
+          return value;
+        }
+      };
+    }
   } else if (typeof module !== 'undefined') {
     module.exports = dmc;
   }

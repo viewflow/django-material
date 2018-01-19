@@ -28,6 +28,7 @@ urlpatterns = [
     path('widget/float/', FormView.as_view(form_class=widgets.FloatFieldForm)),
     path('widget/hidden/', FormView.as_view(form_class=widgets.HiddenInputForm)),
     # path('widget/image/', FormView.as_view(form_class=widgets.ImageFieldForm)),
+    path('widget/inlinecalendar/', FormView.as_view(form_class=widgets.InlineCalendarForm)),
     path('widget/integer/', FormView.as_view(form_class=widgets.IntegerFieldForm)),
     # path('widget/ipaddress/', FormView.as_view(form_class=widgets.GenericIPAddressFieldForm)),
     # path('widget/modelchoice/$', FormView.as_view(form_class=widgets.ModelChoiceFieldForm)),

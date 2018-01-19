@@ -13,6 +13,7 @@ from .views import (
 from .widgets import (
     TextInput, NumberInput, EmailInput,
     URLInput, PasswordInput, Select,
+    InlineCalendar,
 )
 
 
@@ -37,7 +38,7 @@ __all__ = (
     'Layout', 'Row', 'Column', 'Fieldset', 'Span', 'Icon', 'Viewset',
     'ViewsetMetaClass', 'Site', 'Application', 'AppViewset', 'viewprop',
     'TextInput', 'NumberInput', 'EmailInput',
-    'URLInput', 'PasswordInput', 'Select',
+    'URLInput', 'PasswordInput', 'Select', 'InlineCalendar',
     'ModelViewset', 'ListModelView', 'CreateModelView',
     'DeleteModelView', 'DetailModelView', 'UpdateModelView',
     'DetailViewsetMixin', 'DeleteViewsetMixin', 'ReadonlyModelViewset',

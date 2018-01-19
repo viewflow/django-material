@@ -1,5 +1,6 @@
 from functools import lru_cache
 from django.utils.functional import cached_property
+from django.utils.html import mark_safe, conditional_escape
 from django.test.signals import setting_changed
 
 
@@ -38,6 +39,14 @@ class FieldRender(object):
     @cached_property
     def errors(self):
         return self.bound_field.errors
+
+    def format_help_text(self, default=mark_safe('&nbsp;')):
+        text = default
+        if self.errors:
+            text = '<br/>'.join(conditional_escape(error) for error in self.errors)
+        elif self.bound_field.help_text:
+            text = self.bound_field.help_text
+        return text
 
     def __str__(self):
         return str(self.bound_field)

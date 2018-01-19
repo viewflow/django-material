@@ -38,3 +38,7 @@ class PasswordInput(_IconMixin, _AutoInitMixin, widgets.PasswordInput):
 
 class Select(_IconMixin, _AutoInitMixin, widgets.Select):
     autoinit = "DMCSelect"
+
+
+class InlineCalendar(widgets.DateInput):
+    autoinit = "DMCCalendar"

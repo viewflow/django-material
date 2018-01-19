@@ -77,6 +77,13 @@ class HiddenInputForm(forms.Form):
     field1 = forms.CharField(help_text='default', initial="hello!", widget=forms.HiddenInput)
 
 
+class InlineCalendarForm(forms.Form):
+    title = "Inline calendar"
+    subtitle = 'Widget options demo'
+
+    field1 = forms.DateField(help_text='default', required=False, widget=material.InlineCalendar)
+
+
 class IntegerFieldForm(forms.Form):
     title = "IntegerField"
     subtitle = 'Widget options demo'

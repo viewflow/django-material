@@ -1,0 +1,104 @@
+.dmc-calendar {
+  max-width: 470px;
+}
+
+.dmc-calendar__body{
+  position: relative;
+  text-align: center;
+}
+
+.dmc-calendar__title {
+  display: inline-block;
+  padding: 14px;
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(0,0,0,.87);
+}
+
+.dmc-calendar__weekday {
+  font-size: 13px;
+  display: inline-block;
+  width: 14.2857143%;
+  color: rgba(0,0,0,.54);
+  height: 38px;
+  line-height: 38px;
+}
+
+.dmc-calendar__day {
+  display: inline-block;
+  width: 14.2857143%;
+
+  span {
+    display: inline-block;
+    border-radius: 50%;
+    width: 38px;
+    height: 38px;
+    line-height: 38px;
+    vertical-align: middle;
+    font-size: 13px;
+  }
+}
+
+.dmc_calendar__current {
+  span {
+    color: white;
+    background-color: #3f51b5;
+    background-color: var(--mdc-theme-primary, #3f51b5);
+  }
+}
+
+.dmc-calendar:not(.dmc-calendar--disabled) {
+  .dmc-calendar__day:not(.dmc_calendar__current) {
+    span {
+      &:hover:not(:empty) {
+        background: #eee;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.dmc-calendar__prev {
+  position: absolute;
+  top: 6px;
+  left: 0;
+  i.material-icons {
+    vertical-align: middle;
+  }
+}
+
+.dmc-calendar__next {
+  position: absolute;
+  top: 6px;
+  right: 0;
+  i.material-icons {
+    vertical-align: middle;
+  }
+}
+
+// Inline calendar field
+
+.dmc-inline-calendar__label {
+  color: rgba(0,0,0,.5);
+  font-size: 12px;
+  line-height: 15px;
+}
+
+.dmc-inline-calendar__label--required:after {
+  margin-left: 1px;
+  content: "*";
+}
+
+.dmc-inline-calendar__helptext {
+  margin: 0 0 8px 0;
+  color: rgba(0, 0, 0, 0.38);
+  color: var(--mdc-theme-text-hint-on-light, rgba(0, 0, 0, 0.38));
+  font-size: 11px;
+  text-align: center;
+  max-width: 470px;
+}
+
+.dmc-inline-calendar__label--invalid,
+.dmc-inline-calendar__helptext--invalid {
+  color: #d50000;
+}
