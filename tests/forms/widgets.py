@@ -1,10 +1,10 @@
 from decimal import Decimal
 
 from django import forms
+
+import material
 from material import (
     Icon, Layout, Row, Span,
-    MaterialTextInput, MaterialPasswordInput, MaterialSelect,
-    MaterialNumberInput, MaterialEmailInput, MaterialURLInput,
 )
 
 
@@ -18,7 +18,7 @@ class CheckboxInputForm(forms.Form):
     field4 = forms.BooleanField(help_text='on a row with textfield')
     textfield = forms.CharField(
         help_text='with boolean',
-        widget=MaterialTextInput(prefix=Icon('edit'))
+        widget=material.TextInput(prefix=Icon('edit'))
     )
 
     layout = Layout(
@@ -40,7 +40,7 @@ class DecimalFieldForm(forms.Form):
     field5 = forms.DecimalField(help_text='disabled', disabled=True, initial=-1)
     field6 = forms.DecimalField(
         help_text='prefix',
-        widget=MaterialNumberInput(prefix=Icon('insert_invitation')))
+        widget=material.NumberInput(prefix=Icon('insert_invitation')))
 
 
 class EmailFieldForm(forms.Form):
@@ -53,7 +53,7 @@ class EmailFieldForm(forms.Form):
     field4 = forms.EmailField(help_text='disabled', disabled=True, initial='noreply@viewflow.io')
     field5 = forms.EmailField(
         help_text='prefix',
-        widget=MaterialEmailInput(prefix=Icon('insert_invitation')))
+        widget=material.EmailInput(prefix=Icon('insert_invitation')))
 
 
 class FloatFieldForm(forms.Form):
@@ -66,7 +66,7 @@ class FloatFieldForm(forms.Form):
     field4 = forms.FloatField(help_text='disabled', disabled=True, initial=-273.15)
     field5 = forms.FloatField(
         help_text='prefix',
-        widget=MaterialNumberInput(prefix=Icon('insert_invitation'))
+        widget=material.NumberInput(prefix=Icon('insert_invitation'))
     )
 
 
@@ -87,7 +87,7 @@ class IntegerFieldForm(forms.Form):
     field4 = forms.IntegerField(help_text='disabled', disabled=True, initial=-1)
     field5 = forms.IntegerField(
         help_text='prefix',
-        widget=MaterialNumberInput(prefix=Icon('insert_invitation')))
+        widget=material.NumberInput(prefix=Icon('insert_invitation')))
     field6 = forms.IntegerField(  # TODO
         help_text="range", widget=forms.NumberInput(attrs={'type': 'range', 'min': '0', 'max': '100'}))
 
@@ -103,7 +103,7 @@ class PasswordInputForm(forms.Form):
     field2 = forms.CharField(
         help_text='prefix icon',
         initial="Initial value",
-        widget=MaterialPasswordInput(prefix=Icon('lock'))
+        widget=material.PasswordInput(prefix=Icon('lock'))
     )
 
 
@@ -137,12 +137,12 @@ class SelectForm(forms.Form):
     field7 = forms.ChoiceField(
         help_text='prefix',
         choices=CHOICES,
-        widget=MaterialSelect(prefix=Icon('account_box'))
+        widget=material.Select(prefix=Icon('account_box'))
     )
     field8 = forms.ChoiceField(help_text='on a row with textfield', choices=CHOICES)
     textfield = forms.CharField(
         help_text='with select',
-        widget=MaterialTextInput(prefix=Icon('edit'))
+        widget=material.TextInput(prefix=Icon('edit'))
     )
     field9 = forms.ChoiceField(
         help_text='disabled',
@@ -173,11 +173,11 @@ class TextInputForm(forms.Form):
     field3 = forms.CharField(help_text='length between 5-10', min_length=5, max_length=10)
     field4 = forms.CharField(
         help_text='prefix icon',
-        widget=MaterialTextInput(prefix=Icon('edit'))
+        widget=material.TextInput(prefix=Icon('edit'))
     )
     field5 = forms.CharField(
         help_text='suffix icon',
-        widget=MaterialTextInput(suffix=Icon('perm_contact_calendar'))
+        widget=material.TextInput(suffix=Icon('perm_contact_calendar'))
     )
     field6 = forms.CharField(help_text='disabled', disabled=True, initial='Not editable')
 
@@ -192,4 +192,4 @@ class URLFieldForm(forms.Form):
     field4 = forms.URLField(help_text='disabled', disabled=True, initial="http://viewflow.io/pro/")
     field5 = forms.URLField(
         help_text='prefix',
-        widget=MaterialURLInput(prefix=Icon('insert_invitation')))
+        widget=material.URLInput(prefix=Icon('insert_invitation')))

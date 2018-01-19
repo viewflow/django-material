@@ -21,22 +21,22 @@ WIDGET_RENDERERS = {
     widgets.CheckboxInput: CheckboxInputRenderer,
 
     widgets.TextInput: InputRenderer,
-    material_widgets.MaterialTextInput: MaterialInputRenderer,
+    material_widgets.TextInput: MaterialInputRenderer,
 
     widgets.NumberInput: InputRenderer,
-    material_widgets.MaterialNumberInput: MaterialInputRenderer,
+    material_widgets.NumberInput: MaterialInputRenderer,
 
     widgets.EmailInput: InputRenderer,
-    material_widgets.MaterialEmailInput: MaterialInputRenderer,
+    material_widgets.EmailInput: MaterialInputRenderer,
 
     widgets.PasswordInput: PasswordRenderer,
-    material_widgets.MaterialPasswordInput: MaterialPasswordRenderer,
+    material_widgets.PasswordInput: MaterialPasswordRenderer,
 
     widgets.Select: SelectRenderer,
-    material_widgets.MaterialSelect: MaterialSelectRenderer,
+    material_widgets.Select: MaterialSelectRenderer,
 
     widgets.URLInput: InputRenderer,
-    material_widgets.MaterialURLInput: MaterialInputRenderer,
+    material_widgets.URLInput: MaterialInputRenderer,
 }
 
 

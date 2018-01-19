@@ -11,8 +11,8 @@ from .views import (
     DetailViewsetMixin, DeleteViewsetMixin, ReadonlyModelViewset
 )
 from .widgets import (
-    MaterialTextInput, MaterialNumberInput, MaterialEmailInput,
-    MaterialURLInput, MaterialPasswordInput, MaterialSelect,
+    TextInput, NumberInput, EmailInput,
+    URLInput, PasswordInput, Select,
 )
 
 
@@ -36,8 +36,8 @@ if material_settings.AUTOREGISTER:
 __all__ = (
     'Layout', 'Row', 'Column', 'Fieldset', 'Span', 'Icon', 'Viewset',
     'ViewsetMetaClass', 'Site', 'Application', 'AppViewset', 'viewprop',
-    'MaterialTextInput', 'MaterialNumberInput', 'MaterialEmailInput',
-    'MaterialURLInput', 'MaterialPasswordInput', 'MaterialSelect',
+    'TextInput', 'NumberInput', 'EmailInput',
+    'URLInput', 'PasswordInput', 'Select',
     'ModelViewset', 'ListModelView', 'CreateModelView',
     'DeleteModelView', 'DetailModelView', 'UpdateModelView',
     'DetailViewsetMixin', 'DeleteViewsetMixin', 'ReadonlyModelViewset',

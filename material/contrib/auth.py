@@ -13,9 +13,9 @@ from django.utils.decorators import method_decorator
 from django.views import generic
 from django.utils.translation import ugettext_lazy as _
 
+import material
 from material import (
     Viewset, viewprop, Icon,
-    MaterialTextInput, MaterialPasswordInput
 )
 
 
@@ -23,11 +23,11 @@ class AuthenticationForm(auth_forms.AuthenticationForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        self.fields['username'].widget = MaterialTextInput(
+        self.fields['username'].widget = material.TextInput(
             attrs={'autofocus': True},
             prefix=Icon('account_box')
         )
-        self.fields['password'].widget = MaterialPasswordInput(
+        self.fields['password'].widget = material.PasswordInput(
             prefix=Icon('lock')
         )
 

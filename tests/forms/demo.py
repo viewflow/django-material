@@ -1,7 +1,7 @@
 from django import forms
+import material
 from material import (
     Layout, Row, Fieldset, Icon,
-    MaterialTextInput, MaterialEmailInput, MaterialPasswordInput
 )
 
 COUNTRY_CHOICES = (
@@ -65,8 +65,8 @@ class LoginForm(forms.Form):
     title = "Login Form"
     subtitle = 'john@doe.com blocked here'
 
-    email = forms.EmailField(widget=MaterialEmailInput(prefix=Icon('email')))
-    password = forms.CharField(widget=MaterialPasswordInput(prefix=Icon('lock_open')))
+    email = forms.EmailField(widget=material.EmailInput(prefix=Icon('email')))
+    password = forms.CharField(widget=material.PasswordInput(prefix=Icon('lock_open')))
     keep_logged = forms.BooleanField(required=False, label="Keep me logged in")
 
     def clean(self):
@@ -78,9 +78,9 @@ class LoginForm(forms.Form):
 class ContactForm(forms.Form):
     title = "Contact form"
 
-    name = forms.CharField(widget=MaterialTextInput(prefix=Icon('account_box')))
-    email = forms.EmailField(widget=MaterialEmailInput(prefix=Icon('email')))
-    subject = forms.CharField(widget=MaterialTextInput(prefix=Icon('announcement')))
+    name = forms.CharField(widget=material.TextInput(prefix=Icon('account_box')))
+    email = forms.EmailField(widget=material.EmailInput(prefix=Icon('email')))
+    subject = forms.CharField(widget=material.TextInput(prefix=Icon('announcement')))
     message = forms.CharField(widget=forms.Textarea)  # Icon('message')
     send_copy = forms.BooleanField(
         required=False,
@@ -94,14 +94,14 @@ class RegistrationForm(forms.Form):
     title = "Registration Form"
 
     username = forms.CharField(
-        widget=MaterialTextInput(prefix=Icon('account_box'))
+        widget=material.TextInput(prefix=Icon('account_box'))
     )
     email = forms.EmailField(
         label="Email Address",
-        widget=MaterialEmailInput(prefix=Icon('email'))
+        widget=material.EmailInput(prefix=Icon('email'))
     )
     password = forms.CharField(
-        widget=MaterialPasswordInput(prefix=Icon('lock_open'))
+        widget=material.PasswordInput(prefix=Icon('lock_open'))
     )
     password_confirm = forms.CharField(
         label="Confirm password",

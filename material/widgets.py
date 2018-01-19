@@ -16,25 +16,25 @@ class _AutoInitMixin(object):
         super().__init__(*args, **kwargs)
 
 
-class MaterialTextInput(_IconMixin, _AutoInitMixin, widgets.TextInput):
+class TextInput(_IconMixin, _AutoInitMixin, widgets.TextInput):
     autoinit = "MDCTextField"
 
 
-class MaterialNumberInput(_IconMixin, _AutoInitMixin, widgets.NumberInput):
+class NumberInput(_IconMixin, _AutoInitMixin, widgets.NumberInput):
     autoinit = "MDCTextField"
 
 
-class MaterialEmailInput(_IconMixin, _AutoInitMixin, widgets.EmailInput):
+class EmailInput(_IconMixin, _AutoInitMixin, widgets.EmailInput):
     autoinit = "MDCTextField"
 
 
-class MaterialURLInput(_IconMixin, _AutoInitMixin, widgets.URLInput):
+class URLInput(_IconMixin, _AutoInitMixin, widgets.URLInput):
     autoinit = "MDCTextField"
 
 
-class MaterialPasswordInput(_IconMixin, _AutoInitMixin, widgets.PasswordInput):
+class PasswordInput(_IconMixin, _AutoInitMixin, widgets.PasswordInput):
     autoinit = "DMCPasswordField"
 
 
-class MaterialSelect(_IconMixin, _AutoInitMixin, widgets.Select):
+class Select(_IconMixin, _AutoInitMixin, widgets.Select):
     autoinit = "DMCSelect"
