@@ -8,8 +8,8 @@ class DMCCalendar {
   constructor(root) {
     this.root_ = root;
 
-    // target
     this.targetEl_ = document.getElementById(root.dataset.dateTarget);
+    this.surfaceEl_ = root.querySelector('.dmc-calendar__surface');
 
     // current month
     this.currEl_ = root.querySelector('.dmc-calendar__month--current');
@@ -21,8 +21,45 @@ class DMCCalendar {
     this.currentDate_ = DMCCalendar.parseDate(this.targetEl_.dataset.dateFormat, this.targetEl_.value);
     if (isNaN(this.currentDate_)) {
       this.currentDate_ = new Date();
+      this.updateTarget();
     }
+    this.renderCurrentMonth();
 
+    // navigation
+    this.prevMonthEl_ = root.querySelector('.dmc-calendar__prev');
+    this.onPrevMonthClick = () => {
+      this.changeMonth(-1);
+    };
+    this.prevMonthEl_.addEventListener('click', this.onPrevMonthClick);
+
+    this.nextMonthEl_ = root.querySelector('.dmc-calendar__next');
+    this.onNextMonthClick = () => {
+      this.changeMonth(1);
+    };
+    this.nextMonthEl_.addEventListener('click', this.onNextMonthClick);
+
+    this.onDaysClick = (event) => {
+      if (event.target.tagName != 'SPAN') {
+        return;
+      }
+
+      const day = parseInt(event.target.textContent);
+
+      if (isNaN(day)) {
+        return;
+      };
+      this.changeDay(day);
+    };
+    this.surfaceEl_.addEventListener('click', this.onDaysClick);
+  }
+
+  destroy() {
+    this.prevMonthEl_.removeEventListener('click', this.onPrevMonthClick);
+    this.nextMonthEl_.removeEventListener('click', this.onNextMonthClick);
+    this.surfaceEl_.removeEventListener('click', this.onDaysClick);
+  }
+
+  renderCurrentMonth() {
     this.renderTitle(this.currentDate_.getFullYear(), this.currentDate_.getMonth(), this.currTitleEl_);
     this.renderWeekDays(this.currWeekdaysEl_);
     this.renderDays(
@@ -31,7 +68,6 @@ class DMCCalendar {
       this.currentDate_.getDate(),
       this.currDaysEl_);
   }
-
   renderTitle(year, month, target) {
     target.innerText = `${DMCCalendar.monthsOfYear[month]} ${year}`;
   }
@@ -66,32 +102,79 @@ class DMCCalendar {
       }
       days.push('</div>');
     }
-    target.innerHTML = days.join('')
+    target.innerHTML = days.join('');
+  }
+
+  changeMonth(shift) {
+    this.currentDate_.setMonth(this.currentDate_.getMonth() + shift);
+    this.renderCurrentMonth();
+    this.updateTarget();
+  }
+
+  changeDay(day) {
+    this.currentDate_.setDate(day);
+    this.renderDays(
+      this.currentDate_.getFullYear(),
+      this.currentDate_.getMonth(),
+      this.currentDate_.getDate(),
+      this.currDaysEl_);
+    this.updateTarget();
+  }
+
+  updateTarget() {
+    if (!this.targetEl_ || !this.targetEl_.dataset.dateFormat) {
+      return;
+    }
+    this.targetEl_.value = DMCCalendar.formatDate(
+      this.targetEl_.dataset.dateFormat,
+      this.currentDate_
+    );
   }
 }
 
 DMCCalendar.parseDate = (format, value) => {
     let splitFormat = format.split(/[.\-/]/);
     let date = value.split(/[.\-/]/);
-    let i = 0;
     let day;
     let month;
     let year;
-    while (i < splitFormat.length) {
-        switch (splitFormat[i]) {
-            case '%d':
-                day = date[i];
-                break;
-            case '%m':
-                month = date[i] - 1;
-                break;
-            case '%Y':
-                year = date[i];
-                break;
-        }
-        ++i;
+    for (let i=0; i < splitFormat.length; i++) {
+      switch (splitFormat[i]) {
+          case '%d':
+              day = date[i];
+              break;
+          case '%m':
+              month = date[i] - 1;
+              break;
+          case '%Y':
+              year = date[i];
+              break;
+      }
     }
     return new Date(Date.UTC(year, month, day));
+};
+
+DMCCalendar.formatDate = (format, value) => {
+  let result = '';
+  for (let i=0; i< format.length; i++) {
+    if (format[i] === '%') {
+      switch (format[i+1]) {
+        case 'd':
+          result += ('0' + value.getDate()).slice(-2);
+          break;
+        case 'm':
+          result += ('0' + (value.getMonth()+1)).slice(-2);
+          break;
+        case 'Y':
+          result += value.getFullYear();
+          break;
+      }
+      i++;
+    } else {
+      result += format[i];
+    }
+  }
+  return result;
 };
 
 DMCCalendar.firstDayOfWeek = parseInt(get_format('FIRST_DAY_OF_WEEK'));
