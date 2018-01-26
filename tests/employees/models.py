@@ -85,7 +85,11 @@ class Employee(models.Model):
     birth_date = models.DateField(_('birthday'))
     first_name = models.CharField(_('first name'), max_length=14)
     last_name = models.CharField(_('last name'), max_length=16)
-    gender = models.CharField(_('gender'), max_length=1)
+    gender = models.CharField(_('gender'), max_length=1, choices=(
+        ('M', 'Male'),
+        ('F', 'Female'),
+        ('O', 'Other'))
+    )
     hire_date = models.DateField(_('hire date'))
 
     class Meta:
