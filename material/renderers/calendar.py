@@ -1,14 +1,14 @@
-from django.utils.formats import get_format
+from django.utils.formats import get_format, localize_input
 from material.ptml import Button, Div, Icon, Input, Label, P
 
 from .base import FieldRender
 
 
-def find_target_date_format(proposed_format=None):
-    if proposed_format is None:
+def find_target_date_format(proposed_formats=None):
+    if not proposed_formats:
         formats = get_format('DATE_INPUT_FORMATS')
     else:
-        formats = [proposed_format]
+        formats = proposed_formats
 
     supported_formats = [  # input mask friendly formats
         r'%Y-%m-%d', r'%m-%d-%Y',
@@ -94,12 +94,19 @@ class InlineCalendarRenderer(FieldRender):
         ]
 
     def hidden_control(self):
+        date_format = find_target_date_format(
+            [self.widget.format] if self.widget.format else self.field.input_formats)
+
+        value = self.value
+        if value:
+            value = localize_input(value, date_format)
+
         input_attrs = {
             'type': 'hidden',
             'id': self.bound_field.id_for_label,
             'name': self.bound_field.html_name,
-            'value': self.formatted_value,
-            'data-date-format': find_target_date_format(self.widget.format),
+            'value': value,
+            'data-date-format': date_format,
         }
         return Input(**input_attrs)
 

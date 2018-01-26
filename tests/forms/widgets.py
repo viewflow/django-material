@@ -1,6 +1,8 @@
+from datetime import date
 from decimal import Decimal
 
 from django import forms
+from django.utils import timezone
 
 import material
 from material import (
@@ -82,6 +84,24 @@ class InlineCalendarForm(forms.Form):
     subtitle = 'Widget options demo'
 
     field1 = forms.DateField(help_text='default', required=False, widget=material.InlineCalendar)
+    field2 = forms.DateField(
+        help_text='initial value',
+        initial=timezone.now,
+        widget=material.InlineCalendar
+    )
+    field3 = forms.DateField(
+        help_text='custom input format',
+        input_formats=['%d.%m.%Y'],
+        initial=date(1979, 10, 12),
+        widget=material.InlineCalendar
+    )
+    field4 = forms.DateField(
+        help_text='disabled',
+        required=False,
+        disabled=True,
+        initial=date(1970, 1, 1),
+        widget=material.InlineCalendar
+    )
 
 
 class IntegerFieldForm(forms.Form):

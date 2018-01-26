@@ -9,7 +9,10 @@
   {% block turbolinks-cache-control %}<meta name="turbolinks-cache-control" content="no-cache">{% endblock %}
   <title>{% block title %}Django Material{% endblock %}</title>
   {% block css %}{% include 'material/includes/material_css.html' %}{% endblock css %}
-  {% block js %}{% include 'material/includes/material_js.html' %}{% endblock js %}
+  {% block js %}
+    {% url 'javascript-catalog' as javascript_catalog_url %}{% if javascript_catalog_url %}<script type="text/javascript" src="{{ javascript_catalog_url }}"></script>{% endif %}
+    {% include 'material/includes/material_js.html' %}
+  {% endblock js %}
   {% block extrahead %}{% endblock %}
 </head>
 
