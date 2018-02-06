@@ -66,6 +66,10 @@ class HtmlElement(object):
         return conditional_escape(value)
 
 
+class Aside(HtmlElement):
+    tag = 'aside'
+
+
 class Button(HtmlElement):
     tag = 'button'
 

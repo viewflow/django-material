@@ -1,7 +1,8 @@
 from django.utils.formats import get_format, localize_input
-from material.ptml import Button, Div, Icon, Input, Label, P
+from material.ptml import A, Aside, Button, Div, Icon, Input, Label, P
 
-from .base import FieldRender
+from .base import FieldRender, FormFieldRender
+from .input import TextInput
 
 
 def find_target_date_format(proposed_formats=None):
@@ -21,6 +22,67 @@ def find_target_date_format(proposed_formats=None):
             return lookup.replace('-', separator)
 
     raise ValueError("Widget should accept one of input-mask friendly date input format.")
+
+
+class InlineCalendar(object):
+    def __init__(self, renderer, autoinit=None, header=False, actions=False):
+        self.renderer = renderer
+        self.autoinit = autoinit
+        self.with_header = header
+        self.with_actions = actions
+
+    def wrapper_attrs(self):
+        return {
+            'class': {
+                "dmc-calendar": True,
+                "dmc-calendar--disabled": self.renderer.disabled,
+            },
+            'data-mdc-auto-init': self.autoinit,
+            'data-date-target': self.renderer.bound_field.id_for_label
+        }
+
+    def header(self):
+        if self.with_header:
+            return Div(class_="dmc-calendar-header") / [
+                Div(class_="dmc-calendar-header__year mdc-typography--subheading1"),
+                Div(class_="dmc-calendar-header__date mdc-typography--display1") / [
+                    Div(class_="dmc-calendar-header__weekday"),
+                    Div(class_="dmc-calendar-header__day")
+                ]
+            ]
+
+    def calendar(self):
+        return Div(class_="dmc-calendar__surface") / [
+            Div(class_="dmc-calendar__month dmc-calendar__month--current") / [
+                Div(class_="dmc-calendar__title") / [],
+                Div(class_="dmc-calendar__grid") / [
+                    Div(class_="dmc-calendar__weekdays") / [],
+                    Div(class_="dmc_calendar__days") / []
+                ]
+            ]
+        ]
+
+    def navigation(self):
+        return [
+            Button(tabindex="0", class_="mdc-button mdc-button--compact dmc-calendar__prev", type_="button") / [
+                Icon('chevron_left')
+            ],
+            Button(tabindex="0", class_="mdc-button mdc-button--compact dmc-calendar__next", type_="button") / [
+                Icon('chevron_right')
+            ]
+        ] if not self.renderer.disabled else []
+
+    def element(self):
+        return Div(**self.wrapper_attrs()) / [
+            self.header(),
+            Div(class_="dmc-calendar__body") / [
+                self.calendar(),
+                *self.navigation(),
+            ]
+        ]
+
+    def __str__(self):
+        return str(self.element())
 
 
 class InlineCalendarRenderer(FieldRender):
@@ -46,16 +108,6 @@ class InlineCalendarRenderer(FieldRender):
             }
         }
 
-    def control_attrs(self):
-        return {
-            'class': {
-                "dmc-calendar": True,
-                "dmc-calendar--disabled": self.disabled,
-            },
-            'data-mdc-auto-init': self.widget.autoinit,
-            'data-date-target': self.bound_field.id_for_label
-        }
-
     def help_text_attrs(self):
         return {
             'class': {
@@ -63,35 +115,6 @@ class InlineCalendarRenderer(FieldRender):
                 "dmc-inline-calendar__helptext--invalid": bool(self.errors)
             }
         }
-
-    def calendar(self):
-        return Div(class_="dmc-calendar__surface") / [
-            Div(class_="dmc-calendar__month dmc-calendar__month--current") / [
-                Div(class_="dmc-calendar__title") / [],
-                Div(class_="dmc-calendar__grid") / [
-                    Div(class_="dmc-calendar__weekdays") / [],
-                    Div(class_="dmc_calendar__days") / []
-                ]
-            ]
-        ]
-
-    def navigation(self):
-        return [
-            Button(tabindex="0", class_="mdc-button mdc-button--compact dmc-calendar__prev", type_="button") / [
-                Icon('chevron_left')
-            ],
-            Button(tabindex="0", class_="mdc-button mdc-button--compact dmc-calendar__next", type_="button") / [
-                Icon('chevron_right')
-            ]
-        ] if not self.disabled else []
-
-    def control(self):
-        return Div(**self.control_attrs()) / [
-            Div(class_="dmc-calendar__body") / [
-                self.calendar(),
-                *self.navigation(),
-            ]
-        ]
 
     def hidden_control(self):
         date_format = find_target_date_format(
@@ -117,10 +140,62 @@ class InlineCalendarRenderer(FieldRender):
         element = Div(**self.wrapper_attrs()) / [
             Div(class_="dmc-form-field__input") / [
                 Label(**self.label_attrs()) / [self.bound_field.label],
-                self.control(),
+                InlineCalendar(self, autoinit='DMCInlineCalendar'),
                 self.hidden_control(),
                 self.help_text(),
             ]
         ]
 
         return str(element)
+
+
+class DateTextInput(TextInput):
+    def control_attrs(self):
+        date_format = find_target_date_format(
+            [self.renderer.widget.format] if self.renderer.widget.format else self.renderer.field.input_formats)
+
+        attrs = super().control_attrs()
+        attrs['class'].update({
+            'dmc-text-field__input--date': True
+        })
+        attrs.update({
+            'placeholder': 'YYYY-MM-DD',  # TODO
+            'data-date-format': date_format,
+        })
+        return attrs
+
+
+class DateInputRenderer(FormFieldRender):
+    autoinit = "DMCDateInput"
+
+    def wrapper_attrs(self):
+        attrs = super().wrapper_attrs()
+        attrs.update({
+            'data-mdc-auto-init': self.autoinit
+        })
+        return attrs
+
+    def suffix(self):
+        return A(href='#', class_="mdc-button mdc-button--compact dmc-datepicker__button") / [
+            Icon('insert_invitation')
+        ]
+
+    def popup(self):
+        return Aside(class_='mdc-dialog') / [
+            Div(class_='mdc-dialog__surface dmc-datepicker__surface') / [
+                Div(class_='mdc-dialog__body') / [
+                    InlineCalendar(self, header=True)
+                ]
+            ],
+            Div(class_="mdc-dialog__backdrop")
+        ]
+
+    def help_text(self):
+        pass
+
+    def body(self):
+        return [
+            DateTextInput(self),
+            self.help_text(),
+            self.popup()
+        ]

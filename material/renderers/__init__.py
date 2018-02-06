@@ -4,7 +4,7 @@ from material import widgets as material_widgets
 
 from .base import get_field_renderer
 from .form import FormRenderer
-from .calendar import InlineCalendarRenderer
+from .calendar import InlineCalendarRenderer, DateInputRenderer
 from .checkbox import CheckboxInputRenderer
 from .input import (
     InputRenderer, MaterialInputRenderer, PasswordRenderer,
@@ -20,6 +20,8 @@ __all__ = (
 
 WIDGET_RENDERERS = {
     widgets.CheckboxInput: CheckboxInputRenderer,
+
+    widgets.DateInput: DateInputRenderer,
 
     widgets.TextInput: InputRenderer,
     material_widgets.TextInput: MaterialInputRenderer,

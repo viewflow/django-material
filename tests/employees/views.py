@@ -30,7 +30,6 @@ class EmployeeViewset(DetailViewsetMixin, ModelViewset):
     )
     form_widgets = {
         'hire_date': material.InlineCalendar,
-        'birth_date': material.TextInput(suffix=Icon('insert_invitation'))
     }
 
     def no(self, obj):

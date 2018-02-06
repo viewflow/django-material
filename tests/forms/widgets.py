@@ -31,6 +31,15 @@ class CheckboxInputForm(forms.Form):
     )
 
 
+class DateFieldForm(forms.Form):
+    description = "DateField options"
+
+    field1 = forms.DateField(help_text='default')
+    # field2 = forms.DateField(help_text='initial value', initial=timezone.now)
+    # field3 = forms.DateField(help_text='custom input format', input_formats=['%d %b, %Y'])
+    # field4 = forms.DateField(help_text='prefix')
+
+
 class DecimalFieldForm(forms.Form):
     title = "Decimal"
     subtitle = 'Widget options demo'
