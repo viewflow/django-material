@@ -60,8 +60,16 @@
   }
 }
 
+.dmc-calendar__actions {
+  text-align: right;
+  padding-bottom: 8px;
+}
+
 .dmc-calendar-header {
-  width: 130px;
+  width: 160px;
+  flex-grow: 0;
+  flex-shrink: 0;
+  box-sizing: border-box;
   background-color: #3f51b5;
   background-color: var(--mdc-theme-primary, #3f51b5);
   padding: 24px 24px 20px;

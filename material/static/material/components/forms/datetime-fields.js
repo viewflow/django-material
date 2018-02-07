@@ -114,7 +114,7 @@ class DMCCalendar {
 
     this.currentYear_ = 1970;
     this.currentMonth_ = 0;
-    this.currentDay_ = NaN;
+    this.selectedDate_ = NaN;
 
     // navigation
     if (!this.disabled_) {
@@ -155,7 +155,14 @@ class DMCCalendar {
     }
   }
 
-  renderMonth_(year, month, day, target) {
+  renderMonth_(year, month, target) {
+    let currentDay = NaN;
+    if (!isNaN(this.selectedDate_) &&
+        this.selectedDate_.getFullYear() === year &&
+        this.selectedDate_.getMonth() == month) {
+      currentDay = this.selectedDate_.getDate();
+    }
+
     // title
     let titleEl = target.querySelector('.dmc-calendar__title');
     titleEl.innerText = `${DMCDateUtils.monthsOfYear[month]} ${year}`;
@@ -180,7 +187,7 @@ class DMCCalendar {
         let class_='';
         if (cell >= startPos && cell < daysInMonth + startPos) {
           label = cell - startPos + 1;
-          if (label === day) {
+          if (label === currentDay) {
             class_ = ' dmc_calendar__current';
           }
         }
@@ -202,30 +209,35 @@ class DMCCalendar {
       this.currentMonth_ = 0;
     }
 
-    if (!isNaN(this.currentDay_)) {
-      let day = this.currentDay_;
-      let daysInMonth = new Date(this.currentYear_, this.currentMonth_+1, 0).getDate();
-      if (daysInMonth < this.currentDay_) {
-        day = daysInMonth;
-      }
-      this.currentDay_ = day;
-    }
+    this.updateCurrentMonth();
 
-    this.renderMonth_(this.currentYear_, this.currentMonth_, this.currentDay_, this.currentMonthEl_);
-    this.updateCurrentDate_();
+    this.renderMonth_(this.currentYear_, this.currentMonth_, this.currentMonthEl_);
   }
 
   changeDay_(day) {
-    this.currentDay_ = day;
+    this.selectedDate_ = new Date(this.currentYear_, this.currentMonth_, day);
     this.updateCurrentDate_();
-    this.renderMonth_(this.currentYear_, this.currentMonth_, this.currentDay_, this.currentMonthEl_);
+    this.renderMonth_(this.currentYear_, this.currentMonth_, this.currentMonthEl_);
+  }
+
+  updateCurrentMonth() {
+
   }
 
   updateCurrentDate_() {
   }
 
-  getSelectedDate() {
-    return new Date(this.currentYear_, this.currentMonth_, this.currentDay_);
+  get selectedDate() {
+    return this.selectedDate_;
+  }
+
+  set selectedDate(value) {
+    this.selectedDate_ = value;
+    if (!isNaN(value)) {
+      this.currentYear_ = value.getFullYear();
+      this.currentMonth_ = value.getMonth();
+    }
+    this.renderMonth_(this.currentYear_, this.currentMonth_, this.currentMonthEl_);
   }
 }
 
@@ -241,28 +253,43 @@ class DMCInlineCalendar extends DMCCalendar {
 
     // init date
     let initialDate = DMCDateUtils.parseDateTime(this.targetEl_.dataset.dateFormat, this.targetEl_.value);
-    if (!isNaN(initialDate)) {
-      this.currentYear_ = initialDate.getFullYear();
-      this.currentMonth_ = initialDate.getMonth();
-      this.currentDay_ = initialDate.getDate();
+    if (isNaN(initialDate)) {
+      initialDate = new Date();
+    } else {
+      this.selectedDate_ = initialDate;
     }
+    this.currentYear_ = initialDate.getFullYear();
+    this.currentMonth_ = initialDate.getMonth();
 
-    this.renderMonth_(this.currentYear_, this.currentMonth_, this.currentDay_, this.currentMonthEl_);
+    this.renderMonth_(this.currentYear_, this.currentMonth_, this.currentMonthEl_);
   }
 
   changeDay_(day) {
-    if (this.currentDay === day) {
-      day = undefined; // unset current date, if selected day clicked.
+    if (!isNaN(this.selectedDate_) && this.selectedDate_.getDate() === day) {
+      day = undefined;
     }
     super.changeDay_(day);
   }
 
-  // update target
+  /** Set new selected date on a month change */
+  updateCurrentMonth() {
+    if (!isNaN(this.selectedDate_)) {
+      let day = this.selectedDate_.getDate();
+      let daysInMonth = new Date(this.currentYear_, this.currentMonth_+1, 0).getDate();
+      if (daysInMonth < day) {
+        day = daysInMonth;
+      }
+      this.selectedDate_ = new Date(this.currentYear_, this.currentMonth_, day);
+      this.updateCurrentDate_();
+    }
+  }
+
+  /** Update target hidden input */
   updateCurrentDate_() {
-    if (!isNaN(this.getSelectedDate())) {
+    if (!isNaN(this.selectedDate)) {
       this.targetEl_.value = DMCDateUtils.formatDate(
         this.targetEl_.dataset.dateFormat,
-        this.getSelectedDate()
+        this.selectedDate
       );
     } else {
       this.targetEl_.value = '';
@@ -274,18 +301,31 @@ class DMCInlineCalendar extends DMCCalendar {
 class DMCPopupCalendar extends DMCCalendar {
   constructor(root) {
     super(root);
+    this.targetEl_ = document.getElementById(root.dataset.dateTarget);
     this.headerEl_ = root.querySelector('.dmc-calendar-header');
     this.headerYearEl_ = this.headerEl_.querySelector('.dmc-calendar-header__year');
     this.headerWeekdayEl_ = this.headerEl_.querySelector('.dmc-calendar-header__weekday');
     this.headerDayEl_ = this.headerEl_.querySelector('.dmc-calendar-header__day');
   }
 
+  changeDay_(day) {
+    super.changeDay_(day);
+    this.renderHeader();
+  }
+
+  set selectedDate(value) {
+    super.selectedDate = value;
+    this.renderHeader();
+  }
+
   renderHeader() {
-    this.headerYearEl_.innerText = this.currentYear_;
-    if (!isNan(day)) {
-      this.headerWeekdayEl_.innerText = DMCDateUtils.daysOfWeekAbbr[this.getSelectedDate().getDay()] + ',';
-      this.headerDayEl_.innerText = DMCCalendar.monthsOfYearAbbr[this.currentMonth_] + ' ' + this.currentDay_;
+    if (!isNaN(this.selectedDate_)) {
+      this.headerYearEl_.innerText = this.currentYear_;
+      this.headerWeekdayEl_.innerText = DMCDateUtils.daysOfWeekAbbr[this.selectedDate_.getDay()] + ',';
+      this.headerDayEl_.innerText = DMCDateUtils.monthsOfYearAbbr[this.currentMonth_] +
+        ' ' + this.selectedDate_.getDate();
     } else {
+      this.headerYearEl_.innerText = '';
       this.headerWeekdayEl_.innerText = '';
       this.headerDayEl_.innerText = '';
     }
@@ -303,14 +343,17 @@ class DMCDateInput {
     this.calendarEl_ = root.querySelector('.dmc-calendar');
     this.dialogEl_ = root.querySelector('.mdc-dialog');
     this.buttonEl_ = root.querySelector('.dmc-datepicker__button');
+    this.targetEl_ = document.getElementById(this.calendarEl_.dataset.dateTarget);
 
     this.popupOpenHandler = (event) => this.handlePopupOpen(event);
+    this.acceptDialogHandler = () => this.handleDialogAccept();
 
     this.text_ = mdc.textField.MDCTextField.attachTo(this.textEl_);
     this.dialog_ = mdc.dialog.MDCDialog.attachTo(this.dialogEl_);
     this.calendar_ = new DMCPopupCalendar(this.calendarEl_);
 
     this.buttonEl_.addEventListener('click', this.popupOpenHandler);
+    this.dialog_.listen('MDCDialog:accept', this.acceptDialogHandler);
   }
 
   destroy() {
@@ -322,8 +365,28 @@ class DMCDateInput {
 
   handlePopupOpen(event) {
     event.preventDefault();
+
+    let selectedDate = DMCDateUtils.parseDateTime(
+      this.targetEl_.dataset.dateFormat,
+      this.targetEl_.value
+    );
+    if (isNaN(selectedDate)) {
+      selectedDate = new Date();
+    }
+    this.calendar_.selectedDate = selectedDate;
+
     this.dialog_.lastFocusedTarget = event.target;
     this.dialog_.show();
+  }
+
+  handleDialogAccept() {
+    const selectedDate = this.calendar_.selectedDate_;
+    if (!isNaN(selectedDate)) {
+      this.text_.input_.value = DMCDateUtils.formatDate(
+        this.targetEl_.dataset.dateFormat,
+        selectedDate
+      );
+    }
   }
 }
 

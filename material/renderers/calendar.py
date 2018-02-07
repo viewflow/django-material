@@ -51,6 +51,20 @@ class InlineCalendar(object):
                 ]
             ]
 
+    def actions(self):
+        if self.with_actions:
+            return Div(class_="dmc-calendar__actions") / [
+                Button(
+                    tabindex="3", type_="button",
+                    class_="mdc-button mdc-dialog__footer__button mdc-dialog__footer__button--cancel"
+                ) / ['cancel'],
+                Button(
+                    tabindex="2",
+                    type_="button",
+                    class_="mdc-button mdc-dialog__footer__button mdc-dialog__footer__button--accept"
+                ) / ['ok'],
+            ]
+
     def calendar(self):
         return Div(class_="dmc-calendar__surface") / [
             Div(class_="dmc-calendar__month dmc-calendar__month--current") / [
@@ -78,7 +92,8 @@ class InlineCalendar(object):
             Div(class_="dmc-calendar__body") / [
                 self.calendar(),
                 *self.navigation(),
-            ]
+                self.actions(),
+            ],
         ]
 
     def __str__(self):
@@ -184,7 +199,7 @@ class DateInputRenderer(FormFieldRender):
         return Aside(class_='mdc-dialog') / [
             Div(class_='mdc-dialog__surface dmc-datepicker__surface') / [
                 Div(class_='mdc-dialog__body') / [
-                    InlineCalendar(self, header=True)
+                    InlineCalendar(self, header=True, actions=True)
                 ]
             ],
             Div(class_="mdc-dialog__backdrop")
