@@ -1,6 +1,10 @@
-from django.utils.formats import get_format, localize_input
-from material.ptml import A, Aside, Button, Div, Icon, Input, Label, P
+import re
 
+from django.utils.formats import get_format, localize_input
+from django.utils.text import format_lazy
+from django.utils.translation import ugettext_lazy as _
+
+from material.ptml import A, Aside, Button, Div, Icon, Input, Label, P
 from .base import FieldRender, FormFieldRender
 from .input import TextInput
 
@@ -22,6 +26,17 @@ def find_target_date_format(proposed_formats=None):
             return lookup.replace('-', separator)
 
     raise ValueError("Widget should accept one of input-mask friendly date input format.")
+
+
+def date_format_placeholder(date_format):
+    i18n = {
+        r'%Y': _('YYYY'),
+        r'%m': _('MM'),
+        r'%d': _('DD'),
+    }
+    split_format = re.split(r'([.\-/])', date_format)
+    items = [i18n.get(item, item) for item in split_format]
+    return format_lazy('{}' * len(items), *items)
 
 
 class InlineCalendar(object):
@@ -174,7 +189,7 @@ class DateTextInput(TextInput):
             'dmc-text-field__input--date': True
         })
         attrs.update({
-            'placeholder': 'YYYY-MM-DD',  # TODO
+            'placeholder': date_format_placeholder(date_format),
             'data-date-format': date_format,
         })
         return attrs
@@ -189,6 +204,14 @@ class DateInputRenderer(FormFieldRender):
             'data-mdc-auto-init': self.autoinit
         })
         return attrs
+
+    def help_text_attrs(self):
+        return {
+            'class': {
+                "dmc-datepicker__helptext": True,
+                "dmc-datepicker__helptext--invalid": bool(self.errors)
+            }
+        }
 
     def suffix(self):
         return A(href='#', class_="mdc-button mdc-button--compact dmc-datepicker__button") / [
@@ -206,7 +229,7 @@ class DateInputRenderer(FormFieldRender):
         ]
 
     def help_text(self):
-        pass
+        return P(**self.help_text_attrs()) / [self.format_help_text()]
 
     def body(self):
         return [

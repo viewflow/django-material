@@ -32,13 +32,24 @@ class CheckboxInputForm(forms.Form):
 
 
 class DateFieldForm(forms.Form):
-    description = "DateField options"
+    title = 'DateInput'
+    subtitle = 'Widget options demo'
 
     field1 = forms.DateField(help_text='default')
-    # field2 = forms.DateField(help_text='initial value', initial=timezone.now)
-    # field3 = forms.DateField(help_text='custom input format', input_formats=['%d %b, %Y'])
-    # field4 = forms.DateField(help_text='prefix')
+    field2 = forms.DateField(help_text='initial value', initial=timezone.now)
+    field3 = forms.DateField(help_text='custom input format', input_formats=['%d/%m/%Y'])
+    field4 = forms.DateField(help_text='on a row with textfield')
+    textfield = forms.CharField(
+        help_text='with boolean',
+        widget=material.TextInput(prefix=Icon('edit'))
+    )
 
+    layout = Layout(
+        'field1',
+        'field2',
+        'field3',
+        Row('textfield', Span('field4', desktop=3))
+    )
 
 class DecimalFieldForm(forms.Form):
     title = "Decimal"

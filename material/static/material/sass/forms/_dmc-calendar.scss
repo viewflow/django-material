@@ -157,3 +157,14 @@
     margin: 0;
   }
 }
+
+.dmc-datepicker__helptext {
+  margin: 0 0 6px 0;
+  color: rgba(0, 0, 0, 0.38);
+  color: var(--mdc-theme-text-hint-on-light, rgba(0, 0, 0, 0.38));
+  font-size: 11px;
+}
+
+dmc-datepicker__helptext--invalid {
+  color: #d50000;
+}
