@@ -382,7 +382,7 @@ class DMCDateInput {
   handleDialogAccept() {
     const selectedDate = this.calendar_.selectedDate_;
     if (!isNaN(selectedDate)) {
-      this.text_.input_.value = DMCDateUtils.formatDate(
+      this.text_.value = DMCDateUtils.formatDate(
         this.targetEl_.dataset.dateFormat,
         selectedDate
       );

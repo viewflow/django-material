@@ -137,11 +137,11 @@
   height: 24px;
   margin-top: 16px;
   margin-left: 8px;
-  min-width: initial;
+  min-width: 24px;
 }
 
 .dmc-text-field__input--date:not(:focus)::placeholder {
-  color: transparent;
+  color: transparent !important;
 }
 
 .dmc-text-field__input--date:focus::placeholder {

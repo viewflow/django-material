@@ -93,10 +93,10 @@
 
 .dmc-select-field {
   &.dmc-form-field--invalid {
-    .mdc-select {
-      color: #d50000;
-      border-bottom: 1px solid #d50000;
-    }
+    // .mdc-select {
+    //   color: #d50000;
+    //   border-bottom: 1px solid #d50000;
+    // }
     .dmc-select-field__helptext {
       color: #d50000;
     }
@@ -121,10 +121,6 @@
     }
   }
 
-  .mdc-select {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.5);
-  }
-
   .dmc-select-field__label {
     color: rgba(0, 0, 0, 0.5);
     font-size: 10px;
@@ -132,7 +128,7 @@
   }
 
   .dmc-select-field__helptext {
-    margin: 0 0 8px 0;
+    margin: 8px 0 8px 0;
     color: rgba(0, 0, 0, 0.38);
     color: var(--mdc-theme-text-hint-on-light, rgba(0, 0, 0, 0.38));
     font-size: 11px;

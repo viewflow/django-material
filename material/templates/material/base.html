@@ -20,11 +20,11 @@
   <div class="dmc-page">
     {% with site=request.resolver_match.site app=request.resolver_match.app %}
     <aside id="id_site_drawer"
-          class="mdc-persistent-drawer dmc-responsive-drawer"
+          class="mdc-drawer mdc-drawer--persistent dmc-drawer"
           data-mdc-auto-init="DMCResponsiveDrawer">
-      <nav class="mdc-persistent-drawer__drawer">
-        <header class="mdc-persistent-drawer__header">
-          <div class="mdc-persistent-drawer__header-content">
+      <nav class="mdc-drawer__drawer">
+        <header class="mdc-drawer__header">
+          <div class="mdc-drawer__header-content">
             {% block sidebar-header %}
             <div class="dmc-header">
                 {% block sidebar-avatar-image %}
@@ -50,7 +50,7 @@
               {% endblock sidebar-header %}
           </div>
         </header>
-        <nav class="mdc-persistent-drawer__content mdc-list" id="id_site_drawer_menu">
+        <nav class="mdc-drawer__content mdc-list" id="id_site_drawer_menu">
           <div class="dmc-header-menu__primary">
             {% block sidebar-app-menu %}
             {% if app %}{% include app.menu_template_name with app=app %}{% endif %}

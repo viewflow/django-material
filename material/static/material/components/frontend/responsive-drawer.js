@@ -12,11 +12,6 @@ class DMCResponsiveDrawer extends mdc.base.MDCComponent {
     this.temporalDrawer_ = null;
     this.persistentDrawer_ = null;
 
-    this.drawer_ = this.root_.querySelector('nav');
-    this.header_ = this.drawer_.querySelector('header');
-    this.headerContent_ = this.header_.querySelector('div');
-    this.content_ = this.drawer_.querySelector('nav');
-
     this.onResize = () => {
       cancelAnimationFrame(this.reconcileDrawer_);
       this.reconcileDrawer_ = requestAnimationFrame(() => this.reconcileDrawer());
@@ -40,55 +35,35 @@ class DMCResponsiveDrawer extends mdc.base.MDCComponent {
     const rootClasses = this.root_.classList;
     if (
       window.innerWidth < 992 &&
-        (!rootClasses.contains('mdc-temporary-drawer') ||
+        (!rootClasses.contains('mdc-drawer--temporary') ||
          this.temporalDrawer_ === null)
     ) {
       if (this.persistentDrawer_) {
         this.persistentDrawer_.destroy();
         this.persistentDrawer_ = null;
       }
-      this.root_.classList.remove('mdc-persistent-drawer', 'mdc-persistent-drawer--open');
-      this.drawer_.classList.remove('mdc-persistent-drawer__drawer');
-      this.header_.classList.remove('mdc-persistent-drawer__header');
-      this.headerContent_.classList.remove('mdc-persistent-drawer__header-content');
-      this.content_.classList.remove('mdc-persistent-drawer__content');
-
-
-      this.root_.classList.add('mdc-temporary-drawer');
-      this.drawer_.classList.add('mdc-temporary-drawer__drawer');
-      this.header_.classList.add('mdc-temporary-drawer__header');
-      this.headerContent_.classList.add('mdc-temporary-drawer__header-content');
-      this.content_.classList.add('mdc-temporary-drawer__content');
+      // this.root_.classList.remove('mdc-persistent-drawer', 'mdc-persistent-drawer--open');
+      this.root_.classList.add('mdc-drawer--temporary');
       this.temporalDrawer_ = new mdc.drawer.MDCTemporaryDrawer(this.root_);
-      this.drawer_.removeEventListener('click', this.temporalDrawer_.foundation_.drawerClickHandler_);
+      // this.drawer_.removeEventListener('click', this.temporalDrawer_.foundation_.drawerClickHandler_);
     } else if (
       window.innerWidth >= 992 &&
-        (!rootClasses.contains('mdc-persistent-drawer') ||
+        (!rootClasses.contains('mdc-drawer--persistent') ||
          this.persistentDrawer_ === null)
     ) {
       if (this.temporalDrawer_) {
         this.temporalDrawer_.destroy();
         this.temporalDrawer_ = null;
       }
-      this.root_.classList.remove('mdc-temporary-drawer');
-      this.drawer_.classList.remove('mdc-temporary-drawer__drawer');
-      this.header_.classList.remove('mdc-temporary-drawer__header');
-      this.headerContent_.classList.remove('mdc-temporary-drawer__header-content');
-      this.content_.classList.remove('mdc-temporary-drawer__content');
-
-
-      this.root_.classList.add('mdc-persistent-drawer');
+      this.root_.classList.remove('mdc-drawer--temporary');
+      this.root_.classList.add('mdc-drawer--persistent');
       if (sessionStorage.getItem('dmc_site_drawer_state') != 'closed') {
-        this.root_.classList.add('mdc-persistent-drawer--open');
+        this.root_.classList.add('mdc-drawer--open');
       } else {
-        this.root_.classList.remove('mdc-persistent-drawer--open');
+        this.root_.classList.remove('mdc-drawer--open');
       }
-      this.drawer_.classList.add('mdc-persistent-drawer__drawer');
-      this.header_.classList.add('mdc-persistent-drawer__header');
-      this.headerContent_.classList.add('mdc-persistent-drawer__header-content');
-      this.content_.classList.add('mdc-persistent-drawer__content');
       this.persistentDrawer_ = new mdc.drawer.MDCPersistentDrawer(this.root_);
-      this.drawer_.removeEventListener('click', this.persistentDrawer_.foundation_.drawerClickHandler_);
+      // this.drawer_.removeEventListener('click', this.persistentDrawer_.foundation_.drawerClickHandler_);
     }
   }
 

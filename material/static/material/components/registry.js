@@ -108,7 +108,10 @@
   };
 
 
+  dmc.register('MDCLineRipple', mdc.lineRipple.MDCLineRipple);
   dmc.register('MDCCheckbox', mdc.checkbox.MDCCheckbox);
+  dmc.register('MDCChip', mdc.chips.MDCChip);
+  dmc.register('MDCChipSet', mdc.chips.MDCChipSet);
   dmc.register('MDCDialog', mdc.dialog.MDCDialog);
   dmc.register('MDCPersistentDrawer', mdc.drawer.MDCPersistentDrawer);
   dmc.register('MDCTemporaryDrawer', mdc.drawer.MDCTemporaryDrawer);
@@ -122,7 +125,7 @@
   dmc.register('MDCTab', mdc.tabs.MDCTab);
   dmc.register('MDCTabBar', mdc.tabs.MDCTabBar);
   dmc.register('MDCTextField', mdc.textField.MDCTextField);
-  dmc.register('MDCSimpleMenu', mdc.menu.MDCSimpleMenu);
+  dmc.register('MDCMenu', mdc.menu.MDCMenu);
   dmc.register('MDCSelect', mdc.select.MDCSelect);
   dmc.register('MDCSlider', mdc.slider.MDCSlider);
   dmc.register('MDCToolbar', mdc.toolbar.MDCToolbar);

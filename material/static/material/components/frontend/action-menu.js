@@ -4,8 +4,8 @@ class DMCActionMenu extends mdc.base.MDCComponent {
   }
 
   initialize() {
-    this.menuEl_ = this.root_.querySelector('.mdc-simple-menu');
-    this.menu_ = new mdc.menu.MDCSimpleMenu(this.menuEl_);
+    this.menuEl_ = this.root_.querySelector('.mdc-menu');
+    this.menu_ = new mdc.menu.MDCMenu(this.menuEl_);
     this.menuEl_.addEventListener('MDCSimpleMenu:selected', function(evt) {
       let itemData = evt.detail.item.dataset;
       if (itemData.dmcMenuHref) {

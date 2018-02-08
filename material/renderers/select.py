@@ -92,9 +92,13 @@ class SelectRenderer(FieldRender):
         }
 
         return Div(**control_attrs) / [
-            Span(class_="mdc-select__selected-text") / [self.selected_text(options)],
-            Div(class_="mdc-simple-menu mdc-select__menu") / [
-                Ul(class_="mdc-list mdc-simple-menu__items") / list(self.list_items(options))
+            Div(class_="mdc-select__surface", tabindex="0") / [
+                Div(class_="mdc-select__label mdc-select__label--float-above") / [self.bound_field.label],
+                Div(class_="mdc-select__selected-text") / [self.selected_text(options)],
+                Div(class_="mdc-select__bottom-line")
+            ],
+            Div(class_="mdc-menu mdc-select__menu") / [
+                Ul(class_="mdc-list mdc-menu__items") / list(self.list_items(options))
             ]
         ]
 
@@ -145,7 +149,7 @@ class SelectRenderer(FieldRender):
         element = Div(**wrapper_attrs) / [
             self.prefix(),
             Div(class_="dmc-form-field__input", data_mdc_auto_init=self.autoinit()) / [
-                Label(**label_attrs) / [self.bound_field.label],
+                # Label(**label_attrs) / [self.bound_field.label],
                 self.control(options),
                 self.native_control(options),
                 self.help_text(),

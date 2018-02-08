@@ -16,7 +16,7 @@ body {
   background-color: var(--mdc-theme-secondary,#ff4081);
 }
 
-.dmc-responsive-drawer {
+.dmc-drawer {
   z-index: 1;  // improve hide/show animation
 
   .mdc-list-group__subheader--dmc {
@@ -37,8 +37,7 @@ body {
     color: var(--mdc-theme-primary, #3f51b5);
   }
 
-  .mdc-persistent-drawer__header,
-  .mdc-temporary-drawer__header {
+  .mdc-drawer__header {
     color: white;
     color: var(--mdc-theme-text-primary-on-secondary-dark, white);
     background: linear-gradient(110deg, #3f51b5, 60%, #6f7dcd 60%);
