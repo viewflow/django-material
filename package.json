@@ -2,30 +2,28 @@
   "name": "django-material",
   "private": true,
   "scripts": {
-    "gulp": "gulp"
+    "build": "webpack",
+    "dev": "webpack --watch"
   },
   "devDependencies": {
-    "autoprefixer": "^7.2.4",
     "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
     "babel-plugin-transform-class-properties": "^6.24.1",
-    "babel-plugin-transform-es2015-modules-umd": "^6.24.1",
-    "babel-preset-env": "^1.6.0",
+    "babel-preset-env": "^1.6.1",
+    "copy-webpack-plugin": "^4.4.1",
+    "css-loader": "^0.28.9",
     "eslint-config-google": "^0.9.1",
-    "gulp": "^3.9.1",
-    "gulp-add-src": "^0.2.0",
-    "gulp-babel": "^7.0.0",
-    "gulp-clean-css": "^3.9.2",
-    "gulp-concat": "^2.6.1",
-    "gulp-postcss": "^7.0.1",
-    "gulp-rename": "^1.2.2",
-    "gulp-sass": "^3.1.0",
-    "gulp-sourcemaps": "^2.6.1",
-    "gulp-uglify": "^1.5.4",
+    "extract-text-webpack-plugin": "^3.0.2",
     "material-components-web": "^0.30.0",
     "material-design-icons": "^3.0.1",
+    "node-sass": "^4.7.2",
     "roboto-npm-webfont": "^1.0.1",
+    "sass-loader": "^6.0.6",
     "smartcrop": "^1.1.1",
-    "turbolinks": "^5.0.3"
+    "stimulus": "^1.0.1",
+    "turbolinks": "^5.1.1",
+    "webpack": "^3.10.0",
+    "webpack-extraneous-file-cleanup-plugin": "^1.0.5"
   },
   "dependencies": {}
 }

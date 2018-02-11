@@ -1,0 +1,6 @@
+@import "@material/theme/color-palette";
+
+$mdc-theme-primary: $material-color-light-blue-900;
+$mdc-theme-secondary: $material-color-cyan-700;
+
+@import "@material/theme/mdc-theme";
