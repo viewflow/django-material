@@ -1,0 +1,1 @@
+import './dmc-profile';

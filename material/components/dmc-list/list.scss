@@ -1,0 +1,52 @@
+.dmc-list {
+  overflow: initial;
+  margin: 8px;
+  background: #fff;
+  background: var(--mdc-theme-background, #fff);
+
+  .mdc-card__primary {
+    padding-left: 24px;
+    padding-bottom: 29px;
+    position: relative;
+  }
+}
+
+@media (max-width: 600px) {
+  .dmc-list {
+    margin: 0px;
+  }
+}
+
+.dmc-list__menu {
+  position: absolute;
+  right: 8px;
+  top: 16px;
+
+  .mdc-list {
+    padding-right: 0;
+    padding-left: 0;
+
+    i.material-icons {
+      margin-right: 16px;
+    }
+
+    .mdc-list-item {
+      padding-left: 56px;
+    }
+
+    .mdc-list-item--with-icon {
+      padding-left: 16px;
+    }
+  }
+}
+
+.dmc-list__menu-trigger {
+  padding-left: 8px;
+  padding-right: 8px;
+  min-width: auto;
+  display: inline-flex;
+
+  &:not(:disabled) {
+    color: black;
+  }
+}

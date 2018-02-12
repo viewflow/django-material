@@ -1,4 +1,4 @@
-import { Controller } from "stimulus"
+import {Controller} from 'stimulus';
 import {MDCTextField} from '@material/textfield';
 
 
@@ -8,7 +8,7 @@ export default class extends Controller {
   }
 
   disconnect() {
-    if(this.textField_) {
+    if (this.textField_) {
       this.textField_.destroy();
     }
   }

@@ -1,0 +1,27 @@
+.dmc-profile {
+  padding: 8px;
+}
+
+.dmc-profile-layout-grid__inner {
+  grid-gap: 8px;
+}
+
+@media (max-width: 839px) {
+  .dmc-profile {
+    padding: 0px;
+  }
+
+  .dmc-profile-layout-grid__inner {
+    grid-gap: 0px;
+  }
+
+  .dmc-profile-avatar {
+    display: none;
+  }
+}
+
+.dmc-profile-detail,
+.dmc-profile-avatar {
+  background: #fff;
+  background: var(--mdc-theme-background, #fff);
+}
