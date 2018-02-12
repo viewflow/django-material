@@ -1,6 +1,8 @@
 import {Controller} from 'stimulus';
 import {MDCTextField} from '@material/textfield';
 
+import './text-field.scss';
+
 
 export default class extends Controller {
   connect() {

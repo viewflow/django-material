@@ -1,0 +1,21 @@
+.dmc-checkbox-field {
+  margin-top: 12px;
+  margin-bottom: 7px;
+
+  &.dmc-form-field--invalid .dmc-text-field-helptext,
+  &.dmc-form-field--invalid label {
+    opacity: 1;
+    color: #d50000;
+  }
+
+  &.dmc-form-field--invalid .mdc-checkbox__background {
+    border-color: rgba(213, 0, 0, 0.54) !important;
+  }
+
+  .dmc-text-field-helptext {
+    margin-bottom: 0px !important;
+    margin-top: -3px;
+    margin-left: 40px;
+    padding-left: 4px;
+  }
+}

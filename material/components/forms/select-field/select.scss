@@ -1,0 +1,63 @@
+.dmc-select-field {
+  &.dmc-form-field--invalid {
+    // .mdc-select {
+    //   color: #d50000;
+    //   border-bottom: 1px solid #d50000;
+    // }
+    .dmc-select-field__helptext {
+      color: #d50000;
+    }
+  }
+
+  .dmc-form-field__input {
+    overflow: hidden;
+
+    select.mdc-select {
+      display: none;
+      max-width: 100%;
+    }
+
+    @media (max-width: 600px) and (pointer: coarse) {
+      .mdc-select[role="listbox"] {
+        display: none;
+      }
+
+      select.mdc-select {
+        display: block;
+      }
+    }
+  }
+}
+
+.dmc-select-field__label {
+  color: rgba(0, 0, 0, 0.5);
+  font-size: 10px;
+  line-height: 15px;
+}
+
+.dmc-select-field__helptext {
+  margin: 8px 0 8px 0;
+  color: rgba(0, 0, 0, 0.38);
+  color: var(--mdc-theme-text-hint-on-light, rgba(0, 0, 0, 0.38));
+  font-size: 11px;
+}
+
+.dmc-select-field__group {
+  margin-top: 0px;
+  padding: 0px;
+
+  .mdc-list-item {
+    padding-left: 32px;
+    color: rgba(0, 0, 0, 0.54);
+    color: var(--mdc-theme-text-secondary-on-light, rgba(0, 0, 0, 0.54));
+  }
+
+  .mdc-list-item[aria-selected="true"] {
+    color: rgba(0, 0, 0, 0.87);
+    color: var(--mdc-theme-text-primary-on-light, rgba(0, 0, 0, 0.87));
+  }
+}
+
+.dmc-select-field__groupheader {
+  padding-left: 16px;
+}

@@ -1,0 +1,26 @@
+.dmc-text-field {
+  width: 100%;
+  margin-top: 0px !important;
+  margin-bottom: 2px;
+
+  input[type=number] {
+    -moz-appearance: textfield;
+  }
+
+  input[type=number]:hover,
+  input[type=number]:focus {
+    -moz-appearance: initial;
+  }
+
+  .dmc-text-field__input {
+    width: 100%;
+  }
+
+
+}
+
+.dmc-text-field-helptext {
+  font-size: 11px;
+  margin-bottom: 6px !important;
+  margin-top: 0px;
+}
