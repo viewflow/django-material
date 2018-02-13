@@ -97,7 +97,7 @@ const COMPONENTS_CONFIG = {
   },
 
   externals: {
-    '@material': 'mdc',
+    'material-components-web': 'mdc',
     'stimulus': 'Stimulus',
     'turbolinks': 'Turbolinks',
   },
