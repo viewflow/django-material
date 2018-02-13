@@ -52,7 +52,7 @@ Demo
 
 http://forms.viewflow.io/
 
-To checkout and run open source demo version localy, you need to have
+To checkout and run open source demo version locally, you need to have
 `git <https://git-scm.com/>`_ and `tox
 <https://tox.readthedocs.io/en/latest/>`_ tools installed.
 
@@ -85,10 +85,8 @@ Django Material Pro with additional features has a commercial-friendly license. 
 Changelog
 =========
 
-1.2.0 2017-12-20
+1.2.2 2017-01-11
 ----------------
 
-- Materialize 1.0.0.alpha2
-- Django 2.0 support
-- Drop compatibility with Django 1.8/1.9/1.10
-- Drop Material Admin
+- Materialize 1.0.0.alpha3
+- [PRO] Fix ajax multi-select widget
