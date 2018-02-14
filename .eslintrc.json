@@ -8,6 +8,7 @@
     },
     "rules": {
         "require-jsdoc": "off",
-        "max-len": ["error", 120]
+        "max-len": ["error", 120],
+        "no-undef": "error"
     }
 }

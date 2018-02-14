@@ -1,3 +1,5 @@
+/* eslint-env browser */
+
 import {Controller} from 'stimulus';
 import {drawer} from 'material-components-web';
 
