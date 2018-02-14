@@ -1,1 +1,0 @@
-import './lockscreen.scss';

@@ -25,7 +25,7 @@ const SASS_LOADER_CONFIG = {
     use: [{
       loader: 'css-loader',
       options: {
-        minimize: true,
+        // minimize: true,
         sourceMap: true,
       },
     }, {
@@ -38,8 +38,9 @@ const SASS_LOADER_CONFIG = {
   }),
 };
 
-const THEMES_CONFIG = {
+const SASS_CONFIG = {
   entry: {
+    'django-material-components': './material/components/django-material-components.scss',
     'django-material-theme-amber': './material/components/themes/theme-amber.scss',
     'django-material-theme-bluegrey': './material/components/themes/theme-bluegrey.scss',
     'django-material-theme-blue': './material/components/themes/theme-blue.scss',
@@ -78,9 +79,9 @@ const THEMES_CONFIG = {
   ],
 };
 
-const COMPONENTS_CONFIG = {
+const JAVASCRIPT_CONFIG = {
   entry: {
-    'django-material-components': './material/components/index.js',
+    'django-material-components': './material/components/django-material-components.js',
   },
 
   output: {
@@ -93,7 +94,7 @@ const COMPONENTS_CONFIG = {
   devtool: 'source-map',
 
   module: {
-    rules: [BABEL_LOADER_CONFIG, SASS_LOADER_CONFIG],
+    rules: [BABEL_LOADER_CONFIG],
   },
 
   externals: {
@@ -103,7 +104,6 @@ const COMPONENTS_CONFIG = {
   },
 
   plugins: [
-    extractSass,
     copyWebpackPlugin([
       {
         from: 'node_modules/turbolinks/dist/turbolinks.js',
@@ -134,6 +134,6 @@ const COMPONENTS_CONFIG = {
 };
 
 module.exports = [
-  COMPONENTS_CONFIG,
-  THEMES_CONFIG,
+  JAVASCRIPT_CONFIG,
+  SASS_CONFIG,
 ];

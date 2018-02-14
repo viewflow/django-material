@@ -3,7 +3,7 @@
 
 {% block viewset_links %}
 {{ block.super }}
-<a class="mdc-list-item mdc-list-item--dmc" href="{% viewset_url app 'employee:add' %}">
+<a class="mdc-list-item dmc-drawer__list-item" href="{% viewset_url app 'employee:add' %}">
     <i class="material-icons">person_add</i> {% trans 'Add new' %}
 </a>
 {% endblock %}

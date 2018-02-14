@@ -1,0 +1,8 @@
+.dmc-alert {
+  padding: 8px;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.54);
+  color: var(--mdc-theme-text-primary-on-secondary, rgba(0, 0, 0, 0.54));
+  background-color: #ff87b0;
+  background-color: var(--mdc-theme-secondary-light, #ff87b0);
+}

@@ -1,10 +1,10 @@
 {% load i18n material_site %}
-<nav class="mdc-list" data-mdc-auto-init="DMCActiveNav">
+<nav class="mdc-list" data-controller="dmc-active-navigation">
   <div class="mdc-list-group">
-    <h3 class="mdc-list-group__subheader mdc-list-group__subheader--dmc">{{ app.title }}</h3>
+    <h3 class="mdc-list-group__subheader dmc-drawer__subheader">{{ app.title }}</h3>
     {% block viewset_links %}{% for viewset in app.menu_items %}
     {% viewset_url viewset 'index' as index_url %}{% if index_url %}
-    <a class="mdc-list-item mdc-list-item--dmc" href="{{ index_url }}">
+    <a class="mdc-list-item dmc-drawer__list-item" href="{{ index_url }}">
       {% if viewset.icon %}{{ viewset.icon }}{% else %}<i class="material-icons">view_carousel</i>{% endif %}{{ viewset.title }}
     </a>
     {% endif %}

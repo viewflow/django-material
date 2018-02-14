@@ -1,8 +1,6 @@
 import {Controller} from 'stimulus';
 import {textField} from 'material-components-web';
 
-import './text-field.scss';
-
 
 export default class extends Controller {
   connect() {

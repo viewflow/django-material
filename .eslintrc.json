@@ -1,6 +1,8 @@
 {
     "extends": "google",
+    "parser": "babel-eslint",
     "parserOptions": {
+        "classes": true,
         "ecmaVersion": 2015,
         "sourceType": "module"
     },

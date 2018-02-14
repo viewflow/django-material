@@ -19,29 +19,27 @@
 <body class="mdc-typography" data-mdc-auto-init="DMCScrollLockFix">{% block body %}
   <div class="dmc-page">
     {% with site=request.resolver_match.site app=request.resolver_match.app %}
-    <aside id="id_site_drawer"
-          class="mdc-drawer mdc-drawer--persistent dmc-page__drawer"
-          data-controller="responsive-drawer">
+    <aside id="id_site_drawer" class="mdc-drawer dmc-drawer dmc-page__drawer mdc-drawer--persistent" data-controller="dmc-drawer">
       <nav class="mdc-drawer__drawer">
-        <header class="mdc-drawer__header dmc-page__drawer-header">
+        <header class="dmc-drawer-header mdc-drawer__header">
           <div class="mdc-drawer__header-content">
             {% block sidebar-header %}
-            <div class="dmc-page-header">
+            <div class="dmc-drawer-header__content">
                 {% block sidebar-avatar-image %}
-                <img class="dmc-page-header__avatar" src="{{ request.user|_user_avatar_url }}">
+                <img class="dmc-drawer-header__avatar" src="{{ request.user|_user_avatar_url }}">
                 {% endblock %}
-                <div class="dmc-page-header__info">
-                  <div class="dmc-page-header__user">
+                <div class="dmc-drawer-header__info">
+                  <div class="dmc-drawer-header__user">
                     {% block user-info %}
-                    <div class="dmc-page-header__title">
+                    <div class="dmc-drawer-header__title">
                       {{ request.user.get_full_name|default:request.user.get_username }}
                     </div>
                     {% if request.user.email != request.user.get_username %}
-                    <div class="dmc-page-header__subtitle">{{ request.user.email}}</div>
+                    <div class="dmc-drawer-header__subtitle">{{ request.user.email}}</div>
                     {% endif %} {% endblock %}
                   </div>
-                  <div class="dmc-page-header__menu" data-mdc-auto-init="DMCHeaderMenu" data-toggle-menu="id_site_drawer_menu">
-                    <button class="mdc-button dmc-page-header__menu-button">
+                  <div class="dmc-drawer-header__menu">
+                    <button class="mdc-button dmc-drawer-header__menu-button" data-action="dmc-drawer#toggleUserMenu">
                       <i class="material-icons">arrow_drop_down</i>
                     </button>
                   </div>
@@ -50,26 +48,26 @@
               {% endblock sidebar-header %}
           </div>
         </header>
-        <nav class="mdc-drawer__content mdc-list" id="id_site_drawer_menu">
-          <div class="dmc-page-menu__primary">
+        <nav class="mdc-drawer__content mdc-list" id="id_site_drawer_menu" data-target="dmc-drawer.content">
+          <div class="dmc-drawer__primary-content">
             {% block sidebar-app-menu %}
             {% if app %}{% include app.menu_template_name with app=app %}{% endif %}
             {% if site %}{% include site.menu_template_name with site=site user=request.user only %}{% endif %}
             {% endblock %}
           </div>
-          <div class="dmc-page-menu__secondary">
+          <div class="dmc-drawer__secondary-content">
               {% block sidebar-user-menu %}
               <nav class="mdc-list">
                   {% block sidebar-user-menu-actions %}
                   {% url 'profile' as profile_url %}
                   {% if profile_url %}
-                  <a class="mdc-list-item mdc-list-item--dmc" href="{{ profile_url }}">
+                  <a class="mdc-list-item dmc-drawer__list-item" href="{{ profile_url }}">
                     <i class="material-icons">account_box</i> {% trans 'Profile' %}
                   </a>
                   {% endif %}
                   {% url 'logout' as logout_url %}
                   {% if logout_url %}
-                  <a class="mdc-list-item mdc-list-item--dmc" href="{{ logout_url }}">
+                  <a class="mdc-list-item dmc-drawer__list-item" href="{{ logout_url }}">
                     <i class="material-icons">exit_to_app</i> {% trans 'Log out' %}
                   </a>
                   {% endif %}
@@ -82,12 +80,13 @@
     </aside>
 
     <div class="dmc-page__body">
-      <header class="mdc-toolbar dmc_page__toolbar">
+      <header class="mdc-toolbar dmc-page__toolbar">
         <div class="mdc-toolbar__row">
           <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
             <a href="#"
               class="material-icons mdc-toolbar__menu-icon"
-              data-mdc-auto-init="DMCToggleDrawer"
+              data-controller="dmc-toggle-drawer-button"
+              data-action="dmc-toggle-drawer-button#toggleDrawer"
               data-toggle-drawer-id="id_site_drawer">menu</a>
             <span class="mdc-toolbar__title">{% block page-title %}{{ app.title|default:site.title|default:"Django Material" }}{% endblock %}</span>
           </section>
