@@ -8,10 +8,10 @@
 {% block page-title %}{% trans 'Log in' %}{% endblock %}
 
 {% block sidebar-content %}
-<form method="POST" data-mdc-auto-init="DMCTurbolinksForm">
+<form method="POST" data-controller="dmc-form">
   {% csrf_token %}
   {% material form %}
-  <button type="submit" class="mdc-button mdc-button--raised dmc-action-button dmc-lockscreen__action" data-mdc-auto-init="MDCRipple">
+  <button type="submit" class="mdc-button mdc-button--raised dmc-lockscreen__action" data-action="dmc-form#submit">
       {% trans 'Log in' %}
   </button>
 </form>

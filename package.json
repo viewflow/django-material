@@ -14,6 +14,7 @@
     "copy-webpack-plugin": "^4.4.1",
     "css-loader": "^0.28.9",
     "eslint-config-google": "^0.9.1",
+    "eslint-plugin-babel": "^4.1.2",
     "extract-text-webpack-plugin": "^3.0.2",
     "material-components-web": "^0.30.0",
     "material-design-icons": "^3.0.1",
