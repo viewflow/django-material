@@ -12,7 +12,7 @@
   .dmc-form-field__input {
     overflow: hidden;
 
-    select.mdc-select {
+    .dmc-select-field__native {
       display: none;
       max-width: 100%;
     }
@@ -22,7 +22,7 @@
         display: none;
       }
 
-      select.mdc-select {
+      .dmc-select-field__native {
         display: block;
       }
     }

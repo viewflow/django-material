@@ -1,8 +1,8 @@
 from django.utils.html import mark_safe, conditional_escape
 
 from material.ptml import (
-    Div, Span, Select, Option, Optgroup,
-    Ul, Li, Label, P, H3
+    Div, Select, Option, Optgroup,
+    Ul, Li, P, H3
 )
 from .base import FieldRender
 
@@ -10,8 +10,8 @@ from .base import FieldRender
 class SelectRenderer(FieldRender):
     wrapper_class = "dmc-select-field"
 
-    def autoinit(self):
-        return "DMCSelect"
+    def controller(self):
+        return "dmc-select-field"
 
     def prefix(self):
         return None
@@ -125,7 +125,7 @@ class SelectRenderer(FieldRender):
             else:
                 items += options
 
-        return Select(class_="mdc-select", name=self.bound_field.name, **self.widget.attrs) / items
+        return Select(class_="dmc-select-field__native", name=self.bound_field.name, **self.widget.attrs) / items
 
     def __str__(self):
         options = list(self.widget.optgroups(self.bound_field.name, self.formatted_value))
@@ -133,7 +133,7 @@ class SelectRenderer(FieldRender):
         wrapper_attrs = {
             'class': {
                 'mdc-form-field': False,
-                'data-mdc-auto-init': "MDCFormField" if self.autoinit() else False,
+                # 'data-controller': "MDCFormField" if self.controller() else False,
                 'dmc-form-field': True,
                 'dmc-form-field--invalid': bool(self.errors),
                 self.wrapper_class: bool(self.wrapper_class)
@@ -141,14 +141,9 @@ class SelectRenderer(FieldRender):
             'title': self.bound_field.help_text
         }
 
-        label_attrs = {
-           'for': self.bound_field.id_for_label,
-           'class': 'dmc-select-field__label',
-        }
-
         element = Div(**wrapper_attrs) / [
             self.prefix(),
-            Div(class_="dmc-form-field__input", data_mdc_auto_init=self.autoinit()) / [
+            Div(class_="dmc-form-field__input", data_controller=self.controller()) / [
                 # Label(**label_attrs) / [self.bound_field.label],
                 self.control(options),
                 self.native_control(options),
@@ -161,8 +156,8 @@ class SelectRenderer(FieldRender):
 
 
 class MaterialSelectRenderer(SelectRenderer):
-    def autoinit(self):
-        return self.widget.autoinit
+    def controller(self):
+        return self.widget.controller
 
     def prefix(self):
         return self.widget.prefix
