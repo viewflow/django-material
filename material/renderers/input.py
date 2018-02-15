@@ -53,9 +53,9 @@ class MDCTextInput(object):
 class TextInput(MDCTextInput):
     """Django-bound text field."""
 
-    def __init__(self, render, autoinit=None):
+    def __init__(self, render, controller=None):
         self.renderer = render
-        self.autoinit = autoinit
+        self.controller = controller
 
     def control_type(self):
         return self.renderer.widget.input_type
@@ -65,7 +65,7 @@ class TextInput(MDCTextInput):
 
     def wrapper_attrs(self):
         attrs = super().wrapper_attrs()
-        attrs['data-mdc-auto-init'] = self.autoinit
+        attrs['data-controller'] = self.controller
         attrs['class'].update({
             'mdc-text-field--upgraded': True,
             'mdc-text-field--invalid': bool(self.renderer.errors)
@@ -95,6 +95,12 @@ class TextInput(MDCTextInput):
 
 class PasswordInput(TextInput):
     """Django-bound password field."""
+    def control_attrs(self):
+        attrs = super().control_attrs()
+        attrs.update({
+            'data-target': f'{self.controller}.input'
+        })
+        return attrs
 
     def toggle_attrs(self):
         return {
@@ -104,7 +110,8 @@ class PasswordInput(TextInput):
             },
             'href': '#',
             'tabindex': '-1',
-            'aria-hidden': 'true'
+            'aria-hidden': 'true',
+            'data-action': f'{self.controller}#toggle'
         }
 
     def toggle(self):
@@ -120,8 +127,8 @@ class InputRenderer(FormFieldRender):
     wrapper_class = None
     control_class = TextInput
 
-    def autoinit(self):
-        return "MDCTextField"
+    def controller(self):
+        return "dmc-input-field"
 
     def help_text(self):
         classes = [
@@ -137,7 +144,7 @@ class InputRenderer(FormFieldRender):
 
     def body(self):
         return [
-            self.control_class(self, autoinit=self.autoinit()),
+            self.control_class(self, controller=self.controller()),
             self.help_text(),
         ]
 
@@ -157,8 +164,8 @@ class PasswordRenderer(InputRenderer):
     wrapper_class = 'dmc-password-field'
     control_class = PasswordInput
 
-    def autoinit(self):
-        return "DMCPasswordField"
+    def controller(self):
+        return "dmc-password-field"
 
 
 class MaterialPasswordRenderer(PasswordRenderer):
