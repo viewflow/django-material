@@ -96,3 +96,11 @@
     transition: transform 150ms linear;
   }
 }
+
+.dmc-drawer--secondary-content-shown {
+  .dmc-drawer-header__menu-button:not(:disabled) {
+    i.material-icons {
+      transform: rotate( -180deg );
+    }
+  }
+}

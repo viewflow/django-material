@@ -48,9 +48,9 @@ export default class extends Controller {
     this.reconcileDrawer_ = requestAnimationFrame(() => this.reconcileDrawer());
   }
 
-  toggleUserMenu() {
-    this.menuContainer.classList.toggle('dmc-drawer-menu--secondary-shown');
-    this.element.classList.toggle('dmc-drawer-menu__secondary--shown');
+  toggleUserMenu(event) {
+    event.preventDefault();
+    this.element.classList.toggle('dmc-drawer--secondary-content-shown');
   }
 
   reconcileDrawer() {
