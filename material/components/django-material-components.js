@@ -10,6 +10,7 @@ import DMCCardMenu from './site/card-menu';
 import DMCDrawer from './site/drawer';
 import DMCSnackbar from './site/snackbar';
 import DMCToggleDrawerButton from './site/toggle-drawer-button';
+import DMCScrollLockFix from './site/scroll-lock-fix';
 
 export const application = Application.start();
 application.register('dmc-input-field', DMCInputField);
@@ -21,3 +22,4 @@ application.register('dmc-card-menu', DMCCardMenu);
 application.register('dmc-active-navigation', DMCActiveNavigation);
 application.register('dmc-snackbar', DMCSnackbar);
 application.register('dmc-toggle-drawer-button', DMCToggleDrawerButton);
+application.register('dmc-scroll-lock-fix', DMCScrollLockFix);

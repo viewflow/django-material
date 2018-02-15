@@ -16,7 +16,7 @@
   {% block extrahead %}{% endblock %}
 </head>
 
-<body class="mdc-typography" data-mdc-auto-init="DMCScrollLockFix">{% block body %}
+<body class="mdc-typography" data-controller="dmc-scroll-lock-fix">{% block body %}
   <div class="dmc-page">
     {% with site=request.resolver_match.site app=request.resolver_match.app %}
     <aside id="id_site_drawer" class="mdc-drawer dmc-drawer dmc-page__drawer mdc-drawer--persistent" data-controller="dmc-drawer">
