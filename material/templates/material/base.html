@@ -39,7 +39,7 @@
                     {% endif %} {% endblock %}
                   </div>
                   <div class="dmc-drawer-header__menu">
-                    <button class="mdc-button dmc-drawer-header__menu-button" data-action="dmc-drawer#toggleUserMenu">
+                    <button class="mdc-button dmc-drawer-header__menu-button">
                       <i class="material-icons">arrow_drop_down</i>
                     </button>
                   </div>
@@ -48,7 +48,7 @@
               {% endblock sidebar-header %}
           </div>
         </header>
-        <nav class="mdc-drawer__content mdc-list" id="id_site_drawer_menu" data-target="dmc-drawer.content">
+        <nav class="mdc-drawer__content mdc-list" id="id_site_drawer_menu">
           <div class="dmc-drawer__primary-content">
             {% block sidebar-app-menu %}
             {% if app %}{% include app.menu_template_name with app=app %}{% endif %}

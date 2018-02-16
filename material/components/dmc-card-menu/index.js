@@ -5,28 +5,33 @@ import {menu} from 'material-components-web';
 import Turbolinks from 'turbolinks';
 
 export default class extends Controller {
-  static targets = ['menu'];
+  initialize() {
+    this._menuEl = this.element.querySelector('.mdc-menu');
+    this._triggerEl = this.element.querySelector('.dmc-list__menu-trigger');
+  }
 
   connect() {
-    this.menu = new menu.MDCMenu(this.menuTarget);
-    this.menuTarget.addEventListener('MDCMenu:selected', this.menuSelectedHandler);
+    this._mdcMenu = new menu.MDCMenu(this._menuEl);
+    this._menuEl.addEventListener('MDCMenu:selected', this.onMenuSelect);
+    this._triggerEl.addEventListener('click', this.onToggleMenu);
   }
 
   disconnect() {
-    this.menu.destroy();
+    this._mdcMenu.destroy();
+    this._triggerEl.removeEventListener('click', this.onToggleMenu);
   }
 
-  toggleMenu() {
-    this.menu.open = !this.menu.open;
+  onToggleMenu = () => {
+    this._mdcMenu.open = !this._mdcMenu.open;
   }
 
-  menuSelectedHandler = (event) => {
+  onMenuSelect = (event) => {
     let itemData = event.detail.item.dataset;
-    if (itemData.dmcMenuHref) {
+    if (itemData.dmcCardMenuHref) {
         if (Turbolinks) {
-          Turbolinks.visit(itemData.dmcMenuHref);
+          Turbolinks.visit(itemData.dmcCardMenuHref);
         } else {
-          window.location = itemData.dmcMenuHref;
+          window.location = itemData.dmcCardMenuHref;
         }
     }
   }

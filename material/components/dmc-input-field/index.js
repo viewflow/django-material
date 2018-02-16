@@ -4,10 +4,10 @@ import {textField} from 'material-components-web';
 
 export default class extends Controller {
   connect() {
-    this._textField = new textField.MDCTextField(this.element);
+    this._mdcTextField = new textField.MDCTextField(this.element);
   }
 
   disconnect() {
-    this._textField.destroy();
+    this._mdcTextField.destroy();
   }
 }

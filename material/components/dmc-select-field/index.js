@@ -23,28 +23,32 @@ class MDCSelect extends select.MDCSelect {
 
 
 export default class extends Controller {
+  initialize() {
+    this._customSelectEl = this.element.querySelector('.mdc-select[role="listbox"]');
+    this._nativeSelectEl = this.element.querySelector('.dmc-select-field__native');
+  }
+
   connect() {
-    this.customSelect = new MDCSelect(this.element.querySelector('.mdc-select[role="listbox"]'));
-    this.nativeSelect = this.element.querySelector('.dmc-select-field__native');
-    this.customSelect.listen('MDCSelect:change', this.changeHandler);
-    this.nativeSelect.addEventListener('change', this.changeHandler);
+    this._mdcSelect = new MDCSelect(this._customSelectEl);
+    this._mdcSelect.listen('MDCSelect:change', this.onSelectChange);
+    this._nativeSelectEl.addEventListener('change', this.onSelectChange);
   }
 
   disconnect() {
-    this.customSelect.destroy();
-    this.nativeSelect.removeEventListener('change', this.changeHandler);
+    this._mdcSelect.destroy();
+    this._nativeSelectEl.removeEventListener('change', this.onSelectChange);
   }
 
-  changeHandler = ({type}) => {
+  onSelectChange = ({type}) => {
     let changedSelect;
     let selectToUpdate;
 
     if (type === 'MDCSelect:change') {
-      changedSelect = this.customSelect;
-      selectToUpdate = this.nativeSelect;
+      changedSelect = this._mdcSelect;
+      selectToUpdate = this._nativeSelectEl;
     } else {
-      changedSelect = this.nativeSelect;
-      selectToUpdate = this.customSelect;
+      changedSelect = this._nativeSelectEl;
+      selectToUpdate = this._mdcSelect;
     }
     selectToUpdate.selectedIndex = changedSelect.selectedIndex;
   };

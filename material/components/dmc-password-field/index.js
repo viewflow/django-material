@@ -9,12 +9,12 @@ export default class extends Controller {
   }
 
   connect() {
-    this._textField = new textField.MDCTextField(this.element);
+    this._mdcTextField = new textField.MDCTextField(this.element);
     this._toggleEl.addEventListener('click', this.onToggle);
   }
 
   disconnect() {
-    this._textField.destroy();
+    this._mdcTextField.destroy();
     this._toggleEl.removeEventListener('click', this.onToggle);
   }
 
