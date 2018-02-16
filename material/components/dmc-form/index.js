@@ -4,7 +4,41 @@ import {Controller} from 'stimulus';
 import Turbolinks from 'turbolinks';
 
 export default class extends Controller {
-  performPost() {
+  connect() {
+    this.element.addEventListener('submit', this.onSubmit);
+    this.element.querySelectorAll('button[type=submit]').forEach(
+      (button) => {
+        button.addEventListener('click', this.onButtonClick);
+      }
+    );
+  }
+
+  disconnect() {
+    this.element.querySelectorAll('button[type=submit]').forEach(
+      (button) => {
+        button.removeEventListener('click', this.onButtonClick);
+      }
+    );
+  }
+
+  onButtonClick = (event) => {
+    if (!Turbolinks) {
+      return true;
+    } else {
+      event.preventDefault();
+      event.target.classList.add('dmc-action-button--active');
+      this.element.querySelectorAll('button').forEach(
+        (button) => button.disabled=true
+      );
+      if (this.element.method == 'post') {
+        this._performPost();
+      } else {
+        this._performGet();
+      }
+    }
+  }
+
+  _performPost() {
     let xhr = new XMLHttpRequest();
     xhr.open('POST', window.location.search, true);
     xhr.setRequestHeader('Turbolinks-Referrer', window.location);
@@ -42,7 +76,7 @@ export default class extends Controller {
     xhr.send(new FormData(this.element));
   }
 
-  performGet() {
+  _performGet() {
     const formData = Array.from(
       new FormData(this.element).entries(),
       (entry) => entry.map(encodeURIComponent).join('=')
@@ -53,22 +87,5 @@ export default class extends Controller {
         (this.element.action.indexOf('?') == -1 ? '?' : '&') +
         formData
     );
-  }
-
-  submit(event) {
-    if (!Turbolinks) {
-      return true;
-    } else {
-      event.preventDefault();
-      event.target.classList.add('dmc-action-button--active');
-      this.element.querySelectorAll('button').forEach(
-        (button) => button.disabled=true
-      );
-      if (this.element.method == 'post') {
-        this.performPost();
-      } else {
-        this.performGet();
-      }
-    }
   }
 }
