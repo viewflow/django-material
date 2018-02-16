@@ -1,18 +1,17 @@
-@import './forms/checkbox-field/dmc-checkbox';
-@import './forms/datetime-fields/dmc-datetime';
-@import './forms/form/dmc-form';
-@import './forms/input-field/dmc-text-field';
-@import './forms/password-field/dmc-password-field';
-@import './forms/select-field/dmc-select-field';
-
-@import './site/alert/dmc-alert';
-@import './site/breadcrumbs/dmc-breadcrumbs';
-@import './site/card/dmc-card';
-@import './site/drawer/dmc-drawer';
-@import './site/form-page/dmc-form-page';
-@import './site/list/dmc-list';
-@import './site/lockscreen/dmc-lockscreen';
-@import './site/page/dmc-page';
+@import './dmc-alert/dmc-alert';
+@import './dmc-breadcrumbs/dmc-breadcrumbs';
+@import './dmc-card/dmc-card';
+@import './dmc-checkbox-field/dmc-checkbox';
+@import './dmc-datetime-fields/dmc-datetime';
+@import './dmc-drawer/dmc-drawer';
+@import './dmc-form-page/dmc-form-page';
+@import './dmc-form/dmc-form';
+@import './dmc-input-field/dmc-text-field';
+@import './dmc-list/dmc-list';
+@import './dmc-lockscreen/dmc-lockscreen';
+@import './dmc-page/dmc-page';
+@import './dmc-password-field/dmc-password-field';
+@import './dmc-select-field/dmc-select-field';
 
 
 html {

@@ -40,9 +40,9 @@ def date_format_placeholder(date_format):
 
 
 class InlineCalendar(object):
-    def __init__(self, renderer, autoinit=None, header=False, actions=False):
+    def __init__(self, renderer, controller=None, header=False, actions=False):
         self.renderer = renderer
-        self.autoinit = autoinit
+        self.controller = controller
         self.with_header = header
         self.with_actions = actions
 
@@ -52,7 +52,7 @@ class InlineCalendar(object):
                 "dmc-calendar": True,
                 "dmc-calendar--disabled": self.renderer.disabled,
             },
-            'data-mdc-auto-init': self.autoinit,
+            'data-controller': self.controller,
             'data-date-target': self.renderer.bound_field.id_for_label
         }
 
@@ -81,8 +81,8 @@ class InlineCalendar(object):
             ]
 
     def calendar(self):
-        return Div(class_="dmc-calendar__surface") / [
-            Div(class_="dmc-calendar__month dmc-calendar__month--current") / [
+        return Div(class_='dmc-calendar__surface') / [
+            Div(class_='dmc-calendar__month dmc-calendar__month--current') / [
                 Div(class_="dmc-calendar__title") / [],
                 Div(class_="dmc-calendar__grid") / [
                     Div(class_="dmc-calendar__weekdays") / [],
@@ -93,10 +93,18 @@ class InlineCalendar(object):
 
     def navigation(self):
         return [
-            Button(tabindex="0", class_="mdc-button mdc-button--compact dmc-calendar__prev", type_="button") / [
+            Button(
+                class_="mdc-button mdc-button--compact dmc-calendar__prev",
+                tabindex="0",
+                type_="button",
+            ) / [
                 Icon('chevron_left')
             ],
-            Button(tabindex="0", class_="mdc-button mdc-button--compact dmc-calendar__next", type_="button") / [
+            Button(
+                class_="mdc-button mdc-button--compact dmc-calendar__next",
+                tabindex="0",
+                type_="button",
+            ) / [
                 Icon('chevron_right')
             ]
         ] if not self.renderer.disabled else []
@@ -170,7 +178,7 @@ class InlineCalendarRenderer(FieldRender):
         element = Div(**self.wrapper_attrs()) / [
             Div(class_="dmc-form-field__input") / [
                 Label(**self.label_attrs()) / [self.bound_field.label],
-                InlineCalendar(self, autoinit='DMCInlineCalendar'),
+                InlineCalendar(self, controller='dmc-inline-calendar-field'),
                 self.hidden_control(),
                 self.help_text(),
             ]
@@ -196,12 +204,12 @@ class DateTextInput(TextInput):
 
 
 class DateInputRenderer(FormFieldRender):
-    autoinit = "DMCDateInput"
+    controller = "dmc-date-input-field"
 
     def wrapper_attrs(self):
         attrs = super().wrapper_attrs()
         attrs.update({
-            'data-mdc-auto-init': self.autoinit
+            'data-controller': self.controller
         })
         return attrs
 
@@ -222,7 +230,7 @@ class DateInputRenderer(FormFieldRender):
         return Aside(class_='mdc-dialog') / [
             Div(class_='mdc-dialog__surface dmc-datepicker__surface') / [
                 Div(class_='mdc-dialog__body') / [
-                    InlineCalendar(self, header=True, actions=True)
+                    InlineCalendar(self, header=True, actions=True, controller='dmc-popup-calendar')
                 ]
             ],
             Div(class_="mdc-dialog__backdrop")

@@ -7,6 +7,10 @@
   <link rel="icon" href="{% static 'material/favicon.png' %}" type="image/png" />
   <title>{% block title %}Material Design for Django{% endblock %}</title>
   {% block css %}{% include 'material/includes/material_css.html' %}{% endblock css %}
+  {% block js %}
+    {% url 'javascript-catalog' as javascript_catalog_url %}{% if javascript_catalog_url %}<script type="text/javascript" src="{{ javascript_catalog_url }}"></script>{% endif %}
+    {% include 'material/includes/material_js.html' %}
+  {% endblock js %}
   <style>
     body {
       display: flex;
@@ -19,13 +23,9 @@
     }
   </style>
 </head>
-<body data-mdc-auto-init="DMCScrollLockFix">
+<body data-controller="dmc-scroll-lock-fix">
   <div class="page">
     {% block content %}{% endblock %}
   </div>
-  {% block js %}
-    {% url 'javascript-catalog' as javascript_catalog_url %}{% if javascript_catalog_url %}<script type="text/javascript" src="{{ javascript_catalog_url }}"></script>{% endif %}
-    {% include 'material/includes/material_js.html' %}
-  {% endblock js %}
 </body>
 </html>
