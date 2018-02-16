@@ -87,7 +87,7 @@ class TextInput(MDCTextInput):
     def label_attrs(self):
         attrs = super().label_attrs()
         attrs['class'].update({
-            'mdc-text-field__label--float-above': bool(self.renderer.value)
+            'mdc-text-field__label--float-above': bool(self.renderer.formatted_value)
         })
         attrs['for'] = self.renderer.bound_field.id_for_label
         return attrs
