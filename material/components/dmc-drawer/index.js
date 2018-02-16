@@ -61,9 +61,9 @@ export default class extends Controller {
         (!rootClasses.contains('mdc-drawer--temporary') ||
          this._mdcTemporalDrawer === null)
     ) {
-      if (this._mdcTemporalDrawer) {
-        this._mdcTemporalDrawer.destroy();
-        this._mdcTemporalDrawer = null;
+      if (this._mdcPersistentDrawer) {
+        this._mdcPersistentDrawer.destroy();
+        this._mdcPersistentDrawer = null;
       }
       this.element.classList.remove('mdc-drawer--persistent', 'mdc-drawer--open');
       this.element.classList.add('mdc-drawer--temporary');

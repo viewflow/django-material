@@ -4,10 +4,11 @@ import {Controller} from 'stimulus';
 
 export default class extends Controller {
   connect() {
-    this.drawer = document.getElementById(this.element.dataset.toggleDrawerId);
+    this._drawerEl = document.getElementById(this.element.dataset.toggleDrawerId);
+    this.element.addEventListener('click', this.onToggleDrawerClick);
   }
 
-  toggleDrawer(event) {
+  onToggleDrawerClick = (event) => {
     event.preventDefault();
     const drawerController = this.getDrawerController();
     if (drawerController) {
@@ -16,6 +17,6 @@ export default class extends Controller {
   }
 
   getDrawerController() {
-    return this.application.getControllerForElementAndIdentifier(this.drawer, 'dmc-drawer');
+    return this.application.getControllerForElementAndIdentifier(this._drawerEl, 'dmc-drawer');
   }
 }

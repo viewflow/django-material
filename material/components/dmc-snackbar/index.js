@@ -5,34 +5,36 @@ import {snackbar} from 'material-components-web';
 import Turbolinks from 'turbolinks';
 
 export default class extends Controller {
-  static targets = ['text']
+  initialize() {
+    this._textEl = this.element.querySelector('.mdc-snackbar__text');
+  }
 
   connect() {
-    this.snackbar = snackbar.MDCSnackbar.attachTo(this.element);
-    window.addEventListener('dmc-snackbar:show', this.showSnackbar, false);
-    this.showInitialSnackbar();
+    this._mdcSnackbar = snackbar.MDCSnackbar.attachTo(this.element);
+    window.addEventListener('dmc-snackbar:show', this.onShowSnackbarEvent, false);
+    this._showInitialSnackbar();
   }
 
   disconnect() {
-    this.snackbar.destroy();
-    window.removeEventListener('dmc-snackbar:show', this.showSnackbar);
+    this._mdcSnackbar.destroy();
+    window.removeEventListener('dmc-snackbar:show', this.onShowSnackbarEvent);
   }
 
-  showSnackbar = (event) => {
-    this.snackbar.show(event.detail);
+  onShowSnackbarEvent = (event) => {
+    this._mdcSnackbar.show(event.detail);
   }
 
-  showInitialSnackbar() {
+  _showInitialSnackbar() {
     let actionText;
     let actionHandler;
 
-    const message = Array.prototype.filter.call(this.textTarget.childNodes, (child) => {
+    const message = Array.prototype.filter.call(this._textEl.childNodes, (child) => {
       return child.nodeType === Node.TEXT_NODE;
     }).map((child) => {
       return child.textContent.trim();
     }).join(' ');
 
-    const link = this.textTarget.querySelector('a');
+    const link = this._textEl.querySelector('a');
     if (link && window.location.href !== link.href) {
       actionText = link.textContent;
       actionHandler = () => {
@@ -46,7 +48,7 @@ export default class extends Controller {
 
     if (message) {
       setTimeout( () => {
-        this.snackbar.show({
+        this._mdcSnackbar.show({
           message: message,
           actionText: actionText,
           actionHandler: actionHandler,
