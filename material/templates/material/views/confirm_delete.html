@@ -25,7 +25,7 @@
   <form method="POST" data-controller="dmc-form">
     {% csrf_token %}
     <section class="dmc-form-page__form">
-        <h3 class="mdc-typography--subheading2 dmc-alert">
+        <h3 class="mdc-typography--subheading2 mdc-elevation--z6 dmc-alert">
             {% blocktrans with escaped_object=object %}"{{ escaped_object }}" and all of the following related items will be deleted{% endblocktrans %}
         </h3>
 

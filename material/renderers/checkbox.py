@@ -7,8 +7,8 @@ from .base import FieldRender
 class CheckboxInputRenderer(FieldRender):
     wrapper_class = "dmc-checkbox-field"
 
-    def autoinit(self):
-        return "MDCCheckbox"
+    def controller(self):
+        return "dmc-checkbox-field"
 
     def prefix(self):
         return None
@@ -51,7 +51,7 @@ class CheckboxInputRenderer(FieldRender):
             Div(class_="mdc-checkbox__background") / [
                 Svg(class_="mdc-checkbox__checkmark", viewbox="0 0 24 24") / [
                     Path(
-                        class_="mdc-checkbox__checkmark__path",
+                        class_="mdc-checkbox__checkmark-path",
                         d="M1.73,12.91 8.1,19.28 22.79,4.59",
                         fill="none", stroke="white")
                 ],
@@ -75,13 +75,13 @@ class CheckboxInputRenderer(FieldRender):
                 'mdc-checkbox': True,
                 'mdc-checkbox--disabled': self.bound_field.field.disabled,
             },
-            'data-mdc-auto-init': self.autoinit()
+            'data-controller': self.controller()
         }
 
         element = Div(**wrapper_attrs) / [
             self.prefix(),
             Div(class_="dmc-form-field__input") / [
-                Div(class_="mdc-form-field", data_mdc_auto_init="MDCFormField" if self.autoinit() else False) / [
+                Div(class_="mdc-form-field", data_controller="dmc-form-field" if self.controller() else False) / [
                     Div(**control_attrs) / self.control(),
                     Label(for_=self.bound_field.id_for_label) / [self.bound_field.label],
                 ],

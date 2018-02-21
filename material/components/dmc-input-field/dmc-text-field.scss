@@ -1,7 +1,7 @@
 .dmc-text-field {
   width: 100%;
-  margin-top: 0px !important;
-  margin-bottom: 2px;
+  margin-bottom: 0px !important;
+  margin-top: 8px !important;
 
   input[type=number] {
     -moz-appearance: textfield;
@@ -21,6 +21,6 @@
 
 .dmc-text-field-helptext {
   font-size: 11px;
-  margin-bottom: 6px !important;
-  margin-top: 0px;
+  margin-bottom: 4px!important;
+  margin-top: 3px;
 }

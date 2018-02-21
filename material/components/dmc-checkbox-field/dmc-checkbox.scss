@@ -1,6 +1,14 @@
 .dmc-checkbox-field {
+  padding-top: 7px;
+}
+
+.dmc-checkbox-field {
   margin-top: 12px;
   margin-bottom: 7px;
+
+  .mdc-checkbox {
+    margin-left: -5px;
+  }
 
   &.dmc-form-field--invalid .dmc-text-field-helptext,
   &.dmc-form-field--invalid label {
@@ -15,7 +23,7 @@
   .dmc-text-field-helptext {
     margin-bottom: 0px !important;
     margin-top: -3px;
-    margin-left: 40px;
+    margin-left: 35px;
     padding-left: 4px;
   }
 }
