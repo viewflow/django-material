@@ -3,10 +3,10 @@
 
 {% block content %}
 <div class="mdc-card dmc-form-page">
-  <section class=dmc-form-page__header">
-    <h1 class="mdc-card__title mdc-card__title--large">{{ view.object }}</h1>
+  <section class="dmc-form-page__header">
+    <h1 class="mdc-typography--headline">{{ view.object }}</h1>
     {% block list-header-subtitle %}
-    <h2 class="mdc-card__subtitle dmc-breadcrumbs">
+    <h2 class="mdc-typography--subheading1 dmc-breadcrumbs">
       {% block breadcrumbs_items %}
       <a href="{% viewset_url view.viewset 'list' %}">{{ view.model|verbose_name_plural|title }}</a>
       {% if view.object.pk %}

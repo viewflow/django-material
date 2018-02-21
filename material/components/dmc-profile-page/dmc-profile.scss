@@ -1,4 +1,4 @@
-@import './profile_avatar.scss';
+@import './profile-avatar.scss';
 
 .dmc-profile {
   padding: 8px;
@@ -26,4 +26,18 @@
 .dmc-profile-avatar {
   background: #fff;
   background: var(--mdc-theme-background, #fff);
+}
+
+.dmc-profile-detail__header {
+  padding-left: 24px;
+  padding-bottom: 8px;
+  position: relative;
+
+  .mdc-typography--headline {
+    margin-bottom: 0;
+  }
+
+  .mdc-typography--subheading1 {
+    margin: 0;
+  }
 }

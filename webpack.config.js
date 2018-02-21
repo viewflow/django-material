@@ -1,7 +1,10 @@
+/* eslint-env node */
+
 const path = require('path');
 const copyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const ExtraneousFileCleanupPlugin = require('webpack-extraneous-file-cleanup-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 
 const BABEL_LOADER_CONFIG = {
@@ -41,6 +44,7 @@ const SASS_LOADER_CONFIG = {
 const SASS_CONFIG = {
   entry: {
     'django-material-components': './material/components/django-material-components.scss',
+    'django-material-profile-page': './material/components/dmc-profile-page/dmc-profile.scss',
     'django-material-theme-amber': './material/components/themes/theme-amber.scss',
     'django-material-theme-bluegrey': './material/components/themes/theme-bluegrey.scss',
     'django-material-theme-blue': './material/components/themes/theme-blue.scss',
@@ -79,7 +83,39 @@ const SASS_CONFIG = {
   ],
 };
 
-const JAVASCRIPT_CONFIG = {
+const JAVASCRIPT_PAGES_CONFIG = {
+  entry: {
+    'django-material-profile-page': './material/components/django-material-profile-page.js',
+  },
+
+  output: {
+    filename: 'js/[name].min.js',
+    path: path.resolve(__dirname, 'material/static/material'),
+    library: 'frontend',
+    libraryTarget: 'umd',
+  },
+
+  devtool: 'source-map',
+
+  module: {
+    rules: [BABEL_LOADER_CONFIG],
+  },
+
+  externals: {
+    'material-components-web': 'mdc',
+    'stimulus': 'Stimulus',
+    'turbolinks': 'Turbolinks',
+    'frontend': 'frontend',
+  },
+
+  plugins: [
+    new UglifyJsPlugin({
+      sourceMap: true,
+    }),
+  ],
+};
+
+const JAVASCRIPT_CORE_CONFIG = {
   entry: {
     'django-material-components': './material/components/django-material-components.js',
   },
@@ -104,6 +140,9 @@ const JAVASCRIPT_CONFIG = {
   },
 
   plugins: [
+    new UglifyJsPlugin({
+      sourceMap: true,
+    }),
     copyWebpackPlugin([
       {
         from: 'node_modules/turbolinks/dist/turbolinks.js',
@@ -134,6 +173,7 @@ const JAVASCRIPT_CONFIG = {
 };
 
 module.exports = [
-  JAVASCRIPT_CONFIG,
+  JAVASCRIPT_CORE_CONFIG,
+  JAVASCRIPT_PAGES_CONFIG,
   SASS_CONFIG,
 ];

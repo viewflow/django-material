@@ -3,8 +3,8 @@
 
 {% block js %}
 {{ block.super }}
-<link href="{% static 'material/css/django-material-frontend-profile.min.css' %}" rel="stylesheet">
-<script src="{% static 'material/js/django-material-frontend-profile.min.js' %}" async="false"></script>
+<link href="{% static 'material/css/django-material-profile-page.min.css' %}" rel="stylesheet">
+<script src="{% static 'material/js/django-material-profile-page.min.js' %}"></script>
 {% endblock js %}
 
 {% block sidebar-app-menu %}
@@ -21,13 +21,13 @@
 {% block page-title %}{% trans 'Profile' %}{% endblock %}
 
 {% block content %}
-<div class="mdc-layout-grid dmc-profile" data-mdc-auto-init="DMCProfilePage">
+<div class="mdc-layout-grid dmc-profile">
   <div class="mdc-layout-grid__inner dmc-profile-layout-grid__inner">
     <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-10">
       <div class="mdc-card dmc-profile-detail">
-        <section class="mdc-card__primary">
-          <h1 class="mdc-card__title mdc-card__title--large">John Doe</h1>
-          <h2 class="mdc-card__subtitle">admin@admin.com</h2>
+        <section class="dmc-profile-detail__header">
+          <h1 class="mdc-typography--headline">John Doe</h1>
+          <h2 class="mdc-typography--subheading1">admin@admin.com</h2>
         </section>
         <section>
           <table class="dmc-list-table">
@@ -54,7 +54,7 @@
       </div>
     </div>
     <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2">
-      <div class="mdc-card dmc-profile-avatar">
+      <div class="mdc-card dmc-profile-avatar" data-controller="dmc-profile-avatar">
         <section class="mdc-card__media dmc-profile-avatar__media">
           <div>
             <img src="{{ request.user|_user_avatar_url }}">
