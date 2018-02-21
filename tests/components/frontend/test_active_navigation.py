@@ -11,7 +11,7 @@ class Test(LiveTestCase):
         self.browser.get(f"{self.live_server_url}/atlas/city/")
         city_link = self.browser.find_element_by_xpath('//aside//a[@href="/atlas/city/"]')
         self.assertIn(
-            'mdc-permanent-drawer--selected',
+            'mdc-list-item--selected',
             city_link.get_attribute('class').split(' ')
         )
 
@@ -20,6 +20,6 @@ class Test(LiveTestCase):
         ocean_link.click()
 
         self.browser.find_element_by_xpath(
-            '//aside//a[@href="/atlas/ocean/"][contains(@class, "mdc-permanent-drawer--selected")]'
+            '//aside//a[@href="/atlas/ocean/"][contains(@class, "mdc-list-item--selected")]'
         )
         self.assertNoJsErrors()

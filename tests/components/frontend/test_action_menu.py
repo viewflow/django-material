@@ -13,10 +13,10 @@ class Test(LiveTestCase):
         page_menu.click()
 
         # click
-        menu = self.browser.find_element_by_css_selector('.dmc-list .mdc-simple-menu--open')
+        menu = self.browser.find_element_by_css_selector('.dmc-list .mdc-menu--open')
         self.assertTrue(menu.is_displayed())
 
-        add_link = menu.find_element_by_css_selector('[data-dmc-menu-href="/atlas/city/add/"]')
+        add_link = menu.find_element_by_css_selector('[data-dmc-card-menu-href="/atlas/city/add/"]')
         add_link.click()
 
         # add page loaded

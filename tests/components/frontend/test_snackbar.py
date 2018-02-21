@@ -6,7 +6,7 @@ from .. import LiveTestCase
 
 
 class Test(LiveTestCase):
-    def test_responsive_drawer(self):
+    def test_snackbar(self):
         self.browser.get(f"{self.live_server_url}/components/snackbar/")
 
         button = WebDriverWait(self.browser, 10).until(

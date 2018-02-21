@@ -14,7 +14,7 @@ class Test(LiveTestCase):
         self.browser.find_element_by_css_selector('button[type=submit]').click()
 
         # wait for page load
-        self.browser.find_element_by_css_selector('.dmc-header__avatar')
+        self.browser.find_element_by_css_selector('.dmc-drawer-header__avatar')
 
         self.assertTrue(
             self.browser.execute_script('return window.notReloaded')

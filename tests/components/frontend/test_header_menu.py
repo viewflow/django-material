@@ -8,9 +8,9 @@ class Test(LiveTestCase):
         self.assertTrue(self.login(username='admin', password='admin'))
         self.browser.get(f"{self.live_server_url}/atlas/city/")
 
-        primary_menu = self.browser.find_element_by_css_selector('.dmc-header-menu__primary')
-        secondary_menu = self.browser.find_element_by_css_selector('.dmc-header-menu__secondary')
-        button = self.browser.find_element_by_css_selector('.dmc-header__menu button')
+        primary_menu = self.browser.find_element_by_css_selector('.dmc-drawer__primary-content')
+        secondary_menu = self.browser.find_element_by_css_selector('.dmc-drawer__secondary-content')
+        button = self.browser.find_element_by_css_selector('.dmc-drawer-header__menu-button')
 
         self.assertTrue(primary_menu.is_displayed())
         self.assertFalse(secondary_menu.is_displayed())
