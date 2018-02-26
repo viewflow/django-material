@@ -1,7 +1,7 @@
 from datetime import date
 
 from tests.atlas.models import Continent, Country
-from .. import LiveTestCase
+from . import LiveTestCase
 
 
 class Test(LiveTestCase):
