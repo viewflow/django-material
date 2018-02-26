@@ -14,6 +14,8 @@ import DMCScrollLockFix from './dmc-scroll-lock-fix';
 import DMCSelectField from './dmc-select-field';
 import DMCSnackbar from './dmc-snackbar';
 import DMCToggleDrawerButton from './dmc-toggle-drawer-button';
+import DMCTurbolinks from './dmc-turbolinks';
+
 
 export const application = Application.start();
 application.register('dmc-active-navigation', DMCActiveNavigation);
@@ -31,3 +33,5 @@ application.register('dmc-scroll-lock-fix', DMCScrollLockFix);
 application.register('dmc-select-field', DMCSelectField);
 application.register('dmc-snackbar', DMCSnackbar);
 application.register('dmc-toggle-drawer-button', DMCToggleDrawerButton);
+application.register('dmc-turbolinks', DMCTurbolinks);
+
