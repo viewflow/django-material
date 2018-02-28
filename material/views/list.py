@@ -170,7 +170,7 @@ class ObjectAttrColumn(DataSourceColumn):
         return attr
 
 
-class ListModelView(generic.ListView):
+class BaseListModelView(generic.ListView):
     viewset = None
     columns = None
     object_link_columns = None
@@ -200,7 +200,7 @@ class ListModelView(generic.ListView):
             return self.columns[0]
         return self.object_link_columns
 
-    def get_column(self, attr_name):
+    def get_column_def(self, attr_name):
         opts = self.model._meta
 
         # an object field
@@ -233,8 +233,21 @@ class ListModelView(generic.ListView):
                 return obj.get_absolute_url()
 
     @cached_property
-    def list_columns(self):
-        return [self.get_column(column_name) for column_name in self.get_columns()]
+    def list_columns_defs(self):
+        return [self.get_column_def(column_name) for column_name in self.get_columns()]
+
+    def get_column_data(self, column_def):
+        return {
+            'column_def': column_def,
+            'column_type': column_def.column_type,
+            'header': column_def.header
+        }
+
+    def get_columns_data(self):
+        return [
+            self.get_column_data(column_def)
+            for column_def in self.list_columns_defs
+        ]
 
     def format_value(self, obj, column, value):
         result = column.format_value(obj, value)
@@ -243,7 +256,6 @@ class ListModelView(generic.ListView):
             if url:
                 result = format_html('<a href="{}">{}</a>', url, result)
         return result
-
     def get_page_data(self, page):
         """"Formated page data for a table.
 
@@ -252,8 +264,8 @@ class ListModelView(generic.ListView):
         """
         for obj in page:
             yield [
-                (column, self.format_value(obj, column, column.get_value(obj)))
-                for column in self.list_columns
+                (column_def, self.format_value(obj, column_def, column_def.get_value(obj)))
+                for column_def in self.list_columns_defs
             ]
 
     def get_page_actions(self, *actions):
@@ -289,4 +301,10 @@ class ListModelView(generic.ListView):
         if not self.has_view_permission(self.request):
             raise PermissionDenied
 
-        return super(ListModelView, self).dispatch(request, *args, **kwargs)
+        return super(BaseListModelView, self).dispatch(request, *args, **kwargs)
+
+
+class ListModelView(BaseListModelView):
+    """
+    Render some list of objects.
+    """
