@@ -85,8 +85,8 @@ Django Material Pro with additional features has a commercial-friendly license. 
 Changelog
 =========
 
-1.2.2 2017-01-11
+1.2.3 GIT
 ----------------
 
-- Materialize 1.0.0.alpha3
-- [PRO] Fix ajax multi-select widget
+- Materialize 1.0.0.alpha4
+

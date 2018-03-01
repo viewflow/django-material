@@ -13,7 +13,7 @@
       .find('select')
       .not('.disabled')
       .not('.material-ignore')
-      .select()
+      .formSelect()
 
     var lang = jQuery( ":root" ).attr('lang')
     if(lang) {
