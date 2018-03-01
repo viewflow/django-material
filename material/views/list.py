@@ -222,7 +222,7 @@ class BaseListModelView(generic.ListView):
                 return DataSourceColumn(data_source, attr_name)
 
         # a method from object
-        if hasattr(self.object_list.model, attr_name):
+        if hasattr(self.model, attr_name):
             return ObjectAttrColumn(self.model, attr_name)
 
     def get_object_url(self, obj):
