@@ -233,21 +233,11 @@ class BaseListModelView(generic.ListView):
                 return obj.get_absolute_url()
 
     @cached_property
-    def list_columns_defs(self):
-        return [self.get_column_def(column_name) for column_name in self.get_columns()]
-
-    def get_column_data(self, column_def):
+    def list_columns(self):
         return {
-            'column_def': column_def,
-            'column_type': column_def.column_type,
-            'header': column_def.header
+            column_name: self.get_column_def(column_name)
+            for column_name in self.get_columns()
         }
-
-    def get_columns_data(self):
-        return [
-            self.get_column_data(column_def)
-            for column_def in self.list_columns_defs
-        ]
 
     def format_value(self, obj, column, value):
         result = column.format_value(obj, value)
@@ -256,6 +246,7 @@ class BaseListModelView(generic.ListView):
             if url:
                 result = format_html('<a href="{}">{}</a>', url, result)
         return result
+
     def get_page_data(self, page):
         """"Formated page data for a table.
 
@@ -265,7 +256,7 @@ class BaseListModelView(generic.ListView):
         for obj in page:
             yield [
                 (column_def, self.format_value(obj, column_def, column_def.get_value(obj)))
-                for column_def in self.list_columns_defs
+                for column_def in self.list_columns.values()
             ]
 
     def get_page_actions(self, *actions):

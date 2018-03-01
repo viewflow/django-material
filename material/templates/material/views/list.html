@@ -18,7 +18,7 @@
     <table class="dmc-list-table">
       <thead>
         <tr>
-          {% for column in view.get_columns_data %}
+          {% for name, column in view.list_columns.items %}
           <th class="dmc-list-table__header-{{ column.column_type }}">{{ column.header }}</th>
           {% endfor %}
         </tr>
