@@ -27,7 +27,7 @@
   thead {
     display: block;
     position: sticky;
-    top: 0;
+    top: -1px;
     background: #fff;
     background: var(--mdc-theme-background, #fff);
 
