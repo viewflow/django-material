@@ -10,6 +10,10 @@
   flex-grow: 1;
 }
 
+.dmc-page__content {
+  display: flex;
+}
+
 .dmc-page__toolbar {
   z-index: 1;
   margin-left: -1px;

@@ -20,8 +20,8 @@
       <tbody>
         {% for field, field_name, value in view.get_object_data %}
         <tr>
-          <th>{{ field_name }}</th>
-          <td>{{ value }}</td>
+          <th class="dmc-list-table__header-text">{{ field_name }}</th>
+          <td class="dmc-list-table__cell-text">{{ value }}</td>
         </tr>
         {% endfor %}
       </tbody>
