@@ -8,15 +8,21 @@
 
 .dmc-page__body {
   flex-grow: 1;
+  display: flex;
+  flex-direction: column
 }
 
 .dmc-page__content {
   display: flex;
+  height: 100%;
+  align-items: flex-start;
 }
 
 .dmc-page__toolbar {
   z-index: 1;
   margin-left: -1px;
+  flex-shrink: 0;
+  flex-grow: 0;
 }
 
 .dmc-page__drawer {
