@@ -13,7 +13,11 @@
       {% endblock %}
     </h2>
     {% endblock %}
-    {% block list-header-menu %}{% include 'material/includes/view_action_menu.html' with view=view only %}{% endblock %}
+    {% block list-header-menu %}
+    <div class="dmc-list__menu">
+      {% include 'material/includes/view_action_menu.html' with view=view only %}
+    </div>
+    {% endblock %}
   </section>
   <section>
     <table class="dmc-list-table">
