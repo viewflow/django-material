@@ -304,7 +304,7 @@ class WidgetAttrNode(Node):
 
         {% attr form.email 'widget' 'data-validate' %}email{% endattr %}
         {% attr form.email 'widget' 'class' append %}green{%  endattr %}
-        {% attr form.email 'widget' 'required' %}True{%  endattr %}
+        {% attr form.email 'widget' 'required' %}required{%  endattr %}
 
     """
 
