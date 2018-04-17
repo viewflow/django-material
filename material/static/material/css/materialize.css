@@ -3632,8 +3632,9 @@ small {
       .card .card-content .card-title i {
         line-height: 32px; }
   .card .card-action {
-    position: relative;
+    background-color: inherit;
     border-top: 1px solid rgba(160, 160, 160, 0.2);
+    position: relative;
     padding: 16px 24px; }
     .card .card-action:last-child {
       border-radius: 0 0 2px 2px; }
@@ -3762,8 +3763,11 @@ small {
       font-size: 14px;
       text-overflow: ellipsis;
       overflow: hidden;
-      -webkit-transition: color .28s ease;
-      transition: color .28s ease; }
+      -webkit-transition: color .28s ease, background-color .28s ease;
+      transition: color .28s ease, background-color .28s ease; }
+      .tabs .tab a:focus, .tabs .tab a:focus.active {
+        background-color: rgba(104, 104, 104, 0.2);
+        outline: none; }
       .tabs .tab a:hover, .tabs .tab a.active {
         background-color: transparent;
         color: #424242; }
@@ -4937,6 +4941,12 @@ textarea.materialize-textarea + label:after, .select-wrapper + label:after {
               transform: translateY(-14px) scale(0.8);
       -webkit-transform-origin: 0 0;
               transform-origin: 0 0; }
+  .input-field > input[type=date]:not(.browser-default) + label,
+  .input-field > input[type=time]:not(.browser-default) + label {
+    -webkit-transform: translateY(-14px) scale(0.8);
+            transform: translateY(-14px) scale(0.8);
+    -webkit-transform-origin: 0 0;
+            transform-origin: 0 0; }
   .input-field .helper-text {
     position: relative;
     min-height: 18px;
@@ -4980,7 +4990,9 @@ textarea.materialize-textarea + label:after, .select-wrapper + label:after {
 /* Search Field */
 .input-field input[type=search] {
   display: block;
-  line-height: inherit; }
+  line-height: inherit;
+  -webkit-transition: .3s background-color;
+  transition: .3s background-color; }
   .nav-wrapper .input-field input[type=search] {
     height: inherit;
     padding-left: 4rem;
@@ -5042,17 +5054,13 @@ textarea {
   z-index: -1; }
 
 /* Autocomplete */
-.autocomplete-content {
-  margin-top: -8px;
-  margin-bottom: 8px;
-  opacity: 1;
-  position: static; }
-  .autocomplete-content li .highlight {
-    color: #444; }
-  .autocomplete-content li img {
-    height: 40px;
-    width: 40px;
-    margin: 5px 15px; }
+.autocomplete-content li .highlight {
+  color: #444; }
+
+.autocomplete-content li img {
+  height: 40px;
+  width: 40px;
+  margin: 5px 15px; }
 
 /* Character Counter */
 .character-counter {
@@ -5428,16 +5436,6 @@ select {
   border: 1px solid #f2f2f2;
   border-radius: 2px;
   height: 3rem; }
-
-.input-field select {
-  display: block;
-  position: absolute;
-  width: 0;
-  pointer-events: none;
-  height: 0;
-  bottom: 0;
-  left: 0;
-  opacity: 0; }
 
 .select-label {
   position: absolute; }
@@ -6690,6 +6688,7 @@ input[type=range].focused:focus:not(.active)::-ms-thumb {
       -ms-flex-pack: justify;
           justify-content: space-between; }
 
+.datepicker-cancel,
 .datepicker-clear,
 .datepicker-today,
 .datepicker-done {

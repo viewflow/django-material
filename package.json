@@ -24,7 +24,7 @@
     "jquery": "^3.3.1",
     "jquery-datetimepicker": "^2.5.18",
     "material-design-icons": "^3.0.1",
-    "materialize-css": "1.0.0-alpha.4",
+    "materialize-css": "1.0.0-beta",
     "merge-stream": "^1.0.1",
     "perfect-scrollbar": "^1.3.0",
     "pump": "^1.0.2",

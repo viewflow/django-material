@@ -88,5 +88,5 @@ Changelog
 1.2.3 GIT
 ----------------
 
-- Materialize 1.0.0.alpha4
+- Materialize 1.0.0.beta
 
