@@ -85,8 +85,10 @@ Django Material Pro with additional features has a commercial-friendly license. 
 Changelog
 =========
 
-1.2.3 GIT
+1.2.3 2018-04-19
 ----------------
 
 - Materialize 1.0.0.beta
+- [PRO] do not show clear label for ajax fields
+- [PRO] trigger js change events on autocomplete
 
