@@ -61,7 +61,7 @@
       .find('select')
       .not('.disabled')
       .not('.material-ignore')
-      .select('destroy')
+      .formSelect('destroy')
 
     // Date/DateTime/Time
     $container
