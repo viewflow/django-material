@@ -116,6 +116,8 @@ select.material-ignore {
 
         .caret {
             z-index: 0;
+            cursor: pointer;
+            pointer-events: none;
         }
     }
 }

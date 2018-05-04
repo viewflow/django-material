@@ -78,7 +78,9 @@ select.material-ignore {
   .select-field .select-wrapper input.select-dropdown {
     margin-top: -7px; }
   .select-field .select-wrapper .caret {
-    z-index: 0; }
+    z-index: 0;
+    cursor: pointer;
+    pointer-events: none; }
 
 /* CHECHBOX FIELD */
 .checkbox-field {
