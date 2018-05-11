@@ -6,7 +6,7 @@
 {% block page-title %}403 {% trans 'Access Forbidden' %}{% endblock %}
 
 {% block sidebar-content %}
-<div class="mdc-typography--subheading2 mdc-typography--adjust-margin">
+<div class="mdc-typography--body1">
   {% if request.user.is_anonymous %}
     {% trans 'You are not logged in' %}
   {% else %}

@@ -5,7 +5,7 @@
 <div class="mdc-card dmc-form-page">
   <section class="dmc-form-page__header">
     {% block list-header-title %}
-    <h1 class="mdc-typography--headline">
+    <h1 class="mdc-typography--headline5">
       {% if view.object.pk %}
         {{ view.object }}
       {% else %}
@@ -13,7 +13,7 @@
       {% endif %}</h1>
     {% endblock %}
     {% block list-header-subtitle %}
-    <h2 class="mdc-typography--subheading1 dmc-breadcrumbs">
+    <h2 class="mdc-typography--subtitle1 dmc-breadcrumbs">
       {% block breadcrumbs_items %}
       <a href="{% viewset_url view.viewset 'list' %}">{{ view.model|verbose_name_plural|title }}</a>
       {% if view.object.pk %}

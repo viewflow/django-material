@@ -30,6 +30,14 @@ class FieldRender(object):
             self.bound_field.form.use_required_attribute
         )
 
+    @property
+    def html_name(self):
+        return self.bound_field.html_name
+
+    @property
+    def label_text(self):
+        return self.bound_field.label
+
     @cached_property
     def value(self):
         return self.bound_field.value()

@@ -6,7 +6,7 @@ class MDCTextInput(object):
     """
     MDC Text Field Element.
 
-    https://material.io/components/web/catalog/input-controls/text-field/
+    https://material.io/develop/web/components/input-controls/text-field/
     """
 
     def control_type(self):
@@ -35,7 +35,7 @@ class MDCTextInput(object):
     def label_attrs(self):
         return {
             'class': {
-                'mdc-text-field__label': True
+                'mdc-floating-label': True
             }
         }
 
@@ -43,7 +43,7 @@ class MDCTextInput(object):
         return Div(**self.wrapper_attrs()) / [
             Input(**self.control_attrs()),
             Label(**self.label_attrs()) / [self.label_text()],
-            Div(class_='mdc-text-field__bottom-line')
+            Div(class_='mdc-line-ripple')
         ]
 
     def __str__(self):
