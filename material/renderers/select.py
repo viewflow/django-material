@@ -34,7 +34,8 @@ class MDCSelectMenu(object):
     def label_attrs(self):
         return {
             'class': {
-                'mdc-floating-label': True
+                'mdc-floating-label': True,
+                'mdc-floating-label--float-above': True,
             }
         }
 
