@@ -2365,6 +2365,61 @@ td, th {
       border: 0;
       border-right: 1px solid rgba(0, 0, 0, 0.12); } }
 
+/***Added responsive table vertical here- simply a a tweaked version of responsive table****/
+
+@media only screen and (max-width: 992px) {
+  table.responsive-table-vertical {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    display: block;
+    position: relative;
+    /* sort out borders */ }
+    table.responsive-table-vertical td:empty:before {
+      content: '\00a0'; }
+    table.responsive-table-vertical th,
+    table.responsive-table-vertical td {
+      margin: 0;
+      vertical-align: top; }
+    table.responsive-table-vertical th {
+      text-align: left; }
+    table.responsive-table-vertical thead {
+      display: none; }
+      table.responsive-table-vertical thead tr {
+        display: block;
+        padding: 0 10px 0 0; }
+        table.responsive-table-vertical thead tr th::before {
+          content: "\00a0"; }
+    table.responsive-table-vertical tbody {
+      display: block;
+      width: auto;
+      position: relative;
+      overflow-x: auto;
+      white-space: nowrap; }
+      table.responsive-table-vertical tbody tr {
+        display: block;
+        vertical-align: top;
+        font-size: x-large; }
+    table.responsive-table-vertical th {
+      display: block;
+      text-align: right; }
+    table.responsive-table-vertical td {
+      display: block;
+      min-height: 1.25em;
+      text-align: right; }
+    table.responsive-table-vertical td::before {
+      content: attr(data-label);
+      float: left;
+      font-weight: bold;
+    }
+    table.responsive-table-vertical tr {
+      border-bottom: none;
+      padding: 0 10px; }
+    table.responsive-table-vertical thead {
+      border: 0;
+      border-right: 1px solid rgba(0, 0, 0, 0.12); } }
+ 
+
 .collection {
   margin: 0.5rem 0 1rem 0;
   border: 1px solid #e0e0e0;
@@ -6456,10 +6511,19 @@ input[type=range]::-ms-thumb {
     visibility: visible;
     -webkit-animation: pulse-animation 1s cubic-bezier(0.24, 0, 0.38, 1) infinite;
             animation: pulse-animation 1s cubic-bezier(0.24, 0, 0.38, 1) infinite;
-    -webkit-transition: opacity .3s, visibility 0s 1s, -webkit-transform .3s;
-    transition: opacity .3s, visibility 0s 1s, -webkit-transform .3s;
-    transition: opacity .3s, transform .3s, visibility 0s 1s;
-    transition: opacity .3s, transform .3s, visibility 0s 1s, -webkit-transform .3s; }
+    -webkit-transition: opacity .3s,
+ visibility 0s 1s,
+ -webkit-transform .3s;
+    transition: opacity .3s,
+ visibility 0s 1s,
+ -webkit-transform .3s;
+    transition: opacity .3s,
+ transform .3s,
+ visibility 0s 1s;
+    transition: opacity .3s,
+ transform .3s,
+ visibility 0s 1s,
+ -webkit-transform .3s; }
 
 .tap-target {
   position: absolute;
@@ -6503,10 +6567,19 @@ input[type=range]::-ms-thumb {
     transition: transform .3s, -webkit-transform .3s; }
   .tap-target-wave::after {
     visibility: hidden;
-    -webkit-transition: opacity .3s, visibility 0s, -webkit-transform .3s;
-    transition: opacity .3s, visibility 0s, -webkit-transform .3s;
-    transition: opacity .3s, transform .3s, visibility 0s;
-    transition: opacity .3s, transform .3s, visibility 0s, -webkit-transform .3s;
+    -webkit-transition: opacity .3s,
+ visibility 0s,
+ -webkit-transform .3s;
+    transition: opacity .3s,
+ visibility 0s,
+ -webkit-transform .3s;
+    transition: opacity .3s,
+ transform .3s,
+ visibility 0s;
+    transition: opacity .3s,
+ transform .3s,
+ visibility 0s,
+ -webkit-transform .3s;
     z-index: -1; }
 
 .tap-target-origin {
