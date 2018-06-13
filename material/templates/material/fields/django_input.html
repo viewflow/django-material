@@ -11,6 +11,7 @@
             name="{{ bound_field.html_name }}"
             type="{{ field.widget.input_type }}"
             {% if bound_field.errors %}class="invalid"{% endif %}
+            {% if field.disabled %}disabled{% endif %}
             {% if bound_field.value != None %}value="{{ bound_field.value|unlocalize }}"{% endif %}
         {% endattrs %}>{% endpart %}
         {% part field label %}

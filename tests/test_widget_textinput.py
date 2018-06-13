@@ -13,6 +13,14 @@ class TextInputForm(forms.Form):
         widget=forms.TextInput(attrs={'data-test': 'Test Attr'}))
 
 
+class DisabledTextInputForm(forms.Form):
+    test_field = forms.CharField(
+        min_length=5,
+        max_length=20,
+        disabled=True,
+        widget=forms.TextInput(attrs={'data-test': 'Test Attr'}))
+
+
 @override_settings(ROOT_URLCONF=__name__)
 class Test(WebTest):
     default_form = TextInputForm
@@ -139,5 +147,12 @@ class Test(WebTest):
              {% part form.test_field  errors%}<div class="errors"><small class="error">My Error</small></div>{% endpart %}
         {% endform %}
     '''
+
+    def test_disabled_field(self):
+        page = self.app.get(self.test_disabled_field.url)
+
+        self.assertIn('disabled', page.body.decode('utf-8'))
+
+    test_disabled_field.form = DisabledTextInputForm
 
 urlpatterns = build_test_urls(Test)
