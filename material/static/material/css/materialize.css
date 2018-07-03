@@ -4280,6 +4280,8 @@ body.keyboard-focused .dropdown-content li:focus {
   overflow-y: auto;
   border-radius: 2px;
   will-change: top, opacity; }
+  .modal:focus {
+    outline: none; }
   @media only screen and (max-width: 992px) {
     .modal {
       width: 80%; } }
