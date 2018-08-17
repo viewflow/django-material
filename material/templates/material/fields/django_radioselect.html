@@ -15,6 +15,7 @@
                 type="radio"
                 class="with-gap{% if bound_field.errors %} invalid{% endif %}"
                 value="{{ value|unlocalize }}"
+                {% if field.disabled %}disabled{% endif %}
                 {% if selected %}checked{% endif %}
             {% endattrs %}/>
             <span{% attrs bound_field 'label' %}

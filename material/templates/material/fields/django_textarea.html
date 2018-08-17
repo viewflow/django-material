@@ -9,6 +9,7 @@
             id="id_{{ bound_field.html_name }}"
             name="{{ bound_field.html_name }}"
             class="materialize-textarea{% if bound_field.errors %} invalid{% endif %}"
+            {% if field.disabled %}disabled{% endif %}
         {% endattrs %}>{% if bound_field.value %}{{ bound_field.value }}{% endif %}</textarea>
         {% endpart %}
         {% part field label %}

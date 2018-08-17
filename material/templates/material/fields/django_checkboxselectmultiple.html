@@ -21,6 +21,7 @@
                         type="checkbox"
                         {% if bound_field.errors %}class="invalid"{% endif %}
                         value="{{ value|unlocalize }}"
+                        {% if field.disabled %}disabled{% endif %}
                         {% if selected %}checked{% endif %}
                     {% endattrs %}/>
                     <span for="id_{{ bound_field.html_name }}_{{ position }}">{{ choice }}</span>
