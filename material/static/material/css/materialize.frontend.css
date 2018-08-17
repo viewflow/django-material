@@ -70,7 +70,7 @@ th {
 /* LAYOUT */
 @media only screen and (min-width: 993px) {
   html {
-    overflow-y: scroll; }
+    overflow-y: auto; }
   main, footer {
     margin-left: 300px; }
   nav {
