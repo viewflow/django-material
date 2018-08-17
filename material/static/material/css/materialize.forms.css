@@ -131,9 +131,11 @@ select.material-ignore {
   left: auto; }
 
 .file-field-clear {
-  float: right; }
+  float: right;
+  margin-top: 15px;
+  margin-left: 6px; }
   .file-field-clear label {
-    margin-right: 25px;
+    margin-right: 5px;
     width: auto; }
 
 /* FORMSET*/

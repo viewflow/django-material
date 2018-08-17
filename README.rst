@@ -85,8 +85,8 @@ Django Material Pro with additional features has a commercial-friendly license. 
 Changelog
 =========
 
-1.2.5 2018-05-07
+1.3.0 2018-08-*
 ----------------
 
-- Fix pre-build themes
-
+- Conform select multiple attribute rendering
+- Fix multiple and clearable file inputs

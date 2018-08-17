@@ -165,6 +165,7 @@ class FileFieldForm(forms.Form):
     field1 = forms.FileField(help_text='default')
     field2 = forms.FileField(help_text='initial value', initial=FakeFieldFile())
     field3 = forms.FileField(help_text='optional', required=False, initial=FakeFieldFile())
+    field4 = forms.FileField(help_text='multiple', widget=forms.FileInput(attrs={'multiple': True}))
 
 
 class FilePathFieldForm(forms.Form):
