@@ -42,7 +42,7 @@ class SelectDateWidget(Widget):
                     except ValueError:
                         pass
                 else:
-                    match = self.re_date.match(value)
+                    match = self.date_re.match(value)
                     if match:
                         year_val, month_val, day_val = [
                             int(v) for v in match.groups()
