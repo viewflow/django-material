@@ -48,6 +48,7 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <tr style="display:none"><td></td></tr> {# fix for invalid colpan on datatable init #}
                     {% for item, row in data %}
                     <tr>
                         {% for column_name, item in row.items %}
