@@ -88,6 +88,9 @@ Changelog
 1.3.0 GIT VERSION
 -----------------
 
+- Django 2.1 compatibility
 - Conform select multiple attribute rendering
 - Fix multiple and clearable file inputs
 - Support for field.disabled
+- [PRO] Improve custom columns ordering handing
+- [PRO] Allow to select object from different pages in a list view
