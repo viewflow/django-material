@@ -85,8 +85,8 @@ Django Material Pro with additional features has a commercial-friendly license. 
 Changelog
 =========
 
-1.3.0 GIT VERSION
------------------
+1.3.0 2018-08-23
+----------------
 
 - Django 2.1 compatibility
 - Conform select multiple attribute rendering

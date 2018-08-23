@@ -1,3 +1,13 @@
+1.3.0 2018-08-23
+----------------
+
+- Django 2.1 compatibility
+- Conform select multiple attribute rendering
+- Fix multiple and clearable file inputs
+- Support for field.disabled
+- [PRO] Improve custom columns ordering handing
+- [PRO] Allow to select object from different pages in a list view
+
 1.2.5 2018-05-07
 ----------------
 
