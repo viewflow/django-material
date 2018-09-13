@@ -35,3 +35,14 @@ $(document).on("submit", "form[data-control-form][method=get]", function(e) {
   );
   return false;
 });
+
+// Disable reload same page links
+document.addEventListener("turbolinks:before-visit", function (event) {
+  var origin = window.location.href;
+  var destination = event.data.url;
+
+  if(origin == destination) {
+    event.preventDefault();
+    return;
+  }
+});
