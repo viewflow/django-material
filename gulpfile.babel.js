@@ -37,7 +37,8 @@ gulp.task('3rdparty.js', () => {
     'node_modules/datatables/media/js/jquery.dataTables.js',
     'node_modules/jquery-datetimepicker/build/jquery.datetimepicker.full.js',
     'node_modules/perfect-scrollbar/dist/js/perfect-scrollbar.jquery.js',
-    'node_modules/turbolinks/dist/turbolinks.js'
+    'node_modules/turbolinks/dist/turbolinks.js',
+    'node_modules/@webcomponents/custom-elements/custom-elements.min.js',
   ]
 
   return gulp.src(deps)
@@ -56,6 +57,29 @@ gulp.task('3rdparty.css', () => {
 })
 
 
+gulp.task('components.js', () => {
+  var deps = [
+    './node_modules/@webcomponents/custom-elements/src/native-shim.js',
+  ];
+
+  return gulp.src(deps)
+  .pipe(babel({presets: [
+    ['env', {
+      "targets": {
+        "browsers": supportedBrowsers
+      },
+      "plugins": [
+        'transform-es2015-arrow-functions',
+        'transform-es2015-block-scoping',
+        'transform-es2015-classes',
+        'transform-es2015-template-literals',
+        'transform-es2015-constants',
+      ]
+    }]
+  ]}))
+  .pipe(gulp.dest('./material/static/material/js/'));
+});
+
 gulp.task('materialize.js', () => {
   var deps = [
     'node_modules/materialize-css/dist/js/materialize.js'
@@ -63,56 +87,6 @@ gulp.task('materialize.js', () => {
 
   return gulp.src(deps)
     .pipe(gulp.dest('./material/static/material/js/'))
-  /*
-  var deps = [
-    "node_modules/materialize-css/js/anime.min.js",
-    "node_modules/materialize-css/js/autocomplete.js",
-    "node_modules/materialize-css/js/buttons.js",
-    "node_modules/materialize-css/js/cards.js",
-    "node_modules/materialize-css/js/carousel.js",
-    "node_modules/materialize-css/js/cash.js",
-    "node_modules/materialize-css/js/characterCounter.js",
-    "node_modules/materialize-css/js/chips.js",
-    "node_modules/materialize-css/js/collapsible.js",
-    "node_modules/materialize-css/js/datepicker.js",
-    "node_modules/materialize-css/js/dropdown.js",
-    "node_modules/materialize-css/js/forms.js",
-    "node_modules/materialize-css/js/global.js",
-    "node_modules/materialize-css/js/jquery.timeago.min.js",
-    "node_modules/materialize-css/js/materialbox.js",
-    "node_modules/materialize-css/js/modal.js",
-    "node_modules/materialize-css/js/parallax.js",
-    "node_modules/materialize-css/js/prism.js",
-    "node_modules/materialize-css/js/pushpin.js",
-    "node_modules/materialize-css/js/range.js",
-    "node_modules/materialize-css/js/scrollspy.js",
-    "node_modules/materialize-css/js/select.js",
-    "node_modules/materialize-css/js/sidenav.js",
-    "node_modules/materialize-css/js/slider.js",
-    "node_modules/materialize-css/js/tabs.js",
-    "node_modules/materialize-css/js/tapTarget.js",
-    "node_modules/materialize-css/js/timepicker.js",
-    "node_modules/materialize-css/js/toasts.js",
-    "node_modules/materialize-css/js/tooltip.js",
-    "node_modules/materialize-css/js/waves.js",
-  ]
-  return gulp.src(deps)
-    .pipe(babel({presets: [
-      ['env', {
-        "targets": {
-          "browsers": supportedBrowsers
-        },
-        "plugins": [
-          'transform-es2015-arrow-functions',
-          'transform-es2015-block-scoping',
-          'transform-es2015-classes',
-          'transform-es2015-template-literals'
-        ]
-      }]
-    ]}))
-    .pipe(concat('materialize.js'))
-    .pipe(gulp.dest('./material/static/material/js/'));
-    */
 })
 
 gulp.task('materialize.scss', () => {
@@ -149,7 +123,7 @@ gulp.task('materialize.django.scss', () => {
     ))
 })
 
-gulp.task('frontend.min.js', ['materialize.js', '3rdparty.js'], (cb) => {
+gulp.task('frontend.min.js', ['materialize.js', '3rdparty.js', 'components.js'], (cb) => {
   var deps = [
     'material/static/material/js/turbolinks.js',
     'material/static/material/js/jquery.js',
@@ -163,6 +137,8 @@ gulp.task('frontend.min.js', ['materialize.js', '3rdparty.js'], (cb) => {
     'material/static/material/js/materialize.js',
     'material/static/material/js/materialize.forms.js',
     'material/static/material/js/materialize.frontend.js',
+    'material/static/material/js/native-shim.js',
+    'material/static/material/js/custom-elements.min.js',
   ]
   pump([
     gulp.src(deps),
