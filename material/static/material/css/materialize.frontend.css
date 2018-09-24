@@ -1,6 +1,9 @@
 /* materialize.css variables */
 /* django-material variables */
 /* fixes */
+dmc-snackbar > * {
+  display: none; }
+
 /* MAIN */
 html, body, main {
   height: 100%; }

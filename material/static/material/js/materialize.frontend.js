@@ -19,11 +19,6 @@ $(document).on('turbolinks:before-cache', function () {
   $('.sidenav').css('transform', '')
   $('.drag-target').remove()
   $('#slide-out').perfectScrollbar('destroy')
-
-  // Toasts
-  $('script#messages').remove()
-  M.Toast.dismissAll();
-  $('div#toast-container').css('display', 'none')
 })
 
 // submit GET forms with turbolinks

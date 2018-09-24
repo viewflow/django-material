@@ -59,24 +59,13 @@ gulp.task('3rdparty.css', () => {
 
 gulp.task('components.js', () => {
   var deps = [
-    './node_modules/@webcomponents/custom-elements/src/native-shim.js',
+    //'./node_modules/@webcomponents/custom-elements/src/native-shim.js',
+    './material/components/snackbar/index.js',
   ];
 
   return gulp.src(deps)
-  .pipe(babel({presets: [
-    ['env', {
-      "targets": {
-        "browsers": supportedBrowsers
-      },
-      "plugins": [
-        'transform-es2015-arrow-functions',
-        'transform-es2015-block-scoping',
-        'transform-es2015-classes',
-        'transform-es2015-template-literals',
-        'transform-es2015-constants',
-      ]
-    }]
-  ]}))
+  .pipe(babel())
+  .pipe(concat('materialize.components.js'))
   .pipe(gulp.dest('./material/static/material/js/'));
 });
 

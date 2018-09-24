@@ -102,13 +102,11 @@
         {% endblock %}
         {% block messages %}
         {% if messages %}
-        <script id="messages" type="text/javascript">
-            $(document).one('turbolinks:load', function () {
-              {% for message in messages %}
-              M.toast({html: '{{ message|capfirst }}', displayLength: 10000, classes:'alert-{{ message.tags }}'})
-              {% endfor %}
-            });
-        </script>
+        <dmc-snackbar>
+            {% for message in messages %}
+            <p class="alert-{{ message.tags }}">{{ message|capfirst }}</p>
+            {% endfor %}
+        </dmc-snackbar>
         {% endif %}
         {% endblock messages %}
     </body>
