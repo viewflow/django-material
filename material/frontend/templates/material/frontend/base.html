@@ -19,47 +19,49 @@
         {% block body %}
         <header>
             {% block header %}
-            <ul id="slide-out" class="sidenav sidenav-fixed" data-turbolinks-permanent>
-                {% block sidenav_header %}
-                <li>
-                    <div class="user-view">
-                        <div class="background" >
-                          <img src="{% static 'material/imgs/sidenav.svg' %}">
-                        </div>
-                        {% block userphoto %}
-                        {% if user.photo.url %}
-                        <a href="#"><img class="circle" src="{{ user.photo.url }}"></a>
-                        {% else %}
-                        <a href="#"><img class="circle" src="{% static 'material/imgs/user.png' %}"></a>
-                        {% endif %}
-                        {% endblock %}
-                        <a href="#"><span class="white-text name">{{ request.user.get_username|title }}</span></a>
-                        <a href="#"><span class="white-text email">{{ request.user.email }}</span></a>
-                    </div>
-                </li>
-                {% endblock %}
-                {% block sidenav_items %}
-                {% for module in modules %}
-                {% if current_module == module %}
-                <li class="active">
-                    <ul class="collapsible collapsible-accordion">
-                        <li>
-                            <a href="{{ module.index_url }}" class="collapsible-header active">{{ module.verbose_name }}{{ module.icon|safe }}</a>
-                            <div class="collapsible-body" style="display:block">
-                                {% include module.menu %}
+            <dmc-sidenav>
+                <ul id="slide-out" class="sidenav sidenav-fixed" data-turbolinks-permanent>
+                    {% block sidenav_header %}
+                    <li>
+                        <div class="user-view">
+                            <div class="background" >
+                              <img src="{% static 'material/imgs/sidenav.svg' %}">
                             </div>
-                        </li>
-                    </ul>
-                </li>
-                {% else %}
-                <li {% if forloop.last %}class="last"{% endif %}>
-                    <a href="{{ module.index_url }}" class="collapsible-header" data-turbolinks="false">{{ module.verbose_name }}{{ module.icon|safe }}</a>
-                </li>
-                {% endif %}
-                {% endfor %}
-                {% endblock sidenav_items %}
-            </ul>
-            {% endblock %}            
+                            {% block userphoto %}
+                            {% if user.photo.url %}
+                            <a href="#"><img class="circle" src="{{ user.photo.url }}"></a>
+                            {% else %}
+                            <a href="#"><img class="circle" src="{% static 'material/imgs/user.png' %}"></a>
+                            {% endif %}
+                            {% endblock %}
+                            <a href="#"><span class="white-text name">{{ request.user.get_username|title }}</span></a>
+                            <a href="#"><span class="white-text email">{{ request.user.email }}</span></a>
+                        </div>
+                    </li>
+                    {% endblock %}
+                    {% block sidenav_items %}
+                    {% for module in modules %}
+                    {% if current_module == module %}
+                    <li class="active">
+                        <ul class="collapsible collapsible-accordion">
+                            <li>
+                                <a href="{{ module.index_url }}" class="collapsible-header active">{{ module.verbose_name }}{{ module.icon|safe }}</a>
+                                <div class="collapsible-body" style="display:block">
+                                    {% include module.menu %}
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                    {% else %}
+                    <li {% if forloop.last %}class="last"{% endif %}>
+                        <a href="{{ module.index_url }}" class="collapsible-header" data-turbolinks="false">{{ module.verbose_name }}{{ module.icon|safe }}</a>
+                    </li>
+                    {% endif %}
+                    {% endfor %}
+                    {% endblock sidenav_items %}
+                </ul>
+            </dmc-sidenav>
+            {% endblock %}
         </header>
         <main>
             {% block main %}

@@ -59,7 +59,8 @@ gulp.task('3rdparty.css', () => {
 
 gulp.task('components.js', () => {
   var deps = [
-    //'./node_modules/@webcomponents/custom-elements/src/native-shim.js',
+    './node_modules/@webcomponents/custom-elements/src/native-shim.js',
+    './material/components/sidenav/index.js',
     './material/components/snackbar/index.js',
   ];
 
