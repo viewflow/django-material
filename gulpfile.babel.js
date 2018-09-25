@@ -60,12 +60,14 @@ gulp.task('3rdparty.css', () => {
 gulp.task('components.js', () => {
   var deps = [
     './node_modules/@webcomponents/custom-elements/src/native-shim.js',
+    './material/components/form/index.js',
     './material/components/sidenav/index.js',
     './material/components/snackbar/index.js',
   ];
 
   return gulp.src(deps)
   .pipe(babel())
+  .on('error', console.error.bind(console))
   .pipe(concat('materialize.components.js'))
   .pipe(gulp.dest('./material/static/material/js/'));
 });

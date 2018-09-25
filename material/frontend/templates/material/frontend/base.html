@@ -103,13 +103,11 @@
         </footer>
         {% endblock %}
         {% block messages %}
-        {% if messages %}
         <dmc-snackbar>
             {% for message in messages %}
             <p class="alert-{{ message.tags }}">{{ message|capfirst }}</p>
             {% endfor %}
         </dmc-snackbar>
-        {% endif %}
         {% endblock messages %}
     </body>
 </html>
