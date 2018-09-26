@@ -7,7 +7,7 @@ import merge from 'merge-stream'
 import postcss from 'gulp-postcss'
 import pump from 'pump'
 import sass from 'gulp-sass'
-import uglify from 'gulp-uglify'
+import uglify from 'gulp-uglify-es'
 
 var supportedBrowsers = [
   'last 2 versions',
@@ -60,7 +60,9 @@ gulp.task('3rdparty.css', () => {
 gulp.task('components.js', () => {
   var deps = [
     './node_modules/@webcomponents/custom-elements/src/native-shim.js',
+    './material/components/datetime/index.js',
     './material/components/form/index.js',
+    './material/components/select/index.js',
     './material/components/sidenav/index.js',
     './material/components/snackbar/index.js',
   ];
@@ -127,10 +129,8 @@ gulp.task('frontend.min.js', ['materialize.js', '3rdparty.js', 'components.js'],
     'material/static/material/js/dataTables.fixedHeader.js',
     'material/static/material/js/dataTables.responsive.js',
     'material/static/material/js/materialize.js',
-    'material/static/material/js/materialize.forms.js',
-    'material/static/material/js/materialize.frontend.js',
-    'material/static/material/js/native-shim.js',
     'material/static/material/js/custom-elements.min.js',
+    'material/static/material/js/materialize.components.js',
   ]
   pump([
     gulp.src(deps),

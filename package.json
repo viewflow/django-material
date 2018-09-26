@@ -24,6 +24,7 @@
     "gulp-postcss": "^8.0.0",
     "gulp-sass": "^4.0.1",
     "gulp-uglify": "^3.0.0",
+    "gulp-uglify-es": "^1.0.4",
     "jquery": "^3.3.1",
     "jquery-datetimepicker": "^2.5.20",
     "material-design-icons": "^3.0.1",

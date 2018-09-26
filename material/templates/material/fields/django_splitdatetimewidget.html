@@ -9,7 +9,7 @@
             for="{{ bound_field.id_for_label }}"
         {% endattrs %}>{{ bound_field.label }}</label>
     </div>
-    <div{% attrs bound_field 'group' %}
+    <{{ field.widget.component|default:'dmc-datetime' }}><div{% attrs bound_field 'group' %}
         class="input-field col s6{% if field.required %} required{% endif %}{% if bound_field.errors %} has-error{% endif %}"
         style="margin-top:-7px"
     {% endattrs %}>
@@ -35,8 +35,8 @@
         <div class="help-block">{{ bound_field.help_text|safe }}</div>
         {% endif %}
         {% endpart %}{{ hidden_initial }}
-    </div>
-    <div class="input-field col s6{% if field.required %} required{% endif %}{% if bound_field.errors %} has-error{% endif %}"
+    </div></{{ field.widget.component|default:'dmc-datetime' }}>
+    <{{ field.widget.component|default:'dmc-datetime' }}><div class="input-field col s6{% if field.required %} required{% endif %}{% if bound_field.errors %} has-error{% endif %}"
          style="margin-top:-7px">
         <i class="material-icons prefix">query_builder</i>
         <input{% attrs bound_field 'widget_time' default field.widget.attrs %}
@@ -50,5 +50,5 @@
             {% if bound_field.errors %}class="invalid"{% endif %}
             {% if bound_field.value %} value="{{ bound_field|multiwidget_value:1|datepicker_value:field.fields.1.input_formats.0 }}"{% endif %}
          {% endattrs %}>
-    </div>
+    </div></{{ field.widget.component|default:'dmc-datetime' }}>
 </div>{% endpart %}

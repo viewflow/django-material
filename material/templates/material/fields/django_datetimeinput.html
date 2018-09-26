@@ -1,7 +1,7 @@
 {% load i18n material_form material_form_internal %}
 {% get_current_language as LANGUAGE_CODE %}
 {% get_language_info for LANGUAGE_CODE as lang %}
-{% part bound_field.field %}<div class="row">
+{% part bound_field.field %}<{{ field.widget.component|default:'dmc-datetime' }}><div class="row">
     <div{% attrs bound_field 'group' %}
         id="id_{{ bound_field.html_name }}_container"
         class="input-field col s12{% if field.required %} required{% endif %}{% if bound_field.errors %} has-error{% endif %}"
@@ -33,4 +33,4 @@
             {% include  'material/field_errors.html' %}
         {% endif %}{% endpart %}{{ hidden_initial }}
     </div>
-</div>{% endpart %}
+</div></{{ field.widget.component|default:'dmc-datetime' }}>{% endpart %}

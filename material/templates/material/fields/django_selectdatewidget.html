@@ -9,7 +9,7 @@
         {% part field prefix %}{% endpart %}
         {% part field control %}
         {% with bound_field|select_date_widget_wrapper as wrapper %}
-        {% for select in wrapper.selects %}{% if select.type == "day" %}<div class="col s2">
+        {% for select in wrapper.selects %}{% if select.type == "day" %}<dmc-select><div class="col s2">
             <select{% attrs bound_field 'widget_day' %}
                 id="id_{{ bound_field.html_name }}_day"
                 name="{{ bound_field.html_name }}_day"
@@ -18,7 +18,7 @@
             {% endattrs %}>{% for value, choice in select.choices %}
                 <option {% if value == None or value == '' %}value{% else %}value="{{ value }}"{% endif %}{% if value|force_text == select.value|force_text %} selected="selected"{% endif %}>{% if value == None or value == '' %}{{ form_select_empty_label|default:choice }}{% else %}{{ choice }}{% endif %}</option>{% endfor %}
             </select>
-        </div>{% endif %}{% if select.type == "month" %}<div class="col s6">
+        </div></dmc-select>{% endif %}{% if select.type == "month" %}<dmc-select><div class="col s6">
             <select{% attrs bound_field 'widget_month' %}
                 id="id_{{ bound_field.html_name }}_month"
                 name="{{ bound_field.html_name }}_month"
@@ -27,7 +27,7 @@
             {% endattrs %}> {% for value, choice in select.choices %}
                 <option {% if value == None or value == '' %}value{% else %}value="{{ value }}"{% endif %}{% if value|force_text == select.value|force_text %} selected="selected"{% endif %}>{% if value == None or value == '' %}{{ form_select_empty_label|default:choice }}{% else %}{{ choice }}{% endif %}</option> {% endfor %}
             </select>
-        </div> {% endif %}{% if select.type == "year" %}<div class="col s4">
+        </div> </dmc-select>{% endif %}{% if select.type == "year" %}<dmc-select><div class="col s4">
             <select{% attrs bound_field 'widget_year' %}
                 id="id_{{ bound_field.html_name }}_year"
                 name="{{ bound_field.html_name }}_year"
@@ -36,7 +36,7 @@
                       {% endattrs %}>{% for value, choice in select.choices %}
                 <option {% if value == None or value == '' %}value{% else %}value="{{ value }}"{% endif %}{% if value|force_text == select.value|force_text %} selected="selected"{% endif %}>{% if value == None or value == '' %}{{ form_select_empty_label|default:choice }}{% else %}{{ choice }}{% endif %}</option>{% endfor %}
             </select>
-        </div>{% endif %}
+        </div></dmc-select>{% endif %}
         {% endfor %}{% endwith %}
         <div class="col s12">
         {% part field help_text %}{% if field.help_text %}
