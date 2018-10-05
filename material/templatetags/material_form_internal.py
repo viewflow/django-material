@@ -2,6 +2,7 @@ from __future__ import division
 
 import math
 import re
+import json
 from collections import OrderedDict
 
 from django.db.models.query import QuerySet
@@ -10,8 +11,10 @@ from django.template import Library
 from django.template.base import (
     Node, TemplateSyntaxError, Variable, token_kwargs
 )
+from django.core.serializers.json import DjangoJSONEncoder
 from django.utils import formats
 from django.utils.encoding import force_text
+from django.utils.html import escape
 
 from ..base import Field
 from ..widgets import SelectDateWidget
@@ -224,3 +227,15 @@ def select_options(bound_field):
             )
 
     return groups.items()
+
+
+class JSONEncoder(DjangoJSONEncoder):
+    def default(self, obj):
+        if obj.__class__.__module__ == 'django.utils.functional':
+            return force_text(obj)
+        return json.JSONEncoder.default(self, obj)
+
+
+@register.filter
+def to_json_attr(obj):
+    return escape(json.dumps(obj, cls=JSONEncoder))

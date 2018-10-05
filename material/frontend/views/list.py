@@ -2,9 +2,9 @@ from __future__ import unicode_literals
 
 import datetime
 import decimal
-import json
 
 from collections import OrderedDict
+from copy import deepcopy
 
 from django.contrib.auth import get_permission_codename
 from django.contrib.auth.decorators import login_required
@@ -177,7 +177,7 @@ class DataTableMixin(ContextMixin):
         """
         context = super(DataTableMixin, self).get_context_data(**kwargs)
         context.update({
-            'datatable_config': json.dumps(self.get_datatable_config()),
+            'datatable_config': self.get_datatable_config(),
             'headers': self.get_headers_data(),
             'data': self.get_table_data(0, self.paginate_by),
         })
@@ -190,7 +190,7 @@ class DataTableMixin(ContextMixin):
 
     def get_datatable_config(self):
         """Prepare datatable config."""
-        config = self.datatable_default_config.copy()
+        config = deepcopy(self.datatable_default_config)
         config['pageLength'] = self.paginate_by
         config['ajax']['url'] = self.request.path
         config['columns'] = self.get_columns_def()

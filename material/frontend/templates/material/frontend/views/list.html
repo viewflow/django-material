@@ -1,69 +1,43 @@
 {% extends current_module.base_template %}
-{% load i18n material_form material_frontend %}
+{% load i18n material_form material_form_internal material_frontend %}
 
 {% block breadcrumbs_items %}
 <a class="active" href="{% url view.model|frontend_urlname:'list' %}">{{ view.model|verbose_name_plural|title }}</a>
 {% endblock %}
 
 
-{% block footer %}
-<script type="text/javascript">
-  config = {{ datatable_config|safe }};
-  config['ajax']['data'] = function(data) {
-    var keys = Object.keys(data);
-    for(var i=0; i<=keys.length; i++) {
-      var key = keys[i],
-          value = data[key];
-      delete data[key];
-      data['datatable-' + key] = value;
-    }
-  };
-  config['ajax']['beforeSend'] = function(request) {
-    request.setRequestHeader("datatable", true);
-  };
-  $(document).one("turbolinks:load", function() {
-    if ( ! $.fn.DataTable.isDataTable( '#table' ) ) {
-      var datatable = $('#table').DataTable(config);
-      new $.fn.dataTable.FixedHeader(datatable);
-
-      $(document).one("turbolinks:before-cache", function() {
-        datatable.destroy();
-      });
-    }
-  });
-</script>
-{% endblock %}
-
 {% block content %}
 {% block left-panel %}
 <div class="left-panel">
     <div class="card list-card">
         <div class="card-content">
-            <table id="table" class="table bordered" data-form-control="datatable" style="width:100%">
-                <thead>
-                    <tr>
-                        {% for header, header_title in headers %}
-                        <th data-name="{{ header }}" class="{{ header }}">{{ header_title|title }}</th>
+            <dmc-datatable config="{{ datatable_config|to_json_attr }}">
+                <table id="table" class="table bordered" data-form-control="datatable" style="width:100%">
+                    <thead>
+                        <tr>
+                            {% for header, header_title in headers %}
+                            <th data-name="{{ header }}" class="{{ header }}">{{ header_title|title }}</th>
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="display:none"><td></td></tr> {# fix for invalid colpan on datatable init #}
+                        {% for item, row in data %}
+                        <tr>
+                            {% for column_name, item in row.items %}
+                            <td>
+                                {% if column_name in view.datalist.list_display_links %}
+                                <a href="#">{{ item }}</a>
+                                {% else %}
+                                {{ item }}
+                                {% endif %}
+                            </td>
+                            {% endfor %}
+                        </tr>
                         {% endfor %}
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr style="display:none"><td></td></tr> {# fix for invalid colpan on datatable init #}
-                    {% for item, row in data %}
-                    <tr>
-                        {% for column_name, item in row.items %}
-                        <td>
-                            {% if column_name in view.datalist.list_display_links %}
-                            <a href="#">{{ item }}</a>
-                            {% else %}
-                            {{ item }}
-                            {% endif %}
-                        </td>
-                        {% endfor %}
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </dmc-datatable>
         </div>
     </div>
 </div>
