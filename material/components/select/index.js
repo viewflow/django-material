@@ -8,6 +8,7 @@ class Select extends HTMLElement {
       .find('select')
       .not('.disabled')
       .not('.material-ignore')
+      .not('.browser-default')
       .formSelect();
   }
 
@@ -16,6 +17,7 @@ class Select extends HTMLElement {
     .find('select')
     .not('.disabled')
     .not('.material-ignore')
+    .not('.browser-default')
     .formSelect('destroy');
   }
 }

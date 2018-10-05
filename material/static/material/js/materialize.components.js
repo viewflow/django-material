@@ -374,12 +374,12 @@ function (_HTMLElement) {
   _createClass(Select, [{
     key: "connectedCallback",
     value: function connectedCallback() {
-      $(this).find('select').not('.disabled').not('.material-ignore').formSelect();
+      $(this).find('select').not('.disabled').not('.material-ignore').not('.browser-default').formSelect();
     }
   }, {
     key: "disconnectedCallback",
     value: function disconnectedCallback() {
-      $(this).find('select').not('.disabled').not('.material-ignore').formSelect('destroy');
+      $(this).find('select').not('.disabled').not('.material-ignore').not('.browser-default').formSelect('destroy');
     }
   }]);
 
