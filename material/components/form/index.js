@@ -67,12 +67,12 @@ class Form extends HTMLElement {
     Turbolinks.visit(
       this.action +
         (this.action.indexOf('?') == -1 ? '?' : '&') +
-        $(this).serialize()
+        $(this._formEl).serialize()
     );
   }
 
   get action() {
-    const action = this.form.getAttribute('action');
+    const action = this._formEl.getAttribute('action');
     if (!action) {
       return window.location.href;
     }
