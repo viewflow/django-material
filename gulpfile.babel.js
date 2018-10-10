@@ -60,9 +60,13 @@ gulp.task('3rdparty.css', () => {
 gulp.task('components.js', () => {
   var deps = [
     './node_modules/@webcomponents/custom-elements/src/native-shim.js',
+    './material/components/collapsible/index.js',
+    './material/components/dropdown/index.js',
     './material/components/datatable/index.js',
     './material/components/datetime/index.js',
     './material/components/form/index.js',
+    './material/components/modal/index.js',
+    './material/components/perfectScrollbar/index.js',
     './material/components/select/index.js',
     './material/components/sidenav/index.js',
     './material/components/snackbar/index.js',
