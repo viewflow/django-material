@@ -503,7 +503,7 @@ function (_HTMLElement) {
 }(_wrapNativeSuper(HTMLElement));
 
 window.addEventListener('load', function () {
-  window.customElements.define('dmc-dropdown', Modal);
+  window.customElements.define('dmc-modal', Modal);
 });
 "use strict";
 

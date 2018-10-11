@@ -13,5 +13,5 @@ class Modal extends HTMLElement {
 }
 
 window.addEventListener('load', () => {
-  window.customElements.define('dmc-dropdown', Modal);
+  window.customElements.define('dmc-modal', Modal);
 });
