@@ -4,14 +4,16 @@ class Sidenav extends HTMLElement {
   }
 
   connectedCallback() {
-    $('.sidenav').sidenav();
+    $(this).find('.sidenav').sidenav();
     $(document).activeNavigation('#slide-out');
     $('#slide-out').perfectScrollbar();
-
-    $(document).on('turbolinks:before-render', function (event) {
-      $(event.originalEvent.data.newBody).activeNavigation('#slide-out')
-    })
   }
+
+  disconnectedCallback() {
+    $(this).find('.sidenav').sidenav('destroy');
+    $('#slide-out').perfectScrollbar('destroy');
+  }
+
 }
 
 window.addEventListener('load', () => {

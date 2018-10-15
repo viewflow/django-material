@@ -661,12 +661,15 @@ function (_HTMLElement) {
   _createClass(Sidenav, [{
     key: "connectedCallback",
     value: function connectedCallback() {
-      $('.sidenav').sidenav();
+      $(this).find('.sidenav').sidenav();
       $(document).activeNavigation('#slide-out');
       $('#slide-out').perfectScrollbar();
-      $(document).on('turbolinks:before-render', function (event) {
-        $(event.originalEvent.data.newBody).activeNavigation('#slide-out');
-      });
+    }
+  }, {
+    key: "disconnectedCallback",
+    value: function disconnectedCallback() {
+      $(this).find('.sidenav').sidenav('destroy');
+      $('#slide-out').perfectScrollbar('destroy');
     }
   }]);
 
