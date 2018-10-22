@@ -8,6 +8,12 @@
 
     {% block head %}
     {% include 'material/includes/material_css.html' %}
+      {% block js %}
+      <script src="{% static 'material/js/jquery.js' %}"></script>
+      <script src="{% static 'material/js/turbolinks.js' %}"></script>
+      {% include 'material/includes/material_js.html' %}
+      {% block extrajs %}{% endblock %}
+      {% endblock %}
 
     <style type="text/css">
       html, body {
@@ -23,10 +29,5 @@
       <div class="{% block container_class %}container expand-on-small-only{% endblock %}">
           {% block content %}{% endblock %}
       </div>
-      {% block js %}
-      <script src="{% static 'material/js/jquery.js' %}"></script>
-      {% include 'material/includes/material_js.html' %}
-      {% block extrajs %}{% endblock %}
-      {% endblock %}
   </body>
 </html>

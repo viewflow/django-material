@@ -33,7 +33,7 @@
 <div class="right-align">
     <button class="btn btn-primary" type="submit">Submit</button>
 </div>
-<div id="form_source" class="modal">
+<dmc-modal><div id="form_source" class="modal">
     <div class="modal-content">
         <div class="section">
             <h5>Code</h5>
@@ -51,12 +51,14 @@
             <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
         </div>
     </div>
-</div>
+</div></dmc-modal>
 {% endblock %}
 
 
 {% block sidebar %}
-<a class="hide-on-small-only dropdown-button dropdown-trigger btn-floating btn-large waves-effect waves-light green" href='#' data-target="dropdown1" data-constrainwidth style="position:absolute;right:30px; top: 30px"><i class="material-icons">view_headline</i></a>
+<dmc-dropdown>
+    <a class="hide-on-small-only dropdown-button dropdown-trigger btn-floating btn-large waves-effect waves-light green" href='#' data-target="dropdown1" data-constrainwidth style="position:absolute;right:30px; top: 30px"><i class="material-icons">view_headline</i></a>
+</dmc-dropdown>
 
 <ul id="dropdown1" class="dropdown-content">
     <li><a href="/demo/widget/boolean/">BooleanField</a></li>
