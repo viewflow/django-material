@@ -21,11 +21,9 @@ Material design for Django.
    :target: https://gitter.im/viewflow/django-material?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
 
 
+- Django-Material 1.[3,4].x compatible Django 1.11/2.0/2.1
 - Django-Material 1.2.x compatible Django 1.11/2.0
 - Django-Material 1.1.x compatible Django 1.8/1.9/1.10/1.11
-
-Django-Material 1.x branch going to be supported till Django 1.8 lifetime (April 2018)
-
 
 Tested with:
 
@@ -85,12 +83,16 @@ Django Material Pro with additional features has a commercial-friendly license. 
 Changelog
 =========
 
-1.3.0 2018-08-23
+1.4.0 2018-10-25
 ----------------
 
-- Django 2.1 compatibility
-- Conform select multiple attribute rendering
-- Fix multiple and clearable file inputs
-- Support for field.disabled
-- [PRO] Improve custom columns ordering handing
-- [PRO] Allow to select object from different pages in a list view
+This is transitional release for the new - webcomponent based
+architecture.
+
+The main goal is to get out of jQuery initialization soup and
+in a future remove jQuery dependency.
+
+http://docs.viewflow.io/material_frontend.html#custom-components
+
+- New WebComponents based Javascript code
+- Upgrade to Materialize 1.0.0

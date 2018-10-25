@@ -1,3 +1,10 @@
+1.4.0 2018-10-25
+----------------
+
+- New WebComponents based Javascript code
+- Upgrade to Materialize 1.0.0
+
+
 1.3.0 2018-08-23
 ----------------
 
@@ -7,6 +14,7 @@
 - Support for field.disabled
 - [PRO] Improve custom columns ordering handing
 - [PRO] Allow to select object from different pages in a list view
+
 
 1.2.5 2018-05-07
 ----------------
