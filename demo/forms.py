@@ -172,7 +172,7 @@ class RegistrationForm(forms.Form):
 
     layout = Layout('username', 'email',
                     Row('password', 'password_confirm'),
-                    Fieldset('Pesonal details',
+                    Fieldset('Personal details',
                              Row('first_name', 'last_name'),
                              'gender', 'receive_news', 'agree_toc'))
 
