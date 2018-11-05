@@ -24,7 +24,7 @@ msgstr "breve descripción"
 
 #: admin.py:109 views.py:69
 msgid "sea area"
-msgstr "ver área"
+msgstr "área marítima"
 
 #: admin.py:120 views.py:21
 msgid "Details"
@@ -56,7 +56,7 @@ msgstr "nombre"
 
 #: models.py:10 models.py:30 models.py:49
 msgid "area"
-msgstr "zona"
+msgstr "área"
 
 #: models.py:11
 msgid "slug"
@@ -72,7 +72,7 @@ msgstr "URL del mapa"
 
 #: models.py:16 models.py:28
 msgid "ocean"
-msgstr "oceano"
+msgstr "océano"
 
 #: models.py:17 models.py:60
 msgid "oceans"
