@@ -17,7 +17,7 @@ let supportedBrowsers = [
   'Explorer >= 11',
   'Safari >= 9',
   'ChromeAndroid >= 50',
-  'FirefoxAndroid >= 46'
+  'FirefoxAndroid >= 46',
 ];
 
 gulp.task('3rdparty.fonts', () => {
@@ -51,10 +51,10 @@ gulp.task('3rdparty.css', () => {
     './node_modules/datatables.net-fixedheader-dt/css/fixedHeader.dataTables.css',
     './node_modules/datatables.net-responsive-dt/css/responsive.dataTables.css',
     './node_modules/jquery-datetimepicker/jquery.datetimepicker.css',
-    './node_modules/perfect-scrollbar/dist/css/perfect-scrollbar.css'
+    './node_modules/perfect-scrollbar/dist/css/perfect-scrollbar.css',
   ];
   return gulp.src(deps)
-    .pipe(gulp.dest('./material/static/material/css/'))
+    .pipe(gulp.dest('./material/static/material/css/'));
 });
 
 
@@ -92,7 +92,7 @@ gulp.task('materialize.js', () => {
 gulp.task('materialize.scss', () => {
   return gulp.src('./material/static/material/sass/*.scss')
     .pipe(sass({
-      includePaths: './node_modules/'
+      includePaths: './node_modules/',
     }).on(
       'error', sass.logError
     ))
@@ -109,7 +109,7 @@ gulp.task('materialize.scss', () => {
 gulp.task('materialize.django.scss', () => {
   return gulp.src('./material/static/material/sass/*.scss')
     .pipe(sass({
-      includePaths: ['./node_modules/', './material/static/']
+      includePaths: ['./node_modules/', './material/static/'],
     }).on(
       'error', sass.logError
     ))
@@ -153,7 +153,7 @@ gulp.task('frontend.min.css', ['3rdparty.css', 'materialize.scss', 'materialize.
     'material/static/material/css/jquery.datetimepicker.css',
     'material/static/material/css/responsive.dataTables.css',
     'material/static/material/css/fixedHeader.dataTables.css',
-    'material/static/material/css/perfect-scrollbar.css'
+    'material/static/material/css/perfect-scrollbar.css',
   ];
 
   return gulp.src(deps)
@@ -161,7 +161,7 @@ gulp.task('frontend.min.css', ['3rdparty.css', 'materialize.scss', 'materialize.
     .pipe(postcss([
       cssnano(),
     ]))
-    .pipe(gulp.dest('material/static/material/css/'))
+    .pipe(gulp.dest('material/static/material/css/'));
 });
 
 gulp.task('default', [
