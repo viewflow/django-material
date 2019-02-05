@@ -1,0 +1,19 @@
+{
+    "extends": "google",
+    "parser": "babel-eslint",
+    "parserOptions": {
+        "classes": true,
+        "ecmaVersion": 2015,
+        "sourceType": "module"
+    },
+    "plugins": [
+        "babel"
+    ],
+    "rules": {
+        "require-jsdoc": "off",
+        "max-len": ["error", 120],
+        "no-undef": "error",
+        "no-invalid-this": 0,
+        "babel/no-invalid-this": 1
+    }
+}

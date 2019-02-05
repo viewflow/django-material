@@ -30,6 +30,7 @@
     "material-design-icons": "^3.0.1",
     "materialize-css": "1.0.0",
     "merge-stream": "^1.0.1",
+    "natives": "^1.1.6",
     "perfect-scrollbar": "^1.3.0",
     "pump": "^1.0.2",
     "roboto-npm-webfont": "^1.0.1",
