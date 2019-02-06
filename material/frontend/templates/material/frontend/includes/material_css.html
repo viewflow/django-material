@@ -3,10 +3,12 @@
 <link href="{% static 'material/fonts/roboto/style.css' %}" rel="stylesheet">
 {% if not debug %}
 <link href="{% static 'material/css/materialize.frontend.min.css' %}" rel="stylesheet">
+<link href="{% static 'material/css/materialize.frontend.print.min.css' %}" rel="stylesheet" media="print">
 {% else %}
 <link href="{% static 'material/css/materialize.css' %}" rel="stylesheet">
 <link href="{% static 'material/css/materialize.forms.css' %}" rel="stylesheet">
 <link href="{% static 'material/css/materialize.frontend.css' %}" rel="stylesheet">
+<link href="{% static 'material/css/materialize.frontend.print.css' %}" rel="stylesheet" media="print">
 <link href="{% static 'material/css/jquery.datetimepicker.css' %}" rel="stylesheet">
 <link href="{% static 'material/css/responsive.dataTables.css' %}" rel="stylesheet">
 <link href="{% static 'material/css/fixedHeader.dataTables.css' %}" rel="stylesheet">

@@ -164,6 +164,19 @@ gulp.task('frontend.min.css', ['3rdparty.css', 'materialize.scss', 'materialize.
     .pipe(gulp.dest('material/static/material/css/'));
 });
 
+gulp.task('frontend.print.min.css', ['materialize.django.scss'], () => {
+  let deps = [
+    'material/static/material/css/materialize.frontend.print.css',
+  ];
+
+  return gulp.src(deps)
+    .pipe(concat('materialize.frontend.print.min.css'))
+    .pipe(postcss([
+      cssnano(),
+    ]))
+    .pipe(gulp.dest('material/static/material/css/'));
+});
+
 gulp.task('default', [
   '3rdparty.fonts',
   '3rdparty.js',
