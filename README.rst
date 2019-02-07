@@ -83,16 +83,8 @@ Django Material Pro with additional features has a commercial-friendly license. 
 Changelog
 =========
 
-1.4.0 2018-10-25
+Git Version
 ----------------
 
-This is transitional release for the new - webcomponent based
-architecture.
-
-The main goal is to get out of jQuery initialization soup and
-in a future remove jQuery dependency.
-
-http://docs.viewflow.io/material_frontend.html#custom-components
-
-- New WebComponents based Javascript code
-- Upgrade to Materialize 1.0.0
+- Basic print styles added
+- [PRO] WYSIWYG medium editor widget
