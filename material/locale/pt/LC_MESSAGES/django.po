@@ -1,0 +1,99 @@
+# distributed under the same license as the Django Material package.
+msgid ""
+msgstr ""
+"Project-Id-Version: django-material\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-05-10 11:28+0000\n"
+"Language: pt\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
+"%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: frontend/apps.py:141
+msgid "Frontend"
+msgstr "Frontend"
+
+#: frontend/models.py:25
+msgid "label"
+msgstr "rótulo"
+
+#: frontend/models.py:26
+msgid "installed"
+msgstr "instalado"
+
+#: frontend/models.py:31
+msgid "module"
+msgstr "модуль"
+
+#: frontend/models.py:32
+msgid "modules"
+msgstr "módulo"
+
+#: frontend/templates/400.html:4 frontend/templates/400.html.py:6
+msgid "Bad Request"
+msgstr "Pedido ruim"
+
+#: frontend/templates/403.html:4 frontend/templates/403.html.py:10
+msgid "Access Forbidden"
+msgstr "Acesso Proibido"
+
+#: frontend/templates/403.html:14
+msgid "You are not logged in"
+msgstr "Você não está logado"
+
+#: frontend/templates/403.html:16
+#, python-format
+msgid "%(user)s have no rights to access to the page"
+msgstr "%(user)s não tem direitos para acessar a página"
+
+#: frontend/templates/404.html:4 frontend/templates/404.html.py:6
+msgid "Page not found"
+msgstr "Página não encontrada"
+
+#: frontend/templates/404.html:11
+msgid "We're sorry, but the requested page could not be found."
+msgstr "Desculpe, mas a página solicitada não foi encontrada."
+
+#: frontend/templates/500.html:4 frontend/templates/500.html.py:10
+msgid "Server error"
+msgstr "Erro de servidor"
+
+#: frontend/templates/material/frontend/base_site.html:4
+#: frontend/templates/material/frontend/base_site.html:5
+msgid "Django Material"
+msgstr ""
+
+#: frontend/templates/material/frontend/views/confirm_delete.html:16
+#, python-format
+msgid "Are you sure you want to delete the %(object)s and related items?"
+msgstr "Tem certeza de que deseja excluir o %(object)s e itens relacionados?"
+
+#: frontend/views/create.py:37
+#, python-brace-format
+msgid "The {name} \"{link}\" was added successfully."
+msgstr "O {name} \"{link}\" foi adicionado com sucesso."
+
+#: frontend/views/delete.py:87
+#, python-brace-format
+msgid "The {name} \"{link}\"  was deleted successfully."
+msgstr "O {name} \"{link}\" foi excluído com sucesso."
+
+#: frontend/views/update.py:38
+#, python-brace-format
+msgid "The {name} \"{link}\" was changed successfully."
+msgstr "O {name} \"{link}\" foi alterado com sucesso."
+
+#: templates/material/fields/django_fileinput.html:8
+msgid "File"
+msgstr "Arquivo"
+
+#: templates/material/fields/django_selectmultiple.html:7
+msgid "Choose your option"
+msgstr "Escolha sua opção"
+
+# action
+msgid "Delete selected objects"
+msgstr "Excluir objetos selecionados"
