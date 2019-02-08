@@ -71,6 +71,7 @@ gulp.task('components.js', () => {
     './material/components/select/index.js',
     './material/components/sidenav/index.js',
     './material/components/snackbar/index.js',
+    './material/components/turbolinks/index.js',
   ];
 
   return gulp.src(deps)
