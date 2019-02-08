@@ -187,4 +187,5 @@ gulp.task('default', [
   'materialize.js',
   'frontend.min.js',
   'frontend.min.css',
+  'frontend.print.min.css',
 ]);
