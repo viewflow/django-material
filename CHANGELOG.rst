@@ -1,3 +1,11 @@
+1.5.0 2019-02-13
+----------------
+
+- Added portuguese translation-
+- Added default page print styles
+- [PRO] WYSIWYG medium editor widget
+
+
 1.4.0 2018-10-25
 ----------------
 

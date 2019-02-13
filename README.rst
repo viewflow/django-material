@@ -83,8 +83,9 @@ Django Material Pro with additional features has a commercial-friendly license. 
 Changelog
 =========
 
-Git Version
+1.5.0 2019-02-13
 ----------------
 
-- Basic print styles added
+- Added portuguese translation-
+- Added default page print styles
 - [PRO] WYSIWYG medium editor widget
