@@ -17,7 +17,7 @@ from django.urls import reverse
 from django.utils import formats, six, timezone
 from django.utils.decorators import method_decorator
 from django.utils.encoding import force_text
-from django.utils.html import format_html
+from django.utils.html import conditional_escape, format_html
 from django.views.generic import View
 from django.views.generic.base import ContextMixin, TemplateResponseMixin
 
@@ -310,6 +310,8 @@ class DataTableMixin(ContextMixin):
 
         result = []
         for item, columns_data in self.get_table_data(start, length):
+            for header, data in columns_data.items():
+                columns_data[header] = conditional_escape(data)
             result.append(columns_data)
 
         data = {
