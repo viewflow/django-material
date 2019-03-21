@@ -165,6 +165,11 @@ select.material-ignore {
 .formset-field td:last-child {
   padding-right: 0px; }
 
+.formset-field.has-error h5 {
+  color: #F44336;
+  border-bottom-color: #F44336;
+  margin-bottom: 5px; }
+
 /* AUTOCOMPLETE */
 .autocomplete-suggestions {
   background-color: #fff;
