@@ -66,7 +66,7 @@ th {
         .logo {
             display: none;
         }
-        
+
         .sidebar {
             width: 100%;
         }
@@ -140,7 +140,7 @@ th {
 .sidenav-fixed {
     // managed by perfect-scrollbar
     overflow-y: hidden;
-    
+
     li {
         min-height: 48px;
     }
@@ -198,6 +198,14 @@ th {
         }
     }
 }
+
+@media only screen and (min-width: 993px) {
+  nav.topbar a.sidenav-trigger {
+    display: block;
+    margin-left: -24px;
+  }
+}
+
 
 /* TOPBAR */
 nav.topbar {

@@ -151,6 +151,11 @@ th {
       .sidenav-fixed .collapsible-body .submenu.active .collapsible > li > .collapsible-header {
         color: rgba(0, 0, 0, 0.87); }
 
+@media only screen and (min-width: 993px) {
+  nav.topbar a.sidenav-trigger {
+    display: block;
+    margin-left: -24px; } }
+
 /* TOPBAR */
 nav.topbar {
   -webkit-box-shadow: none;

@@ -1,3 +1,9 @@
+1.5.2 2019-03-21
+----------------
+
+- Add collapse sidebar button on desktop-sized screen
+
+
 1.5.1 2019-03-07
 ----------------
 

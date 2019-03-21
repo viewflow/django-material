@@ -83,7 +83,8 @@ Django Material Pro with additional features has a commercial-friendly license. 
 Changelog
 =========
 
-1.5.1 2019-03-07
+1.5.2 2019-03-21
 ----------------
 
-- Fix js injection vulnerability in a list view
+- Add collapse sidebar button on desktop-sized screen
+

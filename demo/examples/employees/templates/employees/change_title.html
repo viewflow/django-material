@@ -10,6 +10,7 @@
 {% block content %}
 <div class="left-panel">
     <div class="card">
+      <dmc-form>
         <form method="POST">
             {% csrf_token %}
             <div class="card-content">
@@ -38,6 +39,7 @@
                 <button type="submit" class="btn">{% trans 'Change' %}</button>
             </div>
         </form>
+      </dmc-form>
     </div>
 </div>
 {% endblock %}

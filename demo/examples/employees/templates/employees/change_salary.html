@@ -32,6 +32,7 @@
 </div>
 <div class="right-panel">
     <div class="card">
+      <dmc-form>
         <form method="POST">
             {% csrf_token %}
             <div class="card-content">
@@ -43,6 +44,7 @@
                 <button class=" btn" type="submit">{% trans 'Set new Salary' %}</button>
             </div>
         </form>
+      </dmc-form>
     </div>
 </div>
 {% endblock %}

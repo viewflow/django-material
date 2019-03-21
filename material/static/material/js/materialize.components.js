@@ -647,6 +647,9 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
+/* eslint-env browser */
+
+/* global $, M */
 var Sidenav =
 /*#__PURE__*/
 function (_HTMLElement) {
@@ -661,6 +664,12 @@ function (_HTMLElement) {
   _createClass(Sidenav, [{
     key: "connectedCallback",
     value: function connectedCallback() {
+      var sidebarState = sessionStorage.getItem('viewflow_site_drawer_state');
+
+      if (window.innerWidth >= 992 && sidebarState == 'closed') {
+        $(this).find('.sidenav').removeClass('sidenav-fixed');
+      }
+
       $(this).find('.sidenav').sidenav();
       $(document).activeNavigation('#slide-out');
       $('#slide-out').perfectScrollbar();
@@ -676,8 +685,77 @@ function (_HTMLElement) {
   return Sidenav;
 }(_wrapNativeSuper(HTMLElement));
 
+;
+
+var SidenavTrigger =
+/*#__PURE__*/
+function (_HTMLElement2) {
+  _inherits(SidenavTrigger, _HTMLElement2);
+
+  function SidenavTrigger() {
+    var _this;
+
+    _classCallCheck(this, SidenavTrigger);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(SidenavTrigger).call(this));
+
+    _this.onClick = function (event) {
+      var sidenavId = M.getIdFromTrigger(_this._trigger);
+      var sidenavInstance = document.getElementById(sidenavId).M_Sidenav;
+
+      if (sidenavInstance) {
+        if (sidenavInstance.isOpen) {
+          sidenavInstance.close();
+          sidenavInstance.isFixed = false;
+          $(document).find('.sidenav').removeClass('sidenav-fixed');
+          _this._main.style.marginLeft = '0';
+          sessionStorage.setItem('viewflow_site_drawer_state', 'closed');
+        } else {
+          sidenavInstance.isFixed = true;
+          $(document).find('.sidenav').addClass('sidenav-fixed');
+          sidenavInstance.open();
+          _this._main.style.marginLeft = null;
+          sessionStorage.setItem('viewflow_site_drawer_state', 'open');
+        }
+      }
+
+      event.preventDefault();
+      event.stopPropagation();
+    };
+
+    return _this;
+  }
+
+  _createClass(SidenavTrigger, [{
+    key: "connectedCallback",
+    value: function connectedCallback() {
+      this._trigger = this.querySelector('.sidenav-trigger');
+      this._main = document.querySelector('main');
+
+      this._trigger.addEventListener('click', this.onClick);
+
+      var sidebarState = sessionStorage.getItem('viewflow_site_drawer_state');
+
+      if (window.innerWidth >= 992 && sidebarState == 'closed') {
+        var sidenavId = M.getIdFromTrigger(this._trigger);
+        var sidenavInstance = document.getElementById(sidenavId).M_Sidenav;
+        sidenavInstance.close();
+        this._main.style.marginLeft = '0';
+      }
+    }
+  }, {
+    key: "disconnectedCallback",
+    value: function disconnectedCallback() {
+      this._trigger.removeEventListener('click', this.onClick);
+    }
+  }]);
+
+  return SidenavTrigger;
+}(_wrapNativeSuper(HTMLElement));
+
 window.addEventListener('load', function () {
   window.customElements.define('dmc-sidenav', Sidenav);
+  window.customElements.define('dmc-sidenav-trigger', SidenavTrigger);
 });
 "use strict";
 
