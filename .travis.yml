@@ -10,3 +10,10 @@ install:
 
 script:
   - tox --skip-missing-interpreters
+
+addons:
+  apt:
+    sources:
+      - travis-ci/sqlite3
+    packages:
+      - sqlite3
