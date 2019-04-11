@@ -96,8 +96,8 @@ class DeleteModelView(generic.DeleteView):
         return response
 
     def message_user(self):
-        message = _('The {} "{}"  was deleted successfully.'.format(
-            force_text(self.model._meta.verbose_name),
-            force_text(self.object)
+        message = _('The {name} "{link}"  was deleted successfully.'.format(
+            name=force_text(self.model._meta.verbose_name),
+            link=force_text(self.object)
         ))
         messages.add_message(self.request, messages.SUCCESS, message, fail_silently=True)

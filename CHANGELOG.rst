@@ -1,3 +1,10 @@
+1.5.3 2019-04-11
+----------------
+
+- Fix forms js inclusion template
+- Fix delete view user message
+
+
 1.5.2 2019-03-21
 ----------------
 
