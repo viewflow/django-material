@@ -1,18 +1,18 @@
 from __future__ import unicode_literals
 
+from django.contrib import messages
 from django.contrib.auth import get_permission_codename
 from django.core.exceptions import PermissionDenied, ValidationError
 from django.db import router
 from django.db.models.deletion import Collector
 from django.http import Http404
 from django.urls import reverse
+from django.utils.encoding import force_text
 from django.utils.translation import ugettext_lazy as _
 from django.views import generic
 
-from .mixins import MessageUserMixin
 
-
-class DeleteModelView(MessageUserMixin, generic.DeleteView):
+class DeleteModelView(generic.DeleteView):
     """View for deleting an object and all linked by foreign key data."""
 
     viewset = None
@@ -96,4 +96,8 @@ class DeleteModelView(MessageUserMixin, generic.DeleteView):
         return response
 
     def message_user(self):
-        self.success(_('The {name} "{link}"  was deleted successfully.'))
+        message = _('The {} "{}"  was deleted successfully.'.format(
+            force_text(self.model._meta.verbose_name),
+            force_text(self.object)
+        ))
+        messages.add_message(self.request, messages.SUCCESS, message, fail_silently=True)
