@@ -31,6 +31,7 @@ class SidenavTrigger extends HTMLElement {
   connectedCallback() {
     this._trigger = this.querySelector('.sidenav-trigger');
     this._main = document.querySelector('main');
+    this._footer = document.querySelector('footer');
     this._trigger.addEventListener('click', this.onClick);
 
     let sidebarState = sessionStorage.getItem('viewflow_site_drawer_state');
@@ -56,12 +57,14 @@ class SidenavTrigger extends HTMLElement {
           sidenavInstance.isFixed = false;
           $(document).find('.sidenav').removeClass('sidenav-fixed');
           this._main.style.marginLeft='0';
+          this._footer.style.marginLeft='0';
           sessionStorage.setItem('viewflow_site_drawer_state', 'closed');
         } else {
           sidenavInstance.isFixed = true;
           $(document).find('.sidenav').addClass('sidenav-fixed');
           sidenavInstance.open();
           this._main.style.marginLeft=null;
+          this._footer.style.marginLeft=null;
           sessionStorage.setItem('viewflow_site_drawer_state', 'open');
         }
       }

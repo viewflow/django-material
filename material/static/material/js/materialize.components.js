@@ -709,12 +709,14 @@ function (_HTMLElement2) {
           sidenavInstance.isFixed = false;
           $(document).find('.sidenav').removeClass('sidenav-fixed');
           _this._main.style.marginLeft = '0';
+          _this._footer.style.marginLeft = '0';
           sessionStorage.setItem('viewflow_site_drawer_state', 'closed');
         } else {
           sidenavInstance.isFixed = true;
           $(document).find('.sidenav').addClass('sidenav-fixed');
           sidenavInstance.open();
           _this._main.style.marginLeft = null;
+          _this._footer.style.marginLeft = null;
           sessionStorage.setItem('viewflow_site_drawer_state', 'open');
         }
       }
@@ -731,6 +733,7 @@ function (_HTMLElement2) {
     value: function connectedCallback() {
       this._trigger = this.querySelector('.sidenav-trigger');
       this._main = document.querySelector('main');
+      this._footer = document.querySelector('footer');
 
       this._trigger.addEventListener('click', this.onClick);
 
