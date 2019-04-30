@@ -1,15 +1,29 @@
+/* eslint-env browser */
+/* global $, Turbolinks */
+
 class Form extends HTMLElement {
   constructor() {
     super();
   }
 
   connectedCallback() {
+    this._clickedButton = null;
     this._formEl = this.querySelector('form');
     this._formEl.addEventListener('submit', this.onSubmit);
+    this.querySelectorAll('button[type=submit]').forEach(
+      (button) => button.addEventListener('click', this.onClick)
+    );
   }
 
   disconnectedCallback() {
     this._formEl.removeEventListener('submit', this.onSubmit);
+    this.querySelectorAll('button[type=submit]').forEach(
+      (button) => button.removeEventListener('click', this.onClick)
+    );
+  }
+
+  onClick = (event) => {
+    this._clickedButton = event.target;
   }
 
   onSubmit = (event) => {
@@ -19,9 +33,9 @@ class Form extends HTMLElement {
     );
 
     if (this._formEl.method == 'post') {
-      this._performPost();
+      this._performPost(event);
     } else {
-      this._performGet();
+      this._performGet(event);
     }
   }
 
@@ -60,7 +74,15 @@ class Form extends HTMLElement {
     };
 
     Turbolinks.controller.adapter.showProgressBarAfterDelay();
-    xhr.send(new FormData(this._formEl));
+
+    let formData = new FormData(this._formEl);
+    if (this._clickedButton) {
+      if (this._clickedButton.name) {
+        formData.append(this._clickedButton.name, '');
+      }
+      this._clickedButton = null;
+    }
+    xhr.send(formData);
   }
 
   _performGet = (event) => {
@@ -78,7 +100,6 @@ class Form extends HTMLElement {
     }
     return action;
   }
-
 }
 
 window.addEventListener('load', () => {

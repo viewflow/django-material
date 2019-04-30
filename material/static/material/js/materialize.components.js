@@ -338,6 +338,9 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
+/* eslint-env browser */
+
+/* global $, Turbolinks */
 var Form =
 /*#__PURE__*/
 function (_HTMLElement) {
@@ -350,6 +353,10 @@ function (_HTMLElement) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Form).call(this));
 
+    _this.onClick = function (event) {
+      _this._clickedButton = event.target;
+    };
+
     _this.onSubmit = function (event) {
       event.preventDefault();
 
@@ -358,9 +365,9 @@ function (_HTMLElement) {
       });
 
       if (_this._formEl.method == 'post') {
-        _this._performPost();
+        _this._performPost(event);
       } else {
-        _this._performGet();
+        _this._performGet(event);
       }
     };
 
@@ -405,7 +412,17 @@ function (_HTMLElement) {
       };
 
       Turbolinks.controller.adapter.showProgressBarAfterDelay();
-      xhr.send(new FormData(_this._formEl));
+      var formData = new FormData(_this._formEl);
+
+      if (_this._clickedButton) {
+        if (_this._clickedButton.name) {
+          formData.append(_this._clickedButton.name, '');
+        }
+
+        _this._clickedButton = null;
+      }
+
+      xhr.send(formData);
     };
 
     _this._performGet = function (event) {
@@ -418,14 +435,27 @@ function (_HTMLElement) {
   _createClass(Form, [{
     key: "connectedCallback",
     value: function connectedCallback() {
+      var _this2 = this;
+
+      this._clickedButton = null;
       this._formEl = this.querySelector('form');
 
       this._formEl.addEventListener('submit', this.onSubmit);
+
+      this.querySelectorAll('button[type=submit]').forEach(function (button) {
+        return button.addEventListener('click', _this2.onClick);
+      });
     }
   }, {
     key: "disconnectedCallback",
     value: function disconnectedCallback() {
+      var _this3 = this;
+
       this._formEl.removeEventListener('submit', this.onSubmit);
+
+      this.querySelectorAll('button[type=submit]').forEach(function (button) {
+        return button.removeEventListener('click', _this3.onClick);
+      });
     }
   }, {
     key: "action",
