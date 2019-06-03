@@ -1,3 +1,6 @@
+/* eslint-env browser */
+/* global $ */
+
 class Dropdown extends HTMLElement {
   constructor() {
     super();
