@@ -419,7 +419,7 @@ function (_HTMLElement) {
 
       if (_this._clickedButton) {
         if (_this._clickedButton.name) {
-          formData.append(_this._clickedButton.name, '');
+          formData.append(_this._clickedButton.name, _this._clickedButton.value);
         }
 
         _this._clickedButton = null;

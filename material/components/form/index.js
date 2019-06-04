@@ -78,7 +78,7 @@ class Form extends HTMLElement {
     let formData = new FormData(this._formEl);
     if (this._clickedButton) {
       if (this._clickedButton.name) {
-        formData.append(this._clickedButton.name, '');
+        formData.append(this._clickedButton.name, this._clickedButton.value);
       }
       this._clickedButton = null;
     }
