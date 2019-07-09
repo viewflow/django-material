@@ -26,7 +26,7 @@ class CountryTabularInline(admin.TabularInline):
 
     formset = CountryInlineFormset
 
-    def has_add_permission(self, request):
+    def has_add_permission(self, request, obj=None):
         return False
 
 
