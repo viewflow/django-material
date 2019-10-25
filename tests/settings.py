@@ -28,12 +28,17 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'debug_toolbar',
-    'template_debug',
 
     # test apps
     'tests',
     'demo',
 )
+
+
+if django.VERSION < (3, 0):
+    INSTALLED_APPS += (
+        'template_debug',
+    )
 
 
 MIDDLEWARE = (
@@ -46,6 +51,7 @@ MIDDLEWARE = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
 )
+
 
 SITE_ID = 1
 
@@ -70,12 +76,16 @@ TEMPLATES = [
             ],
             'builtins': [
                 'material.templatetags.material_form',
-                'template_debug.templatetags.debug_tags'
             ],
             'debug': True,
         },
     },
 ]
+
+if django.VERSION < (3, 0):
+    TEMPLATES[0]['OPTIONS']['builtins'] += [
+        'template_debug.templatetags.debug_tags'
+    ]
 
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases

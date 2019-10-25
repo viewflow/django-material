@@ -1,5 +1,6 @@
 import warnings
 from importlib import import_module
+from six.moves import input
 
 from django.apps import AppConfig, apps
 from django.db.models.signals import post_migrate
@@ -7,7 +8,6 @@ from django.template import Template, TemplateDoesNotExist
 from django.template.loader import get_template, select_template
 from django.urls import reverse
 from django.utils.module_loading import module_has_submodule
-from django.utils.six.moves import input
 from django.utils.translation import ugettext_lazy as _
 
 from .registry import modules as modules_registry

@@ -1,11 +1,11 @@
 """Layout primitives definitions."""
 
 import re
+import six
 import warnings
 from functools import partial
 from django.template import TemplateDoesNotExist
 from django.template.loader import get_template, select_template
-from django.utils import six
 from django.utils.encoding import smart_text
 
 

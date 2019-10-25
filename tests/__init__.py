@@ -1,4 +1,6 @@
 import inspect
+import six
+
 from datetime import date
 from decimal import Decimal
 from django.conf.urls import url
@@ -6,7 +8,6 @@ from django.http import JsonResponse, HttpResponse
 from django.template import Context, Template
 from django.views.decorators.csrf import csrf_exempt
 from django.core.serializers.json import DjangoJSONEncoder
-from django.utils import six
 
 
 DEFAULT_TEMPLATE = """

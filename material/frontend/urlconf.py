@@ -1,13 +1,14 @@
 from __future__ import unicode_literals
 
+import six
+
 try:
     from urllib.parse import quote
-except:
+except ImportError:
     from urllib import quote
 
 from django.urls import Resolver404
 from django.http.request import QueryDict
-from django.utils import six
 
 
 class ModuleMatchName(str):

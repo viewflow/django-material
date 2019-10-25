@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 
 import datetime
 import decimal
+import six
 
 from collections import OrderedDict
 from copy import deepcopy
@@ -14,7 +15,7 @@ from django.db.models.query import QuerySet
 from django.forms.forms import pretty_name
 from django.http import JsonResponse
 from django.urls import reverse
-from django.utils import formats, six, timezone
+from django.utils import formats, timezone
 from django.utils.decorators import method_decorator
 from django.utils.encoding import force_text
 from django.utils.html import conditional_escape, format_html
@@ -227,7 +228,9 @@ class DataTableMixin(ContextMixin):
                         return DataSourceAttr(data_source, attr_name)
             if hasattr(self.object_list.model, attr_name):
                 return ModelAttr(self.object_list.model, attr_name)
-        raise AttributeError("Unable to lookup '{}' on {}" .format(attr_name, self.object_list.model._meta.object_name))
+        raise AttributeError("Unable to lookup '{}' on {}" .format(
+            attr_name, self.object_list.model._meta.object_name)
+        )
 
     def get_columns_def(self):
         """Return columns definition for the datables js config."""
