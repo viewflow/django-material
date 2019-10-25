@@ -1,6 +1,7 @@
 import errno
 import io
 import shutil
+import six
 import os
 from importlib import import_module
 from os import path
@@ -11,7 +12,6 @@ from django.template import Context, Engine
 from django.core.management.base import CommandError
 from django.core.management.utils import handle_extensions
 from django.core.management.templates import TemplateCommand
-from django.utils import six
 
 import material
 
