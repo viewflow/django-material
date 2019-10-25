@@ -4,10 +4,17 @@ import inspect
 import functools
 import six
 
+import django
 from django.utils.html import conditional_escape
 
 
-__all__ = ('simple_tag', )
+__all__ = ('simple_tag', '_')
+
+
+if django.VERSION >= (3, 0):
+    from django.utils.translation import gettext_lazy as _
+else:
+    from django.utils.translation import ugettext_lazy as _
 
 
 try:

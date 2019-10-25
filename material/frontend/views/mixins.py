@@ -8,9 +8,8 @@ from django.urls import reverse
 from django.utils.encoding import force_text
 from django.utils.html import format_html
 from django.utils.http import urlquote
-from django.utils.translation import ugettext as _
-
 from ...base import Span
+from ...compat import _
 
 
 def _collect_elements(parent, container=None):

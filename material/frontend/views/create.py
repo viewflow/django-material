@@ -7,6 +7,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.views import generic
 
 from .mixins import MessageUserMixin, ModelViewMixin
+from ...compat import _
 
 
 class CreateModelView(MessageUserMixin, ModelViewMixin, generic.CreateView):

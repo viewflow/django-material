@@ -3,6 +3,7 @@ from django.contrib import admin
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
+from ..compat import _
 from ..frontend.apps import ModuleMixin
 from ..frontend.urlconf import ModuleURLResolver
 

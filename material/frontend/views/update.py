@@ -5,6 +5,7 @@ from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 from django.views import generic
 
+from ...compat import _
 from .mixins import MessageUserMixin, ModelViewMixin
 
 
