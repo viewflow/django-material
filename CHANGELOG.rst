@@ -1,3 +1,10 @@
+1.6.0 2019-11-19
+----------------
+- Django 3.0 compatibility
+- Fix textarea autoresize on init
+- Send clicked button name within <dmc-form>
+
+
 1.5.3 2019-04-11
 ----------------
 
