@@ -5,6 +5,7 @@ import re
 import json
 from collections import OrderedDict
 
+import django
 from django.db.models.query import QuerySet
 from django.forms.forms import BoundField
 from django.template import Library
@@ -13,13 +14,17 @@ from django.template.base import (
 )
 from django.core.serializers.json import DjangoJSONEncoder
 from django.utils import formats
-from django.utils.encoding import force_text
+
 from django.utils.html import escape
 
 from ..base import Field
 from ..widgets import SelectDateWidget
 from .material_form import FormPartNode, WidgetAttrNode, _render_parts
 
+if django.VERSION < (3,):
+    from django.utils.encoding import force_text
+else:
+    from django.utils.encoding import force_str as force_text
 
 register = Library()
 
