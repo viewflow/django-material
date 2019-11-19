@@ -55,8 +55,6 @@ To checkout and run open source demo version locally, you need to have
 `git <https://git-scm.com/>`_ and `tox
 <https://tox.readthedocs.io/en/latest/>`_ tools installed.
 
-Windows users should use WSL.
-
 .. code:: bash
 
     git clone https://github.com/viewflow/django-material.git
@@ -86,10 +84,9 @@ Django Material Pro with additional features has a commercial-friendly license. 
 Changelog
 =========
 
-1.5.3 2019-04-11
+1.6.0 2019-11-19
 ----------------
-
-- Fix forms js inclusion template
-- Fix delete view user message
-
+- Django 3.0 compatibility
+- Fix textarea autoresize on init
+- Send clicked button name within <dmc-form>
 
