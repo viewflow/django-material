@@ -5678,10 +5678,8 @@ input[type=range]::-moz-range-thumb {
   width: 14px;
   border-radius: 50%;
   background: #37474f;
-  -webkit-transition: -webkit-box-shadow .3s;
-  transition: -webkit-box-shadow .3s;
+  -moz-transition: box-shadow .3s;
   transition: box-shadow .3s;
-  transition: box-shadow .3s, -webkit-box-shadow .3s;
   margin-top: -5px; }
 
 input[type=range]:-moz-focusring {
@@ -5711,10 +5709,8 @@ input[type=range]::-ms-thumb {
   width: 14px;
   border-radius: 50%;
   background: #37474f;
-  -webkit-transition: -webkit-box-shadow .3s;
-  transition: -webkit-box-shadow .3s;
-  transition: box-shadow .3s;
-  transition: box-shadow .3s, -webkit-box-shadow .3s; }
+  -ms-transition: box-shadow .3s;
+  transition: box-shadow .3s; }
 
 .keyboard-focused input[type=range]:focus:not(.active)::-ms-thumb {
   box-shadow: 0 0 0 10px rgba(55, 71, 79, 0.26); }
