@@ -61,6 +61,7 @@ gulp.task('3rdparty.css', () => {
 gulp.task('components.js', () => {
   let deps = [
     './node_modules/@webcomponents/custom-elements/src/native-shim.js',
+    './material/components/compatibility.js',
     './material/components/collapsible/index.js',
     './material/components/dropdown/index.js',
     './material/components/datatable/index.js',

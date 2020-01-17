@@ -41,7 +41,7 @@ class Form extends HTMLElement {
 
   _performPost = (event) => {
     let xhr = new XMLHttpRequest();
-    xhr.open('POST', window.location.search, true);
+    xhr.open('POST', window.location.search || '.', true);
     xhr.setRequestHeader('Turbolinks-Referrer', window.location);
     xhr.onload = (event) => {
       let location = xhr.getResponseHeader('turbolinks-location');
