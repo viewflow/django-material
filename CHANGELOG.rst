@@ -1,3 +1,8 @@
+1.6.1 2020-02-25
+----------------
+- Fix NullBooleanField for django>2.2
+
+
 1.6.0 2019-11-19
 ----------------
 - Django 3.0 compatibility

@@ -84,9 +84,7 @@ Django Material Pro with additional features has a commercial-friendly license. 
 Changelog
 =========
 
-1.6.0 2019-11-19
+1.6.1 2020-02-25
 ----------------
-- Django 3.0 compatibility
-- Fix textarea autoresize on init
-- Send clicked button name within <dmc-form>
+- Fix NullBooleanField for django>2.2
 
