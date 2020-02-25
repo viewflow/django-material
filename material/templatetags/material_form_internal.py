@@ -190,12 +190,12 @@ def is_initial_file(value):
 @register.filter
 def is_null_boolean_selected(bound_field, value):
     """Return NullBooleanField state."""
-    BOOL_VALUES = {True: '2', False: '3', '2': '2', '3': '3'}
+    BOOL_VALUES = {True: True, False: False, 'true': True, 'false': False, '2': True, '3': False}
     try:
-        current_value = BOOL_VALUES[bound_field.value()]
+        current_value = BOOL_VALUES[value]
     except KeyError:
-        current_value = '1'
-    return value == current_value
+        current_value = None
+    return bound_field.value() == current_value
 
 
 @register.filter
