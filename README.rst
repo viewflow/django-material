@@ -84,7 +84,7 @@ Django Material Pro with additional features has a commercial-friendly license. 
 Changelog
 =========
 
-1.6.1 2020-02-25
+1.6.3 2020-02-25
 ----------------
 - Fix NullBooleanField for django>2.2
 
