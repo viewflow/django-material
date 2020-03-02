@@ -95,7 +95,7 @@ class ModelAttr(object):
 
 
 class DataSourceAttr(object):
-    """Retrieve attribute value from extenal data source.
+    """Retrieve attribute value from external data source.
 
     Data source attribute could be a property or callable.
 
