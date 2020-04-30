@@ -6,7 +6,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.1.0",
-    "@babel/preset-env": "^7.1.0",
+    "@babel/preset-env": "^7.9.6",
     "@babel/register": "^7.0.0",
     "@webcomponents/custom-elements": "github:kmmbvnr/custom-elements",
     "autoprefixer": "^9.1.5",
