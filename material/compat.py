@@ -13,9 +13,12 @@ __all__ = ('simple_tag', '_')
 
 if django.VERSION >= (3, 0):
     from django.utils.translation import gettext_lazy as _
+
+    def python_2_unicode_compatible(cls):
+        return cls
 else:
     from django.utils.translation import ugettext_lazy as _
-
+    from django.utils.encoding import python_2_unicode_compatible
 
 try:
     from django.template.library import Library  # NOQA

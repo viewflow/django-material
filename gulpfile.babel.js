@@ -7,6 +7,8 @@ import gulp from 'gulp';
 import merge from 'merge-stream';
 import postcss from 'gulp-postcss';
 import pump from 'pump';
+import rename from 'gulp-rename';
+import replace from 'gulp-replace';
 import sass from 'gulp-sass';
 import uglify from 'gulp-uglify-es';
 
@@ -22,7 +24,11 @@ let supportedBrowsers = [
 
 gulp.task('3rdparty.fonts', () => {
   return merge(
-    gulp.src('./node_modules/material-design-icons/iconfont/*')
+    gulp.src('./node_modules/material-design-icons-iconfont/dist/fonts/*')
+      .pipe(gulp.dest('./material/static/material/fonts/material-design-icons/')),
+    gulp.src('./node_modules/material-design-icons-iconfont/dist/material-design-icons.css')
+      .pipe(replace(/\.\/fonts\//g, './'))
+      .pipe(rename('material-icons.css'))
       .pipe(gulp.dest('./material/static/material/fonts/material-design-icons/')),
     gulp.src('./node_modules/roboto-npm-webfont/full/**/*')
       .pipe(gulp.dest('./material/static/material/fonts/roboto/'))

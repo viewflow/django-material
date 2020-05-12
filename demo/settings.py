@@ -21,8 +21,7 @@ INTERNAL_IPS = [
 
 # Application definition
 DEV_APPS = (
-    'autofixture',
-    'template_debug',
+    # 'template_debug',
 )
 
 INSTALLED_APPS = (
@@ -92,7 +91,7 @@ TEMPLATES = [
             ],
             'builtins': [
                 'material.templatetags.material_form',
-                'template_debug.templatetags.debug_tags'
+                # 'template_debug.templatetags.debug_tags'
             ],
             'debug': True,
         },

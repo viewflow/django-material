@@ -84,7 +84,6 @@ Django Material Pro with additional features has a commercial-friendly license. 
 Changelog
 =========
 
-1.6.3 2020-02-25
-----------------
-- Fix NullBooleanField for django>2.2
-
+1.7.0 GIT VERSION
+-----------------
+- Switch icon font to `Material Design Icon DX <https://jossef.github.io/material-design-icons-iconfont/>`_

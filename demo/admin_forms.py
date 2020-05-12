@@ -1,7 +1,7 @@
 from django.contrib.auth.models import Permission, Group
 from django.contrib.admin import site as admin_site
 from django.contrib.admin import widgets
-from django.utils.encoding import python_2_unicode_compatible
+from material.compat import python_2_unicode_compatible
 
 from . import demo as forms
 
