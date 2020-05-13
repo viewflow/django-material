@@ -1,3 +1,9 @@
+1.6.7 2020-05-13
+----------------
+- Switch icon font to `Material Design Icon DX <https://jossef.github.io/material-design-icons-iconfont/>`_
+- [PRO] collapsable filter panel on mobile
+
+
 1.6.3 2020-02-25
 ----------------
 - Fix NullBooleanField for django>2.2

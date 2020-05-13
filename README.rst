@@ -84,6 +84,7 @@ Django Material Pro with additional features has a commercial-friendly license. 
 Changelog
 =========
 
-1.7.0 GIT VERSION
------------------
+1.6.7 2020-05-13
+----------------
 - Switch icon font to `Material Design Icon DX <https://jossef.github.io/material-design-icons-iconfont/>`_
+- [PRO] collapsable filter panel on mobile
