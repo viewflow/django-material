@@ -247,6 +247,13 @@ th {
   margin-left: 0.375rem;
   margin-right: 0.375rem; }
 
+.content.switch-panels .left-panel {
+  display: none; }
+
+.content.switch-panels .right-panel {
+  display: block;
+  flex-basis: 100%; }
+
 @media only screen and (max-width: 993px) {
   .left-panel {
     flex-basis: 100%;
