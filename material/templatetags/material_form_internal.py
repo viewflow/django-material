@@ -7,7 +7,7 @@ from collections import OrderedDict
 
 import django
 from django.db.models.query import QuerySet
-from django.forms.forms import BoundField
+from django.forms.boundfield import BoundField
 from django.template import Library
 from django.template.base import (
     Node, TemplateSyntaxError, Variable, token_kwargs
