@@ -3,7 +3,7 @@ import re
 from collections import defaultdict
 
 from django.forms.utils import flatatt
-from django.forms.forms import BoundField
+from django.forms.boundfield import BoundField
 from django.template import Library
 from django.template.base import (
     TemplateSyntaxError, Node, Variable, token_kwargs)
