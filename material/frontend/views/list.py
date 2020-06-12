@@ -12,7 +12,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.exceptions import FieldDoesNotExist
 from django.core.exceptions import ImproperlyConfigured, PermissionDenied
 from django.db.models.query import QuerySet
-from django.forms.forms import pretty_name
+from django.forms.utils import pretty_name
 from django.http import JsonResponse
 from django.urls import reverse
 from django.utils import formats, timezone
