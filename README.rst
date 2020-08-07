@@ -21,6 +21,7 @@ Material design for Django.
    :target: https://gitter.im/viewflow/django-material?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
 
 
+- Django-Material 1.7.x compatible with Django 1.11/2.0/2.1/2.2/3.0/3.1
 - Django-Material 1.6.x compatible with Django 1.11/2.0/2.1/2.2/3.0
 - Django-Material 1.[3,4,5].x compatible with Django 1.11/2.0/2.1/2.2
 - Django-Material 1.2.x compatible with Django 1.11/2.0
@@ -84,7 +85,6 @@ Django Material Pro with additional features has a commercial-friendly license. 
 Changelog
 =========
 
-1.6.7 2020-05-13
+1.7.0 2020-08-07
 ----------------
-- Switch icon font to `Material Design Icon DX <https://jossef.github.io/material-design-icons-iconfont/>`_
-- [PRO] collapsable filter panel on mobile
+- Django 3.1 support

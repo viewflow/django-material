@@ -1,3 +1,8 @@
+1.7.0 2020-08-07
+----------------
+- Django 3.1 support
+
+
 1.6.7 2020-05-13
 ----------------
 - Switch icon font to `Material Design Icon DX <https://jossef.github.io/material-design-icons-iconfont/>`_
