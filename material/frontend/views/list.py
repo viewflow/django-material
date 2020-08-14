@@ -287,7 +287,7 @@ class DataTableMixin(ContextMixin):
 
                 try:
                     order = self.get_list_display()[int(column_num)]
-                    if column_dir == 'asc':
+                    if column_dir == 'desc':
                         order = '-' + order
                 except (IndexError, TypeError):
                     """ Skip """
