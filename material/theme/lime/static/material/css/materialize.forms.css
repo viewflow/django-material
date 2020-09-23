@@ -207,3 +207,9 @@ select.material-ignore {
 
 .autocomplete-field .chips .input {
   width: auto !important; }
+
+dmc-autocomplete-multi .material-icons.close::before {
+  content: "" !important; }
+
+.autocomplete-field--disabled .material-icons.close {
+  display: none; }
