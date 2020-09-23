@@ -3,6 +3,7 @@ from __future__ import division
 import math
 import re
 import json
+import six
 from collections import OrderedDict
 
 import django
@@ -117,7 +118,7 @@ def have_default_choice(field):
 @register.filter
 def jquery_datepicker_format(field):
     """Convert django input format to jquery datepicket format."""
-    input_format = field.input_formats[0]
+    input_format = six.next(iter(field.input_formats))
 
     # %a, %A, %z, %f %Z %j %U %W %c %x %X unsupported
 
