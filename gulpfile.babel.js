@@ -43,7 +43,7 @@ gulp.task('3rdparty.js', () => {
     'node_modules/datatables.net-responsive/js/dataTables.responsive.js',
     'node_modules/datatables/media/js/jquery.dataTables.js',
     'node_modules/jquery-datetimepicker/build/jquery.datetimepicker.full.js',
-    'node_modules/perfect-scrollbar/dist/js/perfect-scrollbar.jquery.js',
+    'node_modules/perfect-scrollbar/dist/perfect-scrollbar.min.js',
     'node_modules/turbolinks/dist/turbolinks.js',
     'node_modules/@webcomponents/custom-elements/custom-elements.min.js',
   ];
@@ -57,7 +57,7 @@ gulp.task('3rdparty.css', () => {
     './node_modules/datatables.net-fixedheader-dt/css/fixedHeader.dataTables.css',
     './node_modules/datatables.net-responsive-dt/css/responsive.dataTables.css',
     './node_modules/jquery-datetimepicker/jquery.datetimepicker.css',
-    './node_modules/perfect-scrollbar/dist/css/perfect-scrollbar.css',
+    './node_modules/perfect-scrollbar/css/perfect-scrollbar.css',
   ];
   return gulp.src(deps)
     .pipe(gulp.dest('./material/static/material/css/'));
@@ -132,7 +132,7 @@ gulp.task('materialize.django.scss', () => {
     ));
 });
 
-gulp.task('frontend.min.js', ['materialize.js', '3rdparty.js', 'components.js'], (cb) => {
+gulp.task('frontend.min.js', gulp.series('materialize.js', '3rdparty.js', 'components.js', (cb) => {
   let deps = [
     'material/static/material/js/turbolinks.js',
     'material/static/material/js/jquery.js',
@@ -140,7 +140,7 @@ gulp.task('frontend.min.js', ['materialize.js', '3rdparty.js', 'components.js'],
     'material/static/material/js/jquery.activeNavigation.js',
     'material/static/material/js/jquery.datetimepicker.full.js',
     'material/static/material/js/jquery.formset.js',
-    'material/static/material/js/perfect-scrollbar.jquery.js',
+    'material/static/material/js/perfect-scrollbar.min.js',
     'material/static/material/js/dataTables.fixedHeader.js',
     'material/static/material/js/dataTables.responsive.js',
     'material/static/material/js/materialize.js',
@@ -152,9 +152,9 @@ gulp.task('frontend.min.js', ['materialize.js', '3rdparty.js', 'components.js'],
     concat('materialize.frontend.min.js'),
     uglify(),
     gulp.dest('material/static/material/js/')], cb);
-});
+}));
 
-gulp.task('frontend.min.css', ['3rdparty.css', 'materialize.scss', 'materialize.django.scss'], () => {
+gulp.task('frontend.min.css', gulp.series('3rdparty.css', 'materialize.scss', 'materialize.django.scss', () => {
   let deps = [
     'material/static/material/css/materialize.css',
     'material/static/material/css/materialize.forms.css',
@@ -171,9 +171,9 @@ gulp.task('frontend.min.css', ['3rdparty.css', 'materialize.scss', 'materialize.
       cssnano(),
     ]))
     .pipe(gulp.dest('material/static/material/css/'));
-});
+}));
 
-gulp.task('frontend.print.min.css', ['materialize.django.scss'], () => {
+gulp.task('frontend.print.min.css', gulp.series('materialize.django.scss', () => {
   let deps = [
     'material/static/material/css/materialize.frontend.print.css',
   ];
@@ -184,9 +184,9 @@ gulp.task('frontend.print.min.css', ['materialize.django.scss'], () => {
       cssnano(),
     ]))
     .pipe(gulp.dest('material/static/material/css/'));
-});
+}));
 
-gulp.task('default', [
+gulp.task('default', gulp.series(
   '3rdparty.fonts',
   '3rdparty.js',
   '3rdparty.css',
@@ -196,4 +196,4 @@ gulp.task('default', [
   'frontend.min.js',
   'frontend.min.css',
   'frontend.print.min.css',
-]);
+));
