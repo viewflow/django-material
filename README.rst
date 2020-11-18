@@ -85,6 +85,6 @@ Django Material Pro with additional features has a commercial-friendly license. 
 Changelog
 =========
 
-1.7.0 2020-08-07
+1.7.2 2020-11-18
 ----------------
-- Django 3.1 support
+- bump material-design-icons DX to 6.1.0

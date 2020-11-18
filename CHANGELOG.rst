@@ -1,3 +1,8 @@
+1.7.2 2020-11-18
+----------------
+- bump material-design-icons DX to 6.1.0
+
+
 1.7.0 2020-08-07
 ----------------
 - Django 3.1 support
