@@ -1,6 +1,11 @@
+1.7.3 2020-11-20
+----------------
+- Update pre-generated themes and theme generator code
+
+
 1.7.2 2020-11-18
 ----------------
-- bump material-design-icons DX to 6.1.0
+- Bump material-design-icons DX to 6.1.0
 
 
 1.7.0 2020-08-07
