@@ -1,4 +1,4 @@
-class PerfectScrollbar extends HTMLElement {
+class PerfectScrollbarEl extends HTMLElement {
   constructor() {
     super();
   }
@@ -13,5 +13,5 @@ class PerfectScrollbar extends HTMLElement {
 }
 
 window.addEventListener('load', () => {
-  window.customElements.define('dmc-scrollbar', PerfectScrollbar);
+  window.customElements.define('dmc-scrollbar', PerfectScrollbarEl);
 });

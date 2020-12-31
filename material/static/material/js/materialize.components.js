@@ -593,18 +593,18 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
-var PerfectScrollbar = /*#__PURE__*/function (_HTMLElement) {
-  _inherits(PerfectScrollbar, _HTMLElement);
+var PerfectScrollbarEl = /*#__PURE__*/function (_HTMLElement) {
+  _inherits(PerfectScrollbarEl, _HTMLElement);
 
-  var _super = _createSuper(PerfectScrollbar);
+  var _super = _createSuper(PerfectScrollbarEl);
 
-  function PerfectScrollbar() {
-    _classCallCheck(this, PerfectScrollbar);
+  function PerfectScrollbarEl() {
+    _classCallCheck(this, PerfectScrollbarEl);
 
     return _super.call(this);
   }
 
-  _createClass(PerfectScrollbar, [{
+  _createClass(PerfectScrollbarEl, [{
     key: "connectedCallback",
     value: function connectedCallback() {
       this.scrollbar = new PerfectScrollbar($(this).parent().get(0));
@@ -616,11 +616,11 @@ var PerfectScrollbar = /*#__PURE__*/function (_HTMLElement) {
     }
   }]);
 
-  return PerfectScrollbar;
+  return PerfectScrollbarEl;
 }( /*#__PURE__*/_wrapNativeSuper(HTMLElement));
 
 window.addEventListener('load', function () {
-  window.customElements.define('dmc-scrollbar', PerfectScrollbar);
+  window.customElements.define('dmc-scrollbar', PerfectScrollbarEl);
 });
 "use strict";
 
