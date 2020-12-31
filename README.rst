@@ -85,6 +85,11 @@ Django Material Pro with additional features has a commercial-friendly license. 
 Changelog
 =========
 
+1.7.4 2020-12-31
+================
+- Fix perfect scrollbar init
+
+
 1.7.3 2020-11-20
 ----------------
 - Update pre-generated themes and theme generator code
