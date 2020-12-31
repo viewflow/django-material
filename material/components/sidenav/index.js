@@ -14,12 +14,12 @@ class Sidenav extends HTMLElement {
 
     $(this).find('.sidenav').sidenav();
     $(document).activeNavigation('#slide-out');
-    $('#slide-out').perfectScrollbar();
+    this.scrollbar = new PerfectScrollbar($('#slide-out').get(0));
   }
 
   disconnectedCallback() {
     $(this).find('.sidenav').sidenav('destroy');
-    $('#slide-out').perfectScrollbar('destroy');
+    this.scrollbar.destroy()
   }
 };
 

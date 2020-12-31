@@ -607,12 +607,12 @@ var PerfectScrollbar = /*#__PURE__*/function (_HTMLElement) {
   _createClass(PerfectScrollbar, [{
     key: "connectedCallback",
     value: function connectedCallback() {
-      $(this).parent().perfectScrollbar();
+      this.scrollbar = new PerfectScrollbar($(this).parent().get(0));
     }
   }, {
     key: "disconnectedCallback",
     value: function disconnectedCallback() {
-      $(this).parent().perfectScrollbar('destroy');
+      this.scrollbar.destroy();
     }
   }]);
 
@@ -736,13 +736,13 @@ var Sidenav = /*#__PURE__*/function (_HTMLElement) {
 
       $(this).find('.sidenav').sidenav();
       $(document).activeNavigation('#slide-out');
-      $('#slide-out').perfectScrollbar();
+      this.scrollbar = new PerfectScrollbar($('#slide-out').get(0));
     }
   }, {
     key: "disconnectedCallback",
     value: function disconnectedCallback() {
       $(this).find('.sidenav').sidenav('destroy');
-      $('#slide-out').perfectScrollbar('destroy');
+      this.scrollbar.destroy();
     }
   }]);
 

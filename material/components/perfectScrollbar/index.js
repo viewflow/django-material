@@ -4,11 +4,11 @@ class PerfectScrollbar extends HTMLElement {
   }
 
   connectedCallback() {
-    $(this).parent().perfectScrollbar()
+    this.scrollbar = new PerfectScrollbar($(this).parent().get(0));
   }
 
   disconnectedCallback() {
-    $(this).parent().perfectScrollbar('destroy');
+    this.scrollbar.destroy();
   }
 }
 
