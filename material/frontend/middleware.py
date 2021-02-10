@@ -45,7 +45,7 @@ class TurbolinksMiddleware(object):
     def __call__(self, request):
         response = self.get_response(request)
 
-        if isinstance(response,Exception)
+        if isinstance(response,Exception):
             raise response
 
         is_turbolinks = request.META.get('HTTP_TURBOLINKS_REFERRER')
