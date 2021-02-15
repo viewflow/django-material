@@ -24,7 +24,7 @@
             data-lang="{{ lang.code|default:'en' }}"
             {% if field.disabled %}disabled{% endif %}
             {% if bound_field.errors %}class="invalid"{% endif %}
-            {% if bound_field.value %} value="{{ bound_field|multiwidget_value:0|datepicker_value:field.fields.0.input_formats.0 }}"{% endif %}
+            {% if bound_field.value %} value="{{ bound_field|multiwidget_value:0|datepicker_value:field.fields.0 }}"{% endif %}
         {% endattrs %}>
         {% endpart %}{% part field help_text %}
         {% part field errors %}
@@ -48,7 +48,7 @@
             data-lang="{{ lang.code|default:'en' }}"
             {% if field.disabled %}disabled{% endif %}
             {% if bound_field.errors %}class="invalid"{% endif %}
-            {% if bound_field.value %} value="{{ bound_field|multiwidget_value:1|datepicker_value:field.fields.1.input_formats.0 }}"{% endif %}
+            {% if bound_field.value %} value="{{ bound_field|multiwidget_value:1|datepicker_value:field.fields.1 }}"{% endif %}
          {% endattrs %}>
     </div></{{ field.widget.component|default:'dmc-datetime' }}>
 </div>{% endpart %}

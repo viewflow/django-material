@@ -17,7 +17,7 @@
             data-lang="{{ lang.code|default:'en' }}"
             {% if field.disabled %}disabled{% endif %}
             {% if bound_field.errors %}class="invalid"{% endif %}
-            {% if bound_field.value %}value="{{ bound_field.value|datepicker_value:field.input_formats.0 }}"{% endif %}
+            {% if bound_field.value %}value="{{ bound_field.value|datepicker_value:field }}"{% endif %}
         {% endattrs %}>
         {% endpart %}
         {% part field label %}
