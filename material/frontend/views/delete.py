@@ -44,7 +44,7 @@ class DeleteModelView(generic.DeleteView):
 
         `{{ deleted_objects }}` - list of related objects to delete
         """
-        kwargs.setdefault('deleted_objects', self._get_deleted_objects())
+        kwargs.setdefault('deleted_objects', dict(self._get_deleted_objects()))
         return super(DeleteModelView, self).get_context_data(**kwargs)
 
     def get_object(self):
