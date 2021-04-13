@@ -1,3 +1,4 @@
+from django.db.models import F
 from django.utils.translation import ugettext_lazy as _
 
 from material import Layout, Row, Fieldset
@@ -69,3 +70,4 @@ class SeaViewSet(ModelViewSet):
     def sea_area(self, sea):
         return None if sea.area == 0 else sea.area
     sea_area.short_description = _('sea area')
+    sea_area.order_field = 'area'

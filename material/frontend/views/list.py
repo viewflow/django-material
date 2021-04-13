@@ -62,7 +62,7 @@ class ModelField(object):
 
     @property
     def orderable(self):  # noqa D102
-        return True
+        return self.field.name
 
 
 class ModelAttr(object):
@@ -91,7 +91,8 @@ class ModelAttr(object):
 
     @property
     def orderable(self):  # noqa D102
-        return False
+        source = getattr(self.model, self.name)
+        return getattr(source, 'order_field', False)
 
 
 class DataSourceAttr(object):
@@ -132,7 +133,8 @@ class DataSourceAttr(object):
 
     @property
     def orderable(self):  # noqa D102
-        return False
+        source = getattr(self.data_source, self.name)
+        return getattr(source, 'order_field', False)
 
 
 class DataTableMixin(ContextMixin):
@@ -215,7 +217,7 @@ class DataTableMixin(ContextMixin):
         Data could comes from the model field or external `data_source`
         method call.
         """
-        opts = self.object_list.model._meta
+        opts = self.model._meta
         try:
             return ModelField(opts.get_field(attr_name))
         except FieldDoesNotExist:
@@ -235,7 +237,7 @@ class DataTableMixin(ContextMixin):
     def get_columns_def(self):
         """Return columns definition for the datables js config."""
         return [
-            {'data': field_name, 'orderable': self.get_data_attr(field_name).orderable}
+            {'data': field_name, 'orderable': bool(self.get_data_attr(field_name).orderable)}
             for field_name in self.get_list_display()
         ]
 
@@ -284,11 +286,16 @@ class DataTableMixin(ContextMixin):
             requested_order = self.request_form.cleaned_data['ordering']
             for spec in requested_order:
                 column_num, column_dir = spec.get('column', 0), spec.get('dir', 'asc')
-
                 try:
-                    order = self.get_list_display()[int(column_num)]
-                    if column_dir == 'desc':
-                        order = '-' + order
+                    order = self.get_data_attr(
+                         self.get_list_display()[int(column_num)]
+                    ).orderable
+                    if order:
+                        if column_dir == 'desc':
+                            if order.startswith('-'):
+                                order = order[1:]
+                            else:
+                                order = '-' + order
                 except (IndexError, TypeError):
                     """ Skip """
                 else:
