@@ -9,7 +9,7 @@ import postcss from 'gulp-postcss';
 import pump from 'pump';
 import rename from 'gulp-rename';
 import replace from 'gulp-replace';
-import sass from 'gulp-sass';
+import sass from 'gulp-dart-sass';
 import uglify from 'gulp-uglify-es';
 
 let supportedBrowsers = [

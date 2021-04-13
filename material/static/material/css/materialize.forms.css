@@ -2,7 +2,8 @@
 form .row {
   margin-bottom: 0px;
   margin-left: -0.75rem;
-  margin-right: -0.75rem; }
+  margin-right: -0.75rem;
+}
 
 /* COMMON ELEMENTS */
 form .help-block {
@@ -10,134 +11,164 @@ form .help-block {
   position: relative;
   top: -10px;
   color: rgba(0, 0, 0, 0.6);
-  font-size: 75%; }
+  font-size: 75%;
+}
 
 form .error {
   line-height: 12px;
   position: relative;
   top: -10px;
-  color: #F44336; }
+  color: #F44336;
+}
 
 /* INPUT FIELD */
 .input-field {
-  margin-bottom: 0; }
-  .input-field label {
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden; }
-  .input-field.has-error .prefix {
-    color: #F44336; }
-  .input-field .prefix {
-    line-height: 45px; }
-    .input-field .prefix ~ label {
-      width: calc(100% - 21px - 3rem); }
-    .input-field .prefix ~ .errors .error {
-      margin-left: 3rem; }
-  .input-field input[type=number] {
-    -moz-appearance: textfield; }
-  .input-field .input-field-action {
-    position: absolute;
-    top: 0;
-    right: 0;
-    color: #555;
-    padding: 0 0.75rem;
-    line-height: 3rem;
-    background: white; }
-    .input-field .input-field-action i.material-icons {
-      vertical-align: middle; }
-  .input-field ::-webkit-inner-spin-button {
-    -webkit-appearance: none; }
-  .input-field ::-webkit-outer-spin-button {
-    -webkit-appearance: none; }
+  margin-bottom: 0;
+}
+.input-field label {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.input-field.has-error .prefix {
+  color: #F44336;
+}
+.input-field .prefix {
+  line-height: 45px;
+}
+.input-field .prefix ~ label {
+  width: calc(100% - 21px - 3rem);
+}
+.input-field .prefix ~ .errors .error {
+  margin-left: 3rem;
+}
+.input-field input[type=number] {
+  -moz-appearance: textfield;
+}
+.input-field .input-field-action {
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: #555;
+  padding: 0 0.75rem;
+  line-height: 3rem;
+  background: white;
+}
+.input-field .input-field-action i.material-icons {
+  vertical-align: middle;
+}
+.input-field ::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+.input-field ::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
 
 input:-webkit-autofill + label {
   -webkit-transform: translateY(-140%);
-          transform: translateY(-140%); }
+          transform: translateY(-140%);
+}
 
 /* SELECT FIELD */
 select.material-ignore {
-  display: block; }
+  display: block;
+}
 
 .select-field .prefix {
   position: absolute;
   width: 3rem;
   font-size: 2rem;
   margin-top: 25px;
-  -webkit-transition: color .2s;
-  transition: color .2s; }
-  .select-field .prefix ~ label {
-    margin-left: 3rem; }
-
+  -webkit-transition: color 0.2s;
+  transition: color 0.2s;
+}
+.select-field .prefix ~ label {
+  margin-left: 3rem;
+}
 .select-field.has-error input {
   border-bottom: 1px solid #F44336;
   -webkit-box-shadow: 0 1px 0 0 #F44336;
-  box-shadow: 0 1px 0 0 #F44336; }
-
+  box-shadow: 0 1px 0 0 #F44336;
+}
 .select-field .select-wrapper {
-  margin-top: 0px; }
-  .select-field .select-wrapper input.select-dropdown {
-    margin-top: -7px; }
-  .select-field .select-wrapper .caret {
-    z-index: 0;
-    cursor: pointer;
-    pointer-events: none; }
+  margin-top: 0px;
+}
+.select-field .select-wrapper input.select-dropdown {
+  margin-top: -7px;
+}
+.select-field .select-wrapper .caret {
+  z-index: 0;
+  cursor: pointer;
+  pointer-events: none;
+}
 
 /* CHECHBOX FIELD */
 .checkbox-field {
-  line-height: 35px; }
-  .checkbox-field label {
-    color: rgba(0, 0, 0, 0.84); }
-  .checkbox-field .prefix {
-    position: relative;
-    top: 5px;
-    width: 2.5rem;
-    font-size: 2rem; }
-  .checkbox-field .help-block {
-    padding-top: 5px;
-    padding-left: 35px;
-    font-size: 12px;
-    line-height: 16px;
-    display: block; }
+  line-height: 35px;
+}
+.checkbox-field label {
+  color: rgba(0, 0, 0, 0.84);
+}
+.checkbox-field .prefix {
+  position: relative;
+  top: 5px;
+  width: 2.5rem;
+  font-size: 2rem;
+}
+.checkbox-field .help-block {
+  padding-top: 5px;
+  padding-left: 35px;
+  font-size: 12px;
+  line-height: 16px;
+  display: block;
+}
 
 /* RADIO FIELD */
 .radio-field .radio {
-  padding-top: 10px; }
-
+  padding-top: 10px;
+}
 .radio-field .error, .radio-field .help-block {
   top: 0px;
-  left: 5px; }
-
+  left: 5px;
+}
 .radio-field label.item-label {
   font-size: 14px;
-  color: rgba(0, 0, 0, 0.84); }
-
+  color: rgba(0, 0, 0, 0.84);
+}
 .radio-field .prefix {
   position: relative;
   top: 5px;
   width: 2.5rem;
-  font-size: 2rem; }
-  .radio-field .prefix ~ label {
-    width: calc(100% - 21px - 3rem); }
-
+  font-size: 2rem;
+}
+.radio-field .prefix ~ label {
+  width: calc(100% - 21px - 3rem);
+}
 .radio-field .inline {
-  margin-top: 10px; }
-  .radio-field .inline .radio {
-    display: inline;
-    margin-right: 20px; }
+  margin-top: 10px;
+}
+.radio-field .inline .radio {
+  display: inline;
+  margin-right: 20px;
+}
 
 /* FILE FIELD */
 .file-field .btn,
 .file-field .btn-large {
-  left: auto; }
+  left: auto;
+}
 
 .file-field-clear {
   float: right;
   margin-top: 15px;
-  margin-left: 6px; }
-  .file-field-clear label {
-    margin-right: 5px;
-    width: auto; }
+  margin-left: 6px;
+}
+.file-field-clear label {
+  margin-right: 5px;
+  width: auto;
+}
 
 /* FORMSET*/
 .formset-field td {
-  vertical-align: top; }
+  vertical-align: top;
+}
