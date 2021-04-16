@@ -1,5 +1,6 @@
 {% load l10n material_form material_form_internal %}
 {% part field columns asvar 'columns' %}1{% endpart %}
+{% part field group_columns asvar 'group_columns' %}12{% endpart %}
 {% part bound_field.field %}<div class="row checkbox-field">
     {% part field label %}<div class="col s12">
         <label{% attrs bound_field 'label' %}
@@ -12,7 +13,9 @@
     {% endattrs %}>
         {% part field prefix %}{% endpart %}{% part field control %}
         <div class="row">
-            {% for group, items in bound_field|select_options %}{% for col_span, choices in items|split_choices_by_columns:columns %}<div class="col l{{ col_span }}">
+            {% for group, items in bound_field|select_options %}
+                {% if group %}<div class="col l{{ group_columns }}"><h6 style="font-size: .8rem;color: #9e9e9e;padding-left: 12px;">{{ group }}</h6>{% endif %}
+                {% for col_span, choices in items|split_choices_by_columns:columns %}<div class="col l{{ col_span }}">
                 {% for choice, value, selected, position in choices %}
                 <div class="checkbox" id="id_{{ bound_field.html_name }}"><label>
                     <input{% attrs bound_field 'widget' default field.widget.attrs %}
@@ -26,7 +29,9 @@
                     {% endattrs %}/>
                     <span for="id_{{ bound_field.html_name }}_{{ position }}">{{ choice }}</span>
                 </label></div>
-            {% endfor %}</div>{% endfor %}{% endfor %}
+                {% endfor %}</div>{% endfor %}
+                {% if group %}</div>{% endif %}
+            {% endfor %}
         </div>
         {% endpart %}{% part field help_text %}{% if field.help_text %}
         <div class="help-block">{{ bound_field.help_text|safe }}</div>
