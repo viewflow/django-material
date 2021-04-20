@@ -288,6 +288,8 @@ class WidgetAttrsNode(Node):
                     result[attr] += " " + value
                 else:
                     result[attr] = value
+            elif action == 'remove':
+                result.pop(attr, "")
 
         return flatatt(result)
 
@@ -324,10 +326,10 @@ class WidgetAttrNode(Node):
                     bits[0], ','.join(bits[1:]))
             )
 
-        if len(bits) >= 5 and bits[4] not in ['append', 'override']:
+        if len(bits) >= 5 and bits[4] not in ['append', 'override', 'remove']:
             raise TemplateSyntaxError(
-                "{} unknown action {}  should be 'append'"
-                " of 'override'".format(bits[0], ','.join(bits[4]))
+                "{} unknown action {}  should be 'append', 'remove'"
+                " or 'override'".format(bits[0], ','.join(bits[4]))
             )
 
         self.field = Variable(bits[1])
