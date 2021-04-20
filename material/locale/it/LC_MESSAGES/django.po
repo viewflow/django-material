@@ -1,0 +1,97 @@
+# distributed under the same license as the Django Material package.
+msgid ""
+msgstr ""
+"Project-Id-Version: django-material\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-05-10 11:28+0000\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: frontend/apps.py:141
+msgid "Frontend"
+msgstr "Fine frontale"
+
+#: frontend/models.py:25
+msgid "label"
+msgstr "etichetta"
+
+#: frontend/models.py:26
+msgid "installed"
+msgstr "installato"
+
+#: frontend/models.py:31
+msgid "module"
+msgstr "modulo"
+
+#: frontend/models.py:32
+msgid "modules"
+msgstr "moduli"
+
+#: frontend/templates/400.html:4 frontend/templates/400.html.py:6
+msgid "Bad Request"
+msgstr "Brutta richiesta"
+
+#: frontend/templates/403.html:4 frontend/templates/403.html.py:10
+msgid "Access Forbidden"
+msgstr "Accesso Vietato"
+
+#: frontend/templates/403.html:14
+msgid "You are not logged in"
+msgstr "Non sei loggato"
+
+#: frontend/templates/403.html:16
+#, python-format
+msgid "%(user)s have no rights to access to the page"
+msgstr "%(user)s non ha diritti di accesso alla pagina"
+
+#: frontend/templates/404.html:4 frontend/templates/404.html.py:6
+msgid "Page not found"
+msgstr "Pagina non trovata"
+
+#: frontend/templates/404.html:11
+msgid "We're sorry, but the requested page could not be found."
+msgstr "Siamo spiacenti, ma non è stato possibile trovare la pagina richiesta."
+
+#: frontend/templates/500.html:4 frontend/templates/500.html.py:10
+msgid "Server error"
+msgstr "Errore del server"
+
+#: frontend/templates/material/frontend/base_site.html:4
+#: frontend/templates/material/frontend/base_site.html:5
+msgid "Django Material"
+msgstr ""
+
+#: frontend/templates/material/frontend/views/confirm_delete.html:16
+#, python-format
+msgid "Are you sure you want to delete the %(object)s and related items?"
+msgstr "Sei sicuro di voler eliminare %(object)s se gli elementi correlati?"
+
+#: frontend/views/create.py:37
+#, python-brace-format
+msgid "The {name} \"{link}\" was added successfully."
+msgstr "Il {name} \"{link}\" è stato aggiunto con successo."
+
+#: frontend/views/delete.py:87
+#, python-brace-format
+msgid "The {name} \"{link}\"  was deleted successfully."
+msgstr "Il {name} \"{link}\" è stato eliminato con successo."
+
+#: frontend/views/update.py:38
+#, python-brace-format
+msgid "The {name} \"{link}\" was changed successfully."
+msgstr "Il {name} \"{link}\" è stato modificato con successo."
+
+#: templates/material/fields/django_fileinput.html:8
+msgid "File"
+msgstr "File"
+
+#: templates/material/fields/django_selectmultiple.html:7
+msgid "Choose your option"
+msgstr "Scegli la tua opzione"
+
+# action
+msgid "Delete selected objects"
+msgstr "Elimina gli oggetti selezionati"
