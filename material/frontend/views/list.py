@@ -217,7 +217,13 @@ class DataTableMixin(ContextMixin):
         Data could comes from the model field or external `data_source`
         method call.
         """
-        opts = self.get_queryset().model._meta
+        if self.object_list:  # TODO backport simplification from viewflow 2.0?
+            opts = self.object_list.model._meta
+        elif hasattr(self, 'model') and self.model:
+            opts = self.model._meta
+        else:
+            opts = self.get_queryset().model._meta
+
         try:
             return ModelField(opts.get_field(attr_name))
         except FieldDoesNotExist:
