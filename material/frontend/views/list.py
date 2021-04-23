@@ -217,7 +217,7 @@ class DataTableMixin(ContextMixin):
         Data could comes from the model field or external `data_source`
         method call.
         """
-        opts = self.model._meta
+        opts = self.get_queryset().model._meta
         try:
             return ModelField(opts.get_field(attr_name))
         except FieldDoesNotExist:
