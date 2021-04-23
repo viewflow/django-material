@@ -217,7 +217,7 @@ class DataTableMixin(ContextMixin):
         Data could comes from the model field or external `data_source`
         method call.
         """
-        if self.object_list:  # TODO backport simplification from viewflow 2.0?
+        if hasattr(self, 'object_list') and self.object_list:  # TODO backport simplification from viewflow 2.0?
             opts = self.object_list.model._meta
         elif hasattr(self, 'model') and self.model:
             opts = self.model._meta
