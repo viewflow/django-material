@@ -91,3 +91,4 @@ GIT VERSION
 - Add support for attribute removing #500
 - Add support for groups in checkbox select multiple #436
 - Add basic support for ordering custom fields in list view #224
+- Change to lazy evaluation {{ modules }} context variable
