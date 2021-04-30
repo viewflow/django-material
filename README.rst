@@ -85,8 +85,8 @@ Django Material Pro with additional features has a commercial-friendly license. 
 Changelog
 =========
 
-GIT VERSION
-================
+1.9.0 2020-04-30
+----------------
 
 - Add support for attribute removing #500
 - Add support for groups in checkbox select multiple #436
