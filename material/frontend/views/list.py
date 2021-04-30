@@ -482,6 +482,9 @@ class ListModelView(TemplateResponseMixin, DataTableMixin, View):
                 "%(cls)s.get_queryset()." % {
                     'cls': self.__class__.__name__
                 })
+        if self.model is None:
+            self.model = queryset.model
+
         ordering = self.get_ordering()
         if ordering:
             if isinstance(ordering, six.string_types):
