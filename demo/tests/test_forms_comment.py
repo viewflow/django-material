@@ -1,4 +1,4 @@
-from django.conf.urls import url
+from django.urls import path
 from django.views import generic
 from django.test.utils import override_settings
 from django_webtest import WebTest
@@ -34,6 +34,6 @@ class Test(WebTest):
 
 
 urlpatterns = [
-    url(r'^demo/comment/$', generic.FormView.as_view(
+    path('demo/comment/', generic.FormView.as_view(
         form_class=forms.CommentForm, success_url='/demo/comment/', template_name="demo.html")),
 ]

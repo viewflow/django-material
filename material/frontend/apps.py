@@ -20,7 +20,7 @@ class ModuleMixin(object):
     a single no-parametrized url with name='index', ex::
 
         urlpatterns = [
-            url('^$', generic.TemplateView.as_view(template_name="sales/index.html"), name="index"),
+            path('', generic.TemplateView.as_view(template_name="sales/index.html"), name="index"),
         ]
 
     All AppConfigs urls will be included into material.frontend.urls automatically under /<app_label>/ prefix

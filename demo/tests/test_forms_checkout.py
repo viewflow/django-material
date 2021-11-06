@@ -1,4 +1,4 @@
-from django.conf.urls import url
+from django.urls import path
 from django.test.utils import override_settings
 from django.views import generic
 from django_webtest import WebTest
@@ -57,6 +57,6 @@ class Test(WebTest):
 
 
 urlpatterns = [
-    url(r'^demo/checkout/$', generic.FormView.as_view(
+    path('demo/checkout/', generic.FormView.as_view(
         form_class=forms.CheckoutForm, success_url='/demo/checkout/', template_name="demo.html")),
 ]

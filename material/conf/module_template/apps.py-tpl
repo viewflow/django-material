@@ -5,3 +5,4 @@ from material.frontend.apps import ModuleMixin
 class {{camel_case_app_name}}Config(ModuleMixin, AppConfig):
     name = '{{ app_name }}'
     icon = '<i class="material-icons">settings_applications</i>'
+    default_auto_field = 'django.db.models.AutoField'

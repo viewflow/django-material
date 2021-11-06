@@ -1,5 +1,5 @@
 from django.conf import settings
-from django.conf.urls import include, url
+from django.urls import include, path, re_path
 from django.contrib.auth.decorators import login_required
 from django.contrib import admin
 from django.shortcuts import render
@@ -55,113 +55,113 @@ class AdminFormView(generic.FormView):
 
 
 urlpatterns = [
-    url(r'^$', index_view),
-    url(r'^__debug__/', include(debug_toolbar.urls)),
+    path('', index_view),
+    path(r'__debug__/', include(debug_toolbar.urls)),
 
     # demo
-    url(r'^demo/login/$', generic.FormView.as_view(
+    path(r'demo/login/', generic.FormView.as_view(
         form_class=forms.LoginForm, success_url='/demo/login/', template_name="demo.html")),
-    url(r'^demo/registration/$', generic.FormView.as_view(
+    path(r'demo/registration/', generic.FormView.as_view(
         form_class=forms.RegistrationForm, success_url='/demo/registration/', template_name="demo.html")),
-    url(r'^demo/contact/$', generic.FormView.as_view(
+    path('demo/contact/', generic.FormView.as_view(
         form_class=forms.ContactForm, success_url='/demo/contact/', template_name="demo.html")),
-    url(r'^demo/order/$', generic.FormView.as_view(
+    path('demo/order/', generic.FormView.as_view(
         form_class=forms.OrderForm, success_url='/demo/order/', template_name="demo.html")),
-    url(r'^demo/checkout/$', generic.FormView.as_view(
+    path('demo/checkout/', generic.FormView.as_view(
         form_class=forms.CheckoutForm, success_url='/demo/checkout/', template_name="demo.html")),
-    url(r'^demo/comment/$', generic.FormView.as_view(
+    path('demo/comment/', generic.FormView.as_view(
         form_class=forms.CommentForm, success_url='/demo/comment/', template_name="demo.html")),
-    url(r'^demo/bank/$', generic.FormView.as_view(
+    path('demo/bank/', generic.FormView.as_view(
         form_class=forms.BankForm, success_url='/demo/bank/', template_name="demo.html")),
-    url(r'^demo/wizard/$', Wizard.as_view()),
-    url(r'^foundation/basic/', generic.RedirectView.as_view(url='/?cache=no', permanent=False)),
+    path('demo/wizard/', Wizard.as_view()),
+    path('foundation/basic/', generic.RedirectView.as_view(url='/?cache=no', permanent=False)),
 
     # core widgets test
-    url(r'^demo/widget/$', generic.RedirectView.as_view(url='/demo/widget/boolean/', permanent=False)),
-    url(r'^demo/widget/boolean/$', WidgetFormView.as_view(form_class=widget_forms.BooleanFieldForm)),
-    url(r'^demo/widget/char/$', WidgetFormView.as_view(form_class=widget_forms.CharFieldForm)),
-    url(r'^demo/widget/choice/$', WidgetFormView.as_view(form_class=widget_forms.ChoiceFieldForm)),
-    url(r'^demo/widget/date/$', WidgetFormView.as_view(form_class=widget_forms.DateFieldForm)),
-    url(r'^demo/widget/datetime/$', WidgetFormView.as_view(form_class=widget_forms.DateTimeFieldForm)),
-    url(r'^demo/widget/decimal/$', WidgetFormView.as_view(form_class=widget_forms.DecimalFieldForm)),
-    url(r'^demo/widget/duration/$', WidgetFormView.as_view(form_class=widget_forms.DurationFieldForm)),
-    url(r'^demo/widget/email/$', WidgetFormView.as_view(form_class=widget_forms.EmailFieldForm)),
-    url(r'^demo/widget/file/$', WidgetFormView.as_view(form_class=widget_forms.FileFieldForm)),
-    url(r'^demo/widget/filepath/$', WidgetFormView.as_view(form_class=widget_forms.FilePathFieldForm)),
-    url(r'^demo/widget/float/$', WidgetFormView.as_view(form_class=widget_forms.FloatFieldForm)),
-    url(r'^demo/widget/image/$', WidgetFormView.as_view(form_class=widget_forms.ImageFieldForm)),
-    url(r'^demo/widget/integer/$', WidgetFormView.as_view(form_class=widget_forms.IntegerFieldForm)),
-    url(r'^demo/widget/ipaddress/$', WidgetFormView.as_view(form_class=widget_forms.GenericIPAddressFieldForm)),
-    url(r'^demo/widget/multiplechoice/$', WidgetFormView.as_view(form_class=widget_forms.MultipleChoiceFieldForm)),
-    url(r'^demo/widget/nullbolean/$', WidgetFormView.as_view(form_class=widget_forms.NullBooleanFieldForm)),
-    url(r'^demo/widget/regex/$', WidgetFormView.as_view(form_class=widget_forms.RegexFieldForm)),
-    url(r'^demo/widget/slug/$', WidgetFormView.as_view(form_class=widget_forms.SlugFieldForm)),
-    url(r'^demo/widget/time/$', WidgetFormView.as_view(form_class=widget_forms.TimeFieldForm)),
-    url(r'^demo/widget/url/$', WidgetFormView.as_view(form_class=widget_forms.URLFieldForm)),
-    url(r'^demo/widget/uuid/$', WidgetFormView.as_view(form_class=widget_forms.UUIDField)),
-    url(r'^demo/widget/combo/$', WidgetFormView.as_view(form_class=widget_forms.ComboFieldForm)),
-    url(r'^demo/widget/splitdatetime/$', WidgetFormView.as_view(form_class=widget_forms.SplitDateTimeFieldForm)),
-    url(r'^demo/widget/modelchoice/$', WidgetFormView.as_view(form_class=widget_forms.ModelChoiceFieldForm)),
-    url(r'^demo/widget/modelmultichoice/$', WidgetFormView.as_view(form_class=widget_forms.ModelMultipleChoiceFieldForm)),
+    path('demo/widget/', generic.RedirectView.as_view(url='/demo/widget/boolean/', permanent=False)),
+    path('demo/widget/boolean/', WidgetFormView.as_view(form_class=widget_forms.BooleanFieldForm)),
+    path('demo/widget/char/', WidgetFormView.as_view(form_class=widget_forms.CharFieldForm)),
+    path('demo/widget/choice/', WidgetFormView.as_view(form_class=widget_forms.ChoiceFieldForm)),
+    path('demo/widget/date/', WidgetFormView.as_view(form_class=widget_forms.DateFieldForm)),
+    path('demo/widget/datetime/', WidgetFormView.as_view(form_class=widget_forms.DateTimeFieldForm)),
+    path('demo/widget/decimal/', WidgetFormView.as_view(form_class=widget_forms.DecimalFieldForm)),
+    path('demo/widget/duration/', WidgetFormView.as_view(form_class=widget_forms.DurationFieldForm)),
+    path('demo/widget/email/', WidgetFormView.as_view(form_class=widget_forms.EmailFieldForm)),
+    path('demo/widget/file/', WidgetFormView.as_view(form_class=widget_forms.FileFieldForm)),
+    path('demo/widget/filepath/', WidgetFormView.as_view(form_class=widget_forms.FilePathFieldForm)),
+    path('demo/widget/float/', WidgetFormView.as_view(form_class=widget_forms.FloatFieldForm)),
+    path('demo/widget/image/', WidgetFormView.as_view(form_class=widget_forms.ImageFieldForm)),
+    path('demo/widget/integer/', WidgetFormView.as_view(form_class=widget_forms.IntegerFieldForm)),
+    path('demo/widget/ipaddress/', WidgetFormView.as_view(form_class=widget_forms.GenericIPAddressFieldForm)),
+    path('demo/widget/multiplechoice/', WidgetFormView.as_view(form_class=widget_forms.MultipleChoiceFieldForm)),
+    path('demo/widget/nullbolean/', WidgetFormView.as_view(form_class=widget_forms.NullBooleanFieldForm)),
+    path('demo/widget/regex/', WidgetFormView.as_view(form_class=widget_forms.RegexFieldForm)),
+    path('demo/widget/slug/', WidgetFormView.as_view(form_class=widget_forms.SlugFieldForm)),
+    path('demo/widget/time/', WidgetFormView.as_view(form_class=widget_forms.TimeFieldForm)),
+    path('demo/widget/url/', WidgetFormView.as_view(form_class=widget_forms.URLFieldForm)),
+    path('demo/widget/uuid/', WidgetFormView.as_view(form_class=widget_forms.UUIDField)),
+    path('demo/widget/combo/', WidgetFormView.as_view(form_class=widget_forms.ComboFieldForm)),
+    path('demo/widget/splitdatetime/', WidgetFormView.as_view(form_class=widget_forms.SplitDateTimeFieldForm)),
+    path('demo/widget/modelchoice/', WidgetFormView.as_view(form_class=widget_forms.ModelChoiceFieldForm)),
+    path('demo/widget/modelmultichoice/', WidgetFormView.as_view(form_class=widget_forms.ModelMultipleChoiceFieldForm)),
 
-    url(r'^demo/widget/password/$', WidgetFormView.as_view(form_class=widget_forms.PasswordInputForm)),
-    url(r'^demo/widget/hidden/$', WidgetFormView.as_view(form_class=widget_forms.HiddenInputForm)),
-    url(r'^demo/widget/textarea/$', WidgetFormView.as_view(form_class=widget_forms.TextareaForm)),
-    url(r'^demo/widget/radioselect/$', WidgetFormView.as_view(form_class=widget_forms.RadioSelectForm)),
-    url(r'^demo/widget/checkboxmultiple/$', WidgetFormView.as_view(
+    path('demo/widget/password/', WidgetFormView.as_view(form_class=widget_forms.PasswordInputForm)),
+    path('demo/widget/hidden/', WidgetFormView.as_view(form_class=widget_forms.HiddenInputForm)),
+    path('demo/widget/textarea/', WidgetFormView.as_view(form_class=widget_forms.TextareaForm)),
+    path('demo/widget/radioselect/', WidgetFormView.as_view(form_class=widget_forms.RadioSelectForm)),
+    path('demo/widget/checkboxmultiple/', WidgetFormView.as_view(
         form_class=widget_forms.CheckboxSelectMultipleForm)),
-    url(r'^demo/widget/fileinput/$', WidgetFormView.as_view(form_class=widget_forms.FileInputForm)),
-    url(r'^demo/widget/splithiddendatetime/$', WidgetFormView.as_view(
+    path('demo/widget/fileinput/', WidgetFormView.as_view(form_class=widget_forms.FileInputForm)),
+    path('demo/widget/splithiddendatetime/', WidgetFormView.as_view(
         form_class=widget_forms.SplitHiddenDateTimeWidgetForm)),
-    url(r'^demo/widget/selectdate/$', WidgetFormView.as_view(form_class=widget_forms.SelectDateWidgetForm)),
+    path('demo/widget/selectdate/', WidgetFormView.as_view(form_class=widget_forms.SelectDateWidgetForm)),
 
     # admin widgets test
-    url(r'^demo/widget/admin/$', generic.RedirectView.as_view(
+    path('demo/widget/admin/', generic.RedirectView.as_view(
         url='/demo/widget/admin/filteredselectmultiple/', permanent=False)),
-    url(r'^demo/widget/admin/filteredselectmultiple/$', AdminFormView.as_view(
+    path('demo/widget/admin/filteredselectmultiple/', AdminFormView.as_view(
         form_class=admin_forms.FilteredSelectMultipleForm)),
-    url(r'^demo/widget/admin/admindatewidget/$', AdminFormView.as_view(
+    path('demo/widget/admin/admindatewidget/', AdminFormView.as_view(
         form_class=admin_forms.AdminDateWidgetForm)),
-    url(r'^demo/widget/admin/admintimewidget/$', AdminFormView.as_view(
+    path('demo/widget/admin/admintimewidget/', AdminFormView.as_view(
         form_class=admin_forms.AdminTimeWidgetForm)),
-    url(r'^demo/widget/admin/adminsplitdatetime/$', AdminFormView.as_view(
+    path('demo/widget/admin/adminsplitdatetime/', AdminFormView.as_view(
         form_class=admin_forms.AdminSplitDateTimeForm)),
-    url(r'^demo/widget/admin/adminradioselect/$', AdminFormView.as_view(
+    path('demo/widget/admin/adminradioselect/', AdminFormView.as_view(
         form_class=admin_forms.AdminRadioSelectForm)),
-    url(r'^demo/widget/admin/adminfilewidget/$', AdminFormView.as_view(
+    path('demo/widget/admin/adminfilewidget/', AdminFormView.as_view(
         form_class=admin_forms.AdminFileWidgetForm)),
-    url(r'^demo/widget/admin/foreignkeyrawidwidget/$', AdminFormView.as_view(
+    path('demo/widget/admin/foreignkeyrawidwidget/', AdminFormView.as_view(
         form_class=admin_forms.ForeignKeyRawIdWidgetForm)),
-    url(r'^demo/widget/admin/manytomanyrawidwidget/$', AdminFormView.as_view(
+    path('demo/widget/admin/manytomanyrawidwidget/', AdminFormView.as_view(
         form_class=admin_forms.ManyToManyRawIdWidgetForm)),
-    url(r'^demo/widget/admin/relatedfieldwidgetwrapper/$', AdminFormView.as_view(
+    path('demo/widget/admin/relatedfieldwidgetwrapper/', AdminFormView.as_view(
         form_class=admin_forms.RelatedFieldWidgetWrapperForm)),
-    url(r'^demo/widget/admin/admintextareawidget/$', AdminFormView.as_view(
+    path('demo/widget/admin/admintextareawidget/', AdminFormView.as_view(
         form_class=admin_forms.AdminTextareaWidgetForm)),
-    url(r'^demo/widget/admin/admintextinputwidget/$', AdminFormView.as_view(
+    path('demo/widget/admin/admintextinputwidget/', AdminFormView.as_view(
         form_class=admin_forms.AdminTextInputWidgetForm)),
-    url(r'^demo/widget/admin/adminemailfield/$', AdminFormView.as_view(
+    path('demo/widget/admin/adminemailfield/', AdminFormView.as_view(
         form_class=admin_forms.AdminEmailFieldForm)),
-    url(r'^demo/widget/admin/adminurlfieldwidget/$', AdminFormView.as_view(
+    path('demo/widget/admin/adminurlfieldwidget/', AdminFormView.as_view(
         form_class=admin_forms.AdminURLFieldWidgetForm)),
-    url(r'^demo/widget/admin/adminintegerfieldwidget/$', AdminFormView.as_view(
+    path('demo/widget/admin/adminintegerfieldwidget/', AdminFormView.as_view(
         form_class=admin_forms.AdminIntegerFieldWidgetForm)),
-    url(r'^demo/widget/admin/adminbigintegerfieldwidget/$', AdminFormView.as_view(
+    path('demo/widget/admin/adminbigintegerfieldwidget/', AdminFormView.as_view(
         form_class=admin_forms.AdminBigIntegerFieldWidgetForm)),
 
     # frontend
-    url(r'^frontend/$', generic.RedirectView.as_view(url='/frontend/accounting/', permanent=False), name="index"),
-    url(r'', include(frontend_urls)),
+    path('frontend/', generic.RedirectView.as_view(url='/frontend/accounting/', permanent=False), name="index"),
+    path('', include(frontend_urls)),
 ]
 
 urlpatterns += [
-    url(r'^static/(?P<path>.*)$', static.serve,
+    re_path(r'^static/(?P<path>.*)', static.serve,
         {'document_root': settings.STATIC_ROOT, 'show_indexes': True})
 ]
 
 if 'material.frontend' not in settings.INSTALLED_APPS:
-    urlpatterns += [url(r'^admin/', include(admin.site.urls))]
+    urlpatterns += [path('admin/', include(admin.site.urls))]
 
 if 'django.contrib.flatpages' in settings.INSTALLED_APPS:
     from django.contrib.flatpages import views
-    urlpatterns += [url(r'^(?P<url>.*/)$', views.flatpage)]
+    urlpatterns += [re_path(r'^(?P<url>.*/)', views.flatpage)]

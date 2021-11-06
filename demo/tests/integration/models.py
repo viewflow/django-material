@@ -85,7 +85,7 @@ class Country(models.Model):
     code = models.CharField(_('code'), max_length=3, unique=True)
     name = models.CharField(_('name'), max_length=250)
     independence_day = models.DateField(_('independence day'), null=True, blank=True)
-    gay_friendly = models.NullBooleanField(_('gay friendly'))
+    gay_friendly = models.BooleanField(_('gay friendly'), null=True)
     continent = models.ForeignKey(
         Continent, on_delete=models.CASCADE, null=True, related_name='countries', verbose_name=_('continent'))
 
