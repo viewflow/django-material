@@ -140,6 +140,7 @@ class MaterialFrontendConfig(AppConfig):
     name = 'material.frontend'
     verbose_name = _('Frontend')
     icon = '<i class="material-icons">view_module</i>'
+    default_auto_field = 'django.db.models.AutoField'
 
     def ready(self):
         """Register all available modules."""

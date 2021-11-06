@@ -1,3 +1,10 @@
+1.10.0 GIT VERSION
+------------------
+
+- Drop support for python 2.7
+- Drop sipport for Django 1.11, Django 2.0, Django 2.1
+
+
 1.9.0 2020-04-30
 ----------------
 - Add support for attribute removing #500
