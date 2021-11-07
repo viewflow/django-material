@@ -3,7 +3,7 @@ import six
 
 from datetime import date
 from decimal import Decimal
-from django.conf.urls import url
+from django.urls import re_path
 from django.http import JsonResponse, HttpResponse
 from django.template import Context, Template
 from django.views.decorators.csrf import csrf_exempt
@@ -93,7 +93,7 @@ def build_test_urls(testcase_cls):
             else:
                 test.form_cls = form_cls
 
-        urls.append(url(url_path, test_view, {
+        urls.append(re_path(url_path, test_view, {
             'template_content': template_content,
             'form_cls': form_cls
         }))

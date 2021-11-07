@@ -1,5 +1,5 @@
 from django.db.models import F
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from material import Layout, Row, Fieldset
 from material.frontend.views import ModelViewSet

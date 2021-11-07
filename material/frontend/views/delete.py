@@ -7,8 +7,8 @@ from django.db import router
 from django.db.models.deletion import Collector
 from django.http import Http404
 from django.urls import reverse
-from django.utils.encoding import force_text
-from django.utils.translation import ugettext_lazy as _
+from django.utils.encoding import force_str
+from django.utils.translation import gettext_lazy as _
 from django.views import generic
 from ...compat import _
 
@@ -98,7 +98,7 @@ class DeleteModelView(generic.DeleteView):
 
     def message_user(self):
         message = _('The {name} "{link}"  was deleted successfully.'.format(
-            name=force_text(self.model._meta.verbose_name),
-            link=force_text(self.object)
+            name=force_str(self.model._meta.verbose_name),
+            link=force_str(self.object)
         ))
         messages.add_message(self.request, messages.SUCCESS, message, fail_silently=True)

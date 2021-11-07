@@ -17,7 +17,7 @@ from django.http import JsonResponse
 from django.urls import reverse
 from django.utils import formats, timezone
 from django.utils.decorators import method_decorator
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 from django.utils.html import conditional_escape, format_html
 from django.views.generic import View
 from django.views.generic.base import ContextMixin, TemplateResponseMixin
@@ -263,9 +263,9 @@ class DataTableMixin(ContextMixin):
         elif isinstance(value, six.integer_types + (decimal.Decimal, float)):
             return formats.number_format(value)
         elif isinstance(value, (list, tuple)):
-            return ', '.join(force_text(v) for v in value)
+            return ', '.join(force_str(v) for v in value)
         else:
-            return force_text(value)
+            return force_str(value)
 
     def get_table_data(self, start, length):
         """Get a page for datatable."""

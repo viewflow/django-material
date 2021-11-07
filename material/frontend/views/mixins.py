@@ -1,13 +1,13 @@
 from __future__ import unicode_literals
 
+from urllib.parse import quote as urlquote
 from django.contrib import messages
 from django.core.exceptions import PermissionDenied, ValidationError
 from django.forms.models import modelform_factory
 from django.http import Http404
 from django.urls import reverse
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 from django.utils.html import format_html
-from django.utils.http import urlquote
 from ...base import Span
 from ...compat import _
 
@@ -141,8 +141,8 @@ class MessageUserMixin(object):
 
         url = reverse('{}:{}_detail'.format(
             opts.app_label, opts.model_name), args=[self.object.pk])
-        link = format_html('<a href="{}">{}</a>', urlquote(url), force_text(self.object))
-        name = force_text(opts.verbose_name)
+        link = format_html('<a href="{}">{}</a>', urlquote(url), force_str(self.object))
+        name = force_str(opts.verbose_name)
 
         options = {
             'link': link,

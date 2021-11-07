@@ -17,7 +17,7 @@ if django.VERSION >= (3, 0):
     def python_2_unicode_compatible(cls):
         return cls
 else:
-    from django.utils.translation import ugettext_lazy as _
+    from django.utils.translation import gettext_lazy as _
     from django.utils.encoding import python_2_unicode_compatible
 
 try:

@@ -1,6 +1,6 @@
 from __future__ import unicode_literals
 
-from django.conf.urls import url
+from django.urls import re_path
 from django.contrib.auth import get_permission_codename
 
 from .create import CreateModelView
@@ -38,7 +38,7 @@ class BaseViewset(object):
         for url_entry in url_entries:
             regexp, view, name = url_entry
             result.append(
-                url(regexp.format(**format_kwargs),
+                re_path(regexp.format(**format_kwargs),
                     view,
                     name=name.format(**format_kwargs))
             )

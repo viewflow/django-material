@@ -6,7 +6,7 @@ import warnings
 from functools import partial
 from django.template import TemplateDoesNotExist
 from django.template.loader import get_template, select_template
-from django.utils.encoding import smart_text
+from django.utils.encoding import force_str
 
 
 class LayoutNode(object):
@@ -214,7 +214,7 @@ class Span(object):
             warnings.warn("Unknown field and widget {} {}".format(
                 bound_field.field.__class__,
                 bound_field.field.widget.__class__))
-            return smart_text(bound_field)
+            return force_str(bound_field)
         else:
             hidden_initial = ''
 
