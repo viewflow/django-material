@@ -21,6 +21,8 @@ Material design for Django.
    :target: https://gitter.im/viewflow/django-material?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
 
 
+- Django-Material 1.10.x compatible with Django 2.2/3.0/3.1/3.2/4.0
+- Django-Material 1.[8,9].x compatible with Django 1.11/2.0/2.1/2.2/3.0/3.1/3.2
 - Django-Material 1.7.x compatible with Django 1.11/2.0/2.1/2.2/3.0/3.1
 - Django-Material 1.6.x compatible with Django 1.11/2.0/2.1/2.2/3.0
 - Django-Material 1.[3,4,5].x compatible with Django 1.11/2.0/2.1/2.2
