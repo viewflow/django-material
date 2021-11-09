@@ -55,6 +55,8 @@
     content: "\e95c"; }
   .material-icons._1k_plus:before {
     content: "\e95d"; }
+  .material-icons._1x_mobiledata:before {
+    content: "\efcd"; }
   .material-icons._20mp:before {
     content: "\e95e"; }
   .material-icons._21mp:before {
@@ -71,16 +73,28 @@
     content: "\e964"; }
   .material-icons._2mp:before {
     content: "\e965"; }
+  .material-icons._30fps:before {
+    content: "\efce"; }
+  .material-icons._30fps_select:before {
+    content: "\efcf"; }
   .material-icons._360:before {
     content: "\e577"; }
   .material-icons._3d_rotation:before {
     content: "\e84d"; }
+  .material-icons._3g_mobiledata:before {
+    content: "\efd0"; }
   .material-icons._3k:before {
     content: "\e966"; }
   .material-icons._3k_plus:before {
     content: "\e967"; }
   .material-icons._3mp:before {
     content: "\e968"; }
+  .material-icons._3p:before {
+    content: "\efd1"; }
+  .material-icons._4g_mobiledata:before {
+    content: "\efd2"; }
+  .material-icons._4g_plus_mobiledata:before {
+    content: "\efd3"; }
   .material-icons._4k:before {
     content: "\e072"; }
   .material-icons._4k_plus:before {
@@ -95,6 +109,10 @@
     content: "\e96c"; }
   .material-icons._5mp:before {
     content: "\e96d"; }
+  .material-icons._60fps:before {
+    content: "\efd4"; }
+  .material-icons._60fps_select:before {
+    content: "\efd5"; }
   .material-icons._6_ft_apart:before {
     content: "\f21e"; }
   .material-icons._6k:before {
@@ -129,6 +147,8 @@
     content: "\e191"; }
   .material-icons.access_time:before {
     content: "\e192"; }
+  .material-icons.access_time_filled:before {
+    content: "\efd6"; }
   .material-icons.accessibility:before {
     content: "\e84e"; }
   .material-icons.accessibility_new:before {
@@ -185,6 +205,8 @@
     content: "\e97d"; }
   .material-icons.add_photo_alternate:before {
     content: "\e43e"; }
+  .material-icons.add_reaction:before {
+    content: "\e1d3"; }
   .material-icons.add_road:before {
     content: "\ef3b"; }
   .material-icons.add_shopping_cart:before {
@@ -201,12 +223,20 @@
     content: "\e05c"; }
   .material-icons.addchart:before {
     content: "\ef3c"; }
+  .material-icons.adf_scanner:before {
+    content: "\eada"; }
   .material-icons.adjust:before {
     content: "\e39e"; }
   .material-icons.admin_panel_settings:before {
     content: "\ef3d"; }
+  .material-icons.adobe:before {
+    content: "\ea96"; }
+  .material-icons.ads_click:before {
+    content: "\e762"; }
   .material-icons.agriculture:before {
     content: "\ea79"; }
+  .material-icons.air:before {
+    content: "\efd8"; }
   .material-icons.airline_seat_flat:before {
     content: "\e630"; }
   .material-icons.airline_seat_flat_angled:before {
@@ -223,6 +253,12 @@
     content: "\e636"; }
   .material-icons.airline_seat_recline_normal:before {
     content: "\e637"; }
+  .material-icons.airline_stops:before {
+    content: "\e7d0"; }
+  .material-icons.airlines:before {
+    content: "\e7ca"; }
+  .material-icons.airplane_ticket:before {
+    content: "\efd9"; }
   .material-icons.airplanemode_active:before {
     content: "\e195"; }
   .material-icons.airplanemode_inactive:before {
@@ -279,6 +315,8 @@
     content: "\e71c"; }
   .material-icons.announcement:before {
     content: "\e85a"; }
+  .material-icons.aod:before {
+    content: "\efda"; }
   .material-icons.apartment:before {
     content: "\ea40"; }
   .material-icons.api:before {
@@ -289,20 +327,34 @@
     content: "\ef40"; }
   .material-icons.app_settings_alt:before {
     content: "\ef41"; }
+  .material-icons.app_shortcut:before {
+    content: "\eae4"; }
+  .material-icons.apple:before {
+    content: "\ea80"; }
   .material-icons.approval:before {
     content: "\e982"; }
   .material-icons.apps:before {
     content: "\e5c3"; }
+  .material-icons.apps_outage:before {
+    content: "\e7cc"; }
   .material-icons.architecture:before {
     content: "\ea3b"; }
   .material-icons.archive:before {
     content: "\e149"; }
+  .material-icons.area_chart:before {
+    content: "\e770"; }
   .material-icons.arrow_back:before {
     content: "\e5c4"; }
   .material-icons.arrow_back_ios:before {
     content: "\e5e0"; }
+  .material-icons.arrow_back_ios_new:before {
+    content: "\e2ea"; }
   .material-icons.arrow_circle_down:before {
     content: "\f181"; }
+  .material-icons.arrow_circle_left:before {
+    content: "\eaa7"; }
+  .material-icons.arrow_circle_right:before {
+    content: "\eaaa"; }
   .material-icons.arrow_circle_up:before {
     content: "\f182"; }
   .material-icons.arrow_downward:before {
@@ -353,6 +405,8 @@
     content: "\e989"; }
   .material-icons.assistant_photo:before {
     content: "\e3a0"; }
+  .material-icons.assured_workload:before {
+    content: "\eb6f"; }
   .material-icons.atm:before {
     content: "\e573"; }
   .material-icons.attach_email:before {
@@ -365,6 +419,8 @@
     content: "\e2bc"; }
   .material-icons.attractions:before {
     content: "\ea52"; }
+  .material-icons.attribution:before {
+    content: "\efdb"; }
   .material-icons.audiotrack:before {
     content: "\e3a1"; }
   .material-icons.auto_awesome:before {
@@ -381,14 +437,20 @@
     content: "\e664"; }
   .material-icons.auto_fix_off:before {
     content: "\e665"; }
+  .material-icons.auto_graph:before {
+    content: "\e4fb"; }
   .material-icons.auto_stories:before {
     content: "\e666"; }
+  .material-icons.autofps_select:before {
+    content: "\efdc"; }
   .material-icons.autorenew:before {
     content: "\e863"; }
   .material-icons.av_timer:before {
     content: "\e01b"; }
   .material-icons.baby_changing_station:before {
     content: "\f19b"; }
+  .material-icons.back_hand:before {
+    content: "\e764"; }
   .material-icons.backpack:before {
     content: "\f19c"; }
   .material-icons.backspace:before {
@@ -401,12 +463,18 @@
     content: "\ea67"; }
   .material-icons.bakery_dining:before {
     content: "\ea53"; }
+  .material-icons.balance:before {
+    content: "\eaf6"; }
+  .material-icons.balcony:before {
+    content: "\e58f"; }
   .material-icons.ballot:before {
     content: "\e172"; }
   .material-icons.bar_chart:before {
     content: "\e26b"; }
   .material-icons.batch_prediction:before {
     content: "\f0f5"; }
+  .material-icons.bathroom:before {
+    content: "\efdd"; }
   .material-icons.bathtub:before {
     content: "\ea41"; }
   .material-icons.battery_alert:before {
@@ -415,14 +483,26 @@
     content: "\e1a3"; }
   .material-icons.battery_full:before {
     content: "\e1a4"; }
+  .material-icons.battery_saver:before {
+    content: "\efde"; }
   .material-icons.battery_std:before {
     content: "\e1a5"; }
   .material-icons.battery_unknown:before {
     content: "\e1a6"; }
   .material-icons.beach_access:before {
     content: "\eb3e"; }
+  .material-icons.bed:before {
+    content: "\efdf"; }
+  .material-icons.bedroom_baby:before {
+    content: "\efe0"; }
+  .material-icons.bedroom_child:before {
+    content: "\efe1"; }
+  .material-icons.bedroom_parent:before {
+    content: "\efe2"; }
   .material-icons.bedtime:before {
     content: "\ef44"; }
+  .material-icons.bedtime_off:before {
+    content: "\eb76"; }
   .material-icons.beenhere:before {
     content: "\e52d"; }
   .material-icons.bento:before {
@@ -431,10 +511,14 @@
     content: "\ef45"; }
   .material-icons.biotech:before {
     content: "\ea3a"; }
+  .material-icons.blender:before {
+    content: "\efe3"; }
   .material-icons.block:before {
     content: "\e14b"; }
   .material-icons.block_flipped:before {
     content: "\ef46"; }
+  .material-icons.bloodtype:before {
+    content: "\efe4"; }
   .material-icons.bluetooth:before {
     content: "\e1a7"; }
   .material-icons.bluetooth_audio:before {
@@ -443,6 +527,8 @@
     content: "\e1a8"; }
   .material-icons.bluetooth_disabled:before {
     content: "\e1a9"; }
+  .material-icons.bluetooth_drive:before {
+    content: "\efe5"; }
   .material-icons.bluetooth_searching:before {
     content: "\e1aa"; }
   .material-icons.blur_circular:before {
@@ -461,10 +547,16 @@
     content: "\f217"; }
   .material-icons.bookmark:before {
     content: "\e866"; }
+  .material-icons.bookmark_add:before {
+    content: "\e598"; }
+  .material-icons.bookmark_added:before {
+    content: "\e599"; }
   .material-icons.bookmark_border:before {
     content: "\e867"; }
   .material-icons.bookmark_outline:before {
     content: "\e867"; }
+  .material-icons.bookmark_remove:before {
+    content: "\e59a"; }
   .material-icons.bookmarks:before {
     content: "\e98b"; }
   .material-icons.border_all:before {
@@ -491,6 +583,8 @@
     content: "\e232"; }
   .material-icons.border_vertical:before {
     content: "\e233"; }
+  .material-icons.boy:before {
+    content: "\eb67"; }
   .material-icons.branding_watermark:before {
     content: "\e06b"; }
   .material-icons.breakfast_dining:before {
@@ -521,6 +615,8 @@
     content: "\e3ad"; }
   .material-icons.browser_not_supported:before {
     content: "\ef47"; }
+  .material-icons.browser_updated:before {
+    content: "\e7cf"; }
   .material-icons.brunch_dining:before {
     content: "\ea73"; }
   .material-icons.brush:before {
@@ -533,6 +629,8 @@
     content: "\e869"; }
   .material-icons.build_circle:before {
     content: "\ef48"; }
+  .material-icons.bungalow:before {
+    content: "\e591"; }
   .material-icons.burst_mode:before {
     content: "\e43c"; }
   .material-icons.bus_alert:before {
@@ -541,6 +639,10 @@
     content: "\e0af"; }
   .material-icons.business_center:before {
     content: "\eb3f"; }
+  .material-icons.cabin:before {
+    content: "\e589"; }
+  .material-icons.cable:before {
+    content: "\efe6"; }
   .material-icons.cached:before {
     content: "\e86a"; }
   .material-icons.cake:before {
@@ -551,6 +653,10 @@
     content: "\e935"; }
   .material-icons.calendar_view_day:before {
     content: "\e936"; }
+  .material-icons.calendar_view_month:before {
+    content: "\efe7"; }
+  .material-icons.calendar_view_week:before {
+    content: "\efe8"; }
   .material-icons.call:before {
     content: "\e0b0"; }
   .material-icons.call_end:before {
@@ -577,10 +683,16 @@
     content: "\e8fc"; }
   .material-icons.camera_front:before {
     content: "\e3b1"; }
+  .material-icons.camera_indoor:before {
+    content: "\efe9"; }
+  .material-icons.camera_outdoor:before {
+    content: "\efea"; }
   .material-icons.camera_rear:before {
     content: "\e3b2"; }
   .material-icons.camera_roll:before {
     content: "\e3b3"; }
+  .material-icons.cameraswitch:before {
+    content: "\efeb"; }
   .material-icons.campaign:before {
     content: "\ef49"; }
   .material-icons.cancel:before {
@@ -589,6 +701,8 @@
     content: "\e0e9"; }
   .material-icons.cancel_schedule_send:before {
     content: "\ea39"; }
+  .material-icons.candlestick_chart:before {
+    content: "\ead4"; }
   .material-icons.car_rental:before {
     content: "\ea55"; }
   .material-icons.car_repair:before {
@@ -611,6 +725,10 @@
     content: "\e308"; }
   .material-icons.cast_for_education:before {
     content: "\efec"; }
+  .material-icons.castle:before {
+    content: "\eab1"; }
+  .material-icons.catching_pokemon:before {
+    content: "\e508"; }
   .material-icons.category:before {
     content: "\e574"; }
   .material-icons.celebration:before {
@@ -621,6 +739,14 @@
     content: "\e3b4"; }
   .material-icons.center_focus_weak:before {
     content: "\e3b5"; }
+  .material-icons.chair:before {
+    content: "\efed"; }
+  .material-icons.chair_alt:before {
+    content: "\efee"; }
+  .material-icons.chalet:before {
+    content: "\e585"; }
+  .material-icons.change_circle:before {
+    content: "\e2e7"; }
   .material-icons.change_history:before {
     content: "\e86b"; }
   .material-icons.charging_station:before {
@@ -641,6 +767,10 @@
     content: "\e86c"; }
   .material-icons.check_circle_outline:before {
     content: "\e92d"; }
+  .material-icons.checklist:before {
+    content: "\e6b1"; }
+  .material-icons.checklist_rtl:before {
+    content: "\e6b3"; }
   .material-icons.checkroom:before {
     content: "\f19e"; }
   .material-icons.chevron_left:before {
@@ -653,6 +783,8 @@
     content: "\eb42"; }
   .material-icons.chrome_reader_mode:before {
     content: "\e86d"; }
+  .material-icons.church:before {
+    content: "\eaae"; }
   .material-icons.circle:before {
     content: "\ef4a"; }
   .material-icons.circle_notifications:before {
@@ -689,10 +821,24 @@
     content: "\e2c1"; }
   .material-icons.cloud_queue:before {
     content: "\e2c2"; }
+  .material-icons.cloud_sync:before {
+    content: "\eb5a"; }
   .material-icons.cloud_upload:before {
     content: "\e2c3"; }
+  .material-icons.cloudy_snowing:before {
+    content: "\e810"; }
+  .material-icons.co2:before {
+    content: "\e7b0"; }
+  .material-icons.co_present:before {
+    content: "\eaf0"; }
   .material-icons.code:before {
     content: "\e86f"; }
+  .material-icons.code_off:before {
+    content: "\e4f3"; }
+  .material-icons.coffee:before {
+    content: "\efef"; }
+  .material-icons.coffee_maker:before {
+    content: "\eff0"; }
   .material-icons.collections:before {
     content: "\e3b6"; }
   .material-icons.collections_bookmark:before {
@@ -705,6 +851,10 @@
     content: "\e0b9"; }
   .material-icons.comment_bank:before {
     content: "\ea4e"; }
+  .material-icons.comments_disabled:before {
+    content: "\e7a2"; }
+  .material-icons.commit:before {
+    content: "\eaf5"; }
   .material-icons.commute:before {
     content: "\e940"; }
   .material-icons.compare:before {
@@ -713,6 +863,8 @@
     content: "\e915"; }
   .material-icons.compass_calibration:before {
     content: "\e57c"; }
+  .material-icons.compost:before {
+    content: "\e761"; }
   .material-icons.compress:before {
     content: "\e94d"; }
   .material-icons.computer:before {
@@ -725,6 +877,8 @@
     content: "\f223"; }
   .material-icons.connected_tv:before {
     content: "\e998"; }
+  .material-icons.connecting_airports:before {
+    content: "\e7c9"; }
   .material-icons.construction:before {
     content: "\ea3c"; }
   .material-icons.contact_mail:before {
@@ -745,18 +899,32 @@
     content: "\e14e"; }
   .material-icons.content_paste:before {
     content: "\e14f"; }
+  .material-icons.content_paste_go:before {
+    content: "\ea8e"; }
+  .material-icons.content_paste_off:before {
+    content: "\e4f8"; }
+  .material-icons.content_paste_search:before {
+    content: "\ea9b"; }
+  .material-icons.contrast:before {
+    content: "\eb37"; }
   .material-icons.control_camera:before {
     content: "\e074"; }
   .material-icons.control_point:before {
     content: "\e3ba"; }
   .material-icons.control_point_duplicate:before {
     content: "\e3bb"; }
+  .material-icons.cookie:before {
+    content: "\eaac"; }
+  .material-icons.copy_all:before {
+    content: "\e2ec"; }
   .material-icons.copyright:before {
     content: "\e90c"; }
   .material-icons.coronavirus:before {
     content: "\f221"; }
   .material-icons.corporate_fare:before {
     content: "\f1d0"; }
+  .material-icons.cottage:before {
+    content: "\e587"; }
   .material-icons.countertops:before {
     content: "\f1f7"; }
   .material-icons.create:before {
@@ -765,6 +933,12 @@
     content: "\e2cc"; }
   .material-icons.credit_card:before {
     content: "\e870"; }
+  .material-icons.credit_card_off:before {
+    content: "\e4f4"; }
+  .material-icons.credit_score:before {
+    content: "\eff1"; }
+  .material-icons.crib:before {
+    content: "\e588"; }
   .material-icons.crop:before {
     content: "\e3be"; }
   .material-icons.crop_16_9:before {
@@ -789,16 +963,48 @@
     content: "\e437"; }
   .material-icons.crop_square:before {
     content: "\e3c6"; }
+  .material-icons.cruelty_free:before {
+    content: "\e799"; }
+  .material-icons.currency_exchange:before {
+    content: "\eb70"; }
+  .material-icons.currency_franc:before {
+    content: "\eafa"; }
+  .material-icons.currency_lira:before {
+    content: "\eaef"; }
+  .material-icons.currency_pound:before {
+    content: "\eaf1"; }
+  .material-icons.currency_ruble:before {
+    content: "\eaec"; }
+  .material-icons.currency_rupee:before {
+    content: "\eaf7"; }
+  .material-icons.currency_yen:before {
+    content: "\eafb"; }
+  .material-icons.currency_yuan:before {
+    content: "\eaf9"; }
   .material-icons.dangerous:before {
     content: "\e99a"; }
+  .material-icons.dark_mode:before {
+    content: "\e51c"; }
   .material-icons.dashboard:before {
     content: "\e871"; }
   .material-icons.dashboard_customize:before {
     content: "\e99b"; }
+  .material-icons.data_array:before {
+    content: "\ead1"; }
+  .material-icons.data_exploration:before {
+    content: "\e76f"; }
+  .material-icons.data_object:before {
+    content: "\ead3"; }
+  .material-icons.data_saver_off:before {
+    content: "\eff2"; }
+  .material-icons.data_saver_on:before {
+    content: "\eff3"; }
   .material-icons.data_usage:before {
     content: "\e1af"; }
   .material-icons.date_range:before {
     content: "\e916"; }
+  .material-icons.deblur:before {
+    content: "\eb77"; }
   .material-icons.deck:before {
     content: "\ea42"; }
   .material-icons.dehaze:before {
@@ -829,6 +1035,8 @@
     content: "\e3c8"; }
   .material-icons.developer_board:before {
     content: "\e30d"; }
+  .material-icons.developer_board_off:before {
+    content: "\e4ff"; }
   .material-icons.developer_mode:before {
     content: "\e1b0"; }
   .material-icons.device_hub:before {
@@ -845,6 +1053,10 @@
     content: "\e0bb"; }
   .material-icons.dialpad:before {
     content: "\e0bc"; }
+  .material-icons.diamond:before {
+    content: "\ead5"; }
+  .material-icons.dining:before {
+    content: "\eff4"; }
   .material-icons.dinner_dining:before {
     content: "\ea57"; }
   .material-icons.directions:before {
@@ -853,36 +1065,60 @@
     content: "\e52f"; }
   .material-icons.directions_boat:before {
     content: "\e532"; }
+  .material-icons.directions_boat_filled:before {
+    content: "\eff5"; }
   .material-icons.directions_bus:before {
     content: "\e530"; }
+  .material-icons.directions_bus_filled:before {
+    content: "\eff6"; }
   .material-icons.directions_car:before {
     content: "\e531"; }
+  .material-icons.directions_car_filled:before {
+    content: "\eff7"; }
   .material-icons.directions_ferry:before {
     content: "\e532"; }
   .material-icons.directions_off:before {
     content: "\f10f"; }
   .material-icons.directions_railway:before {
     content: "\e534"; }
+  .material-icons.directions_railway_filled:before {
+    content: "\eff8"; }
   .material-icons.directions_run:before {
     content: "\e566"; }
   .material-icons.directions_subway:before {
     content: "\e533"; }
+  .material-icons.directions_subway_filled:before {
+    content: "\eff9"; }
   .material-icons.directions_train:before {
     content: "\e534"; }
   .material-icons.directions_transit:before {
     content: "\e535"; }
+  .material-icons.directions_transit_filled:before {
+    content: "\effa"; }
   .material-icons.directions_walk:before {
     content: "\e536"; }
   .material-icons.dirty_lens:before {
     content: "\ef4b"; }
   .material-icons.disabled_by_default:before {
     content: "\f230"; }
+  .material-icons.disabled_visible:before {
+    content: "\e76e"; }
   .material-icons.disc_full:before {
     content: "\e610"; }
+  .material-icons.discord:before {
+    content: "\ea6c"; }
   .material-icons.dnd_forwardslash:before {
     content: "\e611"; }
   .material-icons.dns:before {
     content: "\e875"; }
+  .material-icons.do_disturb:before {
+    content: "\f08c"; }
+  .material-icons.do_disturb_alt:before {
+    content: "\f08d"; }
+  .material-icons.do_disturb_off:before {
+    content: "\f08e"; }
+  .material-icons.do_disturb_on:before {
+    content: "\f08f"; }
   .material-icons.do_not_disturb:before {
     content: "\e612"; }
   .material-icons.do_not_disturb_alt:before {
@@ -891,14 +1127,20 @@
     content: "\e643"; }
   .material-icons.do_not_disturb_on:before {
     content: "\e644"; }
+  .material-icons.do_not_disturb_on_total_silence:before {
+    content: "\effb"; }
   .material-icons.do_not_step:before {
     content: "\f19f"; }
   .material-icons.do_not_touch:before {
     content: "\f1b0"; }
   .material-icons.dock:before {
     content: "\e30e"; }
+  .material-icons.document_scanner:before {
+    content: "\e5fa"; }
   .material-icons.domain:before {
     content: "\e7ee"; }
+  .material-icons.domain_add:before {
+    content: "\eb62"; }
   .material-icons.domain_disabled:before {
     content: "\e0ef"; }
   .material-icons.domain_verification:before {
@@ -913,20 +1155,42 @@
     content: "\e917"; }
   .material-icons.donut_small:before {
     content: "\e918"; }
+  .material-icons.door_back:before {
+    content: "\effc"; }
+  .material-icons.door_front:before {
+    content: "\effd"; }
+  .material-icons.door_sliding:before {
+    content: "\effe"; }
+  .material-icons.doorbell:before {
+    content: "\efff"; }
   .material-icons.double_arrow:before {
     content: "\ea50"; }
+  .material-icons.downhill_skiing:before {
+    content: "\e509"; }
+  .material-icons.download:before {
+    content: "\f090"; }
+  .material-icons.download_done:before {
+    content: "\f091"; }
+  .material-icons.download_for_offline:before {
+    content: "\f000"; }
+  .material-icons.downloading:before {
+    content: "\f001"; }
   .material-icons.drafts:before {
     content: "\e151"; }
   .material-icons.drag_handle:before {
     content: "\e25d"; }
   .material-icons.drag_indicator:before {
     content: "\e945"; }
+  .material-icons.draw:before {
+    content: "\e746"; }
   .material-icons.drive_eta:before {
     content: "\e613"; }
   .material-icons.drive_file_move:before {
     content: "\e675"; }
   .material-icons.drive_file_move_outline:before {
     content: "\e9a1"; }
+  .material-icons.drive_file_move_rtl:before {
+    content: "\e76d"; }
   .material-icons.drive_file_rename_outline:before {
     content: "\e9a2"; }
   .material-icons.drive_folder_upload:before {
@@ -943,24 +1207,48 @@
     content: "\ea14"; }
   .material-icons.dynamic_form:before {
     content: "\f1bf"; }
+  .material-icons.e_mobiledata:before {
+    content: "\f002"; }
+  .material-icons.earbuds:before {
+    content: "\f003"; }
+  .material-icons.earbuds_battery:before {
+    content: "\f004"; }
   .material-icons.east:before {
     content: "\f1df"; }
   .material-icons.eco:before {
     content: "\ea35"; }
+  .material-icons.edgesensor_high:before {
+    content: "\f005"; }
+  .material-icons.edgesensor_low:before {
+    content: "\f006"; }
   .material-icons.edit:before {
     content: "\e3c9"; }
   .material-icons.edit_attributes:before {
     content: "\e578"; }
+  .material-icons.edit_calendar:before {
+    content: "\e742"; }
   .material-icons.edit_location:before {
     content: "\e568"; }
+  .material-icons.edit_location_alt:before {
+    content: "\e1c5"; }
+  .material-icons.edit_note:before {
+    content: "\e745"; }
+  .material-icons.edit_notifications:before {
+    content: "\e525"; }
   .material-icons.edit_off:before {
     content: "\e950"; }
   .material-icons.edit_road:before {
     content: "\ef4d"; }
+  .material-icons.egg:before {
+    content: "\eacc"; }
+  .material-icons.egg_alt:before {
+    content: "\eac8"; }
   .material-icons.eject:before {
     content: "\e8fb"; }
   .material-icons.elderly:before {
     content: "\f21a"; }
+  .material-icons.elderly_woman:before {
+    content: "\eb69"; }
   .material-icons.electric_bike:before {
     content: "\eb1b"; }
   .material-icons.electric_car:before {
@@ -977,6 +1265,8 @@
     content: "\f1a0"; }
   .material-icons.email:before {
     content: "\e0be"; }
+  .material-icons.emergency:before {
+    content: "\e1eb"; }
   .material-icons.emoji_emotions:before {
     content: "\ea22"; }
   .material-icons.emoji_events:before {
@@ -1031,6 +1321,8 @@
     content: "\e879"; }
   .material-icons.expand:before {
     content: "\e94f"; }
+  .material-icons.expand_circle_down:before {
+    content: "\e7cd"; }
   .material-icons.expand_less:before {
     content: "\e5ce"; }
   .material-icons.expand_more:before {
@@ -1059,10 +1351,14 @@
     content: "\e3cf"; }
   .material-icons.extension:before {
     content: "\e87b"; }
+  .material-icons.extension_off:before {
+    content: "\e4f5"; }
   .material-icons.face:before {
     content: "\e87c"; }
   .material-icons.face_retouching_natural:before {
     content: "\ef4e"; }
+  .material-icons.face_retouching_off:before {
+    content: "\f007"; }
   .material-icons.facebook:before {
     content: "\f234"; }
   .material-icons.fact_check:before {
@@ -1081,12 +1377,18 @@
     content: "\e87e"; }
   .material-icons.favorite_outline:before {
     content: "\e87e"; }
+  .material-icons.fax:before {
+    content: "\ead8"; }
   .material-icons.featured_play_list:before {
     content: "\e06d"; }
   .material-icons.featured_video:before {
     content: "\e06e"; }
+  .material-icons.feed:before {
+    content: "\f009"; }
   .material-icons.feedback:before {
     content: "\e87f"; }
+  .material-icons.female:before {
+    content: "\e590"; }
   .material-icons.fence:before {
     content: "\f1f6"; }
   .material-icons.festival:before {
@@ -1107,6 +1409,10 @@
     content: "\e2c4"; }
   .material-icons.file_download_done:before {
     content: "\e9aa"; }
+  .material-icons.file_download_off:before {
+    content: "\e4fe"; }
+  .material-icons.file_open:before {
+    content: "\eaf3"; }
   .material-icons.file_present:before {
     content: "\ea0e"; }
   .material-icons.file_upload:before {
@@ -1135,6 +1441,8 @@
     content: "\e3da"; }
   .material-icons.filter_alt:before {
     content: "\ef4f"; }
+  .material-icons.filter_alt_off:before {
+    content: "\eb32"; }
   .material-icons.filter_b_and_w:before {
     content: "\e3db"; }
   .material-icons.filter_center_focus:before {
@@ -1149,6 +1457,8 @@
     content: "\e152"; }
   .material-icons.filter_list_alt:before {
     content: "\e94e"; }
+  .material-icons.filter_list_off:before {
+    content: "\eb57"; }
   .material-icons.filter_none:before {
     content: "\e3e0"; }
   .material-icons.filter_tilt_shift:before {
@@ -1171,10 +1481,14 @@
     content: "\e5dc"; }
   .material-icons.fit_screen:before {
     content: "\ea10"; }
+  .material-icons.fitbit:before {
+    content: "\e82b"; }
   .material-icons.fitness_center:before {
     content: "\eb43"; }
   .material-icons.flag:before {
     content: "\e153"; }
+  .material-icons.flag_circle:before {
+    content: "\eaf8"; }
   .material-icons.flaky:before {
     content: "\ef50"; }
   .material-icons.flare:before {
@@ -1185,8 +1499,16 @@
     content: "\e3e6"; }
   .material-icons.flash_on:before {
     content: "\e3e7"; }
+  .material-icons.flashlight_off:before {
+    content: "\f00a"; }
+  .material-icons.flashlight_on:before {
+    content: "\f00b"; }
+  .material-icons.flatware:before {
+    content: "\f00c"; }
   .material-icons.flight:before {
     content: "\e539"; }
+  .material-icons.flight_class:before {
+    content: "\e7cb"; }
   .material-icons.flight_land:before {
     content: "\e904"; }
   .material-icons.flight_takeoff:before {
@@ -1201,20 +1523,38 @@
     content: "\e882"; }
   .material-icons.flip_to_front:before {
     content: "\e883"; }
+  .material-icons.flourescent:before {
+    content: "\f00d"; }
+  .material-icons.flutter_dash:before {
+    content: "\e00b"; }
+  .material-icons.fmd_bad:before {
+    content: "\f00e"; }
+  .material-icons.fmd_good:before {
+    content: "\f00f"; }
+  .material-icons.foggy:before {
+    content: "\e818"; }
   .material-icons.folder:before {
     content: "\e2c7"; }
+  .material-icons.folder_delete:before {
+    content: "\eb34"; }
   .material-icons.folder_open:before {
     content: "\e2c8"; }
   .material-icons.folder_shared:before {
     content: "\e2c9"; }
   .material-icons.folder_special:before {
     content: "\e617"; }
+  .material-icons.folder_zip:before {
+    content: "\eb2c"; }
   .material-icons.follow_the_signs:before {
     content: "\f222"; }
   .material-icons.font_download:before {
     content: "\e167"; }
+  .material-icons.font_download_off:before {
+    content: "\e4f9"; }
   .material-icons.food_bank:before {
     content: "\f1f2"; }
+  .material-icons.forest:before {
+    content: "\ea99"; }
   .material-icons.format_align_center:before {
     content: "\e234"; }
   .material-icons.format_align_justify:before {
@@ -1247,6 +1587,8 @@
     content: "\e242"; }
   .material-icons.format_list_numbered_rtl:before {
     content: "\e267"; }
+  .material-icons.format_overline:before {
+    content: "\eb65"; }
   .material-icons.format_paint:before {
     content: "\e243"; }
   .material-icons.format_quote:before {
@@ -1265,6 +1607,8 @@
     content: "\e249"; }
   .material-icons.format_underlined:before {
     content: "\e249"; }
+  .material-icons.fort:before {
+    content: "\eaad"; }
   .material-icons.forum:before {
     content: "\e0bf"; }
   .material-icons.forward:before {
@@ -1281,30 +1625,52 @@
     content: "\f200"; }
   .material-icons.free_breakfast:before {
     content: "\eb44"; }
+  .material-icons.free_cancellation:before {
+    content: "\e748"; }
+  .material-icons.front_hand:before {
+    content: "\e769"; }
   .material-icons.fullscreen:before {
     content: "\e5d0"; }
   .material-icons.fullscreen_exit:before {
     content: "\e5d1"; }
   .material-icons.functions:before {
     content: "\e24a"; }
+  .material-icons.g_mobiledata:before {
+    content: "\f010"; }
   .material-icons.g_translate:before {
     content: "\e927"; }
   .material-icons.gamepad:before {
     content: "\e30f"; }
   .material-icons.games:before {
     content: "\e021"; }
+  .material-icons.garage:before {
+    content: "\f011"; }
   .material-icons.gavel:before {
     content: "\e90e"; }
+  .material-icons.generating_tokens:before {
+    content: "\e749"; }
   .material-icons.gesture:before {
     content: "\e155"; }
   .material-icons.get_app:before {
     content: "\e884"; }
   .material-icons.gif:before {
     content: "\e908"; }
+  .material-icons.gif_box:before {
+    content: "\e7a3"; }
+  .material-icons.girl:before {
+    content: "\eb68"; }
+  .material-icons.gite:before {
+    content: "\e58b"; }
   .material-icons.goat:before {
     content: "\ebff"; }
   .material-icons.golf_course:before {
     content: "\eb45"; }
+  .material-icons.gpp_bad:before {
+    content: "\f012"; }
+  .material-icons.gpp_good:before {
+    content: "\f013"; }
+  .material-icons.gpp_maybe:before {
+    content: "\f014"; }
   .material-icons.gps_fixed:before {
     content: "\e1b3"; }
   .material-icons.gps_not_fixed:before {
@@ -1323,6 +1689,12 @@
     content: "\e1b8"; }
   .material-icons.grass:before {
     content: "\f205"; }
+  .material-icons.grid_3x3:before {
+    content: "\f015"; }
+  .material-icons.grid_4x4:before {
+    content: "\f016"; }
+  .material-icons.grid_goldenratio:before {
+    content: "\f017"; }
   .material-icons.grid_off:before {
     content: "\e3eb"; }
   .material-icons.grid_on:before {
@@ -1333,10 +1705,18 @@
     content: "\e7ef"; }
   .material-icons.group_add:before {
     content: "\e7f0"; }
+  .material-icons.group_off:before {
+    content: "\e747"; }
+  .material-icons.group_remove:before {
+    content: "\e7ad"; }
   .material-icons.group_work:before {
     content: "\e886"; }
   .material-icons.groups:before {
     content: "\f233"; }
+  .material-icons.h_mobiledata:before {
+    content: "\f018"; }
+  .material-icons.h_plus_mobiledata:before {
+    content: "\f019"; }
   .material-icons.hail:before {
     content: "\e9b1"; }
   .material-icons.handyman:before {
@@ -1345,16 +1725,30 @@
     content: "\ea59"; }
   .material-icons.hd:before {
     content: "\e052"; }
+  .material-icons.hdr_auto:before {
+    content: "\f01a"; }
+  .material-icons.hdr_auto_select:before {
+    content: "\f01b"; }
   .material-icons.hdr_enhanced_select:before {
     content: "\ef51"; }
   .material-icons.hdr_off:before {
     content: "\e3ed"; }
+  .material-icons.hdr_off_select:before {
+    content: "\f01c"; }
   .material-icons.hdr_on:before {
     content: "\e3ee"; }
+  .material-icons.hdr_on_select:before {
+    content: "\f01d"; }
+  .material-icons.hdr_plus:before {
+    content: "\f01e"; }
   .material-icons.hdr_strong:before {
     content: "\e3f1"; }
   .material-icons.hdr_weak:before {
     content: "\e3f2"; }
+  .material-icons.headphones:before {
+    content: "\f01f"; }
+  .material-icons.headphones_battery:before {
+    content: "\f020"; }
   .material-icons.headset:before {
     content: "\e310"; }
   .material-icons.headset_mic:before {
@@ -1363,10 +1757,14 @@
     content: "\e33a"; }
   .material-icons.healing:before {
     content: "\e3f3"; }
+  .material-icons.health_and_safety:before {
+    content: "\e1d5"; }
   .material-icons.hearing:before {
     content: "\e023"; }
   .material-icons.hearing_disabled:before {
     content: "\f104"; }
+  .material-icons.heart_broken:before {
+    content: "\eac2"; }
   .material-icons.height:before {
     content: "\ea16"; }
   .material-icons.help:before {
@@ -1375,6 +1773,14 @@
     content: "\f1c0"; }
   .material-icons.help_outline:before {
     content: "\e8fd"; }
+  .material-icons.hevc:before {
+    content: "\f021"; }
+  .material-icons.hexagon:before {
+    content: "\eb39"; }
+  .material-icons.hide_image:before {
+    content: "\f022"; }
+  .material-icons.hide_source:before {
+    content: "\f023"; }
   .material-icons.high_quality:before {
     content: "\e024"; }
   .material-icons.highlight:before {
@@ -1385,16 +1791,26 @@
     content: "\e888"; }
   .material-icons.highlight_remove:before {
     content: "\e888"; }
+  .material-icons.hiking:before {
+    content: "\e50a"; }
   .material-icons.history:before {
     content: "\e889"; }
   .material-icons.history_edu:before {
     content: "\ea3e"; }
   .material-icons.history_toggle_off:before {
     content: "\f17d"; }
+  .material-icons.hive:before {
+    content: "\eaa6"; }
+  .material-icons.holiday_village:before {
+    content: "\e58a"; }
   .material-icons.home:before {
     content: "\e88a"; }
   .material-icons.home_filled:before {
     content: "\e9b2"; }
+  .material-icons.home_max:before {
+    content: "\f024"; }
+  .material-icons.home_mini:before {
+    content: "\f025"; }
   .material-icons.home_repair_service:before {
     content: "\f100"; }
   .material-icons.home_work:before {
@@ -1409,6 +1825,8 @@
     content: "\eb46"; }
   .material-icons.hotel:before {
     content: "\e53a"; }
+  .material-icons.hotel_class:before {
+    content: "\e743"; }
   .material-icons.hourglass_bottom:before {
     content: "\ea5c"; }
   .material-icons.hourglass_disabled:before {
@@ -1423,6 +1841,8 @@
     content: "\ea44"; }
   .material-icons.house_siding:before {
     content: "\f202"; }
+  .material-icons.houseboat:before {
+    content: "\e584"; }
   .material-icons.how_to_reg:before {
     content: "\e174"; }
   .material-icons.how_to_vote:before {
@@ -1431,8 +1851,12 @@
     content: "\e902"; }
   .material-icons.https:before {
     content: "\e88d"; }
+  .material-icons.hub:before {
+    content: "\e9f4"; }
   .material-icons.hvac:before {
     content: "\f10e"; }
+  .material-icons.ice_skating:before {
+    content: "\e50b"; }
   .material-icons.icecream:before {
     content: "\ea69"; }
   .material-icons.image:before {
@@ -1453,6 +1877,8 @@
     content: "\e912"; }
   .material-icons.inbox:before {
     content: "\e156"; }
+  .material-icons.incomplete_circle:before {
+    content: "\e79b"; }
   .material-icons.indeterminate_check_box:before {
     content: "\e909"; }
   .material-icons.info:before {
@@ -1475,14 +1901,26 @@
     content: "\e24f"; }
   .material-icons.insert_link:before {
     content: "\e250"; }
+  .material-icons.insert_page_break:before {
+    content: "\eaca"; }
   .material-icons.insert_photo:before {
     content: "\e251"; }
   .material-icons.insights:before {
     content: "\f092"; }
+  .material-icons.install_desktop:before {
+    content: "\eb71"; }
+  .material-icons.install_mobile:before {
+    content: "\eb72"; }
   .material-icons.integration_instructions:before {
     content: "\ef54"; }
+  .material-icons.interests:before {
+    content: "\e7c8"; }
+  .material-icons.interpreter_mode:before {
+    content: "\e83b"; }
   .material-icons.inventory:before {
     content: "\e179"; }
+  .material-icons.inventory_2:before {
+    content: "\e1a1"; }
   .material-icons.invert_colors:before {
     content: "\e891"; }
   .material-icons.invert_colors_off:before {
@@ -1491,10 +1929,28 @@
     content: "\e891"; }
   .material-icons.ios_share:before {
     content: "\e6b8"; }
+  .material-icons.iron:before {
+    content: "\e583"; }
   .material-icons.iso:before {
     content: "\e3f6"; }
+  .material-icons.join_full:before {
+    content: "\eaeb"; }
+  .material-icons.join_inner:before {
+    content: "\eaf4"; }
+  .material-icons.join_left:before {
+    content: "\eaf2"; }
+  .material-icons.join_right:before {
+    content: "\eaea"; }
+  .material-icons.kayaking:before {
+    content: "\e50c"; }
+  .material-icons.kebab_dining:before {
+    content: "\e842"; }
+  .material-icons.key:before {
+    content: "\e73c"; }
   .material-icons.keyboard:before {
     content: "\e312"; }
+  .material-icons.keyboard_alt:before {
+    content: "\f028"; }
   .material-icons.keyboard_arrow_down:before {
     content: "\e313"; }
   .material-icons.keyboard_arrow_left:before {
@@ -1507,10 +1963,28 @@
     content: "\e317"; }
   .material-icons.keyboard_capslock:before {
     content: "\e318"; }
+  .material-icons.keyboard_command:before {
+    content: "\eae0"; }
+  .material-icons.keyboard_command_key:before {
+    content: "\eae7"; }
   .material-icons.keyboard_control:before {
     content: "\e5d3"; }
+  .material-icons.keyboard_control_key:before {
+    content: "\eae6"; }
+  .material-icons.keyboard_double_arrow_down:before {
+    content: "\ead0"; }
+  .material-icons.keyboard_double_arrow_left:before {
+    content: "\eac3"; }
+  .material-icons.keyboard_double_arrow_right:before {
+    content: "\eac9"; }
+  .material-icons.keyboard_double_arrow_up:before {
+    content: "\eacf"; }
   .material-icons.keyboard_hide:before {
     content: "\e31a"; }
+  .material-icons.keyboard_option:before {
+    content: "\eadf"; }
+  .material-icons.keyboard_option_key:before {
+    content: "\eae8"; }
   .material-icons.keyboard_return:before {
     content: "\e31b"; }
   .material-icons.keyboard_tab:before {
@@ -1521,6 +1995,8 @@
     content: "\ea45"; }
   .material-icons.kitchen:before {
     content: "\eb47"; }
+  .material-icons.kitesurfing:before {
+    content: "\e50d"; }
   .material-icons.label:before {
     content: "\e892"; }
   .material-icons.label_important:before {
@@ -1531,6 +2007,8 @@
     content: "\e9b6"; }
   .material-icons.label_outline:before {
     content: "\e893"; }
+  .material-icons.lan:before {
+    content: "\eb2f"; }
   .material-icons.landscape:before {
     content: "\e3f7"; }
   .material-icons.language:before {
@@ -1563,6 +2041,8 @@
     content: "\f11b"; }
   .material-icons.lens:before {
     content: "\e3fa"; }
+  .material-icons.lens_blur:before {
+    content: "\f029"; }
   .material-icons.library_add:before {
     content: "\e02e"; }
   .material-icons.library_add_check:before {
@@ -1571,10 +2051,16 @@
     content: "\e02f"; }
   .material-icons.library_music:before {
     content: "\e030"; }
+  .material-icons.light:before {
+    content: "\f02a"; }
+  .material-icons.light_mode:before {
+    content: "\e518"; }
   .material-icons.lightbulb:before {
     content: "\e0f0"; }
   .material-icons.lightbulb_outline:before {
     content: "\e90f"; }
+  .material-icons.line_axis:before {
+    content: "\ea9a"; }
   .material-icons.line_style:before {
     content: "\e919"; }
   .material-icons.line_weight:before {
@@ -1597,6 +2083,8 @@
     content: "\e0c6"; }
   .material-icons.live_tv:before {
     content: "\e639"; }
+  .material-icons.living:before {
+    content: "\f02b"; }
   .material-icons.local_activity:before {
     content: "\e53f"; }
   .material-icons.local_airport:before {
@@ -1687,8 +2175,12 @@
     content: "\e898"; }
   .material-icons.lock_outline:before {
     content: "\e899"; }
+  .material-icons.lock_reset:before {
+    content: "\eade"; }
   .material-icons.login:before {
     content: "\ea77"; }
+  .material-icons.logo_dev:before {
+    content: "\ead6"; }
   .material-icons.logout:before {
     content: "\e9ba"; }
   .material-icons.looks:before {
@@ -1713,6 +2205,10 @@
     content: "\e16d"; }
   .material-icons.loyalty:before {
     content: "\e89a"; }
+  .material-icons.lte_mobiledata:before {
+    content: "\f02c"; }
+  .material-icons.lte_plus_mobiledata:before {
+    content: "\f02d"; }
   .material-icons.luggage:before {
     content: "\f235"; }
   .material-icons.lunch_dining:before {
@@ -1721,8 +2217,18 @@
     content: "\e158"; }
   .material-icons.mail_outline:before {
     content: "\e0e1"; }
+  .material-icons.male:before {
+    content: "\e58e"; }
+  .material-icons.man:before {
+    content: "\e4eb"; }
+  .material-icons.manage_accounts:before {
+    content: "\f02e"; }
+  .material-icons.manage_search:before {
+    content: "\f02f"; }
   .material-icons.map:before {
     content: "\e55b"; }
+  .material-icons.maps_home_work:before {
+    content: "\f030"; }
   .material-icons.maps_ugc:before {
     content: "\ef58"; }
   .material-icons.margin:before {
@@ -1745,10 +2251,18 @@
     content: "\f218"; }
   .material-icons.maximize:before {
     content: "\e930"; }
+  .material-icons.media_bluetooth_off:before {
+    content: "\f031"; }
+  .material-icons.media_bluetooth_on:before {
+    content: "\f032"; }
   .material-icons.mediation:before {
     content: "\efa7"; }
   .material-icons.medical_services:before {
     content: "\f109"; }
+  .material-icons.medication:before {
+    content: "\f033"; }
+  .material-icons.medication_liquid:before {
+    content: "\ea87"; }
   .material-icons.meeting_room:before {
     content: "\eb4f"; }
   .material-icons.memory:before {
@@ -1795,10 +2309,22 @@
     content: "\e201"; }
   .material-icons.mobile_screen_share:before {
     content: "\e0e7"; }
+  .material-icons.mobiledata_off:before {
+    content: "\f034"; }
+  .material-icons.mode:before {
+    content: "\f097"; }
   .material-icons.mode_comment:before {
     content: "\e253"; }
   .material-icons.mode_edit:before {
     content: "\e254"; }
+  .material-icons.mode_edit_outline:before {
+    content: "\f035"; }
+  .material-icons.mode_night:before {
+    content: "\f036"; }
+  .material-icons.mode_of_travel:before {
+    content: "\e7ce"; }
+  .material-icons.mode_standby:before {
+    content: "\f037"; }
   .material-icons.model_training:before {
     content: "\f0cf"; }
   .material-icons.monetization_on:before {
@@ -1807,8 +2333,14 @@
     content: "\e57d"; }
   .material-icons.money_off:before {
     content: "\e25c"; }
+  .material-icons.money_off_csred:before {
+    content: "\f038"; }
   .material-icons.monitor:before {
     content: "\ef5b"; }
+  .material-icons.monitor_heart:before {
+    content: "\eaa2"; }
+  .material-icons.monitor_weight:before {
+    content: "\f039"; }
   .material-icons.monochrome_photos:before {
     content: "\e403"; }
   .material-icons.mood:before {
@@ -1825,6 +2357,10 @@
     content: "\ea5d"; }
   .material-icons.more_vert:before {
     content: "\e5d4"; }
+  .material-icons.mosque:before {
+    content: "\eab2"; }
+  .material-icons.motion_photos_auto:before {
+    content: "\f03a"; }
   .material-icons.motion_photos_off:before {
     content: "\e9c0"; }
   .material-icons.motion_photos_on:before {
@@ -1837,14 +2373,20 @@
     content: "\e91b"; }
   .material-icons.mouse:before {
     content: "\e323"; }
+  .material-icons.move_down:before {
+    content: "\eb61"; }
   .material-icons.move_to_inbox:before {
     content: "\e168"; }
+  .material-icons.move_up:before {
+    content: "\eb64"; }
   .material-icons.movie:before {
     content: "\e02c"; }
   .material-icons.movie_creation:before {
     content: "\e404"; }
   .material-icons.movie_filter:before {
     content: "\e43a"; }
+  .material-icons.moving:before {
+    content: "\e501"; }
   .material-icons.mp:before {
     content: "\e9c3"; }
   .material-icons.multiline_chart:before {
@@ -1885,6 +2427,10 @@
     content: "\e569"; }
   .material-icons.near_me_disabled:before {
     content: "\f1ef"; }
+  .material-icons.nearby_error:before {
+    content: "\f03b"; }
+  .material-icons.nearby_off:before {
+    content: "\f03c"; }
   .material-icons.network_cell:before {
     content: "\e1b9"; }
   .material-icons.network_check:before {
@@ -1893,6 +2439,8 @@
     content: "\e61a"; }
   .material-icons.network_wifi:before {
     content: "\e1ba"; }
+  .material-icons.new_label:before {
+    content: "\e609"; }
   .material-icons.new_releases:before {
     content: "\e031"; }
   .material-icons.next_plan:before {
@@ -1905,10 +2453,14 @@
     content: "\f1f1"; }
   .material-icons.nightlife:before {
     content: "\ea62"; }
+  .material-icons.nightlight:before {
+    content: "\f03d"; }
   .material-icons.nightlight_round:before {
     content: "\ef5e"; }
   .material-icons.nights_stay:before {
     content: "\ea46"; }
+  .material-icons.no_accounts:before {
+    content: "\f03e"; }
   .material-icons.no_backpack:before {
     content: "\f237"; }
   .material-icons.no_cell:before {
@@ -1917,6 +2469,8 @@
     content: "\f1a5"; }
   .material-icons.no_encryption:before {
     content: "\e641"; }
+  .material-icons.no_encryption_gmailerrorred:before {
+    content: "\f03f"; }
   .material-icons.no_flash:before {
     content: "\f1a6"; }
   .material-icons.no_food:before {
@@ -1937,6 +2491,8 @@
     content: "\f1af"; }
   .material-icons.no_transfer:before {
     content: "\f1d5"; }
+  .material-icons.nordic_walking:before {
+    content: "\e50e"; }
   .material-icons.north:before {
     content: "\f1e0"; }
   .material-icons.north_east:before {
@@ -1955,8 +2511,12 @@
     content: "\e06f"; }
   .material-icons.note_add:before {
     content: "\e89c"; }
+  .material-icons.note_alt:before {
+    content: "\f040"; }
   .material-icons.notes:before {
     content: "\e26c"; }
+  .material-icons.notification_add:before {
+    content: "\e399"; }
   .material-icons.notification_important:before {
     content: "\e004"; }
   .material-icons.notifications:before {
@@ -1975,6 +2535,8 @@
     content: "\e1bc"; }
   .material-icons.now_widgets:before {
     content: "\e1bd"; }
+  .material-icons.numbers:before {
+    content: "\eac7"; }
   .material-icons.offline_bolt:before {
     content: "\e932"; }
   .material-icons.offline_pin:before {
@@ -1993,10 +2555,16 @@
     content: "\f1ce"; }
   .material-icons.open_in_new:before {
     content: "\e89e"; }
+  .material-icons.open_in_new_off:before {
+    content: "\e4f6"; }
   .material-icons.open_with:before {
     content: "\e89f"; }
+  .material-icons.other_houses:before {
+    content: "\e58c"; }
   .material-icons.outbond:before {
     content: "\f228"; }
+  .material-icons.outbound:before {
+    content: "\e1ca"; }
   .material-icons.outbox:before {
     content: "\ef5f"; }
   .material-icons.outdoor_grill:before {
@@ -2013,6 +2581,8 @@
     content: "\e7f9"; }
   .material-icons.pageview:before {
     content: "\e8a0"; }
+  .material-icons.paid:before {
+    content: "\f041"; }
   .material-icons.palette:before {
     content: "\e40a"; }
   .material-icons.pan_tool:before {
@@ -2039,12 +2609,20 @@
     content: "\e40f"; }
   .material-icons.panorama_wide_angle_select:before {
     content: "\ef62"; }
+  .material-icons.paragliding:before {
+    content: "\e50f"; }
   .material-icons.park:before {
     content: "\ea63"; }
   .material-icons.party_mode:before {
     content: "\e7fa"; }
+  .material-icons.password:before {
+    content: "\f042"; }
+  .material-icons.pattern:before {
+    content: "\f043"; }
   .material-icons.pause:before {
     content: "\e034"; }
+  .material-icons.pause_circle:before {
+    content: "\e1a2"; }
   .material-icons.pause_circle_filled:before {
     content: "\e035"; }
   .material-icons.pause_circle_outline:before {
@@ -2055,18 +2633,24 @@
     content: "\e8a1"; }
   .material-icons.payments:before {
     content: "\ef63"; }
+  .material-icons.paypal:before {
+    content: "\ea8d"; }
   .material-icons.pedal_bike:before {
     content: "\eb29"; }
   .material-icons.pending:before {
     content: "\ef64"; }
   .material-icons.pending_actions:before {
     content: "\f1bb"; }
+  .material-icons.pentagon:before {
+    content: "\eb50"; }
   .material-icons.people:before {
     content: "\e7fb"; }
   .material-icons.people_alt:before {
     content: "\ea21"; }
   .material-icons.people_outline:before {
     content: "\e7fc"; }
+  .material-icons.percent:before {
+    content: "\eb58"; }
   .material-icons.perm_camera_mic:before {
     content: "\e8a2"; }
   .material-icons.perm_contact_cal:before {
@@ -2097,6 +2681,8 @@
     content: "\ef65"; }
   .material-icons.person_add_disabled:before {
     content: "\e9cb"; }
+  .material-icons.person_off:before {
+    content: "\e510"; }
   .material-icons.person_outline:before {
     content: "\e7ff"; }
   .material-icons.person_pin:before {
@@ -2109,6 +2695,8 @@
     content: "\ef67"; }
   .material-icons.person_search:before {
     content: "\f106"; }
+  .material-icons.personal_injury:before {
+    content: "\e6da"; }
   .material-icons.personal_video:before {
     content: "\e63b"; }
   .material-icons.pest_control:before {
@@ -2117,6 +2705,8 @@
     content: "\f0fd"; }
   .material-icons.pets:before {
     content: "\e91d"; }
+  .material-icons.phishing:before {
+    content: "\ead7"; }
   .material-icons.phone:before {
     content: "\e0cd"; }
   .material-icons.phone_android:before {
@@ -2173,6 +2763,10 @@
     content: "\e433"; }
   .material-icons.photo_size_select_small:before {
     content: "\e434"; }
+  .material-icons.piano:before {
+    content: "\e521"; }
+  .material-icons.piano_off:before {
+    content: "\e520"; }
   .material-icons.picture_as_pdf:before {
     content: "\e415"; }
   .material-icons.picture_in_picture:before {
@@ -2181,18 +2775,32 @@
     content: "\e911"; }
   .material-icons.pie_chart:before {
     content: "\e6c4"; }
+  .material-icons.pie_chart_outline:before {
+    content: "\f044"; }
   .material-icons.pie_chart_outlined:before {
     content: "\e6c5"; }
+  .material-icons.pin:before {
+    content: "\f045"; }
   .material-icons.pin_drop:before {
     content: "\e55e"; }
+  .material-icons.pin_end:before {
+    content: "\e767"; }
+  .material-icons.pin_invoke:before {
+    content: "\e763"; }
+  .material-icons.pinch:before {
+    content: "\eb38"; }
   .material-icons.pivot_table_chart:before {
     content: "\e9ce"; }
+  .material-icons.pix:before {
+    content: "\eaa3"; }
   .material-icons.place:before {
     content: "\e55f"; }
   .material-icons.plagiarism:before {
     content: "\ea5a"; }
   .material-icons.play_arrow:before {
     content: "\e037"; }
+  .material-icons.play_circle:before {
+    content: "\e1c4"; }
   .material-icons.play_circle_fill:before {
     content: "\e038"; }
   .material-icons.play_circle_filled:before {
@@ -2203,16 +2811,24 @@
     content: "\ef6a"; }
   .material-icons.play_for_work:before {
     content: "\e906"; }
+  .material-icons.play_lesson:before {
+    content: "\f047"; }
   .material-icons.playlist_add:before {
     content: "\e03b"; }
   .material-icons.playlist_add_check:before {
     content: "\e065"; }
+  .material-icons.playlist_add_check_circle:before {
+    content: "\e7e6"; }
+  .material-icons.playlist_add_circle:before {
+    content: "\e7e5"; }
   .material-icons.playlist_play:before {
     content: "\e05f"; }
   .material-icons.plumbing:before {
     content: "\f107"; }
   .material-icons.plus_one:before {
     content: "\e800"; }
+  .material-icons.podcasts:before {
+    content: "\f048"; }
   .material-icons.point_of_sale:before {
     content: "\f17e"; }
   .material-icons.policy:before {
@@ -2237,12 +2853,18 @@
     content: "\e646"; }
   .material-icons.power_settings_new:before {
     content: "\e8ac"; }
+  .material-icons.precision_manufacturing:before {
+    content: "\f049"; }
   .material-icons.pregnant_woman:before {
     content: "\e91e"; }
   .material-icons.present_to_all:before {
     content: "\e0df"; }
   .material-icons.preview:before {
     content: "\f1c5"; }
+  .material-icons.price_change:before {
+    content: "\f04a"; }
+  .material-icons.price_check:before {
+    content: "\f04b"; }
   .material-icons.print:before {
     content: "\e8ad"; }
   .material-icons.print_disabled:before {
@@ -2251,6 +2873,10 @@
     content: "\e645"; }
   .material-icons.privacy_tip:before {
     content: "\f0dc"; }
+  .material-icons.private_connectivity:before {
+    content: "\e744"; }
+  .material-icons.production_quantity_limits:before {
+    content: "\e1d1"; }
   .material-icons.psychology:before {
     content: "\ea4a"; }
   .material-icons.public:before {
@@ -2261,6 +2887,8 @@
     content: "\e255"; }
   .material-icons.published_with_changes:before {
     content: "\f232"; }
+  .material-icons.punch_clock:before {
+    content: "\eaa8"; }
   .material-icons.push_pin:before {
     content: "\f10d"; }
   .material-icons.qr_code:before {
@@ -2271,6 +2899,8 @@
     content: "\f206"; }
   .material-icons.query_builder:before {
     content: "\e8ae"; }
+  .material-icons.query_stats:before {
+    content: "\e4fc"; }
   .material-icons.question_answer:before {
     content: "\e8af"; }
   .material-icons.queue:before {
@@ -2285,6 +2915,14 @@
     content: "\e0d0"; }
   .material-icons.quickreply:before {
     content: "\ef6c"; }
+  .material-icons.quiz:before {
+    content: "\f04c"; }
+  .material-icons.quora:before {
+    content: "\ea98"; }
+  .material-icons.r_mobiledata:before {
+    content: "\f04d"; }
+  .material-icons.radar:before {
+    content: "\f04e"; }
   .material-icons.radio:before {
     content: "\e03e"; }
   .material-icons.radio_button_checked:before {
@@ -2301,8 +2939,14 @@
     content: "\ea64"; }
   .material-icons.rate_review:before {
     content: "\e560"; }
+  .material-icons.raw_off:before {
+    content: "\f04f"; }
+  .material-icons.raw_on:before {
+    content: "\f050"; }
   .material-icons.read_more:before {
     content: "\ef6d"; }
+  .material-icons.real_estate_agent:before {
+    content: "\e73a"; }
   .material-icons.receipt:before {
     content: "\e8b0"; }
   .material-icons.receipt_long:before {
@@ -2313,6 +2957,12 @@
     content: "\e9d2"; }
   .material-icons.record_voice_over:before {
     content: "\e91f"; }
+  .material-icons.rectangle:before {
+    content: "\eb54"; }
+  .material-icons.recycling:before {
+    content: "\e760"; }
+  .material-icons.reddit:before {
+    content: "\eaa0"; }
   .material-icons.redeem:before {
     content: "\e8b1"; }
   .material-icons.redo:before {
@@ -2321,6 +2971,8 @@
     content: "\f21c"; }
   .material-icons.refresh:before {
     content: "\e5d5"; }
+  .material-icons.remember_me:before {
+    content: "\f051"; }
   .material-icons.remove:before {
     content: "\e15b"; }
   .material-icons.remove_circle:before {
@@ -2363,6 +3015,8 @@
     content: "\e15f"; }
   .material-icons.report:before {
     content: "\e160"; }
+  .material-icons.report_gmailerrorred:before {
+    content: "\f052"; }
   .material-icons.report_off:before {
     content: "\e170"; }
   .material-icons.report_problem:before {
@@ -2373,6 +3027,8 @@
     content: "\f1b6"; }
   .material-icons.reset_tv:before {
     content: "\e9d9"; }
+  .material-icons.restart_alt:before {
+    content: "\f053"; }
   .material-icons.restaurant:before {
     content: "\e56c"; }
   .material-icons.restaurant_menu:before {
@@ -2383,6 +3039,8 @@
     content: "\e938"; }
   .material-icons.restore_page:before {
     content: "\e929"; }
+  .material-icons.reviews:before {
+    content: "\f054"; }
   .material-icons.rice_bowl:before {
     content: "\f1f5"; }
   .material-icons.ring_volume:before {
@@ -2397,18 +3055,24 @@
     content: "\eb49"; }
   .material-icons.rotate_90_degrees_ccw:before {
     content: "\e418"; }
+  .material-icons.rotate_90_degrees_cw:before {
+    content: "\eaab"; }
   .material-icons.rotate_left:before {
     content: "\e419"; }
   .material-icons.rotate_right:before {
     content: "\e41a"; }
   .material-icons.rounded_corner:before {
     content: "\e920"; }
+  .material-icons.route:before {
+    content: "\eacd"; }
   .material-icons.router:before {
     content: "\e328"; }
   .material-icons.rowing:before {
     content: "\e921"; }
   .material-icons.rss_feed:before {
     content: "\e0e5"; }
+  .material-icons.rsvp:before {
+    content: "\f055"; }
   .material-icons.rtt:before {
     content: "\e9ad"; }
   .material-icons.rule:before {
@@ -2417,18 +3081,32 @@
     content: "\f1c9"; }
   .material-icons.run_circle:before {
     content: "\ef6f"; }
+  .material-icons.running_with_errors:before {
+    content: "\e51d"; }
   .material-icons.rv_hookup:before {
     content: "\e642"; }
+  .material-icons.safety_divider:before {
+    content: "\e1cc"; }
+  .material-icons.sailing:before {
+    content: "\e502"; }
   .material-icons.sanitizer:before {
     content: "\f21d"; }
   .material-icons.satellite:before {
     content: "\e562"; }
+  .material-icons.satellite_alt:before {
+    content: "\eb3a"; }
   .material-icons.save:before {
     content: "\e161"; }
   .material-icons.save_alt:before {
     content: "\e171"; }
+  .material-icons.save_as:before {
+    content: "\eb60"; }
   .material-icons.saved_search:before {
     content: "\ea11"; }
+  .material-icons.savings:before {
+    content: "\e2eb"; }
+  .material-icons.scale:before {
+    content: "\eb5f"; }
   .material-icons.scanner:before {
     content: "\e329"; }
   .material-icons.scatter_plot:before {
@@ -2437,6 +3115,8 @@
     content: "\e8b5"; }
   .material-icons.schedule_send:before {
     content: "\ea0a"; }
+  .material-icons.schema:before {
+    content: "\e4fd"; }
   .material-icons.school:before {
     content: "\e80c"; }
   .material-icons.science:before {
@@ -2455,10 +3135,14 @@
     content: "\ef70"; }
   .material-icons.screen_share:before {
     content: "\e0e2"; }
+  .material-icons.screenshot:before {
+    content: "\f056"; }
   .material-icons.sd:before {
     content: "\e9dd"; }
   .material-icons.sd_card:before {
     content: "\e623"; }
+  .material-icons.sd_card_alert:before {
+    content: "\f057"; }
   .material-icons.sd_storage:before {
     content: "\e1c2"; }
   .material-icons.search:before {
@@ -2467,22 +3151,36 @@
     content: "\ea76"; }
   .material-icons.security:before {
     content: "\e32a"; }
+  .material-icons.security_update:before {
+    content: "\f058"; }
+  .material-icons.security_update_good:before {
+    content: "\f059"; }
+  .material-icons.security_update_warning:before {
+    content: "\f05a"; }
   .material-icons.segment:before {
     content: "\e94b"; }
   .material-icons.select_all:before {
     content: "\e162"; }
   .material-icons.self_improvement:before {
     content: "\ea78"; }
+  .material-icons.sell:before {
+    content: "\f05b"; }
   .material-icons.send:before {
     content: "\e163"; }
   .material-icons.send_and_archive:before {
     content: "\ea0c"; }
+  .material-icons.send_time_extension:before {
+    content: "\eadb"; }
   .material-icons.send_to_mobile:before {
     content: "\f05c"; }
   .material-icons.sensor_door:before {
     content: "\f1b5"; }
   .material-icons.sensor_window:before {
     content: "\f1b4"; }
+  .material-icons.sensors:before {
+    content: "\e51e"; }
+  .material-icons.sensors_off:before {
+    content: "\e51f"; }
   .material-icons.sentiment_dissatisfied:before {
     content: "\e811"; }
   .material-icons.sentiment_neutral:before {
@@ -2499,6 +3197,8 @@
     content: "\f1ea"; }
   .material-icons.settings:before {
     content: "\e8b8"; }
+  .material-icons.settings_accessibility:before {
+    content: "\f05d"; }
   .material-icons.settings_applications:before {
     content: "\e8b9"; }
   .material-icons.settings_backup_restore:before {
@@ -2531,18 +3231,30 @@
     content: "\e8c6"; }
   .material-icons.settings_remote:before {
     content: "\e8c7"; }
+  .material-icons.settings_suggest:before {
+    content: "\f05e"; }
   .material-icons.settings_system_daydream:before {
     content: "\e1c3"; }
   .material-icons.settings_voice:before {
     content: "\e8c8"; }
   .material-icons.share:before {
     content: "\e80d"; }
+  .material-icons.share_arrival_time:before {
+    content: "\e524"; }
+  .material-icons.share_location:before {
+    content: "\f05f"; }
   .material-icons.shield:before {
     content: "\e9e0"; }
+  .material-icons.shield_moon:before {
+    content: "\eaa9"; }
   .material-icons.shop:before {
     content: "\e8c9"; }
+  .material-icons.shop_2:before {
+    content: "\e19e"; }
   .material-icons.shop_two:before {
     content: "\e8ca"; }
+  .material-icons.shopify:before {
+    content: "\ea9d"; }
   .material-icons.shopping_bag:before {
     content: "\f1cc"; }
   .material-icons.shopping_basket:before {
@@ -2551,8 +3263,12 @@
     content: "\e8cc"; }
   .material-icons.short_text:before {
     content: "\e261"; }
+  .material-icons.shortcut:before {
+    content: "\f060"; }
   .material-icons.show_chart:before {
     content: "\e6e1"; }
+  .material-icons.shower:before {
+    content: "\f061"; }
   .material-icons.shuffle:before {
     content: "\e043"; }
   .material-icons.shuffle_on:before {
@@ -2567,10 +3283,14 @@
     content: "\e1c8"; }
   .material-icons.signal_cellular_alt:before {
     content: "\e202"; }
+  .material-icons.signal_cellular_connected_no_internet_0_bar:before {
+    content: "\f0ac"; }
   .material-icons.signal_cellular_connected_no_internet_4_bar:before {
     content: "\e1cd"; }
   .material-icons.signal_cellular_no_sim:before {
     content: "\e1ce"; }
+  .material-icons.signal_cellular_nodata:before {
+    content: "\f062"; }
   .material-icons.signal_cellular_null:before {
     content: "\e1cf"; }
   .material-icons.signal_cellular_off:before {
@@ -2581,24 +3301,48 @@
     content: "\e1d8"; }
   .material-icons.signal_wifi_4_bar_lock:before {
     content: "\e1d9"; }
+  .material-icons.signal_wifi_bad:before {
+    content: "\f063"; }
+  .material-icons.signal_wifi_connected_no_internet_4:before {
+    content: "\f064"; }
   .material-icons.signal_wifi_off:before {
     content: "\e1da"; }
+  .material-icons.signal_wifi_statusbar_4_bar:before {
+    content: "\f065"; }
+  .material-icons.signal_wifi_statusbar_connected_no_internet_4:before {
+    content: "\f066"; }
+  .material-icons.signal_wifi_statusbar_null:before {
+    content: "\f067"; }
   .material-icons.sim_card:before {
     content: "\e32b"; }
   .material-icons.sim_card_alert:before {
     content: "\e624"; }
+  .material-icons.sim_card_download:before {
+    content: "\f068"; }
   .material-icons.single_bed:before {
     content: "\ea48"; }
+  .material-icons.sip:before {
+    content: "\f069"; }
+  .material-icons.skateboarding:before {
+    content: "\e511"; }
   .material-icons.skip_next:before {
     content: "\e044"; }
   .material-icons.skip_previous:before {
     content: "\e045"; }
+  .material-icons.sledding:before {
+    content: "\e512"; }
   .material-icons.slideshow:before {
     content: "\e41b"; }
   .material-icons.slow_motion_video:before {
     content: "\e068"; }
   .material-icons.smart_button:before {
     content: "\f1c1"; }
+  .material-icons.smart_display:before {
+    content: "\f06a"; }
+  .material-icons.smart_screen:before {
+    content: "\f06b"; }
+  .material-icons.smart_toy:before {
+    content: "\f06c"; }
   .material-icons.smartphone:before {
     content: "\e32c"; }
   .material-icons.smoke_free:before {
@@ -2609,20 +3353,36 @@
     content: "\e625"; }
   .material-icons.sms_failed:before {
     content: "\e626"; }
+  .material-icons.snapchat:before {
+    content: "\ea6e"; }
   .material-icons.snippet_folder:before {
     content: "\f1c7"; }
   .material-icons.snooze:before {
     content: "\e046"; }
+  .material-icons.snowboarding:before {
+    content: "\e513"; }
+  .material-icons.snowing:before {
+    content: "\e80f"; }
+  .material-icons.snowmobile:before {
+    content: "\e503"; }
+  .material-icons.snowshoeing:before {
+    content: "\e514"; }
   .material-icons.soap:before {
     content: "\f1b2"; }
+  .material-icons.social_distance:before {
+    content: "\e1cb"; }
   .material-icons.sort:before {
     content: "\e164"; }
   .material-icons.sort_by_alpha:before {
     content: "\e053"; }
+  .material-icons.soup_kitchen:before {
+    content: "\e7d3"; }
   .material-icons.source:before {
     content: "\f1c4"; }
   .material-icons.south:before {
     content: "\f1e3"; }
+  .material-icons.south_america:before {
+    content: "\e7e4"; }
   .material-icons.south_east:before {
     content: "\f1e4"; }
   .material-icons.south_west:before {
@@ -2631,6 +3391,8 @@
     content: "\eb4c"; }
   .material-icons.space_bar:before {
     content: "\e256"; }
+  .material-icons.space_dashboard:before {
+    content: "\e66b"; }
   .material-icons.speaker:before {
     content: "\e32d"; }
   .material-icons.speaker_group:before {
@@ -2645,6 +3407,10 @@
     content: "\e9e4"; }
   .material-icons.spellcheck:before {
     content: "\e8ce"; }
+  .material-icons.splitscreen:before {
+    content: "\f06d"; }
+  .material-icons.spoke:before {
+    content: "\e9a7"; }
   .material-icons.sports:before {
     content: "\ea30"; }
   .material-icons.sports_bar:before {
@@ -2667,20 +3433,28 @@
     content: "\ea2b"; }
   .material-icons.sports_kabaddi:before {
     content: "\ea34"; }
+  .material-icons.sports_martial_arts:before {
+    content: "\eae9"; }
   .material-icons.sports_mma:before {
     content: "\ea2c"; }
   .material-icons.sports_motorsports:before {
     content: "\ea2d"; }
   .material-icons.sports_rugby:before {
     content: "\ea2e"; }
+  .material-icons.sports_score:before {
+    content: "\f06e"; }
   .material-icons.sports_soccer:before {
     content: "\ea2f"; }
   .material-icons.sports_tennis:before {
     content: "\ea32"; }
   .material-icons.sports_volleyball:before {
     content: "\ea31"; }
+  .material-icons.square:before {
+    content: "\eb36"; }
   .material-icons.square_foot:before {
     content: "\ea49"; }
+  .material-icons.ssid_chart:before {
+    content: "\eb66"; }
   .material-icons.stacked_bar_chart:before {
     content: "\e9e6"; }
   .material-icons.stacked_line_chart:before {
@@ -2691,14 +3465,20 @@
     content: "\e838"; }
   .material-icons.star_border:before {
     content: "\e83a"; }
+  .material-icons.star_border_purple500:before {
+    content: "\f099"; }
   .material-icons.star_half:before {
     content: "\e839"; }
   .material-icons.star_outline:before {
     content: "\f06f"; }
+  .material-icons.star_purple500:before {
+    content: "\f09a"; }
   .material-icons.star_rate:before {
     content: "\f0ec"; }
   .material-icons.stars:before {
     content: "\e8d0"; }
+  .material-icons.start:before {
+    content: "\e089"; }
   .material-icons.stay_current_landscape:before {
     content: "\e0d3"; }
   .material-icons.stay_current_portrait:before {
@@ -2723,6 +3503,8 @@
     content: "\e563"; }
   .material-icons.storefront:before {
     content: "\ea12"; }
+  .material-icons.storm:before {
+    content: "\f070"; }
   .material-icons.straighten:before {
     content: "\e41c"; }
   .material-icons.stream:before {
@@ -2751,6 +3533,12 @@
     content: "\ef72"; }
   .material-icons.subway:before {
     content: "\e56f"; }
+  .material-icons.summarize:before {
+    content: "\f071"; }
+  .material-icons.sunny:before {
+    content: "\e81a"; }
+  .material-icons.sunny_snowing:before {
+    content: "\e819"; }
   .material-icons.superscript:before {
     content: "\f112"; }
   .material-icons.supervised_user_circle:before {
@@ -2761,6 +3549,8 @@
     content: "\ef73"; }
   .material-icons.support_agent:before {
     content: "\f0e2"; }
+  .material-icons.surfing:before {
+    content: "\e515"; }
   .material-icons.surround_sound:before {
     content: "\e049"; }
   .material-icons.swap_calls:before {
@@ -2777,6 +3567,28 @@
     content: "\e8d6"; }
   .material-icons.swipe:before {
     content: "\e9ec"; }
+  .material-icons.swipe_down:before {
+    content: "\eb53"; }
+  .material-icons.swipe_down_alt:before {
+    content: "\eb30"; }
+  .material-icons.swipe_left:before {
+    content: "\eb59"; }
+  .material-icons.swipe_left_alt:before {
+    content: "\eb33"; }
+  .material-icons.swipe_right:before {
+    content: "\eb52"; }
+  .material-icons.swipe_right_alt:before {
+    content: "\eb56"; }
+  .material-icons.swipe_up:before {
+    content: "\eb2e"; }
+  .material-icons.swipe_up_alt:before {
+    content: "\eb35"; }
+  .material-icons.swipe_vertical:before {
+    content: "\eb51"; }
+  .material-icons.switch_access_shortcut:before {
+    content: "\e7e1"; }
+  .material-icons.switch_access_shortcut_add:before {
+    content: "\e7e2"; }
   .material-icons.switch_account:before {
     content: "\e9ed"; }
   .material-icons.switch_camera:before {
@@ -2787,14 +3599,24 @@
     content: "\f1d2"; }
   .material-icons.switch_video:before {
     content: "\e41f"; }
+  .material-icons.synagogue:before {
+    content: "\eab0"; }
   .material-icons.sync:before {
     content: "\e627"; }
   .material-icons.sync_alt:before {
     content: "\ea18"; }
   .material-icons.sync_disabled:before {
     content: "\e628"; }
+  .material-icons.sync_lock:before {
+    content: "\eaee"; }
   .material-icons.sync_problem:before {
     content: "\e629"; }
+  .material-icons.system_security_update:before {
+    content: "\f072"; }
+  .material-icons.system_security_update_good:before {
+    content: "\f073"; }
+  .material-icons.system_security_update_warning:before {
+    content: "\f074"; }
   .material-icons.system_update:before {
     content: "\e62a"; }
   .material-icons.system_update_alt:before {
@@ -2805,8 +3627,12 @@
     content: "\e8d8"; }
   .material-icons.tab_unselected:before {
     content: "\e8d9"; }
+  .material-icons.table_bar:before {
+    content: "\ead2"; }
   .material-icons.table_chart:before {
     content: "\e265"; }
+  .material-icons.table_restaurant:before {
+    content: "\eac6"; }
   .material-icons.table_rows:before {
     content: "\f101"; }
   .material-icons.table_view:before {
@@ -2827,14 +3653,28 @@
     content: "\e62b"; }
   .material-icons.tapas:before {
     content: "\f1e9"; }
+  .material-icons.task:before {
+    content: "\f075"; }
+  .material-icons.task_alt:before {
+    content: "\e2e6"; }
   .material-icons.taxi_alert:before {
     content: "\ef74"; }
+  .material-icons.telegram:before {
+    content: "\ea6b"; }
+  .material-icons.temple_buddhist:before {
+    content: "\eab3"; }
+  .material-icons.temple_hindu:before {
+    content: "\eaaf"; }
   .material-icons.terrain:before {
     content: "\e564"; }
+  .material-icons.text_decrease:before {
+    content: "\eadd"; }
   .material-icons.text_fields:before {
     content: "\e262"; }
   .material-icons.text_format:before {
     content: "\e165"; }
+  .material-icons.text_increase:before {
+    content: "\eae2"; }
   .material-icons.text_rotate_up:before {
     content: "\e93a"; }
   .material-icons.text_rotate_vertical:before {
@@ -2857,6 +3697,10 @@
     content: "\ea66"; }
   .material-icons.theaters:before {
     content: "\e8da"; }
+  .material-icons.thermostat:before {
+    content: "\f076"; }
+  .material-icons.thermostat_auto:before {
+    content: "\f077"; }
   .material-icons.thumb_down:before {
     content: "\e8db"; }
   .material-icons.thumb_down_alt:before {
@@ -2871,6 +3715,8 @@
     content: "\e9f3"; }
   .material-icons.thumbs_up_down:before {
     content: "\e8dd"; }
+  .material-icons.tiktok:before {
+    content: "\ea7e"; }
   .material-icons.time_to_leave:before {
     content: "\e62c"; }
   .material-icons.timelapse:before {
@@ -2881,10 +3727,16 @@
     content: "\e425"; }
   .material-icons.timer_10:before {
     content: "\e423"; }
+  .material-icons.timer_10_select:before {
+    content: "\f07a"; }
   .material-icons.timer_3:before {
     content: "\e424"; }
+  .material-icons.timer_3_select:before {
+    content: "\f07b"; }
   .material-icons.timer_off:before {
     content: "\e426"; }
+  .material-icons.tips_and_updates:before {
+    content: "\e79a"; }
   .material-icons.title:before {
     content: "\e264"; }
   .material-icons.toc:before {
@@ -2895,6 +3747,8 @@
     content: "\e9f5"; }
   .material-icons.toggle_on:before {
     content: "\e9f6"; }
+  .material-icons.token:before {
+    content: "\ea25"; }
   .material-icons.toll:before {
     content: "\e8e0"; }
   .material-icons.tonality:before {
@@ -2919,10 +3773,14 @@
     content: "\e572"; }
   .material-icons.transform:before {
     content: "\e428"; }
+  .material-icons.transgender:before {
+    content: "\e58d"; }
   .material-icons.transit_enterexit:before {
     content: "\e579"; }
   .material-icons.translate:before {
     content: "\e8e2"; }
+  .material-icons.travel_explore:before {
+    content: "\e2db"; }
   .material-icons.trending_down:before {
     content: "\e8e3"; }
   .material-icons.trending_flat:before {
@@ -2933,10 +3791,14 @@
     content: "\e8e5"; }
   .material-icons.trip_origin:before {
     content: "\e57b"; }
+  .material-icons.try:before {
+    content: "\f07c"; }
   .material-icons.tty:before {
     content: "\f1aa"; }
   .material-icons.tune:before {
     content: "\e429"; }
+  .material-icons.tungsten:before {
+    content: "\f07d"; }
   .material-icons.turned_in:before {
     content: "\e8e6"; }
   .material-icons.turned_in_not:before {
@@ -2961,16 +3823,24 @@
     content: "\f236"; }
   .material-icons.unsubscribe:before {
     content: "\e0eb"; }
+  .material-icons.upcoming:before {
+    content: "\f07e"; }
   .material-icons.update:before {
     content: "\e923"; }
   .material-icons.update_disabled:before {
     content: "\e075"; }
   .material-icons.upgrade:before {
     content: "\f0fb"; }
+  .material-icons.upload:before {
+    content: "\f09b"; }
   .material-icons.upload_file:before {
     content: "\e9fc"; }
   .material-icons.usb:before {
     content: "\e1e0"; }
+  .material-icons.usb_off:before {
+    content: "\e4fa"; }
+  .material-icons.vaccines:before {
+    content: "\e138"; }
   .material-icons.verified:before {
     content: "\ef76"; }
   .material-icons.verified_user:before {
@@ -2989,6 +3859,10 @@
     content: "\e62d"; }
   .material-icons.video_call:before {
     content: "\e070"; }
+  .material-icons.video_camera_back:before {
+    content: "\f07f"; }
+  .material-icons.video_camera_front:before {
+    content: "\f080"; }
   .material-icons.video_collection:before {
     content: "\e04a"; }
   .material-icons.video_label:before {
@@ -2997,12 +3871,16 @@
     content: "\e04a"; }
   .material-icons.video_settings:before {
     content: "\ea75"; }
+  .material-icons.video_stable:before {
+    content: "\f081"; }
   .material-icons.videocam:before {
     content: "\e04b"; }
   .material-icons.videocam_off:before {
     content: "\e04c"; }
   .material-icons.videogame_asset:before {
     content: "\e338"; }
+  .material-icons.videogame_asset_off:before {
+    content: "\e500"; }
   .material-icons.view_agenda:before {
     content: "\e8e9"; }
   .material-icons.view_array:before {
@@ -3015,8 +3893,14 @@
     content: "\e42a"; }
   .material-icons.view_comfy:before {
     content: "\e42a"; }
+  .material-icons.view_comfy_alt:before {
+    content: "\eb73"; }
   .material-icons.view_compact:before {
     content: "\e42b"; }
+  .material-icons.view_compact_alt:before {
+    content: "\eb74"; }
+  .material-icons.view_cozy:before {
+    content: "\eb75"; }
   .material-icons.view_day:before {
     content: "\e8ed"; }
   .material-icons.view_headline:before {
@@ -3037,6 +3921,8 @@
     content: "\e8f3"; }
   .material-icons.vignette:before {
     content: "\e435"; }
+  .material-icons.villa:before {
+    content: "\e586"; }
   .material-icons.visibility:before {
     content: "\e8f4"; }
   .material-icons.visibility_off:before {
@@ -3049,6 +3935,8 @@
     content: "\e0d9"; }
   .material-icons.volume_down:before {
     content: "\e04d"; }
+  .material-icons.volume_down_alt:before {
+    content: "\e79c"; }
   .material-icons.volume_mute:before {
     content: "\e04e"; }
   .material-icons.volume_off:before {
@@ -3061,6 +3949,8 @@
     content: "\e0da"; }
   .material-icons.vpn_lock:before {
     content: "\e62f"; }
+  .material-icons.vrpano:before {
+    content: "\f082"; }
   .material-icons.wallet_giftcard:before {
     content: "\e8f6"; }
   .material-icons.wallet_membership:before {
@@ -3071,18 +3961,28 @@
     content: "\e1bc"; }
   .material-icons.warning:before {
     content: "\e002"; }
+  .material-icons.warning_amber:before {
+    content: "\f083"; }
   .material-icons.wash:before {
     content: "\f1b1"; }
   .material-icons.watch:before {
     content: "\e334"; }
   .material-icons.watch_later:before {
     content: "\e924"; }
+  .material-icons.watch_off:before {
+    content: "\eae3"; }
+  .material-icons.water:before {
+    content: "\f084"; }
   .material-icons.water_damage:before {
     content: "\f203"; }
+  .material-icons.water_drop:before {
+    content: "\e798"; }
   .material-icons.waterfall_chart:before {
     content: "\ea00"; }
   .material-icons.waves:before {
     content: "\e176"; }
+  .material-icons.waving_hand:before {
+    content: "\e766"; }
   .material-icons.wb_auto:before {
     content: "\e42c"; }
   .material-icons.wb_cloudy:before {
@@ -3097,16 +3997,26 @@
     content: "\e430"; }
   .material-icons.wb_twighlight:before {
     content: "\ea02"; }
+  .material-icons.wb_twilight:before {
+    content: "\e1c6"; }
   .material-icons.wc:before {
     content: "\e63d"; }
   .material-icons.web:before {
     content: "\e051"; }
   .material-icons.web_asset:before {
     content: "\e069"; }
+  .material-icons.web_asset_off:before {
+    content: "\e4f7"; }
+  .material-icons.web_stories:before {
+    content: "\e595"; }
+  .material-icons.wechat:before {
+    content: "\ea81"; }
   .material-icons.weekend:before {
     content: "\e16b"; }
   .material-icons.west:before {
     content: "\f1e6"; }
+  .material-icons.whatsapp:before {
+    content: "\ea9c"; }
   .material-icons.whatshot:before {
     content: "\e80e"; }
   .material-icons.wheelchair_pickup:before {
@@ -3119,22 +4029,48 @@
     content: "\e63e"; }
   .material-icons.wifi_calling:before {
     content: "\ef77"; }
+  .material-icons.wifi_calling_3:before {
+    content: "\f085"; }
+  .material-icons.wifi_channel:before {
+    content: "\eb6a"; }
+  .material-icons.wifi_find:before {
+    content: "\eb31"; }
   .material-icons.wifi_lock:before {
     content: "\e1e1"; }
   .material-icons.wifi_off:before {
     content: "\e648"; }
+  .material-icons.wifi_password:before {
+    content: "\eb6b"; }
   .material-icons.wifi_protected_setup:before {
     content: "\f0fc"; }
   .material-icons.wifi_tethering:before {
     content: "\e1e2"; }
+  .material-icons.wifi_tethering_error:before {
+    content: "\ead9"; }
+  .material-icons.wifi_tethering_error_rounded:before {
+    content: "\f086"; }
+  .material-icons.wifi_tethering_off:before {
+    content: "\f087"; }
+  .material-icons.window:before {
+    content: "\f088"; }
   .material-icons.wine_bar:before {
     content: "\f1e8"; }
+  .material-icons.woman:before {
+    content: "\e13e"; }
+  .material-icons.woo_commerce:before {
+    content: "\ea6d"; }
+  .material-icons.wordpress:before {
+    content: "\ea9f"; }
   .material-icons.work:before {
     content: "\e8f9"; }
   .material-icons.work_off:before {
     content: "\e942"; }
   .material-icons.work_outline:before {
     content: "\e943"; }
+  .material-icons.workspace_premium:before {
+    content: "\e7af"; }
+  .material-icons.workspaces:before {
+    content: "\e1a0"; }
   .material-icons.workspaces_filled:before {
     content: "\ea0d"; }
   .material-icons.workspaces_outline:before {
@@ -3145,10 +4081,14 @@
     content: "\ef78"; }
   .material-icons.wysiwyg:before {
     content: "\f1c3"; }
+  .material-icons.yard:before {
+    content: "\f089"; }
   .material-icons.youtube_searched_for:before {
     content: "\e8fa"; }
   .material-icons.zoom_in:before {
     content: "\e8ff"; }
+  .material-icons.zoom_in_map:before {
+    content: "\eb2d"; }
   .material-icons.zoom_out:before {
     content: "\e900"; }
   .material-icons.zoom_out_map:before {
