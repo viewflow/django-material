@@ -4,7 +4,9 @@
 - Drop support for python 2.7
 - Drop support for Django 1.11, Django 2.0, Django 2.1
 - Add support for Django 4.0
-
+- Keep viewset.queryset for detai and delete views
+- Improve multiple ajax select
+- Speed up model List View
 
 1.9.0 2020-04-30
 ----------------

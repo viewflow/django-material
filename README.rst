@@ -87,10 +87,13 @@ Django Material Pro with additional features has a commercial-friendly license. 
 Changelog
 =========
 
-1.9.0 2020-04-30
-----------------
 
-- Add support for attribute removing #500
-- Add support for groups in checkbox select multiple #436
-- Add basic support for ordering custom fields in list view #224
-- Change to lazy evaluation {{ modules }} context variable
+1.10.0 GIT VERSION
+------------------
+
+- Drop support for python 2.7
+- Drop support for Django 1.11, Django 2.0, Django 2.1
+- Add support for Django 4.0
+- Keep viewset.queryset for detai and delete views
+- Improve multiple ajax select
+- Speed up model List View
