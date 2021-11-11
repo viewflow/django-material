@@ -13,6 +13,17 @@ class DetailModelView(generic.DetailView):
 
     viewset = None
 
+    def get_queryset(self):
+        """Return the list of items for this view.
+
+        If view have no explicit `self.queryset`, tries too lookup to
+        `viewflow.get_queryset`
+        """
+        if self.queryset is None and self.viewset is not None:
+            if hasattr(self.viewset, 'get_queryset'):
+                return self.viewset.get_queryset(self.request)
+        return super(DetailModelView, self).get_queryset()
+
     def get_object_data(self):
         """List of object fields to display.
 
