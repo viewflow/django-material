@@ -88,7 +88,7 @@ Changelog
 =========
 
 
-1.10.0 GIT VERSION
+1.10.0 2021-11-12
 ------------------
 
 - Drop support for python 2.7

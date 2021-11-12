@@ -52,9 +52,6 @@ setup(
     ],
     classifiers=[
         'Framework :: Django',
-        "Framework :: Django :: 1.11",
-        "Framework :: Django :: 2.0",
-        "Framework :: Django :: 2.1",
         "Framework :: Django :: 2.2",
         "Framework :: Django :: 3.0",
         "Framework :: Django :: 3.1",
@@ -69,6 +66,8 @@ setup(
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.9',
         'Topic :: Software Development',
         'Topic :: Software Development :: User Interfaces',
     ],

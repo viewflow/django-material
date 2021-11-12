@@ -1,5 +1,5 @@
-1.10.0 GIT VERSION
-------------------
+1.10.0 2021-11-12
+-----------------
 
 - Drop support for python 2.7
 - Drop support for Django 1.11, Django 2.0, Django 2.1
@@ -8,7 +8,7 @@
 - Improve multiple ajax select
 - Speed up model List View
 
-1.9.0 2020-04-30
+1.9.0 2021-04-30
 ----------------
 - Add support for attribute removing #500
 - Add support for groups in checkbox select multiple #436
