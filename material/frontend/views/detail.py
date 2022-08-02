@@ -63,7 +63,7 @@ class DetailModelView(generic.DetailView):
         return self.has_change_permission(request, obj=obj)
 
     def has_change_permission(self, request, obj):
-        """Object chane permission check.
+        """Object change permission check.
 
         If view had a `viewset`, the `viewset.has_change_permission` used.
 

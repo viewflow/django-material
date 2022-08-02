@@ -5518,7 +5518,7 @@ $jscomp.polyfill = function (e, r, p, m) {
       _this31.isFixed = _this31.el.classList.contains('sidenav-fixed');
 
       /**
-       * Describes if Sidenav is being draggeed
+       * Describes if Sidenav is being dragged
        * @type {Boolean}
        */
       _this31.isDragged = false;
