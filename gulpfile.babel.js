@@ -44,8 +44,10 @@ gulp.task('3rdparty.js', () => {
     'node_modules/datatables/media/js/jquery.dataTables.js',
     'node_modules/jquery-datetimepicker/build/jquery.datetimepicker.full.js',
     'node_modules/perfect-scrollbar/dist/perfect-scrollbar.min.js',
+    'node_modules/perfect-scrollbar/dist/perfect-scrollbar.min.js.map',
     'node_modules/turbolinks/dist/turbolinks.js',
     'node_modules/@webcomponents/custom-elements/custom-elements.min.js',
+    'node_modules/@webcomponents/custom-elements/custom-elements.min.js.map',
   ];
 
   return gulp.src(deps)
