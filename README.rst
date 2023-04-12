@@ -4,6 +4,14 @@ Django Material
 
 Material design for Django.
 
+
+IN ORDER TO REDUCE MAINTENANCE COST, THE PACKAGE FUNCTIONALITY HAS BEEN MOVED INTO THE django-viewflow
+
+PLEASE, CONSIDE TO UPGRADE
+
+$ pip install django-viewflow>=2.0.0b1
+
+
 .. image:: https://img.shields.io/pypi/v/django-material.svg
     :target: https://pypi.python.org/pypi/django-material
 .. image:: https://img.shields.io/pypi/wheel/django-material.svg

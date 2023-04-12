@@ -13,3 +13,8 @@ __all__ = (
     'Span8', 'Span9', 'Span10', 'Span11', 'Span12',
     'LayoutMixin'
 )
+
+import warnings
+
+warnings.warn("The package was merged into django-viewflow. Please consider to switch to django-viewflow>=2.0.0b1")
+
