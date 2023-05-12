@@ -122,6 +122,13 @@ select.material-ignore {
   line-height: 16px;
   display: block;
 }
+.checkbox-field .inline {
+  margin-top: 10px;
+}
+.checkbox-field .inline .radio {
+  display: inline;
+  margin-right: 20px;
+}
 
 /* RADIO FIELD */
 .radio-field .radio {
