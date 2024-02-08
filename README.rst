@@ -11,6 +11,7 @@ PLEASE, CONSIDE TO UPGRADE
 
 $ pip install django-viewflow>=2.0.0b1
 
+`Django‐Material and Viewflow 1.x migration Guide <https://github.com/viewflow/viewflow/wiki/Django%E2%80%90Material-and-Viewflow-1.x-migration-Guide>`_
 
 .. image:: https://img.shields.io/pypi/v/django-material.svg
     :target: https://pypi.python.org/pypi/django-material
