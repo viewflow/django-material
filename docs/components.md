@@ -125,6 +125,52 @@ You can specify the button type for form submissions:
 </c-button.filled>
 ```
 
+### Accessibility Features
+
+All button components include built-in accessibility features:
+
+#### ARIA Labels
+
+Provide descriptive labels for screen readers with `aria_label`:
+
+```html
+<c-button.filled aria_label="Submit application form">
+  Submit
+</c-button.filled>
+
+<!-- Required for icon buttons -->
+<c-button.icon icon="settings" aria_label="Open settings"></c-button.icon>
+```
+
+#### Keyboard Navigation
+
+Buttons have visible focus states for keyboard navigation:
+- Each button has a distinct focus style using background color changes
+- Focus states maintain the same color theme as the button
+- Focus is more prominent than hover for better visibility
+
+#### Disabled State
+
+Buttons can be disabled with the `disabled` attribute:
+
+```html
+<c-button.filled disabled>
+  Cannot Submit
+</c-button.filled>
+```
+
+This applies:
+- Visual styling (reduced opacity)
+- `aria-disabled="true"` for screen readers
+- The `disabled` HTML attribute
+- Pointer events disabled to prevent interaction
+
+#### Screen Reader Support
+
+- Icon-only buttons always require an `aria_label`
+- Icon decorations within text buttons use `aria-hidden="true"`
+- All buttons maintain proper contrast ratios for readability
+
 ## Cards
 
 Cards contain content and actions about a single subject.

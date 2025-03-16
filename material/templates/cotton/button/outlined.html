@@ -9,15 +9,18 @@
         bg-transparent active:ripple
         border border-solid
         {% if color == 'secondary' %}
-            text-secondary border-secondary hover:bg-secondary/5
+            text-secondary border-secondary hover:bg-secondary/5 focus:bg-secondary/10
         {% elif color == 'tertiary' %}
-            text-tertiary border-tertiary hover:bg-tertiary/5
+            text-tertiary border-tertiary hover:bg-tertiary/5 focus:bg-tertiary/10
         {% else %}
-            text-primary border-primary hover:bg-primary/5
+            text-primary border-primary hover:bg-primary/5 focus:bg-primary/10
         {% endif %}
-    ">
+        {% if disabled %}opacity-50 cursor-not-allowed pointer-events-none{% endif %}
+    "
+    {% if aria_label %}aria-label="{{ aria_label }}"{% endif %}
+    {% if disabled %}aria-disabled="true" disabled{% endif %}>
     {% if icon %}
-      <span class="material-icons mr-2">{{ icon }}</span>
+      <span class="material-icons mr-2" aria-hidden="true">{{ icon }}</span>
     {% endif %}
     <span class="pt-2 pb-1 text-sm">{{ slot }}</span>
 </button>

@@ -7,13 +7,15 @@
         transition-all duration-300 ease-in-out
         active:ripple
         {% if color == 'secondary' %}
-            text-secondary hover:bg-secondary/10
+            text-secondary hover:bg-secondary/10 focus:bg-secondary/20
         {% elif color == 'tertiary' %}
-            text-tertiary hover:bg-tertiary/10
+            text-tertiary hover:bg-tertiary/10 focus:bg-tertiary/20
         {% else %}
-            text-primary hover:bg-primary/10
+            text-primary hover:bg-primary/10 focus:bg-primary/20
         {% endif %}
+        {% if disabled %}opacity-50 cursor-not-allowed pointer-events-none{% endif %}
     "
-    aria-label="{{ aria_label|default:'' }}">
-    <span class="material-icons">{{ icon|default:'more_vert' }}</span>
+    {% if aria_label %}aria-label="{{ aria_label }}"{% else %}aria-label="Button"{% endif %}
+    {% if disabled %}aria-disabled="true" disabled{% endif %}>
+    <span class="material-icons" aria-hidden="true">{{ icon|default:'more_vert' }}</span>
 </button>
