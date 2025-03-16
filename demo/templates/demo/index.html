@@ -176,6 +176,46 @@
                 </div>
             </div>
             
+            <!-- Floating Action Buttons -->
+            <div class="mt-8">
+                <h3 class="text-xl font-medium mb-2">Floating Action Buttons (FAB)</h3>
+                <p class="mb-4">High-emphasis circular buttons that represent the primary action in an application.</p>
+                
+                <h4 class="text-lg font-medium mb-2">Basic FAB</h4>
+                <div class="flex flex-wrap items-center gap-6 mb-6">
+                    <c-button.fab aria_label="Create new item"></c-button.fab>
+                    <c-button.fab icon="edit" color="secondary" aria_label="Edit"></c-button.fab>
+                    <c-button.fab icon="favorite" color="tertiary" aria_label="Add to favorites"></c-button.fab>
+                </div>
+                
+                <h4 class="text-lg font-medium mb-2">FAB Sizes</h4>
+                <div class="flex flex-wrap items-end gap-6 mb-6">
+                    <c-button.fab size="small" icon="add" aria_label="Small FAB"></c-button.fab>
+                    <c-button.fab icon="add" aria_label="Regular FAB"></c-button.fab>
+                    <c-button.fab size="large" icon="add" aria_label="Large FAB"></c-button.fab>
+                </div>
+                
+                <h4 class="text-lg font-medium mb-2">Extended FAB</h4>
+                <div class="flex flex-wrap items-center gap-6 mb-4">
+                    <c-button.fab icon="navigation" aria_label="Navigate">Navigate</c-button.fab>
+                    <c-button.fab icon="create" color="secondary" aria_label="Compose">Compose</c-button.fab>
+                </div>
+                
+                <div class="mt-4 bg-gray-100 p-4 rounded-md">
+                    <pre class="text-sm"><code>{% verbatim %}&lt;!-- Regular FAB --&gt;
+&lt;c-button.fab icon="add" aria_label="Create"&gt;&lt;/c-button.fab&gt;
+
+&lt;!-- Small FAB --&gt;
+&lt;c-button.fab size="small" icon="edit" aria_label="Edit"&gt;&lt;/c-button.fab&gt;
+
+&lt;!-- Large FAB --&gt;
+&lt;c-button.fab size="large" icon="add" aria_label="Create"&gt;&lt;/c-button.fab&gt;
+
+&lt;!-- Extended FAB with text --&gt;
+&lt;c-button.fab icon="create" aria_label="Compose"&gt;Compose&lt;/c-button.fab&gt;{% endverbatim %}</code></pre>
+                </div>
+            </div>
+            
             <!-- Accessibility Features -->
             <div class="mt-8">
                 <h3 class="text-xl font-medium mb-2">Accessibility Features</h3>

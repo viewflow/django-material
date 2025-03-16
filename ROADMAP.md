@@ -5,14 +5,14 @@ This file tracks the development progress of the Django Material project. As ite
 ## Core Components
 
 - [x] Base HTML templates
-- [ ] Button component
+- [x] Button component
   - [x] Basic implementation (filled button)
   - [x] Text button
   - [x] Outlined button
   - [x] Elevated button
   - [x] Icon button
   - [x] Segmented button
-  - [ ] Floating action button
+  - [x] Floating action button
 - [ ] Form controls
   - [ ] Text field
   - [ ] Select

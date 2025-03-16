@@ -1,0 +1,44 @@
+<button type="{{ type|default:'button' }}"
+    class="
+        relative flex items-center justify-center
+        {% if slot and slot != "" %}
+            {% if size == 'small' %}
+                h-10 px-4
+            {% elif size == 'large' %}
+                h-16 px-8
+            {% else %}
+                h-14 px-6
+            {% endif %}
+        {% else %}
+            {% if size == 'small' %}
+                w-10 h-10
+            {% elif size == 'large' %}
+                w-16 h-16
+            {% else %}
+                w-14 h-14
+            {% endif %}
+        {% endif %}
+        cursor-pointer
+        rounded-2xl
+        overflow-hidden focus:outline-none
+        transition-all duration-300 ease-in-out
+        shadow-lg hover:shadow-xl active:shadow-md
+        active:ripple
+        {% if color == 'secondary' %}
+            bg-secondary text-on-secondary hover:bg-secondary/90 focus:bg-secondary/80
+        {% elif color == 'tertiary' %}
+            bg-tertiary text-on-tertiary hover:bg-tertiary/90 focus:bg-tertiary/80
+        {% else %}
+            bg-primary text-on-primary hover:bg-primary/90 focus:bg-primary/80
+        {% endif %}
+        {% if disabled %}opacity-50 cursor-not-allowed pointer-events-none{% endif %}
+    "
+    {% if aria_label %}aria-label="{{ aria_label }}"{% else %}aria-label="Action button"{% endif %}
+    {% if disabled %}aria-disabled="true" disabled{% endif %}>
+    <span class="material-icons {% if size == 'small' %}text-base{% elif size == 'large' %}text-3xl{% else %}text-2xl{% endif %}" aria-hidden="true">
+        {{ icon|default:'add' }}
+    </span>
+    {% if slot and slot != "" %}
+        <span class="ml-2 font-medium {% if size == 'small' %}text-xs{% elif size == 'large' %}text-xl{% else %}text-sm{% endif %}">{{ slot }}</span>
+    {% endif %}
+</button>

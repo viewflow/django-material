@@ -106,6 +106,27 @@ For example, with icons and more segments:
 </div>
 ```
 
+#### Floating Action Button (FAB)
+
+A circular button that represents the primary action in an application:
+
+```html
+<c-button.fab icon="add" aria_label="Create new item"></c-button.fab>
+```
+
+FAB buttons support these specific parameters:
+- `size`: Size of the button ("small", "regular" (default), or "large")
+- `icon`: The icon to display (defaults to "add")
+- `color`: Apply color theme (primary, secondary, tertiary)
+
+FAB buttons can be extended with text:
+
+```html
+<c-button.fab icon="create" aria_label="Compose">
+  Compose
+</c-button.fab>
+```
+
 ### Button with Icon
 
 You can add a Material Icon to text and container button variants:
