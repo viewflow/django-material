@@ -15,22 +15,71 @@
             <div>
                 <h3 class="text-xl font-medium mb-2">Filled Button (Default)</h3>
                 <p class="mb-4">The standard, high-emphasis button with a filled background.</p>
-                <div class="flex flex-wrap gap-4 items-center">
+                
+                <h4 class="text-lg font-medium mb-2">Color Variants</h4>
+                <div class="flex flex-wrap gap-4 items-center mb-6">
                     <c-button.filled>
-                        Default Button
+                        Primary
                     </c-button.filled>
 
-                    <c-button.filled icon="person" color="tertiary">
-                        With Icon
+                    <c-button.filled color="secondary">
+                        Secondary
+                    </c-button.filled>
+                    
+                    <c-button.filled color="tertiary">
+                        Tertiary
                     </c-button.filled>
                 </div>
+                
+                <h4 class="text-lg font-medium mb-2">With Icons</h4>
+                <div class="flex flex-wrap gap-4 items-center mb-6">
+                    <c-button.filled icon="add">
+                        Add Item
+                    </c-button.filled>
+
+                    <c-button.filled icon="bookmark" color="secondary">
+                        Bookmark
+                    </c-button.filled>
+                    
+                    <c-button.filled icon="download" color="tertiary">
+                        Download
+                    </c-button.filled>
+                </div>
+                
+                <h4 class="text-lg font-medium mb-2">Special States</h4>
+                <div class="flex flex-wrap gap-4 items-center">
+                    <c-button.filled type="submit">
+                        Submit Form
+                    </c-button.filled>
+                    
+                    <c-button.filled aria_label="Save document with keyboard shortcut Ctrl+S">
+                        Save Document
+                    </c-button.filled>
+                    
+                    <c-button.filled disabled>
+                        Disabled
+                    </c-button.filled>
+                </div>
+                
                 <div class="mt-4 bg-gray-100 p-4 rounded-md">
-                    <pre class="text-sm"><code>{% verbatim %}&lt;c-button.filled&gt;
-    Filled Button
+                    <pre class="text-sm"><code>{% verbatim %}&lt;!-- Primary color (default) --&gt;
+&lt;c-button.filled&gt;
+    Primary
 &lt;/c-button.filled&gt;
 
+&lt;!-- Secondary color --&gt;
+&lt;c-button.filled color="secondary"&gt;
+    Secondary
+&lt;/c-button.filled&gt;
+
+&lt;!-- With icon --&gt;
 &lt;c-button.filled icon="add"&gt;
-    With Icon
+    Add Item
+&lt;/c-button.filled&gt;
+
+&lt;!-- Form submission --&gt;
+&lt;c-button.filled type="submit"&gt;
+    Submit Form
 &lt;/c-button.filled&gt;{% endverbatim %}</code></pre>
                 </div>
             </div>
