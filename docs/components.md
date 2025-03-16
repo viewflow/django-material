@@ -22,7 +22,11 @@ Components in subfolders can be called using dot notation to represent folder le
 
 Buttons allow users to take actions and make choices with a single tap.
 
-### Filled Button
+### Button Variants
+
+Django Material offers different button variants with varying levels of emphasis:
+
+#### Filled Button
 
 The standard filled button with high emphasis:
 
@@ -32,14 +36,42 @@ The standard filled button with high emphasis:
 </c-button.filled>
 ```
 
+#### Outlined Button
+
+A medium-emphasis button with an outline border:
+
+```html
+<c-button.outlined>
+  Cancel
+</c-button.outlined>
+```
+
+#### Text Button
+
+A low-emphasis button with no background or border:
+
+```html
+<c-button.text>
+  Learn More
+</c-button.text>
+```
+
 ### Button with Icon
 
-You can add a Material Icon to your button:
+You can add a Material Icon to any button variant:
 
 ```html
 <c-button.filled icon="add">
   Add Item
 </c-button.filled>
+
+<c-button.outlined icon="bookmark">
+  Bookmark
+</c-button.outlined>
+
+<c-button.text icon="share">
+  Share
+</c-button.text>
 ```
 
 ### Button Colors
@@ -47,17 +79,17 @@ You can add a Material Icon to your button:
 Buttons support primary (default), secondary, and tertiary colors:
 
 ```html
-<c-button.filled>
+<c-button.outlined>
   Primary Button
-</c-button.filled>
+</c-button.outlined>
 
-<c-button.filled color="secondary">
+<c-button.outlined color="secondary">
   Secondary Button
-</c-button.filled>
+</c-button.outlined>
 
-<c-button.filled color="tertiary">
+<c-button.outlined color="tertiary">
   Tertiary Button
-</c-button.filled>
+</c-button.outlined>
 ```
 
 ### Button Types
