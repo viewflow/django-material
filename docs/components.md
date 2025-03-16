@@ -66,9 +66,20 @@ A low-emphasis button with no background or border:
 </c-button.text>
 ```
 
+#### Icon Button
+
+A compact, circular button that displays only an icon:
+
+```html
+<c-button.icon 
+  icon="settings" 
+  aria_label="Settings">
+</c-button.icon>
+```
+
 ### Button with Icon
 
-You can add a Material Icon to any button variant:
+You can add a Material Icon to text and container button variants:
 
 ```html
 <c-button.filled icon="add">
@@ -83,6 +94,8 @@ You can add a Material Icon to any button variant:
   Share
 </c-button.text>
 ```
+
+Note that the icon button is a separate component designed specifically for icon-only buttons, while these examples show text buttons with accompanying icons.
 
 ### Button Colors
 

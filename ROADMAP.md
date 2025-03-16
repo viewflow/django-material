@@ -10,6 +10,7 @@ This file tracks the development progress of the Django Material project. As ite
   - [x] Text button
   - [x] Outlined button
   - [x] Elevated button
+  - [x] Icon button
   - [ ] Floating action button
   - [ ] Button group
 - [ ] Form controls

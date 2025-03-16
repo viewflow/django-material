@@ -118,6 +118,26 @@
 &lt;/c-button.elevated&gt;{% endverbatim %}</code></pre>
                 </div>
             </div>
+            
+            <!-- Icon Button  -->
+            <div class="mt-8">
+                <h3 class="text-xl font-medium mb-2">Icon Button</h3>
+                <p class="mb-4">A compact, circular button that displays only an icon.</p>
+                <div class="flex flex-wrap gap-4 items-center">
+                    <c-button.icon icon="settings" aria_label="Settings"></c-button.icon>
+                    <c-button.icon icon="favorite" color="secondary" aria_label="Favorite"></c-button.icon>
+                    <c-button.icon icon="delete" color="tertiary" aria_label="Delete"></c-button.icon>
+                </div>
+                <div class="mt-4 bg-gray-100 p-4 rounded-md">
+                    <pre class="text-sm"><code>{% verbatim %}&lt;c-button.icon icon="settings" aria_label="Settings"&gt;&lt;/c-button.icon&gt;
+
+&lt;c-button.icon 
+    icon="favorite" 
+    color="secondary" 
+    aria_label="Favorite"&gt;
+&lt;/c-button.icon&gt;{% endverbatim %}</code></pre>
+                </div>
+            </div>
         </div>
     </section>
 </div>
