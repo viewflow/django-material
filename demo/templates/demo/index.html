@@ -1,0 +1,68 @@
+{% extends 'material/base_page.html' %}
+
+{% block title %}Django Material Component Demo{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold mb-8">Material Design Components</h1>
+    
+    <section class="mb-12">
+        <h2 class="text-2xl font-bold mb-4">Buttons</h2>
+        <p class="mb-4">Material Design offers several button variants to match your UI needs.</p>
+        
+        <div class="space-y-8">
+            <!-- Filled Button  -->
+            <div>
+                <h3 class="text-xl font-medium mb-2">Filled Button (Default)</h3>
+                <p class="mb-4">The standard, high-emphasis button with a filled background.</p>
+                <div class="flex flex-wrap gap-4 items-center">
+                    <c-button.filled>
+                        Default Button
+                    </c-button.filled>
+
+                    <c-button.filled icon="person" color="tertiary">
+                        With Icon
+                    </c-button.filled>
+                </div>
+                <div class="mt-4 bg-gray-100 p-4 rounded-md">
+                    <pre class="text-sm"><code>{% verbatim %}&lt;c-button.filled&gt;
+    Filled Button
+&lt;/c-button.filled&gt;
+
+&lt;c-button.filled icon="add"&gt;
+    With Icon
+&lt;/c-button.filled&gt;{% endverbatim %}</code></pre>
+                </div>
+            </div>
+            
+            <!-- Text Button  -->
+            <div class="mt-8">
+                <h3 class="text-xl font-medium mb-2">Text Button</h3>
+                <p class="mb-4">A lower emphasis button with no background or elevation.</p>
+                <div class="flex flex-wrap gap-4 items-center">
+                    <c-button.text>
+                        Text Button
+                    </c-button.text>
+
+                    <c-button.text icon="favorite" color="secondary">
+                        With Icon
+                    </c-button.text>
+                    
+                    <c-button.text color="tertiary">
+                        Tertiary
+                    </c-button.text>
+                </div>
+                <div class="mt-4 bg-gray-100 p-4 rounded-md">
+                    <pre class="text-sm"><code>{% verbatim %}&lt;c-button.text&gt;
+    Text Button
+&lt;/c-button.text&gt;
+
+&lt;c-button.text icon="favorite" color="secondary"&gt;
+    With Icon
+&lt;/c-button.text&gt;{% endverbatim %}</code></pre>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}

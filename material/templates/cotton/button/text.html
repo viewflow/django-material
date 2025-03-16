@@ -1,0 +1,22 @@
+<button type="{{ type|default:'button' }}"
+    class="
+        relative inline-flex items-center
+        px-4 py-1 cursor-pointer
+        font-medium tracking-wide
+        rounded-2xl
+        overflow-hidden focus:outline-none 
+        transition-all duration-300 ease-in-out
+        bg-transparent active:ripple
+        {% if color == 'secondary' %}
+            text-secondary hover:bg-secondary/10
+        {% elif color == 'tertiary' %}
+            text-tertiary hover:bg-tertiary/10
+        {% else %}
+            text-primary hover:bg-primary/10
+        {% endif %}
+    ">
+    {% if icon %}
+      <span class="material-icons mr-2">{{ icon }}</span>
+    {% endif %}
+    <span class="pt-2 pb-1 text-sm">{{ slot }}</span>
+</button>
