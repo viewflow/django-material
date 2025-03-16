@@ -1,0 +1,55 @@
+/* 
+ * Top Header Layout
+ * ----------------
+ * This layout puts the header on top, with navigation and 
+ * main content below, and footer at the bottom
+ *
+ * +------------------+
+ * |     Header       |
+ * +--------+---------+
+ * |  Nav   |  Main   |
+ * |        |         |
+ * +--------+---------+
+ * |     Footer       |
+ * +------------------+
+ */
+
+body:not([class]) {
+  display: grid;
+  grid-template-areas:
+    "header header"
+    "nav main"
+    "footer footer";
+  grid-template-rows: auto 1fr auto;
+  grid-template-columns: 250px 1fr;
+  gap: 1px;
+}
+
+[role="banner"]:not([class]) {
+  grid-area: header;
+}
+
+[role="navigation"]:not([class]) {
+  grid-area: nav;
+}
+
+main:not([class]) {
+  grid-area: main;
+}
+
+[role="contentinfo"]:not([class]) {
+  grid-area: footer;
+}
+
+/* Responsive adjustments for mobile */
+@media (max-width: 768px) {
+  body:not([class]) {
+    grid-template-areas:
+      "header"
+      "nav"
+      "main"
+      "footer";
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto 1fr auto;
+  }
+}

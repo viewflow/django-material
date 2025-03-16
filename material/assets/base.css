@@ -1,0 +1,44 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Roboto", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+/* Document Base */
+html:not([class]) {
+  @apply h-full min-h-full w-full;
+}
+
+body:not([class]) {
+  @apply h-full min-h-full w-full bg-gray-100 m-0 p-0 font-sans text-gray-900;
+}
+
+[role="banner"]:not([class]) {
+  @apply bg-white text-gray-900 p-5 shadow-md z-10;
+}
+
+[role="navigation"]:not([class]) {
+  @apply bg-blue-600 text-white py-6 px-4 shadow-lg z-20 overflow-y-auto;
+}
+
+main:not([class]) {
+  @apply bg-gray-100 p-6 overflow-y-auto;
+}
+
+[role="contentinfo"]:not([class]) {
+  @apply bg-white text-gray-900 p-4 shadow-inner text-center;
+}
+
+/* Link styles */
+a:not([class]) {
+  @apply text-blue-600 no-underline transition-colors duration-200 ease-in-out;
+}
+
+a:not([class]):hover {
+  @apply text-blue-700 underline;
+}
+
+/* Focus states for accessibility */
+:focus:not([class]) {
+  @apply outline-none ring-2 ring-offset-2 ring-blue-500;
+}

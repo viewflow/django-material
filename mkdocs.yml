@@ -1,0 +1,62 @@
+site_name: Django Material
+site_description: Modern Material Design framework for Django
+site_author: Mikhail Podgurskiy
+repo_url: https://github.com/viewflow/django-material
+repo_name: django-material
+
+theme:
+  name: material
+  palette:
+    primary: indigo
+    accent: indigo
+  icon:
+    repo: fontawesome/brands/github
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.expand
+    - navigation.indexes
+    - content.code.copy
+
+markdown_extensions:
+  - admonition
+  - codehilite
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+
+nav:
+  - Home: index.md
+  - Getting Started: 
+    - Installation: installation.md
+    - Quick Start: quick-start.md
+  - Components: components.md
+  - Templates:
+    - Overview: templates/index.md
+    - Base Template: templates/base.md
+  - Customization: customization.md
+  - Accessibility: accessibility.md
+  - API Reference: api-reference.md
+  - Contributing: contributing.md
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/yourusername/django-material
+    - icon: fontawesome/brands/python
+      link: https://pypi.org/project/django-material/
+
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          selection:
+            docstring_style: google
+          rendering:
+            show_source: true

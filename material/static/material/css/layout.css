@@ -1,0 +1,61 @@
+/* 
+ * Side Navigation Layout
+ * ---------------------
+ * This layout puts navigation on the left side, with header,
+ * main content, and footer on the right
+ *
+ * +--------+-----------+
+ * |        |  Header   |
+ * |        +-----------+
+ * |  Nav   |           |
+ * |        |   Main    |
+ * |        |           |
+ * |        +-----------+
+ * |        |  Footer   |
+ * +--------+-----------+
+ */
+
+body:not([class]) {
+  display: grid;
+  grid-template-areas:
+    "nav header"
+    "nav main"
+    "nav footer";
+  grid-template-rows: auto 1fr auto;
+  grid-template-columns: 280px 1fr;
+  gap: 1px;
+}
+
+[role="banner"]:not([class]) {
+  grid-area: header;
+}
+
+[role="navigation"]:not([class]) {
+  grid-area: nav;
+  min-height: 100%;
+}
+
+main:not([class]) {
+  grid-area: main;
+}
+
+[role="contentinfo"]:not([class]) {
+  grid-area: footer;
+}
+
+/* Responsive adjustments for mobile */
+@media (max-width: 992px) {
+  body:not([class]) {
+    grid-template-areas:
+      "nav"
+      "header"
+      "main"
+      "footer";
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto 1fr auto;
+  }
+
+  [role="navigation"]:not([class]) {
+    min-height: auto;
+  }
+}
