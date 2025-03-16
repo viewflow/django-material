@@ -1,0 +1,48 @@
+<button type="{{ type|default:'button' }}"
+    class="
+        relative inline-flex items-center
+        px-4 py-1 cursor-pointer
+        font-medium tracking-wide
+        {% if start %}rounded-l-3xl{% endif %}
+        {% if end %}rounded-r-3xl{% endif %}
+        {% if not start and not end %}-mx-px border-l-0 border-r-0{% endif %}
+        {% if selected %}
+            {% if color == 'secondary' %}
+                bg-secondary/10 text-secondary
+            {% elif color == 'tertiary' %}
+                bg-tertiary/10 text-tertiary
+            {% else %}
+                bg-primary/10 text-primary
+            {% endif %}
+        {% else %}
+            bg-transparent
+            {% if color == 'secondary' %}
+                text-secondary hover:bg-secondary/5 focus:bg-secondary/10
+            {% elif color == 'tertiary' %}
+                text-tertiary hover:bg-tertiary/5 focus:bg-tertiary/10
+            {% else %}
+                text-primary hover:bg-primary/5 focus:bg-primary/10
+            {% endif %}
+        {% endif %}
+        overflow-hidden focus:outline-none
+        transition-all duration-300 ease-in-out
+        border border-solid
+        {% if color == 'secondary' %}
+            border-secondary
+        {% elif color == 'tertiary' %}
+            border-tertiary
+        {% else %}
+            border-primary
+        {% endif %}
+        {% if disabled %}opacity-50 cursor-not-allowed pointer-events-none{% endif %}
+        active:ripple
+    "
+    {% if aria_label %}aria-label="{{ aria_label }}"{% endif %}
+    {% if selected %}aria-selected="true"{% endif %}
+    {% if disabled %}aria-disabled="true" disabled{% endif %}
+    role="tab">
+    {% if icon %}
+      <span class="material-icons mr-2" aria-hidden="true">{{ icon }}</span>
+    {% endif %}
+    <span class="pt-2 pb-1 text-sm">{{ slot }}</span>
+</button>

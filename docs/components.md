@@ -77,6 +77,35 @@ A compact, circular button that displays only an icon:
 </c-button.icon>
 ```
 
+#### Segmented Button
+
+A button used in a group to create a segmented control:
+
+```html
+<div class="flex">
+  <c-button.segment start>Day</c-button.segment>
+  <c-button.segment selected>Week</c-button.segment>
+  <c-button.segment end>Month</c-button.segment>
+</div>
+```
+
+Segmented buttons support these specific parameters:
+- `start`: Applies rounded corners to the left side (first button)
+- `end`: Applies rounded corners to the right side (last button)
+- `selected`: Marks a segment as selected/active
+- `icon`: Add an icon to the segment
+- `color`: Apply color theme (primary, secondary, tertiary)
+
+For example, with icons and more segments:
+
+```html
+<div class="flex">
+  <c-button.segment start icon="format_align_left">Left</c-button.segment>
+  <c-button.segment icon="format_align_center">Center</c-button.segment>
+  <c-button.segment icon="format_align_right" end>Right</c-button.segment>
+</div>
+```
+
 ### Button with Icon
 
 You can add a Material Icon to text and container button variants:

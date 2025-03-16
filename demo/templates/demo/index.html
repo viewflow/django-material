@@ -138,6 +138,74 @@
 &lt;/c-button.icon&gt;{% endverbatim %}</code></pre>
                 </div>
             </div>
+            
+            <!-- Segmented Buttons -->
+            <div class="mt-8">
+                <h3 class="text-xl font-medium mb-2">Segmented Buttons</h3>
+                <p class="mb-4">Groups of buttons that function as related options or sections.</p>
+                
+                <h4 class="text-lg font-medium mb-2">Basic Segmented Button Group</h4>
+                <div class="flex flex-wrap items-center mb-6">
+                    <c-button.segment start>Day</c-button.segment>
+                    <c-button.segment selected>Week</c-button.segment>
+                    <c-button.segment end>Month</c-button.segment>
+                </div>
+                
+                <h4 class="text-lg font-medium mb-2">With Icons</h4>
+                <div class="flex flex-wrap items-center mb-6">
+                    <c-button.segment start icon="format_align_left" color="secondary">Left</c-button.segment>
+                    <c-button.segment icon="format_align_center" color="secondary">Center</c-button.segment>
+                    <c-button.segment selected icon="format_align_right" color="secondary" end>Right</c-button.segment>
+                </div>
+                
+                <h4 class="text-lg font-medium mb-2">More Segments</h4>
+                <div class="flex flex-wrap items-center mb-4">
+                    <c-button.segment start color="tertiary">XS</c-button.segment>
+                    <c-button.segment color="tertiary">S</c-button.segment>
+                    <c-button.segment selected color="tertiary">M</c-button.segment>
+                    <c-button.segment color="tertiary">L</c-button.segment>
+                    <c-button.segment end color="tertiary">XL</c-button.segment>
+                </div>
+                
+                <div class="mt-4 bg-gray-100 p-4 rounded-md">
+                    <pre class="text-sm"><code>{% verbatim %}&lt;div class="flex"&gt;
+    &lt;c-button.segment start&gt;Day&lt;/c-button.segment&gt;
+    &lt;c-button.segment selected&gt;Week&lt;/c-button.segment&gt;
+    &lt;c-button.segment end&gt;Month&lt;/c-button.segment&gt;
+&lt;/div&gt;{% endverbatim %}</code></pre>
+                </div>
+            </div>
+            
+            <!-- Accessibility Features -->
+            <div class="mt-8">
+                <h3 class="text-xl font-medium mb-2">Accessibility Features</h3>
+                <p class="mb-4">Buttons include built-in accessibility support.</p>
+                
+                <h4 class="text-lg font-medium mb-2">ARIA Labels</h4>
+                <div class="flex flex-wrap gap-4 items-center mb-4">
+                    <c-button.filled aria_label="Submit application form">
+                        With ARIA Label
+                    </c-button.filled>
+                    <c-button.icon icon="info" aria_label="More information"></c-button.icon>
+                </div>
+                
+                <h4 class="text-lg font-medium mb-2">Disabled Buttons</h4>
+                <div class="flex flex-wrap gap-4 items-center">
+                    <c-button.filled disabled>Disabled Button</c-button.filled>
+                    <c-button.outlined disabled>Disabled Outlined</c-button.outlined>
+                    <c-button.text disabled>Disabled Text</c-button.text>
+                    <c-button.icon icon="lock" disabled aria_label="Locked feature"></c-button.icon>
+                </div>
+                <div class="mt-4 bg-gray-100 p-4 rounded-md">
+                    <pre class="text-sm"><code>{% verbatim %}&lt;c-button.filled disabled&gt;
+    Disabled Button
+&lt;/c-button.filled&gt;
+
+&lt;c-button.filled aria_label="Submit application form"&gt;
+    With ARIA Label
+&lt;/c-button.filled&gt;{% endverbatim %}</code></pre>
+                </div>
+            </div>
         </div>
     </section>
 </div>
