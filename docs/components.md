@@ -36,6 +36,16 @@ The standard filled button with high emphasis:
 </c-button.filled>
 ```
 
+#### Elevated Button
+
+A button with a subtle shadow that provides a raised appearance:
+
+```html
+<c-button.elevated>
+  Continue
+</c-button.elevated>
+```
+
 #### Outlined Button
 
 A medium-emphasis button with an outline border:
