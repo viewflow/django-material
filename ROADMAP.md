@@ -58,12 +58,57 @@ This file tracks the development progress of the Django Material project. As ite
   - [x] Elevated card
   - [x] Filled card
   - [x] Outlined card
+  - [ ] Card enhancement components
+    - [ ] card_menu.html - Card action menu
+    - [ ] card_menu_item.html - Menu item for card actions
+    - [ ] card_actions.html - Container for card action buttons
+    - [ ] card_divider.html - Visual divider for card sections
+    - [ ] card_media.html - Media container for cards
+    - [ ] card_content_group.html - Group related content within card
 - [ ] Dialog/Modal
 - [ ] App bar
 - [x] Breadcrumbs navigation
 - [ ] Navigation drawer
+  - [ ] Drawer components
+    - [ ] drawer.html - Main drawer container
+    - [ ] drawer_header.html - Drawer header with logo/title
+    - [ ] drawer_content.html - Drawer content container
+    - [ ] drawer_item.html - Navigation item
+    - [ ] drawer_divider.html - Content divider
+    - [ ] drawer_subheader.html - Section subheader
+  - [ ] Drawer variants
+    - [ ] Standard drawer - Push content when opened
+    - [ ] Modal drawer - Overlay on top of content
+    - [ ] Dismissible drawer - Can be dismissed by user
+  - [ ] Features
+    - [ ] Responsive behavior - Adapt to screen size
+    - [ ] Nested navigation - Collapsible sections
+    - [ ] Active state - Highlight current section
+    - [ ] Icons support - Item with leading icons
 - [ ] Tabs
 - [ ] Data table
+  - [ ] Core table components
+    - [ ] table.html - Main table container
+    - [ ] table_header.html - Table header row
+    - [ ] table_body.html - Table body container
+    - [ ] table_row.html - Table row component
+    - [ ] table_cell.html - Table cell component
+  - [ ] Data table features
+    - [ ] Sorting - Column sorting with indicators
+    - [ ] Filtering - Advanced filtering options
+    - [ ] Pagination - Page navigation controls
+    - [ ] Row actions - Action buttons/menus for rows
+    - [ ] Selection - Row selection with checkboxes
+    - [ ] Expandable rows - Collapsible detail views
+  - [ ] Styling and behavior
+    - [ ] _table.scss - Base table styling
+    - [ ] _filter.scss - Filter component styling
+    - [ ] _pagination.scss - Pagination controls styling
+    - [ ] _actions.scss - Row actions styling
+    - [ ] sort.js - Sorting behavior implementation
+    - [ ] filter.js - Filtering functionality
+    - [ ] pagination.js - Pagination controls handling
+    - [ ] actions.js - Row actions implementation
 - [ ] Snackbar/Toast notifications
 - [ ] Progress indicators
 
@@ -125,6 +170,18 @@ This file tracks the development progress of the Django Material project. As ite
 2. Create checkbox and radio button components
 3. Develop select dropdown components
 4. Implement date/time input components
-5. Finish installation documentation
-6. Add unit tests for existing components 
-7. Create form controls showcase page in demo app
+5. Add card enhancement components
+   - Card menu and menu items
+   - Card actions container
+   - Card media support
+6. Begin navigation drawer implementation
+   - Core drawer container and items
+   - Responsive behavior
+   - Integration with main layout
+7. Begin data table implementation with core components
+   - Basic table structure
+   - Sorting functionality
+   - Pagination controls
+8. Finish installation documentation
+9. Add unit tests for existing components 
+10. Create form controls, enhanced cards, navigation, and data table showcase pages in demo app
