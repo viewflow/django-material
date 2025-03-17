@@ -1,332 +1,126 @@
 {% extends 'material/base_page.html' %}
 
-{% block title %}Django Material Component Demo{% endblock %}
+{% block title %}Django Material Design Components{% endblock %}
 
 {% block content %}
 <div class="container mx-auto px-4 py-8">
-    <div class="flex">
-        <!-- Main content -->
-        <main class="flex-1 pr-8">
-            <h1 class="text-3xl font-bold mb-8">Material Design Components</h1>
-            
-            <section class="mb-12" id="buttons">
-                <h2 class="text-2xl font-bold mb-4">Buttons</h2>
-                <p class="mb-4">Material Design offers several button variants to match your UI needs.</p>
-                
-                <div class="space-y-8">
-                    <!-- Filled Button  -->
-                    <div id="filled-button">
-                <h3 class="text-xl font-medium mb-2">Filled Button (Default)</h3>
-                <p class="mb-4">The standard, high-emphasis button with a filled background.</p>
-                
-                <h4 class="text-lg font-medium mb-2">Color Variants</h4>
-                <div class="flex flex-wrap gap-4 items-center mb-6">
-                    <c-button.filled>
-                        Primary
-                    </c-button.filled>
-
-                    <c-button.filled color="secondary">
-                        Secondary
-                    </c-button.filled>
-                    
-                    <c-button.filled color="tertiary">
-                        Tertiary
-                    </c-button.filled>
-                </div>
-                
-                <h4 class="text-lg font-medium mb-2">With Icons</h4>
-                <div class="flex flex-wrap gap-4 items-center mb-6">
-                    <c-button.filled icon="add">
-                        Add Item
-                    </c-button.filled>
-
-                    <c-button.filled icon="bookmark" color="secondary">
-                        Bookmark
-                    </c-button.filled>
-                    
-                    <c-button.filled icon="download" color="tertiary">
-                        Download
-                    </c-button.filled>
-                </div>
-                
-                <h4 class="text-lg font-medium mb-2">Special States</h4>
-                <div class="flex flex-wrap gap-4 items-center">
-                    <c-button.filled type="submit">
-                        Submit Form
-                    </c-button.filled>
-                    
-                    <c-button.filled aria_label="Save document with keyboard shortcut Ctrl+S">
-                        Save Document
-                    </c-button.filled>
-                    
-                    <c-button.filled disabled>
-                        Disabled
-                    </c-button.filled>
-                </div>
-                
-                <div class="mt-4 bg-gray-100 p-4 rounded-md">
-                    <pre class="text-sm"><code>{% verbatim %}&lt;!-- Primary color (default) --&gt;
-&lt;c-button.filled&gt;
-    Primary
-&lt;/c-button.filled&gt;
-
-&lt;!-- Secondary color --&gt;
-&lt;c-button.filled color="secondary"&gt;
-    Secondary
-&lt;/c-button.filled&gt;
-
-&lt;!-- With icon --&gt;
-&lt;c-button.filled icon="add"&gt;
-    Add Item
-&lt;/c-button.filled&gt;
-
-&lt;!-- Form submission --&gt;
-&lt;c-button.filled type="submit"&gt;
-    Submit Form
-&lt;/c-button.filled&gt;{% endverbatim %}</code></pre>
-                </div>
-            </div>
-            
-            <!-- Text Button  -->
-            <div class="mt-8" id="text-button">
-                <h3 class="text-xl font-medium mb-2">Text Button</h3>
-                <p class="mb-4">A lower emphasis button with no background or elevation.</p>
-                <div class="flex flex-wrap gap-4 items-center">
-                    <c-button.text>
-                        Text Button
-                    </c-button.text>
-
-                    <c-button.text icon="favorite" color="secondary">
-                        With Icon
-                    </c-button.text>
-                    
-                    <c-button.text color="tertiary">
-                        Tertiary
-                    </c-button.text>
-                </div>
-                <div class="mt-4 bg-gray-100 p-4 rounded-md">
-                    <pre class="text-sm"><code>{% verbatim %}&lt;c-button.text&gt;
-    Text Button
-&lt;/c-button.text&gt;
-
-&lt;c-button.text icon="favorite" color="secondary"&gt;
-    With Icon
-&lt;/c-button.text&gt;{% endverbatim %}</code></pre>
-                </div>
-            </div>
-            
-            <!-- Outlined Button  -->
-            <div class="mt-8" id="outlined-button">
-                <h3 class="text-xl font-medium mb-2">Outlined Button</h3>
-                <p class="mb-4">A medium-emphasis button with an outline border and no background fill.</p>
-                <div class="flex flex-wrap gap-4 items-center">
-                    <c-button.outlined>
-                        Outlined Button
-                    </c-button.outlined>
-
-                    <c-button.outlined icon="bookmark" color="secondary">
-                        With Icon
-                    </c-button.outlined>
-                    
-                    <c-button.outlined color="tertiary">
-                        Tertiary
-                    </c-button.outlined>
-                </div>
-                <div class="mt-4 bg-gray-100 p-4 rounded-md">
-                    <pre class="text-sm"><code>{% verbatim %}&lt;c-button.outlined&gt;
-    Outlined Button
-&lt;/c-button.outlined&gt;
-
-&lt;c-button.outlined icon="bookmark" color="secondary"&gt;
-    With Icon
-&lt;/c-button.outlined&gt;{% endverbatim %}</code></pre>
-                </div>
-            </div>
-            
-            <!-- Elevated Button  -->
-            <div class="mt-8" id="elevated-button">
-                <h3 class="text-xl font-medium mb-2">Elevated Button</h3>
-                <p class="mb-4">A button with a subtle shadow that provides a raised appearance.</p>
-                <div class="flex flex-wrap gap-4 items-center">
-                    <c-button.elevated>
-                        Elevated Button
-                    </c-button.elevated>
-
-                    <c-button.elevated icon="cloud_upload" color="secondary">
-                        With Icon
-                    </c-button.elevated>
-                    
-                    <c-button.elevated color="tertiary">
-                        Tertiary
-                    </c-button.elevated>
-                </div>
-                <div class="mt-4 bg-gray-100 p-4 rounded-md">
-                    <pre class="text-sm"><code>{% verbatim %}&lt;c-button.elevated&gt;
-    Elevated Button
-&lt;/c-button.elevated&gt;
-
-&lt;c-button.elevated icon="cloud_upload" color="secondary"&gt;
-    With Icon
-&lt;/c-button.elevated&gt;{% endverbatim %}</code></pre>
-                </div>
-            </div>
-            
-            <!-- Icon Button  -->
-            <div class="mt-8" id="icon-button">
-                <h3 class="text-xl font-medium mb-2">Icon Button</h3>
-                <p class="mb-4">A compact, circular button that displays only an icon.</p>
-                <div class="flex flex-wrap gap-4 items-center">
-                    <c-button.icon icon="settings" aria_label="Settings"></c-button.icon>
-                    <c-button.icon icon="favorite" color="secondary" aria_label="Favorite"></c-button.icon>
-                    <c-button.icon icon="delete" color="tertiary" aria_label="Delete"></c-button.icon>
-                </div>
-                <div class="mt-4 bg-gray-100 p-4 rounded-md">
-                    <pre class="text-sm"><code>{% verbatim %}&lt;c-button.icon icon="settings" aria_label="Settings"&gt;&lt;/c-button.icon&gt;
-
-&lt;c-button.icon 
-    icon="favorite" 
-    color="secondary" 
-    aria_label="Favorite"&gt;
-&lt;/c-button.icon&gt;{% endverbatim %}</code></pre>
-                </div>
-            </div>
-            
-            <!-- Segmented Buttons -->
-            <div class="mt-8" id="segmented-button">
-                <h3 class="text-xl font-medium mb-2">Segmented Buttons</h3>
-                <p class="mb-4">Groups of buttons that function as related options or sections.</p>
-                
-                <h4 class="text-lg font-medium mb-2">Basic Segmented Button Group</h4>
-                <div class="flex flex-wrap items-center mb-6">
-                    <c-button.segment start>Day</c-button.segment>
-                    <c-button.segment selected>Week</c-button.segment>
-                    <c-button.segment end>Month</c-button.segment>
-                </div>
-                
-                <h4 class="text-lg font-medium mb-2">With Icons</h4>
-                <div class="flex flex-wrap items-center mb-6">
-                    <c-button.segment start icon="format_align_left" color="secondary">Left</c-button.segment>
-                    <c-button.segment icon="format_align_center" color="secondary">Center</c-button.segment>
-                    <c-button.segment selected icon="format_align_right" color="secondary" end>Right</c-button.segment>
-                </div>
-                
-                <h4 class="text-lg font-medium mb-2">More Segments</h4>
-                <div class="flex flex-wrap items-center mb-4">
-                    <c-button.segment start color="tertiary">XS</c-button.segment>
-                    <c-button.segment color="tertiary">S</c-button.segment>
-                    <c-button.segment selected color="tertiary">M</c-button.segment>
-                    <c-button.segment color="tertiary">L</c-button.segment>
-                    <c-button.segment end color="tertiary">XL</c-button.segment>
-                </div>
-                
-                <div class="mt-4 bg-gray-100 p-4 rounded-md">
-                    <pre class="text-sm"><code>{% verbatim %}&lt;div class="flex"&gt;
-    &lt;c-button.segment start&gt;Day&lt;/c-button.segment&gt;
-    &lt;c-button.segment selected&gt;Week&lt;/c-button.segment&gt;
-    &lt;c-button.segment end&gt;Month&lt;/c-button.segment&gt;
-&lt;/div&gt;{% endverbatim %}</code></pre>
-                </div>
-            </div>
-            
-            <!-- Floating Action Buttons -->
-            <div class="mt-8" id="fab-button">
-                <h3 class="text-xl font-medium mb-2">Floating Action Buttons (FAB)</h3>
-                <p class="mb-4">High-emphasis circular buttons that represent the primary action in an application.</p>
-                
-                <h4 class="text-lg font-medium mb-2">Basic FAB</h4>
-                <div class="flex flex-wrap items-center gap-6 mb-6">
-                    <c-button.fab aria_label="Create new item"></c-button.fab>
-                    <c-button.fab icon="edit" color="secondary" aria_label="Edit"></c-button.fab>
-                    <c-button.fab icon="favorite" color="tertiary" aria_label="Add to favorites"></c-button.fab>
-                </div>
-                
-                <h4 class="text-lg font-medium mb-2">FAB Sizes</h4>
-                <div class="flex flex-wrap items-end gap-6 mb-6">
-                    <c-button.fab size="small" icon="add" aria_label="Small FAB"></c-button.fab>
-                    <c-button.fab icon="add" aria_label="Regular FAB"></c-button.fab>
-                    <c-button.fab size="large" icon="add" aria_label="Large FAB"></c-button.fab>
-                </div>
-                
-                <h4 class="text-lg font-medium mb-2">Extended FAB</h4>
-                <div class="flex flex-wrap items-center gap-6 mb-4">
-                    <c-button.fab icon="navigation" aria_label="Navigate">Navigate</c-button.fab>
-                    <c-button.fab icon="create" color="secondary" aria_label="Compose">Compose</c-button.fab>
-                </div>
-                
-                <div class="mt-4 bg-gray-100 p-4 rounded-md">
-                    <pre class="text-sm"><code>{% verbatim %}&lt;!-- Regular FAB --&gt;
-&lt;c-button.fab icon="add" aria_label="Create"&gt;&lt;/c-button.fab&gt;
-
-&lt;!-- Small FAB --&gt;
-&lt;c-button.fab size="small" icon="edit" aria_label="Edit"&gt;&lt;/c-button.fab&gt;
-
-&lt;!-- Large FAB --&gt;
-&lt;c-button.fab size="large" icon="add" aria_label="Create"&gt;&lt;/c-button.fab&gt;
-
-&lt;!-- Extended FAB with text --&gt;
-&lt;c-button.fab icon="create" aria_label="Compose"&gt;Compose&lt;/c-button.fab&gt;{% endverbatim %}</code></pre>
-                </div>
-            </div>
-            
-            <!-- Accessibility Features -->
-            <div class="mt-8" id="accessibility">
-                <h3 class="text-xl font-medium mb-2">Accessibility Features</h3>
-                <p class="mb-4">Buttons include built-in accessibility support.</p>
-                
-                <h4 class="text-lg font-medium mb-2">ARIA Labels</h4>
-                <div class="flex flex-wrap gap-4 items-center mb-4">
-                    <c-button.filled aria_label="Submit application form">
-                        With ARIA Label
-                    </c-button.filled>
-                    <c-button.icon icon="info" aria_label="More information"></c-button.icon>
-                </div>
-                
-                <h4 class="text-lg font-medium mb-2">Disabled Buttons</h4>
-                <div class="flex flex-wrap gap-4 items-center">
-                    <c-button.filled disabled>Disabled Button</c-button.filled>
-                    <c-button.outlined disabled>Disabled Outlined</c-button.outlined>
-                    <c-button.text disabled>Disabled Text</c-button.text>
-                    <c-button.icon icon="lock" disabled aria_label="Locked feature"></c-button.icon>
-                </div>
-                <div class="mt-4 bg-gray-100 p-4 rounded-md">
-                    <pre class="text-sm"><code>{% verbatim %}&lt;c-button.filled disabled&gt;
-    Disabled Button
-&lt;/c-button.filled&gt;
-
-&lt;c-button.filled aria_label="Submit application form"&gt;
-    With ARIA Label
-&lt;/c-button.filled&gt;{% endverbatim %}</code></pre>
-                </div>
-            </div>
-            </section>
-        </main>
+    <header class="text-center mb-12">
+        <h1 class="text-4xl font-bold mb-4">Django Material</h1>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+            A comprehensive Material Design 3 component library for Django applications.
+        </p>
+    </header>
+    
+    <div class="max-w-5xl mx-auto">
+        <h2 class="text-2xl font-bold mb-6">Component Libraries</h2>
         
-        <!-- Side navigation -->
-        <aside class="w-64 shrink-0">
-            <div class="sticky top-8 mt-8 ml-4 p-4">
-                <h3 class="text-base uppercase text-gray-600 font-bold mb-3">Button Types</h3>
-                <ul class="space-y-1">
-                    <li><a href="#filled-button" class="block py-1 text-primary hover:underline">Filled Button</a></li>
-                    <li><a href="#text-button" class="block py-1 text-primary hover:underline">Text Button</a></li>
-                    <li><a href="#outlined-button" class="block py-1 text-primary hover:underline">Outlined Button</a></li>
-                    <li><a href="#elevated-button" class="block py-1 text-primary hover:underline">Elevated Button</a></li>
-                    <li><a href="#icon-button" class="block py-1 text-primary hover:underline">Icon Button</a></li>
-                    <li><a href="#segmented-button" class="block py-1 text-primary hover:underline">Segmented Button</a></li>
-                    <li><a href="#fab-button" class="block py-1 text-primary hover:underline">FAB Button</a></li>
+        <!-- Component Categories -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-12">
+            <!-- Buttons -->
+            <div class="p-6 rounded-xl border border-gray-200 hover:border-primary transition-colors hover:shadow-sm">
+                <h3 class="text-xl font-bold mb-2 text-primary flex items-center">
+                    <span class="material-icons mr-2">touch_app</span>
+                    Buttons
+                </h3>
+                <p class="mb-4 text-gray-600">Interactive elements for user actions, available in multiple variants.</p>
+                <ul class="mb-4 space-y-1">
+                    <li class="text-sm text-gray-600">• Filled, Outlined, Text</li>
+                    <li class="text-sm text-gray-600">• Elevated, Icon, FAB</li>
+                    <li class="text-sm text-gray-600">• Segmented buttons</li>
                 </ul>
-                
-                <h3 class="text-base uppercase text-secondary font-bold mt-6 mb-3">Features</h3>
-                <ul class="space-y-1">
-                    <li><a href="#accessibility" class="block py-1 text-secondary hover:underline">Accessibility</a></li>
+                <a href="/buttons/" class="text-primary font-medium hover:underline inline-flex items-center">
+                    View All Buttons
+                    <span class="material-icons ml-1" style="font-size: 18px;">arrow_forward</span>
+                </a>
+            </div>
+            
+            <!-- Cards -->
+            <div class="p-6 rounded-xl border border-gray-200 hover:border-primary transition-colors hover:shadow-sm">
+                <h3 class="text-xl font-bold mb-2 text-primary flex items-center">
+                    <span class="material-icons mr-2">dashboard</span>
+                    Cards
+                </h3>
+                <p class="mb-4 text-gray-600">Container components for organizing related content and actions.</p>
+                <ul class="mb-4 space-y-1">
+                    <li class="text-sm text-gray-600">• Elevated cards</li>
+                    <li class="text-sm text-gray-600">• Filled cards</li>
+                    <li class="text-sm text-gray-600">• Outlined cards</li>
                 </ul>
-                
-                <h3 class="text-base uppercase text-tertiary font-bold mt-6 mb-3">Other Components</h3>
+                <a href="/cards/" class="text-primary font-medium hover:underline inline-flex items-center">
+                    View All Cards
+                    <span class="material-icons ml-1" style="font-size: 18px;">arrow_forward</span>
+                </a>
+            </div>
+            
+            <!-- Navigation -->
+            <div class="p-6 rounded-xl border border-gray-200 hover:border-primary transition-colors hover:shadow-sm">
+                <h3 class="text-xl font-bold mb-2 text-primary flex items-center">
+                    <span class="material-icons mr-2">navigation</span>
+                    Navigation
+                </h3>
+                <p class="mb-4 text-gray-600">Components that help users navigate between different views and sections.</p>
+                <ul class="mb-4 space-y-1">
+                    <li class="text-sm text-gray-600">• Breadcrumbs</li>
+                    <li class="text-sm text-gray-600">• App bar (Coming soon)</li>
+                    <li class="text-sm text-gray-600">• Navigation drawer (Coming soon)</li>
+                </ul>
+                <a href="/breadcrumbs/" class="text-primary font-medium hover:underline inline-flex items-center">
+                    View Breadcrumbs
+                    <span class="material-icons ml-1" style="font-size: 18px;">arrow_forward</span>
+                </a>
+            </div>
+        </div>
+        
+        <h2 class="text-2xl font-bold mb-6">Implementation Status</h2>
+        <p class="mb-4 text-gray-600">
+            Django Material is a growing collection of components. Check our current implementation status:
+        </p>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            <div class="p-6 rounded-xl border border-gray-200">
+                <h3 class="text-lg font-bold mb-3">Completed</h3>
                 <ul class="space-y-1">
-                    <li><a href="/cards/" class="block py-1 text-tertiary hover:underline">Cards</a></li>
-                    <li><a href="/breadcrumbs/" class="block py-1 text-tertiary hover:underline">Breadcrumbs</a></li>
+                    <li class="flex items-center text-gray-700">
+                        <span class="material-icons text-green-600 mr-2" style="font-size: 18px;">check_circle</span>
+                        Button component suite
+                    </li>
+                    <li class="flex items-center text-gray-700">
+                        <span class="material-icons text-green-600 mr-2" style="font-size: 18px;">check_circle</span>
+                        Card component suite
+                    </li>
+                    <li class="flex items-center text-gray-700">
+                        <span class="material-icons text-green-600 mr-2" style="font-size: 18px;">check_circle</span>
+                        Breadcrumbs navigation
+                    </li>
                 </ul>
             </div>
-        </aside>
+            
+            <div class="p-6 rounded-xl border border-gray-200">
+                <h3 class="text-lg font-bold mb-3">Coming Soon</h3>
+                <ul class="space-y-1">
+                    <li class="flex items-center text-gray-700">
+                        <span class="material-icons text-gray-400 mr-2" style="font-size: 18px;">pending</span>
+                        Form controls
+                    </li>
+                    <li class="flex items-center text-gray-700">
+                        <span class="material-icons text-gray-400 mr-2" style="font-size: 18px;">pending</span>
+                        Dialog & Modals
+                    </li>
+                    <li class="flex items-center text-gray-700">
+                        <span class="material-icons text-gray-400 mr-2" style="font-size: 18px;">pending</span>
+                        App bar & Navigation drawer
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="text-center mt-12">
+            <p class="text-gray-600 mb-4">Want to see more? Check our complete roadmap on GitHub:</p>
+            <a href="https://github.com/" class="inline-flex items-center px-4 py-2 border border-primary text-primary rounded-3xl hover:bg-primary/5 transition-colors">
+                <span class="material-icons mr-2">code</span>
+                View on GitHub
+            </a>
+        </div>
     </div>
 </div>
 {% endblock %}
