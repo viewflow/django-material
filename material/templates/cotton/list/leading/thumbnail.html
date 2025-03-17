@@ -1,0 +1,7 @@
+<div class="w-16 h-12 rounded-md overflow-hidden bg-on-surface/10 flex items-center justify-center">
+  {% if image %}
+    <img src="{{ image }}" alt="{{ alt|default:'' }}" class="w-full h-full object-cover">
+  {% else %}
+    <span class="text-xs text-on-surface/60">{{ text|default:'Thumbnail' }}</span>
+  {% endif %}
+</div>

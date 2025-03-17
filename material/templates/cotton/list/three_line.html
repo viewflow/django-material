@@ -1,0 +1,47 @@
+<li class="
+    flex items-start
+    px-4 py-3
+    {% if clickable %}
+      hover:bg-on-surface/10
+      transition-colors duration-200
+      cursor-pointer
+    {% endif %}
+  ">
+  {% if leading %}
+    <div class="mr-4 flex-shrink-0 pt-1">
+      {{ leading }}
+    </div>
+  {% endif %}
+  
+  <div class="flex-grow min-w-0">
+    <div class="text-base text-on-surface font-medium
+      {% if line_clamp %}
+        truncate
+      {% endif %}
+    ">
+      {{ title|default:slot }}
+    </div>
+    
+    {% if subtitle %}
+      <div class="text-sm text-on-surface/60 mt-0.5
+        {% if line_clamp %}
+          truncate
+        {% endif %}
+      ">{{ subtitle }}</div>
+    {% endif %}
+    
+    {% if supporting %}
+      <div class="text-sm text-on-surface/60 mt-1
+        {% if line_clamp %}
+          line-clamp-1
+        {% endif %}
+      ">{{ supporting }}</div>
+    {% endif %}
+  </div>
+  
+  {% if trailing %}
+    <div class="ml-4 flex-shrink-0 pt-1">
+      {{ trailing }}
+    </div>
+  {% endif %}
+</li>

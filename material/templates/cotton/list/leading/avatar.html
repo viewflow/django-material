@@ -1,0 +1,7 @@
+<div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center overflow-hidden">
+  {% if image %}
+    <img src="{{ image }}" alt="{{ alt|default:'' }}" class="w-full h-full object-cover">
+  {% else %}
+    <span class="text-sm font-medium">{{ text|default:slot }}</span>
+  {% endif %}
+</div>

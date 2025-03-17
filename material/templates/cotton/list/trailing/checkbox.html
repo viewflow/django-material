@@ -1,0 +1,17 @@
+<div class="relative">
+  <input 
+    type="checkbox" 
+    id="{{ id|default:'list-checkbox' }}"
+    name="{{ name|default:'' }}"
+    value="{{ value|default:'on' }}"
+    {% if checked %}checked{% endif %}
+    class="peer sr-only"
+  >
+  <label for="{{ id|default:'list-checkbox' }}" class="cursor-pointer">
+    <div class="w-5 h-5 border-2 border-on-surface/50 rounded peer-checked:border-primary peer-checked:bg-primary flex items-center justify-center transition-colors duration-200">
+      <svg class="w-3.5 h-3.5 text-white hidden peer-checked:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="20 6 9 17 4 12"></polyline>
+      </svg>
+    </div>
+  </label>
+</div>

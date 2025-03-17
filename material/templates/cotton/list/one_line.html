@@ -1,0 +1,31 @@
+<li class="
+    flex items-center
+    px-4 py-2
+    {% if clickable %}
+      hover:bg-on-surface/10
+      transition-colors duration-200
+      cursor-pointer
+    {% endif %}
+  ">
+  {% if leading %}
+    <div class="mr-4 flex-shrink-0">
+      {{ leading }}
+    </div>
+  {% endif %}
+  
+  <div class="flex-grow min-w-0">
+    <div class="text-base text-on-surface
+      {% if line_clamp %}
+        truncate
+      {% endif %}
+    ">
+      {{ title|default:slot }}
+    </div>
+  </div>
+  
+  {% if trailing %}
+    <div class="ml-4 flex-shrink-0">
+      {{ trailing }}
+    </div>
+  {% endif %}
+</li>

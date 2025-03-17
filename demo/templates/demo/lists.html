@@ -1,0 +1,290 @@
+{% extends 'material/base_page.html' %}
+
+{% block title %}Material Design Lists Demo{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    <div class="flex">
+        <!-- Main content -->
+        <main class="flex-1 pr-8">
+            <h1 class="text-3xl font-bold mb-8">List Components</h1>
+            
+            <section class="mb-12" id="lists">
+                <h2 class="text-2xl font-bold mb-4">Lists</h2>
+                <p class="mb-4">Material Design lists are continuous, vertical indexes of text or images.</p>
+                
+                <div class="space-y-8">
+                    <!-- Single-line List  -->
+                    <div id="single-line">
+                        <h3 class="text-xl font-medium mb-2">Single-line List</h3>
+                        <p class="mb-4">Basic list with single-line items.</p>
+                        
+                        <div class="bg-surface rounded-xl shadow-sm mb-6 max-w-md">
+                            <c-list.container>
+                                <c-list.subheader>List Header</c-list.subheader>
+                                <c-list.one_line title="Item 1" clickable></c-list.one_line>
+                                <c-list.one_line title="Item 2" clickable></c-list.one_line>
+                                <c-list.one_line title="Item 3" clickable></c-list.one_line>
+                            </c-list.container>
+                        </div>
+                        
+                        <h4 class="text-lg font-medium mb-2">With Leading Icons</h4>
+                        <div class="bg-surface rounded-xl shadow-sm mb-6 max-w-md">
+                            <c-list.container dividers>
+                                <c-list.one_line clickable>
+                                    <c-slot name="leading">
+                                        <c-list.leading.icon>
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                                            </svg>
+                                        </c-list.leading.icon>
+                                    </c-slot>
+                                    Home
+                                </c-list.one_line>
+                                <c-list.one_line clickable>
+                                    <c-slot name="leading">
+                                        <c-list.leading.icon>
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                            </svg>
+                                        </c-list.leading.icon>
+                                    </c-slot>
+                                    Profile
+                                </c-list.one_line>
+                                <c-list.one_line clickable>
+                                    <c-slot name="leading">
+                                        <c-list.leading.icon>
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                            </svg>
+                                        </c-list.leading.icon>
+                                    </c-slot>
+                                    Settings
+                                </c-list.one_line>
+                            </c-list.container>
+                        </div>
+                    </div>
+                    
+                    <!-- Two-line List  -->
+                    <div class="mt-8" id="two-line">
+                        <h3 class="text-xl font-medium mb-2">Two-line List</h3>
+                        <p class="mb-4">List with primary and secondary text.</p>
+                        
+                        <div class="bg-surface rounded-xl shadow-sm mb-6 max-w-md">
+                            <c-list.container>
+                                <c-list.two_line 
+                                    title="Title Line" 
+                                    subtitle="Secondary text" 
+                                    clickable>
+                                </c-list.two_line>
+                                <c-list.two_line 
+                                    title="Another Item" 
+                                    subtitle="Supporting text goes here" 
+                                    clickable>
+                                </c-list.two_line>
+                                <c-list.two_line 
+                                    title="Third Item" 
+                                    subtitle="More supporting text" 
+                                    clickable>
+                                </c-list.two_line>
+                            </c-list.container>
+                        </div>
+                        
+                        <h4 class="text-lg font-medium mb-2">With Avatars and Trailing Text</h4>
+                        <div class="bg-surface rounded-xl shadow-sm mb-6 max-w-md">
+                            <c-list.container dividers>
+                                <c-list.two_line 
+                                    title="Jane Smith" 
+                                    subtitle="Meeting scheduled for tomorrow"
+                                    clickable>
+                                    <c-slot name="leading">
+                                        <c-list.leading.avatar text="JS"></c-list.leading.avatar>
+                                    </c-slot>
+                                    <c-slot name="trailing">
+                                        <c-list.trailing.text>3:30 PM</c-list.trailing.text>
+                                    </c-slot>
+                                </c-list.two_line>
+                                <c-list.two_line 
+                                    title="John Doe" 
+                                    subtitle="Please review the documents"
+                                    clickable>
+                                    <c-slot name="leading">
+                                        <c-list.leading.avatar text="JD"></c-list.leading.avatar>
+                                    </c-slot>
+                                    <c-slot name="trailing">
+                                        <c-list.trailing.text>Yesterday</c-list.trailing.text>
+                                    </c-slot>
+                                </c-list.two_line>
+                                <c-list.two_line 
+                                    title="Alex Johnson" 
+                                    subtitle="Project update: everything is on track"
+                                    clickable>
+                                    <c-slot name="leading">
+                                        <c-list.leading.avatar text="AJ"></c-list.leading.avatar>
+                                    </c-slot>
+                                    <c-slot name="trailing">
+                                        <c-list.trailing.text>Mar 15</c-list.trailing.text>
+                                    </c-slot>
+                                </c-list.two_line>
+                            </c-list.container>
+                        </div>
+                    </div>
+                    
+                    <!-- Three-line List  -->
+                    <div class="mt-8" id="three-line">
+                        <h3 class="text-xl font-medium mb-2">Three-line List</h3>
+                        <p class="mb-4">List with primary, secondary, and tertiary text.</p>
+                        
+                        <div class="bg-surface rounded-xl shadow-sm mb-6 max-w-md">
+                            <c-list.container>
+                                <c-list.three_line 
+                                    title="Main title" 
+                                    subtitle="Secondary text"
+                                    supporting="This is additional supporting text that can span multiple lines. It provides more details about the item."
+                                    clickable>
+                                </c-list.three_line>
+                                <c-list.divider></c-list.divider>
+                                <c-list.three_line 
+                                    title="Another Item" 
+                                    subtitle="Secondary line"
+                                    supporting="More supporting text that provides additional context and information about this particular item."
+                                    clickable>
+                                </c-list.three_line>
+                            </c-list.container>
+                        </div>
+                        
+                        <h4 class="text-lg font-medium mb-2">With Thumbnails and Actions</h4>
+                        <div class="bg-surface rounded-xl shadow-sm mb-6 max-w-md">
+                            <c-list.container>
+                                <c-list.three_line 
+                                    title="Summer Vacation Photos" 
+                                    subtitle="Beach day with family"
+                                    supporting="32 photos from Hawaii trip, including sunset views and beach activities."
+                                    clickable>
+                                    <c-slot name="leading">
+                                        <c-list.leading.thumbnail text="Photo"></c-list.leading.thumbnail>
+                                    </c-slot>
+                                    <c-slot name="trailing">
+                                        <c-list.trailing.icon>
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
+                                            </svg>
+                                        </c-list.trailing.icon>
+                                    </c-slot>
+                                </c-list.three_line>
+                                <c-list.divider inset></c-list.divider>
+                                <c-list.three_line 
+                                    title="Mountain Hiking Video" 
+                                    subtitle="Weekend adventure"
+                                    supporting="15-minute video from our hike to Mount Rainier last weekend. Beautiful views!"
+                                    clickable>
+                                    <c-slot name="leading">
+                                        <c-list.leading.thumbnail text="Video"></c-list.leading.thumbnail>
+                                    </c-slot>
+                                    <c-slot name="trailing">
+                                        <c-list.trailing.icon>
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
+                                            </svg>
+                                        </c-list.trailing.icon>
+                                    </c-slot>
+                                </c-list.three_line>
+                            </c-list.container>
+                        </div>
+                    </div>
+                    
+                    <!-- List Variants  -->
+                    <div class="mt-8" id="variants">
+                        <h3 class="text-xl font-medium mb-2">List Variants</h3>
+                        
+                        <h4 class="text-lg font-medium mb-2">Inset List</h4>
+                        <div class="bg-surface rounded-xl p-4 shadow-sm mb-6 max-w-md">
+                            <c-list.container variant="inset">
+                                <c-list.subheader>Settings</c-list.subheader>
+                                <c-list.two_line 
+                                    title="Notifications" 
+                                    subtitle="Control app notifications"
+                                    clickable>
+                                    <c-slot name="leading">
+                                        <c-list.leading.icon>
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                                            </svg>
+                                        </c-list.leading.icon>
+                                    </c-slot>
+                                </c-list.two_line>
+                                <c-list.two_line 
+                                    title="Privacy" 
+                                    subtitle="Manage privacy settings"
+                                    clickable>
+                                    <c-slot name="leading">
+                                        <c-list.leading.icon>
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                                            </svg>
+                                        </c-list.leading.icon>
+                                    </c-slot>
+                                </c-list.two_line>
+                            </c-list.container>
+                        </div>
+                        
+                        <h4 class="text-lg font-medium mb-2">Selection List</h4>
+                        <div class="bg-surface rounded-xl shadow-sm mb-6 max-w-md">
+                            <c-list.container>
+                                <c-list.subheader>Select Items</c-list.subheader>
+                                <c-list.two_line 
+                                    title="Option 1" 
+                                    subtitle="First selection option"
+                                    clickable>
+                                    <c-slot name="trailing">
+                                        <c-list.trailing.checkbox></c-list.trailing.checkbox>
+                                    </c-slot>
+                                </c-list.two_line>
+                                <c-list.divider></c-list.divider>
+                                <c-list.two_line 
+                                    title="Option 2" 
+                                    subtitle="Second selection option"
+                                    clickable>
+                                    <c-slot name="trailing">
+                                        <c-list.trailing.checkbox></c-list.trailing.checkbox>
+                                    </c-slot>
+                                </c-list.two_line>
+                                <c-list.divider></c-list.divider>
+                                <c-list.two_line 
+                                    title="Option 3" 
+                                    subtitle="Third selection option"
+                                    clickable>
+                                    <c-slot name="trailing">
+                                        <c-list.trailing.checkbox checked></c-list.trailing.checkbox>
+                                    </c-slot>
+                                </c-list.two_line>
+                            </c-list.container>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <!-- Side navigation -->
+        <aside class="w-64 shrink-0">
+            <div class="sticky top-8 mt-8 ml-4 p-4">
+                <h3 class="text-base uppercase text-gray-600 font-bold mb-3">List Types</h3>
+                <ul class="space-y-1">
+                    <li><a href="#single-line" class="block py-1 text-primary hover:underline">Single-line</a></li>
+                    <li><a href="#two-line" class="block py-1 text-primary hover:underline">Two-line</a></li>
+                    <li><a href="#three-line" class="block py-1 text-primary hover:underline">Three-line</a></li>
+                    <li><a href="#variants" class="block py-1 text-primary hover:underline">List Variants</a></li>
+                </ul>
+                
+                <h3 class="text-base uppercase text-secondary font-bold mt-6 mb-3">Related</h3>
+                <ul class="space-y-1">
+                    <li><a href="/" class="block py-1 text-secondary hover:underline">Overview</a></li>
+                    <li><a href="/cards/" class="block py-1 text-secondary hover:underline">Card Components</a></li>
+                    <li><a href="/buttons/" class="block py-1 text-secondary hover:underline">Button Components</a></li>
+                </ul>
+            </div>
+        </aside>
+    </div>
+</div>
+{% endblock %}

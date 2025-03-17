@@ -1,0 +1,16 @@
+<ul class="
+    list-none
+    p-0 m-0
+    {% if variant == 'inset' %}
+      rounded-xl
+      border border-outline/30
+    {% endif %}
+    {% if dividers %}
+      divide-y divide-outline/30
+    {% endif %}
+    {% if dense %}
+      text-sm
+    {% endif %}
+  ">
+  {{ slot }}
+</ul>

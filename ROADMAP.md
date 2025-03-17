@@ -109,6 +109,17 @@ This file tracks the development progress of the Django Material project. As ite
     - [ ] filter.js - Filtering functionality
     - [ ] pagination.js - Pagination controls handling
     - [ ] actions.js - Row actions implementation
+- [x] List components
+  - [x] Container component
+  - [x] List items
+    - [x] One-line item
+    - [x] Two-line item
+    - [x] Three-line item
+  - [x] Supporting elements
+    - [x] Leading icons/avatars/thumbnails
+    - [x] Trailing actions
+    - [x] Dividers
+    - [x] Subheaders
 - [ ] Snackbar/Toast notifications
 - [ ] Progress indicators
 
