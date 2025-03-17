@@ -1,0 +1,30 @@
+<section class="
+    rounded-xl overflow-hidden
+    flex flex-col h-full
+    {% if color == 'secondary' %}
+        bg-secondary text-on-secondary
+    {% elif color == 'tertiary' %}
+        bg-tertiary text-on-tertiary
+    {% else %}
+        bg-primary text-on-primary
+    {% endif %}
+  ">
+  {% if title %}
+    <header class="p-4 pb-0 flex-shrink-0">
+      <h3 class="text-lg font-medium">{{ title }}</h3>
+      {% if subtitle %}
+        <p class="text-sm opacity-80 mt-1">{{ subtitle }}</p>
+      {% endif %}
+    </header>
+  {% endif %}
+
+  <div class="p-4 flex-grow">
+    {{ slot }}
+  </div>
+
+  {% if footer %}
+    <footer class="px-4 py-2 border-t border-white/20 flex-shrink-0">
+      {{ footer }}
+    </footer>
+  {% endif %}
+</section>

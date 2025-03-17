@@ -225,19 +225,74 @@ This applies:
 
 Cards contain content and actions about a single subject.
 
-> ⚠️ **Coming Soon** - This component is not yet implemented.
+### Card Variants
+
+Django Material offers different card variants with varying levels of emphasis:
+
+#### Elevated Card
+
+A card with a drop shadow that provides a raised appearance:
 
 ```html
-<c-card.basic>
-  <c-slot name="title">Card Title</c-slot>
-  <c-slot name="content">
-    <p>Card content goes here.</p>
+<c-card.elevated title="Card Title" subtitle="Optional subtitle">
+  <p>Card content goes here.</p>
+  
+  <c-slot name="footer">
+    <div class="flex justify-end space-x-2">
+      <c-button.text>Cancel</c-button.text>
+      <c-button.filled>Save</c-button.filled>
+    </div>
   </c-slot>
-  <c-slot name="actions">
-    <c-button.text>Action</c-button.text>
-  </c-slot>
-</c-card.basic>
+</c-card.elevated>
 ```
+
+#### Filled Card
+
+A high-emphasis card with a colored background:
+
+```html
+<c-card.filled 
+  title="Promotional Offer" 
+  subtitle="Limited time" 
+  color="secondary">
+  <p>Card content goes here.</p>
+  
+  <c-slot name="footer">
+    <div class="flex justify-end">
+      <c-button.text>Action</c-button.text>
+    </div>
+  </c-slot>
+</c-card.filled>
+```
+
+#### Outlined Card
+
+A medium-emphasis card with a colored outline:
+
+```html
+<c-card.outlined title="Information Card">
+  <p>Card content goes here.</p>
+  
+  <c-slot name="footer">
+    <div class="flex justify-between items-center">
+      <span class="text-sm">Additional info</span>
+      <c-button.text>Dismiss</c-button.text>
+    </div>
+  </c-slot>
+</c-card.outlined>
+```
+
+### Card Properties
+
+Cards support these parameters:
+- `title`: Main heading text for the card
+- `subtitle`: Secondary text displayed below the title
+- `color`: Apply color theme (primary, secondary, tertiary) - affects background or border depending on card type
+
+### Named Slots
+
+Cards support the following slot:
+- `footer`: Content to display in the card footer section, typically containing actions
 
 ## Forms
 

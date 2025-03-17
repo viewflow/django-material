@@ -19,7 +19,10 @@ This file tracks the development progress of the Django Material project. As ite
   - [ ] Checkbox
   - [ ] Radio button
   - [ ] Switch
-- [ ] Card component
+- [x] Card component
+  - [x] Elevated card
+  - [x] Filled card
+  - [x] Outlined card
 - [ ] Dialog/Modal
 - [ ] App bar
 - [ ] Navigation drawer

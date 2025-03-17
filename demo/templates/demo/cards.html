@@ -1,0 +1,244 @@
+{% extends 'material/base_page.html' %}
+
+{% block title %}Material Design Cards Demo{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    <div class="flex">
+        <!-- Main content -->
+        <main class="flex-1 pr-8">
+            <h1 class="text-3xl font-bold mb-8">Card Components</h1>
+            
+            <section class="mb-12" id="cards">
+                <h2 class="text-2xl font-bold mb-4">Cards</h2>
+                <p class="mb-4">Material Design cards contain content and actions about a single subject.</p>
+                
+                <div class="space-y-8">
+                    <!-- Elevated Card  -->
+                    <div id="elevated-card">
+                        <h3 class="text-xl font-medium mb-2">Elevated Card</h3>
+                        <p class="mb-4">A card with a drop shadow that provides a raised appearance.</p>
+                        
+                        <h4 class="text-lg font-medium mb-2">Basic Examples</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
+                            <c-card.elevated title="Card Title">
+                                <p>This is a basic elevated card with a title. Cards can contain text, images, and other content.</p>
+                            </c-card.elevated>
+                            
+                            <c-card.elevated title="With Subtitle" subtitle="Secondary text">
+                                <p>This card has both a title and a subtitle for additional context. The subtitle appears below the title in a lighter color.</p>
+                            </c-card.elevated>
+                            
+                            <c-card.elevated>
+                                <p>This card has no title or subtitle, just content. This is useful when you want a simpler card layout.</p>
+                            </c-card.elevated>
+                        </div>
+                        
+                        <h4 class="text-lg font-medium mb-2">With Footer Actions</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            <c-card.elevated title="With Footer">
+                                <p>This card includes a footer section with action buttons.</p>
+                                
+                                <c-slot name="footer">
+                                    <div class="flex justify-end space-x-2">
+                                        <c-button.text>Cancel</c-button.text>
+                                        <c-button.filled>Save</c-button.filled>
+                                    </div>
+                                </c-slot>
+                            </c-card.elevated>
+                            
+                            <c-card.elevated title="Event Card" subtitle="April 15, 2025">
+                                <p>Join us for a special event featuring the latest design trends and networking opportunities.</p>
+                                
+                                <c-slot name="footer">
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-sm text-on-surface/60">5:30 PM - 8:00 PM</span>
+                                        <c-button.text>RSVP</c-button.text>
+                                    </div>
+                                </c-slot>
+                            </c-card.elevated>
+                        </div>
+                        
+                        <div class="mt-4 bg-gray-100 p-4 rounded-md">
+                            <pre class="text-sm"><code>{% verbatim %}&lt;!-- Basic Elevated Card --&gt;
+&lt;c-card.elevated title="Card Title"&gt;
+    &lt;p&gt;This is a basic elevated card with a title.&lt;/p&gt;
+&lt;/c-card.elevated&gt;
+
+&lt;!-- With Subtitle --&gt;
+&lt;c-card.elevated title="With Subtitle" subtitle="Secondary text"&gt;
+    &lt;p&gt;This card has both a title and a subtitle.&lt;/p&gt;
+&lt;/c-card.elevated&gt;
+
+&lt;!-- With Footer --&gt;
+&lt;c-card.elevated title="With Footer"&gt;
+    &lt;p&gt;This card includes a footer section with action buttons.&lt;/p&gt;
+    
+    &lt;c-slot name="footer"&gt;
+        &lt;div class="flex justify-end space-x-2"&gt;
+            &lt;c-button.text&gt;Cancel&lt;/c-button.text&gt;
+            &lt;c-button.filled&gt;Save&lt;/c-button.filled&gt;
+        &lt;/div&gt;
+    &lt;/c-slot&gt;
+&lt;/c-card.elevated&gt;{% endverbatim %}</code></pre>
+                        </div>
+                    </div>
+                    
+                    <!-- Filled Card  -->
+                    <div class="mt-8" id="filled-card">
+                        <h3 class="text-xl font-medium mb-2">Filled Card</h3>
+                        <p class="mb-4">A high-emphasis card with colored background based on the theme.</p>
+                        
+                        <h4 class="text-lg font-medium mb-2">Color Variants</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                            <c-card.filled title="Primary Card">
+                                <p>This is a filled card with primary color.</p>
+                            </c-card.filled>
+                            
+                            <c-card.filled title="Secondary Card" color="secondary">
+                                <p>This card uses the secondary color theme.</p>
+                            </c-card.filled>
+                            
+                            <c-card.filled title="Tertiary Card" color="tertiary">
+                                <p>This card uses the tertiary color theme.</p>
+                            </c-card.filled>
+                        </div>
+                        
+                        <h4 class="text-lg font-medium mb-2">With Footer Actions</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            <c-card.filled title="Promotional Offer" subtitle="Limited time">
+                                <p>Get 20% off your next purchase with code SPRING20.</p>
+                                
+                                <c-slot name="footer">
+                                    <div class="flex justify-end">
+                                        <c-button.text>Claim Offer</c-button.text>
+                                    </div>
+                                </c-slot>
+                            </c-card.filled>
+                            
+                            <c-card.filled title="Join Premium" color="secondary">
+                                <p>Upgrade to premium for exclusive access to advanced features.</p>
+                                
+                                <c-slot name="footer">
+                                    <div class="flex justify-between items-center">
+                                        <span>$9.99/month</span>
+                                        <c-button.text>Upgrade</c-button.text>
+                                    </div>
+                                </c-slot>
+                            </c-card.filled>
+                        </div>
+                        
+                        <div class="mt-4 bg-gray-100 p-4 rounded-md">
+                            <pre class="text-sm"><code>{% verbatim %}&lt;!-- Primary Filled Card --&gt;
+&lt;c-card.filled title="Primary Card"&gt;
+    &lt;p&gt;This is a filled card with primary color.&lt;/p&gt;
+&lt;/c-card.filled&gt;
+
+&lt;!-- Secondary Filled Card --&gt;
+&lt;c-card.filled title="Secondary Card" color="secondary"&gt;
+    &lt;p&gt;This card uses the secondary color theme.&lt;/p&gt;
+&lt;/c-card.filled&gt;
+
+&lt;!-- With Footer --&gt;
+&lt;c-card.filled title="Promotional Offer" subtitle="Limited time"&gt;
+    &lt;p&gt;Get 20% off your next purchase with code SPRING20.&lt;/p&gt;
+    
+    &lt;c-slot name="footer"&gt;
+        &lt;div class="flex justify-end"&gt;
+            &lt;c-button.text&gt;Claim Offer&lt;/c-button.text&gt;
+        &lt;/div&gt;
+    &lt;/c-slot&gt;
+&lt;/c-card.filled&gt;{% endverbatim %}</code></pre>
+                        </div>
+                    </div>
+                    
+                    <!-- Outlined Card  -->
+                    <div class="mt-8" id="outlined-card">
+                        <h3 class="text-xl font-medium mb-2">Outlined Card</h3>
+                        <p class="mb-4">A medium-emphasis card with a colored outline and transparent background.</p>
+                        
+                        <h4 class="text-lg font-medium mb-2">Color Variants</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                            <c-card.outlined title="Primary Outlined">
+                                <p>This is an outlined card with a primary color border.</p>
+                            </c-card.outlined>
+                            
+                            <c-card.outlined title="Secondary Outlined" color="secondary">
+                                <p>This card has a secondary color border.</p>
+                            </c-card.outlined>
+                            
+                            <c-card.outlined title="Tertiary Outlined" color="tertiary">
+                                <p>This card has a tertiary color border.</p>
+                            </c-card.outlined>
+                        </div>
+                        
+                        <h4 class="text-lg font-medium mb-2">With Footer Actions</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            <c-card.outlined title="Information" subtitle="Important details">
+                                <p>This card provides important information with a subtle outlined design.</p>
+                                
+                                <c-slot name="footer">
+                                    <div class="flex justify-end">
+                                        <c-button.text>Dismiss</c-button.text>
+                                    </div>
+                                </c-slot>
+                            </c-card.outlined>
+                            
+                            <c-card.outlined title="Settings" color="secondary">
+                                <p>Configure your preferences and account settings.</p>
+                                
+                                <c-slot name="footer">
+                                    <div class="flex justify-between items-center">
+                                        <c-button.text>Reset</c-button.text>
+                                        <c-button.filled color="secondary">Apply</c-button.filled>
+                                    </div>
+                                </c-slot>
+                            </c-card.outlined>
+                        </div>
+                        
+                        <div class="mt-4 bg-gray-100 p-4 rounded-md">
+                            <pre class="text-sm"><code>{% verbatim %}&lt;!-- Primary Outlined Card --&gt;
+&lt;c-card.outlined title="Primary Outlined"&gt;
+    &lt;p&gt;This is an outlined card with a primary color border.&lt;/p&gt;
+&lt;/c-card.outlined&gt;
+
+&lt;!-- Secondary Outlined Card --&gt;
+&lt;c-card.outlined title="Secondary Outlined" color="secondary"&gt;
+    &lt;p&gt;This card has a secondary color border.&lt;/p&gt;
+&lt;/c-card.outlined&gt;
+
+&lt;!-- With Footer --&gt;
+&lt;c-card.outlined title="Information" subtitle="Important details"&gt;
+    &lt;p&gt;This card provides important information.&lt;/p&gt;
+    
+    &lt;c-slot name="footer"&gt;
+        &lt;div class="flex justify-end"&gt;
+            &lt;c-button.text&gt;Dismiss&lt;/c-button.text&gt;
+        &lt;/div&gt;
+    &lt;/c-slot&gt;
+&lt;/c-card.outlined&gt;{% endverbatim %}</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <!-- Side navigation -->
+        <aside class="w-64 shrink-0">
+            <div class="sticky top-8 mt-8 ml-4 p-4">
+                <h3 class="text-base uppercase text-gray-600 font-bold mb-3">Card Types</h3>
+                <ul class="space-y-1">
+                    <li><a href="#elevated-card" class="block py-1 text-primary hover:underline">Elevated Card</a></li>
+                    <li><a href="#filled-card" class="block py-1 text-primary hover:underline">Filled Card</a></li>
+                    <li><a href="#outlined-card" class="block py-1 text-primary hover:underline">Outlined Card</a></li>
+                </ul>
+                
+                <h3 class="text-base uppercase text-secondary font-bold mt-6 mb-3">Related</h3>
+                <ul class="space-y-1">
+                    <li><a href="index.html" class="block py-1 text-secondary hover:underline">Button Components</a></li>
+                </ul>
+            </div>
+        </aside>
+    </div>
+</div>
+{% endblock %}

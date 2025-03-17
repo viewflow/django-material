@@ -4,15 +4,18 @@
 
 {% block content %}
 <div class="container mx-auto px-4 py-8">
-    <h1 class="text-3xl font-bold mb-8">Material Design Components</h1>
-    
-    <section class="mb-12">
-        <h2 class="text-2xl font-bold mb-4">Buttons</h2>
-        <p class="mb-4">Material Design offers several button variants to match your UI needs.</p>
-        
-        <div class="space-y-8">
-            <!-- Filled Button  -->
-            <div>
+    <div class="flex">
+        <!-- Main content -->
+        <main class="flex-1 pr-8">
+            <h1 class="text-3xl font-bold mb-8">Material Design Components</h1>
+            
+            <section class="mb-12" id="buttons">
+                <h2 class="text-2xl font-bold mb-4">Buttons</h2>
+                <p class="mb-4">Material Design offers several button variants to match your UI needs.</p>
+                
+                <div class="space-y-8">
+                    <!-- Filled Button  -->
+                    <div id="filled-button">
                 <h3 class="text-xl font-medium mb-2">Filled Button (Default)</h3>
                 <p class="mb-4">The standard, high-emphasis button with a filled background.</p>
                 
@@ -85,7 +88,7 @@
             </div>
             
             <!-- Text Button  -->
-            <div class="mt-8">
+            <div class="mt-8" id="text-button">
                 <h3 class="text-xl font-medium mb-2">Text Button</h3>
                 <p class="mb-4">A lower emphasis button with no background or elevation.</p>
                 <div class="flex flex-wrap gap-4 items-center">
@@ -113,7 +116,7 @@
             </div>
             
             <!-- Outlined Button  -->
-            <div class="mt-8">
+            <div class="mt-8" id="outlined-button">
                 <h3 class="text-xl font-medium mb-2">Outlined Button</h3>
                 <p class="mb-4">A medium-emphasis button with an outline border and no background fill.</p>
                 <div class="flex flex-wrap gap-4 items-center">
@@ -141,7 +144,7 @@
             </div>
             
             <!-- Elevated Button  -->
-            <div class="mt-8">
+            <div class="mt-8" id="elevated-button">
                 <h3 class="text-xl font-medium mb-2">Elevated Button</h3>
                 <p class="mb-4">A button with a subtle shadow that provides a raised appearance.</p>
                 <div class="flex flex-wrap gap-4 items-center">
@@ -169,7 +172,7 @@
             </div>
             
             <!-- Icon Button  -->
-            <div class="mt-8">
+            <div class="mt-8" id="icon-button">
                 <h3 class="text-xl font-medium mb-2">Icon Button</h3>
                 <p class="mb-4">A compact, circular button that displays only an icon.</p>
                 <div class="flex flex-wrap gap-4 items-center">
@@ -189,7 +192,7 @@
             </div>
             
             <!-- Segmented Buttons -->
-            <div class="mt-8">
+            <div class="mt-8" id="segmented-button">
                 <h3 class="text-xl font-medium mb-2">Segmented Buttons</h3>
                 <p class="mb-4">Groups of buttons that function as related options or sections.</p>
                 
@@ -226,7 +229,7 @@
             </div>
             
             <!-- Floating Action Buttons -->
-            <div class="mt-8">
+            <div class="mt-8" id="fab-button">
                 <h3 class="text-xl font-medium mb-2">Floating Action Buttons (FAB)</h3>
                 <p class="mb-4">High-emphasis circular buttons that represent the primary action in an application.</p>
                 
@@ -266,7 +269,7 @@
             </div>
             
             <!-- Accessibility Features -->
-            <div class="mt-8">
+            <div class="mt-8" id="accessibility">
                 <h3 class="text-xl font-medium mb-2">Accessibility Features</h3>
                 <p class="mb-4">Buttons include built-in accessibility support.</p>
                 
@@ -295,7 +298,34 @@
 &lt;/c-button.filled&gt;{% endverbatim %}</code></pre>
                 </div>
             </div>
-        </div>
-    </section>
+            </section>
+        </main>
+        
+        <!-- Side navigation -->
+        <aside class="w-64 shrink-0">
+            <div class="sticky top-8 mt-8 ml-4 p-4">
+                <h3 class="text-base uppercase text-gray-600 font-bold mb-3">Button Types</h3>
+                <ul class="space-y-1">
+                    <li><a href="#filled-button" class="block py-1 text-primary hover:underline">Filled Button</a></li>
+                    <li><a href="#text-button" class="block py-1 text-primary hover:underline">Text Button</a></li>
+                    <li><a href="#outlined-button" class="block py-1 text-primary hover:underline">Outlined Button</a></li>
+                    <li><a href="#elevated-button" class="block py-1 text-primary hover:underline">Elevated Button</a></li>
+                    <li><a href="#icon-button" class="block py-1 text-primary hover:underline">Icon Button</a></li>
+                    <li><a href="#segmented-button" class="block py-1 text-primary hover:underline">Segmented Button</a></li>
+                    <li><a href="#fab-button" class="block py-1 text-primary hover:underline">FAB Button</a></li>
+                </ul>
+                
+                <h3 class="text-base uppercase text-secondary font-bold mt-6 mb-3">Features</h3>
+                <ul class="space-y-1">
+                    <li><a href="#accessibility" class="block py-1 text-secondary hover:underline">Accessibility</a></li>
+                </ul>
+                
+                <h3 class="text-base uppercase text-tertiary font-bold mt-6 mb-3">Other Components</h3>
+                <ul class="space-y-1">
+                    <li><a href="/cards/" class="block py-1 text-tertiary hover:underline">Cards</a></li>
+                </ul>
+            </div>
+        </aside>
+    </div>
 </div>
 {% endblock %}
