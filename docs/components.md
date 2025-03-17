@@ -332,6 +332,33 @@ Dialogs inform users about a task and can contain critical information, require 
 
 ## Navigation
 
+### Breadcrumbs
+
+Breadcrumbs provide a navigation aid that helps users keep track of their location within the website's hierarchy.
+
+```html
+<c-breadcrumbs.container>
+  <c-breadcrumbs.item href="/" first>Home</c-breadcrumbs.item>
+  <c-breadcrumbs.item href="/products">Products</c-breadcrumbs.item>
+  <c-breadcrumbs.item>Current Page</c-breadcrumbs.item>
+</c-breadcrumbs.container>
+```
+
+Breadcrumbs support these specific parameters:
+- `href`: The URL for the breadcrumb link (omit for current page)
+- `icon`: Add a Material Icon to the breadcrumb item
+- `first`: Indicates this is the first item (no separator before it)
+
+You can also add icons to breadcrumb items:
+
+```html
+<c-breadcrumbs.container>
+  <c-breadcrumbs.item href="/" icon="home" first>Home</c-breadcrumbs.item>
+  <c-breadcrumbs.item href="/products" icon="category">Products</c-breadcrumbs.item>
+  <c-breadcrumbs.item icon="shopping_bag">Current Page</c-breadcrumbs.item>
+</c-breadcrumbs.container>
+```
+
 ### Drawer
 
 > ⚠️ **Coming Soon** - This component is not yet implemented.

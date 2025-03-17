@@ -25,6 +25,7 @@ This file tracks the development progress of the Django Material project. As ite
   - [x] Outlined card
 - [ ] Dialog/Modal
 - [ ] App bar
+- [x] Breadcrumbs navigation
 - [ ] Navigation drawer
 - [ ] Tabs
 - [ ] Data table

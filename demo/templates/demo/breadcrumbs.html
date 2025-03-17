@@ -1,0 +1,141 @@
+{% extends 'material/base_page.html' %}
+
+{% block title %}Material Design Breadcrumbs Demo{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    <div class="flex">
+        <!-- Main content -->
+        <main class="flex-1 pr-8">
+            <h1 class="text-3xl font-bold mb-8">Breadcrumbs Component</h1>
+            
+            <section class="mb-12" id="breadcrumbs">
+                <h2 class="text-2xl font-bold mb-4">Breadcrumbs</h2>
+                <p class="mb-4">Breadcrumbs provide a navigation aid that helps users keep track of their location within the website's hierarchy.</p>
+                
+                <div class="space-y-8">
+                    <!-- Basic Breadcrumbs -->
+                    <div id="basic-breadcrumbs">
+                        <h3 class="text-xl font-medium mb-2">Basic Breadcrumbs</h3>
+                        <p class="mb-4">Standard breadcrumbs with text-only links.</p>
+                        
+                        <div class="p-4 border border-gray-200 rounded-lg mb-6">
+                            <c-breadcrumbs.container>
+                                <c-breadcrumbs.item href="/" first>Home</c-breadcrumbs.item>
+                                <c-breadcrumbs.item href="/products">Products</c-breadcrumbs.item>
+                                <c-breadcrumbs.item href="/products/electronics">Electronics</c-breadcrumbs.item>
+                                <c-breadcrumbs.item>Smartphones</c-breadcrumbs.item>
+                            </c-breadcrumbs.container>
+                        </div>
+                        
+                        <div class="mt-4 bg-gray-100 p-4 rounded-md">
+                            <pre class="text-sm"><code>{% verbatim %}&lt;c-breadcrumbs.container&gt;
+    &lt;c-breadcrumbs.item href="/" first&gt;Home&lt;/c-breadcrumbs.item&gt;
+    &lt;c-breadcrumbs.item href="/products"&gt;Products&lt;/c-breadcrumbs.item&gt;
+    &lt;c-breadcrumbs.item href="/products/electronics"&gt;Electronics&lt;/c-breadcrumbs.item&gt;
+    &lt;c-breadcrumbs.item&gt;Smartphones&lt;/c-breadcrumbs.item&gt;
+&lt;/c-breadcrumbs.container&gt;{% endverbatim %}</code></pre>
+                        </div>
+                    </div>
+                    
+                    <!-- With Icons -->
+                    <div class="mt-8" id="with-icons">
+                        <h3 class="text-xl font-medium mb-2">Breadcrumbs with Icons</h3>
+                        <p class="mb-4">Breadcrumbs can include icons for better visual cues.</p>
+                        
+                        <div class="p-4 border border-gray-200 rounded-lg mb-6">
+                            <c-breadcrumbs.container>
+                                <c-breadcrumbs.item href="/" icon="home" first>Home</c-breadcrumbs.item>
+                                <c-breadcrumbs.item href="/shop" icon="shopping_bag">Shop</c-breadcrumbs.item>
+                                <c-breadcrumbs.item href="/shop/clothing" icon="checkroom">Clothing</c-breadcrumbs.item>
+                                <c-breadcrumbs.item icon="style">T-Shirts</c-breadcrumbs.item>
+                            </c-breadcrumbs.container>
+                        </div>
+                        
+                        <div class="mt-4 bg-gray-100 p-4 rounded-md">
+                            <pre class="text-sm"><code>{% verbatim %}&lt;c-breadcrumbs.container&gt;
+    &lt;c-breadcrumbs.item href="/" icon="home" first&gt;Home&lt;/c-breadcrumbs.item&gt;
+    &lt;c-breadcrumbs.item href="/shop" icon="shopping_bag"&gt;Shop&lt;/c-breadcrumbs.item&gt;
+    &lt;c-breadcrumbs.item href="/shop/clothing" icon="checkroom"&gt;Clothing&lt;/c-breadcrumbs.item&gt;
+    &lt;c-breadcrumbs.item icon="style"&gt;T-Shirts&lt;/c-breadcrumbs.item&gt;
+&lt;/c-breadcrumbs.container&gt;{% endverbatim %}</code></pre>
+                        </div>
+                    </div>
+                    
+                    <!-- In Context -->
+                    <div class="mt-8" id="in-context">
+                        <h3 class="text-xl font-medium mb-2">Breadcrumbs in Context</h3>
+                        <p class="mb-4">How breadcrumbs appear in a typical page context.</p>
+                        
+                        <div class="p-6 border border-gray-200 rounded-lg mb-6 bg-surface">
+                            <c-breadcrumbs.container>
+                                <c-breadcrumbs.item href="/" icon="home" first>Home</c-breadcrumbs.item>
+                                <c-breadcrumbs.item href="/blog">Blog</c-breadcrumbs.item>
+                                <c-breadcrumbs.item href="/blog/tech">Technology</c-breadcrumbs.item>
+                                <c-breadcrumbs.item>Material Design 3</c-breadcrumbs.item>
+                            </c-breadcrumbs.container>
+                            
+                            <h1 class="text-2xl font-bold mt-4 mb-2">Introducing Material Design 3</h1>
+                            <p class="text-sm text-on-surface/60 mb-4">Published on March 15, 2025 • 5 min read</p>
+                            
+                            <div class="prose max-w-none">
+                                <p>Material Design 3 represents the latest evolution of Google's design system, with updated components, color systems, and more...</p>
+                                <p class="opacity-40">[Article content continues...]</p>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-4 bg-gray-100 p-4 rounded-md">
+                            <pre class="text-sm"><code>{% verbatim %}&lt;!-- Page Header --&gt;
+&lt;c-breadcrumbs.container&gt;
+    &lt;c-breadcrumbs.item href="/" icon="home" first&gt;Home&lt;/c-breadcrumbs.item&gt;
+    &lt;c-breadcrumbs.item href="/blog"&gt;Blog&lt;/c-breadcrumbs.item&gt;
+    &lt;c-breadcrumbs.item href="/blog/tech"&gt;Technology&lt;/c-breadcrumbs.item&gt;
+    &lt;c-breadcrumbs.item&gt;Material Design 3&lt;/c-breadcrumbs.item&gt;
+&lt;/c-breadcrumbs.container&gt;
+
+&lt;h1 class="text-2xl font-bold mt-4 mb-2"&gt;Introducing Material Design 3&lt;/h1&gt;
+&lt;p class="text-sm text-on-surface/60 mb-4"&gt;Published on March 15, 2025 • 5 min read&lt;/p&gt;
+
+&lt;!-- Article Content --&gt;{% endverbatim %}</code></pre>
+                        </div>
+                    </div>
+                    
+                    <!-- Usage Guidelines -->
+                    <div class="mt-8" id="guidelines">
+                        <h3 class="text-xl font-medium mb-2">Usage Guidelines</h3>
+                        <p class="mb-4">Best practices for implementing breadcrumbs in your interface.</p>
+                        
+                        <ul class="list-disc ml-6 space-y-2">
+                            <li>Place breadcrumbs at the top of the page, above the main content</li>
+                            <li>Use breadcrumbs for pages that are at least three levels deep in the site hierarchy</li>
+                            <li>Keep breadcrumb labels short and descriptive</li>
+                            <li>The current page should be the last item and should not be a link</li>
+                            <li>Consider using the home icon instead of text for the first item</li>
+                            <li>Ensure breadcrumbs are responsive and wrap properly on smaller screens</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <!-- Side navigation -->
+        <aside class="w-64 shrink-0">
+            <div class="sticky top-8 mt-8 ml-4 p-4">
+                <h3 class="text-base uppercase text-gray-600 font-bold mb-3">Sections</h3>
+                <ul class="space-y-1">
+                    <li><a href="#basic-breadcrumbs" class="block py-1 text-primary hover:underline">Basic Breadcrumbs</a></li>
+                    <li><a href="#with-icons" class="block py-1 text-primary hover:underline">With Icons</a></li>
+                    <li><a href="#in-context" class="block py-1 text-primary hover:underline">In Context</a></li>
+                    <li><a href="#guidelines" class="block py-1 text-primary hover:underline">Usage Guidelines</a></li>
+                </ul>
+                
+                <h3 class="text-base uppercase text-secondary font-bold mt-6 mb-3">Related</h3>
+                <ul class="space-y-1">
+                    <li><a href="/" class="block py-1 text-secondary hover:underline">Button Components</a></li>
+                    <li><a href="/cards/" class="block py-1 text-secondary hover:underline">Card Components</a></li>
+                </ul>
+            </div>
+        </aside>
+    </div>
+</div>
+{% endblock %}
