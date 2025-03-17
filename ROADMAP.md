@@ -14,11 +14,46 @@ This file tracks the development progress of the Django Material project. As ite
   - [x] Segmented button
   - [x] Floating action button
 - [ ] Form controls
-  - [ ] Text field
-  - [ ] Select
-  - [ ] Checkbox
-  - [ ] Radio button
-  - [ ] Switch
+  - [ ] Input fields
+    - [ ] text.html - Basic text input
+    - [ ] textarea.html - Multiline text input
+    - [ ] email.html - Email input with validation
+    - [ ] password.html - Secure password input
+    - [ ] number.html - Numeric input
+    - [ ] search.html - Search input
+    - [ ] url.html - URL input with validation
+    - [ ] tel.html - Telephone number input
+    - [ ] color.html - Color picker
+    - [ ] date.html - Date picker
+    - [ ] time.html - Time picker
+    - [ ] datetime.html - Combined date and time
+    - [ ] file.html - File upload
+    - [ ] clearable_file_input.html - File upload with clear option
+    - [ ] hidden.html - Hidden input
+    - [ ] multiple_hidden.html - Multiple hidden inputs
+    - [ ] multiple_input.html - Multiple text inputs
+    - [ ] attrs.html - Attributes helper
+  - [ ] Selection controls
+    - [ ] select.html - Dropdown select
+    - [ ] select_date.html - Date selection widget
+    - [ ] select_option.html - Individual select option
+    - [ ] checkbox.html - Checkbox control
+    - [ ] checkbox_option.html - Individual checkbox option
+    - [ ] checkbox_select.html - Multiple checkbox selection
+    - [ ] radio.html - Radio button control
+    - [ ] radio_option.html - Individual radio option
+  - [ ] Complex inputs
+    - [ ] input_option.html - Input with options
+    - [ ] multiwidget.html - Multiple widget container
+    - [ ] splitdatetime.html - Split date and time inputs
+    - [ ] splithiddendatetime.html - Split date/time with hidden
+  - [ ] Advanced form components
+    - [ ] autocomplete.html - Autocomplete text input
+    - [ ] editor.html - Rich text editor
+    - [ ] formset.html - Form set container
+    - [ ] json.html - JSON data editor
+    - [ ] select_dependent.html - Dependent/cascading select
+    - [ ] total.html - Calculation total field
 - [x] Card component
   - [x] Elevated card
   - [x] Filled card
@@ -86,8 +121,10 @@ This file tracks the development progress of the Django Material project. As ite
 
 ## Next Milestone Tasks
 
-1. Complete core button variants
-2. Implement text field component
-3. Finish installation documentation
-4. Add unit tests for existing components
-5. Create component showcase page in demo app
+1. Implement basic text input components (text.html, email.html, password.html)
+2. Create checkbox and radio button components
+3. Develop select dropdown components
+4. Implement date/time input components
+5. Finish installation documentation
+6. Add unit tests for existing components 
+7. Create form controls showcase page in demo app
