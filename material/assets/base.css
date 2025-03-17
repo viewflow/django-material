@@ -6,7 +6,7 @@
 
 /* Document Base */
 html:not([class]) {
-  @apply h-full min-h-full w-full scroll-smooth;
+  @apply min-h-full w-full scroll-smooth;
 }
 
 body:not([class]) {

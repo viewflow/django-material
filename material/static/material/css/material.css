@@ -242,11 +242,16 @@
   .visible {
     visibility: visible;
   }
-  .absolute {
+  .sr-only {
     position: absolute;
-  }
-  .fixed {
-    position: fixed;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
   }
   .relative {
     position: relative;
@@ -341,20 +346,26 @@
   .block {
     display: block;
   }
-  .contents {
-    display: contents;
-  }
   .flex {
     display: flex;
   }
   .grid {
     display: grid;
   }
+  .hidden {
+    display: none;
+  }
   .inline-flex {
     display: inline-flex;
   }
   .table {
     display: table;
+  }
+  .h-5 {
+    height: calc(var(--spacing) * 5);
+  }
+  .h-8 {
+    height: calc(var(--spacing) * 8);
   }
   .h-10 {
     height: calc(var(--spacing) * 10);
@@ -367,6 +378,12 @@
   }
   .h-full {
     height: 100%;
+  }
+  .w-5 {
+    width: calc(var(--spacing) * 5);
+  }
+  .w-8 {
+    width: calc(var(--spacing) * 8);
   }
   .w-10 {
     width: calc(var(--spacing) * 10);
@@ -392,9 +409,6 @@
   .flex-1 {
     flex: 1;
   }
-  .flex-shrink {
-    flex-shrink: 1;
-  }
   .flex-shrink-0 {
     flex-shrink: 0;
   }
@@ -404,9 +418,6 @@
   .flex-grow {
     flex-grow: 1;
   }
-  .border-collapse {
-    border-collapse: collapse;
-  }
   .transform {
     transform: var(--tw-rotate-x) var(--tw-rotate-y) var(--tw-rotate-z) var(--tw-skew-x) var(--tw-skew-y);
   }
@@ -415,9 +426,6 @@
   }
   .cursor-pointer {
     cursor: pointer;
-  }
-  .resize {
-    resize: both;
   }
   .list-disc {
     list-style-type: disc;
@@ -436,6 +444,9 @@
   }
   .items-end {
     align-items: flex-end;
+  }
+  .items-start {
+    align-items: flex-start;
   }
   .justify-between {
     justify-content: space-between;
@@ -535,9 +546,6 @@
   .border-gray-200 {
     border-color: var(--color-gray-200);
   }
-  .border-outline {
-    border-color: var(--color-outline);
-  }
   .border-outline\/20 {
     border-color: color-mix(in oklab, var(--color-outline) 20%, transparent);
   }
@@ -549,9 +557,6 @@
   }
   .border-tertiary {
     border-color: var(--color-tertiary);
-  }
-  .border-white {
-    border-color: var(--color-white);
   }
   .border-white\/20 {
     border-color: color-mix(in oklab, var(--color-white) 20%, transparent);
@@ -654,10 +659,6 @@
     font-size: var(--text-xs);
     line-height: var(--tw-leading, var(--text-xs--line-height));
   }
-  .leading-none {
-    --tw-leading: 1;
-    line-height: 1;
-  }
   .font-bold {
     --tw-font-weight: var(--font-weight-bold);
     font-weight: var(--font-weight-bold);
@@ -715,9 +716,6 @@
   .uppercase {
     text-transform: uppercase;
   }
-  .underline {
-    text-decoration-line: underline;
-  }
   .opacity-40 {
     opacity: 40%;
   }
@@ -770,6 +768,13 @@
     &:hover {
       @media (hover: hover) {
         border-color: var(--color-primary);
+      }
+    }
+  }
+  .hover\:bg-on-surface\/10 {
+    &:hover {
+      @media (hover: hover) {
+        background-color: color-mix(in oklab, var(--color-on-surface) 10%, transparent);
       }
     }
   }
@@ -895,6 +900,11 @@
       }
     }
   }
+  .focus\:bg-on-surface\/10 {
+    &:focus {
+      background-color: color-mix(in oklab, var(--color-on-surface) 10%, transparent);
+    }
+  }
   .focus\:bg-primary\/10 {
     &:focus {
       background-color: color-mix(in oklab, var(--color-primary) 10%, transparent);
@@ -964,6 +974,17 @@
     &:focus {
       --tw-outline-style: none;
       outline-style: none;
+    }
+  }
+  .focus-visible\:ring-2 {
+    &:focus-visible {
+      --tw-ring-shadow: var(--tw-ring-inset,) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color, currentColor);
+      box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+    }
+  }
+  .focus-visible\:ring-primary {
+    &:focus-visible {
+      --tw-ring-color: var(--color-primary);
     }
   }
   .active\:shadow {
@@ -1144,7 +1165,6 @@
 }
 @layer utilities;
 html:not([class]) {
-  height: 100%;
   min-height: 100%;
   width: 100%;
   scroll-behavior: smooth;
@@ -1268,10 +1288,6 @@ a:not([class]):hover {
   syntax: "*";
   inherits: false;
   initial-value: solid;
-}
-@property --tw-leading {
-  syntax: "*";
-  inherits: false;
 }
 @property --tw-font-weight {
   syntax: "*";
