@@ -1,14 +1,34 @@
 <section class="
     rounded-xl overflow-hidden
-    border border-solid
+    {% if hover_border %}
+      border-transparent hover:border-solid
+    {% else %}
+      border border-solid
+    {% endif %}
     flex flex-col h-full
     {% if color == 'secondary' %}
-        border-secondary text-secondary
+        {% if hover_border %}
+          border hover:border-secondary text-secondary
+        {% else %}
+          border-secondary text-secondary
+        {% endif %}
     {% elif color == 'tertiary' %}
-        border-tertiary text-tertiary
+        {% if hover_border %}
+          border hover:border-tertiary text-tertiary
+        {% else %}
+          border-tertiary text-tertiary
+        {% endif %}
     {% else %}
-        border-primary text-primary
+        {% if hover_border %}
+          border hover:border-primary text-primary
+        {% else %}
+          border-primary text-primary
+        {% endif %}
     {% endif %}
+    {% if hover_border %}
+      hover:shadow-sm
+    {% endif %}
+    transition-all duration-300
     bg-transparent
   ">
   {% if title %}

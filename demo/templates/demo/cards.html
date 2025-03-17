@@ -244,6 +244,23 @@
                             </c-card.outlined>
                         </div>
                         
+                        <h4 class="text-lg font-medium mb-2">Hover Border Variant</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            <c-card.outlined title="Hover Border Card" hover_border>
+                                <p>This card shows its border only on hover. It creates a more subtle look for card-based layouts.</p>
+                            </c-card.outlined>
+                            
+                            <c-card.outlined title="Interactive Card" subtitle="Hover to see border" color="secondary" hover_border>
+                                <p>Hover border cards are great for interactive elements where you want to indicate elements are clickable without overwhelming the design.</p>
+                                
+                                <c-slot name="footer">
+                                    <div class="flex justify-end">
+                                        <c-button.text>Learn More</c-button.text>
+                                    </div>
+                                </c-slot>
+                            </c-card.outlined>
+                        </div>
+                        
                         <h4 class="text-lg font-medium mb-2">With Footer Actions</h4>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                             <c-card.outlined title="Information" subtitle="Important details">
@@ -277,6 +294,11 @@
 &lt;!-- Secondary Outlined Card --&gt;
 &lt;c-card.outlined title="Secondary Outlined" color="secondary"&gt;
     &lt;p&gt;This card has a secondary color border.&lt;/p&gt;
+&lt;/c-card.outlined&gt;
+
+&lt;!-- Hover Border Card --&gt;
+&lt;c-card.outlined title="Hover Border Card" hover_border&gt;
+    &lt;p&gt;This card shows its border only on hover.&lt;/p&gt;
 &lt;/c-card.outlined&gt;
 
 &lt;!-- With Footer --&gt;

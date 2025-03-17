@@ -58,8 +58,9 @@ This file tracks the development progress of the Django Material project. As ite
   - [x] Elevated card
   - [x] Filled card
   - [x] Outlined card
-  - [ ] Card enhancement components
-    - [ ] card_menu.html - Card action menu
+  - [x] Card enhancement components
+    - [x] hover_border attribute - Show border only on hover
+    - [x] card_menu.html - Card action menu
     - [ ] card_menu_item.html - Menu item for card actions
     - [ ] card_actions.html - Container for card action buttons
     - [ ] card_divider.html - Visual divider for card sections

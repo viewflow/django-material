@@ -17,76 +17,116 @@
         <!-- Component Categories -->
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-12">
             <!-- Buttons -->
-            <div class="p-6 rounded-xl border border-gray-200 hover:border-primary transition-colors hover:shadow-sm">
-                <h3 class="text-xl font-bold mb-2 text-primary flex items-center">
-                    <span class="material-icons mr-2">touch_app</span>
-                    Buttons
-                </h3>
-                <p class="mb-4 text-gray-600">Interactive elements for user actions, available in multiple variants.</p>
-                <ul class="mb-4 space-y-1">
-                    <li class="text-sm text-gray-600">• Filled, Outlined, Text</li>
-                    <li class="text-sm text-gray-600">• Elevated, Icon, FAB</li>
-                    <li class="text-sm text-gray-600">• Segmented buttons</li>
-                </ul>
-                <a href="/buttons/" class="text-primary font-medium hover:underline inline-flex items-center">
-                    View All Buttons
-                    <span class="material-icons ml-1" style="font-size: 18px;">arrow_forward</span>
-                </a>
-            </div>
+            <c-card.outlined hover_border>
+                <c-slot name="title">
+                    <span class="flex items-center">
+                        <span class="material-icons mr-2 text-primary">touch_app</span>
+                        <span class="text-xl font-bold text-primary">Buttons</span>
+                    </span>
+                </c-slot>
+                
+                <div>
+                    <p class="mb-4 text-gray-600">Interactive elements for user actions, available in multiple variants.</p>
+                    <ul class="mb-4 space-y-1">
+                        <li class="text-sm text-gray-600">• Filled, Outlined, Text</li>
+                        <li class="text-sm text-gray-600">• Elevated, Icon, FAB</li>
+                        <li class="text-sm text-gray-600">• Segmented buttons</li>
+                    </ul>
+                </div>
+                
+                <c-slot name="footer">
+                    <div class="flex justify-end">
+                        <a href="/buttons/" class="text-primary font-medium hover:underline inline-flex items-center">
+                            View All Buttons
+                            <span class="material-icons ml-1" style="font-size: 18px;">arrow_forward</span>
+                        </a>
+                    </div>
+                </c-slot>
+            </c-card.outlined>
             
             <!-- Cards -->
-            <div class="p-6 rounded-xl border border-gray-200 hover:border-primary transition-colors hover:shadow-sm">
-                <h3 class="text-xl font-bold mb-2 text-primary flex items-center">
-                    <span class="material-icons mr-2">dashboard</span>
-                    Cards
-                </h3>
-                <p class="mb-4 text-gray-600">Container components for organizing related content and actions.</p>
-                <ul class="mb-4 space-y-1">
-                    <li class="text-sm text-gray-600">• Elevated cards</li>
-                    <li class="text-sm text-gray-600">• Filled cards</li>
-                    <li class="text-sm text-gray-600">• Outlined cards</li>
-                </ul>
-                <a href="/cards/" class="text-primary font-medium hover:underline inline-flex items-center">
-                    View All Cards
-                    <span class="material-icons ml-1" style="font-size: 18px;">arrow_forward</span>
-                </a>
-            </div>
+            <c-card.outlined hover_border>
+                <c-slot name="title">
+                    <span class="flex items-center">
+                        <span class="material-icons mr-2 text-primary">dashboard</span>
+                        <span class="text-xl font-bold text-primary">Cards</span>
+                    </span>
+                </c-slot>
+                
+                <div>
+                    <p class="mb-4 text-gray-600">Container components for organizing related content and actions.</p>
+                    <ul class="mb-4 space-y-1">
+                        <li class="text-sm text-gray-600">• Elevated cards</li>
+                        <li class="text-sm text-gray-600">• Filled cards</li>
+                        <li class="text-sm text-gray-600">• Outlined cards</li>
+                    </ul>
+                </div>
+                
+                <c-slot name="footer">
+                    <div class="flex justify-end">
+                        <a href="/cards/" class="text-primary font-medium hover:underline inline-flex items-center">
+                            View All Cards
+                            <span class="material-icons ml-1" style="font-size: 18px;">arrow_forward</span>
+                        </a>
+                    </div>
+                </c-slot>
+            </c-card.outlined>
             
             <!-- Lists -->
-            <div class="p-6 rounded-xl border border-gray-200 hover:border-primary transition-colors hover:shadow-sm">
-                <h3 class="text-xl font-bold mb-2 text-primary flex items-center">
-                    <span class="material-icons mr-2">format_list_bulleted</span>
-                    Lists
-                </h3>
-                <p class="mb-4 text-gray-600">Continuous vertical indexes of text or images for displaying collections of items.</p>
-                <ul class="mb-4 space-y-1">
-                    <li class="text-sm text-gray-600">• Single-line lists</li>
-                    <li class="text-sm text-gray-600">• Two and three-line lists</li>
-                    <li class="text-sm text-gray-600">• Avatar and thumbnail lists</li>
-                </ul>
-                <a href="/lists/" class="text-primary font-medium hover:underline inline-flex items-center">
-                    View All Lists
-                    <span class="material-icons ml-1" style="font-size: 18px;">arrow_forward</span>
-                </a>
-            </div>
+            <c-card.outlined hover_border>
+                <c-slot name="title">
+                    <span class="flex items-center">
+                        <span class="material-icons mr-2 text-primary">format_list_bulleted</span>
+                        <span class="text-xl font-bold text-primary">Lists</span>
+                    </span>
+                </c-slot>
+                
+                <div>
+                    <p class="mb-4 text-gray-600">Continuous vertical indexes of text or images for displaying collections of items.</p>
+                    <ul class="mb-4 space-y-1">
+                        <li class="text-sm text-gray-600">• Single-line lists</li>
+                        <li class="text-sm text-gray-600">• Two and three-line lists</li>
+                        <li class="text-sm text-gray-600">• Avatar and thumbnail lists</li>
+                    </ul>
+                </div>
+                
+                <c-slot name="footer">
+                    <div class="flex justify-end">
+                        <a href="/lists/" class="text-primary font-medium hover:underline inline-flex items-center">
+                            View All Lists
+                            <span class="material-icons ml-1" style="font-size: 18px;">arrow_forward</span>
+                        </a>
+                    </div>
+                </c-slot>
+            </c-card.outlined>
             
             <!-- Navigation -->
-            <div class="p-6 rounded-xl border border-gray-200 hover:border-primary transition-colors hover:shadow-sm">
-                <h3 class="text-xl font-bold mb-2 text-primary flex items-center">
-                    <span class="material-icons mr-2">navigation</span>
-                    Navigation
-                </h3>
-                <p class="mb-4 text-gray-600">Components that help users navigate between different views and sections.</p>
-                <ul class="mb-4 space-y-1">
-                    <li class="text-sm text-gray-600">• Breadcrumbs</li>
-                    <li class="text-sm text-gray-600">• App bar (Coming soon)</li>
-                    <li class="text-sm text-gray-600">• Navigation drawer (Coming soon)</li>
-                </ul>
-                <a href="/breadcrumbs/" class="text-primary font-medium hover:underline inline-flex items-center">
-                    View Breadcrumbs
-                    <span class="material-icons ml-1" style="font-size: 18px;">arrow_forward</span>
-                </a>
-            </div>
+            <c-card.outlined hover_border>
+                <c-slot name="title">
+                    <span class="flex items-center">
+                        <span class="material-icons mr-2 text-primary">navigation</span>
+                        <span class="text-xl font-bold text-primary">Navigation</span>
+                    </span>
+                </c-slot>
+                
+                <div>
+                    <p class="mb-4 text-gray-600">Components that help users navigate between different views and sections.</p>
+                    <ul class="mb-4 space-y-1">
+                        <li class="text-sm text-gray-600">• Breadcrumbs</li>
+                        <li class="text-sm text-gray-600">• App bar (Coming soon)</li>
+                        <li class="text-sm text-gray-600">• Navigation drawer (Coming soon)</li>
+                    </ul>
+                </div>
+                
+                <c-slot name="footer">
+                    <div class="flex justify-end">
+                        <a href="/breadcrumbs/" class="text-primary font-medium hover:underline inline-flex items-center">
+                            View Breadcrumbs
+                            <span class="material-icons ml-1" style="font-size: 18px;">arrow_forward</span>
+                        </a>
+                    </div>
+                </c-slot>
+            </c-card.outlined>
         </div>
         
         <h2 class="text-2xl font-bold mb-6">Implementation Status</h2>
@@ -95,8 +135,11 @@
         </p>
         
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-            <div class="p-6 rounded-xl border border-gray-200">
-                <h3 class="text-lg font-bold mb-3">Completed</h3>
+            <c-card.outlined>
+                <c-slot name="title">
+                    <span class="text-lg font-bold">Completed</span>
+                </c-slot>
+                
                 <ul class="space-y-1">
                     <li class="flex items-center text-gray-700">
                         <span class="material-icons text-green-600 mr-2" style="font-size: 18px;">check_circle</span>
@@ -115,10 +158,13 @@
                         List component suite
                     </li>
                 </ul>
-            </div>
+            </c-card.outlined>
             
-            <div class="p-6 rounded-xl border border-gray-200">
-                <h3 class="text-lg font-bold mb-3">Coming Soon</h3>
+            <c-card.outlined>
+                <c-slot name="title">
+                    <span class="text-lg font-bold">Coming Soon</span>
+                </c-slot>
+                
                 <ul class="space-y-1">
                     <li class="flex items-center text-gray-700">
                         <span class="material-icons text-gray-400 mr-2" style="font-size: 18px;">pending</span>
@@ -133,7 +179,7 @@
                         App bar & Navigation drawer
                     </li>
                 </ul>
-            </div>
+            </c-card.outlined>
         </div>
         
         <div class="text-center mt-12">
