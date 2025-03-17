@@ -34,6 +34,25 @@
                             </c-card.elevated>
                         </div>
                         
+                        <h4 class="text-lg font-medium mb-2">With Menu</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            <c-card.elevated title="Card with Menu">
+                                <p>This card includes a menu in the top-right corner for additional actions.</p>
+                                
+                                <c-slot name="menu">
+                                    <c-menu.card_menu></c-menu.card_menu>
+                                </c-slot>
+                            </c-card.elevated>
+                            
+                            <c-card.elevated title="Menu Only">
+                                <c-slot name="menu">
+                                    <c-menu.card_menu></c-menu.card_menu>
+                                </c-slot>
+                                
+                                <p>You can add a menu to any card type. This provides access to additional functionality like edit, delete, or share options.</p>
+                            </c-card.elevated>
+                        </div>
+                        
                         <h4 class="text-lg font-medium mb-2">With Footer Actions</h4>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                             <c-card.elevated title="With Footer">
@@ -70,6 +89,15 @@
     &lt;p&gt;This card has both a title and a subtitle.&lt;/p&gt;
 &lt;/c-card.elevated&gt;
 
+&lt;!-- With Menu --&gt;
+&lt;c-card.elevated title="Card with Menu"&gt;
+    &lt;p&gt;This card includes a menu in the top-right corner.&lt;/p&gt;
+    
+    &lt;c-slot name="menu"&gt;
+        &lt;c-menu.card_menu&gt;&lt;/c-menu.card_menu&gt;
+    &lt;/c-slot&gt;
+&lt;/c-card.elevated&gt;
+
 &lt;!-- With Footer --&gt;
 &lt;c-card.elevated title="With Footer"&gt;
     &lt;p&gt;This card includes a footer section with action buttons.&lt;/p&gt;
@@ -101,6 +129,25 @@
                             
                             <c-card.filled title="Tertiary Card" color="tertiary">
                                 <p>This card uses the tertiary color theme.</p>
+                            </c-card.filled>
+                        </div>
+                        
+                        <h4 class="text-lg font-medium mb-2">With Menu</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            <c-card.filled title="Menu Actions" color="primary">
+                                <p>The menu button in this card uses the text color from the card background.</p>
+                                
+                                <c-slot name="menu">
+                                    <c-menu.card_menu></c-menu.card_menu>
+                                </c-slot>
+                            </c-card.filled>
+                            
+                            <c-card.filled title="Secondary with Menu" color="secondary">
+                                <c-slot name="menu">
+                                    <c-menu.card_menu></c-menu.card_menu>
+                                </c-slot>
+                                
+                                <p>Menu icons automatically use the appropriate contrasting color based on the card's background color.</p>
                             </c-card.filled>
                         </div>
                         
@@ -169,6 +216,31 @@
                             
                             <c-card.outlined title="Tertiary Outlined" color="tertiary">
                                 <p>This card has a tertiary color border.</p>
+                            </c-card.outlined>
+                        </div>
+                        
+                        <h4 class="text-lg font-medium mb-2">With Menu</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            <c-card.outlined title="Menu Example" color="primary">
+                                <p>Outlined cards can also include menu buttons for additional actions.</p>
+                                
+                                <c-slot name="menu">
+                                    <c-menu.card_menu></c-menu.card_menu>
+                                </c-slot>
+                            </c-card.outlined>
+                            
+                            <c-card.outlined title="Complete Card" subtitle="All features" color="secondary">
+                                <c-slot name="menu">
+                                    <c-menu.card_menu></c-menu.card_menu>
+                                </c-slot>
+                                
+                                <p>This card demonstrates all features: title, subtitle, menu, content, and footer actions.</p>
+                                
+                                <c-slot name="footer">
+                                    <div class="flex justify-end">
+                                        <c-button.text>More Info</c-button.text>
+                                    </div>
+                                </c-slot>
                             </c-card.outlined>
                         </div>
                         

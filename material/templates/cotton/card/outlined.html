@@ -12,11 +12,24 @@
     bg-transparent
   ">
   {% if title %}
-    <header class="p-4 pb-0 flex-shrink-0">
-      <h3 class="text-lg font-medium">{{ title }}</h3>
-      {% if subtitle %}
-        <p class="text-sm text-on-surface/60 mt-1">{{ subtitle }}</p>
+    <header class="p-4 pb-0 flex-shrink-0 flex justify-between items-start">
+      <div>
+        <h3 class="text-lg font-medium">{{ title }}</h3>
+        {% if subtitle %}
+          <p class="text-sm text-on-surface/60 mt-1">{{ subtitle }}</p>
+        {% endif %}
+      </div>
+      {% if menu %}
+        <div class="ml-2">
+          {{ menu }}
+        </div>
       {% endif %}
+    </header>
+  {% elif menu %}
+    <header class="p-4 pb-0 flex-shrink-0 flex justify-end">
+      <div>
+        {{ menu }}
+      </div>
     </header>
   {% endif %}
 
