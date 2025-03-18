@@ -41,7 +41,11 @@
     transition-all duration-300
   "
   {% if variant == 'modal' %}
-    aria-hidden="{{ 'false' if open else 'true' }}"
+    {% if open %}
+      aria-hidden="false"
+    {% else %}
+      aria-hidden="true"
+    {% endif %}
   {% endif %}
   >
   {% if header %}
@@ -66,7 +70,7 @@
 {% if variant == 'modal' and backdrop and open %}
   <div class="fixed inset-0 bg-black bg-opacity-50 z-40 transition-opacity duration-300 ease-in-out"
        {% if backdrop_click %}
-         onClick="{{ backdrop_click }}"
+         onclick="{{ backdrop_click }}"
        {% endif %}
   ></div>
 {% endif %}
