@@ -1,0 +1,12 @@
+<div class="relative mb-8 group">
+  <input type="text" id="name" placeholder=" " 
+         class="w-full px-0 pt-5 pb-2 text-base bg-transparent border-0 border-b border-gray-300 appearance-none focus:outline-none focus:border-purple-700 focus:border-b-2 peer">
+  <label for="name" 
+         class="absolute text-base text-gray-500 duration-200 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-0 peer-focus:text-purple-700 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4">
+    {{ widget.label }}
+  </label>
+  <div class="text-xs text-gray-500 mt-1">Enter your full name</div>
+</div>
+
+
+<input type="{{ widget.type }}" name="{{ widget.name }}"{% if widget.value != None %} value="{{ widget.value|stringformat:'s' }}"{% endif %}{% include "django/forms/widgets/attrs.html" %}>
