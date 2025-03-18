@@ -1,4 +1,4 @@
-# Django Material 3
+> **⚠️ IMPORTANT:** This project is currently in experimental development status. APIs, components, and functionality may change significantly between versions. While it's suitable for exploration and prototyping, we recommend careful consideration before using in production environments.
 
 <div align="center">
   <a href="https://github.com/viewflow/django-material">
@@ -8,6 +8,8 @@
   <h3 align="center">Django Material Design 3</h3>
 
   <p align="center">
+    <span><img src="https://img.shields.io/badge/Status-Experimental-yellow" alt="Status: Experimental"></span>
+    <br />
     Modern Material Design components for Django
     <br />
     <a href="https://material.viewflow.io"><strong>Explore the docs »</strong></a>
