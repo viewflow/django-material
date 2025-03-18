@@ -21,6 +21,9 @@
 - Use CSS custom properties for theming with primary/secondary/tertiary color schemes
 - Use flexbox for component layouts
 - Implement proper hover and focus states for interactive elements
+- Standardize on `icon` attribute for all components that display icons
+- Components with text content should use slot content directly instead of label attributes
+- Required attributes should have sensible defaults whenever possible
 
 ## Component Structure
 - **Button Components**:
@@ -35,11 +38,18 @@
 - **Card Components**:
   - elevated.html - Card with shadow elevation
   - filled.html - Card with colored background
-  - outlined.html - Card with border outline
+  - outlined.html - Card with border outline (supports hover_border)
 
 - **Breadcrumb Components**:
   - container.html - Container for breadcrumb items
   - item.html - Individual breadcrumb link/item
+
+- **Navigation Components**:
+  - container.html - Navigation container (supports rail variant)
+  - item.html - Navigation item (supports expandable/nested items)
+  - group.html - Grouping of navigation items
+  - header.html - Navigation header with title and optional subtitle
+  - divider.html - Visual separator between navigation sections
 
 ## Testing
 - Run Django tests: `python manage.py test`
@@ -52,9 +62,23 @@
   - demo/templates/demo/index.html - Main landing page
   - Dedicated pages for each component category (buttons.html, cards.html, etc.)
   - Each demo page should have consistent navigation
-  
+
+## Timeless Component Design Principles
+- Use semantic HTML elements for proper accessibility
+- Keep component APIs simple and intuitive
+- Be consistent with attribute naming across similar components
+- Minimize required JavaScript dependencies
+- Design for mobile-first, responsive experiences
+- Ensure keyboard navigability for all interactive elements
+- Provide visual feedback for all interactive states
+- Design components to be composable with other components
+- Follow progressive enhancement principles
+- Ensure components work well with screen readers
+
 ## Naming Conventions
 - Use consistent parameter names across similar components
 - Component variants follow Material Design 3 naming: filled, outlined, elevated, etc.
 - For component demos, use semantic IDs that match component types
 - Demo templates should have concise, descriptive titles
+- Prefer shorter component names (e.g., c-nav instead of c-navigation)
+- Use standard attribute names (e.g., icon, title, variant) consistently

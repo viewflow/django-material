@@ -1,13 +1,13 @@
 {% extends 'material/base_page.html' %}
 
-{% block title %}Material Design Navigation Demo{% endblock %}
+{% block title %}Material Design Nav Components Demo{% endblock %}
 
 {% block content %}
 <div class="container mx-auto px-4 py-8">
     <div class="flex">
         <!-- Main content -->
         <main class="flex-1 pr-8">
-            <h1 class="text-3xl font-bold mb-8">Navigation Components</h1>
+            <h1 class="text-3xl font-bold mb-8">Nav Components</h1>
             
             <section class="mb-12" id="navigation">
                 <h2 class="text-2xl font-bold mb-4">Navigation</h2>
@@ -21,68 +21,70 @@
                         
                         <div class="bg-gray-100 p-6 rounded-xl mb-6">
                             <div class="w-full max-w-xs bg-white rounded-xl shadow-lg overflow-hidden">
-                                <c-navigation.container>
-                                    <c-navigation.header title="Navigation" subtitle="Material Design">
+                                <c-nav.container>
+                                    <c-nav.header title="Navigation" subtitle="Material Design">
                                         <c-slot name="logo">
                                             <span class="material-icons text-primary">dashboard</span>
                                         </c-slot>
-                                    </c-navigation.header>
+                                    </c-nav.header>
                                     
-                                    <c-navigation.group>
-                                        <c-navigation.item active url="/dashboard" label="Dashboard" icon="home"></c-navigation.item>
+                                    <c-nav.group>
+                                        <c-nav.item active url="/dashboard" icon="home">Dashboard</c-nav.item>
                                         
-                                        <c-navigation.item url="/profile" label="Profile" icon="person"></c-navigation.item>
+                                        <c-nav.item url="/profile" icon="person">Profile</c-nav.item>
                                         
-                                        <c-navigation.item url="/settings" label="Settings" icon="settings"></c-navigation.item>
-                                    </c-navigation.group>
+                                        <c-nav.item url="/settings" icon="settings">Settings</c-nav.item>
+                                    </c-nav.group>
                                     
-                                    <c-navigation.divider></c-navigation.divider>
+                                    <c-nav.divider></c-nav.divider>
                                     
-                                    <c-navigation.group title="Components">
-                                        <c-navigation.item url="/buttons" label="Buttons" icon="touch_app"></c-navigation.item>
+                                    <c-nav.group title="Components">
+                                        <c-nav.item url="/buttons" icon="touch_app">Buttons</c-nav.item>
                                         
-                                        <c-navigation.item url="/cards" label="Cards" icon="dashboard">
+                                        <c-nav.item url="/cards" icon="dashboard">
+                                            Cards
                                             <c-slot name="badge">
                                                 New
                                             </c-slot>
-                                        </c-navigation.item>
+                                        </c-nav.item>
                                         
-                                        <c-navigation.item url="/lists" label="Lists" icon="format_list_bulleted"></c-navigation.item>
-                                    </c-navigation.group>
-                                </c-navigation.container>
+                                        <c-nav.item url="/lists" icon="format_list_bulleted">Lists</c-nav.item>
+                                    </c-nav.group>
+                                </c-nav.container>
                             </div>
                         </div>
                         
                         <div class="mt-4 bg-gray-100 p-4 rounded-md">
                             <pre class="text-sm"><code>{% verbatim %}<!-- Navigation Container -->
-<c-navigation.container>
+<c-nav.container>
   <!-- Header -->
-  <c-navigation.header title="Navigation" subtitle="Material Design">
+  <c-nav.header title="Navigation" subtitle="Material Design">
     <c-slot name="logo">
       <span class="material-icons text-primary">dashboard</span>
     </c-slot>
-  </c-navigation.header>
+  </c-nav.header>
   
   <!-- Main Navigation Group -->
-  <c-navigation.group>
-    <c-navigation.item active url="/dashboard" label="Dashboard" icon="home"></c-navigation.item>
+  <c-nav.group>
+    <c-nav.item active url="/dashboard" icon="home">Dashboard</c-nav.item>
     
-    <c-navigation.item url="/profile" label="Profile" icon="person"></c-navigation.item>
-  </c-navigation.group>
+    <c-nav.item url="/profile" icon="person">Profile</c-nav.item>
+  </c-nav.group>
   
-  <c-navigation.divider></c-navigation.divider>
+  <c-nav.divider></c-nav.divider>
   
   <!-- Group with Title -->
-  <c-navigation.group title="Components">
-    <c-navigation.item url="/buttons" label="Buttons" icon="touch_app"></c-navigation.item>
+  <c-nav.group title="Components">
+    <c-nav.item url="/buttons" icon="touch_app">Buttons</c-nav.item>
     
-    <c-navigation.item url="/cards" label="Cards" icon="dashboard">
+    <c-nav.item url="/cards" icon="dashboard">
+      Cards
       <c-slot name="badge">
         New
       </c-slot>
-    </c-navigation.item>
-  </c-navigation.group>
-</c-navigation.container>{% endverbatim %}</code></pre>
+    </c-nav.item>
+  </c-nav.group>
+</c-nav.container>{% endverbatim %}</code></pre>
                         </div>
                     </div>
                     
@@ -93,36 +95,36 @@
                         
                         <div class="bg-gray-100 p-6 rounded-xl mb-6">
                             <div class="w-full max-w-xs bg-white rounded-xl shadow-lg overflow-hidden">
-                                <c-navigation.container>
-                                    <c-navigation.header title="Navigation" subtitle="With nested items" />
+                                <c-nav.container>
+                                    <c-nav.header title="Navigation" subtitle="With nested items" />
                                     
-                                    <c-navigation.item active url="/home" label="Home" icon="home"></c-navigation.item>
+                                    <c-nav.item active url="/home" icon="home">Home</c-nav.item>
                                     
-                                    <c-navigation.item 
-                                        label="Components" 
+                                    <c-nav.item 
                                         expandable 
                                         expanded
                                         icon="widgets"
                                     >
+                                        Components
                                         <c-slot name="children">
-                                            <c-navigation.item url="/buttons" label="Buttons"></c-navigation.item>
-                                            <c-navigation.item url="/cards" label="Cards"></c-navigation.item>
-                                            <c-navigation.item url="/lists" label="Lists"></c-navigation.item>
+                                            <c-nav.item url="/buttons">Buttons</c-nav.item>
+                                            <c-nav.item url="/cards">Cards</c-nav.item>
+                                            <c-nav.item url="/lists">Lists</c-nav.item>
                                         </c-slot>
-                                    </c-navigation.item>
+                                    </c-nav.item>
                                     
-                                    <c-navigation.item 
-                                        label="Pages" 
+                                    <c-nav.item 
                                         expandable
                                         icon="description"
                                     >
+                                        Pages
                                         <c-slot name="children">
-                                            <c-navigation.item url="/profile" label="Profile"></c-navigation.item>
-                                            <c-navigation.item url="/settings" label="Settings"></c-navigation.item>
-                                            <c-navigation.item url="/help" label="Help"></c-navigation.item>
+                                            <c-nav.item url="/profile">Profile</c-nav.item>
+                                            <c-nav.item url="/settings">Settings</c-nav.item>
+                                            <c-nav.item url="/help">Help</c-nav.item>
                                         </c-slot>
-                                    </c-navigation.item>
-                                </c-navigation.container>
+                                    </c-nav.item>
+                                </c-nav.container>
                             </div>
                         </div>
                     </div>
@@ -134,17 +136,17 @@
                         
                         <div class="bg-gray-100 p-6 rounded-xl mb-6">
                             <div class="w-full max-w-xs flex">
-                                <c-navigation.container variant="rail">
-                                    <c-navigation.item active url="/dashboard" icon="home"></c-navigation.item>
+                                <c-nav.container variant="rail">
+                                    <c-nav.item active url="/dashboard" icon="home">Home</c-nav.item>
                                     
-                                    <c-navigation.item url="/profile" icon="person"></c-navigation.item>
+                                    <c-nav.item url="/profile" icon="person">Profile</c-nav.item>
                                     
-                                    <c-navigation.item url="/settings" icon="settings"></c-navigation.item>
+                                    <c-nav.item url="/settings" icon="settings">Settings</c-nav.item>
                                     
-                                    <c-navigation.divider></c-navigation.divider>
+                                    <c-nav.divider></c-nav.divider>
                                     
-                                    <c-navigation.item url="/help" icon="help"></c-navigation.item>
-                                </c-navigation.container>
+                                    <c-nav.item url="/help" icon="help">Help</c-nav.item>
+                                </c-nav.container>
                                 
                                 <div class="bg-gray-50 flex-grow p-4 rounded-r-xl border-l border-gray-200">
                                     <p class="text-gray-500">Content area</p>
