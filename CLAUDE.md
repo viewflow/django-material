@@ -25,6 +25,14 @@
 - Components with text content should use slot content directly instead of label attributes
 - Required attributes should have sensible defaults whenever possible
 
+## Comment Guidelines
+- Module docstrings: 1-2 lines explaining core purpose/function
+- Class docstrings: Single line explaining role/responsibility
+- Method docstrings: Brief description of function and parameters
+- Inline comments: Only for non-obvious code or key functionality
+- Use concise language, avoid excessive verbosity
+- For form renderers, document template context variables
+
 ## Component Structure
 - **Button Components**:
   - filled.html - High-emphasis filled background button
