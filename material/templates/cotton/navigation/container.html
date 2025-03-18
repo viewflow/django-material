@@ -1,0 +1,72 @@
+<nav class="
+    w-full
+    {% if variant == 'rail' %}
+      w-16
+    {% elif variant == 'mini' %}
+      w-20
+    {% elif width %}
+      {{ width }}
+    {% else %}
+      w-64
+    {% endif %}
+    {% if variant == 'modal' %}
+      fixed top-0 left-0 h-full z-50 transform transition-transform duration-300 ease-in-out
+      {% if open %}
+        translate-x-0
+      {% else %}
+        -translate-x-full
+      {% endif %}
+    {% endif %}
+    {% if background %}
+      {{ background }}
+    {% else %}
+      bg-surface
+    {% endif %}
+    {% if rounded %}
+      {{ rounded }}
+    {% else %}
+      rounded-r-xl
+    {% endif %}
+    {% if elevation %}
+      {{ elevation }}
+    {% else %}
+      shadow-md
+    {% endif %}
+    flex flex-col
+    {% if density == 'compact' %}
+      py-2
+    {% else %}
+      py-4
+    {% endif %}
+    transition-all duration-300
+  "
+  {% if variant == 'modal' %}
+    aria-hidden="{{ 'false' if open else 'true' }}"
+  {% endif %}
+  >
+  {% if header %}
+    <div class="px-4 mb-4 flex-shrink-0">
+      {{ header }}
+    </div>
+  {% endif %}
+  
+  <div class="flex-grow overflow-y-auto">
+    <ul class="list-none p-0 m-0">
+      {{ slot }}
+    </ul>
+  </div>
+  
+  {% if footer %}
+    <div class="px-4 mt-4 flex-shrink-0">
+      {{ footer }}
+    </div>
+  {% endif %}
+</nav>
+
+{% if variant == 'modal' and backdrop and open %}
+  <div class="fixed inset-0 bg-black bg-opacity-50 z-40 transition-opacity duration-300 ease-in-out"
+       {% if backdrop_click %}
+         onClick="{{ backdrop_click }}"
+       {% endif %}
+  ></div>
+{% endif %}

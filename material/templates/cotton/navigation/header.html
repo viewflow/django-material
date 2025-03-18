@@ -1,0 +1,31 @@
+<div class="flex items-center">
+  {% if logo %}
+    <div class="mr-3">
+      {{ logo }}
+    </div>
+  {% endif %}
+  
+  <div>
+    {% if title %}
+      <h2 class="text-lg font-medium text-on-surface">{{ title }}</h2>
+    {% endif %}
+    
+    {% if subtitle %}
+      <p class="text-sm text-on-surface/60">{{ subtitle }}</p>
+    {% endif %}
+  </div>
+  
+  {% if close_button and variant == 'modal' %}
+    <button 
+      class="ml-auto p-1 rounded-full hover:bg-on-surface/10 text-on-surface/70"
+      aria-label="Close navigation"
+      {% if close_action %}
+        onclick="{{ close_action }}"
+      {% endif %}
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+  {% endif %}
+</div>

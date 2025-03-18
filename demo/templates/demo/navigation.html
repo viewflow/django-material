@@ -1,0 +1,243 @@
+{% extends 'material/base_page.html' %}
+
+{% block title %}Material Design Navigation Demo{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    <div class="flex">
+        <!-- Main content -->
+        <main class="flex-1 pr-8">
+            <h1 class="text-3xl font-bold mb-8">Navigation Components</h1>
+            
+            <section class="mb-12" id="navigation">
+                <h2 class="text-2xl font-bold mb-4">Navigation</h2>
+                <p class="mb-4">Material Design navigation components help users move between views and sections of an app.</p>
+                
+                <div class="space-y-8">
+                    <!-- Standard Navigation  -->
+                    <div id="standard-navigation">
+                        <h3 class="text-xl font-medium mb-2">Standard Navigation</h3>
+                        <p class="mb-4">A standard navigation drawer with items and groups.</p>
+                        
+                        <div class="bg-gray-100 p-6 rounded-xl mb-6">
+                            <div class="w-full max-w-xs bg-white rounded-xl shadow-lg overflow-hidden">
+                                <c-navigation.container>
+                                    <c-navigation.header title="Navigation" subtitle="Material Design">
+                                        <c-slot name="logo">
+                                            <span class="material-icons text-primary">dashboard</span>
+                                        </c-slot>
+                                    </c-navigation.header>
+                                    
+                                    <c-navigation.group>
+                                        <c-navigation.item active url="/dashboard" label="Dashboard">
+                                            <c-slot name="icon">
+                                                <span class="material-icons">home</span>
+                                            </c-slot>
+                                        </c-navigation.item>
+                                        
+                                        <c-navigation.item url="/profile" label="Profile">
+                                            <c-slot name="icon">
+                                                <span class="material-icons">person</span>
+                                            </c-slot>
+                                        </c-navigation.item>
+                                        
+                                        <c-navigation.item url="/settings" label="Settings">
+                                            <c-slot name="icon">
+                                                <span class="material-icons">settings</span>
+                                            </c-slot>
+                                        </c-navigation.item>
+                                    </c-navigation.group>
+                                    
+                                    <c-navigation.divider></c-navigation.divider>
+                                    
+                                    <c-navigation.group title="Components">
+                                        <c-navigation.item url="/buttons" label="Buttons">
+                                            <c-slot name="icon">
+                                                <span class="material-icons">touch_app</span>
+                                            </c-slot>
+                                        </c-navigation.item>
+                                        
+                                        <c-navigation.item url="/cards" label="Cards">
+                                            <c-slot name="icon">
+                                                <span class="material-icons">dashboard</span>
+                                            </c-slot>
+                                            <c-slot name="badge">
+                                                New
+                                            </c-slot>
+                                        </c-navigation.item>
+                                        
+                                        <c-navigation.item url="/lists" label="Lists">
+                                            <c-slot name="icon">
+                                                <span class="material-icons">format_list_bulleted</span>
+                                            </c-slot>
+                                        </c-navigation.item>
+                                    </c-navigation.group>
+                                </c-navigation.container>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-4 bg-gray-100 p-4 rounded-md">
+                            <pre class="text-sm"><code>{% verbatim %}<!-- Navigation Container -->
+<c-navigation.container>
+  <!-- Header -->
+  <c-navigation.header title="Navigation" subtitle="Material Design">
+    <c-slot name="logo">
+      <span class="material-icons text-primary">dashboard</span>
+    </c-slot>
+  </c-navigation.header>
+  
+  <!-- Main Navigation Group -->
+  <c-navigation.group>
+    <c-navigation.item active url="/dashboard" label="Dashboard">
+      <c-slot name="icon">
+        <span class="material-icons">home</span>
+      </c-slot>
+    </c-navigation.item>
+    
+    <c-navigation.item url="/profile" label="Profile">
+      <c-slot name="icon">
+        <span class="material-icons">person</span>
+      </c-slot>
+    </c-navigation.item>
+  </c-navigation.group>
+  
+  <c-navigation.divider></c-navigation.divider>
+  
+  <!-- Group with Title -->
+  <c-navigation.group title="Components">
+    <c-navigation.item url="/buttons" label="Buttons">
+      <c-slot name="icon">
+        <span class="material-icons">touch_app</span>
+      </c-slot>
+    </c-navigation.item>
+    
+    <c-navigation.item url="/cards" label="Cards">
+      <c-slot name="icon">
+        <span class="material-icons">dashboard</span>
+      </c-slot>
+      <c-slot name="badge">
+        New
+      </c-slot>
+    </c-navigation.item>
+  </c-navigation.group>
+</c-navigation.container>{% endverbatim %}</code></pre>
+                        </div>
+                    </div>
+                    
+                    <!-- Expandable Navigation -->
+                    <div id="expandable-navigation" class="mt-8">
+                        <h3 class="text-xl font-medium mb-2">Expandable Navigation</h3>
+                        <p class="mb-4">Navigation with expandable nested sections.</p>
+                        
+                        <div class="bg-gray-100 p-6 rounded-xl mb-6">
+                            <div class="w-full max-w-xs bg-white rounded-xl shadow-lg overflow-hidden">
+                                <c-navigation.container>
+                                    <c-navigation.header title="Navigation" subtitle="With nested items" />
+                                    
+                                    <c-navigation.item active url="/home" label="Home">
+                                        <c-slot name="icon">
+                                            <span class="material-icons">home</span>
+                                        </c-slot>
+                                    </c-navigation.item>
+                                    
+                                    <c-navigation.item 
+                                        label="Components" 
+                                        expandable 
+                                        expanded
+                                    >
+                                        <c-slot name="icon">
+                                            <span class="material-icons">widgets</span>
+                                        </c-slot>
+                                        
+                                        <c-slot name="children">
+                                            <c-navigation.item url="/buttons" label="Buttons"></c-navigation.item>
+                                            <c-navigation.item url="/cards" label="Cards"></c-navigation.item>
+                                            <c-navigation.item url="/lists" label="Lists"></c-navigation.item>
+                                        </c-slot>
+                                    </c-navigation.item>
+                                    
+                                    <c-navigation.item 
+                                        label="Pages" 
+                                        expandable
+                                    >
+                                        <c-slot name="icon">
+                                            <span class="material-icons">description</span>
+                                        </c-slot>
+                                        
+                                        <c-slot name="children">
+                                            <c-navigation.item url="/profile" label="Profile"></c-navigation.item>
+                                            <c-navigation.item url="/settings" label="Settings"></c-navigation.item>
+                                            <c-navigation.item url="/help" label="Help"></c-navigation.item>
+                                        </c-slot>
+                                    </c-navigation.item>
+                                </c-navigation.container>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Rail Navigation -->
+                    <div id="rail-navigation" class="mt-8">
+                        <h3 class="text-xl font-medium mb-2">Rail Navigation</h3>
+                        <p class="mb-4">Compact rail-style navigation with icons only.</p>
+                        
+                        <div class="bg-gray-100 p-6 rounded-xl mb-6">
+                            <div class="w-full max-w-xs flex">
+                                <c-navigation.container variant="rail">
+                                    <c-navigation.item active url="/dashboard">
+                                        <c-slot name="icon">
+                                            <span class="material-icons">home</span>
+                                        </c-slot>
+                                    </c-navigation.item>
+                                    
+                                    <c-navigation.item url="/profile">
+                                        <c-slot name="icon">
+                                            <span class="material-icons">person</span>
+                                        </c-slot>
+                                    </c-navigation.item>
+                                    
+                                    <c-navigation.item url="/settings">
+                                        <c-slot name="icon">
+                                            <span class="material-icons">settings</span>
+                                        </c-slot>
+                                    </c-navigation.item>
+                                    
+                                    <c-navigation.divider></c-navigation.divider>
+                                    
+                                    <c-navigation.item url="/help">
+                                        <c-slot name="icon">
+                                            <span class="material-icons">help</span>
+                                        </c-slot>
+                                    </c-navigation.item>
+                                </c-navigation.container>
+                                
+                                <div class="bg-gray-50 flex-grow p-4 rounded-r-xl border-l border-gray-200">
+                                    <p class="text-gray-500">Content area</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <!-- Side navigation -->
+        <aside class="w-64 shrink-0">
+            <div class="sticky top-8 mt-8 ml-4 p-4">
+                <h3 class="text-base uppercase text-gray-600 font-bold mb-3">Navigation Types</h3>
+                <ul class="space-y-1">
+                    <li><a href="#standard-navigation" class="block py-1 text-primary hover:underline">Standard Navigation</a></li>
+                    <li><a href="#expandable-navigation" class="block py-1 text-primary hover:underline">Expandable Navigation</a></li>
+                    <li><a href="#rail-navigation" class="block py-1 text-primary hover:underline">Rail Navigation</a></li>
+                </ul>
+                
+                <h3 class="text-base uppercase text-secondary font-bold mt-6 mb-3">Related</h3>
+                <ul class="space-y-1">
+                    <li><a href="/" class="block py-1 text-secondary hover:underline">Overview</a></li>
+                    <li><a href="/lists/" class="block py-1 text-secondary hover:underline">List Components</a></li>
+                    <li><a href="/buttons/" class="block py-1 text-secondary hover:underline">Button Components</a></li>
+                </ul>
+            </div>
+        </aside>
+    </div>
+</div>
+{% endblock %}

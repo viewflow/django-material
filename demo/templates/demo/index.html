@@ -113,15 +113,19 @@
                     <p class="mb-4 text-gray-600">Components that help users navigate between different views and sections.</p>
                     <ul class="mb-4 space-y-1">
                         <li class="text-sm text-gray-600">• Breadcrumbs</li>
+                        <li class="text-sm text-gray-600">• Navigation drawer</li>
                         <li class="text-sm text-gray-600">• App bar (Coming soon)</li>
-                        <li class="text-sm text-gray-600">• Navigation drawer (Coming soon)</li>
                     </ul>
                 </div>
                 
                 <c-slot name="footer">
-                    <div class="flex justify-end">
+                    <div class="flex justify-end space-x-4">
                         <a href="/breadcrumbs/" class="text-primary font-medium hover:underline inline-flex items-center">
-                            View Breadcrumbs
+                            Breadcrumbs
+                            <span class="material-icons ml-1" style="font-size: 18px;">arrow_forward</span>
+                        </a>
+                        <a href="/navigation/" class="text-primary font-medium hover:underline inline-flex items-center">
+                            Navigation
                             <span class="material-icons ml-1" style="font-size: 18px;">arrow_forward</span>
                         </a>
                     </div>
@@ -157,6 +161,10 @@
                         <span class="material-icons text-green-600 mr-2" style="font-size: 18px;">check_circle</span>
                         List component suite
                     </li>
+                    <li class="flex items-center text-gray-700">
+                        <span class="material-icons text-green-600 mr-2" style="font-size: 18px;">check_circle</span>
+                        Navigation drawer
+                    </li>
                 </ul>
             </c-card.outlined>
             
@@ -176,7 +184,11 @@
                     </li>
                     <li class="flex items-center text-gray-700">
                         <span class="material-icons text-gray-400 mr-2" style="font-size: 18px;">pending</span>
-                        App bar & Navigation drawer
+                        App bar
+                    </li>
+                    <li class="flex items-center text-gray-700">
+                        <span class="material-icons text-gray-400 mr-2" style="font-size: 18px;">pending</span>
+                        Data tables
                     </li>
                 </ul>
             </c-card.outlined>
