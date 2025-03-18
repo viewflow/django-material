@@ -84,7 +84,7 @@ This file tracks the development progress of the Django Material project. As ite
     - [x] Responsive behavior - Adapt to screen size
     - [x] Nested navigation - Expandable sections with children
     - [x] Active state - Highlight current section
-    - [x] Icons support - Items with icon_name attribute for Material icons
+    - [x] Icons support - Items with icon attribute for Material icons
     - [x] Rounded corners - Custom styling for improved design
 - [ ] Tabs
 - [ ] Data table

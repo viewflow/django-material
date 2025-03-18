@@ -21,23 +21,8 @@
        onclick="{{ onclick }}"
      {% endif %}
   >
-    {% if icon_name %}
+    {% if icon %}
       <span class="material-icons
-        {% if variant == 'rail' %}
-          mx-auto
-        {% else %}
-          mr-3
-        {% endif %}
-        {% if active %}
-          text-primary
-        {% else %}
-          text-on-surface/70
-        {% endif %}
-      ">
-        {{ icon_name }}
-      </span>
-    {% elif icon %}
-      <span class="
         {% if variant == 'rail' %}
           mx-auto
         {% else %}
