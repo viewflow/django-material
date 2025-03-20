@@ -389,24 +389,105 @@ You can also add icons to breadcrumb items:
 
 ### Tables
 
-> ⚠️ **Coming Soon** - This component is not yet implemented.
+Tables provide an organized way to display structured data in rows and columns.
+
+#### Basic Table
+
+A simple table to display data:
 
 ```html
-<c-table.data :data="data">
-  <c-slot name="headers">
-    <th>Name</th>
-    <th>Email</th>
-  </c-slot>
-  <c-slot name="rows">
-    {% for item in data %}
-      <tr>
-        <td>{{ item.name }}</td>
-        <td>{{ item.email }}</td>
-      </tr>
-    {% endfor %}
-  </c-slot>
-</c-table.data>
+<c-table.container :columns="[
+  {'label': 'Name', 'key': 'name', 'sortable': True},
+  {'label': 'Position', 'key': 'position', 'sortable': True},
+  {'label': 'Office', 'key': 'office', 'sortable': True}
+]" header>
+  <c-table.row>
+    <c-table.cell font_medium>Tiger Nixon</c-table.cell>
+    <c-table.cell>System Architect</c-table.cell>
+    <c-table.cell>Edinburgh</c-table.cell>
+  </c-table.row>
+  <c-table.row>
+    <c-table.cell font_medium>Garrett Winters</c-table.cell>
+    <c-table.cell>Accountant</c-table.cell>
+    <c-table.cell>Tokyo</c-table.cell>
+  </c-table.row>
+</c-table.container>
 ```
+
+#### Table with Selectable Rows
+
+Enables row selection with checkboxes:
+
+```html
+<c-table.container :columns="[
+  {'label': 'Name', 'key': 'name', 'sortable': True},
+  {'label': 'Position', 'key': 'position', 'sortable': True}
+]" header selectable>
+  <c-table.row selectable row_id="1">
+    <c-table.cell>Tiger Nixon</c-table.cell>
+    <c-table.cell>System Architect</c-table.cell>
+  </c-table.row>
+  <c-table.row selectable row_id="2">
+    <c-table.cell>Garrett Winters</c-table.cell>
+    <c-table.cell>Accountant</c-table.cell>
+  </c-table.row>
+</c-table.container>
+```
+
+#### Table with Pagination
+
+Adds pagination controls for navigating through large datasets:
+
+```html
+<c-table.container :columns="[
+  {'label': 'Name', 'key': 'name', 'sortable': True},
+  {'label': 'Position', 'key': 'position', 'sortable': True}
+]" header :pagination="{
+  'start': 1,
+  'end': 10,
+  'total': 57,
+  'prev_disabled': True,
+  'next_disabled': False
+}">
+  <!-- Table rows -->
+</c-table.container>
+```
+
+#### Table Components
+
+The table system consists of three components:
+
+1. **container.html** - The main table wrapper
+   - `columns`: List of column objects with properties:
+     - `label`: Display name of the column
+     - `key`: Unique identifier for sorting
+     - `sortable`: Boolean indicating if column can be sorted
+   - `header`: Boolean to show/hide the header row
+   - `selectable`: Boolean to enable row selection with checkboxes
+   - `pagination`: Object with pagination information:
+     - `start`: Starting row number being displayed
+     - `end`: Ending row number being displayed
+     - `total`: Total number of rows in the dataset
+     - `prev_disabled`: Boolean to disable previous button
+     - `next_disabled`: Boolean to disable next button
+
+2. **row.html** - Individual table rows
+   - `selectable`: Boolean to enable checkbox for this row
+   - `row_id`: Unique identifier for the row (required when selectable is true)
+
+3. **cell.html** - Individual table cells
+   - `font_medium`: Boolean to apply medium font weight (useful for primary cells)
+   - `whitespace_nowrap`: Boolean to prevent text wrapping
+   - Supports all HTML attributes via `{{ attrs }}`
+
+#### Accessibility Features
+
+The table components include built-in accessibility features:
+- Semantic HTML table structure
+- ARIA attributes for improved screen reader compatibility
+- Clear visual indicators for sortable columns
+- Keyboard navigation support for interactive elements
+- Proper focus states for all interactive elements
 
 ### Lists
 

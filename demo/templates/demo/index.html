@@ -131,6 +131,35 @@
                     </div>
                 </c-slot>
             </c-card.outlined>
+            
+            <!-- Tables -->
+            <c-card.outlined hover_border>
+                <c-slot name="title">
+                    <span class="flex items-center">
+                        <span class="material-icons mr-2 text-primary">table_chart</span>
+                        <span class="text-xl font-bold text-primary">Tables</span>
+                    </span>
+                </c-slot>
+                
+                <div>
+                    <p class="mb-4 text-gray-600">Table components for displaying structured data in a clean, organized format.</p>
+                    <ul class="mb-4 space-y-1">
+                        <li class="text-sm text-gray-600">• Basic tables</li>
+                        <li class="text-sm text-gray-600">• Selectable rows</li>
+                        <li class="text-sm text-gray-600">• Sortable columns</li>
+                        <li class="text-sm text-gray-600">• Pagination</li>
+                    </ul>
+                </div>
+                
+                <c-slot name="footer">
+                    <div class="flex justify-end">
+                        <a href="/tables/" class="text-primary font-medium hover:underline inline-flex items-center">
+                            View Tables
+                            <span class="material-icons ml-1" style="font-size: 18px;">arrow_forward</span>
+                        </a>
+                    </div>
+                </c-slot>
+            </c-card.outlined>
         </div>
         
         <h2 class="text-2xl font-bold mb-6">Implementation Status</h2>
@@ -165,6 +194,10 @@
                         <span class="material-icons text-green-600 mr-2" style="font-size: 18px;">check_circle</span>
                         Navigation drawer
                     </li>
+                    <li class="flex items-center text-gray-700">
+                        <span class="material-icons text-green-600 mr-2" style="font-size: 18px;">check_circle</span>
+                        Data tables
+                    </li>
                 </ul>
             </c-card.outlined>
             
@@ -185,10 +218,6 @@
                     <li class="flex items-center text-gray-700">
                         <span class="material-icons text-gray-400 mr-2" style="font-size: 18px;">pending</span>
                         App bar
-                    </li>
-                    <li class="flex items-center text-gray-700">
-                        <span class="material-icons text-gray-400 mr-2" style="font-size: 18px;">pending</span>
-                        Data tables
                     </li>
                 </ul>
             </c-card.outlined>

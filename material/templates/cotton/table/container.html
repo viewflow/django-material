@@ -1,0 +1,47 @@
+<div class="relative overflow-x-auto rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+  <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+    {% if header %}
+    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+      <tr>
+        {% if selectable %}
+        <th scope="col" class="p-4">
+          <div class="flex items-center">
+            <input id="checkbox-all" type="checkbox" class="w-4 h-4 text-primary-600 bg-gray-100 border-gray-300 rounded focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+            <label for="checkbox-all" class="sr-only">checkbox</label>
+          </div>
+        </th>
+        {% endif %}
+        {% for column in columns %}
+        <th scope="col" class="p-4{% if column.sortable %} cursor-pointer group{% endif %}" {% if column.sortable %}data-sort-key="{{ column.key }}"{% endif %}>
+          <div class="flex items-center">
+            {{ column.label }}
+            {% if column.sortable %}
+            <span class="material-icons text-base ml-1 text-gray-400 group-hover:text-gray-700 dark:group-hover:text-gray-300" aria-hidden="true">arrow_drop_down</span>
+            {% endif %}
+          </div>
+        </th>
+        {% endfor %}
+      </tr>
+    </thead>
+    {% endif %}
+    <tbody>
+      {{ slot }}
+    </tbody>
+  </table>
+  
+  {% if pagination %}
+  <div class="flex justify-between items-center p-4 bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
+    <span class="text-sm text-gray-700 dark:text-gray-400">
+      Showing <span class="font-medium">{{ pagination.start }}</span> to <span class="font-medium">{{ pagination.end }}</span> of <span class="font-medium">{{ pagination.total }}</span> entries
+    </span>
+    <div class="inline-flex">
+      <c-button.outlined id="prev-page" icon="chevron_left" disabled="{{ pagination.prev_disabled }}">
+        Previous
+      </c-button.outlined>
+      <c-button.outlined id="next-page" icon="chevron_right" disabled="{{ pagination.next_disabled }}">
+        Next
+      </c-button.outlined>
+    </div>
+  </div>
+  {% endif %}
+</div>

@@ -1,0 +1,114 @@
+{% extends "demo/index.html" %}
+
+{% block title %}Tables{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+  <h1 class="text-2xl font-medium mb-6">Tables</h1>
+  
+  <section id="basic-table" class="mb-12">
+    <h2 class="text-xl font-medium mb-4">Basic Table</h2>
+    <c-table.container :columns="[
+      {'label': 'Name', 'key': 'name', 'sortable': True},
+      {'label': 'Position', 'key': 'position', 'sortable': True},
+      {'label': 'Office', 'key': 'office', 'sortable': True},
+      {'label': 'Start Date', 'key': 'start_date', 'sortable': True},
+      {'label': 'Salary', 'key': 'salary', 'sortable': True}
+    ]" header>
+      <c-table.row>
+        <c-table.cell font_medium whitespace_nowrap>Tiger Nixon</c-table.cell>
+        <c-table.cell>System Architect</c-table.cell>
+        <c-table.cell>Edinburgh</c-table.cell>
+        <c-table.cell>2011/04/25</c-table.cell>
+        <c-table.cell>$320,800</c-table.cell>
+      </c-table.row>
+      <c-table.row>
+        <c-table.cell font_medium whitespace_nowrap>Garrett Winters</c-table.cell>
+        <c-table.cell>Accountant</c-table.cell>
+        <c-table.cell>Tokyo</c-table.cell>
+        <c-table.cell>2011/07/25</c-table.cell>
+        <c-table.cell>$170,750</c-table.cell>
+      </c-table.row>
+      <c-table.row>
+        <c-table.cell font_medium whitespace_nowrap>Ashton Cox</c-table.cell>
+        <c-table.cell>Junior Technical Author</c-table.cell>
+        <c-table.cell>San Francisco</c-table.cell>
+        <c-table.cell>2009/01/12</c-table.cell>
+        <c-table.cell>$86,000</c-table.cell>
+      </c-table.row>
+    </c-table.container>
+  </section>
+  
+  <section id="selectable-table" class="mb-12">
+    <h2 class="text-xl font-medium mb-4">Selectable Table</h2>
+    <c-table.container :columns="[
+      {'label': 'Name', 'key': 'name', 'sortable': True},
+      {'label': 'Position', 'key': 'position', 'sortable': True},
+      {'label': 'Office', 'key': 'office', 'sortable': True},
+      {'label': 'Start Date', 'key': 'start_date', 'sortable': False},
+      {'label': 'Salary', 'key': 'salary', 'sortable': True}
+    ]" header selectable>
+      <c-table.row selectable row_id="1">
+        <c-table.cell font_medium whitespace_nowrap>Tiger Nixon</c-table.cell>
+        <c-table.cell>System Architect</c-table.cell>
+        <c-table.cell>Edinburgh</c-table.cell>
+        <c-table.cell>2011/04/25</c-table.cell>
+        <c-table.cell>$320,800</c-table.cell>
+      </c-table.row>
+      <c-table.row selectable row_id="2">
+        <c-table.cell font_medium whitespace_nowrap>Garrett Winters</c-table.cell>
+        <c-table.cell>Accountant</c-table.cell>
+        <c-table.cell>Tokyo</c-table.cell>
+        <c-table.cell>2011/07/25</c-table.cell>
+        <c-table.cell>$170,750</c-table.cell>
+      </c-table.row>
+      <c-table.row selectable row_id="3">
+        <c-table.cell font_medium whitespace_nowrap>Ashton Cox</c-table.cell>
+        <c-table.cell>Junior Technical Author</c-table.cell>
+        <c-table.cell>San Francisco</c-table.cell>
+        <c-table.cell>2009/01/12</c-table.cell>
+        <c-table.cell>$86,000</c-table.cell>
+      </c-table.row>
+    </c-table.container>
+  </section>
+  
+  <section id="pagination-table" class="mb-12">
+    <h2 class="text-xl font-medium mb-4">Table with Pagination</h2>
+    <c-table.container :columns="[
+      {'label': 'Name', 'key': 'name', 'sortable': True},
+      {'label': 'Position', 'key': 'position', 'sortable': True},
+      {'label': 'Office', 'key': 'office', 'sortable': True},
+      {'label': 'Start Date', 'key': 'start_date', 'sortable': True},
+      {'label': 'Salary', 'key': 'salary', 'sortable': True}
+    ]" header :pagination="{
+      'start': 1,
+      'end': 10,
+      'total': 57,
+      'prev_disabled': True,
+      'next_disabled': False
+    }">
+      <c-table.row>
+        <c-table.cell font_medium whitespace_nowrap>Tiger Nixon</c-table.cell>
+        <c-table.cell>System Architect</c-table.cell>
+        <c-table.cell>Edinburgh</c-table.cell>
+        <c-table.cell>2011/04/25</c-table.cell>
+        <c-table.cell>$320,800</c-table.cell>
+      </c-table.row>
+      <c-table.row>
+        <c-table.cell font_medium whitespace_nowrap>Garrett Winters</c-table.cell>
+        <c-table.cell>Accountant</c-table.cell>
+        <c-table.cell>Tokyo</c-table.cell>
+        <c-table.cell>2011/07/25</c-table.cell>
+        <c-table.cell>$170,750</c-table.cell>
+      </c-table.row>
+      <c-table.row>
+        <c-table.cell font_medium whitespace_nowrap>Ashton Cox</c-table.cell>
+        <c-table.cell>Junior Technical Author</c-table.cell>
+        <c-table.cell>San Francisco</c-table.cell>
+        <c-table.cell>2009/01/12</c-table.cell>
+        <c-table.cell>$86,000</c-table.cell>
+      </c-table.row>
+    </c-table.container>
+  </section>
+</div>
+{% endblock %}

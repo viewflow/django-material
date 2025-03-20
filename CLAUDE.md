@@ -25,6 +25,45 @@
 - Components with text content should use slot content directly instead of label attributes
 - Required attributes should have sensible defaults whenever possible
 
+## Django-Cotton Usage Guidelines
+- Files should be placed in the `templates/cotton/` directory
+- Component filenames use snake_case: `my_component.html`
+- Components are used with kebab-case prefixed by 'c-': `<c-my-component>`
+- Components with variants use dot notation: `<c-button.filled>`
+- Default content (slot) is passed between opening and closing tags:
+  ```html
+  <c-button.filled>Click me</c-button.filled>
+  ```
+- Named slots are used for providing content in specific locations:
+  ```html
+  <c-card.filled>
+    <c-slot name="title">Card Title</c-slot>
+    Main content here
+    <c-slot name="footer">Footer content</c-slot>
+  </c-card.filled>
+  ```
+- Boolean attributes can be specified without values:
+  ```html
+  <c-button.filled disabled>Cannot Click</c-button.filled>
+  ```
+- Template variables are passed with a colon prefix:
+  ```html
+  <c-button.filled :disabled="is_disabled">Dynamic Button</c-button.filled>
+  ```
+- Python data types can be passed with colon prefix:
+  ```html
+  <c-table.container :columns="[{'label': 'Name', 'sortable': True}]"></c-table.container>
+  ```
+- Component-defined variables use the `<c-vars>` tag:
+  ```html
+  <!-- In component definition -->
+  <c-vars theme="bg-purple-500" />
+  ```
+- Dynamic components can be created with the `is` attribute:
+  ```html
+  <c-component :is="component_type"></c-component>
+  ```
+
 ## Comment Guidelines
 - Module docstrings: 1-2 lines explaining core purpose/function
 - Class docstrings: Single line explaining role/responsibility
@@ -58,6 +97,11 @@
   - group.html - Grouping of navigation items
   - header.html - Navigation header with title and optional subtitle
   - divider.html - Visual separator between navigation sections
+  
+- **Table Components**:
+  - container.html - Main table wrapper with headers and pagination
+  - row.html - Table row with optional selection checkbox
+  - cell.html - Table cell with text formatting options
 
 ## Testing
 - Run Django tests: `python manage.py test`
