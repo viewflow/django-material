@@ -1,0 +1,22 @@
+{% comment %}
+An elevated button with optional icon. Elevated buttons have surface-container background with the color as text.
+{% endcomment %}
+
+{% load i18n %}
+
+<c-vars
+  color="primary"
+  class="inline-flex relative items-center justify-center rounded-full px-6 py-2.5 font-medium text-sm leading-6 transition-all duration-300 ease-in-out overflow-hidden shadow hover:shadow-lg focus:outline-none focus:shadow-lg disabled:bg-surface-variant disabled:text-on-surface-variant disabled:shadow-none disabled:cursor-not-allowed active:ripple"
+  icon_class="material-icons mr-2 text-lg" />
+
+<button
+  class="{{ class }} bg-surface-container-low text-{{ color }} hover:bg-surface-container-high focus:bg-surface-container-high"
+  {% if disabled %}disabled{% endif %}
+  {% if aria_label %}aria-label="{{ aria_label }}"{% endif %}
+  role="button"
+  {{ attrs }}>
+  {% if icon %}
+    <span class="{{ icon_class }}" aria-hidden="true">{{ icon }}</span>
+  {% endif %}
+  {{ slot }}
+</button>
