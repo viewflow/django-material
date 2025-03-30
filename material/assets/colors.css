@@ -1,0 +1,52 @@
+@import "tailwindcss";
+
+@theme static {
+  /* Primary colors */
+  --color-primary: #01579b;
+  --color-on-primary: #FFFFFF;
+  /* A very light blue as the primary container, with a dark blue text */
+  --color-primary-container: #E1F5FE;
+  --color-on-primary-container: #003c6e;
+
+  /* Secondary colors (a complementary teal) */
+  --color-secondary: #00897B;
+  --color-on-secondary: #FFFFFF;
+  --color-secondary-container: #B2DFDB;
+  --color-on-secondary-container: #004D40;
+
+  /* Tertiary colors (a vibrant pinkish accent) */
+  --color-tertiary: #D81B60;
+  --color-on-tertiary: #FFFFFF;
+  --color-tertiary-container: #F8BBD0;
+  --color-on-tertiary-container: #880E4F;
+
+  /* Error colors (kept from a standard palette) */
+  --color-error: #B3261E;
+  --color-on-error: #FFFFFF;
+  --color-error-container: #F9DEDC;
+  --color-on-error-container: #410E0B;
+
+  /* Background and surface settings */
+  --color-background: #FFFFFF;
+  --color-on-background: #212121;
+  --color-surface: #FFFFFF;
+  --color-on-surface: #212121;
+  --color-surface-variant: #ECEFF1;
+  --color-on-surface-variant: #757575;
+
+  /* Inverse colors for high contrast elements */
+  --color-inverse-surface: #424242;
+  --color-inverse-on-surface: #FAFAFA;
+  --color-inverse-primary: #B3E5FC;
+
+  /* Additional settings */
+  --color-outline: #9E9E9E;
+  --color-outline-variant: #BDBDBD;
+  --color-shadow: #000000;
+  --color-scrim: #000000;
+
+  --color-surface-dim: #121212;
+  --color-surface-bright: #FFFFFF;
+  --color-surface-container-low: #ECEFF1;
+  --color-surface-container-high: #F5F5F5;
+}

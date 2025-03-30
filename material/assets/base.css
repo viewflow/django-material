@@ -1,0 +1,14 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Roboto", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+/* Document Base */
+html:not([class]) {
+  @apply min-h-full w-full scroll-smooth;
+}
+
+body:not([class]) {
+  @apply h-full min-h-full w-full bg-gray-100 m-0 p-0 font-sans text-gray-900;
+}

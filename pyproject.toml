@@ -1,0 +1,15 @@
+[project]
+name = "material"
+version = "0.1.0"
+description = "Modern Material Design framework for Django"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "django>=5.1.7",
+    "django-cotton>=2.0.0",
+]
+
+[dependency-groups]
+dev = [
+    "ipdb>=0.13.13",
+]

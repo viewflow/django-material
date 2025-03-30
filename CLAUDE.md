@@ -1,7 +1,7 @@
 # Development Guidelines for Django Material
 
 ## Code Style
-- Use TailwindCSS for styling components
+- Use TailwindCSS for components
 - Follow Google style docstrings for Python code
 - Follow Material Design 3 guidelines for component styling
 - Always provide ARIA attributes for accessibility
@@ -23,7 +23,7 @@
 
 #### Default Slot Content
 ```html
-<!-- In component definition (cotton/button.html) -->
+<!-- In component definition -->
 <a href="/" class="...">{{ slot }}</a>
 
 <!-- In view usage -->
@@ -123,3 +123,9 @@
 - Demo templates should have concise, descriptive titles
 - Prefer shorter component names (e.g., c-nav instead of c-navigation)
 - Use standard attribute names (e.g., icon, title, variant) consistently
+
+## Git Workflow
+- For Claude's contributions, always use:
+  ```
+  git commit --author="Claude AI <claude@anthropic.com>" -m "Commit message"
+  ```

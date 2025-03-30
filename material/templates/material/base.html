@@ -1,0 +1,26 @@
+{% load i18n static %}<!DOCTYPE html>
+{% get_current_language as LANGUAGE_CODE %}{% get_current_language_bidi as LANGUAGE_BIDI %}
+<html lang="{{ LANGUAGE_CODE|default:"en-us" }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
+  {% with site=request.resolver_match.site app=request.resolver_match.app viewset=request.resolver_match.viewset %}
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      {% block favicon %}<link rel="icon" href="{% static 'material/img/favicon.png' %}" type="image/png" />{% endblock %}
+      <title>{% block title %}{{ site.title|default:"Django Material" }}{% endblock %}</title>
+      {% block css %}
+      <link rel="stylesheet" href="{% static 'material/fonts/roboto/fonts.css' %}">
+      <link rel="stylesheet" href="{% static 'material/fonts/material-icons/index.css' %}">
+      <link rel="stylesheet" href="{% static 'material/css/unpoly.min.css' %}">
+      <link rel="stylesheet" href="{% static 'material/css/material.css' %}">
+      {% block layout_css %}<link rel="stylesheet" href="{% static 'material/css/layout.css' %}">{% endblock layout_css %}
+      {% endblock css %}
+      {% block js %}
+        {% url 'javascript-catalog' as javascript_catalog_url %}{% if javascript_catalog_url %}<script type="text/javascript" src="{{ javascript_catalog_url }}"></script>{% endif %}
+      {% endblock js %}
+      {% block extrahead %}{% endblock %}
+    </head>
+    <body>
+      {% block body %}{% endblock %}
+    </body>
+  {% endwith %}
+</html>

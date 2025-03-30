@@ -1,0 +1,9 @@
+{% extends 'material/base.html' %}
+
+{% block body %}
+  <header role="banner"></header>
+  <nav role="navigation"></nav>
+  <main>{% block content %}{% endblock %}</main>
+  <footer role="contentinfo"></footer>
+  {% block extrabody %}{% endblock extrabody %}
+{% endblock %}
