@@ -1,0 +1,135 @@
+{% extends 'material/base_page.html' %}
+{% load i18n %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+  <h1 class="text-3xl font-bold mb-8">Button Components</h1>
+
+  <section id="filled-buttons" class="mb-12">
+    <h2 class="text-2xl font-bold mb-4">Filled Buttons</h2>
+    <p class="mb-6">
+      Filled buttons are high-emphasis buttons that use color fill and elevation to stand out.
+      They are used for primary actions.
+    </p>
+
+    <div class="flex flex-wrap gap-4 mb-8">
+      <!-- Primary color (default) -->
+      <div class="flex flex-col items-center">
+        <c-button.filled>Primary</c-button.filled>
+        <span class="text-sm mt-2">Default</span>
+      </div>
+
+      <!-- Secondary color -->
+      <div class="flex flex-col items-center">
+        <c-button.filled color="secondary">Secondary</c-button.filled>
+        <span class="text-sm mt-2">color="secondary"</span>
+      </div>
+
+      <!-- Tertiary color -->
+      <div class="flex flex-col items-center">
+        <c-button.filled color="tertiary">Tertiary</c-button.filled>
+        <span class="text-sm mt-2">color="tertiary"</span>
+      </div>
+
+      <!-- Disabled state -->
+      <div class="flex flex-col items-center">
+        <c-button.filled disabled>Disabled</c-button.filled>
+        <span class="text-sm mt-2">disabled</span>
+      </div>
+    </div>
+
+    <div class="flex flex-wrap gap-4 mb-8">
+      <!-- With icon -->
+      <div class="flex flex-col items-center">
+        <c-button.filled icon="add">With Icon</c-button.filled>
+        <span class="text-sm mt-2">icon="add"</span>
+      </div>
+
+      <!-- With aria-label -->
+      <div class="flex flex-col items-center">
+        <c-button.filled icon="favorite" aria_label="Add to favorites">Favorite</c-button.filled>
+        <span class="text-sm mt-2">With aria_label</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="usage" class="mb-12">
+    <h2 class="text-2xl font-bold mb-4">Usage</h2>
+    
+    <div class="bg-surface-variant p-6 rounded-lg mb-6">
+      <pre class="text-on-surface-variant"><code>&lt;c-button.filled&gt;Button Text&lt;/c-button.filled&gt;
+
+&lt;!-- With color variants --&gt;
+&lt;c-button.filled color="secondary"&gt;Secondary Button&lt;/c-button.filled&gt;
+&lt;c-button.filled color="tertiary"&gt;Tertiary Button&lt;/c-button.filled&gt;
+
+&lt;!-- With icon --&gt;
+&lt;c-button.filled icon="add"&gt;Add Item&lt;/c-button.filled&gt;
+
+&lt;!-- Disabled state --&gt;
+&lt;c-button.filled disabled&gt;Disabled Button&lt;/c-button.filled&gt;
+
+&lt;!-- With ARIA label for accessibility --&gt;
+&lt;c-button.filled icon="favorite" aria_label="Add to favorites"&gt;Favorite&lt;/c-button.filled&gt;</code></pre>
+    </div>
+  </section>
+
+  <section id="attributes" class="mb-12">
+    <h2 class="text-2xl font-bold mb-4">Attributes</h2>
+    
+    <table class="w-full border-collapse mb-6">
+      <thead>
+        <tr class="bg-surface-variant">
+          <th class="border p-2 text-left">Attribute</th>
+          <th class="border p-2 text-left">Type</th>
+          <th class="border p-2 text-left">Default</th>
+          <th class="border p-2 text-left">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="border p-2"><code>color</code></td>
+          <td class="border p-2">string</td>
+          <td class="border p-2">"primary"</td>
+          <td class="border p-2">Button color theme. Options: "primary", "secondary", "tertiary"</td>
+        </tr>
+        <tr>
+          <td class="border p-2"><code>icon</code></td>
+          <td class="border p-2">string</td>
+          <td class="border p-2">none</td>
+          <td class="border p-2">Material icon name to display before the button text</td>
+        </tr>
+        <tr>
+          <td class="border p-2"><code>disabled</code></td>
+          <td class="border p-2">boolean</td>
+          <td class="border p-2">false</td>
+          <td class="border p-2">When true, the button is disabled and non-interactive</td>
+        </tr>
+        <tr>
+          <td class="border p-2"><code>aria_label</code></td>
+          <td class="border p-2">string</td>
+          <td class="border p-2">none</td>
+          <td class="border p-2">Accessible label for screen readers</td>
+        </tr>
+        <tr>
+          <td class="border p-2"><code>attrs</code></td>
+          <td class="border p-2">object</td>
+          <td class="border p-2">none</td>
+          <td class="border p-2">Additional HTML attributes to apply to the button element</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section id="accessibility" class="mb-12">
+    <h2 class="text-2xl font-bold mb-4">Accessibility</h2>
+    
+    <ul class="list-disc pl-6 mb-6">
+      <li class="mb-2">Buttons include the <code>role="button"</code> attribute</li>
+      <li class="mb-2">Icons are marked with <code>aria-hidden="true"</code> to prevent screen readers from announcing them</li>
+      <li class="mb-2">Use <code>aria_label</code> to provide more context for buttons with icons</li>
+      <li class="mb-2">Disabled buttons maintain visible contrast for users with visual impairments</li>
+    </ul>
+  </section>
+</div>
+{% endblock %}

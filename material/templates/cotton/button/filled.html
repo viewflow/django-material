@@ -1,0 +1,22 @@
+{% comment %}
+A filled button with optional icon, supporting primary, secondary, and tertiary color variants.
+{% endcomment %}
+
+{% load i18n %}
+
+<c-vars
+  color="primary"
+  class="inline-flex items-center justify-center rounded-full px-6 py-2.5 font-medium text-sm leading-6 transition-shadow hover:shadow-md focus:outline-none focus:shadow-md disabled:bg-surface-variant disabled:text-on-surface-variant disabled:shadow-none disabled:cursor-not-allowed"
+  icon_class="material-icons mr-2 text-lg" />
+
+<button
+  class="{{ class }} bg-{{ color }} text-on-{{ color }}"
+  {% if disabled %}disabled{% endif %}
+  {% if aria_label %}aria-label="{{ aria_label }}"{% endif %}
+  role="button"
+  {{ attrs }}>
+  {% if icon %}
+    <span class="{{ icon_class }}" aria-hidden="true">{{ icon }}</span>
+  {% endif %}
+  {{ slot }}
+</button>
