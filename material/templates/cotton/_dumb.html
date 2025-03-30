@@ -1,0 +1,23 @@
+{% comment %}
+This is a "dumb" component that exists solely to make Tailwind generate the Material Design color classes.
+It's not meant to be used directly in templates.
+{% endcomment %}
+
+<div class="bg-primary text-on-primary p-4 mb-2">
+  Primary color background with on-primary text
+</div>
+
+<div class="bg-secondary text-on-secondary p-4 mb-2">
+  Secondary color background with on-secondary text
+</div>
+
+<div class="bg-tertiary text-on-tertiary p-4 mb-2">
+  Tertiary color background with on-tertiary text
+</div>
+
+{% comment %}
+Button hover and focus states for Tailwind class generation
+{% endcomment %}
+<div class="hover:bg-primary/80 focus:bg-primary/70">Primary button states</div>
+<div class="hover:bg-secondary/80 focus:bg-secondary/70">Secondary button states</div>
+<div class="hover:bg-tertiary/80 focus:bg-tertiary/70">Tertiary button states</div>

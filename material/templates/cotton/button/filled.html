@@ -6,11 +6,11 @@ A filled button with optional icon, supporting primary, secondary, and tertiary 
 
 <c-vars
   color="primary"
-  class="inline-flex items-center justify-center rounded-full px-6 py-2.5 font-medium text-sm leading-6 transition-shadow hover:shadow-md focus:outline-none focus:shadow-md disabled:bg-surface-variant disabled:text-on-surface-variant disabled:shadow-none disabled:cursor-not-allowed"
+  class="inline-flex relative items-center justify-center rounded-full px-6 py-2.5 font-medium text-sm leading-6 transition-all duration-300 ease-in-out overflow-hidden hover:shadow-md focus:outline-none focus:shadow-md disabled:bg-surface-variant disabled:text-on-surface-variant disabled:shadow-none disabled:cursor-not-allowed active:ripple"
   icon_class="material-icons mr-2 text-lg" />
 
 <button
-  class="{{ class }} bg-{{ color }} text-on-{{ color }}"
+  class="{{ class }} bg-{{ color }} text-on-{{ color }} hover:bg-{{ color }}/80 focus:bg-{{ color }}/70"
   {% if disabled %}disabled{% endif %}
   {% if aria_label %}aria-label="{{ aria_label }}"{% endif %}
   role="button"
