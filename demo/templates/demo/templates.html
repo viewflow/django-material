@@ -206,15 +206,99 @@
     </div>
   </section>
 
-  <section id="best-practices" class="mb-12">
-    <h2 class="text-2xl font-bold mb-4">Best Practices</h2>
+  <section id="template-customization" class="mb-12">
+    <h2 class="text-2xl font-bold mb-4">Template Customization</h2>
+    
+    <p class="mb-6">
+      Django Material templates follow Django's template inheritance system, allowing you to override any template in your project.
+      This makes it easy to customize the appearance and functionality of Material components without modifying the core files.
+    </p>
+    
+    <h3 class="text-xl font-medium mb-3">Overriding Templates</h3>
+    <p class="mb-6">
+      To override any Django Material template, you can create a template with the same path in your project's templates directory.
+      First, ensure your templates directory is properly configured in your Django settings:
+    </p>
+    
+    <div class="bg-surface-variant p-6 rounded-lg mb-6">
+      <pre class="text-on-surface-variant"><code>TEMPLATES = [
+{
+    'BACKEND': 'django.template.backends.django.DjangoTemplates',
+    'DIRS': [
+        # ./templates/ subdirectory is located at the same folder as ./manage.py
+        os.path.join(BASE_DIR, 'templates')
+    ],
+    ...
+}
+]</code></pre>
+    </div>
+    
+    <p class="mb-6">
+      To override a component template, create a file with the same path in your templates directory.
+      For example, to override <code>material/base.html</code>, create a file at:
+    </p>
+    
+    <div class="bg-surface-variant p-6 rounded-lg mb-6">
+      <pre class="text-on-surface-variant"><code>templates/material/base.html</code></pre>
+    </div>
+    
+    <h3 class="text-xl font-medium mb-3">Extending and Modifying Templates</h3>
+    <p class="mb-6">
+      The recommended approach is to extend the original template and override only the blocks you want to customize.
+      This ensures your template will continue to work even if the original template is updated.
+    </p>
+    
+    <div class="bg-surface-variant p-6 rounded-lg mb-6">
+      <pre class="text-on-surface-variant"><code>&#123;% extends 'material/base.html' %&#125;
+&#123;% load i18n static %&#125;
+
+&#123;% block title %&#125;&#123;&#123; site.title|default:"Corp. Ink." &#125;&#125;&#123;% endblock %&#125;
+
+&#123;% block css %&#125;
+  &#123;&#123; block.super &#125;&#125;
+  &lt;link rel="stylesheet" href="&#123;% static 'myapp/css/custom.css' %&#125;"&gt;
+&#123;% endblock %&#125;</code></pre>
+    </div>
+    
+    <p class="mb-6">
+      This approach works for any template, including component templates in the <code>cotton/</code> directory.
+      For example, to customize the filled button template:
+    </p>
+    
+    <div class="bg-surface-variant p-6 rounded-lg mb-6">
+      <pre class="text-on-surface-variant"><code>templates/cotton/button/filled.html</code></pre>
+    </div>
+    
+    <h3 class="text-xl font-medium mb-3">Overriding Cotton Components</h3>
+    <p class="mb-6">
+      Cotton components can be overridden just like any other template. When you override a component template,
+      all instances of that component in your application will use your customized version.
+    </p>
+    
+    <div class="bg-surface-variant p-6 rounded-lg mb-6">
+      <pre class="text-on-surface-variant"><code>&#123;% extends 'cotton/button/filled.html' %&#125;
+&#123;% load i18n static %&#125;
+
+&lt;c-vars
+  class="inline-flex items-center justify-center px-6 py-3 bg-primary text-on-primary rounded-full shadow-lg &#123;&#123; class &#125;&#125;" /&gt;
+
+&lt;button class="&#123;&#123; class &#125;&#125;" &#123;&#123; attrs &#125;&#125;&gt;
+  &#123;% if icon %&#125;
+  &lt;span class="material-icons mr-2 leading-tight"&gt;&#123;&#123; icon &#125;&#125;&lt;/span&gt;
+  &#123;% endif %&#125;
+  &#123;&#123; slot &#125;&#125;
+&lt;/button&gt;</code></pre>
+    </div>
+    
+    <p class="mb-4">
+      When overriding component templates, remember to:
+    </p>
     
     <ul class="list-disc pl-6 mb-6">
-      <li class="mb-2">Use <code>{{ block.super }}</code> when you want to extend rather than replace a block's content</li>
-      <li class="mb-2">Create your own application-specific base template that extends <code>material/base_page.html</code></li>
-      <li class="mb-2">Use the navigation blocks to create a consistent menu structure across your application</li>
-      <li class="mb-2">Leverage Unpoly's navigation features by using <code>up-target="main"</code> on navigation links</li>
-      <li class="mb-2">Consider creating reusable component templates for repeated content patterns</li>
+      <li class="mb-2">Include all required variables and default values</li>
+      <li class="mb-2">Maintain proper accessibility attributes</li>
+      <li class="mb-2">Pass the &#123;&#123; attrs &#125;&#125; variable to forward attributes</li>
+      <li class="mb-2">Use &#123;&#123; slot &#125;&#125; to render the component content</li>
     </ul>
   </section>
 </div>
