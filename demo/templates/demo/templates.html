@@ -1,0 +1,221 @@
+{% extends 'material/base_page.html' %}
+{% load i18n static %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+  <h1 class="text-3xl font-bold mb-8">Base Templates</h1>
+
+  <p class="mb-6">
+    Django Material provides base templates that can be extended to create consistent layouts across your application.
+    These templates include various blocks that can be redefined to customize the content and appearance.
+  </p>
+
+  <section id="base-html" class="mb-12">
+    <h2 class="text-2xl font-bold mb-4">material/base.html</h2>
+    <p class="mb-6">
+      The foundational template that sets up the HTML document structure, includes required CSS and JavaScript,
+      and defines the basic layout.
+    </p>
+
+    <div class="bg-surface-variant p-6 rounded-lg mb-6">
+      <pre class="text-on-surface-variant"><code>&#123;% extends 'material/base.html' %&#125;
+
+&#123;% block title %&#125;My Custom Title&#123;% endblock %&#125;
+
+&#123;% block body %&#125;
+  <!-- Your content here -->
+&#123;% endblock %&#125;</code></pre>
+    </div>
+
+    <table class="w-full border-collapse mb-6">
+      <thead>
+        <tr class="bg-surface-variant">
+          <th class="border p-2 text-left">Block Name</th>
+          <th class="border p-2 text-left">Default Content</th>
+          <th class="border p-2 text-left">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="border p-2"><code>favicon</code></td>
+          <td class="border p-2">Link to default favicon</td>
+          <td class="border p-2">Customize the favicon for your application</td>
+        </tr>
+        <tr>
+          <td class="border p-2"><code>title</code></td>
+          <td class="border p-2"><code>{{ site.title|default:"Django Material" }}</code></td>
+          <td class="border p-2">Set the page title</td>
+        </tr>
+        <tr>
+          <td class="border p-2"><code>css</code></td>
+          <td class="border p-2">Core stylesheets</td>
+          <td class="border p-2">Include additional or override default stylesheets</td>
+        </tr>
+        <tr>
+          <td class="border p-2"><code>layout_css</code></td>
+          <td class="border p-2">Layout stylesheet</td>
+          <td class="border p-2">Override the layout stylesheet</td>
+        </tr>
+        <tr>
+          <td class="border p-2"><code>js</code></td>
+          <td class="border p-2">Core JavaScript files</td>
+          <td class="border p-2">Include additional or override default JavaScript</td>
+        </tr>
+        <tr>
+          <td class="border p-2"><code>extrahead</code></td>
+          <td class="border p-2">Empty</td>
+          <td class="border p-2">Add additional content to the head section</td>
+        </tr>
+        <tr>
+          <td class="border p-2"><code>body</code></td>
+          <td class="border p-2">Empty</td>
+          <td class="border p-2">The main content area of the page</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section id="base-page-html" class="mb-12">
+    <h2 class="text-2xl font-bold mb-4">material/base_page.html</h2>
+    <p class="mb-6">
+      Extends base.html and provides a standard page layout with navigation, main content area, and footer.
+      This is the recommended template to extend for most pages.
+    </p>
+
+    <div class="bg-surface-variant p-6 rounded-lg mb-6">
+      <pre class="text-on-surface-variant"><code>&#123;% extends 'material/base_page.html' %&#125;
+
+&#123;% block nav_header %&#125;
+  <!-- Navigation header content -->
+&#123;% endblock %&#125;
+
+&#123;% block nav_items %&#125;
+  <!-- Navigation items -->
+  &lt;c-nav.item icon="home" href="/"&gt;Home&lt;/c-nav.item&gt;
+&#123;% endblock %&#125;
+
+&#123;% block nav_footer %&#125;
+  <!-- Navigation footer content -->
+&#123;% endblock %&#125;
+
+&#123;% block content %&#125;
+  <!-- Main page content -->
+&#123;% endblock %&#125;
+
+&#123;% block footer %&#125;
+  <!-- Footer content -->
+&#123;% endblock %&#125;</code></pre>
+    </div>
+
+    <table class="w-full border-collapse mb-6">
+      <thead>
+        <tr class="bg-surface-variant">
+          <th class="border p-2 text-left">Block Name</th>
+          <th class="border p-2 text-left">Default Content</th>
+          <th class="border p-2 text-left">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="border p-2"><code>navigation</code></td>
+          <td class="border p-2">Navigation container with slots</td>
+          <td class="border p-2">Override the entire navigation component</td>
+        </tr>
+        <tr>
+          <td class="border p-2"><code>nav_header</code></td>
+          <td class="border p-2">Empty</td>
+          <td class="border p-2">Content for the navigation header</td>
+        </tr>
+        <tr>
+          <td class="border p-2"><code>nav_items</code></td>
+          <td class="border p-2">Empty</td>
+          <td class="border p-2">Navigation menu items</td>
+        </tr>
+        <tr>
+          <td class="border p-2"><code>nav_footer</code></td>
+          <td class="border p-2">Empty</td>
+          <td class="border p-2">Content for the navigation footer</td>
+        </tr>
+        <tr>
+          <td class="border p-2"><code>content</code></td>
+          <td class="border p-2">Empty</td>
+          <td class="border p-2">Main content area of the page</td>
+        </tr>
+        <tr>
+          <td class="border p-2"><code>footer</code></td>
+          <td class="border p-2">Empty</td>
+          <td class="border p-2">Footer content</td>
+        </tr>
+        <tr>
+          <td class="border p-2"><code>extrabody</code></td>
+          <td class="border p-2">Empty</td>
+          <td class="border p-2">Additional content at the end of the body</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section id="customization" class="mb-12">
+    <h2 class="text-2xl font-bold mb-4">Customization Examples</h2>
+
+    <h3 class="text-xl font-medium mb-3">Customizing the Navigation</h3>
+    <div class="bg-surface-variant p-6 rounded-lg mb-6">
+      <pre class="text-on-surface-variant"><code>&#123;% extends 'material/base_page.html' %&#125;
+
+&#123;% block nav_header %&#125;
+  &lt;div class="flex items-center mb-2"&gt;
+    &lt;span class="material-icons mr-2"&gt;dashboard&lt;/span&gt;
+    &lt;span class="text-lg font-semibold text-primary"&gt;My Application&lt;/span&gt;
+  &lt;/div&gt;
+&#123;% endblock %&#125;
+
+&#123;% block nav_items %&#125;
+  &lt;c-nav.item icon="home" href="&#123;% url 'home' %&#125;"&gt;Home&lt;/c-nav.item&gt;
+  &lt;c-nav.item icon="person" href="&#123;% url 'profile' %&#125;"&gt;Profile&lt;/c-nav.item&gt;
+  &lt;c-nav.item icon="settings" href="&#123;% url 'settings' %&#125;"&gt;Settings&lt;/c-nav.item&gt;
+&#123;% endblock %&#125;
+
+&#123;% block nav_footer %&#125;
+  &lt;div class="flex items-center"&gt;
+    &lt;span class="material-icons mr-2"&gt;account_circle&lt;/span&gt;
+    &lt;span&gt;John Doe&lt;/span&gt;
+  &lt;/div&gt;
+&#123;% endblock %&#125;</code></pre>
+    </div>
+
+    <h3 class="text-xl font-medium mb-3">Adding Custom CSS and JavaScript</h3>
+    <div class="bg-surface-variant p-6 rounded-lg mb-6">
+      <pre class="text-on-surface-variant"><code>&#123;% extends 'material/base_page.html' %&#125;
+
+&#123;% block css %&#125;
+  &#123;&#123; block.super &#125;&#125;
+  &lt;link rel="stylesheet" href="&#123;% static 'myapp/css/custom.css' %&#125;"&gt;
+&#123;% endblock %&#125;
+
+&#123;% block js %&#125;
+  &#123;&#123; block.super &#125;&#125;
+  &lt;script src="&#123;% static 'myapp/js/custom.js' %&#125;"&gt;&lt;/script&gt;
+&#123;% endblock %&#125;</code></pre>
+    </div>
+
+    <h3 class="text-xl font-medium mb-3">Customizing the Page Title</h3>
+    <div class="bg-surface-variant p-6 rounded-lg mb-6">
+      <pre class="text-on-surface-variant"><code>&#123;% extends 'material/base_page.html' %&#125;
+
+&#123;% block title %&#125;&#123;&#123; object.title &#125;&#125; | My Application&#123;% endblock %&#125;</code></pre>
+    </div>
+  </section>
+
+  <section id="best-practices" class="mb-12">
+    <h2 class="text-2xl font-bold mb-4">Best Practices</h2>
+    
+    <ul class="list-disc pl-6 mb-6">
+      <li class="mb-2">Use <code>{{ block.super }}</code> when you want to extend rather than replace a block's content</li>
+      <li class="mb-2">Create your own application-specific base template that extends <code>material/base_page.html</code></li>
+      <li class="mb-2">Use the navigation blocks to create a consistent menu structure across your application</li>
+      <li class="mb-2">Leverage Unpoly's navigation features by using <code>up-target="main"</code> on navigation links</li>
+      <li class="mb-2">Consider creating reusable component templates for repeated content patterns</li>
+    </ul>
+  </section>
+</div>
+{% endblock %}
