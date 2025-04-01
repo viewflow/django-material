@@ -683,6 +683,11 @@
     line-height: calc(var(--spacing) * 6);
   }
 
+  .leading-\[1px\] {
+    --tw-leading: 1px;
+    line-height: 1px;
+  }
+
   .font-bold {
     --tw-font-weight: var(--font-weight-bold);
     font-weight: var(--font-weight-bold);
