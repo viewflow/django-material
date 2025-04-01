@@ -1,9 +1,20 @@
 {% extends 'material/base.html' %}
 
 {% block body %}
-  <header role="banner"></header>
-  <nav role="navigation"></nav>
+  {% block navigation %}
+    <c-nav.container>
+      <c-slot name="header">
+        {% block nav_header %}{% endblock nav_header %}
+      </c-slot>
+      
+      {% block nav_items %}{% endblock nav_items %}
+      
+      <c-slot name="footer">
+        {% block nav_footer %}{% endblock nav_footer %}
+      </c-slot>
+    </c-nav.container>
+  {% endblock navigation %}
   <main>{% block content %}{% endblock %}</main>
-  <footer role="contentinfo"></footer>
+  <footer role="contentinfo">{% block footer %}{% endblock footer %}</footer>
   {% block extrabody %}{% endblock extrabody %}
 {% endblock %}

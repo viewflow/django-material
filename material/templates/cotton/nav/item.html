@@ -1,0 +1,11 @@
+<c-vars
+  href="#" />
+
+<li role="listitem" class="list-none">
+  <a href="{{ href }}" up-target="main" up-transition="cross-fade" aria-current="page" class="flex items-center px-2 py-3 rounded-full hover:bg-secondary hover:text-on-secondary focus:outline-none focus-visible:ring focus-visible:ring-primary" {{ attrs }}>
+    {% if icon %}
+      <span class="material-icons pl-2 mr-1">{{ icon }}</span>
+    {% endif %}
+    <span class="ml-4">{{ slot }}</span>
+  </a>
+</li>

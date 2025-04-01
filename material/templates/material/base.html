@@ -16,6 +16,7 @@
       {% endblock css %}
       {% block js %}
         {% url 'javascript-catalog' as javascript_catalog_url %}{% if javascript_catalog_url %}<script type="text/javascript" src="{{ javascript_catalog_url }}"></script>{% endif %}
+        <script type="text/javascript" src="{% static 'material/js/unpoly.js' %}"></script>
       {% endblock js %}
       {% block extrahead %}{% endblock %}
     </head>

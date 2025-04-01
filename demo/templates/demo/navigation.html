@@ -1,0 +1,188 @@
+{% extends 'material/base_page.html' %}
+{% load i18n %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+  <h1 class="text-3xl font-bold mb-8">Navigation Components</h1>
+
+  <section id="navigation-container" class="mb-12">
+    <h2 class="text-2xl font-bold mb-4">Navigation Container</h2>
+    <p class="mb-6">
+      The navigation container is used to structure side navigation with header, content, and footer sections.
+      It provides consistent styling and accessibility features.
+    </p>
+
+    <div class="border p-6 rounded-lg mb-8 bg-surface-variant">
+      <div class="max-w-xs">
+        <c-nav.container>
+          <c-slot name="header">
+            <div class="flex items-center mb-2">
+              <span class="material-icons mr-2">dashboard</span>
+              <span class="font-medium">Dashboard</span>
+            </div>
+          </c-slot>
+          
+          <c-nav.item icon="home">Home</c-nav.item>
+          <c-nav.item icon="person">Profile</c-nav.item>
+          <c-nav.item icon="settings">Settings</c-nav.item>
+          <c-nav.item icon="help">Help</c-nav.item>
+          
+          <c-slot name="footer">
+            <div class="flex items-center">
+              <span class="material-icons mr-2">account_circle</span>
+              <span>User Profile</span>
+            </div>
+          </c-slot>
+        </c-nav.container>
+      </div>
+    </div>
+  </section>
+
+  <section id="navigation-items" class="mb-12">
+    <h2 class="text-2xl font-bold mb-4">Navigation Items</h2>
+    <p class="mb-6">
+      Navigation items are used within the navigation container to create a consistent and accessible menu.
+    </p>
+
+    <div class="flex flex-wrap gap-4 mb-8">
+      <div class="flex flex-col border p-4 rounded-lg bg-surface-variant min-w-[240px] w-[240px]">
+        <h3 class="text-lg font-medium mb-2">Basic Item</h3>
+        <c-nav.item>Basic Item</c-nav.item>
+      </div>
+
+      <div class="flex flex-col border p-4 rounded-lg bg-surface-variant min-w-[240px] w-[240px]">
+        <h3 class="text-lg font-medium mb-2">With Icon</h3>
+        <c-nav.item icon="home">Home</c-nav.item>
+      </div>
+    </div>
+  </section>
+
+  <section id="usage" class="mb-12">
+    <h2 class="text-2xl font-bold mb-4">Usage</h2>
+    
+    <div class="bg-surface-variant p-6 rounded-lg mb-6">
+      <pre class="text-on-surface-variant"><code>&lt;!-- Basic Navigation Container --&gt;
+&lt;c-nav.container&gt;
+  &lt;c-nav.item icon="home"&gt;Home&lt;/c-nav.item&gt;
+  &lt;c-nav.item icon="person"&gt;Profile&lt;/c-nav.item&gt;
+  &lt;c-nav.item icon="settings"&gt;Settings&lt;/c-nav.item&gt;
+&lt;/c-nav.container&gt;
+
+&lt;!-- With Header and Footer --&gt;
+&lt;c-nav.container&gt;
+  &lt;c-slot name="header"&gt;
+    &lt;div class="flex items-center mb-2"&gt;
+      &lt;span class="material-icons mr-2"&gt;dashboard&lt;/span&gt;
+      &lt;span class="font-medium"&gt;Dashboard&lt;/span&gt;
+    &lt;/div&gt;
+  &lt;/c-slot&gt;
+  
+  &lt;c-nav.item icon="home"&gt;Home&lt;/c-nav.item&gt;
+  &lt;c-nav.item icon="person"&gt;Profile&lt;/c-nav.item&gt;
+  
+  &lt;c-slot name="footer"&gt;
+    &lt;div class="flex items-center"&gt;
+      &lt;span class="material-icons mr-2"&gt;account_circle&lt;/span&gt;
+      &lt;span&gt;User Profile&lt;/span&gt;
+    &lt;/div&gt;
+  &lt;/c-slot&gt;
+&lt;/c-nav.container&gt;
+
+&lt;!-- Base Page Integration --&gt;
+&#123;% extends 'material/base_page.html' %&#125;
+
+&#123;% block nav_header %&#125;
+  &lt;div class="flex items-center mb-2"&gt;
+    &lt;span class="material-icons mr-2"&gt;dashboard&lt;/span&gt;
+    &lt;span class="font-medium"&gt;My App&lt;/span&gt;
+  &lt;/div&gt;
+&#123;% endblock nav_header %&#125;
+
+&#123;% block nav_items %&#125;
+  &lt;c-nav.item icon="home"&gt;Home&lt;/c-nav.item&gt;
+  &lt;c-nav.item icon="person"&gt;Profile&lt;/c-nav.item&gt;
+&#123;% endblock nav_items %&#125;
+
+&#123;% block nav_footer %&#125;
+  &lt;div class="flex items-center"&gt;
+    &lt;span class="material-icons mr-2"&gt;account_circle&lt;/span&gt;
+    &lt;span&gt;User Profile&lt;/span&gt;
+  &lt;/div&gt;
+&#123;% endblock nav_footer %&#125;</code></pre>
+    </div>
+  </section>
+
+  <section id="attributes" class="mb-12">
+    <h2 class="text-2xl font-bold mb-4">Attributes</h2>
+    
+    <h3 class="text-xl font-medium mb-3">Navigation Container</h3>
+    <table class="w-full border-collapse mb-6">
+      <thead>
+        <tr class="bg-surface-variant">
+          <th class="border p-2 text-left">Attribute</th>
+          <th class="border p-2 text-left">Type</th>
+          <th class="border p-2 text-left">Default</th>
+          <th class="border p-2 text-left">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="border p-2"><code>header</code></td>
+          <td class="border p-2">slot</td>
+          <td class="border p-2">none</td>
+          <td class="border p-2">Content to display at the top of the navigation</td>
+        </tr>
+        <tr>
+          <td class="border p-2"><code>footer</code></td>
+          <td class="border p-2">slot</td>
+          <td class="border p-2">none</td>
+          <td class="border p-2">Content to display at the bottom of the navigation</td>
+        </tr>
+        <tr>
+          <td class="border p-2"><code>slot</code></td>
+          <td class="border p-2">slot</td>
+          <td class="border p-2">required</td>
+          <td class="border p-2">Primary content area, typically navigation items</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 class="text-xl font-medium mb-3">Navigation Item</h3>
+    <table class="w-full border-collapse mb-6">
+      <thead>
+        <tr class="bg-surface-variant">
+          <th class="border p-2 text-left">Attribute</th>
+          <th class="border p-2 text-left">Type</th>
+          <th class="border p-2 text-left">Default</th>
+          <th class="border p-2 text-left">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="border p-2"><code>icon</code></td>
+          <td class="border p-2">string</td>
+          <td class="border p-2">none</td>
+          <td class="border p-2">Material icon name to display before the item text</td>
+        </tr>
+        <tr>
+          <td class="border p-2"><code>slot</code></td>
+          <td class="border p-2">slot</td>
+          <td class="border p-2">required</td>
+          <td class="border p-2">Text content of the navigation item</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section id="accessibility" class="mb-12">
+    <h2 class="text-2xl font-bold mb-4">Accessibility</h2>
+    
+    <ul class="list-disc pl-6 mb-6">
+      <li class="mb-2">Navigation container includes <code>role="navigation"</code> and <code>aria-label</code></li>
+      <li class="mb-2">Navigation items are contained within a properly structured list with <code>role="list"</code></li>
+      <li class="mb-2">Navigation items provide visual feedback on hover and focus for keyboard navigation</li>
+      <li class="mb-2">Icons are properly labeled and not solely relied upon for navigation</li>
+    </ul>
+  </section>
+</div>
+{% endblock %}
