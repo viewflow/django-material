@@ -20,16 +20,16 @@ body:not([class]) {
 
 /* Navigation - Unpoly Current Item Styling */
 .up-current {
-  @apply bg-secondary-container text-on-secondary-container font-medium;
+  @apply bg-primary-container text-on-primary-container font-medium;
 }
 
 /* Custom styling for navigation items that are current */
 [role="navigation"] a.up-current {
-  @apply bg-secondary-container text-on-secondary-container font-medium;
+  @apply bg-primary-container text-on-primary-container font-medium;
 }
 
 /* Specific styling for our Cotton nav items when current */
 [role="listitem"] a.up-current {
-  @apply bg-secondary-container text-on-secondary-container font-medium;
-  @apply hover:bg-secondary hover:text-on-secondary;
+  @apply bg-primary-container text-on-primary-container font-medium;
+  @apply hover:bg-primary hover:text-on-primary;
 }
