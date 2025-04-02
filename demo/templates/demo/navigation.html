@@ -2,16 +2,16 @@
 {% load i18n %}
 
 {% block content %}
-<div class="container mx-auto px-4 pb-8">
+<div class="container mx-auto px-10 pt-4 pb-8">
   <c-breadcrumbs.container class="mb-2">
     <c-breadcrumbs.home href="{% url 'index' %}"></c-breadcrumbs.home>
     <c-breadcrumbs.item current="true">Navigation</c-breadcrumbs.item>
   </c-breadcrumbs.container>
   
-  <h1 class="text-3xl font-bold mb-8">Navigation Components</h1>
+  <h1 class="text-3xl font-medium mb-8">Navigation Components</h1>
 
   <section id="navigation-container" class="mb-12">
-    <h2 class="text-2xl font-bold mb-4">Navigation Container</h2>
+    <h2 class="text-2xl mb-4">Navigation Container</h2>
     <p class="mb-6">
       The navigation container is used to structure side navigation with header, content, and footer sections.
       It provides consistent styling and accessibility features.
@@ -44,7 +44,7 @@
   </section>
 
   <section id="navigation-items" class="mb-12">
-    <h2 class="text-2xl font-bold mb-4">Navigation Items</h2>
+    <h2 class="text-2xl mb-4">Navigation Items</h2>
     <p class="mb-6">
       Navigation items are used within the navigation container to create a consistent and accessible menu.
     </p>
@@ -63,7 +63,7 @@
   </section>
 
   <section id="usage" class="mb-12">
-    <h2 class="text-2xl font-bold mb-4">Usage</h2>
+    <h2 class="text-2xl mb-4">Usage</h2>
     
     <div class="bg-surface-variant p-6 rounded-lg mb-6">
       <pre class="text-on-surface-variant"><code>&lt;!-- Basic Navigation Container --&gt;
@@ -118,7 +118,7 @@
   </section>
 
   <section id="attributes" class="mb-12">
-    <h2 class="text-2xl font-bold mb-4">Attributes</h2>
+    <h2 class="text-2xl mb-4">Attributes</h2>
     
     <h3 class="text-xl font-medium mb-3">Navigation Container</h3>
     <table class="w-full border-collapse mb-6">
@@ -180,7 +180,7 @@
   </section>
 
   <section id="accessibility" class="mb-12">
-    <h2 class="text-2xl font-bold mb-4">Accessibility</h2>
+    <h2 class="text-2xl mb-4">Accessibility</h2>
     
     <ul class="list-disc pl-6 mb-6">
       <li class="mb-2">Navigation container includes <code>role="navigation"</code> and <code>aria-label</code></li>

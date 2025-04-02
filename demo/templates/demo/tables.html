@@ -4,17 +4,17 @@
 {% block title %}Tables{% endblock %}
 
 {% block content %}
-<div class="container mx-auto px-4 pb-8">
+<div class="container mx-auto px-10 pt-4 pb-8">
   <c-breadcrumbs.container class="mb-2">
     <c-breadcrumbs.home href="{% url 'index' %}"></c-breadcrumbs.home>
     <c-breadcrumbs.item current="true">Tables</c-breadcrumbs.item>
   </c-breadcrumbs.container>
   
-  <h1 class="text-3xl font-bold mb-8">Data Table Components</h1>
+  <h1 class="text-3xl font-medium mb-8">Data Table Components</h1>
   <p class="mb-6">Material Design data tables display information in a way that's easy to scan, so that users can look for patterns and insights.</p>
 
   <section id="basic-table" class="mb-12">
-    <h2 class="text-2xl font-bold mb-4">Basic Table</h2>
+    <h2 class="text-2xl mb-4">Basic Table</h2>
     <p class="mb-6">
       A simple data table with basic styling. Used for displaying tabular data in a clean, readable format.
     </p>
@@ -51,7 +51,7 @@
   </section>
 
   <section id="sortable-table" class="mb-12">
-    <h2 class="text-2xl font-bold mb-4">Sortable Table with Caption</h2>
+    <h2 class="text-2xl mb-4">Sortable Table with Caption</h2>
     <p class="mb-6">
       A data table with sortable columns and a caption that provides context about the data.
       The Material Design icons indicate sortable columns and sort direction.
@@ -95,7 +95,7 @@
   </section>
 
   <section id="selectable-rows" class="mb-12">
-    <h2 class="text-2xl font-bold mb-4">Selectable Rows with Pagination</h2>
+    <h2 class="text-2xl mb-4">Selectable Rows with Pagination</h2>
     <p class="mb-6">
       A data table with selectable rows and pagination controls. Selected rows are highlighted with a
       background color and proper ARIA attributes for accessibility.
@@ -134,7 +134,7 @@
   </section>
 
   <section id="usage" class="mb-12">
-    <h2 class="text-2xl font-bold mb-4">Usage</h2>
+    <h2 class="text-2xl mb-4">Usage</h2>
     
     <div class="bg-surface-variant p-6 rounded-lg mb-6">
       <pre class="text-on-surface-variant"><code>&lt;!-- Basic Table --&gt;
@@ -179,7 +179,7 @@
   </section>
 
   <section id="attributes" class="mb-12">
-    <h2 class="text-2xl font-bold mb-4">Attributes</h2>
+    <h2 class="text-2xl mb-4">Attributes</h2>
     
     <h3 class="text-xl font-medium mb-3">Table Container</h3>
     <table class="w-full border-collapse mb-6">
@@ -293,7 +293,7 @@
   </section>
 
   <section id="accessibility" class="mb-12">
-    <h2 class="text-2xl font-bold mb-4">Accessibility</h2>
+    <h2 class="text-2xl mb-4">Accessibility</h2>
     
     <ul class="list-disc pl-6 mb-6">
       <li class="mb-2">Tables use proper HTML table semantics with <code>&lt;table&gt;</code>, <code>&lt;thead&gt;</code>, <code>&lt;tbody&gt;</code>, and <code>&lt;caption&gt;</code> elements</li>

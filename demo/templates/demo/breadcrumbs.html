@@ -2,16 +2,16 @@
 {% load i18n %}
 
 {% block content %}
-<div class="container mx-auto px-4 pb-8">
+<div class="container mx-auto px-10 pt-4 pb-8">
   <c-breadcrumbs.container class="mb-2">
     <c-breadcrumbs.home href="{% url 'index' %}"></c-breadcrumbs.home>
     <c-breadcrumbs.item current="true">Breadcrumbs</c-breadcrumbs.item>
   </c-breadcrumbs.container>
   
-  <h1 class="text-3xl font-bold mb-8">Breadcrumb Components</h1>
+  <h1 class="text-3xl font-medium mb-8">Breadcrumb Components</h1>
 
   <section id="basic-breadcrumbs" class="mb-12">
-    <h2 class="text-2xl font-bold mb-4">Basic Breadcrumbs</h2>
+    <h2 class="text-2xl mb-4">Basic Breadcrumbs</h2>
     <p class="mb-6">
       Breadcrumbs provide navigation links that show the user's location in a website hierarchy.
       They help users understand where they are and provide easy navigation to higher levels.
@@ -28,7 +28,7 @@
   </section>
 
   <section id="customized-breadcrumbs" class="mb-12">
-    <h2 class="text-2xl font-bold mb-4">Customized Breadcrumbs</h2>
+    <h2 class="text-2xl mb-4">Customized Breadcrumbs</h2>
     <p class="mb-6">
       Breadcrumbs can be customized with different classes to match your application's design.
     </p>
@@ -43,7 +43,7 @@
   </section>
 
   <section id="usage" class="mb-12">
-    <h2 class="text-2xl font-bold mb-4">Usage</h2>
+    <h2 class="text-2xl mb-4">Usage</h2>
     
     <div class="bg-surface-variant p-6 rounded-lg mb-6">
       <pre class="text-on-surface-variant"><code>&lt;!-- Basic Breadcrumbs --&gt;
@@ -70,7 +70,7 @@
   </section>
 
   <section id="attributes" class="mb-12">
-    <h2 class="text-2xl font-bold mb-4">Attributes</h2>
+    <h2 class="text-2xl mb-4">Attributes</h2>
     
     <h3 class="text-xl font-medium mb-3">Breadcrumbs Container</h3>
     <table class="w-full border-collapse mb-6">
@@ -146,7 +146,7 @@
   </section>
 
   <section id="accessibility" class="mb-12">
-    <h2 class="text-2xl font-bold mb-4">Accessibility</h2>
+    <h2 class="text-2xl mb-4">Accessibility</h2>
     
     <ul class="list-disc pl-6 mb-6">
       <li class="mb-2">Breadcrumbs are wrapped in a <code>nav</code> element with <code>aria-label="Breadcrumbs"</code></li>

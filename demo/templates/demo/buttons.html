@@ -2,16 +2,16 @@
 {% load i18n %}
 
 {% block content %}
-<div class="container mx-auto px-4 pb-8">
+<div class="container mx-auto px-10 pt-4 pb-8">
   <c-breadcrumbs.container class="mb-2">
     <c-breadcrumbs.home href="{% url 'index' %}"></c-breadcrumbs.home>
     <c-breadcrumbs.item current="true">Buttons</c-breadcrumbs.item>
   </c-breadcrumbs.container>
   
-  <h1 class="text-3xl font-bold mb-8">Button Components</h1>
+  <h1 class="text-3xl font-medium mb-8">Button Components</h1>
 
   <section id="filled-buttons" class="mb-12">
-    <h2 class="text-2xl font-bold mb-4">Filled Buttons</h2>
+    <h2 class="text-2xl mb-4">Filled Buttons</h2>
     <p class="mb-6">
       Filled buttons are high-emphasis buttons that use color fill and elevation to stand out.
       They are used for primary actions.
@@ -59,7 +59,7 @@
   </section>
 
   <section id="elevated-buttons" class="mb-12">
-    <h2 class="text-2xl font-bold mb-4">Elevated Buttons</h2>
+    <h2 class="text-2xl mb-4">Elevated Buttons</h2>
     <p class="mb-6">
       Elevated buttons are medium-emphasis buttons that use elevation to stand out.
       They are used for important but not primary actions.
@@ -107,7 +107,7 @@
   </section>
 
   <section id="usage" class="mb-12">
-    <h2 class="text-2xl font-bold mb-4">Usage</h2>
+    <h2 class="text-2xl mb-4">Usage</h2>
     
     <div class="bg-surface-variant p-6 rounded-lg mb-6">
       <pre class="text-on-surface-variant"><code>&lt;!-- Filled Button --&gt;
@@ -135,7 +135,7 @@
   </section>
 
   <section id="attributes" class="mb-12">
-    <h2 class="text-2xl font-bold mb-4">Attributes</h2>
+    <h2 class="text-2xl mb-4">Attributes</h2>
     
     <table class="w-full border-collapse mb-6">
       <thead>
@@ -182,7 +182,7 @@
   </section>
 
   <section id="accessibility" class="mb-12">
-    <h2 class="text-2xl font-bold mb-4">Accessibility</h2>
+    <h2 class="text-2xl mb-4">Accessibility</h2>
     
     <ul class="list-disc pl-6 mb-6">
       <li class="mb-2">Buttons include the <code>role="button"</code> attribute</li>

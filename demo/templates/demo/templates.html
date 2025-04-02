@@ -2,13 +2,13 @@
 {% load i18n static %}
 
 {% block content %}
-<div class="container mx-auto px-4 pb-8">
+<div class="container mx-auto px-10 pt-4 pb-8">
   <c-breadcrumbs.container class="mb-2">
     <c-breadcrumbs.home href="{% url 'index' %}"></c-breadcrumbs.home>
     <c-breadcrumbs.item current="true">Templates</c-breadcrumbs.item>
   </c-breadcrumbs.container>
   
-  <h1 class="text-3xl font-bold mb-8">Base Templates</h1>
+  <h1 class="text-3xl font-medium mb-8">Base Templates</h1>
 
   <p class="mb-6">
     Django Material provides base templates that can be extended to create consistent layouts across your application.
@@ -16,7 +16,7 @@
   </p>
 
   <section id="base-html" class="mb-12">
-    <h2 class="text-2xl font-bold mb-4">material/base.html</h2>
+    <h2 class="text-2xl mb-4">material/base.html</h2>
     <p class="mb-6">
       The foundational template that sets up the HTML document structure, includes required CSS and JavaScript,
       and defines the basic layout.
@@ -81,7 +81,7 @@
   </section>
 
   <section id="base-page-html" class="mb-12">
-    <h2 class="text-2xl font-bold mb-4">material/base_page.html</h2>
+    <h2 class="text-2xl mb-4">material/base_page.html</h2>
     <p class="mb-6">
       Extends base.html and provides a standard page layout with navigation, main content area, and footer.
       This is the recommended template to extend for most pages.
@@ -161,7 +161,7 @@
   </section>
 
   <section id="customization" class="mb-12">
-    <h2 class="text-2xl font-bold mb-4">Customization Examples</h2>
+    <h2 class="text-2xl mb-4">Customization Examples</h2>
 
     <h3 class="text-xl font-medium mb-3">Customizing the Navigation</h3>
     <div class="bg-surface-variant p-6 rounded-lg mb-6">
@@ -212,7 +212,7 @@
   </section>
 
   <section id="template-customization" class="mb-12">
-    <h2 class="text-2xl font-bold mb-4">Template Customization</h2>
+    <h2 class="text-2xl mb-4">Template Customization</h2>
     
     <p class="mb-6">
       Django Material templates follow Django's template inheritance system, allowing you to override any template in your project.
