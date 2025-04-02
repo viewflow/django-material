@@ -1,24 +1,24 @@
 @import "tailwindcss";
 
 @theme static {
-  /* Primary colors */
-  --color-primary: #01579b;
+  /* Primary colors - Light Blue 700 */
+  --color-primary: #0277bd;
   --color-on-primary: #FFFFFF;
   /* A very light blue as the primary container, with a dark blue text */
   --color-primary-container: #E1F5FE;
-  --color-on-primary-container: #003c6e;
+  --color-on-primary-container: #01579b;
 
-  /* Secondary colors (a complementary teal) */
-  --color-secondary: #00897B;
+  /* Secondary colors - Teal 400 */
+  --color-secondary: #26a69a;
   --color-on-secondary: #FFFFFF;
   --color-secondary-container: #B2DFDB;
-  --color-on-secondary-container: #004D40;
+  --color-on-secondary-container: #00695C;
 
-  /* Tertiary colors (a vibrant pinkish accent) */
-  --color-tertiary: #D81B60;
+  /* Tertiary colors - Pink 500 */
+  --color-tertiary: #e91e63;
   --color-on-tertiary: #FFFFFF;
-  --color-tertiary-container: #F8BBD0;
-  --color-on-tertiary-container: #880E4F;
+  --color-tertiary-container: #FCE4EC;
+  --color-on-tertiary-container: #AD1457;
 
   /* Error colors (kept from a standard palette) */
   --color-error: #B3261E;
@@ -28,25 +28,25 @@
 
   /* Background and surface settings */
   --color-background: #FFFFFF;
-  --color-on-background: #212121;
+  --color-on-background: #263238;
   --color-surface: #FFFFFF;
-  --color-on-surface: #212121;
-  --color-surface-variant: #ECEFF1;
-  --color-on-surface-variant: #757575;
+  --color-on-surface: #263238;
+  --color-surface-variant: #EEF2F6;
+  --color-on-surface-variant: #607D8B;
 
   /* Inverse colors for high contrast elements */
-  --color-inverse-surface: #424242;
-  --color-inverse-on-surface: #FAFAFA;
-  --color-inverse-primary: #B3E5FC;
+  --color-inverse-surface: #37474F;
+  --color-inverse-on-surface: #ECEFF1;
+  --color-inverse-primary: #81D4FA;
 
   /* Additional settings */
-  --color-outline: #9E9E9E;
-  --color-outline-variant: #BDBDBD;
+  --color-outline: #90A4AE;
+  --color-outline-variant: #CFD8DC;
   --color-shadow: #000000;
   --color-scrim: #000000;
 
-  --color-surface-dim: #121212;
+  --color-surface-dim: #0D47A1;
   --color-surface-bright: #FFFFFF;
-  --color-surface-container-low: #ECEFF1;
+  --color-surface-container-low: #E3F2FD;
   --color-surface-container-high: #F5F5F5;
 }
