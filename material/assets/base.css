@@ -10,7 +10,7 @@ html:not([class]) {
 }
 
 body:not([class]) {
-  @apply h-full min-h-full w-full bg-gray-100 m-0 p-0 font-sans text-gray-900;
+  @apply h-full min-h-full w-full bg-background m-0 p-0 font-sans text-on-background;
 }
 
 /* layout */

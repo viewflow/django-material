@@ -27,12 +27,12 @@
   --color-on-error-container: #410E0B;
 
   /* Background and surface settings */
-  --color-background: #FFFFFF;
+  --color-background: #F5F7FA;
   --color-on-background: #263238;
   --color-surface: #FFFFFF;
   --color-on-surface: #263238;
-  --color-surface-variant: #EEF2F6;
-  --color-on-surface-variant: #607D8B;
+  --color-surface-variant: #E8F5E9;
+  --color-on-surface-variant: #546E7A;
 
   /* Inverse colors for high contrast elements */
   --color-inverse-surface: #37474F;
@@ -46,7 +46,7 @@
   --color-scrim: #000000;
 
   --color-surface-dim: #0D47A1;
-  --color-surface-bright: #FFFFFF;
-  --color-surface-container-low: #E3F2FD;
-  --color-surface-container-high: #F5F5F5;
+  --color-surface-bright: #F8FAFF;
+  --color-surface-container-low: #E1F5FE;
+  --color-surface-container-high: #F1F8E9;
 }
