@@ -4,7 +4,7 @@
   "description": "Material Design for Django",
   "scripts": {
     "build:css": "tailwindcss -i ./material/assets/index.css -o material/static/material/css/material.css --minify",
-    "watch:css": "tailwindcss -i material/assets/index.css -o material/static/material/css/material.css --watch --optimize",
+    "watch:css": "tailwindcss -i material/assets/index.css -o material/static/material/css/material.css --watch --minify",
     "runserver": "uv run manage.py runserver",
     "dev": "npm-run-all2 --parallel --print-label watch:css runserver",
     "update:venv": "uv sync --group dev",

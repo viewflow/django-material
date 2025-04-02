@@ -125,6 +125,7 @@
 - Use standard attribute names (e.g., icon, title, variant) consistently
 
 ## Git Workflow
+- Run `npm run build:css` before committing CSS changes
 - For Claude's contributions, always use:
   ```
   git commit --author="Claude AI <claude@anthropic.com>" -m "Commit message"
