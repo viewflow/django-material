@@ -17,7 +17,7 @@
       They help users understand where they are and provide easy navigation to higher levels.
     </p>
 
-    <div class="mb-8 p-6 border rounded-lg bg-surface-variant">
+    <div class="mb-8 p-6 border rounded-lg bg-surface-container-low">
       <c-breadcrumbs.container>
         <c-breadcrumbs.home href="#"></c-breadcrumbs.home>
         <c-breadcrumbs.item href="#">Products</c-breadcrumbs.item>
@@ -33,8 +33,8 @@
       Breadcrumbs can be customized with different classes to match your application's design.
     </p>
 
-    <div class="mb-8 p-6 border rounded-lg bg-surface-variant">
-      <c-breadcrumbs.container class="py-4 border-b border-t">
+    <div class="mb-8 p-6 border rounded-lg bg-surface-container-low">
+      <c-breadcrumbs.container class="px-4 py-4 bg-surface-variant">
         <c-breadcrumbs.home href="#"></c-breadcrumbs.home>
         <c-breadcrumbs.item href="#">Library</c-breadcrumbs.item>
         <c-breadcrumbs.item current="true">Book Title</c-breadcrumbs.item>
@@ -45,7 +45,7 @@
   <section id="usage" class="mb-12">
     <h2 class="text-2xl mb-4">Usage</h2>
     
-    <div class="bg-surface-variant p-6 rounded-lg mb-6">
+    <div class="bg-surface-container-low p-6 rounded-lg mb-6">
       <pre class="text-on-surface-variant"><code>&lt;!-- Basic Breadcrumbs --&gt;
 &lt;c-breadcrumbs.container&gt;
   &lt;c-breadcrumbs.home href="/"&gt;&lt;/c-breadcrumbs.home&gt;
@@ -54,7 +54,7 @@
 &lt;/c-breadcrumbs.container&gt;
 
 &lt;!-- With Custom Classes --&gt;
-&lt;c-breadcrumbs.container class="py-4 bg-gray-100"&gt;
+&lt;c-breadcrumbs.container class="bg-surface-variant"&gt;
   &lt;c-breadcrumbs.home href="/"&gt;&lt;/c-breadcrumbs.home&gt;
   &lt;c-breadcrumbs.item href="/products"&gt;Products&lt;/c-breadcrumbs.item&gt;
   &lt;c-breadcrumbs.item current="true"&gt;Product Details&lt;/c-breadcrumbs.item&gt;
@@ -73,76 +73,76 @@
     <h2 class="text-2xl mb-4">Attributes</h2>
     
     <h3 class="text-xl font-medium mb-3">Breadcrumbs Container</h3>
-    <table class="w-full border-collapse mb-6">
-      <thead>
-        <tr class="bg-surface-variant">
-          <th class="border p-2 text-left">Attribute</th>
-          <th class="border p-2 text-left">Type</th>
-          <th class="border p-2 text-left">Default</th>
-          <th class="border p-2 text-left">Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="border p-2"><code>aria_label</code></td>
-          <td class="border p-2">string</td>
-          <td class="border p-2">"Breadcrumbs"</td>
-          <td class="border p-2">Accessible label for screen readers</td>
-        </tr>
-        <tr>
-          <td class="border p-2"><code>class</code></td>
-          <td class="border p-2">string</td>
-          <td class="border p-2">""</td>
-          <td class="border p-2">Additional CSS classes for the container</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="overflow-x-auto mb-6">
+      <c-table.container>
+        <c-slot name="header">
+          <c-table.header_row>
+            <c-table.header>Attribute</c-table.header>
+            <c-table.header>Type</c-table.header>
+            <c-table.header>Default</c-table.header>
+            <c-table.header>Description</c-table.header>
+          </c-table.header_row>
+        </c-slot>
+        <c-table.row>
+          <c-table.cell><code>aria_label</code></c-table.cell>
+          <c-table.cell>string</c-table.cell>
+          <c-table.cell>"Breadcrumbs"</c-table.cell>
+          <c-table.cell>Accessible label for screen readers</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>class</code></c-table.cell>
+          <c-table.cell>string</c-table.cell>
+          <c-table.cell>""</c-table.cell>
+          <c-table.cell>Additional CSS classes for the container</c-table.cell>
+        </c-table.row>
+      </c-table.container>
+    </div>
 
     <h3 class="text-xl font-medium mb-3">Breadcrumbs Item</h3>
-    <table class="w-full border-collapse mb-6">
-      <thead>
-        <tr class="bg-surface-variant">
-          <th class="border p-2 text-left">Attribute</th>
-          <th class="border p-2 text-left">Type</th>
-          <th class="border p-2 text-left">Default</th>
-          <th class="border p-2 text-left">Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="border p-2"><code>href</code></td>
-          <td class="border p-2">string</td>
-          <td class="border p-2">"#"</td>
-          <td class="border p-2">URL for the breadcrumb link</td>
-        </tr>
-        <tr>
-          <td class="border p-2"><code>current</code></td>
-          <td class="border p-2">string</td>
-          <td class="border p-2">"false"</td>
-          <td class="border p-2">When "true", indicates the current page (no link)</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="overflow-x-auto mb-6">
+      <c-table.container>
+        <c-slot name="header">
+          <c-table.header_row>
+            <c-table.header>Attribute</c-table.header>
+            <c-table.header>Type</c-table.header>
+            <c-table.header>Default</c-table.header>
+            <c-table.header>Description</c-table.header>
+          </c-table.header_row>
+        </c-slot>
+        <c-table.row>
+          <c-table.cell><code>href</code></c-table.cell>
+          <c-table.cell>string</c-table.cell>
+          <c-table.cell>"#"</c-table.cell>
+          <c-table.cell>URL for the breadcrumb link</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>current</code></c-table.cell>
+          <c-table.cell>string</c-table.cell>
+          <c-table.cell>"false"</c-table.cell>
+          <c-table.cell>When "true", indicates the current page (no link)</c-table.cell>
+        </c-table.row>
+      </c-table.container>
+    </div>
 
     <h3 class="text-xl font-medium mb-3">Breadcrumbs Home Item</h3>
-    <table class="w-full border-collapse mb-6">
-      <thead>
-        <tr class="bg-surface-variant">
-          <th class="border p-2 text-left">Attribute</th>
-          <th class="border p-2 text-left">Type</th>
-          <th class="border p-2 text-left">Default</th>
-          <th class="border p-2 text-left">Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="border p-2"><code>href</code></td>
-          <td class="border p-2">string</td>
-          <td class="border p-2">"/"</td>
-          <td class="border p-2">URL for the home link</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="overflow-x-auto mb-6">
+      <c-table.container>
+        <c-slot name="header">
+          <c-table.header_row>
+            <c-table.header>Attribute</c-table.header>
+            <c-table.header>Type</c-table.header>
+            <c-table.header>Default</c-table.header>
+            <c-table.header>Description</c-table.header>
+          </c-table.header_row>
+        </c-slot>
+        <c-table.row>
+          <c-table.cell><code>href</code></c-table.cell>
+          <c-table.cell>string</c-table.cell>
+          <c-table.cell>"/"</c-table.cell>
+          <c-table.cell>URL for the home link</c-table.cell>
+        </c-table.row>
+      </c-table.container>
+    </div>
   </section>
 
   <section id="accessibility" class="mb-12">

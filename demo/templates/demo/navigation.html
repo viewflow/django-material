@@ -17,7 +17,7 @@
       It provides consistent styling and accessibility features.
     </p>
 
-    <div class="border p-6 rounded-lg mb-8 bg-surface-variant">
+    <div class="border p-6 rounded-lg mb-8 bg-surface-container-low">
       <div class="max-w-xs">
         <c-nav.container>
           <c-slot name="header">
@@ -50,12 +50,12 @@
     </p>
 
     <div class="flex flex-wrap gap-4 mb-8">
-      <div class="flex flex-col border p-4 rounded-lg bg-surface-variant min-w-[240px] w-[240px]">
+      <div class="flex flex-col border p-4 rounded-lg bg-surface-container-low min-w-[240px] w-[240px]">
         <h3 class="text-lg font-medium mb-2">Basic Item</h3>
         <c-nav.item>Basic Item</c-nav.item>
       </div>
 
-      <div class="flex flex-col border p-4 rounded-lg bg-surface-variant min-w-[240px] w-[240px]">
+      <div class="flex flex-col border p-4 rounded-lg bg-surface-container-low min-w-[240px] w-[240px]">
         <h3 class="text-lg font-medium mb-2">With Icon</h3>
         <c-nav.item icon="home">Home</c-nav.item>
       </div>
@@ -65,7 +65,7 @@
   <section id="usage" class="mb-12">
     <h2 class="text-2xl mb-4">Usage</h2>
     
-    <div class="bg-surface-variant p-6 rounded-lg mb-6">
+    <div class="bg-surface-container-low p-6 rounded-lg mb-6">
       <pre class="text-on-surface-variant"><code>&lt;!-- Basic Navigation Container --&gt;
 &lt;c-nav.container&gt;
   &lt;c-nav.item icon="home"&gt;Home&lt;/c-nav.item&gt;
@@ -121,62 +121,62 @@
     <h2 class="text-2xl mb-4">Attributes</h2>
     
     <h3 class="text-xl font-medium mb-3">Navigation Container</h3>
-    <table class="w-full border-collapse mb-6">
-      <thead>
-        <tr class="bg-surface-variant">
-          <th class="border p-2 text-left">Attribute</th>
-          <th class="border p-2 text-left">Type</th>
-          <th class="border p-2 text-left">Default</th>
-          <th class="border p-2 text-left">Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="border p-2"><code>header</code></td>
-          <td class="border p-2">slot</td>
-          <td class="border p-2">none</td>
-          <td class="border p-2">Content to display at the top of the navigation</td>
-        </tr>
-        <tr>
-          <td class="border p-2"><code>footer</code></td>
-          <td class="border p-2">slot</td>
-          <td class="border p-2">none</td>
-          <td class="border p-2">Content to display at the bottom of the navigation</td>
-        </tr>
-        <tr>
-          <td class="border p-2"><code>slot</code></td>
-          <td class="border p-2">slot</td>
-          <td class="border p-2">required</td>
-          <td class="border p-2">Primary content area, typically navigation items</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="overflow-x-auto mb-6">
+      <c-table.container>
+        <c-slot name="header">
+          <c-table.header_row>
+            <c-table.header>Attribute</c-table.header>
+            <c-table.header>Type</c-table.header>
+            <c-table.header>Default</c-table.header>
+            <c-table.header>Description</c-table.header>
+          </c-table.header_row>
+        </c-slot>
+        <c-table.row>
+          <c-table.cell><code>header</code></c-table.cell>
+          <c-table.cell>slot</c-table.cell>
+          <c-table.cell>none</c-table.cell>
+          <c-table.cell>Content to display at the top of the navigation</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>footer</code></c-table.cell>
+          <c-table.cell>slot</c-table.cell>
+          <c-table.cell>none</c-table.cell>
+          <c-table.cell>Content to display at the bottom of the navigation</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>slot</code></c-table.cell>
+          <c-table.cell>slot</c-table.cell>
+          <c-table.cell>required</c-table.cell>
+          <c-table.cell>Primary content area, typically navigation items</c-table.cell>
+        </c-table.row>
+      </c-table.container>
+    </div>
 
     <h3 class="text-xl font-medium mb-3">Navigation Item</h3>
-    <table class="w-full border-collapse mb-6">
-      <thead>
-        <tr class="bg-surface-variant">
-          <th class="border p-2 text-left">Attribute</th>
-          <th class="border p-2 text-left">Type</th>
-          <th class="border p-2 text-left">Default</th>
-          <th class="border p-2 text-left">Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="border p-2"><code>icon</code></td>
-          <td class="border p-2">string</td>
-          <td class="border p-2">none</td>
-          <td class="border p-2">Material icon name to display before the item text</td>
-        </tr>
-        <tr>
-          <td class="border p-2"><code>slot</code></td>
-          <td class="border p-2">slot</td>
-          <td class="border p-2">required</td>
-          <td class="border p-2">Text content of the navigation item</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="overflow-x-auto mb-6">
+      <c-table.container>
+        <c-slot name="header">
+          <c-table.header_row>
+            <c-table.header>Attribute</c-table.header>
+            <c-table.header>Type</c-table.header>
+            <c-table.header>Default</c-table.header>
+            <c-table.header>Description</c-table.header>
+          </c-table.header_row>
+        </c-slot>
+        <c-table.row>
+          <c-table.cell><code>icon</code></c-table.cell>
+          <c-table.cell>string</c-table.cell>
+          <c-table.cell>none</c-table.cell>
+          <c-table.cell>Material icon name to display before the item text</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>slot</code></c-table.cell>
+          <c-table.cell>slot</c-table.cell>
+          <c-table.cell>required</c-table.cell>
+          <c-table.cell>Text content of the navigation item</c-table.cell>
+        </c-table.row>
+      </c-table.container>
+    </div>
   </section>
 
   <section id="accessibility" class="mb-12">

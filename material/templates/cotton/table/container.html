@@ -8,17 +8,17 @@
   {% if caption %}
     <caption class="text-lg font-medium my-2 text-left">{{ caption }}</caption>
   {% endif %}
-  {% if slot_header %}
+  {% if header %}
     <thead class="bg-primary/10 text-on-surface border-b border-outline-variant">
-      {{ slot_header }}
+      {{ header }}
     </thead>
   {% endif %}
   <tbody class="divide-y divide-outline-variant">
     {{ slot }}
   </tbody>
-  {% if slot_footer %}
+  {% if footer %}
     <tfoot class="border-t border-outline-variant">
-      {{ slot_footer }}
+      {{ footer }}
     </tfoot>
   {% endif %}
 </table>

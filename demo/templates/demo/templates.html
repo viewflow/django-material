@@ -22,7 +22,7 @@
       and defines the basic layout.
     </p>
 
-    <div class="bg-surface-variant p-6 rounded-lg mb-6">
+    <div class="bg-surface-container-low p-6 rounded-lg mb-6">
       <pre class="text-on-surface-variant"><code>&#123;% extends 'material/base.html' %&#125;
 
 &#123;% block title %&#125;My Custom Title&#123;% endblock %&#125;
@@ -32,52 +32,52 @@
 &#123;% endblock %&#125;</code></pre>
     </div>
 
-    <table class="w-full border-collapse mb-6">
-      <thead>
-        <tr class="bg-surface-variant">
-          <th class="border p-2 text-left">Block Name</th>
-          <th class="border p-2 text-left">Default Content</th>
-          <th class="border p-2 text-left">Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="border p-2"><code>favicon</code></td>
-          <td class="border p-2">Link to default favicon</td>
-          <td class="border p-2">Customize the favicon for your application</td>
-        </tr>
-        <tr>
-          <td class="border p-2"><code>title</code></td>
-          <td class="border p-2"><code>{{ site.title|default:"Django Material" }}</code></td>
-          <td class="border p-2">Set the page title</td>
-        </tr>
-        <tr>
-          <td class="border p-2"><code>css</code></td>
-          <td class="border p-2">Core stylesheets</td>
-          <td class="border p-2">Include additional or override default stylesheets</td>
-        </tr>
-        <tr>
-          <td class="border p-2"><code>layout_css</code></td>
-          <td class="border p-2">Layout stylesheet</td>
-          <td class="border p-2">Override the layout stylesheet</td>
-        </tr>
-        <tr>
-          <td class="border p-2"><code>js</code></td>
-          <td class="border p-2">Core JavaScript files</td>
-          <td class="border p-2">Include additional or override default JavaScript</td>
-        </tr>
-        <tr>
-          <td class="border p-2"><code>extrahead</code></td>
-          <td class="border p-2">Empty</td>
-          <td class="border p-2">Add additional content to the head section</td>
-        </tr>
-        <tr>
-          <td class="border p-2"><code>body</code></td>
-          <td class="border p-2">Empty</td>
-          <td class="border p-2">The main content area of the page</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="overflow-x-auto mb-6">
+      <c-table.container>
+        <c-slot name="header">
+          <c-table.header_row>
+            <c-table.header>Block Name</c-table.header>
+            <c-table.header>Default Content</c-table.header>
+            <c-table.header>Description</c-table.header>
+          </c-table.header_row>
+        </c-slot>
+        <c-table.row>
+          <c-table.cell><code>favicon</code></c-table.cell>
+          <c-table.cell>Link to default favicon</c-table.cell>
+          <c-table.cell>Customize the favicon for your application</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>title</code></c-table.cell>
+          <c-table.cell><code>{{ site.title|default:"Django Material" }}</code></c-table.cell>
+          <c-table.cell>Set the page title</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>css</code></c-table.cell>
+          <c-table.cell>Core stylesheets</c-table.cell>
+          <c-table.cell>Include additional or override default stylesheets</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>layout_css</code></c-table.cell>
+          <c-table.cell>Layout stylesheet</c-table.cell>
+          <c-table.cell>Override the layout stylesheet</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>js</code></c-table.cell>
+          <c-table.cell>Core JavaScript files</c-table.cell>
+          <c-table.cell>Include additional or override default JavaScript</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>extrahead</code></c-table.cell>
+          <c-table.cell>Empty</c-table.cell>
+          <c-table.cell>Add additional content to the head section</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>body</code></c-table.cell>
+          <c-table.cell>Empty</c-table.cell>
+          <c-table.cell>The main content area of the page</c-table.cell>
+        </c-table.row>
+      </c-table.container>
+    </div>
   </section>
 
   <section id="base-page-html" class="mb-12">
@@ -87,7 +87,7 @@
       This is the recommended template to extend for most pages.
     </p>
 
-    <div class="bg-surface-variant p-6 rounded-lg mb-6">
+    <div class="bg-surface-container-low p-6 rounded-lg mb-6">
       <pre class="text-on-surface-variant"><code>&#123;% extends 'material/base_page.html' %&#125;
 
 &#123;% block nav_header %&#125;
@@ -112,59 +112,59 @@
 &#123;% endblock %&#125;</code></pre>
     </div>
 
-    <table class="w-full border-collapse mb-6">
-      <thead>
-        <tr class="bg-surface-variant">
-          <th class="border p-2 text-left">Block Name</th>
-          <th class="border p-2 text-left">Default Content</th>
-          <th class="border p-2 text-left">Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="border p-2"><code>navigation</code></td>
-          <td class="border p-2">Navigation container with slots</td>
-          <td class="border p-2">Override the entire navigation component</td>
-        </tr>
-        <tr>
-          <td class="border p-2"><code>nav_header</code></td>
-          <td class="border p-2">Empty</td>
-          <td class="border p-2">Content for the navigation header</td>
-        </tr>
-        <tr>
-          <td class="border p-2"><code>nav_items</code></td>
-          <td class="border p-2">Empty</td>
-          <td class="border p-2">Navigation menu items</td>
-        </tr>
-        <tr>
-          <td class="border p-2"><code>nav_footer</code></td>
-          <td class="border p-2">Empty</td>
-          <td class="border p-2">Content for the navigation footer</td>
-        </tr>
-        <tr>
-          <td class="border p-2"><code>content</code></td>
-          <td class="border p-2">Empty</td>
-          <td class="border p-2">Main content area of the page</td>
-        </tr>
-        <tr>
-          <td class="border p-2"><code>footer</code></td>
-          <td class="border p-2">Empty</td>
-          <td class="border p-2">Footer content</td>
-        </tr>
-        <tr>
-          <td class="border p-2"><code>extrabody</code></td>
-          <td class="border p-2">Empty</td>
-          <td class="border p-2">Additional content at the end of the body</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="overflow-x-auto mb-6">
+      <c-table.container>
+        <c-slot name="header">
+          <c-table.header_row>
+            <c-table.header>Block Name</c-table.header>
+            <c-table.header>Default Content</c-table.header>
+            <c-table.header>Description</c-table.header>
+          </c-table.header_row>
+        </c-slot>
+        <c-table.row>
+          <c-table.cell><code>navigation</code></c-table.cell>
+          <c-table.cell>Navigation container with slots</c-table.cell>
+          <c-table.cell>Override the entire navigation component</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>nav_header</code></c-table.cell>
+          <c-table.cell>Empty</c-table.cell>
+          <c-table.cell>Content for the navigation header</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>nav_items</code></c-table.cell>
+          <c-table.cell>Empty</c-table.cell>
+          <c-table.cell>Navigation menu items</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>nav_footer</code></c-table.cell>
+          <c-table.cell>Empty</c-table.cell>
+          <c-table.cell>Content for the navigation footer</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>content</code></c-table.cell>
+          <c-table.cell>Empty</c-table.cell>
+          <c-table.cell>Main content area of the page</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>footer</code></c-table.cell>
+          <c-table.cell>Empty</c-table.cell>
+          <c-table.cell>Footer content</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>extrabody</code></c-table.cell>
+          <c-table.cell>Empty</c-table.cell>
+          <c-table.cell>Additional content at the end of the body</c-table.cell>
+        </c-table.row>
+      </c-table.container>
+    </div>
   </section>
 
   <section id="customization" class="mb-12">
     <h2 class="text-2xl mb-4">Customization Examples</h2>
 
     <h3 class="text-xl font-medium mb-3">Customizing the Navigation</h3>
-    <div class="bg-surface-variant p-6 rounded-lg mb-6">
+    <div class="bg-surface-container-low p-6 rounded-lg mb-6">
       <pre class="text-on-surface-variant"><code>&#123;% extends 'material/base_page.html' %&#125;
 
 &#123;% block nav_header %&#125;
@@ -189,7 +189,7 @@
     </div>
 
     <h3 class="text-xl font-medium mb-3">Adding Custom CSS and JavaScript</h3>
-    <div class="bg-surface-variant p-6 rounded-lg mb-6">
+    <div class="bg-surface-container-low p-6 rounded-lg mb-6">
       <pre class="text-on-surface-variant"><code>&#123;% extends 'material/base_page.html' %&#125;
 
 &#123;% block css %&#125;
@@ -204,7 +204,7 @@
     </div>
 
     <h3 class="text-xl font-medium mb-3">Customizing the Page Title</h3>
-    <div class="bg-surface-variant p-6 rounded-lg mb-6">
+    <div class="bg-surface-container-low p-6 rounded-lg mb-6">
       <pre class="text-on-surface-variant"><code>&#123;% extends 'material/base_page.html' %&#125;
 
 &#123;% block title %&#125;&#123;&#123; object.title &#125;&#125; | My Application&#123;% endblock %&#125;</code></pre>
@@ -225,7 +225,7 @@
       First, ensure your templates directory is properly configured in your Django settings:
     </p>
     
-    <div class="bg-surface-variant p-6 rounded-lg mb-6">
+    <div class="bg-surface-container-low p-6 rounded-lg mb-6">
       <pre class="text-on-surface-variant"><code>TEMPLATES = [
 {
     'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -243,7 +243,7 @@
       For example, to override <code>material/base.html</code>, create a file at:
     </p>
     
-    <div class="bg-surface-variant p-6 rounded-lg mb-6">
+    <div class="bg-surface-container-low p-6 rounded-lg mb-6">
       <pre class="text-on-surface-variant"><code>templates/material/base.html</code></pre>
     </div>
     
@@ -253,7 +253,7 @@
       This ensures your template will continue to work even if the original template is updated.
     </p>
     
-    <div class="bg-surface-variant p-6 rounded-lg mb-6">
+    <div class="bg-surface-container-low p-6 rounded-lg mb-6">
       <pre class="text-on-surface-variant"><code>&#123;% extends 'material/base.html' %&#125;
 &#123;% load i18n static %&#125;
 
@@ -270,7 +270,7 @@
       For example, to customize the filled button template:
     </p>
     
-    <div class="bg-surface-variant p-6 rounded-lg mb-6">
+    <div class="bg-surface-container-low p-6 rounded-lg mb-6">
       <pre class="text-on-surface-variant"><code>templates/cotton/button/filled.html</code></pre>
     </div>
     
@@ -280,7 +280,7 @@
       all instances of that component in your application will use your customized version.
     </p>
     
-    <div class="bg-surface-variant p-6 rounded-lg mb-6">
+    <div class="bg-surface-container-low p-6 rounded-lg mb-6">
       <pre class="text-on-surface-variant"><code>&#123;% extends 'cotton/button/filled.html' %&#125;
 &#123;% load i18n static %&#125;
 

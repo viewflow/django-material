@@ -136,7 +136,7 @@
   <section id="usage" class="mb-12">
     <h2 class="text-2xl mb-4">Usage</h2>
     
-    <div class="bg-surface-variant p-6 rounded-lg mb-6">
+    <div class="bg-surface-container-low p-6 rounded-lg mb-6">
       <pre class="text-on-surface-variant"><code>&lt;!-- Basic Table --&gt;
 &lt;c-table.container&gt;
   &lt;c-slot name="header"&gt;
@@ -182,126 +182,101 @@
     <h2 class="text-2xl mb-4">Attributes</h2>
     
     <h3 class="text-xl font-medium mb-3">Table Container</h3>
-    <table class="w-full border-collapse mb-6">
-      <thead>
-        <tr class="bg-surface-variant">
-          <th class="border p-2 text-left">Attribute</th>
-          <th class="border p-2 text-left">Type</th>
-          <th class="border p-2 text-left">Default</th>
-          <th class="border p-2 text-left">Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="border p-2"><code>caption</code></td>
-          <td class="border p-2">string</td>
-          <td class="border p-2">""</td>
-          <td class="border p-2">Table caption that provides context about the data</td>
-        </tr>
-        <tr>
-          <td class="border p-2"><code>density</code></td>
-          <td class="border p-2">string</td>
-          <td class="border p-2">"default"</td>
-          <td class="border p-2">Controls the spacing of table cells (compact, default, comfortable)</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="overflow-x-auto mb-6">
+      <c-table.container>
+        <c-slot name="header">
+          <c-table.header_row>
+            <c-table.header>Attribute</c-table.header>
+            <c-table.header>Type</c-table.header>
+            <c-table.header>Default</c-table.header>
+            <c-table.header>Description</c-table.header>
+          </c-table.header_row>
+        </c-slot>
+        <c-table.row>
+          <c-table.cell><code>caption</code></c-table.cell>
+          <c-table.cell>string</c-table.cell>
+          <c-table.cell>""</c-table.cell>
+          <c-table.cell>Table caption that provides context about the data</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>density</code></c-table.cell>
+          <c-table.cell>string</c-table.cell>
+          <c-table.cell>"default"</c-table.cell>
+          <c-table.cell>Controls the spacing of table cells (compact, default, comfortable)</c-table.cell>
+        </c-table.row>
+      </c-table.container>
+    </div>
 
     <h3 class="text-xl font-medium mb-3">Table Header</h3>
-    <table class="w-full border-collapse mb-6">
-      <thead>
-        <tr class="bg-surface-variant">
-          <th class="border p-2 text-left">Attribute</th>
-          <th class="border p-2 text-left">Type</th>
-          <th class="border p-2 text-left">Default</th>
-          <th class="border p-2 text-left">Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="border p-2"><code>sortable</code></td>
-          <td class="border p-2">boolean</td>
-          <td class="border p-2">false</td>
-          <td class="border p-2">When true, displays sorting controls for the column</td>
-        </tr>
-        <tr>
-          <td class="border p-2"><code>sort_direction</code></td>
-          <td class="border p-2">string</td>
-          <td class="border p-2">""</td>
-          <td class="border p-2">Sort direction: "asc", "desc", or empty string for no sort</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="overflow-x-auto mb-6">
+      <c-table.container>
+        <c-slot name="header">
+          <c-table.header_row>
+            <c-table.header>Attribute</c-table.header>
+            <c-table.header>Type</c-table.header>
+            <c-table.header>Default</c-table.header>
+            <c-table.header>Description</c-table.header>
+          </c-table.header_row>
+        </c-slot>
+        <c-table.row>
+          <c-table.cell><code>sortable</code></c-table.cell>
+          <c-table.cell>boolean</c-table.cell>
+          <c-table.cell>false</c-table.cell>
+          <c-table.cell>When true, displays sorting controls for the column</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>sort_direction</code></c-table.cell>
+          <c-table.cell>string</c-table.cell>
+          <c-table.cell>""</c-table.cell>
+          <c-table.cell>Sort direction: "asc", "desc", or empty string for no sort</c-table.cell>
+        </c-table.row>
+      </c-table.container>
+    </div>
 
     <h3 class="text-xl font-medium mb-3">Table Row</h3>
-    <table class="w-full border-collapse mb-6">
-      <thead>
-        <tr class="bg-surface-variant">
-          <th class="border p-2 text-left">Attribute</th>
-          <th class="border p-2 text-left">Type</th>
-          <th class="border p-2 text-left">Default</th>
-          <th class="border p-2 text-left">Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="border p-2"><code>selected</code></td>
-          <td class="border p-2">boolean</td>
-          <td class="border p-2">false</td>
-          <td class="border p-2">When true, highlights the row and sets proper ARIA attributes</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="overflow-x-auto mb-6">
+      <c-table.container>
+        <c-slot name="header">
+          <c-table.header_row>
+            <c-table.header>Attribute</c-table.header>
+            <c-table.header>Type</c-table.header>
+            <c-table.header>Default</c-table.header>
+            <c-table.header>Description</c-table.header>
+          </c-table.header_row>
+        </c-slot>
+        <c-table.row>
+          <c-table.cell><code>selected</code></c-table.cell>
+          <c-table.cell>boolean</c-table.cell>
+          <c-table.cell>false</c-table.cell>
+          <c-table.cell>When true, highlights the row and sets proper ARIA attributes</c-table.cell>
+        </c-table.row>
+      </c-table.container>
+    </div>
 
     <h3 class="text-xl font-medium mb-3">Pagination</h3>
-    <table class="w-full border-collapse mb-6">
-      <thead>
-        <tr class="bg-surface-variant">
-          <th class="border p-2 text-left">Attribute</th>
-          <th class="border p-2 text-left">Type</th>
-          <th class="border p-2 text-left">Default</th>
-          <th class="border p-2 text-left">Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="border p-2"><code>current_page</code></td>
-          <td class="border p-2">number</td>
-          <td class="border p-2">1</td>
-          <td class="border p-2">Current page number</td>
-        </tr>
-        <tr>
-          <td class="border p-2"><code>total_pages</code></td>
-          <td class="border p-2">number</td>
-          <td class="border p-2">1</td>
-          <td class="border p-2">Total number of pages</td>
-        </tr>
-        <tr>
-          <td class="border p-2"><code>rows_per_page</code></td>
-          <td class="border p-2">number</td>
-          <td class="border p-2">10</td>
-          <td class="border p-2">Number of rows per page</td>
-        </tr>
-        <tr>
-          <td class="border p-2"><code>rows_per_page_options</code></td>
-          <td class="border p-2">array</td>
-          <td class="border p-2">[10, 25, 50, 100]</td>
-          <td class="border p-2">Available options for rows per page</td>
-        </tr>
-      </tbody>
-    </table>
-  </section>
-
-  <section id="accessibility" class="mb-12">
-    <h2 class="text-2xl mb-4">Accessibility</h2>
-    
-    <ul class="list-disc pl-6 mb-6">
-      <li class="mb-2">Tables use proper HTML table semantics with <code>&lt;table&gt;</code>, <code>&lt;thead&gt;</code>, <code>&lt;tbody&gt;</code>, and <code>&lt;caption&gt;</code> elements</li>
-      <li class="mb-2">Table headers use <code>&lt;th scope="col"&gt;</code> for proper association with data cells</li>
-      <li class="mb-2">Sortable columns include accessible button elements with appropriate ARIA labels</li>
-      <li class="mb-2">Selected rows use <code>aria-selected="true"</code> attribute</li>
-      <li class="mb-2">Pagination controls include proper button elements with descriptive labels</li>
-      <li class="mb-2">Tables resize responsibly with overflow scrolling when needed</li>
-    </ul>
+    <div class="overflow-x-auto mb-6">
+      <c-table.container>
+        <c-slot name="header">
+          <c-table.header_row>
+            <c-table.header>Attribute</c-table.header>
+            <c-table.header>Type</c-table.header>
+            <c-table.header>Default</c-table.header>
+            <c-table.header>Description</c-table.header>
+          </c-table.header_row>
+        </c-slot>
+        <c-table.row>
+          <c-table.cell><code>current_page</code></c-table.cell>
+          <c-table.cell>number</c-table.cell>
+          <c-table.cell>1</c-table.cell>
+          <c-table.cell>Current page number</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>total_pages</code></c-table.cell>
+          <c-table.cell>number</c-table.cell>
+          <c-table.cell>1</c-table.cell>
+          <c-table.cell>Total number of pages</c-table.cell>
+        </c-table.row>
+      </c-table.container>
+    </div>
   </section>
 {% endblock %}

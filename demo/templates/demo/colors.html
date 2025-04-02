@@ -705,57 +705,5 @@
       </div>
     </div>
   </section>
-  
-  <section id="color-principles" class="mb-12">
-    <h2 class="text-2xl mb-4">Color System Principles</h2>
-    
-    <div class="p-6 rounded-lg shadow-sm">
-      <h3 class="text-xl font-medium mb-4">Guidelines for Using Colors</h3>
-      
-      <ul class="list-disc pl-6 mb-6">
-        <li class="mb-3">
-          <strong>Maintain contrast ratios:</strong> Ensure text has sufficient contrast against its background for readability and accessibility.
-        </li>
-        <li class="mb-3">
-          <strong>Use color consistently:</strong> Apply colors consistently throughout your app to create a cohesive experience.
-        </li>
-        <li class="mb-3">
-          <strong>Follow color role semantics:</strong> Use colors according to their roles - primary for main actions, error for warnings, etc.
-        </li>
-        <li class="mb-3">
-          <strong>Don't rely on color alone:</strong> Always use additional visual cues (icons, text) alongside color to convey meaning.
-        </li>
-        <li class="mb-3">
-          <strong>Use opacity judiciously:</strong> Apply opacity to create subtle variations without introducing new colors.
-        </li>
-      </ul>
-    </div>
-  </section>
-  
-  <section id="color-tokens" class="mb-12">
-    <h2 class="text-2xl mb-4">Color Tokens and Design System Integration</h2>
-    
-    <div class="p-6 rounded-lg shadow-sm">
-      <p class="mb-4">
-        Django Material's color system is designed to integrate seamlessly with design tokens and design systems.
-        The color roles follow Material Design 3 specifications, making it compatible with design tools that export MD3 tokens.
-      </p>
-      
-      <h3 class="text-xl font-medium mb-4 mt-6">Working with Figma</h3>
-      <p class="mb-4">
-        If your design team uses Figma with Material Design 3 tokens:
-      </p>
-      <ul class="list-disc pl-6 mb-6">
-        <li class="mb-2">Export color tokens from Figma as CSS variables</li>
-        <li class="mb-2">Rename the variables to match Django Material's naming convention if needed</li>
-        <li class="mb-2">Include the exported CSS file in your project</li>
-      </ul>
-      
-      <h3 class="text-xl font-medium mb-4">Generating Themes</h3>
-      <p class="mb-4">
-        You can also use tools like <a href="https://m3.material.io/theme-builder" class="text-primary hover:underline" target="_blank">Material Theme Builder</a> to generate a complete color scheme based on your brand color, then map the exported values to Django Material's CSS variables.
-      </p>
-    </div>
-  </section>
 </div>
 {% endblock %}

@@ -137,59 +137,48 @@
   <section id="attributes" class="mb-12">
     <h2 class="text-2xl mb-4">Attributes</h2>
     
-    <table class="w-full border-collapse mb-6">
-      <thead>
-        <tr class="bg-primary/10">
-          <th class="border p-2 text-left">Attribute</th>
-          <th class="border p-2 text-left">Type</th>
-          <th class="border p-2 text-left">Default</th>
-          <th class="border p-2 text-left">Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="border p-2"><code>color</code></td>
-          <td class="border p-2">string</td>
-          <td class="border p-2">"primary"</td>
-          <td class="border p-2">Button color theme. Options: "primary", "secondary", "tertiary"</td>
-        </tr>
-        <tr>
-          <td class="border p-2"><code>icon</code></td>
-          <td class="border p-2">string</td>
-          <td class="border p-2">none</td>
-          <td class="border p-2">Material icon name to display before the button text</td>
-        </tr>
-        <tr>
-          <td class="border p-2"><code>disabled</code></td>
-          <td class="border p-2">boolean</td>
-          <td class="border p-2">false</td>
-          <td class="border p-2">When true, the button is disabled and non-interactive</td>
-        </tr>
-        <tr>
-          <td class="border p-2"><code>aria_label</code></td>
-          <td class="border p-2">string</td>
-          <td class="border p-2">none</td>
-          <td class="border p-2">Accessible label for screen readers</td>
-        </tr>
-        <tr>
-          <td class="border p-2"><code>attrs</code></td>
-          <td class="border p-2">object</td>
-          <td class="border p-2">none</td>
-          <td class="border p-2">Additional HTML attributes to apply to the button element</td>
-        </tr>
-      </tbody>
-    </table>
-  </section>
-
-  <section id="accessibility" class="mb-12">
-    <h2 class="text-2xl mb-4">Accessibility</h2>
-    
-    <ul class="list-disc pl-6 mb-6">
-      <li class="mb-2">Buttons include the <code>role="button"</code> attribute</li>
-      <li class="mb-2">Icons are marked with <code>aria-hidden="true"</code> to prevent screen readers from announcing them</li>
-      <li class="mb-2">Use <code>aria_label</code> to provide more context for buttons with icons</li>
-      <li class="mb-2">Disabled buttons maintain visible contrast for users with visual impairments</li>
-    </ul>
+    <div class="overflow-x-auto mb-6">
+      <c-table.container>
+        <c-slot name="header">
+          <c-table.header_row>
+            <c-table.header>Attribute</c-table.header>
+            <c-table.header>Type</c-table.header>
+            <c-table.header>Default</c-table.header>
+            <c-table.header>Description</c-table.header>
+          </c-table.header_row>
+        </c-slot>
+        <c-table.row>
+          <c-table.cell><code>color</code></c-table.cell>
+          <c-table.cell>string</c-table.cell>
+          <c-table.cell>"primary"</c-table.cell>
+          <c-table.cell>Button color theme. Options: "primary", "secondary", "tertiary"</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>icon</code></c-table.cell>
+          <c-table.cell>string</c-table.cell>
+          <c-table.cell>none</c-table.cell>
+          <c-table.cell>Material icon name to display before the button text</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>disabled</code></c-table.cell>
+          <c-table.cell>boolean</c-table.cell>
+          <c-table.cell>false</c-table.cell>
+          <c-table.cell>When true, the button is disabled and non-interactive</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>aria_label</code></c-table.cell>
+          <c-table.cell>string</c-table.cell>
+          <c-table.cell>none</c-table.cell>
+          <c-table.cell>Accessible label for screen readers</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>attrs</code></c-table.cell>
+          <c-table.cell>object</c-table.cell>
+          <c-table.cell>none</c-table.cell>
+          <c-table.cell>Additional HTML attributes to apply to the button element</c-table.cell>
+        </c-table.row>
+      </c-table.container>
+    </div>
   </section>
 </div>
 {% endblock %}
