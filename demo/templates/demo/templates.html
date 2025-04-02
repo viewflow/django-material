@@ -23,13 +23,15 @@
     </p>
 
     <div class="bg-surface-container-low p-6 rounded-lg mb-6">
-      <pre class="text-on-surface-variant"><code>&#123;% extends 'material/base.html' %&#125;
+      <div class="overflow-x-auto" style="max-width: 100%;">
+        <pre class="text-on-surface-variant" style="white-space: pre; overflow-x: auto;"><code>&#123;% extends 'material/base.html' %&#125;
 
 &#123;% block title %&#125;My Custom Title&#123;% endblock %&#125;
 
 &#123;% block body %&#125;
   <!-- Your content here -->
 &#123;% endblock %&#125;</code></pre>
+      </div>
     </div>
 
     <div class="overflow-x-auto mb-6">
@@ -88,7 +90,8 @@
     </p>
 
     <div class="bg-surface-container-low p-6 rounded-lg mb-6">
-      <pre class="text-on-surface-variant"><code>&#123;% extends 'material/base_page.html' %&#125;
+      <div class="overflow-x-auto" style="max-width: 100%;">
+        <pre class="text-on-surface-variant" style="white-space: pre; overflow-x: auto;"><code>&#123;% extends 'material/base_page.html' %&#125;
 
 &#123;% block nav_header %&#125;
   <!-- Navigation header content -->
@@ -110,6 +113,7 @@
 &#123;% block footer %&#125;
   <!-- Footer content -->
 &#123;% endblock %&#125;</code></pre>
+      </div>
     </div>
 
     <div class="overflow-x-auto mb-6">
@@ -165,7 +169,8 @@
 
     <h3 class="text-xl font-medium mb-3">Customizing the Navigation</h3>
     <div class="bg-surface-container-low p-6 rounded-lg mb-6">
-      <pre class="text-on-surface-variant"><code>&#123;% extends 'material/base_page.html' %&#125;
+      <div class="overflow-x-auto" style="max-width: 100%;">
+        <pre class="text-on-surface-variant" style="white-space: pre; overflow-x: auto;"><code>&#123;% extends 'material/base_page.html' %&#125;
 
 &#123;% block nav_header %&#125;
   &lt;div class="flex items-center mb-2"&gt;
@@ -186,11 +191,13 @@
     &lt;span&gt;John Doe&lt;/span&gt;
   &lt;/div&gt;
 &#123;% endblock %&#125;</code></pre>
+      </div>
     </div>
 
     <h3 class="text-xl font-medium mb-3">Adding Custom CSS and JavaScript</h3>
     <div class="bg-surface-container-low p-6 rounded-lg mb-6">
-      <pre class="text-on-surface-variant"><code>&#123;% extends 'material/base_page.html' %&#125;
+      <div class="overflow-x-auto" style="max-width: 100%;">
+        <pre class="text-on-surface-variant" style="white-space: pre; overflow-x: auto;"><code>&#123;% extends 'material/base_page.html' %&#125;
 
 &#123;% block css %&#125;
   &#123;&#123; block.super &#125;&#125;
@@ -201,13 +208,16 @@
   &#123;&#123; block.super &#125;&#125;
   &lt;script src="&#123;% static 'myapp/js/custom.js' %&#125;"&gt;&lt;/script&gt;
 &#123;% endblock %&#125;</code></pre>
+      </div>
     </div>
 
     <h3 class="text-xl font-medium mb-3">Customizing the Page Title</h3>
     <div class="bg-surface-container-low p-6 rounded-lg mb-6">
-      <pre class="text-on-surface-variant"><code>&#123;% extends 'material/base_page.html' %&#125;
+      <div class="overflow-x-auto" style="max-width: 100%;">
+        <pre class="text-on-surface-variant" style="white-space: pre; overflow-x: auto;"><code>&#123;% extends 'material/base_page.html' %&#125;
 
 &#123;% block title %&#125;&#123;&#123; object.title &#125;&#125; | My Application&#123;% endblock %&#125;</code></pre>
+      </div>
     </div>
   </section>
 
@@ -226,7 +236,8 @@
     </p>
     
     <div class="bg-surface-container-low p-6 rounded-lg mb-6">
-      <pre class="text-on-surface-variant"><code>TEMPLATES = [
+      <div class="overflow-x-auto" style="max-width: 100%;">
+        <pre class="text-on-surface-variant" style="white-space: pre; overflow-x: auto;"><code>TEMPLATES = [
 {
     'BACKEND': 'django.template.backends.django.DjangoTemplates',
     'DIRS': [
@@ -236,6 +247,7 @@
     ...
 }
 ]</code></pre>
+      </div>
     </div>
     
     <p class="mb-6">
@@ -244,7 +256,9 @@
     </p>
     
     <div class="bg-surface-container-low p-6 rounded-lg mb-6">
-      <pre class="text-on-surface-variant"><code>templates/material/base.html</code></pre>
+      <div class="overflow-x-auto" style="max-width: 100%;">
+        <pre class="text-on-surface-variant" style="white-space: pre; overflow-x: auto;"><code>templates/material/base.html</code></pre>
+      </div>
     </div>
     
     <h3 class="text-xl font-medium mb-3">Extending and Modifying Templates</h3>
@@ -254,7 +268,8 @@
     </p>
     
     <div class="bg-surface-container-low p-6 rounded-lg mb-6">
-      <pre class="text-on-surface-variant"><code>&#123;% extends 'material/base.html' %&#125;
+      <div class="overflow-x-auto" style="max-width: 100%;">
+        <pre class="text-on-surface-variant" style="white-space: pre; overflow-x: auto;"><code>&#123;% extends 'material/base.html' %&#125;
 &#123;% load i18n static %&#125;
 
 &#123;% block title %&#125;&#123;&#123; site.title|default:"Corp. Ink." &#125;&#125;&#123;% endblock %&#125;
@@ -263,6 +278,7 @@
   &#123;&#123; block.super &#125;&#125;
   &lt;link rel="stylesheet" href="&#123;% static 'myapp/css/custom.css' %&#125;"&gt;
 &#123;% endblock %&#125;</code></pre>
+      </div>
     </div>
     
     <p class="mb-6">
@@ -271,7 +287,9 @@
     </p>
     
     <div class="bg-surface-container-low p-6 rounded-lg mb-6">
-      <pre class="text-on-surface-variant"><code>templates/cotton/button/filled.html</code></pre>
+      <div class="overflow-x-auto" style="max-width: 100%;">
+        <pre class="text-on-surface-variant" style="white-space: pre; overflow-x: auto;"><code>templates/cotton/button/filled.html</code></pre>
+      </div>
     </div>
     
     <h3 class="text-xl font-medium mb-3">Overriding Cotton Components</h3>
@@ -281,11 +299,13 @@
     </p>
     
     <div class="bg-surface-container-low p-6 rounded-lg mb-6">
-      <pre class="text-on-surface-variant"><code>&#123;% extends 'cotton/button/filled.html' %&#125;
+      <div class="overflow-x-auto" style="max-width: 100%;">
+        <pre class="text-on-surface-variant" style="white-space: pre; overflow-x: auto;"><code>&#123;% extends 'cotton/button/filled.html' %&#125;
 &#123;% load i18n static %&#125;
 
 &lt;c-vars
-  class="inline-flex items-center justify-center px-6 py-3 bg-primary text-on-primary rounded-full shadow-lg &#123;&#123; class &#125;&#125;" /&gt;
+  class="inline-flex items-center justify-center px-6 py-3 
+         bg-primary text-on-primary rounded-full shadow-lg &#123;&#123; class &#125;&#125;" /&gt;
 
 &lt;button class="&#123;&#123; class &#125;&#125;" &#123;&#123; attrs &#125;&#125;&gt;
   &#123;% if icon %&#125;
@@ -293,6 +313,7 @@
   &#123;% endif %&#125;
   &#123;&#123; slot &#125;&#125;
 &lt;/button&gt;</code></pre>
+      </div>
     </div>
     
   </section>
