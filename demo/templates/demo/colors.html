@@ -13,6 +13,7 @@
   <p class="mb-6">
     Django Material implements Material Design 3 color system with a dynamic and accessible color palette.
     The colors are organized by their role in the user interface and their relationship to each other.
+    The specific color values shown below represent the current theme, but can be fully customized.
   </p>
 
   <section id="primary-colors" class="mb-12">
@@ -633,6 +634,78 @@
     </div>
   </section>
 
+  <section id="customization" class="mb-12">
+    <h2 class="text-2xl mb-4">Customizing Colors</h2>
+    
+    <p class="mb-6">
+      Django Material uses CSS custom properties (variables) to define all color values, making it easy to customize the theme.
+      These variables are defined in <code>material/assets/colors.css</code>.
+    </p>
+    
+    <div class="bg-surface-container-low p-6 rounded-lg shadow-sm mb-6">
+      <h3 class="text-xl font-medium mb-4">CSS Variables</h3>
+      <pre class="text-on-surface-variant"><code>@theme static {
+  /* Primary colors */
+  --color-primary: #0277bd;
+  --color-on-primary: #FFFFFF;
+  --color-primary-container: #E1F5FE;
+  --color-on-primary-container: #01579b;
+
+  /* Secondary colors */
+  --color-secondary: #26a69a;
+  --color-on-secondary: #FFFFFF;
+  --color-secondary-container: #B2DFDB;
+  --color-on-secondary-container: #00695C;
+
+  /* Tertiary colors */
+  --color-tertiary: #e91e63;
+  --color-on-tertiary: #FFFFFF;
+  --color-tertiary-container: #FCE4EC;
+  --color-on-tertiary-container: #AD1457;
+
+  /* And so on for other color roles... */
+}</code></pre>
+    </div>
+    
+    <div class="p-6 rounded-lg shadow-sm mb-6">
+      <h3 class="text-xl font-medium mb-4">How to Customize</h3>
+      
+      <p class="mb-4">To customize the color theme:</p>
+      
+      <ol class="list-decimal pl-6 mb-6">
+        <li class="mb-3">
+          Create a new CSS file in your project, e.g., <code>myapp/static/css/theme.css</code>
+        </li>
+        <li class="mb-3">
+          Override the CSS variables with your custom color values:
+          <pre class="bg-surface-container-low p-4 rounded mt-2 text-on-surface-variant"><code>:root {
+  --color-primary: #1976d2;
+  --color-on-primary: #FFFFFF;
+  --color-primary-container: #BBDEFB;
+  /* Override other colors as needed */
+}</code></pre>
+        </li>
+        <li class="mb-3">
+          Include your CSS file after the Material CSS in your base template:
+          <pre class="bg-surface-container-low p-4 rounded mt-2 text-on-surface-variant"><code>&#123;% block css %&#125;
+  &#123;&#123; block.super &#125;&#125;
+  &lt;link rel="stylesheet" href="&#123;% static 'myapp/css/theme.css' %&#125;"&gt;
+&#123;% endblock %&#125;</code></pre>
+        </li>
+      </ol>
+      
+      <div class="bg-primary/10 p-4 rounded">
+        <p class="mb-2"><strong>Note:</strong> When customizing colors, maintain the relationships between colors:</p>
+        <ul class="list-disc pl-6">
+          <li>Ensure sufficient contrast between text and background colors</li>
+          <li>Keep "on-" colors readable on their respective backgrounds</li>
+          <li>Maintain a cohesive color system by using related hues</li>
+          <li>Test your theme with accessibility tools to verify contrast ratios</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  
   <section id="color-principles" class="mb-12">
     <h2 class="text-2xl mb-4">Color System Principles</h2>
     
@@ -656,6 +729,32 @@
           <strong>Use opacity judiciously:</strong> Apply opacity to create subtle variations without introducing new colors.
         </li>
       </ul>
+    </div>
+  </section>
+  
+  <section id="color-tokens" class="mb-12">
+    <h2 class="text-2xl mb-4">Color Tokens and Design System Integration</h2>
+    
+    <div class="p-6 rounded-lg shadow-sm">
+      <p class="mb-4">
+        Django Material's color system is designed to integrate seamlessly with design tokens and design systems.
+        The color roles follow Material Design 3 specifications, making it compatible with design tools that export MD3 tokens.
+      </p>
+      
+      <h3 class="text-xl font-medium mb-4 mt-6">Working with Figma</h3>
+      <p class="mb-4">
+        If your design team uses Figma with Material Design 3 tokens:
+      </p>
+      <ul class="list-disc pl-6 mb-6">
+        <li class="mb-2">Export color tokens from Figma as CSS variables</li>
+        <li class="mb-2">Rename the variables to match Django Material's naming convention if needed</li>
+        <li class="mb-2">Include the exported CSS file in your project</li>
+      </ul>
+      
+      <h3 class="text-xl font-medium mb-4">Generating Themes</h3>
+      <p class="mb-4">
+        You can also use tools like <a href="https://m3.material.io/theme-builder" class="text-primary hover:underline" target="_blank">Material Theme Builder</a> to generate a complete color scheme based on your brand color, then map the exported values to Django Material's CSS variables.
+      </p>
     </div>
   </section>
 </div>
