@@ -1,0 +1,662 @@
+{% extends 'material/base_page.html' %}
+{% load i18n %}
+
+{% block content %}
+<div class="container mx-auto px-10 pt-4 pb-8">
+  <c-breadcrumbs.container class="mb-2">
+    <c-breadcrumbs.home href="{% url 'index' %}"></c-breadcrumbs.home>
+    <c-breadcrumbs.item current="true">Colors</c-breadcrumbs.item>
+  </c-breadcrumbs.container>
+  
+  <h1 class="text-3xl font-medium mb-8">Color System</h1>
+  
+  <p class="mb-6">
+    Django Material implements Material Design 3 color system with a dynamic and accessible color palette.
+    The colors are organized by their role in the user interface and their relationship to each other.
+  </p>
+
+  <section id="primary-colors" class="mb-12">
+    <h2 class="text-2xl mb-4">Primary Colors</h2>
+    <p class="mb-6">
+      Primary colors are the most prominent colors in your UI, used for key components like buttons, 
+      active states, and primary text. Our primary palette is based on Light Blue 700.
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+      <div class="p-6 rounded-lg shadow-sm">
+        <div class="flex items-center mb-4">
+          <div class="w-12 h-12 rounded-lg bg-primary mr-4"></div>
+          <div>
+            <h3 class="font-medium">Primary</h3>
+            <code class="text-sm bg-surface-container-low px-2 py-1 rounded">#0277bd</code>
+          </div>
+        </div>
+        <p class="mb-2">Used for:</p>
+        <ul class="list-disc pl-6 mb-4">
+          <li>Filled buttons</li>
+          <li>Active states</li>
+          <li>Active navigation items</li>
+          <li>Primary actions</li>
+        </ul>
+        <p class="text-sm bg-gray-100 p-2 rounded">
+          Tailwind class: <code>bg-primary</code> or <code>text-primary</code>
+        </p>
+      </div>
+
+      <div class="p-6 rounded-lg shadow-sm">
+        <div class="flex items-center mb-4">
+          <div class="w-12 h-12 rounded-lg bg-primary-container mr-4"></div>
+          <div>
+            <h3 class="font-medium">Primary Container</h3>
+            <code class="text-sm bg-surface-container-low px-2 py-1 rounded">#E1F5FE</code>
+          </div>
+        </div>
+        <p class="mb-2">Used for:</p>
+        <ul class="list-disc pl-6 mb-4">
+          <li>Selected states</li>
+          <li>Buttons with primary emphasis</li>
+          <li>Backgrounds for primary-related content</li>
+        </ul>
+        <p class="text-sm bg-gray-100 p-2 rounded">
+          Tailwind class: <code>bg-primary-container</code> or <code>text-primary-container</code>
+        </p>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="p-6 rounded-lg shadow-sm">
+        <div class="flex items-center mb-4">
+          <div class="w-12 h-12 rounded-lg bg-primary text-on-primary flex items-center justify-center mr-4">
+            <span class="material-icons">check</span>
+          </div>
+          <div>
+            <h3 class="font-medium">On Primary</h3>
+            <code class="text-sm bg-surface-container-low px-2 py-1 rounded">#FFFFFF</code>
+          </div>
+        </div>
+        <p>Content that appears on primary-colored backgrounds, like text and icons in a primary button.</p>
+        <p class="text-sm bg-gray-100 p-2 rounded mt-4">
+          Tailwind class: <code>text-on-primary</code>
+        </p>
+      </div>
+
+      <div class="p-6 rounded-lg shadow-sm">
+        <div class="flex items-center mb-4">
+          <div class="w-12 h-12 rounded-lg bg-primary-container text-on-primary-container flex items-center justify-center mr-4">
+            <span class="material-icons">check</span>
+          </div>
+          <div>
+            <h3 class="font-medium">On Primary Container</h3>
+            <code class="text-sm bg-surface-container-low px-2 py-1 rounded">#01579b</code>
+          </div>
+        </div>
+        <p>Content that appears on primary container backgrounds.</p>
+        <p class="text-sm bg-gray-100 p-2 rounded mt-4">
+          Tailwind class: <code>text-on-primary-container</code>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="secondary-colors" class="mb-12">
+    <h2 class="text-2xl mb-4">Secondary Colors</h2>
+    <p class="mb-6">
+      Secondary colors are less emphasized than primary colors, used for less prominent components
+      and to create visual distinction. Our secondary palette is based on Teal 400.
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+      <div class="p-6 rounded-lg shadow-sm">
+        <div class="flex items-center mb-4">
+          <div class="w-12 h-12 rounded-lg bg-secondary mr-4"></div>
+          <div>
+            <h3 class="font-medium">Secondary</h3>
+            <code class="text-sm bg-surface-container-low px-2 py-1 rounded">#26a69a</code>
+          </div>
+        </div>
+        <p class="mb-2">Used for:</p>
+        <ul class="list-disc pl-6 mb-4">
+          <li>Secondary buttons</li>
+          <li>Less prominent actions</li>
+          <li>Progress indicators</li>
+        </ul>
+        <p class="text-sm bg-gray-100 p-2 rounded">
+          Tailwind class: <code>bg-secondary</code> or <code>text-secondary</code>
+        </p>
+      </div>
+
+      <div class="p-6 rounded-lg shadow-sm">
+        <div class="flex items-center mb-4">
+          <div class="w-12 h-12 rounded-lg bg-secondary-container mr-4"></div>
+          <div>
+            <h3 class="font-medium">Secondary Container</h3>
+            <code class="text-sm bg-surface-container-low px-2 py-1 rounded">#B2DFDB</code>
+          </div>
+        </div>
+        <p class="mb-2">Used for:</p>
+        <ul class="list-disc pl-6 mb-4">
+          <li>Secondary component containers</li>
+          <li>Backgrounds for secondary content</li>
+          <li>Tag or chip backgrounds</li>
+        </ul>
+        <p class="text-sm bg-gray-100 p-2 rounded">
+          Tailwind class: <code>bg-secondary-container</code> or <code>text-secondary-container</code>
+        </p>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="p-6 rounded-lg shadow-sm">
+        <div class="flex items-center mb-4">
+          <div class="w-12 h-12 rounded-lg bg-secondary text-on-secondary flex items-center justify-center mr-4">
+            <span class="material-icons">check</span>
+          </div>
+          <div>
+            <h3 class="font-medium">On Secondary</h3>
+            <code class="text-sm bg-surface-container-low px-2 py-1 rounded">#FFFFFF</code>
+          </div>
+        </div>
+        <p>Content that appears on secondary-colored backgrounds.</p>
+        <p class="text-sm bg-gray-100 p-2 rounded mt-4">
+          Tailwind class: <code>text-on-secondary</code>
+        </p>
+      </div>
+
+      <div class="p-6 rounded-lg shadow-sm">
+        <div class="flex items-center mb-4">
+          <div class="w-12 h-12 rounded-lg bg-secondary-container text-on-secondary-container flex items-center justify-center mr-4">
+            <span class="material-icons">check</span>
+          </div>
+          <div>
+            <h3 class="font-medium">On Secondary Container</h3>
+            <code class="text-sm bg-surface-container-low px-2 py-1 rounded">#00695C</code>
+          </div>
+        </div>
+        <p>Content that appears on secondary container backgrounds.</p>
+        <p class="text-sm bg-gray-100 p-2 rounded mt-4">
+          Tailwind class: <code>text-on-secondary-container</code>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="tertiary-colors" class="mb-12">
+    <h2 class="text-2xl mb-4">Tertiary Colors</h2>
+    <p class="mb-6">
+      Tertiary colors are used for accents, to draw attention to specific elements,
+      and for decorative purposes. Our tertiary palette is based on Pink 500.
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+      <div class="p-6 rounded-lg shadow-sm">
+        <div class="flex items-center mb-4">
+          <div class="w-12 h-12 rounded-lg bg-tertiary mr-4"></div>
+          <div>
+            <h3 class="font-medium">Tertiary</h3>
+            <code class="text-sm bg-surface-container-low px-2 py-1 rounded">#e91e63</code>
+          </div>
+        </div>
+        <p class="mb-2">Used for:</p>
+        <ul class="list-disc pl-6 mb-4">
+          <li>Accent elements</li>
+          <li>Highlights</li>
+          <li>Attention-grabbing elements</li>
+        </ul>
+        <p class="text-sm bg-gray-100 p-2 rounded">
+          Tailwind class: <code>bg-tertiary</code> or <code>text-tertiary</code>
+        </p>
+      </div>
+
+      <div class="p-6 rounded-lg shadow-sm">
+        <div class="flex items-center mb-4">
+          <div class="w-12 h-12 rounded-lg bg-tertiary-container mr-4"></div>
+          <div>
+            <h3 class="font-medium">Tertiary Container</h3>
+            <code class="text-sm bg-surface-container-low px-2 py-1 rounded">#FCE4EC</code>
+          </div>
+        </div>
+        <p class="mb-2">Used for:</p>
+        <ul class="list-disc pl-6 mb-4">
+          <li>Tertiary component containers</li>
+          <li>Accent backgrounds</li>
+          <li>Visual distinctions</li>
+        </ul>
+        <p class="text-sm bg-gray-100 p-2 rounded">
+          Tailwind class: <code>bg-tertiary-container</code> or <code>text-tertiary-container</code>
+        </p>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="p-6 rounded-lg shadow-sm">
+        <div class="flex items-center mb-4">
+          <div class="w-12 h-12 rounded-lg bg-tertiary text-on-tertiary flex items-center justify-center mr-4">
+            <span class="material-icons">check</span>
+          </div>
+          <div>
+            <h3 class="font-medium">On Tertiary</h3>
+            <code class="text-sm bg-surface-container-low px-2 py-1 rounded">#FFFFFF</code>
+          </div>
+        </div>
+        <p>Content that appears on tertiary-colored backgrounds.</p>
+        <p class="text-sm bg-gray-100 p-2 rounded mt-4">
+          Tailwind class: <code>text-on-tertiary</code>
+        </p>
+      </div>
+
+      <div class="p-6 rounded-lg shadow-sm">
+        <div class="flex items-center mb-4">
+          <div class="w-12 h-12 rounded-lg bg-tertiary-container text-on-tertiary-container flex items-center justify-center mr-4">
+            <span class="material-icons">check</span>
+          </div>
+          <div>
+            <h3 class="font-medium">On Tertiary Container</h3>
+            <code class="text-sm bg-surface-container-low px-2 py-1 rounded">#AD1457</code>
+          </div>
+        </div>
+        <p>Content that appears on tertiary container backgrounds.</p>
+        <p class="text-sm bg-gray-100 p-2 rounded mt-4">
+          Tailwind class: <code>text-on-tertiary-container</code>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="error-colors" class="mb-12">
+    <h2 class="text-2xl mb-4">Error Colors</h2>
+    <p class="mb-6">
+      Error colors communicate error states, warnings, and critical information that requires attention.
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+      <div class="p-6 rounded-lg shadow-sm">
+        <div class="flex items-center mb-4">
+          <div class="w-12 h-12 rounded-lg bg-error mr-4"></div>
+          <div>
+            <h3 class="font-medium">Error</h3>
+            <code class="text-sm bg-surface-container-low px-2 py-1 rounded">#B3261E</code>
+          </div>
+        </div>
+        <p class="mb-2">Used for:</p>
+        <ul class="list-disc pl-6 mb-4">
+          <li>Error messages</li>
+          <li>Error states</li>
+          <li>Critical warnings</li>
+        </ul>
+        <p class="text-sm bg-gray-100 p-2 rounded">
+          Tailwind class: <code>bg-error</code> or <code>text-error</code>
+        </p>
+      </div>
+
+      <div class="p-6 rounded-lg shadow-sm">
+        <div class="flex items-center mb-4">
+          <div class="w-12 h-12 rounded-lg bg-error-container mr-4"></div>
+          <div>
+            <h3 class="font-medium">Error Container</h3>
+            <code class="text-sm bg-surface-container-low px-2 py-1 rounded">#F9DEDC</code>
+          </div>
+        </div>
+        <p class="mb-2">Used for:</p>
+        <ul class="list-disc pl-6 mb-4">
+          <li>Error container backgrounds</li>
+          <li>Error message backgrounds</li>
+          <li>Alert backgrounds</li>
+        </ul>
+        <p class="text-sm bg-gray-100 p-2 rounded">
+          Tailwind class: <code>bg-error-container</code> or <code>text-error-container</code>
+        </p>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="p-6 rounded-lg shadow-sm">
+        <div class="flex items-center mb-4">
+          <div class="w-12 h-12 rounded-lg bg-error text-on-error flex items-center justify-center mr-4">
+            <span class="material-icons">check</span>
+          </div>
+          <div>
+            <h3 class="font-medium">On Error</h3>
+            <code class="text-sm bg-surface-container-low px-2 py-1 rounded">#FFFFFF</code>
+          </div>
+        </div>
+        <p>Content that appears on error-colored backgrounds.</p>
+        <p class="text-sm bg-gray-100 p-2 rounded mt-4">
+          Tailwind class: <code>text-on-error</code>
+        </p>
+      </div>
+
+      <div class="p-6 rounded-lg shadow-sm">
+        <div class="flex items-center mb-4">
+          <div class="w-12 h-12 rounded-lg bg-error-container text-on-error-container flex items-center justify-center mr-4">
+            <span class="material-icons">check</span>
+          </div>
+          <div>
+            <h3 class="font-medium">On Error Container</h3>
+            <code class="text-sm bg-surface-container-low px-2 py-1 rounded">#410E0B</code>
+          </div>
+        </div>
+        <p>Content that appears on error container backgrounds.</p>
+        <p class="text-sm bg-gray-100 p-2 rounded mt-4">
+          Tailwind class: <code>text-on-error-container</code>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="surface-colors" class="mb-12">
+    <h2 class="text-2xl mb-4">Surface & Background Colors</h2>
+    <p class="mb-6">
+      Surface colors are used for backgrounds of components and containers.
+      These neutral colors provide the canvas for your UI elements.
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
+      <div class="p-6 rounded-lg shadow-sm">
+        <div class="flex items-center mb-4">
+          <div class="w-12 h-12 rounded-lg bg-background mr-4"></div>
+          <div>
+            <h3 class="font-medium">Background</h3>
+            <code class="text-sm bg-surface-container-low px-2 py-1 rounded">#F5F7FA</code>
+          </div>
+        </div>
+        <p>The main background color of the app or page.</p>
+        <p class="text-sm bg-gray-100 p-2 rounded mt-4">
+          Tailwind class: <code>bg-background</code>
+        </p>
+      </div>
+
+      <div class="p-6 rounded-lg shadow-sm">
+        <div class="flex items-center mb-4">
+          <div class="w-12 h-12 rounded-lg bg-surface mr-4"></div>
+          <div>
+            <h3 class="font-medium">Surface</h3>
+            <code class="text-sm bg-surface-container-low px-2 py-1 rounded">#FFFFFF</code>
+          </div>
+        </div>
+        <p>The surface of components like cards, sheets, and dialogs.</p>
+        <p class="text-sm bg-gray-100 p-2 rounded mt-4">
+          Tailwind class: <code>bg-surface</code>
+        </p>
+      </div>
+
+      <div class="p-6 rounded-lg shadow-sm">
+        <div class="flex items-center mb-4">
+          <div class="w-12 h-12 rounded-lg bg-surface-variant mr-4"></div>
+          <div>
+            <h3 class="font-medium">Surface Variant</h3>
+            <code class="text-sm bg-surface-container-low px-2 py-1 rounded">#E8F5E9</code>
+          </div>
+        </div>
+        <p>Alternative surface color for distinctive areas.</p>
+        <p class="text-sm bg-gray-100 p-2 rounded mt-4">
+          Tailwind class: <code>bg-surface-variant</code>
+        </p>
+      </div>
+
+      <div class="p-6 rounded-lg shadow-sm">
+        <div class="flex items-center mb-4">
+          <div class="w-12 h-12 rounded-lg bg-surface-container-low mr-4"></div>
+          <div>
+            <h3 class="font-medium">Surface Container Low</h3>
+            <code class="text-sm bg-surface-container-low px-2 py-1 rounded">#E1F5FE</code>
+          </div>
+        </div>
+        <p>Low-emphasis container background.</p>
+        <p class="text-sm bg-gray-100 p-2 rounded mt-4">
+          Tailwind class: <code>bg-surface-container-low</code>
+        </p>
+      </div>
+
+      <div class="p-6 rounded-lg shadow-sm">
+        <div class="flex items-center mb-4">
+          <div class="w-12 h-12 rounded-lg bg-surface-container-high mr-4"></div>
+          <div>
+            <h3 class="font-medium">Surface Container High</h3>
+            <code class="text-sm bg-surface-container-low px-2 py-1 rounded">#F1F8E9</code>
+          </div>
+        </div>
+        <p>High-emphasis container background.</p>
+        <p class="text-sm bg-gray-100 p-2 rounded mt-4">
+          Tailwind class: <code>bg-surface-container-high</code>
+        </p>
+      </div>
+
+      <div class="p-6 rounded-lg shadow-sm">
+        <div class="flex items-center mb-4">
+          <div class="w-12 h-12 rounded-lg bg-surface-bright mr-4"></div>
+          <div>
+            <h3 class="font-medium">Surface Bright</h3>
+            <code class="text-sm bg-surface-container-low px-2 py-1 rounded">#F8FAFF</code>
+          </div>
+        </div>
+        <p>Bright surface color for areas that need to stand out.</p>
+        <p class="text-sm bg-gray-100 p-2 rounded mt-4">
+          Tailwind class: <code>bg-surface-bright</code>
+        </p>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="p-6 rounded-lg shadow-sm">
+        <div class="flex items-center mb-4">
+          <div class="w-12 h-12 rounded-lg bg-on-background text-background flex items-center justify-center mr-4">
+            <span class="material-icons">text_format</span>
+          </div>
+          <div>
+            <h3 class="font-medium">On Background</h3>
+            <code class="text-sm bg-surface-container-low px-2 py-1 rounded">#263238</code>
+          </div>
+        </div>
+        <p>Text and icons on the background.</p>
+        <p class="text-sm bg-gray-100 p-2 rounded mt-4">
+          Tailwind class: <code>text-on-background</code>
+        </p>
+      </div>
+
+      <div class="p-6 rounded-lg shadow-sm">
+        <div class="flex items-center mb-4">
+          <div class="w-12 h-12 rounded-lg bg-on-surface text-surface flex items-center justify-center mr-4">
+            <span class="material-icons">text_format</span>
+          </div>
+          <div>
+            <h3 class="font-medium">On Surface</h3>
+            <code class="text-sm bg-surface-container-low px-2 py-1 rounded">#263238</code>
+          </div>
+        </div>
+        <p>Text and icons on surfaces.</p>
+        <p class="text-sm bg-gray-100 p-2 rounded mt-4">
+          Tailwind class: <code>text-on-surface</code>
+        </p>
+      </div>
+
+      <div class="p-6 rounded-lg shadow-sm">
+        <div class="flex items-center mb-4">
+          <div class="w-12 h-12 rounded-lg bg-on-surface-variant text-surface-variant flex items-center justify-center mr-4">
+            <span class="material-icons">text_format</span>
+          </div>
+          <div>
+            <h3 class="font-medium">On Surface Variant</h3>
+            <code class="text-sm bg-surface-container-low px-2 py-1 rounded">#546E7A</code>
+          </div>
+        </div>
+        <p>Text and icons on surface variants.</p>
+        <p class="text-sm bg-gray-100 p-2 rounded mt-4">
+          Tailwind class: <code>text-on-surface-variant</code>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="outline-colors" class="mb-12">
+    <h2 class="text-2xl mb-4">Outline Colors</h2>
+    <p class="mb-6">
+      Outline colors are used for boundaries, dividers, and decorative elements.
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="p-6 rounded-lg shadow-sm">
+        <div class="flex items-center mb-4">
+          <div class="w-12 h-12 rounded-lg border-4 border-outline mr-4"></div>
+          <div>
+            <h3 class="font-medium">Outline</h3>
+            <code class="text-sm bg-surface-container-low px-2 py-1 rounded">#90A4AE</code>
+          </div>
+        </div>
+        <p class="mb-2">Used for:</p>
+        <ul class="list-disc pl-6 mb-4">
+          <li>Focused component outlines</li>
+          <li>Borders in high emphasis areas</li>
+          <li>Input field outlines</li>
+        </ul>
+        <p class="text-sm bg-gray-100 p-2 rounded">
+          Tailwind class: <code>border-outline</code>
+        </p>
+      </div>
+
+      <div class="p-6 rounded-lg shadow-sm">
+        <div class="flex items-center mb-4">
+          <div class="w-12 h-12 rounded-lg border-4 border-outline-variant mr-4"></div>
+          <div>
+            <h3 class="font-medium">Outline Variant</h3>
+            <code class="text-sm bg-surface-container-low px-2 py-1 rounded">#CFD8DC</code>
+          </div>
+        </div>
+        <p class="mb-2">Used for:</p>
+        <ul class="list-disc pl-6 mb-4">
+          <li>Dividers</li>
+          <li>Subtle boundaries</li>
+          <li>Low emphasis borders</li>
+        </ul>
+        <p class="text-sm bg-gray-100 p-2 rounded">
+          Tailwind class: <code>border-outline-variant</code>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="color-usage" class="mb-12">
+    <h2 class="text-2xl mb-4">Color Usage Examples</h2>
+    
+    <div class="p-6 rounded-lg shadow-sm mb-6">
+      <h3 class="text-xl font-medium mb-4">Buttons</h3>
+      <div class="flex flex-wrap gap-4 mb-4">
+        <c-button.filled>Primary</c-button.filled>
+        <c-button.filled color="secondary">Secondary</c-button.filled>
+        <c-button.filled color="tertiary">Tertiary</c-button.filled>
+        <c-button.elevated>Elevated</c-button.elevated>
+      </div>
+      <div class="bg-surface-container-low p-4 rounded">
+        <pre class="text-on-surface-variant"><code>&lt;c-button.filled&gt;Primary&lt;/c-button.filled&gt;
+&lt;c-button.filled color="secondary"&gt;Secondary&lt;/c-button.filled&gt;
+&lt;c-button.filled color="tertiary"&gt;Tertiary&lt;/c-button.filled&gt;
+&lt;c-button.elevated&gt;Elevated&lt;/c-button.elevated&gt;</code></pre>
+      </div>
+    </div>
+
+    <div class="p-6 rounded-lg shadow-sm mb-6">
+      <h3 class="text-xl font-medium mb-4">Text Colors</h3>
+      <div class="mb-4">
+        <p class="text-primary mb-2">Primary text color</p>
+        <p class="text-secondary mb-2">Secondary text color</p>
+        <p class="text-tertiary mb-2">Tertiary text color</p>
+        <p class="text-error mb-2">Error text color</p>
+        <p class="text-on-surface-variant">On surface variant text color (subtle text)</p>
+      </div>
+      <div class="bg-surface-container-low p-4 rounded">
+        <pre class="text-on-surface-variant"><code>&lt;p class="text-primary"&gt;Primary text color&lt;/p&gt;
+&lt;p class="text-secondary"&gt;Secondary text color&lt;/p&gt;
+&lt;p class="text-tertiary"&gt;Tertiary text color&lt;/p&gt;
+&lt;p class="text-error"&gt;Error text color&lt;/p&gt;
+&lt;p class="text-on-surface-variant"&gt;On surface variant text color (subtle text)&lt;/p&gt;</code></pre>
+      </div>
+    </div>
+
+    <div class="p-6 rounded-lg shadow-sm">
+      <h3 class="text-xl font-medium mb-4">Background Colors</h3>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+        <div class="p-4 bg-surface rounded shadow-sm">
+          <p class="font-medium mb-2">Surface</p>
+          <p class="text-sm">Main component background</p>
+        </div>
+        <div class="p-4 bg-surface-container-low rounded shadow-sm">
+          <p class="font-medium mb-2">Surface Container Low</p>
+          <p class="text-sm">Used for code blocks</p>
+        </div>
+        <div class="p-4 bg-surface-variant rounded shadow-sm">
+          <p class="font-medium mb-2">Surface Variant</p>
+          <p class="text-sm">Alternative component background</p>
+        </div>
+      </div>
+      <div class="bg-surface-container-low p-4 rounded">
+        <pre class="text-on-surface-variant"><code>&lt;div class="p-4 bg-surface rounded shadow-sm"&gt;
+  &lt;p&gt;Surface background&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;div class="p-4 bg-surface-container-low rounded shadow-sm"&gt;
+  &lt;p&gt;Container Low background&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;div class="p-4 bg-surface-variant rounded shadow-sm"&gt;
+  &lt;p&gt;Surface Variant background&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+      </div>
+    </div>
+  </section>
+
+  <section id="opacity-modifiers" class="mb-12">
+    <h2 class="text-2xl mb-4">Opacity Modifiers</h2>
+    <p class="mb-6">
+      You can modify any color with opacity values using the slash syntax.
+    </p>
+
+    <div class="p-6 rounded-lg shadow-sm mb-6">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+        <div class="p-4 bg-primary flex items-center justify-center h-24 rounded-lg">
+          <p class="text-on-primary">100%</p>
+        </div>
+        <div class="p-4 bg-primary/75 flex items-center justify-center h-24 rounded-lg">
+          <p class="text-on-primary">75%</p>
+        </div>
+        <div class="p-4 bg-primary/50 flex items-center justify-center h-24 rounded-lg">
+          <p class="text-on-primary">50%</p>
+        </div>
+        <div class="p-4 bg-primary/25 flex items-center justify-center h-24 rounded-lg">
+          <p class="text-on-primary">25%</p>
+        </div>
+      </div>
+      <div class="bg-surface-container-low p-4 rounded">
+        <pre class="text-on-surface-variant"><code>&lt;div class="bg-primary"&gt;100% opacity&lt;/div&gt;
+&lt;div class="bg-primary/75"&gt;75% opacity&lt;/div&gt;
+&lt;div class="bg-primary/50"&gt;50% opacity&lt;/div&gt;
+&lt;div class="bg-primary/25"&gt;25% opacity&lt;/div&gt;</code></pre>
+      </div>
+    </div>
+  </section>
+
+  <section id="color-principles" class="mb-12">
+    <h2 class="text-2xl mb-4">Color System Principles</h2>
+    
+    <div class="p-6 rounded-lg shadow-sm">
+      <h3 class="text-xl font-medium mb-4">Guidelines for Using Colors</h3>
+      
+      <ul class="list-disc pl-6 mb-6">
+        <li class="mb-3">
+          <strong>Maintain contrast ratios:</strong> Ensure text has sufficient contrast against its background for readability and accessibility.
+        </li>
+        <li class="mb-3">
+          <strong>Use color consistently:</strong> Apply colors consistently throughout your app to create a cohesive experience.
+        </li>
+        <li class="mb-3">
+          <strong>Follow color role semantics:</strong> Use colors according to their roles - primary for main actions, error for warnings, etc.
+        </li>
+        <li class="mb-3">
+          <strong>Don't rely on color alone:</strong> Always use additional visual cues (icons, text) alongside color to convey meaning.
+        </li>
+        <li class="mb-3">
+          <strong>Use opacity judiciously:</strong> Apply opacity to create subtle variations without introducing new colors.
+        </li>
+      </ul>
+    </div>
+  </section>
+</div>
+{% endblock %}
