@@ -1,0 +1,302 @@
+{% extends "material/base_page.html" %}
+{% load i18n %}
+
+{% block title %}Tables{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+  <h1 class="text-3xl font-bold mb-8">Data Table Components</h1>
+  <p class="mb-6">Material Design data tables display information in a way that's easy to scan, so that users can look for patterns and insights.</p>
+
+  <section id="basic-table" class="mb-12">
+    <h2 class="text-2xl font-bold mb-4">Basic Table</h2>
+    <p class="mb-6">
+      A simple data table with basic styling. Used for displaying tabular data in a clean, readable format.
+    </p>
+    <div class="overflow-x-auto mb-8">
+      <c-table.container>
+        <c-slot name="header">
+          <c-table.header_row>
+            <c-table.header>Name</c-table.header>
+            <c-table.header>Email</c-table.header>
+            <c-table.header>Role</c-table.header>
+            <c-table.header>Status</c-table.header>
+          </c-table.header_row>
+        </c-slot>
+        <c-table.row>
+          <c-table.cell>Alice Johnson</c-table.cell>
+          <c-table.cell>alice@example.com</c-table.cell>
+          <c-table.cell>Admin</c-table.cell>
+          <c-table.cell>Active</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell>Bob Smith</c-table.cell>
+          <c-table.cell>bob@example.com</c-table.cell>
+          <c-table.cell>User</c-table.cell>
+          <c-table.cell>Active</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell>Carol Williams</c-table.cell>
+          <c-table.cell>carol@example.com</c-table.cell>
+          <c-table.cell>User</c-table.cell>
+          <c-table.cell>Inactive</c-table.cell>
+        </c-table.row>
+      </c-table.container>
+    </div>
+  </section>
+
+  <section id="sortable-table" class="mb-12">
+    <h2 class="text-2xl font-bold mb-4">Sortable Table with Caption</h2>
+    <p class="mb-6">
+      A data table with sortable columns and a caption that provides context about the data.
+      The Material Design icons indicate sortable columns and sort direction.
+    </p>
+    <div class="overflow-x-auto mb-8">
+      <c-table.container caption="Employee Directory">
+        <c-slot name="header">
+          <c-table.header_row>
+            <c-table.header sortable="true" sort_direction="asc">Name</c-table.header>
+            <c-table.header sortable="true">Department</c-table.header>
+            <c-table.header sortable="true">Location</c-table.header>
+            <c-table.header>Phone</c-table.header>
+          </c-table.header_row>
+        </c-slot>
+        <c-table.row>
+          <c-table.cell>John Doe</c-table.cell>
+          <c-table.cell>Engineering</c-table.cell>
+          <c-table.cell>San Francisco</c-table.cell>
+          <c-table.cell>555-1234</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell>Jane Smith</c-table.cell>
+          <c-table.cell>Design</c-table.cell>
+          <c-table.cell>New York</c-table.cell>
+          <c-table.cell>555-5678</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell>Michael Johnson</c-table.cell>
+          <c-table.cell>Marketing</c-table.cell>
+          <c-table.cell>Seattle</c-table.cell>
+          <c-table.cell>555-9012</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell>Sarah Williams</c-table.cell>
+          <c-table.cell>HR</c-table.cell>
+          <c-table.cell>Chicago</c-table.cell>
+          <c-table.cell>555-3456</c-table.cell>
+        </c-table.row>
+      </c-table.container>
+    </div>
+  </section>
+
+  <section id="selectable-rows" class="mb-12">
+    <h2 class="text-2xl font-bold mb-4">Selectable Rows with Pagination</h2>
+    <p class="mb-6">
+      A data table with selectable rows and pagination controls. Selected rows are highlighted with a
+      background color and proper ARIA attributes for accessibility.
+    </p>
+    <div class="overflow-x-auto mb-8">
+      <c-table.container>
+        <c-slot name="header">
+          <c-table.header_row>
+            <c-table.header>Project</c-table.header>
+            <c-table.header>Client</c-table.header>
+            <c-table.header>Status</c-table.header>
+            <c-table.header>Deadline</c-table.header>
+          </c-table.header_row>
+        </c-slot>
+        <c-table.row selected="true">
+          <c-table.cell>Website Redesign</c-table.cell>
+          <c-table.cell>Acme Inc.</c-table.cell>
+          <c-table.cell>In Progress</c-table.cell>
+          <c-table.cell>2025-06-15</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell>Mobile App</c-table.cell>
+          <c-table.cell>XYZ Corp</c-table.cell>
+          <c-table.cell>Completed</c-table.cell>
+          <c-table.cell>2025-03-01</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell>E-commerce Platform</c-table.cell>
+          <c-table.cell>123 Store</c-table.cell>
+          <c-table.cell>Planning</c-table.cell>
+          <c-table.cell>2025-08-30</c-table.cell>
+        </c-table.row>
+      </c-table.container>
+      <c-table.pagination current_page="1" total_pages="5" />
+    </div>
+  </section>
+
+  <section id="usage" class="mb-12">
+    <h2 class="text-2xl font-bold mb-4">Usage</h2>
+    
+    <div class="bg-surface-variant p-6 rounded-lg mb-6">
+      <pre class="text-on-surface-variant"><code>&lt;!-- Basic Table --&gt;
+&lt;c-table.container&gt;
+  &lt;c-slot name="header"&gt;
+    &lt;c-table.header_row&gt;
+      &lt;c-table.header&gt;Name&lt;/c-table.header&gt;
+      &lt;c-table.header&gt;Email&lt;/c-table.header&gt;
+    &lt;/c-table.header_row&gt;
+  &lt;/c-slot&gt;
+  &lt;c-table.row&gt;
+    &lt;c-table.cell&gt;Alice Johnson&lt;/c-table.cell&gt;
+    &lt;c-table.cell&gt;alice@example.com&lt;/c-table.cell&gt;
+  &lt;/c-table.row&gt;
+&lt;/c-table.container&gt;
+
+&lt;!-- Table with Caption --&gt;
+&lt;c-table.container caption="Employee Directory"&gt;
+  &lt;!-- ... table content ... --&gt;
+&lt;/c-table.container&gt;
+
+&lt;!-- Sortable Table --&gt;
+&lt;c-table.container&gt;
+  &lt;c-slot name="header"&gt;
+    &lt;c-table.header_row&gt;
+      &lt;c-table.header sortable="true" sort_direction="asc"&gt;Name&lt;/c-table.header&gt;
+      &lt;c-table.header sortable="true"&gt;Department&lt;/c-table.header&gt;
+    &lt;/c-table.header_row&gt;
+  &lt;/c-slot&gt;
+  &lt;!-- ... table rows ... --&gt;
+&lt;/c-table.container&gt;
+
+&lt;!-- Selectable Row --&gt;
+&lt;c-table.row selected="true"&gt;
+  &lt;c-table.cell&gt;Website Redesign&lt;/c-table.cell&gt;
+  &lt;!-- ... more cells ... --&gt;
+&lt;/c-table.row&gt;
+
+&lt;!-- Pagination Component --&gt;
+&lt;c-table.pagination current_page="1" total_pages="5" /&gt;</code></pre>
+    </div>
+  </section>
+
+  <section id="attributes" class="mb-12">
+    <h2 class="text-2xl font-bold mb-4">Attributes</h2>
+    
+    <h3 class="text-xl font-medium mb-3">Table Container</h3>
+    <table class="w-full border-collapse mb-6">
+      <thead>
+        <tr class="bg-surface-variant">
+          <th class="border p-2 text-left">Attribute</th>
+          <th class="border p-2 text-left">Type</th>
+          <th class="border p-2 text-left">Default</th>
+          <th class="border p-2 text-left">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="border p-2"><code>caption</code></td>
+          <td class="border p-2">string</td>
+          <td class="border p-2">""</td>
+          <td class="border p-2">Table caption that provides context about the data</td>
+        </tr>
+        <tr>
+          <td class="border p-2"><code>density</code></td>
+          <td class="border p-2">string</td>
+          <td class="border p-2">"default"</td>
+          <td class="border p-2">Controls the spacing of table cells (compact, default, comfortable)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 class="text-xl font-medium mb-3">Table Header</h3>
+    <table class="w-full border-collapse mb-6">
+      <thead>
+        <tr class="bg-surface-variant">
+          <th class="border p-2 text-left">Attribute</th>
+          <th class="border p-2 text-left">Type</th>
+          <th class="border p-2 text-left">Default</th>
+          <th class="border p-2 text-left">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="border p-2"><code>sortable</code></td>
+          <td class="border p-2">boolean</td>
+          <td class="border p-2">false</td>
+          <td class="border p-2">When true, displays sorting controls for the column</td>
+        </tr>
+        <tr>
+          <td class="border p-2"><code>sort_direction</code></td>
+          <td class="border p-2">string</td>
+          <td class="border p-2">""</td>
+          <td class="border p-2">Sort direction: "asc", "desc", or empty string for no sort</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 class="text-xl font-medium mb-3">Table Row</h3>
+    <table class="w-full border-collapse mb-6">
+      <thead>
+        <tr class="bg-surface-variant">
+          <th class="border p-2 text-left">Attribute</th>
+          <th class="border p-2 text-left">Type</th>
+          <th class="border p-2 text-left">Default</th>
+          <th class="border p-2 text-left">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="border p-2"><code>selected</code></td>
+          <td class="border p-2">boolean</td>
+          <td class="border p-2">false</td>
+          <td class="border p-2">When true, highlights the row and sets proper ARIA attributes</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 class="text-xl font-medium mb-3">Pagination</h3>
+    <table class="w-full border-collapse mb-6">
+      <thead>
+        <tr class="bg-surface-variant">
+          <th class="border p-2 text-left">Attribute</th>
+          <th class="border p-2 text-left">Type</th>
+          <th class="border p-2 text-left">Default</th>
+          <th class="border p-2 text-left">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="border p-2"><code>current_page</code></td>
+          <td class="border p-2">number</td>
+          <td class="border p-2">1</td>
+          <td class="border p-2">Current page number</td>
+        </tr>
+        <tr>
+          <td class="border p-2"><code>total_pages</code></td>
+          <td class="border p-2">number</td>
+          <td class="border p-2">1</td>
+          <td class="border p-2">Total number of pages</td>
+        </tr>
+        <tr>
+          <td class="border p-2"><code>rows_per_page</code></td>
+          <td class="border p-2">number</td>
+          <td class="border p-2">10</td>
+          <td class="border p-2">Number of rows per page</td>
+        </tr>
+        <tr>
+          <td class="border p-2"><code>rows_per_page_options</code></td>
+          <td class="border p-2">array</td>
+          <td class="border p-2">[10, 25, 50, 100]</td>
+          <td class="border p-2">Available options for rows per page</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section id="accessibility" class="mb-12">
+    <h2 class="text-2xl font-bold mb-4">Accessibility</h2>
+    
+    <ul class="list-disc pl-6 mb-6">
+      <li class="mb-2">Tables use proper HTML table semantics with <code>&lt;table&gt;</code>, <code>&lt;thead&gt;</code>, <code>&lt;tbody&gt;</code>, and <code>&lt;caption&gt;</code> elements</li>
+      <li class="mb-2">Table headers use <code>&lt;th scope="col"&gt;</code> for proper association with data cells</li>
+      <li class="mb-2">Sortable columns include accessible button elements with appropriate ARIA labels</li>
+      <li class="mb-2">Selected rows use <code>aria-selected="true"</code> attribute</li>
+      <li class="mb-2">Pagination controls include proper button elements with descriptive labels</li>
+      <li class="mb-2">Tables resize responsibly with overflow scrolling when needed</li>
+    </ul>
+  </section>
+{% endblock %}

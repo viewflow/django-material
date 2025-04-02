@@ -1,0 +1,22 @@
+<c-vars
+  class="py-3 px-4 text-left font-medium"
+  sortable="false"
+  sort_direction=""
+/>
+
+<th scope="col" class="{{ class }}" {{ attrs }}>
+  <div class="flex items-center gap-1">
+    {{ slot }}
+    {% if sortable == "true" %}
+      <button class="text-on-surface-variant" aria-label="Sort column">
+        {% if sort_direction == "asc" %}
+          <span class="material-icons" aria-hidden="true">arrow_upward</span>
+        {% elif sort_direction == "desc" %}
+          <span class="material-icons" aria-hidden="true">arrow_downward</span>
+        {% else %}
+          <span class="material-icons opacity-50" aria-hidden="true">unfold_more</span>
+        {% endif %}
+      </button>
+    {% endif %}
+  </div>
+</th>

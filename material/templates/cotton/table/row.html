@@ -1,0 +1,11 @@
+<c-vars
+  class="hover:bg-surface-container-highest transition-colors"
+  selected="false"
+/>
+
+<tr 
+  class="{{ class }} {% if selected == 'true' %}bg-surface-container{% endif %}" 
+  {% if selected == 'true' %}aria-selected="true"{% endif %}
+  {{ attrs }}>
+  {{ slot }}
+</tr>

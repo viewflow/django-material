@@ -1,0 +1,36 @@
+<c-vars
+  class="flex justify-between items-center py-3 px-4 border-t border-outline-variant"
+  current_page="1"
+  total_pages="1"
+  rows_per_page="10"
+  rows_per_page_options="[10, 25, 50, 100]"
+/>
+
+<div class="{{ class }}" {{ attrs }}>
+  <div class="flex items-center">
+    <span class="text-sm text-on-surface-variant mr-2">Rows per page:</span>
+    <select class="bg-surface text-on-surface border border-outline-variant rounded px-2 py-1 text-sm" aria-label="Rows per page">
+      {% for option in rows_per_page_options|safe %}
+        <option value="{{ option }}" {% if option == rows_per_page %}selected{% endif %}>{{ option }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  
+  <div class="flex items-center">
+    <span class="text-sm text-on-surface-variant mr-4">Page {{ current_page }} of {{ total_pages }}</span>
+    <div class="flex">
+      <button 
+        class="p-1 rounded-full hover:bg-surface-container-highest disabled:opacity-50" 
+        aria-label="Previous page"
+        {% if current_page == 1 %}disabled{% endif %}>
+        <span class="material-icons" aria-hidden="true">navigate_before</span>
+      </button>
+      <button 
+        class="p-1 rounded-full hover:bg-surface-container-highest disabled:opacity-50" 
+        aria-label="Next page"
+        {% if current_page == total_pages %}disabled{% endif %}>
+        <span class="material-icons" aria-hidden="true">navigate_next</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,24 @@
+<c-vars
+  class="min-w-full border-collapse"
+  caption=""
+  density="default"
+/>
+
+<table class="{{ class }}" data-density="{{ density }}" {{ attrs }}>
+  {% if caption %}
+    <caption class="text-lg font-medium my-2 text-left">{{ caption }}</caption>
+  {% endif %}
+  {% if slot_header %}
+    <thead class="bg-surface-variant text-on-surface-variant border-b border-outline-variant">
+      {{ slot_header }}
+    </thead>
+  {% endif %}
+  <tbody class="divide-y divide-outline-variant">
+    {{ slot }}
+  </tbody>
+  {% if slot_footer %}
+    <tfoot class="border-t border-outline-variant">
+      {{ slot_footer }}
+    </tfoot>
+  {% endif %}
+</table>
