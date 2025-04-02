@@ -1,0 +1,160 @@
+{% extends 'material/base_page.html' %}
+{% load i18n %}
+
+{% block content %}
+<div class="container mx-auto px-4 pb-8">
+  <c-breadcrumbs.container class="mb-2">
+    <c-breadcrumbs.home href="{% url 'index' %}"></c-breadcrumbs.home>
+    <c-breadcrumbs.item current="true">Breadcrumbs</c-breadcrumbs.item>
+  </c-breadcrumbs.container>
+  
+  <h1 class="text-3xl font-bold mb-8">Breadcrumb Components</h1>
+
+  <section id="basic-breadcrumbs" class="mb-12">
+    <h2 class="text-2xl font-bold mb-4">Basic Breadcrumbs</h2>
+    <p class="mb-6">
+      Breadcrumbs provide navigation links that show the user's location in a website hierarchy.
+      They help users understand where they are and provide easy navigation to higher levels.
+    </p>
+
+    <div class="mb-8 p-6 border rounded-lg bg-surface-variant">
+      <c-breadcrumbs.container>
+        <c-breadcrumbs.home href="#"></c-breadcrumbs.home>
+        <c-breadcrumbs.item href="#">Products</c-breadcrumbs.item>
+        <c-breadcrumbs.item href="#">Electronics</c-breadcrumbs.item>
+        <c-breadcrumbs.item current="true">Smartphones</c-breadcrumbs.item>
+      </c-breadcrumbs.container>
+    </div>
+  </section>
+
+  <section id="customized-breadcrumbs" class="mb-12">
+    <h2 class="text-2xl font-bold mb-4">Customized Breadcrumbs</h2>
+    <p class="mb-6">
+      Breadcrumbs can be customized with different classes to match your application's design.
+    </p>
+
+    <div class="mb-8 p-6 border rounded-lg bg-surface-variant">
+      <c-breadcrumbs.container class="py-4 border-b border-t">
+        <c-breadcrumbs.home href="#"></c-breadcrumbs.home>
+        <c-breadcrumbs.item href="#">Library</c-breadcrumbs.item>
+        <c-breadcrumbs.item current="true">Book Title</c-breadcrumbs.item>
+      </c-breadcrumbs.container>
+    </div>
+  </section>
+
+  <section id="usage" class="mb-12">
+    <h2 class="text-2xl font-bold mb-4">Usage</h2>
+    
+    <div class="bg-surface-variant p-6 rounded-lg mb-6">
+      <pre class="text-on-surface-variant"><code>&lt;!-- Basic Breadcrumbs --&gt;
+&lt;c-breadcrumbs.container&gt;
+  &lt;c-breadcrumbs.home href="/"&gt;&lt;/c-breadcrumbs.home&gt;
+  &lt;c-breadcrumbs.item href="/products"&gt;Products&lt;/c-breadcrumbs.item&gt;
+  &lt;c-breadcrumbs.item current="true"&gt;Product Details&lt;/c-breadcrumbs.item&gt;
+&lt;/c-breadcrumbs.container&gt;
+
+&lt;!-- With Custom Classes --&gt;
+&lt;c-breadcrumbs.container class="py-4 bg-gray-100"&gt;
+  &lt;c-breadcrumbs.home href="/"&gt;&lt;/c-breadcrumbs.home&gt;
+  &lt;c-breadcrumbs.item href="/products"&gt;Products&lt;/c-breadcrumbs.item&gt;
+  &lt;c-breadcrumbs.item current="true"&gt;Product Details&lt;/c-breadcrumbs.item&gt;
+&lt;/c-breadcrumbs.container&gt;
+
+&lt;!-- With Django URL Template Tags --&gt;
+&lt;c-breadcrumbs.container&gt;
+  &lt;c-breadcrumbs.home href="&#123;% url 'home' %&#125;"&gt;&lt;/c-breadcrumbs.home&gt;
+  &lt;c-breadcrumbs.item href="&#123;% url 'category' slug=category.slug %&#125;"&gt;&#123;&#123; category.name &#125;&#125;&lt;/c-breadcrumbs.item&gt;
+  &lt;c-breadcrumbs.item current="true"&gt;&#123;&#123; object.title &#125;&#125;&lt;/c-breadcrumbs.item&gt;
+&lt;/c-breadcrumbs.container&gt;</code></pre>
+    </div>
+  </section>
+
+  <section id="attributes" class="mb-12">
+    <h2 class="text-2xl font-bold mb-4">Attributes</h2>
+    
+    <h3 class="text-xl font-medium mb-3">Breadcrumbs Container</h3>
+    <table class="w-full border-collapse mb-6">
+      <thead>
+        <tr class="bg-surface-variant">
+          <th class="border p-2 text-left">Attribute</th>
+          <th class="border p-2 text-left">Type</th>
+          <th class="border p-2 text-left">Default</th>
+          <th class="border p-2 text-left">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="border p-2"><code>aria_label</code></td>
+          <td class="border p-2">string</td>
+          <td class="border p-2">"Breadcrumbs"</td>
+          <td class="border p-2">Accessible label for screen readers</td>
+        </tr>
+        <tr>
+          <td class="border p-2"><code>class</code></td>
+          <td class="border p-2">string</td>
+          <td class="border p-2">""</td>
+          <td class="border p-2">Additional CSS classes for the container</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 class="text-xl font-medium mb-3">Breadcrumbs Item</h3>
+    <table class="w-full border-collapse mb-6">
+      <thead>
+        <tr class="bg-surface-variant">
+          <th class="border p-2 text-left">Attribute</th>
+          <th class="border p-2 text-left">Type</th>
+          <th class="border p-2 text-left">Default</th>
+          <th class="border p-2 text-left">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="border p-2"><code>href</code></td>
+          <td class="border p-2">string</td>
+          <td class="border p-2">"#"</td>
+          <td class="border p-2">URL for the breadcrumb link</td>
+        </tr>
+        <tr>
+          <td class="border p-2"><code>current</code></td>
+          <td class="border p-2">string</td>
+          <td class="border p-2">"false"</td>
+          <td class="border p-2">When "true", indicates the current page (no link)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 class="text-xl font-medium mb-3">Breadcrumbs Home Item</h3>
+    <table class="w-full border-collapse mb-6">
+      <thead>
+        <tr class="bg-surface-variant">
+          <th class="border p-2 text-left">Attribute</th>
+          <th class="border p-2 text-left">Type</th>
+          <th class="border p-2 text-left">Default</th>
+          <th class="border p-2 text-left">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="border p-2"><code>href</code></td>
+          <td class="border p-2">string</td>
+          <td class="border p-2">"/"</td>
+          <td class="border p-2">URL for the home link</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section id="accessibility" class="mb-12">
+    <h2 class="text-2xl font-bold mb-4">Accessibility</h2>
+    
+    <ul class="list-disc pl-6 mb-6">
+      <li class="mb-2">Breadcrumbs are wrapped in a <code>nav</code> element with <code>aria-label="Breadcrumbs"</code></li>
+      <li class="mb-2">List items are used for proper list semantics</li>
+      <li class="mb-2">The current item uses <code>aria-current="page"</code> to indicate the current page</li>
+      <li class="mb-2">The home icon includes a screen reader text label</li>
+      <li class="mb-2">Separator icons are marked with <code>aria-hidden="true"</code></li>
+    </ul>
+  </section>
+</div>
+{% endblock %}

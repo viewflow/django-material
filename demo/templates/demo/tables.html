@@ -4,7 +4,12 @@
 {% block title %}Tables{% endblock %}
 
 {% block content %}
-<div class="container mx-auto px-4 py-8">
+<div class="container mx-auto px-4 pb-8">
+  <c-breadcrumbs.container class="mb-2">
+    <c-breadcrumbs.home href="{% url 'index' %}"></c-breadcrumbs.home>
+    <c-breadcrumbs.item current="true">Tables</c-breadcrumbs.item>
+  </c-breadcrumbs.container>
+  
   <h1 class="text-3xl font-bold mb-8">Data Table Components</h1>
   <p class="mb-6">Material Design data tables display information in a way that's easy to scan, so that users can look for patterns and insights.</p>
 

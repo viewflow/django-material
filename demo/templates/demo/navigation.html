@@ -2,7 +2,12 @@
 {% load i18n %}
 
 {% block content %}
-<div class="container mx-auto px-4 py-8">
+<div class="container mx-auto px-4 pb-8">
+  <c-breadcrumbs.container class="mb-2">
+    <c-breadcrumbs.home href="{% url 'index' %}"></c-breadcrumbs.home>
+    <c-breadcrumbs.item current="true">Navigation</c-breadcrumbs.item>
+  </c-breadcrumbs.container>
+  
   <h1 class="text-3xl font-bold mb-8">Navigation Components</h1>
 
   <section id="navigation-container" class="mb-12">

@@ -1,0 +1,9 @@
+<c-vars 
+  aria_label="Breadcrumbs"
+  class="" />
+
+<nav aria-label="{{ aria_label }}" class="py-2 {{ class }}" {{ attrs }}>
+  <ol class="flex flex-wrap items-center space-x-2">
+    {{ slot }}
+  </ol>
+</nav>
