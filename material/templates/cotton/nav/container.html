@@ -1,4 +1,17 @@
-<nav up-nav role="navigation" aria-label="Main navigation" class="p-2 flex flex-col min-w-[280px] w-[280px] max-w-[280px] flex-shrink-0 bg-surface-bright shadow-md h-screen sticky top-0 transition-all duration-300 ease-in-out">
+<c-vars
+  width="min-w-[280px] w-[280px] max-w-[280px]"
+  layout="flex flex-col flex-shrink-0 h-screen sticky top-0"
+  styling="p-2 bg-surface-bright shadow-md"
+  transitions="transition-all duration-300 ease-in-out"
+  responsive="max-md:fixed max-md:top-0 max-md:inset-inline-start-0 max-md:z-50 max-md:h-screen max-md:w-[280px]"
+  state="max-md:-translate-x-full max-md:shadow-lg max-md:opacity-0 max-md:invisible"
+  active_state="max-md:nav-open:translate-x-0 max-md:nav-open:opacity-100 max-md:nav-open:visible"
+/>
+
+<nav up-nav 
+     role="navigation" 
+     aria-label="Main navigation" 
+     class="{{ width }} {{ layout }} {{ styling }} {{ transitions }} {{ responsive }} {{ state }} {{ active_state }}">
   {% if header %}
     <div class="p-2">
       {{ header }}
