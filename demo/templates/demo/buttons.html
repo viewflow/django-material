@@ -58,6 +58,54 @@
     </div>
   </section>
 
+  <section id="tonal-buttons" class="mb-12">
+    <h2 class="text-2xl mb-4">Tonal Buttons</h2>
+    <p class="mb-6">
+      Tonal buttons are medium-emphasis buttons that use a lighter tone of the primary color.
+      They are useful for actions that need more prominence than elevated buttons.
+    </p>
+
+    <div class="flex flex-wrap gap-4 mb-8">
+      <!-- Primary color (default) -->
+      <div class="flex flex-col items-center">
+        <c-button.tonal>Primary</c-button.tonal>
+        <span class="text-sm mt-2">Default</span>
+      </div>
+
+      <!-- Secondary color -->
+      <div class="flex flex-col items-center">
+        <c-button.tonal color="secondary">Secondary</c-button.tonal>
+        <span class="text-sm mt-2">color="secondary"</span>
+      </div>
+
+      <!-- Tertiary color -->
+      <div class="flex flex-col items-center">
+        <c-button.tonal color="tertiary">Tertiary</c-button.tonal>
+        <span class="text-sm mt-2">color="tertiary"</span>
+      </div>
+
+      <!-- Disabled state -->
+      <div class="flex flex-col items-center">
+        <c-button.tonal disabled>Disabled</c-button.tonal>
+        <span class="text-sm mt-2">disabled</span>
+      </div>
+    </div>
+
+    <div class="flex flex-wrap gap-4 mb-8">
+      <!-- With icon -->
+      <div class="flex flex-col items-center">
+        <c-button.tonal icon="edit">With Icon</c-button.tonal>
+        <span class="text-sm mt-2">icon="edit"</span>
+      </div>
+
+      <!-- With aria-label -->
+      <div class="flex flex-col items-center">
+        <c-button.tonal icon="share" aria_label="Share content">Share</c-button.tonal>
+        <span class="text-sm mt-2">With aria_label</span>
+      </div>
+    </div>
+  </section>
+
   <section id="elevated-buttons" class="mb-12">
     <h2 class="text-2xl mb-4">Elevated Buttons</h2>
     <p class="mb-6">
@@ -110,26 +158,33 @@
     <h2 class="text-2xl mb-4">Usage</h2>
     
     <div class="bg-surface-container-low p-6 rounded-lg shadow-sm mb-6">
-      <pre class="text-on-surface-variant"><code>&lt;!-- Filled Button --&gt;
+      <pre class="text-on-surface-variant"><code>&lt;!-- Filled Button (high emphasis) --&gt;
 &lt;c-button.filled&gt;Button Text&lt;/c-button.filled&gt;
 
-&lt;!-- Elevated Button --&gt;
+&lt;!-- Tonal Button (medium-high emphasis) --&gt;
+&lt;c-button.tonal&gt;Tonal Button&lt;/c-button.tonal&gt;
+
+&lt;!-- Elevated Button (medium emphasis) --&gt;
 &lt;c-button.elevated&gt;Elevated Button&lt;/c-button.elevated&gt;
 
 &lt;!-- With color variants --&gt;
 &lt;c-button.filled color="secondary"&gt;Secondary Button&lt;/c-button.filled&gt;
+&lt;c-button.tonal color="tertiary"&gt;Tertiary Tonal&lt;/c-button.tonal&gt;
 &lt;c-button.elevated color="tertiary"&gt;Tertiary Button&lt;/c-button.elevated&gt;
 
 &lt;!-- With icon --&gt;
 &lt;c-button.filled icon="add"&gt;Add Item&lt;/c-button.filled&gt;
+&lt;c-button.tonal icon="edit"&gt;Edit Item&lt;/c-button.tonal&gt;
 &lt;c-button.elevated icon="star"&gt;Star Item&lt;/c-button.elevated&gt;
 
 &lt;!-- Disabled state --&gt;
 &lt;c-button.filled disabled&gt;Disabled Button&lt;/c-button.filled&gt;
+&lt;c-button.tonal disabled&gt;Disabled Tonal&lt;/c-button.tonal&gt;
 &lt;c-button.elevated disabled&gt;Disabled Elevated&lt;/c-button.elevated&gt;
 
 &lt;!-- With ARIA label for accessibility --&gt;
 &lt;c-button.filled icon="favorite" aria_label="Add to favorites"&gt;Favorite&lt;/c-button.filled&gt;
+&lt;c-button.tonal icon="share" aria_label="Share content"&gt;Share&lt;/c-button.tonal&gt;
 &lt;c-button.elevated icon="download" aria_label="Download file"&gt;Download&lt;/c-button.elevated&gt;</code></pre>
     </div>
   </section>
