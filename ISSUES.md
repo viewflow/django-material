@@ -7,6 +7,9 @@
 
 ## Compoments
 
+- [ ] Add esbild esbuild main.js --bundle --outfile=bundle.js --format=iife --global-name=MyLib --minify
+
+
 ### Navigation
 
 - [ ] Mobile support

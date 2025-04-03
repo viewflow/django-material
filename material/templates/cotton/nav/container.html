@@ -10,11 +10,11 @@
   overlay_active="max-md:nav-open:block max-md:nav-open:opacity-100 max-md:nav-open:visible max-md:nav-open:delay-0"
 />
 
-<div class="{{ overlay }} {{ overlay_active }}"></div>
+<div up-nav-toggle class="{{ overlay }} {{ overlay_active }}"></div>
 
-<nav up-nav 
+<nav up-nav
      role="navigation" 
-     aria-label="Main navigation" 
+     aria-label="Main navigation"
      class="{{ width }} {{ layout }} {{ styling }} {{ transitions }} {{ responsive }} {{ state }} {{ active_state }}">
   {% if header %}
     <div class="p-2">

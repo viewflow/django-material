@@ -5,14 +5,17 @@
   "scripts": {
     "build:css": "tailwindcss -i ./material/assets/index.css -o material/static/material/css/material.css --minify",
     "watch:css": "tailwindcss -i material/assets/index.css -o material/static/material/css/material.css --watch --minify",
+    "build:js": "esbuild material/templates/cotton/**/script.js --bundle --format=iife --outfile=material/static/material/js/material.js --minify",
+    "watch:js": "esbuild material/templates/cotton/**/script.js --bundle --format=iife --outfile=material/static/material/js/material.js --watch",
     "runserver": "uv run manage.py runserver",
-    "dev": "npm-run-all2 --parallel --print-label watch:css runserver",
+    "dev": "npm-run-all2 --parallel --print-label watch:css watch:js runserver",
     "update:venv": "uv sync --group dev",
     "update:js": "jq -c '.copyFiles[]' package.json | while read file; do src=$(echo $file | jq -r '.src'); dest=$(echo $file | jq -r '.dest'); echo \"Copying $src to $dest\"; cp \"$src\" \"$dest\"; done",
     "update:fonts": "npx get-google-fonts --input=\"https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,600,700,900&display=swap\" --output=\"material/static/material/fonts/roboto/\" && npx get-google-fonts --input=\"https://fonts.googleapis.com/icon?family=Material+Icons\" --output=\"material/static/material/fonts/material-icons/\""
   },
   "devDependencies": {
     "@tailwindcss/cli": "^4.0.14",
+    "esbuild": "^0.25.2",
     "npm-run-all2": "^6.2.0",
     "tailwindcss": "^4.0.14"
   },
@@ -23,7 +26,7 @@
     {
       "src": "node_modules/unpoly/unpoly.js",
       "dest": "material/static/material/js/"
-    },  
+    },
     {
       "src": "node_modules/unpoly/unpoly.min.css",
       "dest": "material/static/material/css/"
