@@ -106,6 +106,54 @@
     </div>
   </section>
 
+  <section id="text-buttons" class="mb-12">
+    <h2 class="text-2xl mb-4">Text Buttons</h2>
+    <p class="mb-6">
+      Text buttons are low-emphasis buttons that display the action as text without container styling.
+      They are used for less important actions or in places where space is limited.
+    </p>
+
+    <div class="flex flex-wrap gap-4 mb-8">
+      <!-- Primary color (default) -->
+      <div class="flex flex-col items-center">
+        <c-button.text>Primary</c-button.text>
+        <span class="text-sm mt-2">Default</span>
+      </div>
+
+      <!-- Secondary color -->
+      <div class="flex flex-col items-center">
+        <c-button.text color="secondary">Secondary</c-button.text>
+        <span class="text-sm mt-2">color="secondary"</span>
+      </div>
+
+      <!-- Tertiary color -->
+      <div class="flex flex-col items-center">
+        <c-button.text color="tertiary">Tertiary</c-button.text>
+        <span class="text-sm mt-2">color="tertiary"</span>
+      </div>
+
+      <!-- Disabled state -->
+      <div class="flex flex-col items-center">
+        <c-button.text disabled>Disabled</c-button.text>
+        <span class="text-sm mt-2">disabled</span>
+      </div>
+    </div>
+
+    <div class="flex flex-wrap gap-4 mb-8">
+      <!-- With icon -->
+      <div class="flex flex-col items-center">
+        <c-button.text icon="link">With Icon</c-button.text>
+        <span class="text-sm mt-2">icon="link"</span>
+      </div>
+
+      <!-- With aria-label -->
+      <div class="flex flex-col items-center">
+        <c-button.text icon="info" aria_label="More information">Info</c-button.text>
+        <span class="text-sm mt-2">With aria_label</span>
+      </div>
+    </div>
+  </section>
+
   <section id="elevated-buttons" class="mb-12">
     <h2 class="text-2xl mb-4">Elevated Buttons</h2>
     <p class="mb-6">
@@ -167,25 +215,32 @@
 &lt;!-- Elevated Button (medium emphasis) --&gt;
 &lt;c-button.elevated&gt;Elevated Button&lt;/c-button.elevated&gt;
 
+&lt;!-- Text Button (low emphasis) --&gt;
+&lt;c-button.text&gt;Text Button&lt;/c-button.text&gt;
+
 &lt;!-- With color variants --&gt;
 &lt;c-button.filled color="secondary"&gt;Secondary Button&lt;/c-button.filled&gt;
 &lt;c-button.tonal color="tertiary"&gt;Tertiary Tonal&lt;/c-button.tonal&gt;
 &lt;c-button.elevated color="tertiary"&gt;Tertiary Button&lt;/c-button.elevated&gt;
+&lt;c-button.text color="secondary"&gt;Secondary Text&lt;/c-button.text&gt;
 
 &lt;!-- With icon --&gt;
 &lt;c-button.filled icon="add"&gt;Add Item&lt;/c-button.filled&gt;
 &lt;c-button.tonal icon="edit"&gt;Edit Item&lt;/c-button.tonal&gt;
 &lt;c-button.elevated icon="star"&gt;Star Item&lt;/c-button.elevated&gt;
+&lt;c-button.text icon="link"&gt;Link Item&lt;/c-button.text&gt;
 
 &lt;!-- Disabled state --&gt;
 &lt;c-button.filled disabled&gt;Disabled Button&lt;/c-button.filled&gt;
 &lt;c-button.tonal disabled&gt;Disabled Tonal&lt;/c-button.tonal&gt;
 &lt;c-button.elevated disabled&gt;Disabled Elevated&lt;/c-button.elevated&gt;
+&lt;c-button.text disabled&gt;Disabled Text&lt;/c-button.text&gt;
 
 &lt;!-- With ARIA label for accessibility --&gt;
 &lt;c-button.filled icon="favorite" aria_label="Add to favorites"&gt;Favorite&lt;/c-button.filled&gt;
 &lt;c-button.tonal icon="share" aria_label="Share content"&gt;Share&lt;/c-button.tonal&gt;
-&lt;c-button.elevated icon="download" aria_label="Download file"&gt;Download&lt;/c-button.elevated&gt;</code></pre>
+&lt;c-button.elevated icon="download" aria_label="Download file"&gt;Download&lt;/c-button.elevated&gt;
+&lt;c-button.text icon="info" aria_label="More information"&gt;Info&lt;/c-button.text&gt;</code></pre>
     </div>
   </section>
 

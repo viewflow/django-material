@@ -1,0 +1,16 @@
+<c-vars
+  color="primary"
+  class="inline-flex relative items-center justify-center rounded-full px-4 py-2 font-medium text-sm leading-6 transition-all duration-300 ease-in-out overflow-hidden focus:outline-none disabled:text-on-surface-variant disabled:cursor-not-allowed active:ripple"
+  icon_class="material-icons mr-2 leading-[1px] text-lg" />
+
+<button
+  class="{{ class }} text-{{ color }} hover:bg-{{ color }}/10 focus:bg-{{ color }}/20"
+  {% if disabled %}disabled{% endif %}
+  {% if aria_label %}aria-label="{{ aria_label }}"{% endif %}
+  role="button"
+  {{ attrs }}>
+  {% if icon %}
+    <span class="{{ icon_class }}" aria-hidden="true">{{ icon }}</span>
+  {% endif %}
+  {{ slot }}
+</button>
