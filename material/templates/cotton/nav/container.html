@@ -12,6 +12,15 @@
 
 <div up-nav-toggle class="{{ overlay }} {{ overlay_active }}"></div>
 
+{# Nav toggle button for mobile #}
+<div class="absolute top-4 right-4 md:hidden">
+  <c-button.icon
+    up-nav-toggle
+    variant="tonal"
+    icon="menu"
+    aria_label="Toggle navigation"></c-button.icon>
+</div>
+
 <nav up-nav
      role="navigation" 
      aria-label="Main navigation"
