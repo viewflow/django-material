@@ -154,6 +154,122 @@
     </div>
   </section>
 
+  <section id="icon-buttons" class="mb-12">
+    <h2 class="text-2xl mb-4">Icon Buttons</h2>
+    <p class="mb-6">
+      Icon buttons are compact buttons that display only an icon. They provide common actions while taking up minimal space.
+      Available in several variants: standard (default), filled, tonal, and outlined.
+    </p>
+
+    <h3 class="text-xl mb-4">Standard (default)</h3>
+    <div class="flex flex-wrap gap-4 mb-8">
+      <!-- Primary color (default) -->
+      <div class="flex flex-col items-center">
+        <c-button.icon icon="favorite" aria_label="Like"></c-button.icon>
+        <span class="text-sm mt-2">Default</span>
+      </div>
+
+      <!-- Secondary color -->
+      <div class="flex flex-col items-center">
+        <c-button.icon color="secondary" icon="refresh" aria_label="Refresh"></c-button.icon>
+        <span class="text-sm mt-2">color="secondary"</span>
+      </div>
+
+      <!-- Tertiary color -->
+      <div class="flex flex-col items-center">
+        <c-button.icon color="tertiary" icon="delete" aria_label="Delete"></c-button.icon>
+        <span class="text-sm mt-2">color="tertiary"</span>
+      </div>
+
+      <!-- Disabled state -->
+      <div class="flex flex-col items-center">
+        <c-button.icon disabled icon="print" aria_label="Print"></c-button.icon>
+        <span class="text-sm mt-2">disabled</span>
+      </div>
+    </div>
+
+    <h3 class="text-xl mb-4">Filled variant</h3>
+    <div class="flex flex-wrap gap-4 mb-8">
+      <!-- Primary color (default) -->
+      <div class="flex flex-col items-center">
+        <c-button.icon variant="filled" icon="favorite" aria_label="Like"></c-button.icon>
+        <span class="text-sm mt-2">variant="filled"</span>
+      </div>
+
+      <!-- Secondary color -->
+      <div class="flex flex-col items-center">
+        <c-button.icon variant="filled" color="secondary" icon="refresh" aria_label="Refresh"></c-button.icon>
+        <span class="text-sm mt-2">color="secondary"</span>
+      </div>
+
+      <!-- Tertiary color -->
+      <div class="flex flex-col items-center">
+        <c-button.icon variant="filled" color="tertiary" icon="delete" aria_label="Delete"></c-button.icon>
+        <span class="text-sm mt-2">color="tertiary"</span>
+      </div>
+
+      <!-- Disabled state -->
+      <div class="flex flex-col items-center">
+        <c-button.icon variant="filled" disabled icon="print" aria_label="Print"></c-button.icon>
+        <span class="text-sm mt-2">disabled</span>
+      </div>
+    </div>
+
+    <h3 class="text-xl mb-4">Tonal variant</h3>
+    <div class="flex flex-wrap gap-4 mb-8">
+      <!-- Primary color (default) -->
+      <div class="flex flex-col items-center">
+        <c-button.icon variant="tonal" icon="bookmark" aria_label="Bookmark"></c-button.icon>
+        <span class="text-sm mt-2">variant="tonal"</span>
+      </div>
+
+      <!-- Secondary color -->
+      <div class="flex flex-col items-center">
+        <c-button.icon variant="tonal" color="secondary" icon="share" aria_label="Share"></c-button.icon>
+        <span class="text-sm mt-2">color="secondary"</span>
+      </div>
+
+      <!-- Tertiary color -->
+      <div class="flex flex-col items-center">
+        <c-button.icon variant="tonal" color="tertiary" icon="info" aria_label="Info"></c-button.icon>
+        <span class="text-sm mt-2">color="tertiary"</span>
+      </div>
+
+      <!-- Disabled state -->
+      <div class="flex flex-col items-center">
+        <c-button.icon variant="tonal" disabled icon="notifications" aria_label="Notifications"></c-button.icon>
+        <span class="text-sm mt-2">disabled</span>
+      </div>
+    </div>
+
+    <h3 class="text-xl mb-4">Outlined variant</h3>
+    <div class="flex flex-wrap gap-4 mb-8">
+      <!-- Primary color (default) -->
+      <div class="flex flex-col items-center">
+        <c-button.icon variant="outlined" icon="search" aria_label="Search"></c-button.icon>
+        <span class="text-sm mt-2">variant="outlined"</span>
+      </div>
+
+      <!-- Secondary color -->
+      <div class="flex flex-col items-center">
+        <c-button.icon variant="outlined" color="secondary" icon="edit" aria_label="Edit"></c-button.icon>
+        <span class="text-sm mt-2">color="secondary"</span>
+      </div>
+
+      <!-- Tertiary color -->
+      <div class="flex flex-col items-center">
+        <c-button.icon variant="outlined" color="tertiary" icon="settings" aria_label="Settings"></c-button.icon>
+        <span class="text-sm mt-2">color="tertiary"</span>
+      </div>
+
+      <!-- Disabled state -->
+      <div class="flex flex-col items-center">
+        <c-button.icon variant="outlined" disabled icon="upload" aria_label="Upload"></c-button.icon>
+        <span class="text-sm mt-2">disabled</span>
+      </div>
+    </div>
+  </section>
+
   <section id="elevated-buttons" class="mb-12">
     <h2 class="text-2xl mb-4">Elevated Buttons</h2>
     <p class="mb-6">
@@ -218,11 +334,20 @@
 &lt;!-- Text Button (low emphasis) --&gt;
 &lt;c-button.text&gt;Text Button&lt;/c-button.text&gt;
 
+&lt;!-- Icon Button (standard) --&gt;
+&lt;c-button.icon icon="favorite" aria_label="Like"&gt;&lt;/c-button.icon&gt;
+
+&lt;!-- Icon Button (variants) --&gt;
+&lt;c-button.icon variant="filled" icon="favorite" aria_label="Like"&gt;&lt;/c-button.icon&gt;
+&lt;c-button.icon variant="tonal" icon="bookmark" aria_label="Bookmark"&gt;&lt;/c-button.icon&gt;
+&lt;c-button.icon variant="outlined" icon="search" aria_label="Search"&gt;&lt;/c-button.icon&gt;
+
 &lt;!-- With color variants --&gt;
 &lt;c-button.filled color="secondary"&gt;Secondary Button&lt;/c-button.filled&gt;
 &lt;c-button.tonal color="tertiary"&gt;Tertiary Tonal&lt;/c-button.tonal&gt;
 &lt;c-button.elevated color="tertiary"&gt;Tertiary Button&lt;/c-button.elevated&gt;
 &lt;c-button.text color="secondary"&gt;Secondary Text&lt;/c-button.text&gt;
+&lt;c-button.icon color="tertiary" icon="settings" aria_label="Settings"&gt;&lt;/c-button.icon&gt;
 
 &lt;!-- With icon --&gt;
 &lt;c-button.filled icon="add"&gt;Add Item&lt;/c-button.filled&gt;
@@ -235,6 +360,7 @@
 &lt;c-button.tonal disabled&gt;Disabled Tonal&lt;/c-button.tonal&gt;
 &lt;c-button.elevated disabled&gt;Disabled Elevated&lt;/c-button.elevated&gt;
 &lt;c-button.text disabled&gt;Disabled Text&lt;/c-button.text&gt;
+&lt;c-button.icon disabled icon="print" aria_label="Print"&gt;&lt;/c-button.icon&gt;
 
 &lt;!-- With ARIA label for accessibility --&gt;
 &lt;c-button.filled icon="favorite" aria_label="Add to favorites"&gt;Favorite&lt;/c-button.filled&gt;
@@ -264,10 +390,16 @@
           <c-table.cell>Button color theme. Options: "primary", "secondary", "tertiary"</c-table.cell>
         </c-table.row>
         <c-table.row>
+          <c-table.cell><code>variant</code></c-table.cell>
+          <c-table.cell>string</c-table.cell>
+          <c-table.cell>"standard"</c-table.cell>
+          <c-table.cell>Icon button variant. Options: "standard", "filled", "tonal", "outlined" (icon buttons only)</c-table.cell>
+        </c-table.row>
+        <c-table.row>
           <c-table.cell><code>icon</code></c-table.cell>
           <c-table.cell>string</c-table.cell>
           <c-table.cell>none</c-table.cell>
-          <c-table.cell>Material icon name to display before the button text</c-table.cell>
+          <c-table.cell>Material icon name to display before the button text (or as the button content for icon buttons)</c-table.cell>
         </c-table.row>
         <c-table.row>
           <c-table.cell><code>disabled</code></c-table.cell>
@@ -279,7 +411,7 @@
           <c-table.cell><code>aria_label</code></c-table.cell>
           <c-table.cell>string</c-table.cell>
           <c-table.cell>none</c-table.cell>
-          <c-table.cell>Accessible label for screen readers</c-table.cell>
+          <c-table.cell>Accessible label for screen readers (required for icon buttons)</c-table.cell>
         </c-table.row>
         <c-table.row>
           <c-table.cell><code>attrs</code></c-table.cell>

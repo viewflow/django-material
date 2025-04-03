@@ -1,0 +1,46 @@
+<c-vars
+  color="primary"
+  variant="standard"
+  class="inline-flex items-center justify-center relative rounded-full w-10 h-10 transition-all duration-300 ease-in-out overflow-hidden focus:outline-none disabled:text-on-surface-variant disabled:cursor-not-allowed active:ripple"
+  icon_class="material-icons text-lg" />
+
+{% if variant == "filled" %}
+<button
+  class="{{ class }} bg-{{ color }} text-on-{{ color }} hover:bg-{{ color }}/80 focus:bg-{{ color }}/70"
+  {% if disabled %}disabled{% endif %}
+  {% if aria_label %}aria-label="{{ aria_label }}"{% endif %}
+  role="button"
+  {{ attrs }}>
+  <span class="{{ icon_class }}" aria-hidden="true">{{ icon }}</span>
+</button>
+
+{% elif variant == "tonal" %}
+<button
+  class="{{ class }} bg-{{ color }}-container text-on-{{ color }}-container hover:bg-{{ color }}-container/80 focus:bg-{{ color }}-container/70"
+  {% if disabled %}disabled{% endif %}
+  {% if aria_label %}aria-label="{{ aria_label }}"{% endif %}
+  role="button"
+  {{ attrs }}>
+  <span class="{{ icon_class }}" aria-hidden="true">{{ icon }}</span>
+</button>
+
+{% elif variant == "outlined" %}
+<button
+  class="{{ class }} border border-outline text-{{ color }} hover:bg-{{ color }}/10 focus:bg-{{ color }}/20"
+  {% if disabled %}disabled{% endif %}
+  {% if aria_label %}aria-label="{{ aria_label }}"{% endif %}
+  role="button"
+  {{ attrs }}>
+  <span class="{{ icon_class }}" aria-hidden="true">{{ icon }}</span>
+</button>
+
+{% else %}
+<button
+  class="{{ class }} text-{{ color }} hover:bg-{{ color }}/10 focus:bg-{{ color }}/20"
+  {% if disabled %}disabled{% endif %}
+  {% if aria_label %}aria-label="{{ aria_label }}"{% endif %}
+  role="button"
+  {{ attrs }}>
+  <span class="{{ icon_class }}" aria-hidden="true">{{ icon }}</span>
+</button>
+{% endif %}
