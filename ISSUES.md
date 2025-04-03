@@ -16,7 +16,7 @@
   - [X] Hide on small screen
   - [X] data-nav-open state
   - [ ] button (css & layout)
-  - [ ] button js (up.compiler)
+  - [X] button js (up.compiler)
 - [ ] Collapse button on desktop (collapse to width 70px, display header, footer none)
 
 ### Tables

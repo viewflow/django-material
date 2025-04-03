@@ -10,7 +10,7 @@
 }
 
 @layer utilities {
-  .active\:ripple:active::after {
+  .active\:ripple:enabled:active::after {
     content: "";
     position: absolute;
     left: var(--ripple-x, 50%);

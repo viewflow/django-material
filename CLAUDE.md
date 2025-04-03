@@ -125,8 +125,11 @@
 - Use standard attribute names (e.g., icon, title, variant) consistently
 
 ## Git Workflow
-- Run `npm run build:css` before committing CSS changes
 - For Claude's contributions, always use:
   ```
   git commit --author="Claude AI <claude@anthropic.com>" -m "Commit message"
   ```
+- IMPORTANT: The `--author` flag is required for GitHub to recognize Claude as a contributor
+- DO NOT use Co-Authored-By trailers alone, as they don't change the commit author
+- All feature/fix commits should be done under Claude's name
+- Run `npm run build:css` before committing CSS changes
