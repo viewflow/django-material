@@ -1,0 +1,5 @@
+@custom-variant nav-open {
+  &:where([data-nav-open] *) {
+    @slot;
+  }
+}

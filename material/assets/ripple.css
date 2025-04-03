@@ -9,7 +9,6 @@
   }
 }
 
-
 @layer utilities {
   .active\:ripple:active::after {
     content: "";

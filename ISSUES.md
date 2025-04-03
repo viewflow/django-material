@@ -9,7 +9,11 @@
 
 ### Navigation
 
-- [ ] Mobile support (button on the top right fixed
+- [ ] Mobile support
+  - [X] Hide on small screen
+  - [X] data-nav-open state
+  - [ ] button (css & layout)
+  - [ ] button js (up.compiler)
 - [ ] Collapse button on desktop (collapse to width 70px, display header, footer none)
 
 ### Tables
@@ -22,7 +26,7 @@
 - [ ] Text button
 - [ ] Icon button
 - [ ] Outlined button
-
+- [ ] Remove ripple form disabled button
 
 ## Missing functionality
 
