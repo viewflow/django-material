@@ -6,7 +6,11 @@
   responsive="max-md:fixed max-md:top-0 max-md:inset-inline-start-0 max-md:z-50 max-md:h-screen max-md:w-[280px]"
   state="max-md:-translate-x-full max-md:shadow-lg max-md:opacity-0 max-md:invisible"
   active_state="max-md:nav-open:translate-x-0 max-md:nav-open:opacity-100 max-md:nav-open:visible"
+  overlay="hidden max-md:fixed max-md:top-0 max-md:left-0 max-md:w-full max-md:h-full max-md:bg-black/50 max-md:opacity-0 max-md:invisible max-md:z-40 max-md:transition-opacity max-md:duration-300 max-md:ease-in-out max-md:delay-300"
+  overlay_active="max-md:nav-open:block max-md:nav-open:opacity-100 max-md:nav-open:visible max-md:nav-open:delay-0"
 />
+
+<div class="{{ overlay }} {{ overlay_active }}"></div>
 
 <nav up-nav 
      role="navigation" 
