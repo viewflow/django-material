@@ -1,0 +1,225 @@
+{% extends 'material/base_page.html' %}
+{% load i18n %}
+
+{% block content %}
+<div class="container mx-auto px-10 pt-4 pb-8">
+  <c-breadcrumbs.container class="mb-2">
+    <c-breadcrumbs.home href="{% url 'index' %}"></c-breadcrumbs.home>
+    <c-breadcrumbs.item current="true">Checkboxes</c-breadcrumbs.item>
+  </c-breadcrumbs.container>
+  
+  <h1 class="text-3xl font-medium mb-8">Checkbox Components</h1>
+
+  <section id="basic-checkboxes" class="mb-12">
+    <h2 class="text-2xl mb-4">Basic Checkboxes</h2>
+    <p class="mb-6">
+      Checkboxes allow users to select one or more items from a set. 
+      They can be used for binary choices or for selecting multiple options.
+    </p>
+
+    <div class="flex flex-wrap gap-8 mb-8">
+      <!-- Unchecked (default) -->
+      <div class="flex flex-col">
+        <c-forms.checkbox id="checkbox1">Unchecked</c-forms.checkbox>
+        <span class="text-sm mt-2">Default (unchecked)</span>
+      </div>
+
+      <!-- Checked -->
+      <div class="flex flex-col">
+        <c-forms.checkbox id="checkbox2" checked>Checked</c-forms.checkbox>
+        <span class="text-sm mt-2">checked</span>
+      </div>
+
+      <!-- Disabled unchecked -->
+      <div class="flex flex-col">
+        <c-forms.checkbox id="checkbox3" disabled>Disabled</c-forms.checkbox>
+        <span class="text-sm mt-2">disabled</span>
+      </div>
+
+      <!-- Disabled checked -->
+      <div class="flex flex-col">
+        <c-forms.checkbox id="checkbox4" disabled checked>Disabled checked</c-forms.checkbox>
+        <span class="text-sm mt-2">disabled checked</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="checkbox-with-help" class="mb-12">
+    <h2 class="text-2xl mb-4">Checkboxes with Help Text</h2>
+    <p class="mb-6">
+      Checkboxes can include additional help text to provide more context or instructions to the user.
+    </p>
+
+    <div class="flex flex-wrap gap-8 mb-8">
+      <!-- With help text -->
+      <div class="flex flex-col max-w-xs">
+        <c-forms.checkbox id="checkbox5" help_text="This checkbox has additional help text to provide more context">
+          With help text
+        </c-forms.checkbox>
+        <span class="text-sm mt-4">help_text="..."</span>
+      </div>
+
+      <!-- Required with help text -->
+      <div class="flex flex-col max-w-xs">
+        <c-forms.checkbox id="checkbox6" required help_text="This field is required and must be checked to proceed">
+          Required checkbox
+        </c-forms.checkbox>
+        <span class="text-sm mt-4">required help_text="..."</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="checkbox-colors" class="mb-12">
+    <h2 class="text-2xl mb-4">Checkbox Color Variants</h2>
+    <p class="mb-6">
+      Checkboxes can be styled with different color themes to match your design system.
+    </p>
+
+    <div class="flex flex-wrap gap-8 mb-8">
+      <!-- Primary color (default) -->
+      <div class="flex flex-col">
+        <c-forms.checkbox id="checkbox7" checked>Primary</c-forms.checkbox>
+        <span class="text-sm mt-2">Default (primary)</span>
+      </div>
+
+      <!-- Secondary color -->
+      <div class="flex flex-col">
+        <c-forms.checkbox id="checkbox8" checked color="secondary">Secondary</c-forms.checkbox>
+        <span class="text-sm mt-2">color="secondary"</span>
+      </div>
+
+      <!-- Tertiary color -->
+      <div class="flex flex-col">
+        <c-forms.checkbox id="checkbox9" checked color="tertiary">Tertiary</c-forms.checkbox>
+        <span class="text-sm mt-2">color="tertiary"</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="usage" class="mb-12">
+    <h2 class="text-2xl mb-4">Usage</h2>
+    
+    <div class="bg-surface-container-low p-6 rounded-lg shadow-sm mb-6">
+      <pre class="text-on-surface-variant"><code>&lt;!-- Basic checkbox --&gt;
+&lt;c-forms.checkbox id="my-checkbox"&gt;Checkbox label&lt;/c-forms.checkbox&gt;
+
+&lt;!-- Checked checkbox --&gt;
+&lt;c-forms.checkbox id="checked-checkbox" checked&gt;Checked option&lt;/c-forms.checkbox&gt;
+
+&lt;!-- Disabled checkbox --&gt;
+&lt;c-forms.checkbox id="disabled-checkbox" disabled&gt;Disabled option&lt;/c-forms.checkbox&gt;
+
+&lt;!-- Disabled and checked checkbox --&gt;
+&lt;c-forms.checkbox id="disabled-checked" disabled checked&gt;Disabled checked&lt;/c-forms.checkbox&gt;
+
+&lt;!-- With help text --&gt;
+&lt;c-forms.checkbox id="help-checkbox" help_text="Additional information about this option"&gt;
+  With help text
+&lt;/c-forms.checkbox&gt;
+
+&lt;!-- Required checkbox --&gt;
+&lt;c-forms.checkbox id="required-checkbox" required&gt;Required option&lt;/c-forms.checkbox&gt;
+
+&lt;!-- With color variants --&gt;
+&lt;c-forms.checkbox id="secondary-checkbox" color="secondary"&gt;Secondary color&lt;/c-forms.checkbox&gt;
+&lt;c-forms.checkbox id="tertiary-checkbox" color="tertiary"&gt;Tertiary color&lt;/c-forms.checkbox&gt;
+
+&lt;!-- With name and value for form submission --&gt;
+&lt;c-forms.checkbox id="consent" name="consent" value="yes"&gt;I agree to terms&lt;/c-forms.checkbox&gt;</code></pre>
+    </div>
+  </section>
+
+  <section id="attributes" class="mb-12">
+    <h2 class="text-2xl mb-4">Attributes</h2>
+    
+    <div class="overflow-x-auto mb-6">
+      <c-table.container>
+        <c-slot name="header">
+          <c-table.header_row>
+            <c-table.header>Attribute</c-table.header>
+            <c-table.header>Type</c-table.header>
+            <c-table.header>Default</c-table.header>
+            <c-table.header>Description</c-table.header>
+          </c-table.header_row>
+        </c-slot>
+        <c-table.row>
+          <c-table.cell><code>id</code></c-table.cell>
+          <c-table.cell>string</c-table.cell>
+          <c-table.cell>none</c-table.cell>
+          <c-table.cell>ID for the checkbox input element (recommended for accessibility)</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>name</code></c-table.cell>
+          <c-table.cell>string</c-table.cell>
+          <c-table.cell>none</c-table.cell>
+          <c-table.cell>Name attribute for the checkbox input, used for form submission</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>value</code></c-table.cell>
+          <c-table.cell>string</c-table.cell>
+          <c-table.cell>none</c-table.cell>
+          <c-table.cell>Value attribute for the checkbox input, submitted when checked</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>checked</code></c-table.cell>
+          <c-table.cell>boolean</c-table.cell>
+          <c-table.cell>false</c-table.cell>
+          <c-table.cell>When true, the checkbox is in a checked state</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>disabled</code></c-table.cell>
+          <c-table.cell>boolean</c-table.cell>
+          <c-table.cell>false</c-table.cell>
+          <c-table.cell>When true, the checkbox is disabled and non-interactive</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>required</code></c-table.cell>
+          <c-table.cell>boolean</c-table.cell>
+          <c-table.cell>false</c-table.cell>
+          <c-table.cell>When true, the checkbox is required to be checked</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>help_text</code></c-table.cell>
+          <c-table.cell>string</c-table.cell>
+          <c-table.cell>none</c-table.cell>
+          <c-table.cell>Explanatory text displayed below the checkbox label</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>color</code></c-table.cell>
+          <c-table.cell>string</c-table.cell>
+          <c-table.cell>"primary"</c-table.cell>
+          <c-table.cell>Color theme for the checkbox. Options: "primary", "secondary", "tertiary"</c-table.cell>
+        </c-table.row>
+      </c-table.container>
+    </div>
+  </section>
+
+  <section id="best-practices" class="mb-12">
+    <h2 class="text-2xl mb-4">Best Practices</h2>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+      <div class="bg-surface-container p-4 rounded-lg">
+        <h3 class="text-lg font-medium mb-2 text-primary">Recommended</h3>
+        <ul class="list-disc pl-5 space-y-2">
+          <li>Use checkboxes when users need to select multiple items from a list</li>
+          <li>Use clear, concise labels that describe the option</li>
+          <li>Group related checkboxes together</li>
+          <li>Use help text to clarify the implications of selecting an option</li>
+          <li>Ensure checkboxes are accessible with proper labeling and focus states</li>
+        </ul>
+      </div>
+      
+      <div class="bg-surface-container p-4 rounded-lg">
+        <h3 class="text-lg font-medium mb-2 text-error">Avoid</h3>
+        <ul class="list-disc pl-5 space-y-2">
+          <li>Don't use checkboxes for mutually exclusive options (use radio buttons instead)</li>
+          <li>Avoid negative language in checkbox labels</li>
+          <li>Don't use checkboxes for actions that take effect immediately (use toggle switches)</li>
+          <li>Avoid having too many checkboxes in a single group, as it can overwhelm users</li>
+          <li>Don't place checkboxes too close together, which can lead to accidental selections</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</div>
+{% endblock %}
