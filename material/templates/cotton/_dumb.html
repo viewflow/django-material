@@ -40,3 +40,22 @@ Surface container colors for elevated buttons
 <div class="bg-surface-container-low text-primary">Elevated button default</div>
 <div class="bg-surface-container-high text-secondary">Elevated button hover/focus</div>
 <div class="text-primary text-secondary text-tertiary">Text colors</div>
+
+{% comment %}
+Peer state variants for primary/secondary/tertiary colors
+{% endcomment %}
+<div>
+  <input type="checkbox" class="peer sr-only">
+  <div class="peer-checked:bg-primary peer-checked:border-primary peer-focus-visible:outline-primary"></div>
+  <div class="peer-checked:bg-secondary peer-checked:border-secondary peer-focus-visible:outline-secondary"></div>
+  <div class="peer-checked:bg-tertiary peer-checked:border-tertiary peer-focus-visible:outline-tertiary"></div>
+  <div class="after:bg-primary/12 after:bg-secondary/12 after:bg-tertiary/12"></div>
+  <div class="peer-active:after:bg-primary peer-active:after:bg-secondary peer-active:after:bg-tertiary"></div>
+</div>
+
+{% comment %}
+Checkbox ripple and focus state helpers
+{% endcomment %}
+<div class="peer-active:after:scale-100 peer-active:after:opacity-100 peer-active:after:transition-none"></div>
+<div class="peer-focus-visible:after:scale-100 peer-focus-visible:after:opacity-100"></div>
+<div class="after:content-[''] after:absolute after:scale-0 after:opacity-0 after:transition-all after:duration-300"></div>
