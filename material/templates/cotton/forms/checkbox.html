@@ -5,7 +5,7 @@
 <label class="{{ class }}" {{ attrs }}>
   <div class="flex items-center">
     <div class="relative inline-flex items-center justify-center w-10 h-10 mr-4">
-      <!-- Actual checkbox input -->
+      {# Actual checkbox input #}
       <input
         type="checkbox"
         class="peer absolute opacity-0 w-full h-full m-0 cursor-pointer z-10"
@@ -18,22 +18,19 @@
         aria-describedby="{% if id %}{{ id }}_help{% endif %}"
         aria-checked="{% if checked %}true{% else %}false{% endif %}"
         aria-disabled="{% if disabled %}true{% else %}false{% endif %}">
-        
-      <!-- Custom checkbox appearance with embedded checkmark -->
+      {# Custom checkbox appearance with embedded checkmark #}
       <div class="relative h-[18px] w-[18px] border-2 border-outline rounded bg-surface transition-all duration-200 ease-in-out 
         peer-checked:bg-{{ color }} peer-checked:border-{{ color }}
         peer-focus-visible:outline-2 peer-focus-visible:outline-{{ color }} peer-focus-visible:outline-offset-2
         peer-disabled:opacity-60 peer-disabled:bg-on-surface-variant peer-disabled:border-outline/50
         after:content-[''] after:absolute after:left-[5px] after:top-[1px] after:w-[5px] after:h-[10px] after:border-r-2 after:border-b-2 after:border-white after:transform after:rotate-45 after:opacity-0 peer-checked:after:opacity-100"></div>
-      
-      <!-- Ripple effect -->
-      <div class="absolute top-0 left-0 right-0 bottom-0 overflow-hidden rounded-full z-0
+      {#- Ripple effect #}
+      {% if not disabled %}<div class="absolute top-0 left-0 right-0 bottom-0 overflow-hidden rounded-full z-0
         after:content-[''] after:absolute after:top-[calc(50%-20px)] after:left-[calc(50%-20px)] after:w-10 after:h-10 after:bg-{{ color }}/12 after:rounded-full after:scale-0 after:opacity-0 after:transition-all after:duration-300
         peer-active:after:scale-100 peer-active:after:opacity-100 peer-active:after:transition-none
-        peer-focus-visible:after:scale-100 peer-focus-visible:after:opacity-100"></div>
+        peer-focus-visible:after:scale-100 peer-focus-visible:after:opacity-100"></div>{% endif %}
     </div>
-    
-    <!-- Label content -->
+    {# Label content #}
     <div class="flex flex-col">
       <span class="text-base leading-6 text-on-surface">{{ slot }}</span>
       {% if help_text %}

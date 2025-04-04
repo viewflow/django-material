@@ -21,7 +21,7 @@
 
 ### Tables
 
-- [ ] Remove per-page pagination options
+- [X] Remove per-page pagination options
 - [ ] js for sorting
 
 ### Buttons
@@ -30,6 +30,10 @@
 - [ ] Icon button
 - [ ] Outlined button
 - [ ] Remove ripple form disabled button
+
+### Expandable
+- [ ] Accordeon mode
+- [ ] Add ability to expand nav items
 
 ## Missing functionality
 
