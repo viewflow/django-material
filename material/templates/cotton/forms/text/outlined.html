@@ -1,0 +1,54 @@
+<c-vars
+  class="relative mb-6 w-full group"
+  type="text"
+  color="primary" />
+
+<div class="{{ class }}" {{ attrs }}>
+  <div class="relative">
+    <div class="flex items-center relative">
+      <input 
+        type="{{ type }}"
+        id="{{ id }}"
+        name="{{ name }}"
+        value="{{ value }}"
+        placeholder=" "
+        class="w-full px-4 {% if leading_icon %}pl-10{% endif %} {% if trailing_icon %}pr-10{% endif %} pt-4 pb-3 text-base bg-transparent border border-outline rounded-md appearance-none focus:outline-none focus:border-{{ color }} focus:border-2 peer
+        disabled:opacity-60 disabled:border-outline/50 disabled:bg-transparent
+        aria-invalid:border-error focus:aria-invalid:border-error"
+        {% if required %}required{% endif %}
+        {% if disabled %}disabled{% endif %}
+        {% if readonly %}readonly{% endif %}
+        aria-describedby="{% if id %}{{ id }}_help{% endif %}"
+        aria-invalid="{% if error %}true{% else %}false{% endif %}" />
+
+      {% if leading_icon %}
+      <span class="absolute material-icons text-on-surface-variant ml-3 z-10">{{ leading_icon }}</span>
+      {% endif %}
+      {% if trailing_icon %}
+      <span class="material-icons text-on-surface-variant absolute right-3">{{ trailing_icon }}</span>
+      {% endif %}
+      
+      <label 
+        for="{{ id }}" 
+        class="pointer-events-none absolute text-base text-on-surface-variant bg-surface px-1 duration-200 transform -translate-y-1/2 scale-75 top-0 z-10 origin-[0] {% if leading_icon %}left-10{% else %}left-4{% endif %} peer-focus:text-{{ color }} 
+        peer-placeholder-shown:scale-100 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-focus:top-0 peer-focus:scale-75 peer-focus:-translate-y-1/2
+        peer-disabled:text-on-surface-variant/70 peer-disabled:bg-surface/80
+        peer-aria-invalid:text-error peer-focus:peer-aria-invalid:text-error">
+        {{ slot }}
+      </label>
+    </div>
+  </div>
+  
+  {% if help_text %}
+    <div id="{% if id %}_help{% endif %}" class="text-xs text-on-surface-variant mt-1 px-4 
+      {% if error %}text-error{% endif %}">
+      {{ help_text }}
+    </div>
+  {% endif %}
+  
+  {% if error %}
+    <div class="text-xs text-error mt-1 px-4">
+      {{ error }}
+    </div>
+  {% endif %}
+</div>

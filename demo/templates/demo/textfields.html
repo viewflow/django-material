@@ -15,7 +15,7 @@
   <section id="filled-textfields" class="mb-12">
     <h2 class="text-2xl mb-4">Filled Text Fields</h2>
     <p class="mb-6">
-      Filled text fields use a solid background (surface-container-highest) and are the default variant for form inputs.
+      Filled text fields use a solid background (surface-container-low) and are the default variant for form inputs.
       They provide clear visual prominence for user input areas.
     </p>
     
@@ -77,15 +77,84 @@
     </div>
   </section>
   
+  <section id="outlined-textfields" class="mb-12">
+    <h2 class="text-2xl mb-4">Outlined Text Fields</h2>
+    <p class="mb-6">
+      Outlined text fields use a border to define their boundaries instead of a filled background.
+      They are less prominent and work well in dense UIs or when multiple fields are grouped together.
+    </p>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div>
+        <h3 class="text-xl mb-4">Default</h3>
+        <c-forms.text.outlined id="outlined_name1">Full Name</c-forms.text.outlined>
+      </div>
+      
+      <div>
+        <h3 class="text-xl mb-4">With Help Text</h3>
+        <c-forms.text.outlined id="outlined_name2" help_text="Enter your full name">Full Name</c-forms.text.outlined>
+      </div>
+      
+      <div>
+        <h3 class="text-xl mb-4">Required</h3>
+        <c-forms.text.outlined id="outlined_email1" type="email" required>Email Address</c-forms.text.outlined>
+      </div>
+      
+      <div>
+        <h3 class="text-xl mb-4">Disabled</h3>
+        <c-forms.text.outlined id="outlined_disabled" disabled>Disabled Field</c-forms.text.outlined>
+      </div>
+      
+      <div>
+        <h3 class="text-xl mb-4">With Error</h3>
+        <c-forms.text.outlined id="outlined_email2" type="email" error="Please enter a valid email address">Email Address</c-forms.text.outlined>
+      </div>
+      
+      <div>
+        <h3 class="text-xl mb-4">With Value</h3>
+        <c-forms.text.outlined id="outlined_prefilled" value="John Doe">Full Name</c-forms.text.outlined>
+      </div>
+      
+      <div>
+        <h3 class="text-xl mb-4">Leading Icon</h3>
+        <c-forms.text.outlined id="outlined_leading_icon" leading_icon="person">Username</c-forms.text.outlined>
+      </div>
+      
+      <div>
+        <h3 class="text-xl mb-4">Trailing Icon</h3>
+        <c-forms.text.outlined id="outlined_trailing_icon" trailing_icon="visibility">Password</c-forms.text.outlined>
+      </div>
+      
+      <div>
+        <h3 class="text-xl mb-4">Both Icons</h3>
+        <c-forms.text.outlined id="outlined_both_icons" leading_icon="mail" trailing_icon="send">Email</c-forms.text.outlined>
+      </div>
+      
+      <div>
+        <h3 class="text-xl mb-4">Secondary Color</h3>
+        <c-forms.text.outlined id="outlined_secondary" color="secondary">Secondary Field</c-forms.text.outlined>
+      </div>
+      
+      <div>
+        <h3 class="text-xl mb-4">Tertiary Color</h3>
+        <c-forms.text.outlined id="outlined_tertiary" color="tertiary">Tertiary Field</c-forms.text.outlined>
+      </div>
+    </div>
+  </section>
+  
   <section id="usage" class="mb-12">
     <h2 class="text-2xl mb-4">Usage</h2>
     
     <div class="bg-surface-container-low p-6 rounded-lg shadow-sm mb-6 overflow-x-auto">
-      <pre class="text-on-surface-variant whitespace-pre-wrap break-words"><code>&lt;!-- Basic text field --&gt;
+      <pre class="text-on-surface-variant whitespace-pre-wrap break-words"><code>&lt;!-- Filled text field (default variant) --&gt;
 &lt;c-forms.text.filled id="name"&gt;Full Name&lt;/c-forms.text.filled&gt;
+
+&lt;!-- Outlined text field --&gt;
+&lt;c-forms.text.outlined id="outlined_name"&gt;Full Name&lt;/c-forms.text.outlined&gt;
 
 &lt;!-- With help text --&gt;
 &lt;c-forms.text.filled id="name_help" help_text="Enter your full name"&gt;Full Name&lt;/c-forms.text.filled&gt;
+&lt;c-forms.text.outlined id="outlined_help" help_text="Enter your full name"&gt;Full Name&lt;/c-forms.text.outlined&gt;
 
 &lt;!-- Required field --&gt;
 &lt;c-forms.text.filled id="email" type="email" required&gt;Email Address&lt;/c-forms.text.filled&gt;
@@ -99,15 +168,14 @@
 
 &lt;!-- With icons --&gt;
 &lt;c-forms.text.filled id="leading_icon" leading_icon="person"&gt;Username&lt;/c-forms.text.filled&gt;
-&lt;c-forms.text.filled id="trailing_icon" trailing_icon="visibility"&gt;Password&lt;/c-forms.text.filled&gt;
-&lt;c-forms.text.filled id="both_icons" leading_icon="mail" trailing_icon="send"&gt;Email&lt;/c-forms.text.filled&gt;
+&lt;c-forms.text.outlined id="outlined_icon" leading_icon="mail" trailing_icon="send"&gt;Email&lt;/c-forms.text.outlined&gt;
 
 &lt;!-- Disabled field --&gt;
 &lt;c-forms.text.filled id="disabled" disabled&gt;Disabled Field&lt;/c-forms.text.filled&gt;
 
 &lt;!-- With color variants --&gt;
 &lt;c-forms.text.filled id="secondary" color="secondary"&gt;Secondary Field&lt;/c-forms.text.filled&gt;
-&lt;c-forms.text.filled id="tertiary" color="tertiary"&gt;Tertiary Field&lt;/c-forms.text.filled&gt;</code></pre>
+&lt;c-forms.text.outlined id="tertiary_outlined" color="tertiary"&gt;Tertiary Field&lt;/c-forms.text.outlined&gt;</code></pre>
     </div>
   </section>
 
