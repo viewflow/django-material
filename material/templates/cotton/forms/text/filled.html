@@ -4,29 +4,39 @@
   color="primary" />
 
 <div class="{{ class }}" {{ attrs }}>
-  <input 
-    type="{{ type }}"
-    id="{{ id }}"
-    name="{{ name }}"
-    value="{{ value }}"
-    placeholder=" "
-    class="w-full px-4 pt-5 pb-2 text-base bg-surface-container-highest border-0 border-b border-outline appearance-none rounded-t-md focus:outline-none focus:border-{{ color }} focus:border-b-2 peer
-    disabled:opacity-60 disabled:border-outline/50 disabled:bg-surface-container-highest/50
-    aria-invalid:border-error focus:aria-invalid:border-error"
-    {% if required %}required{% endif %}
-    {% if disabled %}disabled{% endif %}
-    {% if readonly %}readonly{% endif %}
-    aria-describedby="{% if id %}{{ id }}_help{% endif %}"
-    aria-invalid="{% if error %}true{% else %}false{% endif %}" />
-  
-  <label 
-    for="{{ id }}" 
-    class="absolute text-base text-on-surface-variant duration-200 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-4 peer-focus:text-{{ color }} 
-    peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4
-    peer-disabled:text-on-surface-variant/70
-    peer-aria-invalid:text-error peer-focus:peer-aria-invalid:text-error">
-    {{ slot }}
-  </label>
+  <div class="relative flex items-center bg-surface-container rounded-t-md">
+    {% if leading_icon %}
+    <span class="material-icons text-on-surface-variant ml-3">{{ leading_icon }}</span>
+    {% endif %}
+    
+    <input 
+      type="{{ type }}"
+      id="{{ id }}"
+      name="{{ name }}"
+      value="{{ value }}"
+      placeholder=" "
+      class="w-full px-4 {% if leading_icon %}pl-2{% endif %} {% if trailing_icon %}pr-10{% endif %} pt-5 pb-2 text-base bg-transparent border-0 border-b border-outline appearance-none focus:outline-none focus:border-{{ color }} focus:border-b-2 peer
+      disabled:opacity-60 disabled:border-outline/50 disabled:bg-transparent
+      aria-invalid:border-error focus:aria-invalid:border-error"
+      {% if required %}required{% endif %}
+      {% if disabled %}disabled{% endif %}
+      {% if readonly %}readonly{% endif %}
+      aria-describedby="{% if id %}{{ id }}_help{% endif %}"
+      aria-invalid="{% if error %}true{% else %}false{% endif %}" />
+    
+    {% if trailing_icon %}
+    <span class="material-icons text-on-surface-variant absolute right-3">{{ trailing_icon }}</span>
+    {% endif %}
+    
+    <label 
+      for="{{ id }}" 
+      class="absolute text-base text-on-surface-variant duration-200 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] {% if leading_icon %}left-10{% else %}left-4{% endif %} peer-focus:text-{{ color }} 
+      peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4
+      peer-disabled:text-on-surface-variant/70
+      peer-aria-invalid:text-error peer-focus:peer-aria-invalid:text-error">
+      {{ slot }}
+    </label>
+  </div>
   
   {% if help_text %}
     <div id="{% if id %}_help{% endif %}" class="text-xs text-on-surface-variant mt-1 px-4 

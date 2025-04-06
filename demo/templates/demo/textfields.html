@@ -15,7 +15,7 @@
   <section id="filled-textfields" class="mb-12">
     <h2 class="text-2xl mb-4">Filled Text Fields</h2>
     <p class="mb-6">
-      Filled text fields use a solid background and are the default variant for form inputs.
+      Filled text fields use a solid background (surface-container-highest) and are the default variant for form inputs.
       They provide clear visual prominence for user input areas.
     </p>
     
@@ -51,6 +51,21 @@
       </div>
       
       <div>
+        <h3 class="text-xl mb-4">Leading Icon</h3>
+        <c-forms.text.filled id="leading_icon" leading_icon="person">Username</c-forms.text.filled>
+      </div>
+      
+      <div>
+        <h3 class="text-xl mb-4">Trailing Icon</h3>
+        <c-forms.text.filled id="trailing_icon" trailing_icon="visibility">Password</c-forms.text.filled>
+      </div>
+      
+      <div>
+        <h3 class="text-xl mb-4">Both Icons</h3>
+        <c-forms.text.filled id="both_icons" leading_icon="mail" trailing_icon="send">Email</c-forms.text.filled>
+      </div>
+      
+      <div>
         <h3 class="text-xl mb-4">Secondary Color</h3>
         <c-forms.text.filled id="secondary" color="secondary">Secondary Field</c-forms.text.filled>
       </div>
@@ -80,6 +95,11 @@
 
 &lt;!-- With initial value --&gt;
 &lt;c-forms.text.filled id="prefilled" value="John Doe"&gt;Full Name&lt;/c-forms.text.filled&gt;
+
+&lt;!-- With icons --&gt;
+&lt;c-forms.text.filled id="leading_icon" leading_icon="person"&gt;Username&lt;/c-forms.text.filled&gt;
+&lt;c-forms.text.filled id="trailing_icon" trailing_icon="visibility"&gt;Password&lt;/c-forms.text.filled&gt;
+&lt;c-forms.text.filled id="both_icons" leading_icon="mail" trailing_icon="send"&gt;Email&lt;/c-forms.text.filled&gt;
 
 &lt;!-- Disabled field --&gt;
 &lt;c-forms.text.filled id="disabled" disabled&gt;Disabled Field&lt;/c-forms.text.filled&gt;
@@ -120,6 +140,18 @@
           <c-table.cell>string</c-table.cell>
           <c-table.cell>"text"</c-table.cell>
           <c-table.cell>Input type (text, email, password, etc.)</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>leading_icon</code></c-table.cell>
+          <c-table.cell>string</c-table.cell>
+          <c-table.cell>none</c-table.cell>
+          <c-table.cell>Material icon name to display at the start of the input</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>trailing_icon</code></c-table.cell>
+          <c-table.cell>string</c-table.cell>
+          <c-table.cell>none</c-table.cell>
+          <c-table.cell>Material icon name to display at the end of the input</c-table.cell>
         </c-table.row>
         <c-table.row>
           <c-table.cell><code>help_text</code></c-table.cell>
