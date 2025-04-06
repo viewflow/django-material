@@ -30,8 +30,8 @@
       
       <label 
         for="{{ id }}" 
-        class="pointer-events-none absolute text-base text-on-surface-variant bg-surface px-1 duration-200 transform -translate-y-1/2 scale-75 top-0 z-10 origin-[0] {% if leading_icon %}left-10{% else %}left-4{% endif %} peer-focus:text-{{ color }} 
-        peer-placeholder-shown:scale-100 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-focus:top-0 peer-focus:scale-75 peer-focus:-translate-y-1/2
+        class="pointer-events-none absolute text-base text-on-surface-variant bg-surface px-1 duration-200 transform -translate-y-1/2 scale-75 top-0 z-10 origin-[0] left-4 peer-focus:text-{{ color }} 
+        peer-placeholder-shown:scale-100 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:{% if leading_icon %}left-10{% endif %} peer-focus:left-4 peer-focus:top-0 peer-focus:scale-75 peer-focus:-translate-y-1/2
         peer-disabled:text-on-surface-variant/70 peer-disabled:bg-surface/80
         peer-aria-invalid:text-error peer-focus:peer-aria-invalid:text-error">
         {{ slot }}
