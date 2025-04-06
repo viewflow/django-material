@@ -133,3 +133,4 @@
 - DO NOT use Co-Authored-By trailers alone, as they don't change the commit author
 - All feature/fix commits should be done under Claude's name
 - Run `npm run build:css` before committing CSS changes
+- Update _dumb.html compoment when using new implicity {{ color }} class names in compoments

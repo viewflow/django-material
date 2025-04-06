@@ -7,8 +7,8 @@
 
 ## Compoments
 
-- [ ] Add esbild esbuild main.js --bundle --outfile=bundle.js --format=iife --global-name=MyLib --minify
-
+- [X] Add esbild esbuild main.js --bundle --outfile=bundle.js --format=iife --global-name=MyLib --minify
+- [ ] use {{ debug }} to add min or not minified fiels
 
 ### Navigation
 
@@ -30,7 +30,8 @@
 - [ ] Icon button
 - [ ] Outlined button
 - [ ] Remove ripple form disabled button
-
+- [ ] Add end_icon attribute
+  
 ### Expandable
 - [ ] Accordeon mode
 - [ ] Add ability to expand nav items

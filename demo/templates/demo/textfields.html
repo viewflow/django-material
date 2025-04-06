@@ -1,0 +1,158 @@
+{% extends 'material/base_page.html' %}
+{% load i18n %}
+
+{% block title %}Material 3 Text Fields{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-10 pt-4 pb-8">
+  <c-breadcrumbs.container class="mb-2">
+    <c-breadcrumbs.home href="{% url 'index' %}"></c-breadcrumbs.home>
+    <c-breadcrumbs.item current="true">Text Fields</c-breadcrumbs.item>
+  </c-breadcrumbs.container>
+
+  <h1 class="text-3xl font-medium mb-8">Text Field Components</h1>
+  
+  <section id="filled-textfields" class="mb-12">
+    <h2 class="text-2xl mb-4">Filled Text Fields</h2>
+    <p class="mb-6">
+      Filled text fields use a solid background and are the default variant for form inputs.
+      They provide clear visual prominence for user input areas.
+    </p>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div>
+        <h3 class="text-xl mb-4">Default</h3>
+        <c-forms.text.filled id="name1">Full Name</c-forms.text.filled>
+      </div>
+      
+      <div>
+        <h3 class="text-xl mb-4">With Help Text</h3>
+        <c-forms.text.filled id="name2" help_text="Enter your full name">Full Name</c-forms.text.filled>
+      </div>
+      
+      <div>
+        <h3 class="text-xl mb-4">Required</h3>
+        <c-forms.text.filled id="email1" type="email" required>Email Address</c-forms.text.filled>
+      </div>
+      
+      <div>
+        <h3 class="text-xl mb-4">Disabled</h3>
+        <c-forms.text.filled id="disabled" disabled>Disabled Field</c-forms.text.filled>
+      </div>
+      
+      <div>
+        <h3 class="text-xl mb-4">With Error</h3>
+        <c-forms.text.filled id="email2" type="email" error="Please enter a valid email address">Email Address</c-forms.text.filled>
+      </div>
+      
+      <div>
+        <h3 class="text-xl mb-4">With Value</h3>
+        <c-forms.text.filled id="prefilled" value="John Doe">Full Name</c-forms.text.filled>
+      </div>
+      
+      <div>
+        <h3 class="text-xl mb-4">Secondary Color</h3>
+        <c-forms.text.filled id="secondary" color="secondary">Secondary Field</c-forms.text.filled>
+      </div>
+      
+      <div>
+        <h3 class="text-xl mb-4">Tertiary Color</h3>
+        <c-forms.text.filled id="tertiary" color="tertiary">Tertiary Field</c-forms.text.filled>
+      </div>
+    </div>
+  </section>
+  
+  <section id="usage" class="mb-12">
+    <h2 class="text-2xl mb-4">Usage</h2>
+    
+    <div class="bg-surface-container-low p-6 rounded-lg shadow-sm mb-6">
+      <pre class="text-on-surface-variant"><code>&lt;!-- Basic text field --&gt;
+&lt;c-forms.text.filled id="name"&gt;Full Name&lt;/c-forms.text.filled&gt;
+
+&lt;!-- With help text --&gt;
+&lt;c-forms.text.filled id="name_help" help_text="Enter your full name"&gt;Full Name&lt;/c-forms.text.filled&gt;
+
+&lt;!-- Required field --&gt;
+&lt;c-forms.text.filled id="email" type="email" required&gt;Email Address&lt;/c-forms.text.filled&gt;
+
+&lt;!-- With error message --&gt;
+&lt;c-forms.text.filled id="email_error" type="email" error="Please enter a valid email address"&gt;Email Address&lt;/c-forms.text.filled&gt;
+
+&lt;!-- With initial value --&gt;
+&lt;c-forms.text.filled id="prefilled" value="John Doe"&gt;Full Name&lt;/c-forms.text.filled&gt;
+
+&lt;!-- Disabled field --&gt;
+&lt;c-forms.text.filled id="disabled" disabled&gt;Disabled Field&lt;/c-forms.text.filled&gt;
+
+&lt;!-- With color variants --&gt;
+&lt;c-forms.text.filled id="secondary" color="secondary"&gt;Secondary Field&lt;/c-forms.text.filled&gt;
+&lt;c-forms.text.filled id="tertiary" color="tertiary"&gt;Tertiary Field&lt;/c-forms.text.filled&gt;</code></pre>
+    </div>
+  </section>
+
+  <section id="attributes" class="mb-12">
+    <h2 class="text-2xl mb-4">Attributes</h2>
+    
+    <div class="overflow-x-auto mb-6">
+      <c-table.container>
+        <c-slot name="header">
+          <c-table.header_row>
+            <c-table.header>Attribute</c-table.header>
+            <c-table.header>Type</c-table.header>
+            <c-table.header>Default</c-table.header>
+            <c-table.header>Description</c-table.header>
+          </c-table.header_row>
+        </c-slot>
+        <c-table.row>
+          <c-table.cell><code>id</code></c-table.cell>
+          <c-table.cell>string</c-table.cell>
+          <c-table.cell>none</c-table.cell>
+          <c-table.cell>Unique identifier for the input field (required)</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>color</code></c-table.cell>
+          <c-table.cell>string</c-table.cell>
+          <c-table.cell>"primary"</c-table.cell>
+          <c-table.cell>Input color theme. Options: "primary", "secondary", "tertiary"</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>type</code></c-table.cell>
+          <c-table.cell>string</c-table.cell>
+          <c-table.cell>"text"</c-table.cell>
+          <c-table.cell>Input type (text, email, password, etc.)</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>help_text</code></c-table.cell>
+          <c-table.cell>string</c-table.cell>
+          <c-table.cell>none</c-table.cell>
+          <c-table.cell>Helper text displayed below the input</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>error</code></c-table.cell>
+          <c-table.cell>string</c-table.cell>
+          <c-table.cell>none</c-table.cell>
+          <c-table.cell>Error message to display</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>value</code></c-table.cell>
+          <c-table.cell>string</c-table.cell>
+          <c-table.cell>none</c-table.cell>
+          <c-table.cell>Initial value for the input</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>required</code></c-table.cell>
+          <c-table.cell>boolean</c-table.cell>
+          <c-table.cell>false</c-table.cell>
+          <c-table.cell>When true, the field is required</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>disabled</code></c-table.cell>
+          <c-table.cell>boolean</c-table.cell>
+          <c-table.cell>false</c-table.cell>
+          <c-table.cell>When true, the input is disabled and non-interactive</c-table.cell>
+        </c-table.row>
+      </c-table.container>
+    </div>
+  </section>
+</div>
+{% endblock %}
