@@ -80,8 +80,8 @@
   <section id="usage" class="mb-12">
     <h2 class="text-2xl mb-4">Usage</h2>
     
-    <div class="bg-surface-container-low p-6 rounded-lg shadow-sm mb-6">
-      <pre class="text-on-surface-variant"><code>&lt;!-- Basic text field --&gt;
+    <div class="bg-surface-container-low p-6 rounded-lg shadow-sm mb-6 overflow-x-auto">
+      <pre class="text-on-surface-variant whitespace-pre-wrap break-words"><code>&lt;!-- Basic text field --&gt;
 &lt;c-forms.text.filled id="name"&gt;Full Name&lt;/c-forms.text.filled&gt;
 
 &lt;!-- With help text --&gt;
@@ -91,7 +91,8 @@
 &lt;c-forms.text.filled id="email" type="email" required&gt;Email Address&lt;/c-forms.text.filled&gt;
 
 &lt;!-- With error message --&gt;
-&lt;c-forms.text.filled id="email_error" type="email" error="Please enter a valid email address"&gt;Email Address&lt;/c-forms.text.filled&gt;
+&lt;c-forms.text.filled id="email_error" type="email" 
+    error="Please enter a valid email address"&gt;Email Address&lt;/c-forms.text.filled&gt;
 
 &lt;!-- With initial value --&gt;
 &lt;c-forms.text.filled id="prefilled" value="John Doe"&gt;Full Name&lt;/c-forms.text.filled&gt;
@@ -113,7 +114,7 @@
   <section id="attributes" class="mb-12">
     <h2 class="text-2xl mb-4">Attributes</h2>
     
-    <div class="overflow-x-auto mb-6">
+    <div class="overflow-x-auto mb-6 max-w-full">
       <c-table.container>
         <c-slot name="header">
           <c-table.header_row>
