@@ -1,39 +1,31 @@
 <c-vars
   class="relative mb-6 w-full group"
-  type="text"
-  color="primary" />
+  color="primary"
+  rows="3" />
 
 <div class="{{ class }}" {{ attrs }}>
   <div class="relative">
-    <div class="flex items-center relative">
-      <input 
-        type="{{ type }}"
+    <div class="flex items-start relative">
+      <textarea 
         id="{{ id }}"
         name="{{ name }}"
-        value="{{ value }}"
+        rows="{{ rows }}"
         placeholder=" "
-        class="peer w-full p-4 {% if leading_icon %}pl-10{% endif %} {% if trailing_icon %}pr-10{% endif %} text-base bg-transparent rounded-md appearance-none focus:outline-none
+        up-auto-grow
+        class="peer w-full px-4 pt-2 pb-2 text-base bg-transparent rounded-md resize-none appearance-none focus:outline-none
         disabled:opacity-60 disabled:border-outline/50 disabled:bg-transparent
         aria-invalid:border-error focus:aria-invalid:border-error"
         {% if required %}required{% endif %}
         {% if disabled %}disabled{% endif %}
         {% if readonly %}readonly{% endif %}
         aria-describedby="{% if id %}{{ id }}_help{% endif %}"
-        aria-invalid="{% if error %}true{% else %}false{% endif %}" />
-
-      {% if leading_icon %}
-      <span class="absolute z-10 ml-3 material-icons text-on-surface-variant">{{ leading_icon }}</span>
-      {% endif %}
-      {% if trailing_icon %}
-      <span class="absolute right-3 material-icons text-on-surface-variant">{{ trailing_icon }}</span>
-      {% endif %}
+        aria-invalid="{% if error %}true{% else %}false{% endif %}">{{ value }}</textarea>
       
       <label 
         for="{{ id }}" 
         class="pointer-events-none absolute z-10 px-1 text-base text-on-surface-variant origin-[0] 
         -translate-y-1/2 scale-75 top-0 left-4 duration-300
-        peer-placeholder-shown:scale-100 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 
-        peer-placeholder-shown:{% if leading_icon %}left-10{% endif %} 
+        peer-placeholder-shown:scale-100 peer-placeholder-shown:top-5 peer-placeholder-shown:-translate-y-1/2 
         peer-focus:left-4 peer-focus:top-0 peer-focus:scale-75 peer-focus:-translate-y-1/2 peer-focus:text-{{ color }}
         peer-focus:opacity-0 peer-not-placeholder-shown:opacity-0
         peer-disabled:text-on-surface-variant/70
@@ -50,15 +42,14 @@
         peer-focus:peer-aria-invalid:border-error peer-focus:peer-aria-invalid:[&>legend>span]:text-error
         peer-disabled:border-outline/50
         peer-focus:[&>legend>span]:visible peer-focus:[&>legend>span]:max-w-full peer-focus:[&>legend>span]:px-1 
-        peer-not-placeholder-shown:[&>legend>span]:visible peer-not-placeholder-shown:[&>legend>span]:max-w-full peer-not-placeholder-shown:[&>legend>span]:px-1"
-        aria-hidden="true">
-        <legend><span class="invisible block max-w-0 whitespace-nowrap text-xs text-{{ color }} transition duration-300 ease-in-out">{{ slot }}</span></legend>
+        peer-not-placeholder-shown:[&>legend>span]:visible peer-not-placeholder-shown:[&>legend>span]:max-w-full peer-not-placeholder-shown:[&>legend>span]:px-1">
+        <legend class="ml-1"><span class="invisible block max-w-0 whitespace-nowrap text-xs text-{{ color }} transition duration-300 ease-in-out">{{ slot }}</span></legend>
       </fieldset>
     </div>
   </div>
   
   {% if help_text %}
-    <div id="{% if id %}_help{% endif %}" class="mt-1 px-4 text-xs text-on-surface-variant {% if error %}text-error{% endif %}">
+    <div id="{% if id %}{{ id }}_help{% endif %}" class="mt-1 px-4 text-xs text-on-surface-variant {% if error %}text-error{% endif %}">
       {{ help_text }}
     </div>
   {% endif %}

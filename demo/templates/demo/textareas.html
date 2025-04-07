@@ -1,0 +1,241 @@
+{% extends 'material/base_page.html' %}
+{% load i18n %}
+
+{% block title %}Material 3 Text Areas{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-10 pt-4 pb-8">
+  <c-breadcrumbs.container class="mb-2">
+    <c-breadcrumbs.home href="{% url 'index' %}"></c-breadcrumbs.home>
+    <c-breadcrumbs.item current="true">Text Areas</c-breadcrumbs.item>
+  </c-breadcrumbs.container>
+
+  <h1 class="text-3xl font-medium mb-8">Text Area Components</h1>
+  
+  <section id="filled-textareas" class="mb-12">
+    <h2 class="text-2xl mb-4">Filled Text Areas</h2>
+    <p class="mb-6">
+      Filled text areas use a solid background (surface-container-low) and are the default variant for multi-line inputs.
+      They provide clear visual prominence for user input areas and automatically grow as content is added.
+    </p>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div>
+        <h3 class="text-xl mb-4">Default</h3>
+        <c-forms.textarea.filled id="description1">Description</c-forms.textarea.filled>
+      </div>
+      
+      <div>
+        <h3 class="text-xl mb-4">With Help Text</h3>
+        <c-forms.textarea.filled id="description2" help_text="Enter a detailed description">Description</c-forms.textarea.filled>
+      </div>
+      
+      <div>
+        <h3 class="text-xl mb-4">Required</h3>
+        <c-forms.textarea.filled id="comments1" required>Comments</c-forms.textarea.filled>
+      </div>
+      
+      <div>
+        <h3 class="text-xl mb-4">Disabled</h3>
+        <c-forms.textarea.filled id="disabled" disabled>Disabled Text Area</c-forms.textarea.filled>
+      </div>
+      
+      <div>
+        <h3 class="text-xl mb-4">With Error</h3>
+        <c-forms.textarea.filled id="feedback1" error="Please enter at least 20 characters">Feedback</c-forms.textarea.filled>
+      </div>
+      
+      <div>
+        <h3 class="text-xl mb-4">With Value</h3>
+        <c-forms.textarea.filled id="prefilled" value="This is a sample text that demonstrates the auto-growing behavior of this textarea component. As you can see, it expands automatically to fit the content.">Prefilled Text</c-forms.textarea.filled>
+      </div>
+      
+      <div>
+        <h3 class="text-xl mb-4">With Custom Rows</h3>
+        <c-forms.textarea.filled id="custom_rows" rows="5">Custom Rows</c-forms.textarea.filled>
+      </div>
+      
+      <div>
+        <h3 class="text-xl mb-4">Secondary Color</h3>
+        <c-forms.textarea.filled id="secondary" color="secondary">Secondary Text Area</c-forms.textarea.filled>
+      </div>
+      
+      <div>
+        <h3 class="text-xl mb-4">Tertiary Color</h3>
+        <c-forms.textarea.filled id="tertiary" color="tertiary">Tertiary Text Area</c-forms.textarea.filled>
+      </div>
+    </div>
+  </section>
+  
+  <section id="outlined-textareas" class="mb-12">
+    <h2 class="text-2xl mb-4">Outlined Text Areas</h2>
+    <p class="mb-6">
+      Outlined text areas use a border to define their boundaries instead of a filled background.
+      They are less prominent and work well in dense UIs or when multiple fields are grouped together.
+      Like the filled variant, these also auto-grow as content is added.
+    </p>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div>
+        <h3 class="text-xl mb-4">Default</h3>
+        <c-forms.textarea.outlined id="outlined_description1">Description</c-forms.textarea.outlined>
+      </div>
+      
+      <div>
+        <h3 class="text-xl mb-4">With Help Text</h3>
+        <c-forms.textarea.outlined id="outlined_description2" help_text="Enter a detailed description">Description</c-forms.textarea.outlined>
+      </div>
+      
+      <div>
+        <h3 class="text-xl mb-4">Required</h3>
+        <c-forms.textarea.outlined id="outlined_comments1" required>Comments</c-forms.textarea.outlined>
+      </div>
+      
+      <div>
+        <h3 class="text-xl mb-4">Disabled</h3>
+        <c-forms.textarea.outlined id="outlined_disabled" disabled>Disabled Text Area</c-forms.textarea.outlined>
+      </div>
+      
+      <div>
+        <h3 class="text-xl mb-4">With Error</h3>
+        <c-forms.textarea.outlined id="outlined_feedback1" error="Please enter at least 20 characters">Feedback</c-forms.textarea.outlined>
+      </div>
+      
+      <div>
+        <h3 class="text-xl mb-4">With Value</h3>
+        <c-forms.textarea.outlined id="outlined_prefilled" value="This is a sample text that demonstrates the auto-growing behavior of this textarea component. As you can see, it expands automatically to fit the content.">Prefilled Text</c-forms.textarea.outlined>
+      </div>
+      
+      <div>
+        <h3 class="text-xl mb-4">With Custom Rows</h3>
+        <c-forms.textarea.outlined id="outlined_custom_rows" rows="5">Custom Rows</c-forms.textarea.outlined>
+      </div>
+      
+      <div>
+        <h3 class="text-xl mb-4">Secondary Color</h3>
+        <c-forms.textarea.outlined id="outlined_secondary" color="secondary">Secondary Text Area</c-forms.textarea.outlined>
+      </div>
+      
+      <div>
+        <h3 class="text-xl mb-4">Tertiary Color</h3>
+        <c-forms.textarea.outlined id="outlined_tertiary" color="tertiary">Tertiary Text Area</c-forms.textarea.outlined>
+      </div>
+    </div>
+  </section>
+  
+  <section id="usage" class="mb-12">
+    <h2 class="text-2xl mb-4">Usage</h2>
+    
+    <div class="bg-surface-container-low p-6 rounded-lg shadow-sm mb-6 overflow-x-auto">
+      <pre class="text-on-surface-variant whitespace-pre-wrap break-words"><code>&lt;!-- Filled text area (default variant) --&gt;
+&lt;c-forms.textarea.filled id="description"&gt;Description&lt;/c-forms.textarea.filled&gt;
+
+&lt;!-- Outlined text area --&gt;
+&lt;c-forms.textarea.outlined id="outlined_description"&gt;Description&lt;/c-forms.textarea.outlined&gt;
+
+&lt;!-- With help text --&gt;
+&lt;c-forms.textarea.filled id="description_help" help_text="Enter a detailed description"&gt;Description&lt;/c-forms.textarea.filled&gt;
+&lt;c-forms.textarea.outlined id="outlined_help" help_text="Enter a detailed description"&gt;Description&lt;/c-forms.textarea.outlined&gt;
+
+&lt;!-- Required field --&gt;
+&lt;c-forms.textarea.filled id="comments" required&gt;Comments&lt;/c-forms.textarea.filled&gt;
+
+&lt;!-- With error message --&gt;
+&lt;c-forms.textarea.filled id="feedback_error" 
+    error="Please enter at least 20 characters"&gt;Feedback&lt;/c-forms.textarea.filled&gt;
+
+&lt;!-- With initial value --&gt;
+&lt;c-forms.textarea.filled id="prefilled" value="This is a sample text"&gt;Prefilled Text&lt;/c-forms.textarea.filled&gt;
+
+&lt;!-- With custom rows --&gt;
+&lt;c-forms.textarea.filled id="custom_rows" rows="5"&gt;Custom Rows&lt;/c-forms.textarea.filled&gt;
+
+&lt;!-- Disabled field --&gt;
+&lt;c-forms.textarea.filled id="disabled" disabled&gt;Disabled Field&lt;/c-forms.textarea.filled&gt;
+
+&lt;!-- With color variants --&gt;
+&lt;c-forms.textarea.filled id="secondary" color="secondary"&gt;Secondary Field&lt;/c-forms.textarea.filled&gt;
+&lt;c-forms.textarea.outlined id="tertiary_outlined" color="tertiary"&gt;Tertiary Field&lt;/c-forms.textarea.outlined&gt;</code></pre>
+    </div>
+  </section>
+
+  <section id="attributes" class="mb-12">
+    <h2 class="text-2xl mb-4">Attributes</h2>
+    
+    <div class="overflow-x-auto mb-6 max-w-full">
+      <c-table.container>
+        <c-slot name="header">
+          <c-table.header_row>
+            <c-table.header>Attribute</c-table.header>
+            <c-table.header>Type</c-table.header>
+            <c-table.header>Default</c-table.header>
+            <c-table.header>Description</c-table.header>
+          </c-table.header_row>
+        </c-slot>
+        <c-table.row>
+          <c-table.cell><code>id</code></c-table.cell>
+          <c-table.cell>string</c-table.cell>
+          <c-table.cell>none</c-table.cell>
+          <c-table.cell>Unique identifier for the textarea field (required)</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>color</code></c-table.cell>
+          <c-table.cell>string</c-table.cell>
+          <c-table.cell>"primary"</c-table.cell>
+          <c-table.cell>Textarea color theme. Options: "primary", "secondary", "tertiary"</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>rows</code></c-table.cell>
+          <c-table.cell>number</c-table.cell>
+          <c-table.cell>3</c-table.cell>
+          <c-table.cell>Initial number of visible rows (before auto-growing)</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>help_text</code></c-table.cell>
+          <c-table.cell>string</c-table.cell>
+          <c-table.cell>none</c-table.cell>
+          <c-table.cell>Helper text displayed below the textarea</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>error</code></c-table.cell>
+          <c-table.cell>string</c-table.cell>
+          <c-table.cell>none</c-table.cell>
+          <c-table.cell>Error message to display</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>value</code></c-table.cell>
+          <c-table.cell>string</c-table.cell>
+          <c-table.cell>none</c-table.cell>
+          <c-table.cell>Initial value for the textarea</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>required</code></c-table.cell>
+          <c-table.cell>boolean</c-table.cell>
+          <c-table.cell>false</c-table.cell>
+          <c-table.cell>When true, the field is required</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>disabled</code></c-table.cell>
+          <c-table.cell>boolean</c-table.cell>
+          <c-table.cell>false</c-table.cell>
+          <c-table.cell>When true, the textarea is disabled and non-interactive</c-table.cell>
+        </c-table.row>
+      </c-table.container>
+    </div>
+  </section>
+
+  <section id="auto-grow" class="mb-12">
+    <h2 class="text-2xl mb-4">Auto-Growing Behavior</h2>
+    <p class="mb-6">
+      Both the filled and outlined textarea variants feature automatic height adjustment (auto-growing). 
+      As users type or paste content, the textarea will expand vertically to accommodate the text without
+      showing scrollbars. This provides a better user experience by showing all content at once.
+    </p>
+    
+    <p class="mb-6">
+      The initial height is determined by the <code>rows</code> attribute (default: 3), but the component will
+      automatically grow as needed. This behavior is implemented using Unpoly.js for seamless, JavaScript-enhanced interactions.
+    </p>
+  </section>
+</div>
+{% endblock %}

@@ -13,4 +13,5 @@ urlpatterns = [
     path('colors/', TemplateView.as_view(template_name='demo/colors.html'), name='colors'),
     path('checkboxes/', TemplateView.as_view(template_name='demo/checkboxes.html'), name='checkboxes'),
     path('textfields/', TemplateView.as_view(template_name='demo/textfields.html'), name='textfields'),
+    path('textareas/', TemplateView.as_view(template_name='demo/textareas.html'), name='textareas'),
 ]
