@@ -15,15 +15,17 @@
 
 {% block content %}
 <div class="container mx-auto px-4 py-12 flex justify-center">
-  <c-card.elevated class="w-full max-w-2xl" title="{{ title }}">
-    <form method="post" class="space-y-6">
-      {% csrf_token %}
-      {{ form.as_p }}
+  <form method="post" class="w-full max-w-2xl">
+    {% csrf_token %}
+    <c-card.elevated title="{{ title }}">
+      <div class="space-y-6">
+        {{ form.as_p }}
+      </div>
       
-      <c-slot name="footer" class="flex justify-end">
+      <c-slot name="footer">
         <c-button.filled type="submit">Submit</c-button.filled>
       </c-slot>
-    </form>
-  </c-card.elevated>
+    </c-card.elevated>
+  </form>
 </div>
 {% endblock %}
