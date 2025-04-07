@@ -37,8 +37,8 @@
         peer-aria-invalid:text-error peer-focus:peer-aria-invalid:text-error">
         {{ slot }}
       </label>
-      <fieldset class="absolute -top-3 left-0 right-0 bottom-0 m-0 p-2 border border-[rgba(0,0,0,0.38)] rounded-l pointer-events-none transition-[border-color,border-width] duration-300 ease-in-out overflow-hidden peer-focus:[&>legend>span]:visible peer-focus:[&>legend>span]:max-w-full peer-focus:[&>legend>span]:px-1 peer-not-placeholder-shown:[&>legend>span]:visible peer-not-placeholder-shown:[&>legend>span]:max-w-full peer-not-placeholder-shown:[&>legend>span]:px-1">
-        <legend><span class="invisible block max-w-0 text-{{ color }} text-xs whitespace-nowrap transition-[visibility,opacity,max-width] duration-300 ease-in-out">{{ slot }}</span></legend>
+      <fieldset class="absolute -top-3 left-0 right-0 bottom-0 m-0 p-2 border border-[rgba(0,0,0,0.38)] rounded-l pointer-events-none transition duration-300 ease-in-out overflow-hidden peer-focus:[&>legend>span]:visible peer-focus:[&>legend>span]:max-w-full peer-focus:[&>legend>span]:px-1 peer-not-placeholder-shown:[&>legend>span]:visible peer-not-placeholder-shown:[&>legend>span]:max-w-full peer-not-placeholder-shown:[&>legend>span]:px-1">
+        <legend><span class="invisible block max-w-0 text-{{ color }} text-xs whitespace-nowrap transition duration-300 ease-in-out">{{ slot }}</span></legend>
       </fieldset>
     </div>
   </div>
