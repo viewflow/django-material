@@ -126,34 +126,28 @@
     <h2 class="text-2xl mb-4">Custom Usage</h2>
     
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <c-card.elevated class="h-full">
-        <div class="flex flex-col h-full">
+      <c-card.elevated class="h-full" slot_class="flex-grow flex flex-col p-0" footer_class="flex justify-end">
           <img src="https://dummyimage.com/800x400/" alt="Placeholder Image" class="w-full h-48 object-cover rounded-t-lg">
           <div class="p-4 flex-grow">
             <h3 class="text-xl font-medium mb-2">Media Card</h3>
             <p>This card demonstrates how to include an image in a card layout.</p>
           </div>
-          <div class="p-4 flex justify-end border-t border-outline-variant">
+          <c-slot name="footer" class="flex justify-end">
             <c-button.text>View Details</c-button.text>
-          </div>
-        </div>
+          </c-slot>
       </c-card.elevated>
       
-      <c-card.outlined class="h-full flex">
-        <div class="flex flex-col h-full flex-grow">
-          <div class="p-4">
-            <h3 class="text-xl font-medium mb-2">Interactive Card</h3>
-            <p class="mb-4">Cards can contain interactive elements like forms:</p>
-            <div class="space-y-6">
-              <c-forms.text.outlined id="name">Name</c-forms.text.outlined>
-              <c-forms.textarea.outlined id="message" rows="4">Message</c-forms.textarea.outlined>
-            </div>
+      <c-card.outlined class="h-full" slot_class="flex-grow p-4" footer_class="flex justify-end">
+          <h3 class="text-xl font-medium mb-2">Interactive Card</h3>
+          <p class="mb-4">Cards can contain interactive elements like forms:</p>
+          <div class="space-y-6">
+            <c-forms.text.outlined id="name">Name</c-forms.text.outlined>
+            <c-forms.textarea.outlined id="message" rows="4">Message</c-forms.textarea.outlined>
           </div>
-          <div class="p-4 mt-auto flex justify-end border-t border-outline-variant">
+          <c-slot name="footer" class="flex justify-end">
             <c-button.text>Cancel</c-button.text>
             <c-button.filled class="ml-2">Submit</c-button.filled>
-          </div>
-        </div>
+          </c-slot>
       </c-card.outlined>
     </div>
   </section>

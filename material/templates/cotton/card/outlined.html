@@ -1,7 +1,8 @@
 <c-vars
   color="primary"
   class="relative flex flex-col overflow-hidden rounded-lg border border-outline-variant transition-all duration-300 ease-in-out hover:border-outline"
-  footer_class="" />
+  footer_class="flex justify-end"
+  slot_class="p-4 flex-grow" />
 
 <div class="{{ class }} bg-surface">
   {% if title or menu %}
@@ -22,7 +23,7 @@
   </div>
   {% endif %}
   
-  <div class="p-4 flex-grow">
+  <div class="{{ slot_class }}">
     {{ slot }}
   </div>
   
