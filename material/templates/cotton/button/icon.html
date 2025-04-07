@@ -11,7 +11,7 @@
   {% if aria_label %}aria-label="{{ aria_label }}"{% endif %}
   role="button"
   {{ attrs }}>
-  <span class="{{ icon_class }}" aria-hidden="true">{{ icon }}</span>
+  <span class="{{ icon_class }}" aria-hidden="true">{{ slot }}</span>
 </button>
 
 {% elif variant == "tonal" %}
@@ -21,7 +21,7 @@
   {% if aria_label %}aria-label="{{ aria_label }}"{% endif %}
   role="button"
   {{ attrs }}>
-  <span class="{{ icon_class }}" aria-hidden="true">{{ icon }}</span>
+  <span class="{{ icon_class }}" aria-hidden="true">{{ slot }}</span>
 </button>
 
 {% elif variant == "outlined" %}
@@ -31,7 +31,7 @@
   {% if aria_label %}aria-label="{{ aria_label }}"{% endif %}
   role="button"
   {{ attrs }}>
-  <span class="{{ icon_class }}" aria-hidden="true">{{ icon }}</span>
+  <span class="{{ icon_class }}" aria-hidden="true">{{ slot }}</span>
 </button>
 
 {% else %}
@@ -41,6 +41,6 @@
   {% if aria_label %}aria-label="{{ aria_label }}"{% endif %}
   role="button"
   {{ attrs }}>
-  <span class="{{ icon_class }}" aria-hidden="true">{{ icon }}</span>
+  <span class="{{ icon_class }}" aria-hidden="true">{{ slot }}</span>
 </button>
 {% endif %}
