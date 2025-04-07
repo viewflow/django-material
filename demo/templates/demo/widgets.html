@@ -1,0 +1,31 @@
+{% extends 'material/base_page.html' %}
+{% load i18n %}
+
+{% block nav_header %}
+  <div class="flex items-center mb-2 mt-2 pl-2 text-primary">
+    <span class="material-icons mr-2">widgets</span>
+    <span class="text-xl">Form Widgets</span>
+  </div>
+{% endblock nav_header %}
+
+{% block nav_items %}
+  <c-nav.item icon="arrow_back" href="{% url 'index' %}" up_target="main, nav">Home</c-nav.item>
+  <c-nav.item icon="check_box" href="/widgets/checkbox/">Checkbox</c-nav.item>
+{% endblock nav_items %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-12 flex justify-center">
+  <div class="w-full max-w-md bg-surface shadow-sm rounded-xl p-8">
+    <h1 class="text-2xl font-medium mb-6">{{ title }}</h1>
+    
+    <form method="post" class="space-y-6">
+      {% csrf_token %}
+      {{ form.as_p }}
+      
+      <div class="flex justify-end mt-8">
+        <c-button.filled type="submit">Submit</c-button.filled>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

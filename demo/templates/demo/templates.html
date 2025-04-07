@@ -106,6 +106,11 @@
   <!-- Navigation footer content -->
 &#123;% endblock %&#125;
 
+&#123;% block nav %&#125;
+  <!-- Override entire navigation -->
+  <!-- This would replace the default c-nav.container -->
+&#123;% endblock %&#125;
+
 &#123;% block content %&#125;
   <!-- Main page content -->
 &#123;% endblock %&#125;
@@ -126,7 +131,7 @@
           </c-table.header_row>
         </c-slot>
         <c-table.row>
-          <c-table.cell><code>navigation</code></c-table.cell>
+          <c-table.cell><code>nav</code></c-table.cell>
           <c-table.cell>Navigation container with slots</c-table.cell>
           <c-table.cell>Override the entire navigation component</c-table.cell>
         </c-table.row>

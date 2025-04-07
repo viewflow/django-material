@@ -1,7 +1,7 @@
 {% extends 'material/base.html' %}
 
 {% block body %}
-  {% block navigation %}
+  {% block nav %}
     <c-nav.container>
       <c-slot name="header">
         {% block nav_header %}{% endblock nav_header %}
@@ -13,7 +13,7 @@
         {% block nav_footer %}{% endblock nav_footer %}
       </c-slot>
     </c-nav.container>
-  {% endblock navigation %}
+  {% endblock nav %}
   <main>{% block content %}{% endblock %}</main>
   <footer role="contentinfo">{% block footer %}{% endblock footer %}</footer>
   {% block extrabody %}{% endblock extrabody %}
