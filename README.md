@@ -15,7 +15,7 @@
     <a href="https://material.viewflow.io"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://demo.viewflow.io/material/">View Demo</a>
+    <a href="https://demo.viewflow.io">View Demo</a>
     ·
     <a href="https://github.com/viewflow/django-material/issues">Report Bug</a>
     ·
