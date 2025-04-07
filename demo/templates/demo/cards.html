@@ -204,12 +204,6 @@
           <c-table.cell>Secondary text displayed below the title</c-table.cell>
         </c-table.row>
         <c-table.row>
-          <c-table.cell><code>menu</code></c-table.cell>
-          <c-table.cell>HTML</c-table.cell>
-          <c-table.cell>none</c-table.cell>
-          <c-table.cell>Content to display in the top-right corner of the card, typically an icon button</c-table.cell>
-        </c-table.row>
-        <c-table.row>
           <c-table.cell><code>slot_class</code></c-table.cell>
           <c-table.cell>string</c-table.cell>
           <c-table.cell>"p-4 flex-grow"</c-table.cell>
@@ -244,6 +238,10 @@
           <c-table.cell>The main content of the card</c-table.cell>
         </c-table.row>
         <c-table.row>
+          <c-table.cell><code>menu</code></c-table.cell>
+          <c-table.cell>Content to display in the top-right corner of the card, typically an icon button</c-table.cell>
+        </c-table.row>
+        <c-table.row>
           <c-table.cell><code>footer</code></c-table.cell>
           <c-table.cell>Content to display in the card's footer area, typically action buttons</c-table.cell>
         </c-table.row>
@@ -256,10 +254,13 @@
         <pre class="text-on-surface-variant" style="white-space: pre; overflow-x: auto;"><code>&lt;c-card.elevated 
   title="Card Title" 
   subtitle="Optional subtitle" 
-  menu='&lt;c-button.icon aria-label="Menu"&gt;more_vert&lt;/c-button.icon&gt;'
   slot_class="p-4 flex-grow"
   footer_class="flex justify-end"
   class="w-full max-w-md"&gt;
+
+  &lt;c-slot name="menu"&gt;
+    &lt;c-button.icon aria-label="Menu"&gt;more_vert&lt;/c-button.icon&gt;
+  &lt;/c-slot&gt;
   
   &lt;p&gt;This is the main content of the card.&lt;/p&gt;
   
