@@ -1,0 +1,161 @@
+{% extends 'material/base_page.html' %}
+{% load i18n static %}
+
+{% block content %}
+<div class="container mx-auto px-10 pt-4 pb-8">
+  <c-breadcrumbs.container class="mb-2">
+    <c-breadcrumbs.home href="{% url 'index' %}"></c-breadcrumbs.home>
+    <c-breadcrumbs.item current="true">Cards</c-breadcrumbs.item>
+  </c-breadcrumbs.container>
+  
+  <h1 class="text-3xl font-medium mb-8">Cards</h1>
+
+  <section id="elevated-cards" class="mb-12">
+    <h2 class="text-2xl mb-4">Elevated Cards</h2>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <c-card.elevated title="Basic Card">
+        <p>This is a basic elevated card with just a title and content.</p>
+      </c-card.elevated>
+      
+      <c-card.elevated title="With Subtitle" subtitle="Secondary information">
+        <p>This card includes a subtitle to provide additional context.</p>
+      </c-card.elevated>
+      
+      <c-card.elevated title="With Menu" menu='<c-button.icon aria-label="Menu">more_vert</c-button.icon>'>
+        <p>This card has a menu button in the top-right corner.</p>
+      </c-card.elevated>
+      
+      <c-card.elevated title="With Footer" footer_class="flex justify-end">
+        <p>This card includes a footer section for actions or additional information.</p>
+        <c-slot name="footer">
+          <c-button.text>Cancel</c-button.text>
+          <c-button.filled class="ml-2">Save</c-button.filled>
+        </c-slot>
+      </c-card.elevated>
+      
+      <c-card.elevated>
+        <p>This card has no title or header, just content.</p>
+      </c-card.elevated>
+      
+      <c-card.elevated title="Complete Example" subtitle="With all features" menu='<c-button.icon aria-label="Menu">more_vert</c-button.icon>' footer_class="flex justify-end">
+        <p>This is a comprehensive example with title, subtitle, menu, and footer.</p>
+        <p class="mt-4">Multiple paragraphs can be included in the content area.</p>
+        <c-slot name="footer">
+          <c-button.text>Cancel</c-button.text>
+          <c-button.filled class="ml-2">Save</c-button.filled>
+        </c-slot>
+      </c-card.elevated>
+    </div>
+  </section>
+
+  <section id="filled-cards" class="mb-12">
+    <h2 class="text-2xl mb-4">Filled Cards</h2>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <c-card.filled title="Primary Card">
+        <p>This is a filled card using the primary color theme.</p>
+      </c-card.filled>
+      
+      <c-card.filled title="Secondary Card" color="secondary">
+        <p>This is a filled card using the secondary color theme.</p>
+      </c-card.filled>
+      
+      <c-card.filled title="Tertiary Card" color="tertiary">
+        <p>This is a filled card using the tertiary color theme.</p>
+      </c-card.filled>
+      
+      <c-card.filled title="With Subtitle" subtitle="Secondary information" color="secondary">
+        <p>This card includes a subtitle to provide additional context.</p>
+      </c-card.filled>
+      
+      <c-card.filled title="With Menu" menu='<c-button.icon aria-label="Menu">more_vert</c-button.icon>' color="tertiary">
+        <p>This card has a menu button in the top-right corner.</p>
+      </c-card.filled>
+      
+      <c-card.filled title="With Footer" color="primary" footer_class="flex justify-end">
+        <p>This card includes a footer section for actions or additional information.</p>
+        <c-slot name="footer">
+          <c-button.text>Cancel</c-button.text>
+          <c-button.filled class="ml-2">Save</c-button.filled>
+        </c-slot>
+      </c-card.filled>
+    </div>
+  </section>
+
+  <section id="outlined-cards" class="mb-12">
+    <h2 class="text-2xl mb-4">Outlined Cards</h2>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <c-card.outlined title="Outlined Card">
+        <p>This is a basic outlined card with a light border.</p>
+      </c-card.outlined>
+      
+      <c-card.outlined title="With Subtitle" subtitle="Secondary information">
+        <p>This card includes a subtitle to provide additional context.</p>
+      </c-card.outlined>
+      
+      <c-card.outlined title="With Menu" menu='<c-button.icon aria-label="Menu">more_vert</c-button.icon>'>
+        <p>This card has a menu button in the top-right corner.</p>
+      </c-card.outlined>
+      
+      <c-card.outlined title="With Footer" footer_class="flex justify-end">
+        <p>This card includes a footer section for actions or additional information.</p>
+        <c-slot name="footer">
+          <c-button.text>Cancel</c-button.text>
+          <c-button.filled class="ml-2">Save</c-button.filled>
+        </c-slot>
+      </c-card.outlined>
+      
+      <c-card.outlined>
+        <p>This card has no title or header, just content.</p>
+      </c-card.outlined>
+      
+      <c-card.outlined title="Complete Example" subtitle="With all features" menu='<c-button.icon aria-label="Menu">more_vert</c-button.icon>' footer_class="flex justify-end">
+        <p>This is a comprehensive example with title, subtitle, menu, and footer.</p>
+        <p class="mt-4">Multiple paragraphs can be included in the content area.</p>
+        <c-slot name="footer">
+          <c-button.text>Cancel</c-button.text>
+          <c-button.filled class="ml-2">Save</c-button.filled>
+        </c-slot>
+      </c-card.outlined>
+    </div>
+  </section>
+
+  <section id="custom-cards" class="mb-12">
+    <h2 class="text-2xl mb-4">Custom Usage</h2>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <c-card.elevated class="h-full">
+        <div class="flex flex-col h-full">
+          <img src="https://via.placeholder.com/800x400" alt="Placeholder Image" class="w-full h-48 object-cover rounded-t-lg">
+          <div class="p-4 flex-grow">
+            <h3 class="text-xl font-medium mb-2">Media Card</h3>
+            <p>This card demonstrates how to include an image in a card layout.</p>
+          </div>
+          <div class="p-4 flex justify-end border-t border-outline-variant">
+            <c-button.text>View Details</c-button.text>
+          </div>
+        </div>
+      </c-card.elevated>
+      
+      <c-card.outlined class="h-full flex">
+        <div class="flex flex-col h-full flex-grow">
+          <div class="p-4">
+            <h3 class="text-xl font-medium mb-2">Interactive Card</h3>
+            <p class="mb-4">Cards can contain interactive elements like forms:</p>
+            <div class="space-y-4">
+              <input type="text" placeholder="Name" class="w-full p-2 border border-outline-variant rounded-md">
+              <textarea placeholder="Message" class="w-full p-2 border border-outline-variant rounded-md"></textarea>
+            </div>
+          </div>
+          <div class="p-4 mt-auto flex justify-end border-t border-outline-variant">
+            <c-button.text>Cancel</c-button.text>
+            <c-button.filled class="ml-2">Submit</c-button.filled>
+          </div>
+        </div>
+      </c-card.outlined>
+    </div>
+  </section>
+</div>
+{% endblock %}
