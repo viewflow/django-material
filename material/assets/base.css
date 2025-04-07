@@ -18,6 +18,11 @@ body:not([class]) {
   @apply flex rtl:flex-row-reverse;
 }
 
+/* Main content area */
+main:not([class]) {
+  @apply w-full flex-grow;
+}
+
 /* Navigation - Unpoly Current Item Styling */
 .up-current {
   @apply bg-primary-container text-on-primary-container;
