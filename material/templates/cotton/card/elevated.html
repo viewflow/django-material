@@ -1,10 +1,10 @@
 <c-vars
   color="primary"
-  class="relative flex flex-col overflow-hidden rounded-lg shadow hover:shadow-lg transition-all duration-300 ease-in-out"
+  base_class="relative flex flex-col overflow-hidden rounded-lg shadow hover:shadow-lg transition-all duration-300 ease-in-out"
   footer_class="flex justify-end"
   slot_class="p-4 flex-grow" />
 
-<div class="{{ class }} bg-surface">
+<div class="{{ base_class }} bg-surface {{ class }}">
   {% if title or menu %}
   <div class="flex items-center justify-between p-4 pb-2">
     <div class="flex-grow">

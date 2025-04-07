@@ -22,7 +22,10 @@
         <p>This card includes a subtitle to provide additional context.</p>
       </c-card.elevated>
       
-      <c-card.elevated title="With Menu" menu='<c-button.icon aria-label="Menu">more_vert</c-button.icon>'>
+      <c-card.elevated title="With Menu">
+        <c-slot name="menu">
+          <c-button.icon aria-label="Menu">more_vert</c-button.icon>
+        </c-slot>
         <p>This card has a menu button in the top-right corner.</p>
       </c-card.elevated>
       
@@ -38,7 +41,10 @@
         <p>This card has no title or header, just content.</p>
       </c-card.elevated>
       
-      <c-card.elevated title="Complete Example" subtitle="With all features" menu='<c-button.icon aria-label="Menu">more_vert</c-button.icon>' footer_class="flex justify-end">
+      <c-card.elevated title="Complete Example" subtitle="With all features" footer_class="flex justify-end">
+        <c-slot name="menu">
+          <c-button.icon aria-label="Menu">more_vert</c-button.icon>
+        </c-slot>
         <p>This is a comprehensive example with title, subtitle, menu, and footer.</p>
         <p class="mt-4">Multiple paragraphs can be included in the content area.</p>
         <c-slot name="footer">
@@ -69,7 +75,10 @@
         <p>This card includes a subtitle to provide additional context.</p>
       </c-card.filled>
       
-      <c-card.filled title="With Menu" menu='<c-button.icon aria-label="Menu">more_vert</c-button.icon>' color="tertiary">
+      <c-card.filled title="With Menu" color="tertiary">
+        <c-slot name="menu">
+          <c-button.icon aria-label="Menu">more_vert</c-button.icon>
+        </c-slot>
         <p>This card has a menu button in the top-right corner.</p>
       </c-card.filled>
       
@@ -95,7 +104,10 @@
         <p>This card includes a subtitle to provide additional context.</p>
       </c-card.outlined>
       
-      <c-card.outlined title="With Menu" menu='<c-button.icon aria-label="Menu">more_vert</c-button.icon>'>
+      <c-card.outlined title="With Menu">
+        <c-slot name="menu">
+          <c-button.icon aria-label="Menu">more_vert</c-button.icon>
+        </c-slot>
         <p>This card has a menu button in the top-right corner.</p>
       </c-card.outlined>
       
@@ -111,7 +123,10 @@
         <p>This card has no title or header, just content.</p>
       </c-card.outlined>
       
-      <c-card.outlined title="Complete Example" subtitle="With all features" menu='<c-button.icon aria-label="Menu">more_vert</c-button.icon>' footer_class="flex justify-end">
+      <c-card.outlined title="Complete Example" subtitle="With all features" footer_class="flex justify-end">
+        <c-slot name="menu">
+          <c-button.icon aria-label="Menu">more_vert</c-button.icon>
+        </c-slot>
         <p>This is a comprehensive example with title, subtitle, menu, and footer.</p>
         <p class="mt-4">Multiple paragraphs can be included in the content area.</p>
         <c-slot name="footer">
