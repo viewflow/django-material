@@ -13,6 +13,6 @@ up.compiler('[up-auto-grow]', function(element) {
     el.style.height = 'auto';
     
     // Set the height to scrollHeight to fit all content
-    el.style.height = (el.scrollHeight) + 'px';
+    el.style.height = (el.scrollHeight+2) + 'px';
   }
 });

@@ -19,7 +19,7 @@
     });
     function adjustHeight(el) {
       el.style.height = "auto";
-      el.style.height = el.scrollHeight + "px";
+      el.style.height = el.scrollHeight + 2 + "px";
     }
   });
 })();

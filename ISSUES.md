@@ -31,6 +31,10 @@
 - [ ] Outlined button
 - [ ] Remove ripple form disabled button
 - [ ] Add end_icon attribute
+
+### Checkboxes
+
+- [ ] Size should be bigger (22px?)
   
 ### Expandable
 - [ ] Accordeon mode
