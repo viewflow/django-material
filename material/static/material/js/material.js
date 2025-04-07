@@ -13,7 +13,9 @@
 
   // material/templates/cotton/forms/textarea/script.js
   up.compiler("[up-auto-grow]", function(element) {
-    adjustHeight(element);
+    requestAnimationFrame(function() {
+      adjustHeight(element);
+    });
     element.addEventListener("input", function() {
       adjustHeight(element);
     });

@@ -1,6 +1,8 @@
 up.compiler('[up-auto-grow]', function(element) {
-  // Initial adjustment on load
-  adjustHeight(element);
+  // Initial adjustment on load with requestAnimationFrame to ensure DOM is ready
+  requestAnimationFrame(function() {
+    adjustHeight(element);
+  });
 
   // Listen for input events to adjust height as content changes
   element.addEventListener('input', function() {
