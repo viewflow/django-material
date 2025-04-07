@@ -41,8 +41,14 @@
         {{ slot }}
       </label>
       <fieldset class="absolute inset-x-0 -top-3 bottom-0 m-0 p-2 overflow-hidden 
-        pointer-events-none border rounded-xl border-[rgba(0,0,0,0.38)] 
+        pointer-events-none border rounded border-outline
         transition duration-300 ease-in-out
+        hover:border-[rgba(0,0,0,0.87)]
+        peer-focus:border-{{ color }}
+        peer-not-placeholder-shown:border-{{ color }}
+        peer-aria-invalid:border-error peer-aria-invalid:[&>legend>span]:text-error
+        peer-focus:peer-aria-invalid:border-error peer-focus:peer-aria-invalid:[&>legend>span]:text-error
+        peer-disabled:border-outline/50
         peer-focus:[&>legend>span]:visible peer-focus:[&>legend>span]:max-w-full peer-focus:[&>legend>span]:px-1 
         peer-not-placeholder-shown:[&>legend>span]:visible peer-not-placeholder-shown:[&>legend>span]:max-w-full peer-not-placeholder-shown:[&>legend>span]:px-1">
         <legend><span class="invisible block max-w-0 whitespace-nowrap text-xs text-{{ color }} transition duration-300 ease-in-out">{{ slot }}</span></legend>
