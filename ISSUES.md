@@ -35,14 +35,22 @@
 ### Checkboxes
 
 - [ ] Size should be bigger (22px?)
-  
+- [ ] Required add * to label 
+
 ### Expandable
 - [ ] Accordeon mode
 - [ ] Add ability to expand nav items
 
+### Card compoment
+- [ ] fix menu location margin minus 8
+- [ ] rename menu slot to action and use X in a demo to close a card
+
+## Text Field
+ - [ ] Add required * to label
+ 
+
 ## Missing functionality
 
-- [ ] Card compoment (header, footer)
 - [ ] Menu component
 - [ ] Filters panel
 - [ ] Search (expand button)
@@ -52,8 +60,6 @@
 - [ ] Class-based URLs
 - [ ] CRUD demo
 - [ ] Forms
-  * [ ] Checkbox
-  * [ ] Text Field
   * [ ] Select (native like in angular material)
   * [ ] Formsets
 
