@@ -9,6 +9,7 @@
 - Implement proper hover and focus states for interactive elements
 - Components with text content should use slot content directly instead of label attributes
 - Required attributes should have sensible defaults whenever possible
+- Use uv to run python
 
 ## Django-Cotton Component System
 

@@ -1,0 +1,11 @@
+<c-forms.checkbox
+  id="id_{{ widget.name }}"
+  name="{{ widget.name }}"
+  {% if bound_field.help_text %}{{ bound_field.help_text }}{% endif %}
+  {% if widget.value != None %}checked{% endif %}
+  {% for name, value in widget.attrs.items %}
+    {% if value is not False %}
+      {{ name }}{% if value is not True %}="{{ value|stringformat:'s' }}"{% endif %}
+    {% endif %}
+  {% endfor %}
+>{{ bound_field.label }}</c-forms.checkbox>

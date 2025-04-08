@@ -40,28 +40,28 @@ wheels = [
 
 [[package]]
 name = "django"
-version = "5.1.7"
+version = "5.2"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "asgiref" },
     { name = "sqlparse" },
     { name = "tzdata", marker = "sys_platform == 'win32'" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/5f/57/11186e493ddc5a5e92cc7924a6363f7d4c2b645f7d7cb04a26a63f9bfb8b/Django-5.1.7.tar.gz", hash = "sha256:30de4ee43a98e5d3da36a9002f287ff400b43ca51791920bfb35f6917bfe041c", size = 10716510 }
+sdist = { url = "https://files.pythonhosted.org/packages/4c/1b/c6da718c65228eb3a7ff7ba6a32d8e80fa840ca9057490504e099e4dd1ef/Django-5.2.tar.gz", hash = "sha256:1a47f7a7a3d43ce64570d350e008d2949abe8c7e21737b351b6a1611277c6d89", size = 10824891 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/ba/0f/7e042df3d462d39ae01b27a09ee76653692442bc3701fbfa6cb38e12889d/Django-5.1.7-py3-none-any.whl", hash = "sha256:1323617cb624add820cb9611cdcc788312d250824f92ca6048fda8625514af2b", size = 8276912 },
+    { url = "https://files.pythonhosted.org/packages/63/e0/6a5b5ea350c5bd63fe94b05e4c146c18facb51229d9dee42aa39f9fc2214/Django-5.2-py3-none-any.whl", hash = "sha256:91ceed4e3a6db5aedced65e3c8f963118ea9ba753fc620831c77074e620e7d83", size = 8301361 },
 ]
 
 [[package]]
 name = "django-cotton"
-version = "2.0.1"
+version = "2.0.3"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "django" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/73/e2/080a68f48734c6772b903ebae5a0d53b43b83d13f66e3089c04a0da60d7b/django_cotton-2.0.1.tar.gz", hash = "sha256:aac88b5158d192b65b2d687154ea8ad19589460ef925f581ad9bb8061e977c2c", size = 21557 }
+sdist = { url = "https://files.pythonhosted.org/packages/5b/43/49c48d880ac1461356ddd1a70c74be211db1cf499219ed4cfe54d0e02719/django_cotton-2.0.3.tar.gz", hash = "sha256:ffce33d8e680718928e67fe7e9c6bc64c9d03fea0098b313863728fc38c049bf", size = 21555 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/e7/be/470ecb257c7e7c3056bce93cdefc0547a4723b868d3ee5eabedd6eaaaf2e/django_cotton-2.0.1-py3-none-any.whl", hash = "sha256:ad121bd5d567935140f0eca467563f107f5640097d34a1792990af9505936536", size = 21206 },
+    { url = "https://files.pythonhosted.org/packages/9f/1f/c4277217d24279451901252da6b2d3e7709efe7f1be9aa1d668c99f36d80/django_cotton-2.0.3-py3-none-any.whl", hash = "sha256:53fc1d7756c3728ca9c76c1402758c6778147e0653b12cb3890a5f5e679125e4", size = 21206 },
 ]
 
 [[package]]
@@ -147,7 +147,7 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "django", specifier = ">=5.1.7" },
+    { name = "django", specifier = ">=5.2" },
     { name = "django-cotton", specifier = ">=2.0.0" },
 ]
 

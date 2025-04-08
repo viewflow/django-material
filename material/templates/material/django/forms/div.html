@@ -1,0 +1,14 @@
+{% if errors %}
+<div class="mb-4 p-4 rounded-lg bg-error-50 border border-error-200" role="alert">
+  {{ errors }}
+</div>
+{% endif %}
+
+{% for field, errors in fields %}
+<div class="mb-4 {{ field.css_classes }}" {% if field.id_for_label %}id="{{ field.id_for_label }}_container"{% endif %}>
+  {{ field.as_field_group }}
+  {% if forloop.last %}
+    {% for field in hidden_fields %}{{ field }}{% endfor %}
+  {% endif %}
+</div>
+{% endfor %}

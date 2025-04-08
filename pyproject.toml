@@ -5,7 +5,7 @@ description = "Modern Material Design framework for Django"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
-    "django>=5.1.7",
+    "django>=5.2",
     "django-cotton>=2.0.0",
 ]
 

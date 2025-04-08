@@ -1,0 +1,7 @@
+{% if errors %}
+<ul class="mt-1 text-sm text-error-900 flex flex-col gap-1 {{ error_class }}"{% if errors.field_id %} id="{{ errors.field_id }}_error"{% endif %} role="alert" aria-live="polite">
+    {% for error in errors %}
+    <li class="font-medium">{{ error }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
