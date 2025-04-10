@@ -10,6 +10,7 @@
   {% if disabled %}disabled{% endif %}
   {% if aria_label %}aria-label="{{ aria_label }}"{% endif %}
   role="button"
+  up-ripple
   {{ attrs }}>
   {% if icon %}
     <span class="{{ icon_class }}" aria-hidden="true">{{ icon }}</span>
