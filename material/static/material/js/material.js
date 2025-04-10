@@ -24,4 +24,12 @@
       el.style.height = el.scrollHeight + 2 + "px";
     }
   });
+
+  // material/templates/cotton/button/script.js
+  up.compiler("[up-ripple]", function(elementWithRipple) {
+    elementWithRipple.addEventListener("pointerdown", (mouseEvent) => {
+      elementWithRipple.style.setProperty("--ripple-x", `${mouseEvent.offsetX}px`);
+      elementWithRipple.style.setProperty("--ripple-y", `${mouseEvent.offsetY}px`);
+    });
+  });
 })();

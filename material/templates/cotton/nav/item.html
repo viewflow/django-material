@@ -4,7 +4,7 @@
   up_transition="cross-fade" />
 
 <li role="listitem" class="list-none">
-  <a href="{{ href }}" up-nav-toggle-off {% if up_target %}up-target="{{ up_target }}"{% endif %} {% if up_transition %}up-transition="{{ up_transition }}"{% endif %} aria-current="page" class="relative overflow-hidden flex items-center px-2 py-3 rounded-full transition-all duration-300 ease-in-out2 hover:bg-primary hover:text-on-primary focus:outline-none focus-visible:ring focus-visible:ring-primary active:ripple" {{ attrs }}>
+  <a href="{{ href }}" up-nav-toggle-off {% if up_target %}up-target="{{ up_target }}"{% endif %} {% if up_transition %}up-transition="{{ up_transition }}"{% endif %} aria-current="page" class="relative overflow-hidden flex items-center px-2 py-3 rounded-full transition-all duration-300 ease-in-out hover:bg-primary hover:text-on-primary focus:outline-none focus-visible:ring focus-visible:ring-primary active:ripple" up-ripple {{ attrs }}>
     {% if icon %}
       <span class="material-icons pl-2 mr-1 leading-[1px]">{{ icon }}</span>
     {% endif %}
