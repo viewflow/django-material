@@ -1,5 +1,5 @@
 {% extends 'material/base_page.html' %}
-{% load i18n %}
+{% load i18n material %}
 
 {% block nav_header %}
   <div class="flex items-center mb-2 mt-2 pl-2 text-primary">
@@ -21,7 +21,7 @@
     <c-card.elevated title="{{ title }}">
       <c-slot name="subtitle">Widget options demo</c-slot>
       <div class="space-y-6">
-        {{ form }}
+        {% render form form.layout %}
       </div>
       
       <c-slot name="footer">

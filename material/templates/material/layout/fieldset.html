@@ -1,0 +1,13 @@
+{% comment %}Fieldset layout - groups fields with an optional title{% endcomment %}
+<fieldset class="border border-outline rounded-md p-4 w-full {% if attrs.class %}{{ attrs.class }}{% endif %}">
+  {% if title %}
+    <legend class="text-on-surface-variant px-2 font-medium">{{ title }}</legend>
+  {% endif %}
+  <div class="flex flex-col gap-4">
+    {% for field in fields %}
+      <div class="{% if attrs.class_item %}{{ attrs.class_item }}{% endif %}">
+        {{ field }}
+      </div>
+    {% endfor %}
+  </div>
+</fieldset>

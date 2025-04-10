@@ -1,6 +1,7 @@
 from django import forms
 from material.forms.renderers import MaterialFormRenderer
 
+
 class TextInputForm(forms.Form):
     title = "TextInput"
     subtitle = "Widget options demo"
@@ -11,11 +12,11 @@ class TextInputForm(forms.Form):
         help_text="length between 5-10", min_length=5, max_length=10
     )
     field4 = forms.CharField(
-        help_text="prefix icon", widget=forms.TextInput(attrs={"leading-icon": "edit"})
+        help_text="prefix icon", widget=forms.TextInput(attrs={"leading_icon": "edit"})
     )
     field5 = forms.CharField(
         help_text="suffix icon",
-        widget=forms.TextInput(attrs={"trailing-icon": "perm_contact_calendar"}),
+        widget=forms.TextInput(attrs={"trailing_icon": "perm_contact_calendar"}),
     )
     field6 = forms.CharField(initial="No help text")
     field7 = forms.CharField(
@@ -29,4 +30,3 @@ class TextInputForm(forms.Form):
         if data != "1":
             raise forms.ValidationError("Please, input 1!")
         return data
-

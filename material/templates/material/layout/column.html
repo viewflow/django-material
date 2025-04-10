@@ -1,0 +1,8 @@
+{% comment %}Column layout - arranges fields vertically{% endcomment %}
+<div class="flex flex-col gap-4 w-full {% if attrs.class %}{{ attrs.class }}{% endif %}">
+  {% for field in fields %}
+    <div class="{% if attrs.class_item %}{{ attrs.class_item }}{% endif %}">
+      {{ field }}
+    </div>
+  {% endfor %}
+</div>

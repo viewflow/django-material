@@ -1,4 +1,5 @@
 from django import forms
+from material.forms import Layout, Row, Span
 from material.forms.renderers import MaterialFormRenderer
 
 
@@ -10,5 +11,12 @@ class CheckboxInputForm(forms.Form):
         help_text="on a row with textfield",
         widget=forms.CheckboxInput(attrs={"color": "secondary"}),
     )
+    textfield = forms.CharField(
+        help_text="with boolean", widget=forms.TextInput(attrs={"leading-icon": "edit"})
+    )
 
     default_renderer = MaterialFormRenderer()
+
+    layout = Layout(
+        "field1", "field2", "field3", Row("textfield", Span("field4", desktop=3))
+    )
