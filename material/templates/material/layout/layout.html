@@ -1,5 +1,5 @@
 {% comment %}Main layout container template{% endcomment %}
-<div class="flex flex-col gap-2 w-full {% if attrs.class %}{{ attrs.class }}{% endif %}">
+<div class="flex flex-col gap-4 w-full {% if attrs.class %}{{ attrs.class }}{% endif %}">
   {% for field in fields %}
     {{ field }}
   {% endfor %}
