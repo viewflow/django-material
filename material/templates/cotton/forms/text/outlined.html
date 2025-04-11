@@ -40,7 +40,7 @@
         peer-aria-invalid:text-error peer-focus:peer-aria-invalid:text-error">
         {{ slot }}
       </label>
-      <fieldset class="absolute inset-x-0 -top-3 bottom-0 m-0 p-2 overflow-hidden 
+      <fieldset class="absolute inset-x-0 -top-1.5 bottom-0 m-0 p-2 overflow-hidden 
         pointer-events-none border rounded border-outline
         transition duration-300 ease-in-out
         hover:border-[rgba(0,0,0,0.87)]
@@ -52,7 +52,7 @@
         peer-focus:[&>legend>span]:visible peer-focus:[&>legend>span]:max-w-full peer-focus:[&>legend>span]:px-1 
         peer-not-placeholder-shown:[&>legend>span]:visible peer-not-placeholder-shown:[&>legend>span]:max-w-full peer-not-placeholder-shown:[&>legend>span]:px-1"
         aria-hidden="true">
-        <legend><span class="invisible block max-w-0 whitespace-nowrap text-xs text-{{ color }} transition duration-300 ease-in-out">{{ slot }}</span></legend>
+        <legend class="ml-1"><span class="invisible block max-w-0 whitespace-nowrap text-xs text-{{ color }} transition duration-300 ease-in-out">{{ slot }}</span></legend>
       </fieldset>
     </div>
   </div>

@@ -1,5 +1,5 @@
 {% comment %}Row layout - arranges fields horizontally using Tailwind's grid system{% endcomment %}
-<div class="grid grid-cols-12 w-full {% if attrs.class %}{{ attrs.class }}{% endif %}">
+<div class="grid grid-cols-12 gap-4 w-full {% if attrs.class %}{{ attrs.class }}{% endif %}">
   {% for field in fields %}
     <div class="col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-3 {% if attrs.class_item %}{{ attrs.class_item }}{% endif %}">
       {{ field }}

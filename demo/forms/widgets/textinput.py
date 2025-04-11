@@ -1,4 +1,5 @@
 from django import forms
+from material.forms import Layout, Row, Span
 from material.forms.renderers import MaterialFormRenderer
 
 
@@ -24,6 +25,15 @@ class TextInputForm(forms.Form):
     )
 
     default_renderer = MaterialFormRenderer()
+    
+    layout = Layout(
+        "field1",
+        "field2",
+        "field3",
+        "field4",
+        "field5",
+        Row("field6", "field7")
+    )
 
     def clean_field5(self):
         data = self.cleaned_data["field5"]
