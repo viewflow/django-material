@@ -1,9 +1,11 @@
 from django import forms
-from viewflow.forms import Layout, Row
+from material.forms import Layout, Row
+from material.forms.renderers import MaterialFormRenderer
 from . import Form
 
 
-class CommentForm(Form):
+class CommentForm(forms.Form):
+    default_renderer = MaterialFormRenderer()
     name = forms.CharField(
         widget=forms.TextInput(attrs={"leading-icon": "account_box"})
     )

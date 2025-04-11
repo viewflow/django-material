@@ -1,9 +1,11 @@
 from django import forms
-from viewflow.forms import Layout, Row
+from material.forms import Layout, Row
+from material.forms.renderers import MaterialFormRenderer
 from . import Form
 
 
-class OrderForm(Form):
+class OrderForm(forms.Form):
+    default_renderer = MaterialFormRenderer()
     name = forms.CharField(
         widget=forms.TextInput(attrs={"leading-icon": "account_box"})
     )
@@ -33,7 +35,8 @@ class OrderForm(Form):
     )
     start_date = forms.DateField(label="Expected start date")
     finish_date = forms.DateField(label="Expected finish date")
-    attachment = forms.FileField(label="Include some file...")
+    # attachment = forms.FileField(label="Include some file...")
+    # Commented out until file field widget is implemented
     message = forms.CharField(widget=forms.Textarea)
 
     layout = Layout(
@@ -43,6 +46,6 @@ class OrderForm(Form):
         "phone",
         Row("interest", "budget"),
         Row("start_date", "finish_date"),
-        "attachment",
+        # "attachment",  # Commented out until file field widget is implemented
         "message",
     )

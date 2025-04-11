@@ -1,11 +1,14 @@
 import datetime
 
 from django import forms
-from viewflow.forms import Layout, Row, Column, Span, FieldSet, FormSetField
+from material.forms import Layout, Row, Column, Span, FieldSet
+from material.forms.renderers import MaterialFormRenderer
+# FormSetField not yet implemented
 from . import QUESTION_CHOICES, CARDIOVASCULAR_RISK_CHOICES, APNIA_RISK_CHOICES, Form
 
 
-class HospitalRegistrationForm(Form):
+class HospitalRegistrationForm(forms.Form):
+    default_renderer = MaterialFormRenderer()
     class EmergencyContractForm(forms.Form):
         name = forms.CharField()
         relationship = forms.ChoiceField(
@@ -61,7 +64,8 @@ class HospitalRegistrationForm(Form):
         label=None,
     )
 
-    emergency_contacts = FormSetField(EmergencyContractFormSet, label=None)
+    # emergency_contacts = FormSetField(EmergencyContractFormSet, label=None)
+    # Commented out until FormSetField is implemented
 
     layout = Layout(
         Row(
@@ -73,5 +77,5 @@ class HospitalRegistrationForm(Form):
         FieldSet("Procedural Questions", "procedural_questions"),
         FieldSet("Clinical Predictores of Cardiovascular Risk", "cardiovascular_risks"),
         FieldSet("Clinical Predictors of sleep Apnia Risk", "apnia_risks"),
-        "emergency_contacts",
+        # "emergency_contacts",  # Commented out until FormSetField is implemented
     )

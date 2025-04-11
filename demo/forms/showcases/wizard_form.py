@@ -2,10 +2,11 @@ from django import forms
 from django.shortcuts import render
 from django.utils.translation import gettext_lazy as _
 from formtools.wizard.views import SessionWizardView
-from viewflow.forms import Layout, Row, Span
+from material.forms import Layout, Row, Span
 
 
 class WizardForm1(forms.Form):
+    # Default renderer will be added later when needed
     title = _("Contact Data")
 
     subject = forms.CharField(max_length=100)
@@ -13,6 +14,7 @@ class WizardForm1(forms.Form):
 
 
 class WizardForm2(forms.Form):
+    # Default renderer will be added later when needed
     title = _("Message")
 
     message = forms.CharField(widget=forms.Textarea)

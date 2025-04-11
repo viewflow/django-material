@@ -1,9 +1,11 @@
 from django import forms
-from viewflow.forms import Layout, FieldSet, Row, Column, Span
+from material.forms import Layout, FieldSet, Row, Column, Span
+from material.forms.renderers import MaterialFormRenderer
 from . import COUNTRY_CHOICES, Form
 
 
-class BankForm(Form):
+class BankForm(forms.Form):
+    default_renderer = MaterialFormRenderer()
     branch_name = forms.CharField()
 
     """ Personal Details """

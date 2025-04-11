@@ -1,10 +1,11 @@
 from django import forms
-from viewflow.forms import Layout, FieldSet, Row, Column, Span, DependentModelSelect
-from cookbook.crud101.atlas.models import Country
+from material.forms import Layout, FieldSet, Row, Column, Span
+from material.forms.renderers import MaterialFormRenderer
 from . import COUNTRY_CHOICES, Form
 
 
-class CheckoutForm(Form):
+class CheckoutForm(forms.Form):
+    default_renderer = MaterialFormRenderer()
     first_name = forms.CharField(
         widget=forms.TextInput(attrs={"leading-icon": "account_box"})
     )
@@ -15,20 +16,22 @@ class CheckoutForm(Form):
     phone = forms.CharField(widget=forms.TextInput(attrs={"leading-icon": "call"}))
     country = forms.ChoiceField(choices=COUNTRY_CHOICES)
     city = forms.CharField(
-        widget=forms.Select(
-            attrs={
-                "tag": "vf-field-select-dependent",
-                "parent": "country",
-            },
-        )
+        # Commented out temporarily until dependent selects are implemented
+        # widget=forms.Select(
+        #     attrs={
+        #         "tag": "vf-field-select-dependent",
+        #         "parent": "country",
+        #     },
+        # )
     )
     post_code = forms.CharField(
-        widget=forms.Select(
-            attrs={
-                "tag": "vf-field-select-dependent",
-                "parent": "city",
-            },
-        )
+        # Commented out temporarily until dependent selects are implemented
+        # widget=forms.Select(
+        #     attrs={
+        #         "tag": "vf-field-select-dependent",
+        #         "parent": "city",
+        #     },
+        # )
     )
     address = forms.CharField()
     additional_info = forms.CharField(widget=forms.Textarea)
