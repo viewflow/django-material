@@ -4,9 +4,9 @@ from material.forms.renderers import MaterialFormRenderer
 
 class LoginForm(forms.Form):
     default_renderer = MaterialFormRenderer()
-    email = forms.EmailField(widget=forms.EmailInput(attrs={"leading-icon": "email"}))
+    email = forms.EmailField(widget=forms.EmailInput(attrs={"leading_icon": "email"}))
     password = forms.CharField(
-        widget=forms.PasswordInput(attrs={"leading-icon": "lock"})
+        widget=forms.PasswordInput(attrs={"leading_icon": "lock"})
     )
     keep_logged = forms.BooleanField(required=False, label="Keep me logged in")
 

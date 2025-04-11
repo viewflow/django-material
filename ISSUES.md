@@ -34,8 +34,8 @@
 
 ### Checkboxes
 
-- [ ] Size should be bigger (22px?)
 - [ ] Required add * to label 
+- [ ] hover state
 
 ### Expandable
 - [ ] Accordeon mode
@@ -47,6 +47,7 @@
 
 ## Text Field
  - [ ] Add required * to label
+ - [ ] outliine hower state
  
 
 ## Missing functionality
