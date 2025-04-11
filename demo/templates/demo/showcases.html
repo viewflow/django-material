@@ -1,0 +1,36 @@
+{% extends 'material/base_page.html' %}
+{% load i18n material %}
+
+{% block nav_header %}
+  <div class="flex items-center mb-2 mt-2 pl-2 text-primary">
+    <span class="material-icons mr-2">view_module</span>
+    <span class="text-xl">Form Showcases</span>
+  </div>
+{% endblock nav_header %}
+
+{% block nav_items %}
+  <c-nav.item icon="arrow_back" href="{% url 'index' %}" up_target="main, nav">Home</c-nav.item>
+  <c-nav.item icon="contact_mail" href="/showcases/contact/">Contact</c-nav.item>
+  <c-nav.item icon="login" href="/showcases/login/">Login</c-nav.item>
+  <c-nav.item icon="person" href="/showcases/profile/">Profile</c-nav.item>
+  <c-nav.item icon="person_add" href="/showcases/signup/">Signup</c-nav.item>
+  <c-nav.item icon="app_registration" href="/showcases/registration/">Registration</c-nav.item>
+{% endblock nav_items %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-12 flex justify-center">
+  <form method="post" class="w-full max-w-2xl">
+    {% csrf_token %}
+    <c-card.elevated title="{{ title }}">
+      <c-slot name="subtitle">Form showcase demo</c-slot>
+      <div class="space-y-6">
+        {% render form form.layout %}
+      </div>
+      
+      <c-slot name="footer">
+        <c-button.filled type="submit">Submit</c-button.filled>
+      </c-slot>
+    </c-card.elevated>
+  </form>
+</div>
+{% endblock %}

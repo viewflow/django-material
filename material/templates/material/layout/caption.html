@@ -1,0 +1,7 @@
+{% comment %}Caption layout - renders a heading or label{% endcomment %}
+<div class="w-full my-4 {% if attrs.class %}{{ attrs.class }}{% endif %}">
+  <h6 class="text-md font-medium text-on-surface-variant mb-4 mt-2">{{ text }}</h6>
+  {% for field in fields %}
+    {{ field }}
+  {% endfor %}
+</div>

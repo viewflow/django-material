@@ -16,4 +16,5 @@ urlpatterns = [
     path('textareas/', TemplateView.as_view(template_name='demo/textareas.html'), name='textareas'),
     path('cards/', TemplateView.as_view(template_name='demo/cards.html'), name='cards'),
     path('widgets/', include('demo.forms.widgets.urls')),
+    path('showcases/', include('demo.forms.showcases.urls')),
 ]

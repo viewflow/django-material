@@ -1,0 +1,15 @@
+<c-forms.textarea.outlined
+  id="id_{{ widget.name }}"
+  name="{{ widget.name }}" 
+  help_text="{{ bound_field.help_text }}"
+  value="{{ widget.value|default:'' }}"
+  :disabled=widget.attrs.disabled
+  :required=widget.attrs.required
+  :readonly=widget.attrs.readonly
+  :color=widget.attrs.color
+  :leading_icon=widget.attrs.leading_icon
+  :trailing_icon=widget.attrs.trailing_icon
+  :error=bound_field.errors.0
+  rows="{{ widget.attrs.rows|default:3 }}"
+  up-auto-grow
+>{{ bound_field.label }}</c-forms.textarea.outlined>

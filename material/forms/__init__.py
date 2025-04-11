@@ -3,7 +3,7 @@ Django Material forms module.
 """
 
 from .renderers import MaterialFormRenderer, MaterialBoundField
-from .layout import Layout, Row, Column, FieldSet, Span
+from .layout import Layout, Row, Column, FieldSet, Span, Caption
 
 __all__ = [
     'MaterialFormRenderer',
@@ -13,4 +13,5 @@ __all__ = [
     'Column',
     'FieldSet',
     'Span',
+    'Caption',
 ]

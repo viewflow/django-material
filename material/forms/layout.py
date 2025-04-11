@@ -77,6 +77,23 @@ class FieldSet(LayoutElement):
         return super().render(form, context)
 
 
+class Caption(LayoutElement):
+    """A heading or label with optional styling."""
+    
+    template_name = "material/layout/caption.html"
+    
+    def __init__(self, text, **kwargs):
+        self.text = text
+        super().__init__(**kwargs)
+        
+    def render(self, form, context=None):
+        """Override to include caption text in context."""
+        if context is None:
+            context = {}
+        context["text"] = self.text
+        return super().render(form, context)
+
+
 class Span(LayoutElement):
     """A field that can specify different widths at different breakpoints."""
 
