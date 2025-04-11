@@ -14,7 +14,7 @@
       </c-slot>
     </c-nav.container>
   {% endblock nav %}
-  <main>{% block content %}{% endblock %}</main>
+  <main class="{% block main_class %}w-full flex-grow{% endblock %}">{% block content %}{% endblock %}</main>
   <footer role="contentinfo">{% block footer %}{% endblock footer %}</footer>
   {% block extrabody %}{% endblock extrabody %}
 {% endblock %}

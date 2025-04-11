@@ -4,25 +4,6 @@
   --font-sans: "Roboto", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
-/* Document Base */
-html:not([class]) {
-  @apply min-h-full w-full scroll-smooth;
-}
-
-body:not([class]) {
-  @apply h-full min-h-full w-full bg-background m-0 p-0 font-sans text-on-background max-md:nav-open:overflow-x-hidden;
-}
-
-/* layout */
-body:not([class]) {
-  @apply flex rtl:flex-row-reverse;
-}
-
-/* Main content area */
-main:not([class]) {
-  @apply w-full flex-grow;
-}
-
 /* Navigation - Unpoly Current Item Styling */
 .up-current {
   @apply bg-primary-container text-on-primary-container;
