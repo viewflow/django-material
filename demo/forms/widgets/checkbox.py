@@ -18,5 +18,8 @@ class CheckboxInputForm(forms.Form):
     default_renderer = MaterialFormRenderer()
 
     layout = Layout(
-        "field1", "field2", "field3", Row("textfield", Span("field4", desktop=3))
+        "field1",
+        "field2",
+        "field3",
+        Row(Span("textfield", desktop=9), Span("field4", desktop=3)),
     )
