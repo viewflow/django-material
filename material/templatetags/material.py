@@ -3,13 +3,13 @@ Template tags for rendering form layouts.
 """
 
 from django import template
-from django.template.base import Node, TemplateSyntaxError
+from django.template.base import Parser, Token
 
 register = template.Library()
 
 
 @register.tag
-def render(parser, token):
+def render(parser: Parser, token: Token) -> "RenderNode":
     """
     Render a form using a specified layout.
 
@@ -17,7 +17,7 @@ def render(parser, token):
     """
     bits = token.split_contents()
     if len(bits) != 3:
-        raise TemplateSyntaxError(f"'{bits[0]}' tag requires two arguments")
+        raise template.TemplateSyntaxError(f"'{bits[0]}' tag requires two arguments")
 
     form_var = bits[1]
     layout_var = bits[2]
@@ -25,14 +25,14 @@ def render(parser, token):
     return RenderNode(form_var, layout_var)
 
 
-class RenderNode(Node):
+class RenderNode(template.Node):
     """Node for rendering a form with a specific layout."""
 
-    def __init__(self, form_var, layout_var):
+    def __init__(self, form_var: str, layout_var: str) -> None:
         self.form_var = template.Variable(form_var)
         self.layout_var = template.Variable(layout_var)
 
-    def render(self, context):
+    def render(self, context: template.Context) -> str:
         form = self.form_var.resolve(context)
 
         try:

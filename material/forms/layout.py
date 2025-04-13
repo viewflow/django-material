@@ -5,38 +5,41 @@ Provides a set of layout elements that can be used to structure form fields
 in various layouts including rows, columns, fieldsets, and spans.
 """
 
+from typing import Any, Dict, List, Optional, Tuple, Union
+from django.forms import Form
 from django.template.loader import render_to_string
+from django.template import Context
 
 
 class LayoutElement:
     """Base class for all layout elements."""
 
-    template_name = None
+    template_name: Optional[str] = None
 
-    def __init__(self, *fields, **kwargs):
+    def __init__(self, *fields: Any, **kwargs: Any) -> None:
         self.fields = fields
         self.attrs = kwargs
 
-    def render(self, form, context=None):
+    def render(self, form: Form, context: Optional[Context] = None) -> str:
         """Render this layout element with the given form."""
         if context is None:
-            context = {}
+            context = Context({})
 
-        field_instances = []
+        field_instances: List[Any] = []
         for field_name in self.fields:
             if isinstance(field_name, LayoutElement):
                 field_instances.append(field_name.render(form, context))
             elif field_name in form.fields:
                 field_instances.append(form[field_name])
 
-        template_context = {
+        template_context: Dict[str, Any] = {
             "fields": field_instances,
             "attrs": self.attrs,
             "form": form,
         }
-        template_context.update(context.flatten())
+        template_context.update(context.flatten())  # type: ignore
 
-        return render_to_string(self.template_name, template_context)
+        return render_to_string(self.template_name, template_context)  # type: ignore
 
 
 class Layout(LayoutElement):
@@ -44,7 +47,7 @@ class Layout(LayoutElement):
 
     template_name = "material/layout/layout.html"
 
-    def __init__(self, *elements, **kwargs):
+    def __init__(self, *elements: Any, **kwargs: Any) -> None:
         super().__init__(*elements, **kwargs)
 
 
@@ -65,16 +68,16 @@ class FieldSet(LayoutElement):
 
     template_name = "material/layout/fieldset.html"
 
-    def __init__(self, title, *fields, **kwargs):
+    def __init__(self, title: str, *fields: Any, **kwargs: Any) -> None:
         self.title = title
         super().__init__(*fields, **kwargs)
 
-    def render(self, form, context=None):
+    def render(self, form: Form, context: Optional[Context] = None) -> str:
         """Override to include title in context."""
         if context is None:
-            context = {}
+            context = Context({})
         context["title"] = self.title
-        return super().render(form, context)
+        return super().render(form, context)  # type: ignore
 
 
 class Caption(LayoutElement):
@@ -82,16 +85,16 @@ class Caption(LayoutElement):
     
     template_name = "material/layout/caption.html"
     
-    def __init__(self, text, **kwargs):
+    def __init__(self, text: str, **kwargs: Any) -> None:
         self.text = text
         super().__init__(**kwargs)
         
-    def render(self, form, context=None):
+    def render(self, form: Form, context: Optional[Context] = None) -> str:
         """Override to include caption text in context."""
         if context is None:
-            context = {}
+            context = Context({})
         context["text"] = self.text
-        return super().render(form, context)
+        return super().render(form, context)  # type: ignore
 
 
 class Span(LayoutElement):
@@ -99,7 +102,7 @@ class Span(LayoutElement):
 
     template_name = "material/layout/span.html"
 
-    def __init__(self, field_name, **kwargs):
+    def __init__(self, field_name: str, **kwargs: Any) -> None:
         # Convert keyword arguments like desktop=3 to class attributes
         # that will be rendered as Tailwind responsive classes
         breakpoint_classes = {}
