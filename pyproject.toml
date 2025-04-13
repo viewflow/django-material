@@ -11,5 +11,16 @@ dependencies = [
 
 [dependency-groups]
 dev = [
+    "django-stubs>=5.1.3",
     "ipdb>=0.13.13",
 ]
+
+[tool.pyright]
+include = ["material", ]
+exclude = ["**/node_modules", "**/__pycache__"]
+typeCheckingMode = "basic"
+useLibraryCodeForTypes = true
+reportMissingImports = true
+reportMissingTypeStubs = false
+venvPath = "."
+venv = ".venv"

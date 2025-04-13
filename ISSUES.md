@@ -10,6 +10,9 @@
 - [X] Add esbild esbuild main.js --bundle --outfile=bundle.js --format=iife --global-name=MyLib --minify
 - [ ] use {{ debug }} to add min or not minified fiels
 
+### Icons
+- USe material-symbols icons instead
+
 ### Navigation
 
 - [ ] Mobile support
