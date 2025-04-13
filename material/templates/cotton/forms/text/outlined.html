@@ -36,6 +36,7 @@
         peer-placeholder-shown:{% if leading_icon %}left-10{% endif %} 
         peer-focus:left-4 peer-focus:top-0 peer-focus:scale-75 peer-focus:-translate-y-1/2 peer-focus:text-{{ color }}
         peer-focus:opacity-0 peer-not-placeholder-shown:opacity-0
+        peer-[:-webkit-autofill]:opacity-0
         peer-disabled:text-on-surface-variant/70
         peer-aria-invalid:text-error peer-focus:peer-aria-invalid:text-error">
         {{ slot }}
@@ -50,7 +51,8 @@
         peer-focus:peer-aria-invalid:border-error peer-focus:peer-aria-invalid:[&>legend>span]:text-error
         peer-disabled:border-outline/50
         peer-focus:[&>legend>span]:visible peer-focus:[&>legend>span]:max-w-full peer-focus:[&>legend>span]:px-1 
-        peer-not-placeholder-shown:[&>legend>span]:visible peer-not-placeholder-shown:[&>legend>span]:max-w-full peer-not-placeholder-shown:[&>legend>span]:px-1"
+        peer-not-placeholder-shown:[&>legend>span]:visible peer-not-placeholder-shown:[&>legend>span]:max-w-full peer-not-placeholder-shown:[&>legend>span]:px-1
+        peer-[:-webkit-autofill]:border-{{ color }} peer-[:-webkit-autofill]:[&>legend>span]:visible peer-[:-webkit-autofill]:[&>legend>span]:max-w-full peer-[:-webkit-autofill]:[&>legend>span]:px-1"
         aria-hidden="true">
         <legend class="ml-1"><span class="invisible block max-w-0 whitespace-nowrap text-xs text-{{ color }} transition duration-300 ease-in-out">{{ slot }}</span></legend>
       </fieldset>
