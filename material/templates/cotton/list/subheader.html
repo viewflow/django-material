@@ -1,0 +1,8 @@
+<c-vars
+  base_class="px-4 py-2 text-xs font-normal text-on-surface-variant" />
+
+<li 
+  class="{{ base_class }} {% if inset %}ml-0{% endif %} {{ class }}"
+  {{ attrs }}>
+  {{ slot }}
+</li>

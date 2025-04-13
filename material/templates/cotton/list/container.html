@@ -1,0 +1,22 @@
+<c-vars
+  role="list"
+  variant=""
+  base_class="list-none p-0 m-0" />
+
+<ul 
+  class="{{ base_class }}
+    {% if variant == 'inset' %}
+      rounded-xl
+      border border-outline
+    {% endif %}
+    {% if dividers %}
+      divide-y divide-outline
+    {% endif %}
+    {% if dense %}
+      text-sm [&>li]:py-2
+    {% endif %}
+    {{ class }}"
+  role="{{ role }}"
+  {{ attrs }}>
+  {{ slot }}
+</ul>

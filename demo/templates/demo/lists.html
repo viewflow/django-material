@@ -1,0 +1,376 @@
+{% extends 'material/base_page.html' %}
+{% load i18n %}
+
+{% block content %}
+<div class="container mx-auto px-4 md:px-10 pt-4 pb-8">
+  <c-breadcrumbs.container class="mb-2">
+    <c-breadcrumbs.home href="{% url 'index' %}"></c-breadcrumbs.home>
+    <c-breadcrumbs.item current="true">Lists</c-breadcrumbs.item>
+  </c-breadcrumbs.container>
+  
+  <h1 class="text-3xl font-medium mb-8">List Components</h1>
+  
+  <section id="standard-lists" class="mb-12">
+    <h2 class="text-2xl mb-4">Standard Lists</h2>
+    <p class="mb-6">
+      Lists present content in a way that makes it easy to identify a specific item in a collection.
+    </p>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div>
+        <h3 class="text-xl mb-4">Basic List</h3>
+        <div class="max-w-md mx-auto">
+          <c-list.container>
+            <c-list.item>Inbox</c-list.item>
+            <c-list.item>Starred</c-list.item>
+            <c-list.item>Sent</c-list.item>
+            <c-list.item>Drafts</c-list.item>
+          </c-list.container>
+        </div>
+      </div>
+      
+      <div>
+        <h3 class="text-xl mb-4">With Dividers</h3>
+        <div class="max-w-md mx-auto">
+          <c-list.container dividers="true">
+            <c-list.item>Inbox</c-list.item>
+            <c-list.item>Starred</c-list.item>
+            <c-list.item>Sent</c-list.item>
+            <c-list.item>Drafts</c-list.item>
+          </c-list.container>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section id="list-variants" class="mb-12">
+    <h2 class="text-2xl mb-4">List Variants</h2>
+    <p class="mb-6">
+      Lists can be styled in different ways to match different design contexts.
+    </p>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div>
+        <h3 class="text-xl mb-4">Inset List</h3>
+        <div class="max-w-md mx-auto">
+          <c-list.container variant="inset">
+            <c-list.item>Inbox</c-list.item>
+            <c-list.item>Starred</c-list.item>
+            <c-list.item>Sent</c-list.item>
+            <c-list.item>Drafts</c-list.item>
+          </c-list.container>
+        </div>
+      </div>
+      
+      <div>
+        <h3 class="text-xl mb-4">Dense List</h3>
+        <div class="max-w-md mx-auto">
+          <c-list.container dense="true">
+            <c-list.item>Inbox</c-list.item>
+            <c-list.item>Starred</c-list.item>
+            <c-list.item>Sent</c-list.item>
+            <c-list.item>Drafts</c-list.item>
+          </c-list.container>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section id="content-variations" class="mb-12">
+    <h2 class="text-2xl mb-4">Content Variations</h2>
+    <p class="mb-6">
+      List items can display different levels of detail through titles, subtitles, and supporting text.
+    </p>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div>
+        <h3 class="text-xl mb-4">With Titles</h3>
+        <div class="max-w-md mx-auto">
+          <c-list.container>
+            <c-list.item title="Inbox"></c-list.item>
+            <c-list.item title="Starred"></c-list.item>
+            <c-list.item title="Sent"></c-list.item>
+            <c-list.item title="Drafts"></c-list.item>
+          </c-list.container>
+        </div>
+      </div>
+      
+      <div>
+        <h3 class="text-xl mb-4">With Title and Subtitle</h3>
+        <div class="max-w-md mx-auto">
+          <c-list.container>
+            <c-list.item title="Inbox" subtitle="All incoming messages"></c-list.item>
+            <c-list.item title="Starred" subtitle="Important messages"></c-list.item>
+            <c-list.item title="Sent" subtitle="Outgoing messages"></c-list.item>
+            <c-list.item title="Drafts" subtitle="Unsent messages"></c-list.item>
+          </c-list.container>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section id="leading-trailing" class="mb-12">
+    <h2 class="text-2xl mb-4">With Leading and Trailing Elements</h2>
+    <p class="mb-6">
+      Lists can include icons, images, or other elements before or after the main content.
+    </p>
+    <div class="grid grid-cols-1 gap-8">
+      <div>
+        <h3 class="text-xl mb-4">Using Sub-components</h3>
+        <div class="max-w-md mx-auto">
+          <c-list.container>
+            <c-list.item title="Inbox">
+              <c-slot name="leading">
+                <c-list.leading.icon>inbox</c-list.leading.icon>
+              </c-slot>
+              <c-slot name="trailing">
+                <c-list.trailing.text>14</c-list.trailing.text>
+              </c-slot>
+            </c-list.item>
+            <c-list.item title="Starred">
+              <c-slot name="leading">
+                <c-list.leading.icon>star</c-list.leading.icon>
+              </c-slot>
+              <c-slot name="trailing">
+                <c-list.trailing.text>5</c-list.trailing.text>
+              </c-slot>
+            </c-list.item>
+            <c-list.item title="Sent">
+              <c-slot name="leading">
+                <c-list.leading.icon>send</c-list.leading.icon>
+              </c-slot>
+              <c-slot name="trailing">
+                <c-list.trailing.icon>chevron_right</c-list.trailing.icon>
+              </c-slot>
+            </c-list.item>
+          </c-list.container>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section id="interactive-lists" class="mb-12">
+    <h2 class="text-2xl mb-4">Interactive Lists</h2>
+    <p class="mb-6">
+      Lists can include interactive elements like clickable items or checkboxes.
+    </p>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div>
+        <h3 class="text-xl mb-4">Clickable Items</h3>
+        <div class="max-w-md mx-auto">
+          <c-list.container>
+            <c-list.item clickable="true" title="Settings">
+              <c-slot name="leading">
+                <c-list.leading.icon>settings</c-list.leading.icon>
+              </c-slot>
+            </c-list.item>
+            <c-list.item clickable="true" title="Profile">
+              <c-slot name="leading">
+                <c-list.leading.icon>person</c-list.leading.icon>
+              </c-slot>
+            </c-list.item>
+            <c-list.item clickable="true" title="Help">
+              <c-slot name="leading">
+                <c-list.leading.icon>help</c-list.leading.icon>
+              </c-slot>
+            </c-list.item>
+          </c-list.container>
+        </div>
+      </div>
+      
+      <div>
+        <h3 class="text-xl mb-4">With Checkboxes (Leading and Trailing)</h3>
+        <div class="max-w-md mx-auto">
+          <c-list.container>
+            <c-list.item title="Task 1">
+              <c-slot name="trailing">
+                <c-forms.checkbox id="task1" class="m-0"></c-forms.checkbox>
+              </c-slot>
+            </c-list.item>
+            <c-list.item title="Task 2">
+              <c-slot name="trailing">
+                <c-forms.checkbox id="task2" class="m-0"></c-forms.checkbox>
+              </c-slot>
+            </c-list.item>
+            <c-list.item title="Task 3">
+              <c-slot name="leading">
+                <c-forms.checkbox id="task3" class="m-0"></c-forms.checkbox>
+              </c-slot>
+            </c-list.item>
+          </c-list.container>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section id="lists-with-subheader" class="mb-12">
+    <h2 class="text-2xl mb-4">Lists with Subheader</h2>
+    <p class="mb-6">
+      Lists can be organized with subheaders and dividers to group related content.
+    </p>
+    <div class="grid grid-cols-1 gap-8">
+      <div class="max-w-lg mx-auto">
+        <c-list.container>
+          <c-list.subheader>Messages</c-list.subheader>
+          <c-list.item title="John Doe" subtitle="Meeting reminder" supporting="I wanted to remind you about our meeting tomorrow at 10:00 AM. Please bring your presentation slides."></c-list.item>
+          <c-list.item title="Jane Smith" subtitle="Project update" supporting="I've completed the first phase of the project. Please review it when you have time."></c-list.item>
+          <c-list.subheader>Notifications</c-list.subheader>
+          <c-list.item title="System" subtitle="Update available" supporting="A new system update is available. Please restart your device to install it."></c-list.item>
+          <c-list.item title="App Store" subtitle="Updates available" supporting="3 apps have updates available for download."></c-list.item>
+        </c-list.container>
+      </div>
+    </div>
+  </section>
+  
+  <section id="usage" class="mb-12">
+    <h2 class="text-2xl mb-4">Usage</h2>
+    
+    <div class="bg-surface-container-low p-6 rounded-lg shadow-sm mb-6">
+      <pre class="text-on-surface-variant"><code>&lt;!-- Basic List --&gt;
+&lt;c-list.container&gt;
+  &lt;c-list.item&gt;Inbox&lt;/c-list.item&gt;
+  &lt;c-list.item&gt;Starred&lt;/c-list.item&gt;
+  &lt;c-list.item&gt;Sent&lt;/c-list.item&gt;
+&lt;/c-list.container&gt;
+
+&lt;!-- With Dividers --&gt;
+&lt;c-list.container dividers="true"&gt;
+  &lt;c-list.item&gt;Inbox&lt;/c-list.item&gt;
+  &lt;c-list.item&gt;Starred&lt;/c-list.item&gt;
+&lt;/c-list.container&gt;
+
+&lt;!-- Inset List --&gt;
+&lt;c-list.container variant="inset"&gt;
+  &lt;c-list.item&gt;Inbox&lt;/c-list.item&gt;
+  &lt;c-list.item&gt;Starred&lt;/c-list.item&gt;
+&lt;/c-list.container&gt;
+
+&lt;!-- Dense List --&gt;
+&lt;c-list.container dense="true"&gt;
+  &lt;c-list.item&gt;Inbox&lt;/c-list.item&gt;
+  &lt;c-list.item&gt;Starred&lt;/c-list.item&gt;
+&lt;/c-list.container&gt;
+
+&lt;!-- With Title and Subtitle --&gt;
+&lt;c-list.container&gt;
+  &lt;c-list.item title="Inbox" subtitle="All incoming messages"&gt;&lt;/c-list.item&gt;
+  &lt;c-list.item title="Starred" subtitle="Important messages"&gt;&lt;/c-list.item&gt;
+&lt;/c-list.container&gt;
+
+&lt;!-- With Leading and Trailing Elements --&gt;
+&lt;c-list.container&gt;
+  &lt;c-list.item title="Inbox"&gt;
+    &lt;c-slot name="leading"&gt;
+      &lt;c-list.leading.icon&gt;inbox&lt;/c-list.leading.icon&gt;
+    &lt;/c-slot&gt;
+    &lt;c-slot name="trailing"&gt;
+      &lt;c-list.trailing.text&gt;14&lt;/c-list.trailing.text&gt;
+    &lt;/c-slot&gt;
+  &lt;/c-list.item&gt;
+&lt;/c-list.container&gt;
+
+&lt;!-- Clickable Items --&gt;
+&lt;c-list.container&gt;
+  &lt;c-list.item clickable="true" title="Settings"&gt;
+    &lt;c-slot name="leading"&gt;
+      &lt;c-list.leading.icon&gt;settings&lt;/c-list.leading.icon&gt;
+    &lt;/c-slot&gt;
+  &lt;/c-list.item&gt;
+&lt;/c-list.container&gt;
+
+&lt;!-- With Form Elements --&gt;
+&lt;c-list.container&gt;
+  &lt;c-list.item title="Task 1"&gt;
+    &lt;c-slot name="trailing"&gt;
+      &lt;c-forms.checkbox id="list-task1" class="m-0"&gt;&lt;/c-forms.checkbox&gt;
+    &lt;/c-slot&gt;
+  &lt;/c-list.item&gt;
+  &lt;c-list.item title="Task 2"&gt;
+    &lt;c-slot name="leading"&gt;
+      &lt;c-forms.checkbox id="list-task2" class="m-0"&gt;&lt;/c-forms.checkbox&gt;
+    &lt;/c-slot&gt;
+  &lt;/c-list.item&gt;
+&lt;/c-list.container&gt;
+
+&lt;!-- With Subheaders --&gt;
+&lt;c-list.container&gt;
+  &lt;c-list.subheader&gt;Messages&lt;/c-list.subheader&gt;
+  &lt;c-list.item title="John" subtitle="Project update"&gt;&lt;/c-list.item&gt;
+  &lt;c-list.subheader&gt;Notifications&lt;/c-list.subheader&gt;
+  &lt;c-list.item title="System" subtitle="Update available"&gt;&lt;/c-list.item&gt;
+&lt;/c-list.container&gt;</code></pre>
+    </div>
+  </section>
+  
+  <section id="attributes" class="mb-12">
+    <h2 class="text-2xl mb-4">Attributes</h2>
+    
+    <div class="overflow-x-auto mb-6">
+      <c-table.container>
+        <c-slot name="header">
+          <c-table.header_row>
+            <c-table.header>Component</c-table.header>
+            <c-table.header>Attribute</c-table.header>
+            <c-table.header>Type</c-table.header>
+            <c-table.header>Default</c-table.header>
+            <c-table.header>Description</c-table.header>
+          </c-table.header_row>
+        </c-slot>
+        <c-table.row>
+          <c-table.cell><code>c-list.container</code></c-table.cell>
+          <c-table.cell><code>variant</code></c-table.cell>
+          <c-table.cell>string</c-table.cell>
+          <c-table.cell>""</c-table.cell>
+          <c-table.cell>List variant. Options: "", "inset"</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>c-list.container</code></c-table.cell>
+          <c-table.cell><code>dividers</code></c-table.cell>
+          <c-table.cell>boolean</c-table.cell>
+          <c-table.cell>false</c-table.cell>
+          <c-table.cell>When true, adds dividers between list items</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>c-list.container</code></c-table.cell>
+          <c-table.cell><code>dense</code></c-table.cell>
+          <c-table.cell>boolean</c-table.cell>
+          <c-table.cell>false</c-table.cell>
+          <c-table.cell>When true, reduces the size of list items</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>c-list.item</code></c-table.cell>
+          <c-table.cell><code>title</code></c-table.cell>
+          <c-table.cell>string</c-table.cell>
+          <c-table.cell>none</c-table.cell>
+          <c-table.cell>Primary text for the list item</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>c-list.item</code></c-table.cell>
+          <c-table.cell><code>subtitle</code></c-table.cell>
+          <c-table.cell>string</c-table.cell>
+          <c-table.cell>none</c-table.cell>
+          <c-table.cell>Secondary text for the list item</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>c-list.item</code></c-table.cell>
+          <c-table.cell><code>supporting</code></c-table.cell>
+          <c-table.cell>string</c-table.cell>
+          <c-table.cell>none</c-table.cell>
+          <c-table.cell>Additional supporting text for the list item</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>c-list.item</code></c-table.cell>
+          <c-table.cell><code>clickable</code></c-table.cell>
+          <c-table.cell>boolean</c-table.cell>
+          <c-table.cell>false</c-table.cell>
+          <c-table.cell>When true, styles the item as clickable</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>c-list.item</code></c-table.cell>
+          <c-table.cell><code>line_clamp</code></c-table.cell>
+          <c-table.cell>boolean</c-table.cell>
+          <c-table.cell>false</c-table.cell>
+          <c-table.cell>When true, truncates text that overflows</c-table.cell>
+        </c-table.row>
+      </c-table.container>
+    </div>
+  </section>
+</div>
+{% endblock %}

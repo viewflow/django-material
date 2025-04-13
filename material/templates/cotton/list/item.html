@@ -1,0 +1,55 @@
+<c-vars
+  role="listitem"
+  base_class="flex items-center px-4 py-2" />
+
+<li 
+  class="{{ base_class }}
+    {% if clickable %}
+      hover:bg-on-surface/8 active:bg-on-surface/12 focus:bg-on-surface/12
+      transition-colors duration-200
+      cursor-pointer
+    {% endif %}
+    {% if supporting %}
+      items-start
+    {% endif %}
+    {{ class }}"
+  role="{{ role }}"
+  {{ attrs }}>
+  {% if leading %}
+    <div class="mr-4 flex-shrink-0">
+      {{ leading }}
+    </div>
+  {% endif %}
+  
+  <div class="flex-grow min-w-0">
+    <div class="text-base text-on-surface font-normal leading-normal
+      {% if line_clamp %}
+        truncate
+      {% endif %}
+    ">
+      {{ title|default:slot }}
+    </div>
+    
+    {% if subtitle %}
+      <div class="text-sm text-on-surface-variant mt-0.5 leading-normal
+        {% if line_clamp %}
+          truncate
+        {% endif %}
+      ">{{ subtitle }}</div>
+    {% endif %}
+    
+    {% if supporting %}
+      <div class="text-sm text-on-surface-variant mt-1 leading-normal
+        {% if line_clamp %}
+          line-clamp-1
+        {% endif %}
+      ">{{ supporting }}</div>
+    {% endif %}
+  </div>
+  
+  {% if trailing %}
+    <div class="ml-4 flex-shrink-0">
+      {{ trailing }}
+    </div>
+  {% endif %}
+</li>
