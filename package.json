@@ -12,7 +12,7 @@
     "lint": "pyright material",
     "update:venv": "uv sync --group dev",
     "update:js": "jq -c '.copyFiles[]' package.json | while read file; do src=$(echo $file | jq -r '.src'); dest=$(echo $file | jq -r '.dest'); echo \"Copying $src to $dest\"; cp \"$src\" \"$dest\"; done",
-    "update:fonts": "npx get-google-fonts --input=\"https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,600,700,900&display=swap\" --output=\"material/static/material/fonts/roboto/\" && npx get-google-fonts --input=\"https://fonts.googleapis.com/icon?family=Material+Icons\" --output=\"material/static/material/fonts/material-icons/\""
+    "update:fonts": "npx get-google-fonts --input=\"https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,600,700,900&display=swap\" --output=\"material/static/material/fonts/roboto/\" && npx get-google-fonts --input=\"https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded&display=swap\" --output=\"material/static/material/fonts/material-symbols/\""
   },
   "devDependencies": {
     "@tailwindcss/cli": "^4.0.14",

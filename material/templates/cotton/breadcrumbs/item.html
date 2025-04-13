@@ -7,6 +7,6 @@
     <span class="text-primary" aria-current="page" {{ attrs }}>{{ slot }}</span>
   {% else %}
     <a href="{{ href }}" up-target="main" up-transition="cross-fade" class="text-on-surface-variant hover:text-primary transition-colors" {{ attrs }}>{{ slot }}</a>
-    <span class="material-icons text-on-surface-variant mx-1" aria-hidden="true" style="font-size: 1rem;">chevron_right</span>
+    <span class="material-symbols text-on-surface-variant mx-1" aria-hidden="true" style="font-size: 1rem;">chevron_right</span>
   {% endif %}
 </li>
