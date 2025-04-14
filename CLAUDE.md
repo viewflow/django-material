@@ -4,6 +4,7 @@
 - `npm run build:css`: Build CSS files from TailwindCSS
 - `npm run build:js`: Bundle JavaScript with esbuild
 - `npm run dev`: Start development server with file watching
+- `npm run test`: Run Django tests
 - `npm run lint`: Run pyright type checking
 - Use `uv` instead of pip for Python package management
 

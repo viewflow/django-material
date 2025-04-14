@@ -9,6 +9,7 @@
     "watch:js": "esbuild material/templates/cotton/index.js --bundle --format=iife --outfile=material/static/material/js/material.js --watch",
     "runserver": "uv run manage.py runserver 0.0.0.0:8000",
     "dev": "npm-run-all2 --parallel --print-label watch:css watch:js runserver",
+    "test": "uv run python manage.py test",
     "lint": "pyright material && uv run ruff check material",
     "lint:js": "eslint --config eslint.config.mjs material/templates/cotton/**/*.js",
     "format": "uv run ruff format material && uv run ruff check material --fix",
