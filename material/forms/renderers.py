@@ -3,7 +3,8 @@ Makes bound_field available in widget templates, fixing Django's limitation.
 Injects field context (errors, help_text, label) into widget rendering.
 """
 
-from typing import Any, Dict, Optional
+from typing import Any
+
 from django.forms import BoundField, Form
 from django.forms.renderers import TemplatesSetting
 
@@ -11,7 +12,7 @@ from django.forms.renderers import TemplatesSetting
 class ProxyForm:
     """Intercepts form.renderer access to inject bound_field into context."""
 
-    def __init__(self, bound_field: 'MaterialBoundField', form: Form) -> None:
+    def __init__(self, bound_field: "MaterialBoundField", form: Form) -> None:
         self._bound_field = bound_field
         self._form = form
 
@@ -45,11 +46,13 @@ class MaterialFormRenderer(TemplatesSetting):
 class BoundRenderer(MaterialFormRenderer):
     """Injects bound_field into widget template context."""
 
-    def __init__(self, bound_field: 'MaterialBoundField') -> None:
+    def __init__(self, bound_field: "MaterialBoundField") -> None:
         self._bound_field = bound_field
         super().__init__()
 
-    def render(self, template_name: str, context: Dict[str, Any], request: Optional[Any] = None) -> str:
+    def render(
+        self, template_name: str, context: dict[str, Any], request: Any | None = None
+    ) -> str:
         # Make field accessible in widget templates
         context["bound_field"] = self._bound_field
         return super().render(f"material/{template_name}", context, request=request)

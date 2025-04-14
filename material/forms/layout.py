@@ -5,34 +5,35 @@ Provides a set of layout elements that can be used to structure form fields
 in various layouts including rows, columns, fieldsets, and spans.
 """
 
-from typing import Any, Dict, List, Optional
+from typing import Any
+
 from django.forms import Form
-from django.template.loader import render_to_string
 from django.template import Context
+from django.template.loader import render_to_string
 
 
 class LayoutElement:
     """Base class for all layout elements."""
 
-    template_name: Optional[str] = None
+    template_name: str | None = None
 
     def __init__(self, *fields: Any, **kwargs: Any) -> None:
         self.fields = fields
         self.attrs = kwargs
 
-    def render(self, form: Form, context: Optional[Context] = None) -> str:
+    def render(self, form: Form, context: Context | None = None) -> str:
         """Render this layout element with the given form."""
         if context is None:
             context = Context({})
 
-        field_instances: List[Any] = []
+        field_instances: list[Any] = []
         for field_name in self.fields:
             if isinstance(field_name, LayoutElement):
                 field_instances.append(field_name.render(form, context))
             elif field_name in form.fields:
                 field_instances.append(form[field_name])
 
-        template_context: Dict[str, Any] = {
+        template_context: dict[str, Any] = {
             "fields": field_instances,
             "attrs": self.attrs,
             "form": form,
@@ -72,7 +73,7 @@ class FieldSet(LayoutElement):
         self.title = title
         super().__init__(*fields, **kwargs)
 
-    def render(self, form: Form, context: Optional[Context] = None) -> str:
+    def render(self, form: Form, context: Context | None = None) -> str:
         """Override to include title in context."""
         if context is None:
             context = Context({})
@@ -82,14 +83,14 @@ class FieldSet(LayoutElement):
 
 class Caption(LayoutElement):
     """A heading or label with optional styling."""
-    
+
     template_name = "material/layout/caption.html"
-    
+
     def __init__(self, text: str, **kwargs: Any) -> None:
         self.text = text
         super().__init__(**kwargs)
-        
-    def render(self, form: Form, context: Optional[Context] = None) -> str:
+
+    def render(self, form: Form, context: Context | None = None) -> str:
         """Override to include caption text in context."""
         if context is None:
             context = Context({})
@@ -132,11 +133,7 @@ class Span(LayoutElement):
                         breakpoint_classes[f"{breakpoint}:col-span-{size}"] = True
 
         # Create new kwargs with the breakpoint classes
-        new_kwargs = {
-            "class": " ".join(key for key, val in breakpoint_classes.items() if val)
-        }
-        new_kwargs.update(
-            {k: v for k, v in kwargs.items() if k not in breakpoint_classes}
-        )
+        new_kwargs = {"class": " ".join(key for key, val in breakpoint_classes.items() if val)}
+        new_kwargs.update({k: v for k, v in kwargs.items() if k not in breakpoint_classes})
 
         super().__init__(field_name, **new_kwargs)
