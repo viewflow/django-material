@@ -10,7 +10,9 @@
     "runserver": "uv run manage.py runserver 0.0.0.0:8000",
     "dev": "npm-run-all2 --parallel --print-label watch:css watch:js runserver",
     "lint": "pyright material && uv run ruff check material",
+    "lint:js": "eslint --config eslint.config.mjs material/templates/cotton/**/*.js",
     "format": "uv run ruff format material && uv run ruff check material --fix",
+    "format:js": "prettier --write 'material/templates/cotton/**/*.js'",
     "update:venv": "uv sync --group dev",
     "update:js": "jq -c '.copyFiles[]' package.json | while read file; do src=$(echo $file | jq -r '.src'); dest=$(echo $file | jq -r '.dest'); echo \"Copying $src to $dest\"; cp \"$src\" \"$dest\"; done",
     "update:fonts": "npx get-google-fonts --input=\"https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,600,700,900&display=swap\" --output=\"material/static/material/fonts/roboto/\" && npx get-google-fonts --input=\"https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded&display=swap\" --output=\"material/static/material/fonts/material-symbols/\""
@@ -18,7 +20,12 @@
   "devDependencies": {
     "@tailwindcss/cli": "^4.0.14",
     "esbuild": "^0.25.2",
+    "eslint": "^9.24.0",
+    "eslint-config-prettier": "^10.1.2",
+    "eslint-plugin-prettier": "^5.2.6",
+    "globals": "^16.0.0",
     "npm-run-all2": "^6.2.0",
+    "prettier": "^3.5.3",
     "pyright": "^1.1.399",
     "tailwindcss": "^4.0.14"
   },
@@ -34,5 +41,12 @@
       "src": "node_modules/unpoly/unpoly.min.css",
       "dest": "material/static/material/css/"
     }
-  ]
+  ],
+  "prettier": {
+    "singleQuote": true,
+    "semi": true,
+    "tabWidth": 2,
+    "printWidth": 100,
+    "trailingComma": "es5"
+  }
 }
