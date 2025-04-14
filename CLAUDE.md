@@ -1,5 +1,13 @@
 # Development Guidelines for Django Material
 
+## Build & Development Commands
+- `npm run build:css`: Build CSS files from TailwindCSS
+- `npm run build:js`: Bundle JavaScript with esbuild
+- `npm run dev`: Start development server with file watching
+- `npm run lint`: Run pyright type checking
+- Use `uv` instead of pip for Python package management
+
+
 ## Code Style
 - Use TailwindCSS for components
 - Follow Google style docstrings for Python code
@@ -80,7 +88,7 @@
 #### Dynamic Values
 ```html
 <!-- Template variables with colon prefix -->
-<c-button.filled :disabled="is_disabled">Dynamic Button</c-button.filled>
+<c-button.filled :disabled=is_disabled>Dynamic Button</c-button.filled>
 
 <!-- Python data types with colon prefix -->
 <c-table.container :columns="[{'label': 'Name', 'sortable': True}]"></c-table.container>
@@ -121,7 +129,7 @@
 - Use consistent parameter names across similar components
 - Component variants follow Material Design 3 naming: filled, outlined, elevated, etc.
 - For component demos, use semantic IDs that match component types
-- Demo templates should have concise, descriptive titles
+- Demo templates should have same structure with breadcrumbs, and concise, descriptive titles
 - Prefer shorter component names (e.g., c-nav instead of c-navigation)
 - Use standard attribute names (e.g., icon, title, variant) consistently
 
