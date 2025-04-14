@@ -6,7 +6,8 @@
 # which is part of this source code package.
 
 import re
-from typing import Any, Callable, Generic, Iterator, List, Optional, Tuple, Type, TypeVar
+from collections.abc import Callable, Iterator
+from typing import Any, Generic, TypeVar
 
 from django.apps import apps
 from django.conf import settings
@@ -23,7 +24,7 @@ T = TypeVar("T")
 TCallable = TypeVar("TCallable", bound=Callable[..., Any])
 
 
-class MARKER(object):
+class MARKER:
     def __init__(self, marker: str):
         self.marker = marker
 
@@ -62,9 +63,7 @@ def camel_case_to_underscore(name):
     For example, 'SomeString' becomes 'some_string'.
     """
 
-    return re.sub(
-        "([a-z0-9])([A-Z])", r"\1_\2", re.sub("(.)([A-Z][a-z]+)", r"\1_\2", name)
-    ).lower()
+    return re.sub("([a-z0-9])([A-Z])", r"\1_\2", re.sub("(.)([A-Z][a-z]+)", r"\1_\2", name)).lower()
 
 
 def camel_case_to_title(name):
@@ -84,7 +83,9 @@ def has_object_perm(user, short_perm_name, model, obj=None):
     object is provided, and user has no model-wide permission, check if the user
     has the permission for that specific object instance.
     """
-    perm_name = f"{model._meta.app_label}.{auth.get_permission_codename(short_perm_name, model._meta)}"
+    perm_name = (
+        f"{model._meta.app_label}.{auth.get_permission_codename(short_perm_name, model._meta)}"
+    )
     has_perm = user.has_perm(perm_name)
     if not has_perm and obj is not None:
         has_perm = user.has_perm(perm_name, obj=obj)
@@ -132,7 +133,7 @@ def is_owner(owner: models.Model, user: models.Model) -> bool:
     return isinstance(user, type(owner)) and owner.pk == user.pk
 
 
-class viewprop:
+class viewprop:  # noqa: N801
     """
     A property that can be overridden.
 
@@ -142,10 +143,10 @@ class viewprop:
     """
 
     def __init__(self, func: Any):
-        self.__doc__ = getattr(func, "__doc__")
+        self.__doc__ = func.__doc__
         self.fget = func
 
-    def __get__(self, obj: Optional[Any], objtype: Optional[Type[Any]] = None) -> Any:
+    def __get__(self, obj: Any | None, objtype: type[Any] | None = None) -> Any:
         if obj is None:
             return self
         if self.fget.__name__ not in obj.__dict__:
@@ -156,7 +157,7 @@ class viewprop:
         obj.__dict__[self.fget.__name__] = value
 
     def __repr__(self) -> str:
-        return "<view_property func={}>".format(self.fget)
+        return f"<view_property func={self.fget}>"
 
 
 class LazySingletonDescriptor(Generic[T]):
@@ -169,12 +170,12 @@ class LazySingletonDescriptor(Generic[T]):
     """
 
     def __init__(self) -> None:  # noqa D102
-        self.instance: Optional[T] = None
+        self.instance: T | None = None
 
     def __get__(
         self,
-        instance: Optional[Any] = None,
-        owner: Optional[Type[T]] = None,
+        instance: Any | None = None,
+        owner: type[T] | None = None,
     ) -> T:
         if self.instance is None:
             if owner is None:
@@ -195,7 +196,7 @@ class Icon:
         The CSS class to apply to the icon element.
     """
 
-    def __init__(self, icon_name: str, class_: Optional[str] = None):
+    def __init__(self, icon_name: str, class_: str | None = None):
         self.icon_name = icon_name
         self.class_ = class_ or ""
 
@@ -207,7 +208,7 @@ class Icon:
         )
 
 
-def get_object_data(obj: models.Model) -> Iterator[Tuple[models.Field, str, Any]]:
+def get_object_data(obj: models.Model) -> Iterator[tuple[models.Field, str, Any]]:
     """
     List of object fields to display. Choice fields values are expanded to
     readable choice label.
@@ -217,12 +218,10 @@ def get_object_data(obj: models.Model) -> Iterator[Tuple[models.Field, str, Any]
 
     """
     for field in obj._meta.fields:
-        if isinstance(field, models.AutoField):
-            continue
-        elif field.auto_created:
+        if isinstance(field, models.AutoField) or field.auto_created:
             continue
         else:
-            choice_display_attr = "get_{}_display".format(field.name)
+            choice_display_attr = f"get_{field.name}_display"
         if hasattr(obj, choice_display_attr):
             value = getattr(obj, choice_display_attr)()
         else:
@@ -232,12 +231,10 @@ def get_object_data(obj: models.Model) -> Iterator[Tuple[models.Field, str, Any]
             yield (field, field.verbose_name.capitalize(), value)
 
 
-PATH_PARAMETER_COMPONENT_RE = re.compile(
-    r"<(?:(?P<converter>[^>:]+):)?(?P<parameter>[^>]+)>"
-)
+PATH_PARAMETER_COMPONENT_RE = re.compile(r"<(?:(?P<converter>[^>:]+):)?(?P<parameter>[^>]+)>")
 
 
-def list_path_components(route: str) -> List[str]:
+def list_path_components(route: str) -> list[str]:
     """
     Extract keyword arguments from a Django path expression, which are used as
     input parameters for a view function.
