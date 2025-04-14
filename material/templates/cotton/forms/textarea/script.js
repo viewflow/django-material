@@ -1,11 +1,11 @@
-up.compiler('[up-auto-grow]', function(element) {
+up.compiler('[up-auto-grow]', function (element) {
   // Initial adjustment on load with requestAnimationFrame to ensure DOM is ready
-  requestAnimationFrame(function() {
+  requestAnimationFrame(function () {
     adjustHeight(element);
   });
 
   // Listen for input events to adjust height as content changes
-  element.addEventListener('input', function() {
+  element.addEventListener('input', function () {
     adjustHeight(element);
   });
 
@@ -13,8 +13,8 @@ up.compiler('[up-auto-grow]', function(element) {
   function adjustHeight(el) {
     // Reset height to auto to get the right scrollHeight
     el.style.height = 'auto';
-    
+
     // Set the height to scrollHeight to fit all content
-    el.style.height = (el.scrollHeight+2) + 'px';
+    el.style.height = el.scrollHeight + 2 + 'px';
   }
 });
