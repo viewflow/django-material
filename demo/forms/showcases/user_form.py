@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
+from django.forms import ModelForm
 
-# from viewflow.forms import ModelForm, InlineFormSetField, AjaxModelSelect
+# from viewflow.forms import InlineFormSetField, AjaxModelSelect
 
 
 # GroupFormSet = inlineformset_factory(

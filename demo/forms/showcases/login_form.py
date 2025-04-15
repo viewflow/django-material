@@ -12,6 +12,6 @@ class LoginForm(forms.Form):
     #  {% attr form.keep_logged 'group' class append %}right-align{% endattr %}
 
     def clean(self):
-        cleaned_data = super(LoginForm, self).clean()
+        cleaned_data = super().clean()
         if cleaned_data.get("email") == "john@doe.com":
             raise forms.ValidationError("John, come on. You are blocked.")
