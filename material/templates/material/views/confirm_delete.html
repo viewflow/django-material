@@ -1,0 +1,64 @@
+{% extends request.resolver_match.app.base_template_name|default:'material/base_page.html' %}
+{% load i18n %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+  <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+    <div class="md:col-span-10 md:col-start-2">
+      
+      <c-card.elevated>
+        <!-- Header -->
+        <div class="flex flex-col">
+          <h1 class="text-2xl font-medium text-on-surface">{{ view.object }}</h1>
+          
+          <!-- Breadcrumbs -->
+          <c-breadcrumbs.container>
+            {% if view.viewset %}
+              <c-breadcrumbs.item href="../">{{ view.model|title }}</c-breadcrumbs.item>
+            {% endif %}
+            {% if view.object.pk %}
+              <c-breadcrumbs.item href="../{{ view.object.pk }}/">{{ view.object }}</c-breadcrumbs.item>
+            {% endif %}
+            <c-breadcrumbs.item current="true">{% trans 'Delete' %}</c-breadcrumbs.item>
+          </c-breadcrumbs.container>
+        </div>
+        
+        <!-- Form -->
+        <form method="POST" {% if form.is_multipart %} enctype="multipart/form-data"{% endif %}>
+          {% csrf_token %}
+          
+          <div class="mt-6">
+            <div class="bg-error-container rounded-lg p-4 mb-6">
+              <p class="text-on-error-container font-medium">
+                {% blocktrans with escaped_object=object %}"{{ escaped_object }}" and all of the following related items will be deleted{% endblocktrans %}
+              </p>
+            </div>
+            
+            {% for model, objects in view.get_deleted_objects %}
+              <h3 class="text-xl font-medium text-on-surface mt-6 mb-2">{{ model|title }}</h3>
+              <div class="mb-4 text-on-surface-variant">
+                {% for object in objects %}
+                  <span>{{ object }}</span>{% if not forloop.last %}<span class="mx-1">,</span>{% endif %}
+                {% endfor %}
+              </div>
+            {% endfor %}
+          </div>
+          
+          <!-- Actions -->
+          <c-slot name="footer">
+            <div class="flex justify-end gap-3">
+              <c-button.text href="../{{ view.object.pk }}/">
+                {% trans 'Cancel' %}
+              </c-button.text>
+              <c-button.filled color="error" type="submit">
+                {% trans 'Delete' %}
+              </c-button.filled>
+            </div>
+          </c-slot>
+        </form>
+      </c-card.elevated>
+      
+    </div>
+  </div>
+</div>
+{% endblock content %}

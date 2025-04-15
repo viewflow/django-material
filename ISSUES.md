@@ -2,8 +2,8 @@
 
 ## Demo
 
-- [ ] unpoly links on index page
-
+- [X] unpoly links on index page
+- [ ] overal re-structure using Site and Application
 
 ## Compoments
 
