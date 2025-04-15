@@ -17,11 +17,7 @@ from django.db import models
 from django.utils.html import conditional_escape
 from django.utils.safestring import mark_safe
 
-__all__ = ("has_object_perm", "viewprop", "DEFAULT", "first_not_default")
-
-
-T = TypeVar("T")
-TCallable = TypeVar("TCallable", bound=Callable[..., Any])
+__all__ = ("has_object_perm", "viewprop", "DEFAULT", "first_not_default", "DEFAULT")
 
 
 class MARKER:
@@ -39,8 +35,6 @@ class MARKER:
 
 
 DEFAULT = MARKER("DEFAULT")
-
-IS_DEV = settings.DEBUG or not hasattr(mail, "outbox")  # DEBUG or test mode
 
 
 def first_not_default(*args):
@@ -104,35 +98,6 @@ def strip_suffixes(word, suffixes):
     return word
 
 
-def get_app_package(app_label):
-    """
-    Returns the name of the package that contains the specified app or None if
-    the app is not found.
-    """
-    app_config = apps.get_app_config(app_label)
-    if not app_config:
-        return None
-    return app_config.module.__name__ if app_config.module else None
-
-
-def get_containing_app_data(module):
-    """
-    Returns the app label and package string for the specified module.
-    """
-    app_config = apps.get_containing_app_config(module)
-    if not app_config:
-        return None, None
-    return app_config.label, app_config.module.__name__ if app_config.module else None
-
-
-def is_owner(owner: models.Model, user: models.Model) -> bool:
-    """
-    Checks whether the specified user instance or subclass is equal to the
-    specified owner instance or subclass.
-    """
-    return isinstance(user, type(owner)) and owner.pk == user.pk
-
-
 class viewprop:  # noqa: N801
     """
     A property that can be overridden.
@@ -158,54 +123,6 @@ class viewprop:  # noqa: N801
 
     def __repr__(self) -> str:
         return f"<view_property func={self.fget}>"
-
-
-class LazySingletonDescriptor(Generic[T]):
-    """
-    Descriptor class that creates a lazy singleton instance.
-
-    This descriptor can be used as a class attribute, and the first time the
-    attribute is accessed, it creates an instance of the class. Subsequent
-    accesses return the same instance, effectively making the class a singleton.
-    """
-
-    def __init__(self) -> None:  # noqa D102
-        self.instance: T | None = None
-
-    def __get__(
-        self,
-        instance: Any | None = None,
-        owner: type[T] | None = None,
-    ) -> T:
-        if self.instance is None:
-            if owner is None:
-                raise ValueError("Owner class not provided")
-            self.instance = owner()
-        return self.instance
-
-
-class Icon:
-    """
-    Class representing an HTML icon element.
-
-    Attributes:
-    -----------
-    icon_name : str
-        The name of the icon to use.
-    class_ : str, optional
-        The CSS class to apply to the icon element.
-    """
-
-    def __init__(self, icon_name: str, class_: str | None = None):
-        self.icon_name = icon_name
-        self.class_ = class_ or ""
-
-    def __str__(self) -> str:
-        icon_name = conditional_escape(self.icon_name)
-        class_name = conditional_escape(self.class_)
-        return mark_safe(
-            f'<i class="material-icons ${class_name}" aria-hidden="true">{icon_name}</i>'
-        )
 
 
 def get_object_data(obj: models.Model) -> Iterator[tuple[models.Field, str, Any]]:

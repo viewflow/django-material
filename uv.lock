@@ -65,6 +65,18 @@ wheels = [
 ]
 
 [[package]]
+name = "django-formtools"
+version = "2.5.1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "django" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/73/f8/bb9b228fc33230186f3612a6fc96274a81bab3509817498f2632d7aa6367/django-formtools-2.5.1.tar.gz", hash = "sha256:47cb34552c6efca088863d693284d04fc36eaaf350eb21e1a1d935e0df523c93", size = 88637 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/12/63/91a107e3aaaf3987bad036494dfd8cc2675f4a66d22e65ffd6711f84ba70/django_formtools-2.5.1-py3-none-any.whl", hash = "sha256:bce9b64eda52cc1eef6961cc649cf75aacd1a707c2fff08d6c3efcbc8e7e761a", size = 170651 },
+]
+
+[[package]]
 name = "django-stubs"
 version = "5.1.3"
 source = { registry = "https://pypi.org/simple" }
@@ -171,6 +183,7 @@ dependencies = [
 
 [package.dev-dependencies]
 dev = [
+    { name = "django-formtools" },
     { name = "django-stubs" },
     { name = "ipdb" },
     { name = "ruff" },
@@ -184,6 +197,7 @@ requires-dist = [
 
 [package.metadata.requires-dev]
 dev = [
+    { name = "django-formtools", specifier = ">=2.5.1" },
     { name = "django-stubs", specifier = ">=5.1.3" },
     { name = "ipdb", specifier = ">=0.13.13" },
     { name = "ruff", specifier = ">=0.5.0" },

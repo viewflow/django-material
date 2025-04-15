@@ -11,6 +11,7 @@ dependencies = [
 
 [dependency-groups]
 dev = [
+    "django-formtools>=2.5.1",
     "django-stubs>=5.1.3",
     "ipdb>=0.13.13",
     "ruff>=0.5.0",

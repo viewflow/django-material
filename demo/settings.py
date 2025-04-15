@@ -18,6 +18,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_cotton',
     'material',
+    'tests',
 ]
 
 MIDDLEWARE = [
