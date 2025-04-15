@@ -1,5 +1,4 @@
-from django.contrib.auth.models import User, Group
-from django.forms.models import inlineformset_factory
+from django.contrib.auth.models import User
 
 # from viewflow.forms import ModelForm, InlineFormSetField, AjaxModelSelect
 

@@ -1,19 +1,18 @@
-import re
 from unittest import mock
 
+from django.contrib.auth.models import Permission, User
 from django.test import TestCase
-from django.contrib.auth.models import User, Permission
 
 from material.utils import (
-    MARKER,
     DEFAULT,
-    first_not_default,
-    camel_case_to_underscore,
+    MARKER,
     camel_case_to_title,
+    camel_case_to_underscore,
+    first_not_default,
     has_object_perm,
+    list_path_components,
     strip_suffixes,
     viewprop,
-    list_path_components,
 )
 
 

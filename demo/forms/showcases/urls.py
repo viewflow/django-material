@@ -1,16 +1,17 @@
 from django.urls import path
 from django.views.generic.base import RedirectView
-from .views import FormView
-from .contact_form import ContactForm
-from .login_form import LoginForm
-from .profile_form import ProfileForm
-from .signup_form import SignupForm
-from .registration_form import RegistrationForm
+
 from .bank_form import BankForm
-from .comment_form import CommentForm
-from .hospital_form import HospitalRegistrationForm
-from .order_form import OrderForm
 from .checkout_form import CheckoutForm
+from .comment_form import CommentForm
+from .contact_form import ContactForm
+from .hospital_form import HospitalRegistrationForm
+from .login_form import LoginForm
+from .order_form import OrderForm
+from .profile_form import ProfileForm
+from .registration_form import RegistrationForm
+from .signup_form import SignupForm
+from .views import FormView
 from .wizard_form import WizardView
 
 urlpatterns = [

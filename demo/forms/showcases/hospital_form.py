@@ -1,11 +1,12 @@
 import datetime
 
 from django import forms
-from material.forms import Layout, Row, Column, Span, FieldSet
+
+from material.forms import Column, FieldSet, Layout, Row, Span
 from material.forms.renderers import MaterialFormRenderer
 
 # FormSetField not yet implemented
-from . import QUESTION_CHOICES, CARDIOVASCULAR_RISK_CHOICES, APNIA_RISK_CHOICES, Form
+from . import APNIA_RISK_CHOICES, CARDIOVASCULAR_RISK_CHOICES, QUESTION_CHOICES
 
 
 class HospitalRegistrationForm(forms.Form):

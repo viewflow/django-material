@@ -2,6 +2,7 @@ from django import forms
 from django.shortcuts import render
 from django.utils.translation import gettext_lazy as _
 from formtools.wizard.views import SessionWizardView
+
 from material.forms import Layout, Row, Span
 
 

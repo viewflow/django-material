@@ -1,7 +1,7 @@
 from django import forms
+
 from material.forms import Layout, Row
 from material.forms.renderers import MaterialFormRenderer
-from . import Form
 
 
 class OrderForm(forms.Form):

@@ -1,5 +1,6 @@
 from django import forms
-from material.forms import Layout, Row, Span
+
+from material.forms import Layout, Row
 from material.forms.renderers import MaterialFormRenderer
 
 

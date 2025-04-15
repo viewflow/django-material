@@ -1,5 +1,6 @@
 from django import forms
-from material.forms import Layout, Row, FieldSet
+
+from material.forms import FieldSet, Layout, Row
 from material.forms.renderers import MaterialFormRenderer
 
 

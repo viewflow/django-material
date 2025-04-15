@@ -1,7 +1,9 @@
 from django import forms
-from material.forms import Layout, FieldSet, Row, Column, Span
+
+from material.forms import Column, FieldSet, Layout, Row, Span
 from material.forms.renderers import MaterialFormRenderer
-from . import COUNTRY_CHOICES, Form
+
+from . import COUNTRY_CHOICES
 
 
 class BankForm(forms.Form):

@@ -1,14 +1,12 @@
-from unittest import mock
-
-from django.test import TestCase
 from django import forms
+from django.test import TestCase
 
-from material.forms import Layout, Row, Column, Span, FieldSet
+from material.forms import Column, FieldSet, Layout, Row, Span
 from material.views.base import (
-    _collect_elements,
-    FormLayoutMixin,
     Action,
     BulkActionForm,
+    FormLayoutMixin,
+    _collect_elements,
 )
 
 

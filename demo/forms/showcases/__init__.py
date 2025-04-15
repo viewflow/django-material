@@ -89,7 +89,7 @@ APNIA_RISK_CHOICES = (
 )
 
 
-class SourceCodeMixin(object):
+class SourceCodeMixin:
     def source(self):
         import inspect
         import itertools
