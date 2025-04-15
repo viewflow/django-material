@@ -10,7 +10,7 @@
 - `npm run provision`: Setup project on a new server
 - `npm run deploy`: Update project on an existing server
 - Use `uv` instead of pip for Python package management
-
+- To run python tests for a specific module use: `nom run test path.to.module`
 
 ## Code Style
 - Use TailwindCSS for components
