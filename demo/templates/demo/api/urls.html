@@ -170,6 +170,155 @@ urlpatterns = [
       </c-table.container>
     </div>
 
+    <h3 class="text-xl font-medium mb-3">Site</h3>
+    <p class="mb-6">
+      A top-level Viewset designed for creating site-wide URL structures. It manages multiple applications
+      and provides features for consistent site navigation.
+    </p>
+
+    <div class="overflow-x-auto mb-6">
+      <c-table.container>
+        <c-slot name="header">
+          <c-table.header_row>
+            <c-table.header>Attribute/Method</c-table.header>
+            <c-table.header>Type</c-table.header>
+            <c-table.header>Description</c-table.header>
+          </c-table.header_row>
+        </c-slot>
+        <c-table.row>
+          <c-table.cell><code>title</code></c-table.cell>
+          <c-table.cell>str</c-table.cell>
+          <c-table.cell>Site title, auto-generated from class name if not specified</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>icon</code></c-table.cell>
+          <c-table.cell>str</c-table.cell>
+          <c-table.cell>Default material icon for the site (default: "view_comfy")</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>menu_template_name</code></c-table.cell>
+          <c-table.cell>str</c-table.cell>
+          <c-table.cell>Template for rendering the site menu</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>primary_color</code></c-table.cell>
+          <c-table.cell>str</c-table.cell>
+          <c-table.cell>Primary theme color for the site</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>secondary_color</code></c-table.cell>
+          <c-table.cell>str</c-table.cell>
+          <c-table.cell>Secondary theme color for the site</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>permission</code></c-table.cell>
+          <c-table.cell>str</c-table.cell>
+          <c-table.cell>Required permission for viewing the site</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>menu_items()</code></c-table.cell>
+          <c-table.cell>method</c-table.cell>
+          <c-table.cell>Returns an iterator of Site or Application viewsets for menu building</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>register()</code></c-table.cell>
+          <c-table.cell>method</c-table.cell>
+          <c-table.cell>Register an Application class with the site</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>get_absolute_url()</code></c-table.cell>
+          <c-table.cell>method</c-table.cell>
+          <c-table.cell>Resolve URL for a model object in any registered viewset</c-table.cell>
+        </c-table.row>
+      </c-table.container>
+    </div>
+
+    <h3 class="text-xl font-medium mb-3">Application</h3>
+    <p class="mb-6">
+      A Viewset designed for creating application-specific URL structures. It provides menu integration
+      and consistent navigation within a specific application section.
+    </p>
+
+    <div class="overflow-x-auto mb-6">
+      <c-table.container>
+        <c-slot name="header">
+          <c-table.header_row>
+            <c-table.header>Attribute/Method</c-table.header>
+            <c-table.header>Type</c-table.header>
+            <c-table.header>Description</c-table.header>
+          </c-table.header_row>
+        </c-slot>
+        <c-table.row>
+          <c-table.cell><code>title</code></c-table.cell>
+          <c-table.cell>str</c-table.cell>
+          <c-table.cell>Application title, auto-generated from class name if empty</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>icon</code></c-table.cell>
+          <c-table.cell>str</c-table.cell>
+          <c-table.cell>Default material icon for the application (default: "view_module")</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>menu_template_name</code></c-table.cell>
+          <c-table.cell>str</c-table.cell>
+          <c-table.cell>Template for rendering the application menu</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>base_template_name</code></c-table.cell>
+          <c-table.cell>str</c-table.cell>
+          <c-table.cell>Base template used for application views</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>permission</code></c-table.cell>
+          <c-table.cell>str | callable</c-table.cell>
+          <c-table.cell>Required permission or permission check function</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>menu_items()</code></c-table.cell>
+          <c-table.cell>method</c-table.cell>
+          <c-table.cell>Returns an iterator of AppMenuMixin viewsets for menu building</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>get_context_data()</code></c-table.cell>
+          <c-table.cell>method</c-table.cell>
+          <c-table.cell>Returns context data for application templates</c-table.cell>
+        </c-table.row>
+      </c-table.container>
+    </div>
+
+    <h3 class="text-xl font-medium mb-3">AppMenuMixin</h3>
+    <p class="mb-6">
+      A mixin that enables a viewset to be included in application menus. It provides consistent 
+      title and icon presentation, with automatic title generation.
+    </p>
+
+    <div class="overflow-x-auto mb-6">
+      <c-table.container>
+        <c-slot name="header">
+          <c-table.header_row>
+            <c-table.header>Attribute/Method</c-table.header>
+            <c-table.header>Type</c-table.header>
+            <c-table.header>Description</c-table.header>
+          </c-table.header_row>
+        </c-slot>
+        <c-table.row>
+          <c-table.cell><code>title</code></c-table.cell>
+          <c-table.cell>str</c-table.cell>
+          <c-table.cell>Menu item title, auto-generated from class name if None</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>icon</code></c-table.cell>
+          <c-table.cell>str</c-table.cell>
+          <c-table.cell>Material icon for the menu item (default: "view_carousel")</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>has_view_permission()</code></c-table.cell>
+          <c-table.cell>method</c-table.cell>
+          <c-table.cell>Check if the user has permission to view this menu item</c-table.cell>
+        </c-table.row>
+      </c-table.container>
+    </div>
+
     <h3 class="text-xl font-medium mb-3">route</h3>
     <p class="mb-6">
       Function that creates a route mapping a URL prefix to a viewset.
@@ -247,25 +396,114 @@ class BlogViewset(Viewset):
       </div>
     </div>
 
+    <h3 class="text-xl font-medium mb-3">Site and Application Structure</h3>
+    <div class="bg-surface-container-low p-6 rounded-lg mb-6">
+      <div class="overflow-x-auto" style="max-width: 100%;">
+        <pre class="text-on-surface-variant" style="white-space: pre; overflow-x: auto;"><code>from django.views.generic import TemplateView
+from django.urls import path
+from material.urls import route
+from material.urls.sites import Site, Application, AppMenuMixin
+
+# Define a model viewset that will be part of an application
+class ProductViewset(AppMenuMixin, Viewset):
+    title = "Products"
+    icon = "inventory_2"
+    
+    list_path = path("", ProductListView.as_view(), name="list")
+    detail_path = path("<int:pk>/", ProductDetailView.as_view(), name="detail")
+    
+    # Get URL for a product object
+    def get_object_url(self, request, obj):
+        return self.reverse("detail", args=[obj.pk])
+
+# Define an application
+class ShopApplication(Application):
+    title = "Online Shop"
+    icon = "shopping_cart" 
+    permission = "shop.view_shop"  # Permission required to access this app
+    
+    # Direct URL patterns
+    dashboard_path = path("", DashboardView.as_view(), name="dashboard")
+    settings_path = path("settings/", SettingsView.as_view(), name="settings")
+    
+    # Add the product viewset
+    products_path = route("products/", ProductViewset())
+
+# Define another application
+class BlogApplication(Application):
+    title = "Blog"
+    icon = "article"
+    
+    post_list_path = path("", PostListView.as_view(), name="post_list")
+    post_detail_path = path("<int:pk>/", PostDetailView.as_view(), name="post_detail")
+
+# Create the main site
+class ProjectSite(Site):
+    title = "My Project"
+    primary_color = "indigo"
+    secondary_color = "teal"
+    
+    # Direct URL patterns 
+    home_path = path("", HomeView.as_view(), name="home")
+    about_path = path("about/", AboutView.as_view(), name="about")
+    
+    # Add applications
+    shop_path = route("shop/", ShopApplication())
+    blog_path = route("blog/", BlogApplication())
+
+# Use in your main urls.py
+site = ProjectSite()
+urlpatterns = [
+    path("", site.urls)
+]</code></pre>
+      </div>
+    </div>
+
+    <h3 class="text-xl font-medium mb-3">Model URL Resolution</h3>
+    <div class="bg-surface-container-low p-6 rounded-lg mb-6">
+      <div class="overflow-x-auto" style="max-width: 100%;">
+        <pre class="text-on-surface-variant" style="white-space: pre; overflow-x: auto;"><code># Using the site structure from the previous example
+
+# In a view or template context processor
+def get_model_urls(request):
+    # Get a product instance
+    product = Product.objects.get(pk=1)
+    
+    # Get the URL for this product using the site's get_absolute_url method
+    product_url = site.get_absolute_url(request, product)
+    # Result: /shop/products/1/
+    
+    # This works for any model that has a viewset with get_object_url method
+    # registered in any application in the site
+    
+    return {
+        'product_url': product_url
+    }</code></pre>
+      </div>
+    </div>
+
     <h3 class="text-xl font-medium mb-3">Using reverse()</h3>
     <div class="bg-surface-container-low p-6 rounded-lg mb-6">
       <div class="overflow-x-auto" style="max-width: 100%;">
-        <pre class="text-on-surface-variant" style="white-space: pre; overflow-x: auto;"><code># URL structure
-blogset = BlogViewset()
+        <pre class="text-on-surface-variant" style="white-space: pre; overflow-x: auto;"><code># URL structure from previous example
+site = ProjectSite()
 urlpatterns = [
-    path("blog/", blogset.urls)
+    path("", site.urls)
 ]
 
 # In a view
 def some_view(request):
-    # Get URL to blog home
-    blog_home_url = blogset.reverse("home")  # /blog/
+    # Get URL to site home
+    home_url = site.reverse("home")  # /
     
-    # Get URL to posts list
-    posts_url = blogset.posts_path.viewset.reverse("list")  # /blog/posts/
+    # Get URL to shop dashboard
+    shop_url = site.shop_path.viewset.reverse("dashboard")  # /shop/
     
-    # Get URL to specific post
-    post_url = blogset.posts_path.viewset.reverse("detail", args=[1])  # /blog/posts/1/</code></pre>
+    # Get URL to products list
+    products_url = site.shop_path.viewset.products_path.viewset.reverse("list")  # /shop/products/
+    
+    # Get URL to a specific product
+    product_url = site.shop_path.viewset.products_path.viewset.reverse("detail", args=[1])  # /shop/products/1/</code></pre>
       </div>
     </div>
 
@@ -284,52 +522,173 @@ class UserAPIViewset(BaseAPIViewset):
     profile_path = path("<int:pk>/profile/", ProfileView.as_view(), name="profile")</code></pre>
       </div>
     </div>
+
+    <h3 class="text-xl font-medium mb-3">Registering Applications Dynamically</h3>
+    <div class="bg-surface-container-low p-6 rounded-lg mb-6">
+      <div class="overflow-x-auto" style="max-width: 100%;">
+        <pre class="text-on-surface-variant" style="white-space: pre; overflow-x: auto;"><code># Create a main site
+site = Site(title="My Dynamic Site")
+
+# Define an application class
+class AnalyticsApplication(Application):
+    title = "Analytics"
+    icon = "analytics"
+    
+    dashboard_path = path("", AnalyticsDashboardView.as_view(), name="dashboard")
+    reports_path = path("reports/", ReportsView.as_view(), name="reports")
+
+# Register the application with the site
+site.register(AnalyticsApplication)
+
+# The app is now accessible at /analytics/
+# with automatic namespace 'analytics'</code></pre>
+      </div>
+    </div>
   </section>
 
   <section id="best-practices" class="mb-12">
     <h2 class="text-2xl mb-4">Best Practices</h2>
 
-    <c-list.container>
-      <c-list.item>
-        <c-list.leading.icon>tips_and_updates</c-list.leading.icon>
-        <div>
-          <strong>Consistent Naming</strong>
-          <p>Use consistent naming for URL attributes, ending with <code>_path</code>.</p>
-        </div>
-      </c-list.item>
-      
-      <c-list.item>
-        <c-list.leading.icon>tips_and_updates</c-list.leading.icon>
-        <div>
-          <strong>Organize by Resource</strong>
-          <p>Create separate viewsets for different resources or sections of your application.</p>
-        </div>
-      </c-list.item>
-      
-      <c-list.item>
-        <c-list.leading.icon>tips_and_updates</c-list.leading.icon>
-        <div>
-          <strong>Use IndexViewMixin</strong>
-          <p>Use IndexViewMixin for viewsets where automatic redirection makes sense.</p>
-        </div>
-      </c-list.item>
-      
-      <c-list.item>
-        <c-list.leading.icon>tips_and_updates</c-list.leading.icon>
-        <div>
-          <strong>Use reverse() Method</strong>
-          <p>Prefer the viewset's reverse() method over Django's reverse() for better maintainability.</p>
-        </div>
-      </c-list.item>
-      
-      <c-list.item>
-        <c-list.leading.icon>tips_and_updates</c-list.leading.icon>
-        <div>
-          <strong>Base Viewsets</strong>
-          <p>Create base viewsets for common URL patterns to promote code reuse.</p>
-        </div>
-      </c-list.item>
-    </c-list.container>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+      <div>
+        <h3 class="text-xl font-medium mb-2">General Guidelines</h3>
+        <c-list.container>
+          <c-list.item>
+            <c-list.leading.icon>tips_and_updates</c-list.leading.icon>
+            <div>
+              <strong>Consistent Naming</strong>
+              <p>Use consistent naming for URL attributes, ending with <code>_path</code>.</p>
+            </div>
+          </c-list.item>
+          
+          <c-list.item>
+            <c-list.leading.icon>tips_and_updates</c-list.leading.icon>
+            <div>
+              <strong>Organize by Resource</strong>
+              <p>Create separate viewsets for different resources or sections of your application.</p>
+            </div>
+          </c-list.item>
+          
+          <c-list.item>
+            <c-list.leading.icon>tips_and_updates</c-list.leading.icon>
+            <div>
+              <strong>Use IndexViewMixin</strong>
+              <p>Use IndexViewMixin for viewsets where automatic redirection makes sense.</p>
+            </div>
+          </c-list.item>
+          
+          <c-list.item>
+            <c-list.leading.icon>tips_and_updates</c-list.leading.icon>
+            <div>
+              <strong>Use reverse() Method</strong>
+              <p>Prefer the viewset's reverse() method over Django's reverse() for better maintainability.</p>
+            </div>
+          </c-list.item>
+          
+          <c-list.item>
+            <c-list.leading.icon>tips_and_updates</c-list.leading.icon>
+            <div>
+              <strong>Base Viewsets</strong>
+              <p>Create base viewsets for common URL patterns to promote code reuse.</p>
+            </div>
+          </c-list.item>
+        </c-list.container>
+      </div>
+
+      <div>
+        <h3 class="text-xl font-medium mb-2">Site & Application Tips</h3>
+        <c-list.container>
+          <c-list.item>
+            <c-list.leading.icon>tips_and_updates</c-list.leading.icon>
+            <div>
+              <strong>Structure Hierarchically</strong>
+              <p>Use Site → Application → Viewset hierarchy for complex projects with multiple sections.</p>
+            </div>
+          </c-list.item>
+          
+          <c-list.item>
+            <c-list.leading.icon>tips_and_updates</c-list.leading.icon>
+            <div>
+              <strong>Consistent Icons</strong>
+              <p>Choose appropriate Material Icons for Site and Application classes to improve UX in menus.</p>
+            </div>
+          </c-list.item>
+          
+          <c-list.item>
+            <c-list.leading.icon>tips_and_updates</c-list.leading.icon>
+            <div>
+              <strong>Use AppMenuMixin</strong>
+              <p>Implement AppMenuMixin for any viewset that should appear in application menus.</p>
+            </div>
+          </c-list.item>
+          
+          <c-list.item>
+            <c-list.leading.icon>tips_and_updates</c-list.leading.icon>
+            <div>
+              <strong>Model URLs</strong>
+              <p>Implement <code>get_object_url</code> method in viewsets with models to enable <code>get_absolute_url</code> functionality.</p>
+            </div>
+          </c-list.item>
+          
+          <c-list.item>
+            <c-list.leading.icon>tips_and_updates</c-list.leading.icon>
+            <div>
+              <strong>Permission Control</strong>
+              <p>Use the <code>permission</code> attribute in Applications and Sites for coarse-grained access control.</p>
+            </div>
+          </c-list.item>
+
+          <c-list.item>
+            <c-list.leading.icon>tips_and_updates</c-list.leading.icon>
+            <div>
+              <strong>Theming</strong>
+              <p>Set <code>primary_color</code> and <code>secondary_color</code> in Site class for consistent theming across your application.</p>
+            </div>
+          </c-list.item>
+        </c-list.container>
+      </div>
+    </div>
+
+    <div class="bg-surface-container-low p-6 rounded-lg">
+      <h3 class="text-xl font-medium mb-3">Recommended Project Structure</h3>
+
+      <p class="mb-4">
+        For medium to large projects, consider organizing your URL routing as follows:
+      </p>
+
+      <pre class="text-on-surface-variant p-4 bg-surface-container rounded" style="white-space: pre; overflow-x: auto;"># project/urls.py
+from django.urls import path
+from project.site import site
+
+urlpatterns = [
+    path('', site.urls),
+]
+
+# project/site.py
+from material.urls.sites import Site
+from material.urls import route
+
+from project.apps.dashboard.urls import DashboardApplication
+from project.apps.users.urls import UserApplication
+from project.apps.products.urls import ProductApplication
+
+class ProjectSite(Site):
+    title = "My Project"
+    primary_color = "indigo"
+    secondary_color = "teal"
+    
+    # Register applications with explicit routes
+    dashboard_path = route("", DashboardApplication())
+    users_path = route("users/", UserApplication())
+    products_path = route("products/", ProductApplication())
+
+# Create the site instance
+site = ProjectSite()
+
+# For dynamic registration:
+# from project.apps.billing.urls import BillingApplication
+# site.register(BillingApplication)</pre>
+    </div>
   </section>
 </div>
 {% endblock %}
