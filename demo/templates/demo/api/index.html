@@ -1,0 +1,143 @@
+{% extends 'material/base_page.html' %}
+{% load i18n static %}
+
+{% block content %}
+<div class="container mx-auto px-4 md:px-10 pt-4 pb-8">
+  <c-breadcrumbs.container class="mb-2">
+    <c-breadcrumbs.home href="{% url 'index' %}"></c-breadcrumbs.home>
+    <c-breadcrumbs.item current="true">API Documentation</c-breadcrumbs.item>
+  </c-breadcrumbs.container>
+  
+  <h1 class="text-3xl font-medium mb-6">Django-Vibe API Documentation</h1>
+
+  <div class="flex flex-wrap gap-6 mb-8">
+    <c-card.elevated class="w-full lg:w-8/12 p-6">
+      <h2 class="text-2xl mb-4">Project Overview</h2>
+      <p class="mb-4">
+        Django-Vibe is a modern Material Design 3 implementation for Django applications. It provides a comprehensive set of components, 
+        utilities, and tools to create beautiful, accessible, and responsive web interfaces following Google's Material Design guidelines.
+      </p>
+      <p class="mb-4">
+        Built with TailwindCSS for styling flexibility and Django templates for seamless integration, Django-Vibe offers a complete solution 
+        for developing Django applications with a modern Material Design look and feel.
+      </p>
+      <p>
+        The library includes a component system based on Django-Cotton, which simplifies the creation and customization of UI components
+        through an intuitive template-based approach.
+      </p>
+    </c-card.elevated>
+
+    <c-card.elevated class="w-full lg:w-3/12 p-6">
+      <h2 class="text-2xl mb-4">Key Features</h2>
+      <c-list.container>
+        <c-list.item>
+          <c-list.leading.icon>check_circle</c-list.leading.icon>
+          Material Design 3 components
+        </c-list.item>
+        <c-list.item>
+          <c-list.leading.icon>check_circle</c-list.leading.icon>
+          Responsive layouts
+        </c-list.item>
+        <c-list.item>
+          <c-list.leading.icon>check_circle</c-list.leading.icon>
+          Customizable themes
+        </c-list.item>
+        <c-list.item>
+          <c-list.leading.icon>check_circle</c-list.leading.icon>
+          Django template integration
+        </c-list.item>
+        <c-list.item>
+          <c-list.leading.icon>check_circle</c-list.leading.icon>
+          Advanced form widgets
+        </c-list.item>
+        <c-list.item>
+          <c-list.leading.icon>check_circle</c-list.leading.icon>
+          Minimal JavaScript
+        </c-list.item>
+      </c-list.container>
+    </c-card.elevated>
+  </div>
+
+  <h2 class="text-2xl font-medium mb-4">API Documentation</h2>
+  
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+    <a href="{% url 'api_urls' %}" class="block p-6 bg-surface shadow-sm hover:bg-primary hover:text-on-primary hover:shadow-md rounded-3xl transition-all">
+      <h2 class="text-xl font-medium mb-2">URL Routing</h2>
+      <p>Class-based URL routing system with automatic namespace handling</p>
+    </a>
+    
+    <a href="{% url 'api_forms' %}" class="block p-6 bg-surface shadow-sm hover:bg-primary hover:text-on-primary hover:shadow-md rounded-3xl transition-all">
+      <h2 class="text-xl font-medium mb-2">Forms API</h2>
+      <p>Advanced form handling with Material Design styling</p>
+    </a>
+    
+    <a href="{% url 'api_layout' %}" class="block p-6 bg-surface shadow-sm hover:bg-primary hover:text-on-primary hover:shadow-md rounded-3xl transition-all">
+      <h2 class="text-xl font-medium mb-2">Layout API</h2>
+      <p>Responsive layout components and grid system</p>
+    </a>
+    
+    <a href="{% url 'api_utils' %}" class="block p-6 bg-surface shadow-sm hover:bg-primary hover:text-on-primary hover:shadow-md rounded-3xl transition-all">
+      <h2 class="text-xl font-medium mb-2">Utilities</h2>
+      <p>Helper functions and utilities for common tasks</p>
+    </a>
+    
+    <a href="{% url 'api_views' %}" class="block p-6 bg-surface shadow-sm hover:bg-primary hover:text-on-primary hover:shadow-md rounded-3xl transition-all">
+      <h2 class="text-xl font-medium mb-2">Views</h2>
+      <p>Class-based views with Material Design integration</p>
+    </a>
+    
+    <a href="{% url 'api_templatetags' %}" class="block p-6 bg-surface shadow-sm hover:bg-primary hover:text-on-primary hover:shadow-md rounded-3xl transition-all">
+      <h2 class="text-xl font-medium mb-2">Template Tags</h2>
+      <p>Custom template tags and filters for enhanced templates</p>
+    </a>
+  </div>
+
+  <h2 class="text-2xl font-medium mb-4">Getting Started</h2>
+  
+  <div class="bg-surface-container-low p-6 rounded-lg mb-6">
+    <h3 class="text-xl font-medium mb-3">Installation</h3>
+    <div class="overflow-x-auto" style="max-width: 100%;">
+      <pre class="text-on-surface-variant" style="white-space: pre; overflow-x: auto;"><code>pip install django-vibe</code></pre>
+    </div>
+  </div>
+  
+  <div class="bg-surface-container-low p-6 rounded-lg mb-6">
+    <h3 class="text-xl font-medium mb-3">Configuration</h3>
+    <div class="overflow-x-auto" style="max-width: 100%;">
+      <pre class="text-on-surface-variant" style="white-space: pre; overflow-x: auto;"><code># Add to your INSTALLED_APPS
+INSTALLED_APPS = [
+    ...
+    'material',
+    ...
+]</code></pre>
+    </div>
+  </div>
+  
+  <div class="bg-surface-container-low p-6 rounded-lg mb-6">
+    <h3 class="text-xl font-medium mb-3">Basic Usage</h3>
+    <div class="overflow-x-auto" style="max-width: 100%;">
+      <pre class="text-on-surface-variant" style="white-space: pre; overflow-x: auto;"><code>{% templatetag openblock %} extends 'material/base_page.html' {% templatetag closeblock %}
+{% templatetag openblock %} load i18n {% templatetag closeblock %}
+
+{% templatetag openblock %} block content {% templatetag closeblock %}
+<div class="container mx-auto px-4 py-8">
+  <h1 class="text-3xl font-medium mb-6">My First Django-Vibe Page</h1>
+  
+  <c-button.filled>Get Started</c-button.filled>
+</div>
+{% templatetag openblock %} endblock {% templatetag closeblock %}</code></pre>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block nav_items %}
+<c-nav.item icon="home" href="{% url 'index' %}">Home</c-nav.item>
+<c-nav.item icon="code" href="{% url 'api_index' %}" active="true">API Documentation</c-nav.item>
+<c-nav.item icon="description" href="{% url 'api_urls' %}">URL Routing</c-nav.item>
+<c-nav.item icon="create" href="{% url 'api_forms' %}">Forms API</c-nav.item>
+<c-nav.item icon="grid_view" href="{% url 'api_layout' %}">Layout API</c-nav.item>
+<c-nav.item icon="build" href="{% url 'api_utils' %}">Utilities</c-nav.item>
+<c-nav.item icon="layers" href="{% url 'api_views' %}">Views</c-nav.item>
+<c-nav.item icon="tag" href="{% url 'api_templatetags' %}">Template Tags</c-nav.item>
+{% endblock %}

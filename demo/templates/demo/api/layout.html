@@ -1,0 +1,37 @@
+{% extends 'material/base_page.html' %}
+{% load i18n static %}
+
+{% block content %}
+<div class="container mx-auto px-4 md:px-10 pt-4 pb-8">
+  <c-breadcrumbs.container class="mb-2">
+    <c-breadcrumbs.home href="{% url 'index' %}"></c-breadcrumbs.home>
+    <c-breadcrumbs.item href="{% url 'api_index' %}">API Documentation</c-breadcrumbs.item>
+    <c-breadcrumbs.item current="true">Layout API</c-breadcrumbs.item>
+  </c-breadcrumbs.container>
+  
+  <h1 class="text-3xl font-medium mb-6">Layout API Documentation</h1>
+
+  <p class="mb-6">
+    This page will contain comprehensive documentation about the Django-Vibe Layout system.
+  </p>
+
+  <c-card.elevated class="p-6 mb-6">
+    <h2 class="text-2xl mb-4">Coming Soon</h2>
+    <p>
+      Detailed documentation for the Layout API is currently under development.
+      Please check back later for complete information about layout components, grid systems, and responsive design options.
+    </p>
+  </c-card.elevated>
+</div>
+{% endblock %}
+
+{% block nav_items %}
+<c-nav.item icon="home" href="{% url 'index' %}">Home</c-nav.item>
+<c-nav.item icon="code" href="{% url 'api_index' %}">API Documentation</c-nav.item>
+<c-nav.item icon="description" href="{% url 'api_urls' %}">URL Routing</c-nav.item>
+<c-nav.item icon="create" href="{% url 'api_forms' %}">Forms API</c-nav.item>
+<c-nav.item icon="grid_view" href="{% url 'api_layout' %}" active="true">Layout API</c-nav.item>
+<c-nav.item icon="build" href="{% url 'api_utils' %}">Utilities</c-nav.item>
+<c-nav.item icon="layers" href="{% url 'api_views' %}">Views</c-nav.item>
+<c-nav.item icon="tag" href="{% url 'api_templatetags' %}">Template Tags</c-nav.item>
+{% endblock %}

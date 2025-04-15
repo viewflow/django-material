@@ -46,4 +46,40 @@ urlpatterns = [
     path("lists/", TemplateView.as_view(template_name="demo/lists.html"), name="lists"),
     path("widgets/", include("demo.forms.widgets.urls")),
     path("showcases/", include("demo.forms.showcases.urls")),
+    # API Documentation
+    path(
+        "api/",
+        TemplateView.as_view(template_name="demo/api/index.html"),
+        name="api_index",
+    ),
+    path(
+        "api/urls/",
+        TemplateView.as_view(template_name="demo/api/urls.html"),
+        name="api_urls",
+    ),
+    path(
+        "api/forms/",
+        TemplateView.as_view(template_name="demo/api/forms.html"),
+        name="api_forms",
+    ),
+    path(
+        "api/layout/",
+        TemplateView.as_view(template_name="demo/api/layout.html"),
+        name="api_layout",
+    ),
+    path(
+        "api/utils/",
+        TemplateView.as_view(template_name="demo/api/utils.html"),
+        name="api_utils",
+    ),
+    path(
+        "api/views/",
+        TemplateView.as_view(template_name="demo/api/views.html"),
+        name="api_views",
+    ),
+    path(
+        "api/templatetags/",
+        TemplateView.as_view(template_name="demo/api/templatetags.html"),
+        name="api_templatetags",
+    ),
 ]

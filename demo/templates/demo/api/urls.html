@@ -1,0 +1,346 @@
+{% extends 'material/base_page.html' %}
+{% load i18n static %}
+
+{% block content %}
+<div class="container mx-auto px-4 md:px-10 pt-4 pb-8">
+  <c-breadcrumbs.container class="mb-2">
+    <c-breadcrumbs.home href="{% url 'index' %}"></c-breadcrumbs.home>
+    <c-breadcrumbs.item href="{% url 'api_index' %}">API Documentation</c-breadcrumbs.item>
+    <c-breadcrumbs.item current="true">URL Routing</c-breadcrumbs.item>
+  </c-breadcrumbs.container>
+  
+  <h1 class="text-3xl font-medium mb-6">URL Routing System</h1>
+
+  <p class="mb-6">
+    Django-Vibe provides a powerful class-based URL routing system that simplifies URL configuration in Django applications.
+    It offers automatic namespace handling, inheritance, and easy management of complex URL hierarchies.
+  </p>
+
+  <section id="overview" class="mb-12">
+    <h2 class="text-2xl mb-4">Overview</h2>
+    <p class="mb-6">
+      The URL routing system is built around the concept of <code>Viewset</code> classes, which define URL patterns in a declarative,
+      object-oriented way. This approach makes it easier to organize, extend, and maintain URL configurations compared to the
+      standard Django approach.
+    </p>
+
+    <div class="bg-surface-container-low p-6 rounded-lg mb-6">
+      <div class="overflow-x-auto" style="max-width: 100%;">
+        <pre class="text-on-surface-variant" style="white-space: pre; overflow-x: auto;"><code>from django.views.generic import TemplateView
+from django.urls import path
+from material.urls import Viewset, route
+
+class MyViewset(Viewset):
+    app_name = "myapp"
+    
+    # Define URL patterns as class attributes
+    home_path = path("", TemplateView.as_view(template_name="myapp/home.html"), name="home")
+    about_path = path("about/", TemplateView.as_view(template_name="myapp/about.html"), name="about")
+    
+    # Nest another viewset
+    admin_path = route("admin/", AdminViewset())
+
+# Use in your urls.py
+urlpatterns = [
+    path("", MyViewset().urls)
+]</code></pre>
+      </div>
+    </div>
+  </section>
+
+  <section id="features" class="mb-12">
+    <h2 class="text-2xl mb-4">Key Features</h2>
+
+    <c-card.elevated class="p-6 mb-6">
+      <h3 class="text-xl font-medium mb-3">Declarative URL Definition</h3>
+      <p>
+        Define URLs as class attributes ending with <code>_path</code>. This makes URL configurations more readable and maintainable
+        compared to traditional Django URL patterns.
+      </p>
+    </c-card.elevated>
+
+    <c-card.elevated class="p-6 mb-6">
+      <h3 class="text-xl font-medium mb-3">Automatic Namespace Handling</h3>
+      <p>
+        Viewsets automatically handle URL namespaces based on the <code>app_name</code> and <code>namespace</code> attributes.
+        This simplifies URL resolution in templates and views.
+      </p>
+    </c-card.elevated>
+
+    <c-card.elevated class="p-6 mb-6">
+      <h3 class="text-xl font-medium mb-3">Nested Viewsets</h3>
+      <p>
+        Easily nest viewsets using the <code>route()</code> function. This creates a hierarchical URL structure that matches
+        your application's organization.
+      </p>
+    </c-card.elevated>
+
+    <c-card.elevated class="p-6 mb-6">
+      <h3 class="text-xl font-medium mb-3">Inheritance Support</h3>
+      <p>
+        Extend existing viewsets to inherit and override URL patterns. This promotes code reuse and simplifies creating
+        variations of URL configurations.
+      </p>
+    </c-card.elevated>
+
+    <c-card.elevated class="p-6 mb-6">
+      <h3 class="text-xl font-medium mb-3">Index Redirect</h3>
+      <p>
+        The <code>IndexViewMixin</code> automatically creates a redirect from the root URL to the first suitable URL pattern,
+        eliminating the need for explicit redirects.
+      </p>
+    </c-card.elevated>
+  </section>
+
+  <section id="api-reference" class="mb-12">
+    <h2 class="text-2xl mb-4">API Reference</h2>
+
+    <h3 class="text-xl font-medium mb-3">BaseViewset</h3>
+    <p class="mb-6">
+      Base class for defining class-based URL routing configurations. It provides the core functionality for
+      managing URLs, namespaces, and parent-child relationships.
+    </p>
+
+    <div class="overflow-x-auto mb-6">
+      <c-table.container>
+        <c-slot name="header">
+          <c-table.header_row>
+            <c-table.header>Attribute/Method</c-table.header>
+            <c-table.header>Type</c-table.header>
+            <c-table.header>Description</c-table.header>
+          </c-table.header_row>
+        </c-slot>
+        <c-table.row>
+          <c-table.cell><code>app_name</code></c-table.cell>
+          <c-table.cell>str</c-table.cell>
+          <c-table.cell>The application name for URL namespacing</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>namespace</code></c-table.cell>
+          <c-table.cell>str</c-table.cell>
+          <c-table.cell>Explicit namespace for URLs</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>parent_namespace</code></c-table.cell>
+          <c-table.cell>str</c-table.cell>
+          <c-table.cell>Namespace of the parent viewset</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>urls</code></c-table.cell>
+          <c-table.cell>property</c-table.cell>
+          <c-table.cell>Returns URL patterns, app name, and namespace</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>reverse()</code></c-table.cell>
+          <c-table.cell>method</c-table.cell>
+          <c-table.cell>Generates a URL for a given view name with proper namespacing</c-table.cell>
+        </c-table.row>
+      </c-table.container>
+    </div>
+
+    <h3 class="text-xl font-medium mb-3">Viewset</h3>
+    <p class="mb-6">
+      Extends BaseViewset with the ability to collect URL patterns from class attributes and handle nested viewsets.
+    </p>
+
+    <div class="overflow-x-auto mb-6">
+      <c-table.container>
+        <c-slot name="header">
+          <c-table.header_row>
+            <c-table.header>Attribute/Method</c-table.header>
+            <c-table.header>Type</c-table.header>
+            <c-table.header>Description</c-table.header>
+          </c-table.header_row>
+        </c-slot>
+        <c-table.row>
+          <c-table.cell><code>viewsets</code></c-table.cell>
+          <c-table.cell>list</c-table.cell>
+          <c-table.cell>Additional viewsets to include in the URL configuration</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>urlpatterns</code></c-table.cell>
+          <c-table.cell>list</c-table.cell>
+          <c-table.cell>Additional URL patterns to include</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>declared_patterns</code></c-table.cell>
+          <c-table.cell>dict</c-table.cell>
+          <c-table.cell>Collected URL patterns from class attributes</c-table.cell>
+        </c-table.row>
+      </c-table.container>
+    </div>
+
+    <h3 class="text-xl font-medium mb-3">route</h3>
+    <p class="mb-6">
+      Function that creates a route mapping a URL prefix to a viewset.
+    </p>
+
+    <div class="bg-surface-container-low p-6 rounded-lg mb-6">
+      <div class="overflow-x-auto" style="max-width: 100%;">
+        <pre class="text-on-surface-variant" style="white-space: pre; overflow-x: auto;"><code>route(prefix: str, viewset: BaseViewset) -> Route
+
+# Example
+admin_path = route("admin/", AdminViewset())</code></pre>
+      </div>
+    </div>
+
+    <h3 class="text-xl font-medium mb-3">IndexViewMixin</h3>
+    <p class="mb-6">
+      A mixin that adds automatic redirection from the root URL to the first suitable view in a viewset.
+    </p>
+
+    <div class="bg-surface-container-low p-6 rounded-lg mb-6">
+      <div class="overflow-x-auto" style="max-width: 100%;">
+        <pre class="text-on-surface-variant" style="white-space: pre; overflow-x: auto;"><code>class MyViewset(IndexViewMixin, Viewset):
+    app_name = "myapp"
+    
+    # The index path will be auto-created to redirect to the first suitable URL
+    home_path = path("home/", HomeView.as_view(), name="home")
+    about_path = path("about/", AboutView.as_view(), name="about")</code></pre>
+      </div>
+    </div>
+  </section>
+
+  <section id="usage-examples" class="mb-12">
+    <h2 class="text-2xl mb-4">Usage Examples</h2>
+
+    <h3 class="text-xl font-medium mb-3">Basic Viewset</h3>
+    <div class="bg-surface-container-low p-6 rounded-lg mb-6">
+      <div class="overflow-x-auto" style="max-width: 100%;">
+        <pre class="text-on-surface-variant" style="white-space: pre; overflow-x: auto;"><code>from django.views.generic import TemplateView
+from django.urls import path
+from material.urls import Viewset
+
+class UserViewset(Viewset):
+    app_name = "users"
+    
+    list_path = path("", UserListView.as_view(), name="list")
+    detail_path = path("<int:pk>/", UserDetailView.as_view(), name="detail")
+    create_path = path("new/", UserCreateView.as_view(), name="create")
+    update_path = path("<int:pk>/edit/", UserUpdateView.as_view(), name="update")
+    delete_path = path("<int:pk>/delete/", UserDeleteView.as_view(), name="delete")</code></pre>
+      </div>
+    </div>
+
+    <h3 class="text-xl font-medium mb-3">Nested Viewsets</h3>
+    <div class="bg-surface-container-low p-6 rounded-lg mb-6">
+      <div class="overflow-x-auto" style="max-width: 100%;">
+        <pre class="text-on-surface-variant" style="white-space: pre; overflow-x: auto;"><code>from material.urls import Viewset, route
+
+class PostViewset(Viewset):
+    app_name = "posts"
+    # Post URL patterns...
+
+class CommentViewset(Viewset):
+    app_name = "comments"
+    # Comment URL patterns...
+
+class BlogViewset(Viewset):
+    app_name = "blog"
+    
+    # Main blog URLs
+    home_path = path("", BlogHomeView.as_view(), name="home")
+    
+    # Nested viewsets
+    posts_path = route("posts/", PostViewset())
+    comments_path = route("comments/", CommentViewset())</code></pre>
+      </div>
+    </div>
+
+    <h3 class="text-xl font-medium mb-3">Using reverse()</h3>
+    <div class="bg-surface-container-low p-6 rounded-lg mb-6">
+      <div class="overflow-x-auto" style="max-width: 100%;">
+        <pre class="text-on-surface-variant" style="white-space: pre; overflow-x: auto;"><code># URL structure
+blogset = BlogViewset()
+urlpatterns = [
+    path("blog/", blogset.urls)
+]
+
+# In a view
+def some_view(request):
+    # Get URL to blog home
+    blog_home_url = blogset.reverse("home")  # /blog/
+    
+    # Get URL to posts list
+    posts_url = blogset.posts_path.viewset.reverse("list")  # /blog/posts/
+    
+    # Get URL to specific post
+    post_url = blogset.posts_path.viewset.reverse("detail", args=[1])  # /blog/posts/1/</code></pre>
+      </div>
+    </div>
+
+    <h3 class="text-xl font-medium mb-3">Inheritance</h3>
+    <div class="bg-surface-container-low p-6 rounded-lg mb-6">
+      <div class="overflow-x-auto" style="max-width: 100%;">
+        <pre class="text-on-surface-variant" style="white-space: pre; overflow-x: auto;"><code>class BaseAPIViewset(Viewset):
+    list_path = path("", ListView.as_view(), name="list")
+    detail_path = path("<int:pk>/", DetailView.as_view(), name="detail")
+    create_path = path("create/", CreateView.as_view(), name="create")
+
+class UserAPIViewset(BaseAPIViewset):
+    app_name = "users"
+    # Override specific paths or add new ones
+    detail_path = path("<int:pk>/", UserDetailView.as_view(), name="detail")
+    profile_path = path("<int:pk>/profile/", ProfileView.as_view(), name="profile")</code></pre>
+      </div>
+    </div>
+  </section>
+
+  <section id="best-practices" class="mb-12">
+    <h2 class="text-2xl mb-4">Best Practices</h2>
+
+    <c-list.container>
+      <c-list.item>
+        <c-list.leading.icon>tips_and_updates</c-list.leading.icon>
+        <div>
+          <strong>Consistent Naming</strong>
+          <p>Use consistent naming for URL attributes, ending with <code>_path</code>.</p>
+        </div>
+      </c-list.item>
+      
+      <c-list.item>
+        <c-list.leading.icon>tips_and_updates</c-list.leading.icon>
+        <div>
+          <strong>Organize by Resource</strong>
+          <p>Create separate viewsets for different resources or sections of your application.</p>
+        </div>
+      </c-list.item>
+      
+      <c-list.item>
+        <c-list.leading.icon>tips_and_updates</c-list.leading.icon>
+        <div>
+          <strong>Use IndexViewMixin</strong>
+          <p>Use IndexViewMixin for viewsets where automatic redirection makes sense.</p>
+        </div>
+      </c-list.item>
+      
+      <c-list.item>
+        <c-list.leading.icon>tips_and_updates</c-list.leading.icon>
+        <div>
+          <strong>Use reverse() Method</strong>
+          <p>Prefer the viewset's reverse() method over Django's reverse() for better maintainability.</p>
+        </div>
+      </c-list.item>
+      
+      <c-list.item>
+        <c-list.leading.icon>tips_and_updates</c-list.leading.icon>
+        <div>
+          <strong>Base Viewsets</strong>
+          <p>Create base viewsets for common URL patterns to promote code reuse.</p>
+        </div>
+      </c-list.item>
+    </c-list.container>
+  </section>
+</div>
+{% endblock %}
+
+{% block nav_items %}
+<c-nav.item icon="home" href="{% url 'index' %}">Home</c-nav.item>
+<c-nav.item icon="code" href="{% url 'api_index' %}">API Documentation</c-nav.item>
+<c-nav.item icon="description" href="{% url 'api_urls' %}" active="true">URL Routing</c-nav.item>
+<c-nav.item icon="create" href="{% url 'api_forms' %}">Forms API</c-nav.item>
+<c-nav.item icon="grid_view" href="{% url 'api_layout' %}">Layout API</c-nav.item>
+<c-nav.item icon="build" href="{% url 'api_utils' %}">Utilities</c-nav.item>
+<c-nav.item icon="layers" href="{% url 'api_views' %}">Views</c-nav.item>
+<c-nav.item icon="tag" href="{% url 'api_templatetags' %}">Template Tags</c-nav.item>
+{% endblock %}
