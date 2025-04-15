@@ -6,8 +6,10 @@
 - `npm run dev`: Start development server with file watching
 - `npm run test`: Run Django tests
 - `npm run lint`: Run pyright type checking
+- `npm run format`: Format code with ruff and black
+- `npm run provision`: Setup project on a new server
+- `npm run deploy`: Update project on an existing server
 - Use `uv` instead of pip for Python package management
-- `black .`: Format Python code with Black
 
 
 ## Code Style

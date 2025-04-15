@@ -1,0 +1,11 @@
+material.viewflow.io {
+    root * {{ project_dir }}/static
+    handle_path /media/* {
+        root * {{ project_dir }}
+    }
+    handle {
+        reverse_proxy unix//run/material/material-web.sock
+        encode gzip
+        file_server
+    }
+}

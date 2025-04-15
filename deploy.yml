@@ -1,0 +1,225 @@
+# code: language=ansible
+# Deploy Django Material project to a generic Ubuntu host.
+# Usage:
+#     ansible-playbook -u root --ask-vault-pass deploy.yml
+# Refresh existing installation (without .env changes):
+#     ansible-playbook -u root --tags=update deploy.yml
+- name: "Django Material stack deployment"
+  hosts: all
+  become: true
+  gather_facts: false
+  environment:
+    LANG: "en_US.UTF-8"
+    LC_ALL: "en_US.UTF-8"
+  vars:
+    ansible_ssh_pipelining: 1
+    ansible_python_interpreter: /usr/bin/python3.12
+    project_user: material
+    project_group: caddy
+    project_dir: /srv/django-material
+    venv_path: "{{ project_dir }}/.venv"
+  handlers:
+
+    - name: "Caddy | Restart"
+      ansible.builtin.service:
+        name: caddy
+        state: restarted
+
+    - name: "Web | Restart"
+      ansible.builtin.service:
+        name: material-web
+        state: restarted
+        daemon_reload: true
+
+    - name: "Web Socket | Restart"
+      ansible.builtin.service:
+        name: material-web.socket
+        state: restarted
+        daemon_reload: true
+
+  tasks:
+    - name: "System | Ensure project directory exists"
+      ansible.builtin.file:
+        path: "{{ project_dir }}"
+        state: directory
+        mode: "0755"
+    
+    - name: "System | Add caddy repository"
+      ansible.builtin.apt_repository:
+        repo: deb [trusted=yes] https://apt.fury.io/caddy/ /
+
+    - name: "System | Install system wide dependencies"
+      ansible.builtin.package:
+        state: present
+        name:
+          - rsync
+          - postgresql
+          - caddy
+          - msmtp-mta
+          - python3-psycopg2    # Required by ansible to create pg db/user
+          - python3-setuptools  # Required by ansible to use pip
+          - python3-pip         # Actual pip for ansible
+          - python3-venv        # Allows creating virtual environment
+          - python3-dev         # Setup the python dev package
+
+    - name: "System | Create system user"
+      ansible.builtin.user:
+        name: "{{ project_user }}"
+        group: caddy
+        system: true
+        create_home: false
+
+    - name: "System | MSMTP configuration"
+      ansible.builtin.copy:
+        src: "config/msmtprc.enc"
+        dest: "/etc/msmtprc"
+        decrypt: true
+        mode: "u+r"
+
+    - name: "Database | Create postgresql user"
+      become: true
+      become_user: postgres
+      community.postgresql.postgresql_user:
+        name: "material"
+
+    - name: "Database | Create postgresql database"
+      become: true
+      become_user: postgres
+      community.postgresql.postgresql_db:
+        name: material
+        owner: material
+
+    - name: "Web | Setup caddyfile"
+      ansible.builtin.copy:
+        content: |
+          import *.caddy
+        dest: "/etc/caddy/Caddyfile"
+        mode: "a+r"
+      notify:
+        - "Caddy | Restart"
+
+    - name: "Web | Caddy configuration"
+      ansible.builtin.template:
+        src: config/material-web.caddy.j2
+        dest: "/etc/caddy/material.caddy"
+        mode: "a+r"
+      notify:
+        - "Caddy | Restart"
+
+    - name: "Web | Setup gunicorn socket"
+      ansible.builtin.template:
+        src: config/material-web.socket.j2
+        dest: /etc/systemd/system/material-web.socket
+        mode: "a+r"
+      notify:
+        - "Web Socket | Restart"
+
+    - name: "Web | Setup gunicorn service"
+      ansible.builtin.template:
+        src: config/material-web.service.j2
+        dest: /etc/systemd/system/material-web.service
+        mode: "a+r"
+      notify:
+        - "Web | Restart"
+
+    - name: "Project | Create runtime directories"
+      ansible.builtin.file:
+        path: "/run/material"
+        state: directory
+        owner: "{{ project_user }}"
+        group: "{{ project_group }}"
+        mode: "0770"
+
+    - name: "Project | Create data directories"
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: directory
+        owner: "{{ project_user }}"
+        group: "{{ project_group }}"
+        mode: "0770"
+      with_items:
+        - "{{ project_dir }}/media"
+        - "{{ project_dir }}/static"
+
+    - name: "Project | Synchronize source code"
+      ansible.posix.synchronize:
+        src: .
+        dest: "/srv"
+        delete: true
+        use_ssh_args: true
+        rsync_opts:
+          - "--exclude='.*'"
+          - "--exclude='*.pyc'"
+          - "--exclude='/config/'"
+          - "--exclude='/media/'"
+          - "--exclude='/static/'"
+          - "--exclude='/.venv/'"
+          - "--exclude='/node_modules/'"
+      register: source
+      notify:
+        - "Web | Restart"
+        - "Web Socket | Restart"
+      tags: update
+
+    - name: "Project | Fix ownership"
+      ansible.builtin.file:
+        path: "{{ project_dir }}"
+        owner: "{{ project_user }}"
+        group: "{{ project_group }}"
+        recurse: true
+      when: source.changed
+      tags: update
+
+    - name: "Project | Install python dependencies"
+      ansible.builtin.shell: "{{ ansible_python_interpreter }} -m venv {{ venv_path }} && {{ venv_path }}/bin/pip install -e ."
+      args:
+        chdir: "{{ project_dir }}"
+      become: true
+      become_user: "{{ project_user }}"
+      when: source.changed
+      tags: update
+
+    - name: "Django | Create/Update .env file"
+      ansible.builtin.copy:
+        src: "config/env.enc"
+        dest: "{{ project_dir }}/.env"
+        owner: "{{ project_user }}"
+        decrypt: true
+        mode: "u+r"
+      when: source.changed
+
+    - name: "Django | Install Gunicorn"
+      ansible.builtin.shell: "{{ venv_path }}/bin/pip install gunicorn"
+      args:
+        chdir: "{{ project_dir }}"
+      become: true
+      become_user: "{{ project_user }}"
+      when: source.changed
+      tags: update
+
+    - name: "Project | Build CSS and JS"
+      ansible.builtin.shell: "npm ci && npm run build:css && npm run build:js"
+      args:
+        chdir: "{{ project_dir }}"
+      become: true
+      become_user: "{{ project_user }}"
+      when: source.changed
+      tags: update
+
+    - name: "Django | Collect static files"
+      ansible.builtin.shell: "{{ venv_path }}/bin/python manage.py collectstatic --noinput"
+      args:
+        chdir: "{{ project_dir }}"
+      become: true
+      become_user: "{{ project_user }}"
+      when: source.changed
+      tags: update
+
+    - name: "Django | Run migration"
+      ansible.builtin.shell: "{{ venv_path }}/bin/python manage.py migrate --noinput"
+      args:
+        chdir: "{{ project_dir }}"
+      become: true
+      become_user: "{{ project_user }}"
+      tags: update
+      when: source.changed

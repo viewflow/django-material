@@ -1,0 +1,11 @@
+[Unit]
+Description=Django Material Web Server Socket
+
+[Socket]
+ListenStream=/run/material/material-web.sock
+SocketUser={{ project_user }}
+SocketGroup={{ project_group }}
+SocketMode=0660
+
+[Install]
+WantedBy=sockets.target

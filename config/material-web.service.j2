@@ -1,0 +1,21 @@
+[Unit]
+Description=Django Material Web Server
+After=network.target
+Requires=material-web.socket
+After=material-web.socket
+
+[Service]
+Type=simple
+User={{ project_user }}
+Group={{ project_group }}
+RuntimeDirectory=material
+WorkingDirectory={{ project_dir }}
+Environment="PATH={{ venv_path }}/bin"
+ExecStart={{ venv_path }}/bin/gunicorn demo.wsgi:application --workers=3 --bind=unix:/run/material/material-web.sock
+ExecReload=/bin/kill -s HUP $MAINPID
+KillMode=mixed
+TimeoutStopSec=5
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
