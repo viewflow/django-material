@@ -27,7 +27,9 @@ class ProfileForm(forms.Form):
     # Commented out to fix import error
     # address = FormField(form_class=AddressForm)
 
-    layout = Layout("username", Row("first_name", "last_name")
-                 # Commented out until FormField is implemented
-                 # , "address"
-                 )
+    layout = Layout(
+        "username",
+        Row("first_name", "last_name"),
+        # Commented out until FormField is implemented
+        # , "address"
+    )

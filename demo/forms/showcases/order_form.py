@@ -6,12 +6,8 @@ from . import Form
 
 class OrderForm(forms.Form):
     default_renderer = MaterialFormRenderer()
-    name = forms.CharField(
-        widget=forms.TextInput(attrs={"leading-icon": "account_box"})
-    )
-    company = forms.CharField(
-        widget=forms.TextInput(attrs={"leading-icon": "business"})
-    )
+    name = forms.CharField(widget=forms.TextInput(attrs={"leading-icon": "account_box"}))
+    company = forms.CharField(widget=forms.TextInput(attrs={"leading-icon": "business"}))
     email = forms.EmailField(widget=forms.EmailInput(attrs={"leading-icon": "email"}))
     phone = forms.CharField(widget=forms.TextInput(attrs={"leading-icon": "call"}))
     interest = forms.ChoiceField(

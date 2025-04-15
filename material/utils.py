@@ -6,16 +6,11 @@
 # which is part of this source code package.
 
 import re
-from collections.abc import Callable, Iterator
-from typing import Any, Generic, TypeVar
+from collections.abc import Iterator
+from typing import Any
 
-from django.apps import apps
-from django.conf import settings
 from django.contrib import auth
-from django.core import mail
 from django.db import models
-from django.utils.html import conditional_escape
-from django.utils.safestring import mark_safe
 
 __all__ = ("has_object_perm", "viewprop", "DEFAULT", "first_not_default", "DEFAULT")
 

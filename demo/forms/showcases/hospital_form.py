@@ -3,12 +3,14 @@ import datetime
 from django import forms
 from material.forms import Layout, Row, Column, Span, FieldSet
 from material.forms.renderers import MaterialFormRenderer
+
 # FormSetField not yet implemented
 from . import QUESTION_CHOICES, CARDIOVASCULAR_RISK_CHOICES, APNIA_RISK_CHOICES, Form
 
 
 class HospitalRegistrationForm(forms.Form):
     default_renderer = MaterialFormRenderer()
+
     class EmergencyContractForm(forms.Form):
         name = forms.CharField()
         relationship = forms.ChoiceField(
@@ -34,9 +36,7 @@ class HospitalRegistrationForm(forms.Form):
     birth_date = forms.DateField()
     height = forms.IntegerField(help_text="cm")
     weight = forms.IntegerField(help_text="kg")
-    primary_care_physician = forms.CharField(
-        widget=forms.TextInput(attrs={"leading-icon": "face"})
-    )
+    primary_care_physician = forms.CharField(widget=forms.TextInput(attrs={"leading-icon": "face"}))
     date_of_last_appointment = forms.DateField(widget=forms.DateInput())
     home_phone = forms.CharField(widget=forms.TextInput(attrs={"leading-icon": "call"}))
     work_phone = forms.CharField(

@@ -167,9 +167,7 @@ class BankForm(forms.Form):
             Row("introducer_name", "introducer_account_no"),
             "introducer_signature",
         ),
-        FieldSet(
-            "Account Details", Row("account_type", "account_mode"), "account_amount"
-        ),
+        FieldSet("Account Details", Row("account_type", "account_mode"), "account_amount"),
         FieldSet(
             "Details of Fixed Deposit",
             Row("deposit_type", "deposit_mode"),

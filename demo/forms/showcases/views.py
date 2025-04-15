@@ -1,5 +1,6 @@
 from django.views.generic import FormView as BaseFormView
 
+
 class FormView(BaseFormView):
     template_name = "demo/showcases.html"
 

@@ -7,6 +7,7 @@
 - `npm run test`: Run Django tests
 - `npm run lint`: Run pyright type checking
 - Use `uv` instead of pip for Python package management
+- `black .`: Format Python code with Black
 
 
 ## Code Style
@@ -135,12 +136,14 @@
 - Use standard attribute names (e.g., icon, title, variant) consistently
 
 ## Git Workflow
-- To commit, always use:
+- To commit, always use this exact format with `--author` flag:
   ```
   git commit --author="Claude AI <claude@anthropic.com>" -m "Commit message"
   ```
-- IMPORTANT: The `--author` flag is required for GitHub to recognize Claude as a contributor
-- DO NOT use Co-Authored-By trailers alone, as they don't change the commit author
+- IMPORTANT: 
+  - The `--author="Claude AI <claude@anthropic.com>"` flag MUST be included exactly as shown
+  - This is required for GitHub to properly attribute commits to Claude
+  - DO NOT use Co-Authored-By trailers instead of `--author`, as they don't change the commit author
 - All feature/fix commits should be done under Claude's name
 - Run `npm run build:css` before committing CSS changes
-- Update _dumb.html compoment when using new implicity {{ color }} class names in compoments
+- Update _dumb.html component when using new implicit {{ color }} class names in components

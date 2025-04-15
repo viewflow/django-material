@@ -6,6 +6,14 @@ from .textinput import TextInputForm
 
 urlpatterns = [
     path("", RedirectView.as_view(url="checkbox/", permanent=False)),
-    path("checkbox/", FormView.as_view(form_class=CheckboxInputForm, extra_context={'title': 'Checkbox Input Form'})),
-    path("text/", FormView.as_view(form_class=TextInputForm, extra_context={'title': 'Text Input Form'})),
+    path(
+        "checkbox/",
+        FormView.as_view(
+            form_class=CheckboxInputForm, extra_context={"title": "Checkbox Input Form"}
+        ),
+    ),
+    path(
+        "text/",
+        FormView.as_view(form_class=TextInputForm, extra_context={"title": "Text Input Form"}),
+    ),
 ]

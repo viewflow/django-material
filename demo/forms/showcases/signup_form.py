@@ -23,9 +23,7 @@ class BaseEmailFormset(forms.BaseFormSet):
             emails.append(email)
 
 
-EmailFormSet = forms.formset_factory(
-    EmailForm, extra=3, can_delete=True, formset=BaseEmailFormset
-)
+EmailFormSet = forms.formset_factory(EmailForm, extra=3, can_delete=True, formset=BaseEmailFormset)
 
 
 class AddressForm(forms.Form):
@@ -64,7 +62,7 @@ class SignupForm(forms.Form):
     layout = Layout(
         "username",
         Row("first_name", "last_name", "date_of_birth"),
-        Caption("Additional Information")
+        Caption("Additional Information"),
         # Commented out until FormSetField is implemented
         # "emails",
         # FormSet("addresses", card_desktop=4)

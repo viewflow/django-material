@@ -80,8 +80,11 @@ class Action:
     """
 
     def __init__(
-        self, name: str, url: str | None = None,
-        viewname: str | None = None, icon: str | None = None
+        self,
+        name: str,
+        url: str | None = None,
+        viewname: str | None = None,
+        icon: str | None = None,
     ) -> None:
         """
         Initialize an action with name and destination.
@@ -124,6 +127,4 @@ class BulkActionForm(forms.Form):
             required=False,
         )
 
-        self.fields["select_all"] = forms.CharField(
-            widget=forms.HiddenInput, required=False
-        )
+        self.fields["select_all"] = forms.CharField(widget=forms.HiddenInput, required=False)

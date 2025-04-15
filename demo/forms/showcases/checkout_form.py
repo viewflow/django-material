@@ -6,12 +6,8 @@ from . import COUNTRY_CHOICES, Form
 
 class CheckoutForm(forms.Form):
     default_renderer = MaterialFormRenderer()
-    first_name = forms.CharField(
-        widget=forms.TextInput(attrs={"leading-icon": "account_box"})
-    )
-    last_name = forms.CharField(
-        widget=forms.TextInput(attrs={"leading-icon": "account_box"})
-    )
+    first_name = forms.CharField(widget=forms.TextInput(attrs={"leading-icon": "account_box"}))
+    last_name = forms.CharField(widget=forms.TextInput(attrs={"leading-icon": "account_box"}))
     email = forms.EmailField(widget=forms.EmailInput(attrs={"leading-icon": "email"}))
     phone = forms.CharField(widget=forms.TextInput(attrs={"leading-icon": "call"}))
     country = forms.ChoiceField(choices=COUNTRY_CHOICES)

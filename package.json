@@ -12,7 +12,7 @@
     "test": "uv run python manage.py test",
     "lint": "pyright material && uv run ruff check material",
     "lint:js": "eslint --config eslint.config.mjs material/templates/cotton/**/*.js",
-    "format": "uv run ruff format material && uv run ruff check material --fix",
+    "format": "uv run ruff format material demo tests && uv run ruff check material demo tests --fix && uv run black .",
     "format:js": "prettier --write 'material/templates/cotton/**/*.js'",
     "update:venv": "uv sync --group dev",
     "update:js": "jq -c '.copyFiles[]' package.json | while read file; do src=$(echo $file | jq -r '.src'); dest=$(echo $file | jq -r '.dest'); echo \"Copying $src to $dest\"; cp \"$src\" \"$dest\"; done",

@@ -96,10 +96,7 @@ class SourceCodeMixin(object):
 
         lines = inspect.getsourcelines(self.__class__)[0]
         lines = [
-            x
-            for x in itertools.takewhile(
-                lambda x: not x.strip().startswith("template"), lines
-            )
+            x for x in itertools.takewhile(lambda x: not x.strip().startswith("template"), lines)
         ]
         return "".join(lines)
 
