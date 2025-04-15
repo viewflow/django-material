@@ -1,0 +1,75 @@
+{% extends request.resolver_match.app.base_template_name|default:'material/base_page.html' %}
+{% load i18n %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+  <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+    <div class="md:col-span-10 md:col-start-2">
+      
+      <c-card.elevated>
+        <!-- Header -->
+        <div class="flex flex-col">
+          <h1 class="text-2xl font-medium text-on-surface">{{ view.object }}</h1>
+          
+          <!-- Breadcrumbs -->
+          <c-breadcrumbs.container>
+            {% if view.viewset %}
+              <c-breadcrumbs.item href="../">{{ view.model|title }}</c-breadcrumbs.item>
+            {% endif %}
+            <c-breadcrumbs.item current="true">{{ view.object }}</c-breadcrumbs.item>
+          </c-breadcrumbs.container>
+        </div>
+        
+        <!-- Object details -->
+        <div class="mt-6">
+          <table class="w-full border-collapse">
+            <tbody>
+              {% for field_name, field_value in view.get_object_data.items %}
+                <tr class="border-b border-outline-variant">
+                  <th class="py-3 px-4 text-left text-on-surface-variant font-medium">{{ field_name }}</th>
+                  <td class="py-3 px-4 text-on-surface">{{ field_value|default_if_none:"-" }}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        
+        <!-- Actions -->
+        <c-slot name="footer">
+          <div class="flex justify-end gap-3">
+            {% for action in view.get_page_actions %}
+              <c-button.{{ action.style|default:"text" }} href="{{ action.url }}">
+                {{ action.label }}
+              </c-button.{{ action.style|default:"text" }}>
+            {% endfor %}
+            
+            {% if view.get_object_change_link %}
+              <c-button.filled href="{{ view.get_object_change_link }}">
+                {% trans 'Edit' %}
+              </c-button.filled>
+            {% endif %}
+          </div>
+        </c-slot>
+      </c-card.elevated>
+      
+      <!-- Object actions -->
+      {% with object_actions=view.get_object_actions %}
+        {% if object_actions %}
+          <div class="mt-6">
+            <c-card.outlined>
+              <div class="flex flex-wrap gap-3">
+                {% for action in object_actions %}
+                  <c-button.{{ action.style|default:"text" }} href="{{ action.url }}">
+                    {{ action.label }}
+                  </c-button.{{ action.style|default:"text" }}>
+                {% endfor %}
+              </div>
+            </c-card.outlined>
+          </div>
+        {% endif %}
+      {% endwith %}
+      
+    </div>
+  </div>
+</div>
+{% endblock content %}
