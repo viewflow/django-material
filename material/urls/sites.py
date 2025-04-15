@@ -7,7 +7,10 @@
 
 from __future__ import annotations
 
-from typing import Any, Callable, Dict, Iterator, List, Optional, Type, TypeVar, Union, cast, TYPE_CHECKING
+from typing import TYPE_CHECKING, Any, TypeVar
+
+if TYPE_CHECKING:
+    from collections.abc import Callable, Iterator
 
 from django.urls import NoReverseMatch
 from django.utils.functional import cached_property
@@ -22,7 +25,7 @@ T = TypeVar("T")
 class AppMenuMixin:
     """A route that can be listed in an Application menu."""
 
-    title: Optional[str] = None
+    title: str | None = None
     icon: str = "view_carousel"
 
     def __getattribute__(self, name: str) -> Any:
@@ -30,9 +33,7 @@ class AppMenuMixin:
 
         if name == "title" and attr is None:
             class_title = camel_case_to_title(
-                strip_suffixes(
-                    self.__class__.__name__, ["Viewset", "Admin", "App", "Flow"]
-                )
+                strip_suffixes(self.__class__.__name__, ["Viewset", "Admin", "App", "Flow"])
             )
             if not class_title:
                 raise ValueError("Application item needs a title")
@@ -40,7 +41,7 @@ class AppMenuMixin:
 
         return attr
 
-    def has_view_permission(self, user: Any, obj: Optional[Any] = None) -> bool:
+    def has_view_permission(self, user: Any, obj: Any | None = None) -> bool:
         parent_class = super()
         if hasattr(parent_class, "has_view_permission"):
             # Use type ignore because the parent might not be correctly typed
@@ -53,7 +54,7 @@ class Application(IndexViewMixin, Viewset):
     icon: str = "view_module"
     menu_template_name: str = "material/includes/app_menu.html"
     base_template_name: str = "material/base_page.html"
-    permission: Optional[Union[str, Callable[[Any], bool]]] = None
+    permission: str | Callable[[Any], bool] | None = None
 
     def __getattribute__(self, name: str) -> Any:
         attr = super().__getattribute__(name)
@@ -71,13 +72,13 @@ class Application(IndexViewMixin, Viewset):
 
         return attr
 
-    def _get_resolver_extra(self) -> Dict[str, Any]:
+    def _get_resolver_extra(self) -> dict[str, Any]:
         return {"viewset": self, "app": self}
 
-    def get_context_data(self, request: Any) -> Dict[str, Any]:
+    def get_context_data(self, request: Any) -> dict[str, Any]:
         return {}
 
-    def has_view_permission(self, user: Any, obj: Optional[Any] = None) -> bool:
+    def has_view_permission(self, user: Any, obj: Any | None = None) -> bool:
         if self.permission is not None:
             if callable(self.permission):
                 return self.permission(user)
@@ -91,14 +92,14 @@ class Application(IndexViewMixin, Viewset):
 
 
 class Site(IndexViewMixin, Viewset):
-    title: Optional[str] = None
+    title: str | None = None
     icon: str = "view_comfy"
     menu_template_name: str = "material/includes/site_menu.html"
-    primary_color: Optional[str] = None
-    secondary_color: Optional[str] = None
-    permission: Optional[str] = None
+    primary_color: str | None = None
+    secondary_color: str | None = None
+    permission: str | None = None
 
-    def __init__(self, *, title: Optional[str] = None, **kwargs: Any) -> None:
+    def __init__(self, *, title: str | None = None, **kwargs: Any) -> None:
         super().__init__(**kwargs)
 
         if title is not None:
@@ -106,9 +107,7 @@ class Site(IndexViewMixin, Viewset):
 
         if self.title is None:
             # pluralize class name
-            self.title = camel_case_to_title(
-                strip_suffixes(self.__class__.__name__, ["Site"])
-            )
+            self.title = camel_case_to_title(strip_suffixes(self.__class__.__name__, ["Site"]))
             if not self.title:
                 self.title = "Django Viewflow"
 
@@ -116,42 +115,40 @@ class Site(IndexViewMixin, Viewset):
         attr = super().__getattribute__(name)
 
         if name == "title" and attr is None:
-            title = camel_case_to_title(
-                strip_suffixes(self.__class__.__name__, ["Site"])
-            )
+            title = camel_case_to_title(strip_suffixes(self.__class__.__name__, ["Site"]))
             if not title:
                 title = "Django Viewflow"
             return title
 
         return attr
 
-    def _get_resolver_extra(self) -> Dict[str, Any]:
+    def _get_resolver_extra(self) -> dict[str, Any]:
         return {"viewset": self, "site": self}
 
-    def menu_items(self) -> Iterator[Union["Site", Application]]:
+    def menu_items(self) -> Iterator[Site | Application]:
         for viewset in self._children:
-            if isinstance(viewset, (Site, Application)):
+            if isinstance(viewset, Site | Application):
                 yield viewset
 
-    def has_view_permission(self, user: Any, obj: Optional[Any] = None) -> bool:
+    def has_view_permission(self, user: Any, obj: Any | None = None) -> bool:
         if self.permission is not None:
             return user.has_perm(self.permission)
         return True
 
-    def register(self, app_class: Type[T]) -> Type[T]:
+    def register(self, app_class: type[T]) -> type[T]:
         app = app_class()
         app._parent = self  # type: ignore
-        
+
         # Initialize viewsets if not already done
         if getattr(self, "viewsets", None) is None:
             self.viewsets = []
-            
+
         self.viewsets.append(app)  # type: ignore
         return app_class
 
     @cached_property
-    def _viewset_models(self) -> Dict[Any, Any]:
-        result: Dict[Any, Any] = {}
+    def _viewset_models(self) -> dict[Any, Any]:
+        result: dict[Any, Any] = {}
 
         queue = list(self._children)
         while queue:
@@ -159,10 +156,10 @@ class Site(IndexViewMixin, Viewset):
             if (
                 hasattr(viewset, "model")
                 and hasattr(viewset, "get_object_url")
-                and getattr(viewset, "model") not in result
+                and viewset.model not in result
             ):
-                result[getattr(viewset, "model")] = viewset
-            
+                result[viewset.model] = viewset
+
             # Use getattr to access _children since some types might not have it defined
             children = getattr(viewset, "_children", [])
             for child_viewset in children:
