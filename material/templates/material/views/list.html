@@ -1,0 +1,141 @@
+{% extends request.resolver_match.app.base_template_name|default:'material/base_page.html' %}
+{% load i18n %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+  <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+    <div class="md:col-span-12">
+      
+      <c-card.elevated>
+        <!-- Header -->
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
+          <div>
+            <h1 class="text-2xl font-medium text-on-surface">{{ view.model|title }}</h1>
+            
+            <!-- Breadcrumbs -->
+            <c-breadcrumbs.container>
+              {% if view.viewset %}
+                <c-breadcrumbs.item href="../">{{ view.model|title }}</c-breadcrumbs.item>
+              {% endif %}
+              <c-breadcrumbs.item current="true">{% trans 'List' %}</c-breadcrumbs.item>
+            </c-breadcrumbs.container>
+          </div>
+          
+          <!-- Page actions -->
+          <div class="flex flex-wrap gap-3 mt-4 md:mt-0">
+            {% for action in view.get_page_actions %}
+              <c-button.{{ action.style|default:"text" }} href="{{ action.url }}">
+                {{ action.label }}
+              </c-button.{{ action.style|default:"text" }}>
+            {% endfor %}
+          </div>
+        </div>
+        
+        <!-- Search and filters -->
+        {% if view.search_enabled %}
+        <div class="mb-6">
+          <form method="GET" class="flex gap-4">
+            <div class="flex-grow">
+              <input type="search" name="_search" value="{{ request.GET._search|default:'' }}" 
+                     placeholder="{% trans 'Search' %}" 
+                     class="w-full px-4 py-2 border border-outline-variant rounded-md focus:border-primary focus:outline-none">
+            </div>
+            <c-button.filled type="submit">{% trans 'Search' %}</c-button.filled>
+            {% if request.GET._search %}
+              <c-button.text href="?">{% trans 'Clear' %}</c-button.text>
+            {% endif %}
+          </form>
+        </div>
+        {% endif %}
+        
+        <!-- Table -->
+        {% if page_obj %}
+          <div class="overflow-x-auto">
+            <c-table.container>
+              <c-table.header>
+                <c-table.header_row>
+                  {% for column in view.list_columns.values %}
+                    <c-table.header 
+                      {% if column.orderby %}
+                        sortable="true"
+                        {% with column_ordering=view.columns_order|get_item:column %}
+                          {% if column_ordering == "asc" %}
+                            sort-direction="asc"
+                          {% elif column_ordering == "desc" %}
+                            sort-direction="desc"
+                          {% endif %}
+                        {% endwith %}
+                        href="?{% if request.GET._search %}_search={{ request.GET._search }}&{% endif %}{{ view.ordering_kwarg }}={{ column.attr_name }}"
+                      {% endif %}
+                    >
+                      {{ column.header }}
+                    </c-table.header>
+                  {% endfor %}
+                </c-table.header_row>
+              </c-table.header>
+              
+              <tbody>
+                {% for obj, cells in view.get_page_data %}
+                  <c-table.row>
+                    {% for column, value in cells %}
+                      <c-table.cell class="{{ column.column_type }}">{{ value|default_if_none:"-" }}</c-table.cell>
+                    {% endfor %}
+                  </c-table.row>
+                {% endfor %}
+              </tbody>
+            </c-table.container>
+          </div>
+          
+          <!-- Pagination -->
+          {% if is_paginated %}
+            <c-table.pagination>
+              {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }}" class="px-3 py-2 border rounded-md hover:bg-surface-variant">&laquo;</a>
+              {% endif %}
+              
+              {% for i in paginator.page_range %}
+                {% if page_obj.number == i %}
+                  <span class="px-3 py-2 border rounded-md bg-primary text-on-primary">{{ i }}</span>
+                {% else %}
+                  <a href="?page={{ i }}" class="px-3 py-2 border rounded-md hover:bg-surface-variant">{{ i }}</a>
+                {% endif %}
+              {% endfor %}
+              
+              {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}" class="px-3 py-2 border rounded-md hover:bg-surface-variant">&raquo;</a>
+              {% endif %}
+            </c-table.pagination>
+          {% endif %}
+          
+        {% else %}
+          <div class="text-center py-12 text-on-surface-variant">
+            <p>{% trans "No items to display" %}</p>
+          </div>
+        {% endif %}
+        
+        <!-- Bulk actions -->
+        {% with bulk_actions=view.get_bulk_actions %}
+          {% if bulk_actions %}
+            <c-slot name="footer">
+              <div class="flex justify-between gap-3">
+                <div>
+                  <c-button.text>{% trans 'Select All' %}</c-button.text>
+                </div>
+                <div class="flex gap-3">
+                  {% for action in bulk_actions %}
+                    <c-button.{{ action.style|default:"text" }} href="{{ action.url }}">
+                      {{ action.label }}
+                    </c-button.{{ action.style|default:"text" }}>
+                  {% endfor %}
+                </div>
+              </div>
+            </c-slot>
+          {% endif %}
+        {% endwith %}
+        
+      </c-card.elevated>
+      
+    </div>
+  </div>
+</div>
+{% endblock content %}
