@@ -3,6 +3,7 @@ from material.views.create import CreateModelView
 from material.views.delete import DeleteModelView
 from material.views.detail import DetailModelView
 from material.views.search import SearchableViewMixin
+from material.views.update import UpdateModelView
 
 __all__ = [
     "FormLayoutMixin",
@@ -12,4 +13,5 @@ __all__ = [
     "DeleteModelView",
     "DetailModelView",
     "SearchableViewMixin",
+    "UpdateModelView",
 ]
