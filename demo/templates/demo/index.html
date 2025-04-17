@@ -2,8 +2,7 @@
 {% load i18n %}
 
 {% block content %}
-<div class="container mx-auto px-4 md:px-10 py-6">
-  <h1 class="text-3xl font-medium mb-8">Django Material Components</h1>
+  <h1 class="text-3xl font-medium mt-2 mb-8">Django Material Components</h1>
   
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" up-main>
     <a href="{% url 'buttons' %}" class="block p-6 bg-surface shadow-sm hover:bg-primary hover:text-on-primary hover:shadow-md rounded-3xl transition-all" up-target="main" up-transition="cross-fade">
@@ -31,7 +30,7 @@
       <p>Navigation aids that help users understand their location within the site</p>
     </a>
     
-    <a href="{% url 'colors' %}" class="block p-6 bg-surface shadow-sm hover:bg-primary hover:text-on-primary hover:shadow-md rounded-3xl transition-all" up-target="main" up-transition="cross-fade">
+    <a href="{% url 'html:colors' %}" class="block p-6 bg-surface shadow-sm hover:bg-primary hover:text-on-primary hover:shadow-md rounded-3xl transition-all" up-target="main" up-transition="cross-fade">
       <h2 class="text-xl font-medium mb-2">Colors</h2>
       <p>Comprehensive color system with Material Design 3 color roles and usage guidelines</p>
     </a>
@@ -75,6 +74,4 @@
       <h2 class="text-xl font-medium mb-2">API Documentation</h2>
       <p>Comprehensive documentation of classes, functions, and components</p>
     </a>
-  </div>
-</div>
 {% endblock %}

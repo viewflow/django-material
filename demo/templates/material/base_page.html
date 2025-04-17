@@ -15,7 +15,7 @@
   <c-nav.item icon="table_view" href="{% url 'tables' %}">Tables</c-nav.item>
   <c-nav.item icon="article" href="{% url 'templates' %}">Templates</c-nav.item>
   <c-nav.item icon="linear_scale" href="{% url 'breadcrumbs' %}">Breadcrumbs</c-nav.item>
-  <c-nav.item icon="palette" href="{% url 'colors' %}">Colors</c-nav.item>
+  <c-nav.item icon="palette" href="{% url 'html:colors' %}">Colors</c-nav.item>
   <c-nav.item icon="dashboard_customize" href="{% url 'cards' %}">Cards</c-nav.item>
   <c-nav.item icon="list_alt" href="{% url 'lists' %}">Lists</c-nav.item>
 {% endblock nav_items %}
@@ -26,3 +26,5 @@
     <span>v0.1</span>
   </div>
 {% endblock nav_footer %}
+
+{% block main_class %}container mx-auto px-4 md:px-10 py-4{% endblock main_class %}

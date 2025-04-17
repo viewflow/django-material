@@ -1,10 +1,34 @@
 from django.contrib import admin
 from django.urls import include, path
 from django.views.generic import TemplateView
+from material.urls import Site, Application
+
+
+cotton = Application(
+    title="HTML Compoments",
+    app_name="html",
+    urlpatterns=[
+        path(
+            "colors/",
+            TemplateView.as_view(template_name="demo/colors.html"),
+            name="colors",
+        ),
+    ],
+)
+
+site = Site(
+    title="Django Vibe Components",
+    viewsets=[
+        cotton,
+    ],
+    urlpatterns=[
+        path("", TemplateView.as_view(template_name="demo/index.html"), name="index"),
+    ],
+)
 
 urlpatterns = [
+    path("", site.urls),
     path("admin/", admin.site.urls),
-    path("", TemplateView.as_view(template_name="demo/index.html"), name="index"),
     path(
         "buttons/",
         TemplateView.as_view(template_name="demo/buttons.html"),
@@ -15,7 +39,9 @@ urlpatterns = [
         TemplateView.as_view(template_name="demo/navigation.html"),
         name="navigation",
     ),
-    path("tables/", TemplateView.as_view(template_name="demo/tables.html"), name="tables"),
+    path(
+        "tables/", TemplateView.as_view(template_name="demo/tables.html"), name="tables"
+    ),
     path(
         "templates/",
         TemplateView.as_view(template_name="demo/templates.html"),
@@ -26,7 +52,6 @@ urlpatterns = [
         TemplateView.as_view(template_name="demo/breadcrumbs.html"),
         name="breadcrumbs",
     ),
-    path("colors/", TemplateView.as_view(template_name="demo/colors.html"), name="colors"),
     path(
         "checkboxes/",
         TemplateView.as_view(template_name="demo/checkboxes.html"),

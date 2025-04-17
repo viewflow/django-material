@@ -6,6 +6,8 @@ from material.urls.base import (
     ViewsetMeta,
     route,
 )
+from material.urls.sites import Site, Application, AppMenuMixin
+
 
 __all__ = [
     "BaseViewset",
@@ -14,4 +16,7 @@ __all__ = [
     "IndexViewMixin",
     "route",
     "Route",
+    "Site",
+    "Application",
+    "AppMenuMixin",
 ]
