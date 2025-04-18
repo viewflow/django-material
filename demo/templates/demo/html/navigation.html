@@ -1,13 +1,10 @@
-{% extends 'material/base_page.html' %}
+{% extends 'demo/html/base_page.html' %}
 {% load i18n %}
 
-{% block content %}
-  <c-breadcrumbs.container class="mb-2">
-    <c-breadcrumbs.home href="{% url 'index' %}"></c-breadcrumbs.home>
-    <c-breadcrumbs.item current="true">Navigation</c-breadcrumbs.item>
-  </c-breadcrumbs.container>
-  
-  <h1 class="text-3xl font-medium mb-8">Navigation Components</h1>
+{% block page_breadcrumb %}Navigation{% endblock %}
+{% block page_title %}Navigation Components{% endblock %}
+
+{% block page_content %}
 
   <section id="navigation-container" class="mb-12">
     <h2 class="text-2xl mb-4">Navigation Container</h2>

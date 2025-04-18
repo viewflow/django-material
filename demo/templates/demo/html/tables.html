@@ -1,15 +1,12 @@
-{% extends "material/base_page.html" %}
+{% extends 'demo/html/base_page.html' %}
 {% load i18n %}
 
 {% block title %}Tables{% endblock %}
 
-{% block content %}
-  <c-breadcrumbs.container class="mb-2">
-    <c-breadcrumbs.home href="{% url 'index' %}"></c-breadcrumbs.home>
-    <c-breadcrumbs.item current="true">Tables</c-breadcrumbs.item>
-  </c-breadcrumbs.container>
-  
-  <h1 class="text-3xl font-medium mb-8">Data Table Components</h1>
+{% block page_breadcrumb %}Tables{% endblock %}
+{% block page_title %}Data Table Components{% endblock %}
+
+{% block page_content %}
   <p class="mb-6">Material Design data tables display information in a way that's easy to scan, so that users can look for patterns and insights.</p>
 
   <section id="basic-table" class="mb-12">
@@ -277,4 +274,4 @@
         </c-table.row>
       </c-table.container>
   </section>
-{% endblock %}
+{% endblock page_content %}

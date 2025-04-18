@@ -1,13 +1,10 @@
-{% extends 'material/base_page.html' %}
+{% extends 'demo/html/base_page.html' %}
 {% load i18n static %}
 
-{% block content %}
-  <c-breadcrumbs.container class="mb-2">
-    <c-breadcrumbs.home href="{% url 'index' %}"></c-breadcrumbs.home>
-    <c-breadcrumbs.item current="true">Templates</c-breadcrumbs.item>
-  </c-breadcrumbs.container>
-  
-  <h1 class="text-3xl font-medium mb-8">Base Templates</h1>
+{% block page_breadcrumb %}Templates{% endblock %}
+{% block page_title %}Base Templates{% endblock %}
+
+{% block page_content %}
 
   <p class="mb-6">
     Django Material provides base templates that can be extended to create consistent layouts across your application.
@@ -321,4 +318,4 @@
     </div>
     
   </section>
-{% endblock %}
+{% endblock page_content %}

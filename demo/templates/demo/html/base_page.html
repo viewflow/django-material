@@ -1,0 +1,12 @@
+{% extends 'material/base_page.html' %}
+
+{% block content %}
+<c-breadcrumbs.container class="mb-2">
+    <c-breadcrumbs.home href="{% url 'index' %}"></c-breadcrumbs.home>
+    <c-breadcrumbs.item href="{% url 'html:index' %}">Components</c-breadcrumbs.item>
+    <c-breadcrumbs.item current="true">{% block page_breadcrumb %}{% endblock %}</c-breadcrumbs.item>
+  </c-breadcrumbs.container>
+  
+  <h1 class="text-3xl font-medium mb-8">{% block page_title%}{% endblock %}</h1>
+  {% block page_content %}{% endblock %}
+{% endblock %}

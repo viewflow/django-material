@@ -1,15 +1,12 @@
-{% extends 'material/base_page.html' %}
+{% extends 'demo/html/base_page.html' %}
 {% load i18n %}
 
 {% block title %}Material 3 Text Areas{% endblock %}
 
-{% block content %}
-  <c-breadcrumbs.container class="mb-2">
-    <c-breadcrumbs.home href="{% url 'index' %}"></c-breadcrumbs.home>
-    <c-breadcrumbs.item current="true">Text Areas</c-breadcrumbs.item>
-  </c-breadcrumbs.container>
+{% block page_breadcrumb %}Text Areas{% endblock %}
+{% block page_title %}Text Area Components{% endblock %}
 
-  <h1 class="text-3xl font-medium mb-8">Text Area Components</h1>
+{% block page_content %}
   
   <section id="filled-textareas" class="mb-12">
     <h2 class="text-2xl mb-4">Filled Text Areas</h2>
@@ -236,4 +233,4 @@
       automatically grow as needed. This behavior is implemented using Unpoly.js for seamless, JavaScript-enhanced interactions.
     </p>
   </section>
-{% endblock %}
+{% endblock page_content %}

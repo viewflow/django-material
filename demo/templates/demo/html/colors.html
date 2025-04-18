@@ -1,13 +1,10 @@
-{% extends 'material/base_page.html' %}
+{% extends 'demo/html/base_page.html' %}
 {% load i18n %}
 
-{% block content %}
-  <c-breadcrumbs.container class="mb-2">
-    <c-breadcrumbs.home href="{% url 'index' %}"></c-breadcrumbs.home>
-    <c-breadcrumbs.item current="true">Colors</c-breadcrumbs.item>
-  </c-breadcrumbs.container>
-  
-  <h1 class="text-3xl font-medium mb-8">Color System</h1>
+{% block page_breadcrumb %}Colors{% endblock %}
+{% block page_title %}Color System{% endblock %}
+
+{% block page_content %}
   
   <p class="mb-6">
     Django Material implements Material Design 3 color system with a dynamic and accessible color palette.
@@ -704,4 +701,4 @@
       </div>
     </div>
   </section>
-{% endblock %}
+{% endblock page_content %}

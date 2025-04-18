@@ -1,13 +1,10 @@
-{% extends 'material/base_page.html' %}
+{% extends 'demo/html/base_page.html' %}
 {% load i18n %}
 
-{% block content %}
-  <c-breadcrumbs.container class="mb-2">
-    <c-breadcrumbs.home href="{% url 'index' %}"></c-breadcrumbs.home>
-    <c-breadcrumbs.item current="true">Lists</c-breadcrumbs.item>
-  </c-breadcrumbs.container>
-  
-  <h1 class="text-3xl font-medium mb-8">List Components</h1>
+{% block page_breadcrumb %}Lists{% endblock %}
+{% block page_title %}List Components{% endblock %}
+
+{% block page_content %}
   
   <section id="standard-lists" class="mb-12">
     <h2 class="text-2xl mb-4">Standard Lists</h2>
@@ -371,4 +368,4 @@
       </c-table.container>
     </div>
   </section>
-{% endblock %}
+{% endblock page_content %}
