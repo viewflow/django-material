@@ -1,0 +1,64 @@
+{% load i18n %}
+
+<c-nav.container>
+  {% if site.title %}
+  <c-slot name="header">
+    <div class="flex items-center gap-2 px-3 py-2">
+      {% if site.logo %}
+        <img src="{{ site.logo }}" alt="{{ site.title }} logo" class="h-8 w-auto">
+      {% endif %}
+      <h2 class="text-xl font-medium">
+        {% if site.parent %}
+          {% trans site.title %}
+        {% else %}
+          {% trans 'Applications' %}
+        {% endif %}
+      </h2>
+    </div>
+  </c-slot>
+  {% endif %}
+  
+  {% block back_link %}
+    {% if site.parent %}
+      {% reverse site.parent 'index' as parent_index %}
+      {% if parent_index %}
+        <c-nav.item href="{{ parent_index }}" icon="arrow_back">
+          {% trans 'Back' %}
+        </c-nav.item>
+      {% endif %}
+    {% endif %}
+  {% endblock %}
+  
+  {% block app_links %}
+    {% for app in site.menu_items %}
+      {% if app|has_perm:request.user %}
+        {% reverse app 'index' as index_url %}
+        <c-nav.item 
+          href="{{ index_url }}" 
+          icon="{{ app.icon|default:'apps' }}"
+          {% if app.turbo_disabled or viewset.turbo_disabled %}up_target="^body"{% endif %}>
+          {% trans app.title %}
+        </c-nav.item>
+        {% block app_links_extra %}{% endblock %}
+      {% endif %}
+    {% empty %}
+      <li class="px-4 py-2 text-sm text-error">
+        {% trans 'No applications found.' %}
+      </li>
+    {% endfor %}
+  {% endblock %}
+  
+  {% if user.is_authenticated %}
+  <c-slot name="footer">
+    <div class="w-full flex justify-between items-center px-3">
+      <div class="flex items-center gap-2">
+        <span class="material-symbols-rounded">account_circle</span>
+        <span class="text-sm">{{ user.username }}</span>
+      </div>
+      {% if user.is_authenticated %}
+        <c-button.icon variant="text" href="{% url 'admin:logout' %}" aria_label="{% trans 'Logout' %}">logout</c-button.icon>
+      {% endif %}
+    </div>
+  </c-slot>
+  {% endif %}
+</c-nav.container>
