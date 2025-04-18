@@ -5,13 +5,105 @@ from material.urls import Site, Application
 
 
 cotton = Application(
-    title="HTML Compoments",
+    title="Compoments",
     app_name="html",
     urlpatterns=[
         path(
+            "breadcrumbs/",
+            TemplateView.as_view(template_name="demo/html/breadcrumbs.html"),
+            name="breadcrumbs",
+        ),
+        path(
+            "buttons/",
+            TemplateView.as_view(template_name="demo/html/buttons.html"),
+            name="buttons",
+        ),
+        path(
+            "cards/",
+            TemplateView.as_view(template_name="demo/html/cards.html"),
+            name="cards",
+        ),
+        path(
+            "checkboxes/",
+            TemplateView.as_view(template_name="demo/html/checkboxes.html"),
+            name="checkboxes",
+        ),
+        path(
             "colors/",
-            TemplateView.as_view(template_name="demo/colors.html"),
+            TemplateView.as_view(template_name="demo/html/colors.html"),
             name="colors",
+        ),
+        path(
+            "lists/",
+            TemplateView.as_view(template_name="demo/html/lists.html"),
+            name="lists",
+        ),
+        path(
+            "navigation/",
+            TemplateView.as_view(template_name="demo/html/navigation.html"),
+            name="navigation",
+        ),
+        path(
+            "tables/",
+            TemplateView.as_view(template_name="demo/html/tables.html"),
+            name="tables",
+        ),
+        path(
+            "templates/",
+            TemplateView.as_view(template_name="demo/html/templates.html"),
+            name="templates",
+        ),
+        path(
+            "textareas/",
+            TemplateView.as_view(template_name="demo/html/textareas.html"),
+            name="textareas",
+        ),
+        path(
+            "textfields/",
+            TemplateView.as_view(template_name="demo/html/textfields.html"),
+            name="textfields",
+        ),
+    ],
+)
+
+api = Application(
+    title="Documentation",
+    app_name="api",
+    urlpatterns=[
+        path(
+            "",
+            TemplateView.as_view(template_name="demo/api/index.html"),
+            name="index",
+        ),
+        path(
+            "urls/",
+            TemplateView.as_view(template_name="demo/api/urls.html"),
+            name="urls",
+        ),
+        path(
+            "forms/",
+            TemplateView.as_view(template_name="demo/api/forms.html"),
+            name="forms",
+        ),
+        path(
+            "layout/",
+            TemplateView.as_view(template_name="demo/api/layout.html"),
+            name="layout",
+        ),
+        path(
+            "utils/",
+            TemplateView.as_view(template_name="demo/api/utils.html"),
+            name="utils",
+        ),
+        path(
+            "views/",
+            TemplateView.as_view(template_name="demo/api/views.html"),
+            name="views",
+        ),
+        path(
+            "templatetags/",
+            TemplateView.as_view(template_name="demo/api/templatetags.html"),
+            name="templatetags",
         ),
     ],
 )
@@ -20,6 +112,7 @@ site = Site(
     title="Django Vibe Components",
     viewsets=[
         cotton,
+        api,
     ],
     urlpatterns=[
         path("", TemplateView.as_view(template_name="demo/index.html"), name="index"),
@@ -29,82 +122,6 @@ site = Site(
 urlpatterns = [
     path("", site.urls),
     path("admin/", admin.site.urls),
-    path(
-        "buttons/",
-        TemplateView.as_view(template_name="demo/buttons.html"),
-        name="buttons",
-    ),
-    path(
-        "navigation/",
-        TemplateView.as_view(template_name="demo/navigation.html"),
-        name="navigation",
-    ),
-    path(
-        "tables/", TemplateView.as_view(template_name="demo/tables.html"), name="tables"
-    ),
-    path(
-        "templates/",
-        TemplateView.as_view(template_name="demo/templates.html"),
-        name="templates",
-    ),
-    path(
-        "breadcrumbs/",
-        TemplateView.as_view(template_name="demo/breadcrumbs.html"),
-        name="breadcrumbs",
-    ),
-    path(
-        "checkboxes/",
-        TemplateView.as_view(template_name="demo/checkboxes.html"),
-        name="checkboxes",
-    ),
-    path(
-        "textfields/",
-        TemplateView.as_view(template_name="demo/textfields.html"),
-        name="textfields",
-    ),
-    path(
-        "textareas/",
-        TemplateView.as_view(template_name="demo/textareas.html"),
-        name="textareas",
-    ),
-    path("cards/", TemplateView.as_view(template_name="demo/cards.html"), name="cards"),
-    path("lists/", TemplateView.as_view(template_name="demo/lists.html"), name="lists"),
     path("widgets/", include("demo.forms.widgets.urls")),
     path("showcases/", include("demo.forms.showcases.urls")),
-    # API Documentation
-    path(
-        "api/",
-        TemplateView.as_view(template_name="demo/api/index.html"),
-        name="api_index",
-    ),
-    path(
-        "api/urls/",
-        TemplateView.as_view(template_name="demo/api/urls.html"),
-        name="api_urls",
-    ),
-    path(
-        "api/forms/",
-        TemplateView.as_view(template_name="demo/api/forms.html"),
-        name="api_forms",
-    ),
-    path(
-        "api/layout/",
-        TemplateView.as_view(template_name="demo/api/layout.html"),
-        name="api_layout",
-    ),
-    path(
-        "api/utils/",
-        TemplateView.as_view(template_name="demo/api/utils.html"),
-        name="api_utils",
-    ),
-    path(
-        "api/views/",
-        TemplateView.as_view(template_name="demo/api/views.html"),
-        name="api_views",
-    ),
-    path(
-        "api/templatetags/",
-        TemplateView.as_view(template_name="demo/api/templatetags.html"),
-        name="api_templatetags",
-    ),
 ]
