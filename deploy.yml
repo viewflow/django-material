@@ -6,6 +6,8 @@
 #     ansible-playbook -u root --tags=update deploy.yml
 - name: "Django Material stack deployment"
   hosts: all
+  collections:
+    - community.postgresql.postgresql_user
   become: true
   gather_facts: false
   environment:
