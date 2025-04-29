@@ -18,6 +18,9 @@ dev = [
     "ipdb>=0.13.13",
     "ruff>=0.5.0",
 ]
+prod = [
+    "gunicorn>=21.2.0",
+]
 
 [tool.pyright]
 include = ["material", ]

@@ -1,11 +1,29 @@
+www.material.viewflow.io {
+  redir https://material.viewflow.io{uri}
+}
+
 material.viewflow.io {
-    root * {{ project_dir }}/static
-    handle_path /media/* {
-        root * {{ project_dir }}
+  encode gzip
+  header Strict-Transport-Security "max-age=31536000; preload"
+  
+  @excludeDirs {
+    not path /static/* /media/*
+  }
+  reverse_proxy @excludeDirs unix//run/material/material-web.sock
+  
+  # Handle static files
+  handle /static/* {
+    uri strip_prefix /static
+    file_server {
+      root {{ project_dir }}/static/
     }
-    handle {
-        reverse_proxy unix//run/material/material-web.sock
-        encode gzip
-        file_server
+  }
+  
+  # Handle media files
+  handle /media/* {
+    uri strip_prefix /media
+    file_server {
+      root {{ project_dir }}/media/
     }
+  }
 }

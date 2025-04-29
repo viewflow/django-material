@@ -7,7 +7,7 @@
 - name: "Django Material stack deployment"
   hosts: all
   collections:
-    - community.postgresql.postgresql_user
+    - community.postgresql
   become: true
   gather_facts: false
   environment:
@@ -18,7 +18,7 @@
     ansible_python_interpreter: /usr/bin/python3.12
     project_user: material
     project_group: caddy
-    project_dir: /srv/django-material
+    project_dir: /srv/material
     venv_path: "{{ project_dir }}/.venv"
   handlers:
 
@@ -45,7 +45,7 @@
         path: "{{ project_dir }}"
         state: directory
         mode: "0755"
-    
+
     - name: "System | Add caddy repository"
       ansible.builtin.apt_repository:
         repo: deb [trusted=yes] https://apt.fury.io/caddy/ /
@@ -63,13 +63,17 @@
           - python3-pip         # Actual pip for ansible
           - python3-venv        # Allows creating virtual environment
           - python3-dev         # Setup the python dev package
+          
+    - name: "System | Install uv package manager"
+      ansible.builtin.shell: "{{ ansible_python_interpreter }} -m pip install uv --break-system-packages"
 
     - name: "System | Create system user"
       ansible.builtin.user:
         name: "{{ project_user }}"
         group: caddy
         system: true
-        create_home: false
+        create_home: true
+        home: "{{ project_dir }}"
 
     - name: "System | MSMTP configuration"
       ansible.builtin.copy:
@@ -145,8 +149,8 @@
 
     - name: "Project | Synchronize source code"
       ansible.posix.synchronize:
-        src: .
-        dest: "/srv"
+        src: "./"
+        dest: "/srv/material"
         delete: true
         use_ssh_args: true
         rsync_opts:
@@ -173,7 +177,7 @@
       tags: update
 
     - name: "Project | Install python dependencies"
-      ansible.builtin.shell: "{{ ansible_python_interpreter }} -m venv {{ venv_path }} && {{ venv_path }}/bin/pip install -e ."
+      ansible.builtin.shell: "uv sync --group prod"
       args:
         chdir: "{{ project_dir }}"
       become: true
@@ -189,24 +193,6 @@
         decrypt: true
         mode: "u+r"
       when: source.changed
-
-    - name: "Django | Install Gunicorn"
-      ansible.builtin.shell: "{{ venv_path }}/bin/pip install gunicorn"
-      args:
-        chdir: "{{ project_dir }}"
-      become: true
-      become_user: "{{ project_user }}"
-      when: source.changed
-      tags: update
-
-    - name: "Project | Build CSS and JS"
-      ansible.builtin.shell: "npm ci && npm run build:css && npm run build:js"
-      args:
-        chdir: "{{ project_dir }}"
-      become: true
-      become_user: "{{ project_user }}"
-      when: source.changed
-      tags: update
 
     - name: "Django | Collect static files"
       ansible.builtin.shell: "{{ venv_path }}/bin/python manage.py collectstatic --noinput"
