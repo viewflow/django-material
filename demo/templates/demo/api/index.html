@@ -60,32 +60,37 @@
   <h2 class="text-2xl font-medium mb-4">API Documentation</h2>
   
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-    <a href="{% url 'api_urls' %}" class="block p-6 bg-surface shadow-sm hover:bg-primary hover:text-on-primary hover:shadow-md rounded-3xl transition-all">
+    <a href="{% url 'api:urls' %}" class="block p-6 bg-surface shadow-sm hover:bg-primary hover:text-on-primary hover:shadow-md rounded-3xl transition-all">
       <h2 class="text-xl font-medium mb-2">URL Routing</h2>
       <p>Class-based URL routing system with automatic namespace handling</p>
     </a>
     
-    <a href="{% url 'api_forms' %}" class="block p-6 bg-surface shadow-sm hover:bg-primary hover:text-on-primary hover:shadow-md rounded-3xl transition-all">
+    <a href="{% url 'api:forms' %}" class="block p-6 bg-surface shadow-sm hover:bg-primary hover:text-on-primary hover:shadow-md rounded-3xl transition-all">
       <h2 class="text-xl font-medium mb-2">Forms API</h2>
       <p>Advanced form handling with Material Design styling</p>
     </a>
     
-    <a href="{% url 'api_layout' %}" class="block p-6 bg-surface shadow-sm hover:bg-primary hover:text-on-primary hover:shadow-md rounded-3xl transition-all">
+    <a href="{% url 'api:layout' %}" class="block p-6 bg-surface shadow-sm hover:bg-primary hover:text-on-primary hover:shadow-md rounded-3xl transition-all">
       <h2 class="text-xl font-medium mb-2">Layout API</h2>
       <p>Responsive layout components and grid system</p>
     </a>
     
-    <a href="{% url 'api_utils' %}" class="block p-6 bg-surface shadow-sm hover:bg-primary hover:text-on-primary hover:shadow-md rounded-3xl transition-all">
+    <a href="{% url 'api:middleware' %}" class="block p-6 bg-surface shadow-sm hover:bg-primary hover:text-on-primary hover:shadow-md rounded-3xl transition-all">
+      <h2 class="text-xl font-medium mb-2">Middleware</h2>
+      <p>Auto-configured middleware components with permission handling</p>
+    </a>
+    
+    <a href="{% url 'api:utils' %}" class="block p-6 bg-surface shadow-sm hover:bg-primary hover:text-on-primary hover:shadow-md rounded-3xl transition-all">
       <h2 class="text-xl font-medium mb-2">Utilities</h2>
       <p>Helper functions and utilities for common tasks</p>
     </a>
     
-    <a href="{% url 'api_views' %}" class="block p-6 bg-surface shadow-sm hover:bg-primary hover:text-on-primary hover:shadow-md rounded-3xl transition-all">
+    <a href="{% url 'api:views' %}" class="block p-6 bg-surface shadow-sm hover:bg-primary hover:text-on-primary hover:shadow-md rounded-3xl transition-all">
       <h2 class="text-xl font-medium mb-2">Views</h2>
       <p>Class-based views with Material Design integration</p>
     </a>
     
-    <a href="{% url 'api_templatetags' %}" class="block p-6 bg-surface shadow-sm hover:bg-primary hover:text-on-primary hover:shadow-md rounded-3xl transition-all">
+    <a href="{% url 'api:templatetags' %}" class="block p-6 bg-surface shadow-sm hover:bg-primary hover:text-on-primary hover:shadow-md rounded-3xl transition-all">
       <h2 class="text-xl font-medium mb-2">Template Tags</h2>
       <p>Custom template tags and filters for enhanced templates</p>
     </a>
@@ -131,11 +136,12 @@ INSTALLED_APPS = [
 
 {% block nav_items %}
 <c-nav.item icon="home" href="{% url 'index' %}">Home</c-nav.item>
-<c-nav.item icon="code" href="{% url 'api_index' %}" active="true">API Documentation</c-nav.item>
-<c-nav.item icon="description" href="{% url 'api_urls' %}">URL Routing</c-nav.item>
-<c-nav.item icon="create" href="{% url 'api_forms' %}">Forms API</c-nav.item>
-<c-nav.item icon="grid_view" href="{% url 'api_layout' %}">Layout API</c-nav.item>
-<c-nav.item icon="build" href="{% url 'api_utils' %}">Utilities</c-nav.item>
-<c-nav.item icon="layers" href="{% url 'api_views' %}">Views</c-nav.item>
-<c-nav.item icon="tag" href="{% url 'api_templatetags' %}">Template Tags</c-nav.item>
+<c-nav.item icon="code" href="{% url 'api:index' %}" active="true">API Documentation</c-nav.item>
+<c-nav.item icon="description" href="{% url 'api:urls' %}">URL Routing</c-nav.item>
+<c-nav.item icon="create" href="{% url 'api:forms' %}">Forms API</c-nav.item>
+<c-nav.item icon="grid_view" href="{% url 'api:layout' %}">Layout API</c-nav.item>
+<c-nav.item icon="security" href="{% url 'api:middleware' %}">Middleware</c-nav.item>
+<c-nav.item icon="build" href="{% url 'api:utils' %}">Utilities</c-nav.item>
+<c-nav.item icon="layers" href="{% url 'api:views' %}">Views</c-nav.item>
+<c-nav.item icon="tag" href="{% url 'api:templatetags' %}">Template Tags</c-nav.item>
 {% endblock %}

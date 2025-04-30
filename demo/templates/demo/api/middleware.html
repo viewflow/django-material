@@ -1,0 +1,108 @@
+{% extends 'material/base_page.html' %}
+{% load i18n static %}
+
+{% block content %}
+  <c-breadcrumbs.container class="mb-2">
+    <c-breadcrumbs.home href="{% url 'index' %}"></c-breadcrumbs.home>
+    <c-breadcrumbs.item href="{% url 'api:index' %}">API Documentation</c-breadcrumbs.item>
+    <c-breadcrumbs.item current="true">Middleware</c-breadcrumbs.item>
+  </c-breadcrumbs.container>
+  
+  <h1 class="text-3xl font-medium mb-6">Middleware API Documentation</h1>
+
+  <p class="mb-6">
+    Django Vibe provides middleware components that enhance Django's request/response processing 
+    with Material Design-specific features.
+  </p>
+
+  <c-card.elevated class="p-6 mb-6">
+    <h2 class="text-2xl mb-4">SiteMiddleware</h2>
+    <p class="mb-4">
+      The <code>SiteMiddleware</code> processes site and app permissions based on URL patterns and
+      adds context data to template responses.
+    </p>
+
+    <h3 class="text-xl font-medium mt-6 mb-3">Automatic Configuration</h3>
+    <div class="p-4 bg-primary-container mb-4 rounded-lg">
+      <p class="font-medium">
+        When using the default app configuration (<code>'material'</code> in <code>INSTALLED_APPS</code>), 
+        this middleware is automatically added to your middleware stack.
+      </p>
+    </div>
+    
+    <p class="mb-4">
+      The middleware is automatically added through the <code>MaterialConfig</code> default app configuration.
+      This means you don't need to manually add it to your <code>MIDDLEWARE</code> setting.
+    </p>
+
+    <h3 class="text-xl font-medium mt-6 mb-3">Manual Configuration</h3>
+    <p class="mb-4">
+      If you prefer to manually configure the middleware, you can use the <code>MaterialManualConfig</code>:
+    </p>
+
+    <pre class="bg-surface-variant p-4 rounded mb-6 overflow-x-auto"><code># In settings.py
+INSTALLED_APPS = [
+    # Replace 'material' with:
+    'material.apps.MaterialManualConfig',
+    # ...
+]
+
+MIDDLEWARE = [
+    # ...
+    'material.middleware.SiteMiddleware',
+    # ...
+]</code></pre>
+
+    <h3 class="text-xl font-medium mt-6 mb-3">How It Works</h3>
+    <p class="mb-3">The middleware performs the following functions:</p>
+    <ol class="list-decimal ml-8 mb-6">
+      <li class="mb-2">Checks if the user has permission to access the current site and app</li>
+      <li class="mb-2">Adds site and app objects to the <code>request.resolver_match</code> for view access</li>
+      <li class="mb-2">Injects app context data into template responses</li>
+    </ol>
+
+    <h3 class="text-xl font-medium mt-6 mb-3">Permission Checking</h3>
+    <p class="mb-4">
+      The middleware checks for <code>has_view_permission(user)</code> methods on both site and app objects
+      that are provided in the URL pattern's <code>extra</code> dictionary. If permissions are not granted,
+      a <code>PermissionDenied</code> exception is raised.
+    </p>
+    
+    <pre class="bg-surface-variant p-4 rounded mb-6 overflow-x-auto"><code># Example URL pattern with site and app objects
+from material.urls import Site, Application
+
+app = Application(
+    title="My App",
+    app_name="myapp",
+    # ...
+)
+
+site = Site(
+    title="My Site",
+    viewsets=[app],
+    # ...
+)
+
+urlpatterns = [
+    path('', site.urls),  # SiteMiddleware will check permissions
+]</code></pre>
+
+    <h3 class="text-xl font-medium mt-6 mb-3">Context Data</h3>
+    <p class="mb-4">
+      If an app object has a <code>get_context_data(request)</code> method, the middleware will call it
+      and add the returned data to the template response context.
+    </p>
+  </c-card.elevated>
+{% endblock %}
+
+{% block nav_items %}
+<c-nav.item icon="home" href="{% url 'index' %}">Home</c-nav.item>
+<c-nav.item icon="code" href="{% url 'api:index' %}">API Documentation</c-nav.item>
+<c-nav.item icon="description" href="{% url 'api:urls' %}">URL Routing</c-nav.item>
+<c-nav.item icon="create" href="{% url 'api:forms' %}">Forms API</c-nav.item>
+<c-nav.item icon="grid_view" href="{% url 'api:layout' %}">Layout API</c-nav.item>
+<c-nav.item icon="security" href="{% url 'api:middleware' %}" active="true">Middleware</c-nav.item>
+<c-nav.item icon="build" href="{% url 'api:utils' %}">Utilities</c-nav.item>
+<c-nav.item icon="layers" href="{% url 'api:views' %}">Views</c-nav.item>
+<c-nav.item icon="tag" href="{% url 'api:templatetags' %}">Template Tags</c-nav.item>
+{% endblock %}

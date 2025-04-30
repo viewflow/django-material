@@ -91,6 +91,11 @@ api = Application(
             name="layout",
         ),
         path(
+            "middleware/",
+            TemplateView.as_view(template_name="demo/api/middleware.html"),
+            name="middleware",
+        ),
+        path(
             "utils/",
             TemplateView.as_view(template_name="demo/api/utils.html"),
             name="utils",
