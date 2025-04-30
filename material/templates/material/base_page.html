@@ -1,4 +1,4 @@
-{% extends 'material/base.html' %}
+{% extends 'material/base.html' %}{% load i18n %}
 
 {% block body %}
   {% block nav %}
@@ -7,10 +7,24 @@
         {% block nav_header %}{% endblock nav_header %}
       </c-slot>
       
-      {% block nav_items %}{% endblock nav_items %}
+      {% block nav_items %}
+      {% if site and site.menu_template_name %}{% include site.menu_template_name %}{% endif %}
+      {% endblock nav_items %}
       
       <c-slot name="footer">
-        {% block nav_footer %}{% endblock nav_footer %}
+        {% block nav_footer %}
+          {% if user.is_authenticated %}
+          <div class="w-full flex justify-between items-center px-3">
+            <div class="flex items-center gap-2">
+              <span class="material-symbols-rounded">account_circle</span>
+              <span class="text-sm">{{ user.username }}</span>
+            </div>
+            {% if user.is_authenticated %}
+              <c-button.icon variant="text" href="{% url 'admin:logout' %}" aria_label="{% trans 'Logout' %}">logout</c-button.icon>
+            {% endif %}
+          </div>
+          {% endif %}    
+        {% endblock nav_footer %}
       </c-slot>
     </c-nav.container>
   {% endblock nav %}
