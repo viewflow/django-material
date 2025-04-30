@@ -1,47 +1,74 @@
 """
-Template tags for rendering form layouts.
+Template tags for rendering forms, templates, and handling viewset URLs.
 """
 
+from typing import Any, Dict, List, Optional, Tuple, Union
+
 from django import template
-from django.template.base import Parser, Token
+from django.urls import NoReverseMatch
+from django.utils.html import conditional_escape
+from django.template.loader import get_template
+from django.template.context import Context
+from django.http import HttpRequest
+from django.forms import Form
+
+from material.urls.base import Viewset
 
 register = template.Library()
 
 
-@register.tag
-def render(parser: Parser, token: Token) -> "RenderNode":
+@register.simple_tag
+def render(form: Form, layout: Optional[Any] = None) -> str:
     """
     Render a form using a specified layout.
 
-    Usage: {% render form form.layout %}
+    Usage:
+      {% render form form.layout %}
+      {% render form %}
     """
-    bits = token.split_contents()
-    if len(bits) != 3:
-        raise template.TemplateSyntaxError(f"'{bits[0]}' tag requires two arguments")
+    if layout is None:
+        # If no layout is specified, render the form normally
+        return form.render()
 
-    form_var = bits[1]
-    layout_var = bits[2]
-
-    return RenderNode(form_var, layout_var)
+    return layout.render(form)
 
 
-class RenderNode(template.Node):
-    """Node for rendering a form with a specific layout."""
+@register.simple_tag(takes_context=True)
+def reverse(context: Context, viewset: Viewset, view_name: str, *args: Any, **kwargs: Any) -> str:
+    """
+    Reverse a URL from a viewset.
 
-    def __init__(self, form_var: str, layout_var: str) -> None:
-        self.form_var = template.Variable(form_var)
-        self.layout_var = template.Variable(layout_var)
+    Example:
+        {% reverse viewset 'view_name' arg1 arg2 name1=val1 name2=val2 as var %}
+    """
+    if not isinstance(viewset, Viewset):
+        raise template.TemplateSyntaxError(
+            f"reverse '{view_name}' first argument must be a viewset instance, got '{viewset}'"
+        )
 
-    def render(self, context: template.Context) -> str:
-        form = self.form_var.resolve(context)
-
+    try:
+        current_app = context.request.current_app
+    except AttributeError:
         try:
-            layout = self.layout_var.resolve(context)
-        except template.VariableDoesNotExist:
-            layout = None
+            current_app = context.request.resolver_match.namespace
+        except AttributeError:
+            current_app = None
 
-        if layout is None:
-            # If no layout is specified, render the form normally
-            return form.render()
+    try:
+        url = viewset.reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+        return url
+    except NoReverseMatch:
+        return ""
 
-        return layout.render(form, context)
+
+@register.filter
+def has_perm(obj: Any, user: Any) -> bool:
+    """
+    Check if a user has permission to view an object.
+
+    Example:
+        {% if app|has_perm:request.user %}
+    """
+    if hasattr(obj, "has_view_permission"):
+        return obj.has_view_permission(user)
+    return True

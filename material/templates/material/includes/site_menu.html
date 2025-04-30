@@ -1,5 +1,5 @@
-{% load i18n %}
-ddd
+{% load material i18n %}
+
 {% if site.parent %}
   {% reverse site.parent 'index' as parent_index %}
   {% if parent_index %}
@@ -14,8 +14,7 @@ ddd
     {% reverse app 'index' as index_url %}
     <c-nav.item 
       href="{{ index_url }}" 
-      icon="{{ app.icon|default:'apps' }}"
-      {% if app.turbo_disabled or viewset.turbo_disabled %}up_target="^body"{% endif %}>
+      icon="{{ app.icon|default:'apps' }}">
       {% trans app.title %}
     </c-nav.item>
     {% block app_links_extra %}{% endblock %}
