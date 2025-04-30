@@ -17,6 +17,7 @@ class MaterialConfig(AppConfig):
     if it's not already included.
     """
     name = "material"
+    default = True
     verbose_name = "Material Design"
     
     def ready(self):
