@@ -68,3 +68,6 @@
   * [ ] Select (native like in angular material)
   * [ ] Formsets
 
+## Documentation
+
+- [ ] Menu system explanation (menu_path, templates, sample flat menus)
