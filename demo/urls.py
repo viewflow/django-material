@@ -94,13 +94,6 @@ api = Application(
     icon="code",
     urlpatterns=[
         menu_path(
-            "",
-            TemplateView.as_view(template_name="demo/api/index.html"),
-            name="index",
-            icon="home",
-            title="Overview",
-        ),
-        menu_path(
             "urls/",
             TemplateView.as_view(template_name="demo/api/urls.html"),
             name="urls",
@@ -159,7 +152,13 @@ site = Site(
         api,
     ],
     urlpatterns=[
-        menu_path("", TemplateView.as_view(template_name="demo/index.html"), name="index", icon="home", title="Home"),
+        menu_path(
+            "",
+            TemplateView.as_view(template_name="demo/index.html"),
+            name="index",
+            icon="home",
+            title="Home",
+        ),
     ],
 )
 

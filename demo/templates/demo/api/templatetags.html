@@ -4,7 +4,7 @@
 {% block content %}
   <c-breadcrumbs.container class="mb-2">
     <c-breadcrumbs.home href="{% url 'index' %}"></c-breadcrumbs.home>
-    <c-breadcrumbs.item href="{% url 'api_index' %}">API Documentation</c-breadcrumbs.item>
+    <c-breadcrumbs.item href="{% url 'api:index' %}">API Documentation</c-breadcrumbs.item>
     <c-breadcrumbs.item current="true">Template Tags</c-breadcrumbs.item>
   </c-breadcrumbs.container>
   
@@ -21,15 +21,4 @@
       Please check back later for complete information about custom tags, filters, and template extensions.
     </p>
   </c-card.elevated>
-{% endblock %}
-
-{% block nav_items %}
-<c-nav.item icon="home" href="{% url 'index' %}">Home</c-nav.item>
-<c-nav.item icon="code" href="{% url 'api_index' %}">API Documentation</c-nav.item>
-<c-nav.item icon="description" href="{% url 'api_urls' %}">URL Routing</c-nav.item>
-<c-nav.item icon="create" href="{% url 'api_forms' %}">Forms API</c-nav.item>
-<c-nav.item icon="grid_view" href="{% url 'api_layout' %}">Layout API</c-nav.item>
-<c-nav.item icon="build" href="{% url 'api_utils' %}">Utilities</c-nav.item>
-<c-nav.item icon="layers" href="{% url 'api_views' %}">Views</c-nav.item>
-<c-nav.item icon="tag" href="{% url 'api_templatetags' %}" active="true">Template Tags</c-nav.item>
 {% endblock %}

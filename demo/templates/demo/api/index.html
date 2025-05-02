@@ -133,15 +133,3 @@ INSTALLED_APPS = [
     </div>
   </div>
 {% endblock %}
-
-{% block nav_items %}
-<c-nav.item icon="home" href="{% url 'index' %}">Home</c-nav.item>
-<c-nav.item icon="code" href="{% url 'api:index' %}" active="true">API Documentation</c-nav.item>
-<c-nav.item icon="description" href="{% url 'api:urls' %}">URL Routing</c-nav.item>
-<c-nav.item icon="create" href="{% url 'api:forms' %}">Forms API</c-nav.item>
-<c-nav.item icon="grid_view" href="{% url 'api:layout' %}">Layout API</c-nav.item>
-<c-nav.item icon="security" href="{% url 'api:middleware' %}">Middleware</c-nav.item>
-<c-nav.item icon="build" href="{% url 'api:utils' %}">Utilities</c-nav.item>
-<c-nav.item icon="layers" href="{% url 'api:views' %}">Views</c-nav.item>
-<c-nav.item icon="tag" href="{% url 'api:templatetags' %}">Template Tags</c-nav.item>
-{% endblock %}
