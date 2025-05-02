@@ -1,67 +1,89 @@
 from django.contrib import admin
 from django.urls import include, path
 from django.views.generic import TemplateView
-from material.urls import Site, Application
+from material.urls import Site, Application, menu_path
 
 
 cotton = Application(
     title="Compoments",
     app_name="html",
+    icon="layers",
     urlpatterns=[
-        path(
+        menu_path(
             "breadcrumbs/",
             TemplateView.as_view(template_name="demo/html/breadcrumbs.html"),
             name="breadcrumbs",
+            title="Breadcrumbs",
         ),
-        path(
+        menu_path(
             "buttons/",
             TemplateView.as_view(template_name="demo/html/buttons.html"),
             name="buttons",
+            icon="touch_app",
+            title="Buttons",
         ),
-        path(
+        menu_path(
             "cards/",
             TemplateView.as_view(template_name="demo/html/cards.html"),
             name="cards",
+            icon="style",
+            title="Cards",
         ),
-        path(
+        menu_path(
             "checkboxes/",
             TemplateView.as_view(template_name="demo/html/checkboxes.html"),
             name="checkboxes",
+            icon="check_box",
+            title="Checkboxes",
         ),
-        path(
+        menu_path(
             "colors/",
             TemplateView.as_view(template_name="demo/html/colors.html"),
             name="colors",
+            icon="palette",
+            title="Color System",
         ),
-        path(
+        menu_path(
             "lists/",
             TemplateView.as_view(template_name="demo/html/lists.html"),
             name="lists",
+            icon="format_list_bulleted",
+            title="Lists",
         ),
-        path(
+        menu_path(
             "navigation/",
             TemplateView.as_view(template_name="demo/html/navigation.html"),
             name="navigation",
+            icon="menu",
+            title="Navigation",
         ),
-        path(
+        menu_path(
             "tables/",
             TemplateView.as_view(template_name="demo/html/tables.html"),
             name="tables",
+            icon="table_chart",
+            title="Tables",
         ),
-        path(
+        menu_path(
             "templates/",
             TemplateView.as_view(template_name="demo/html/templates.html"),
             name="templates",
+            icon="layers",
+            title="Templates",
         ),
-        path(
+        menu_path(
             "textareas/",
             TemplateView.as_view(template_name="demo/html/textareas.html"),
             name="textareas",
+            icon="text_fields",
+            title="Text Areas",
         ),
-        path(
+        menu_path(
             "textfields/",
             TemplateView.as_view(template_name="demo/html/textfields.html"),
             name="textfields",
+            icon="input",
+            title="Text Fields",
         ),
     ],
 )
@@ -69,46 +91,63 @@ cotton = Application(
 api = Application(
     title="Documentation",
     app_name="api",
+    icon="code",
     urlpatterns=[
-        path(
+        menu_path(
             "",
             TemplateView.as_view(template_name="demo/api/index.html"),
             name="index",
+            icon="home",
+            title="Overview",
         ),
-        path(
+        menu_path(
             "urls/",
             TemplateView.as_view(template_name="demo/api/urls.html"),
             name="urls",
+            icon="link",
+            title="URL Configuration",
         ),
-        path(
+        menu_path(
             "forms/",
             TemplateView.as_view(template_name="demo/api/forms.html"),
             name="forms",
+            icon="description",
+            title="Forms API",
         ),
-        path(
+        menu_path(
             "layout/",
             TemplateView.as_view(template_name="demo/api/layout.html"),
             name="layout",
+            icon="grid_view",
+            title="Layout System",
         ),
-        path(
+        menu_path(
             "middleware/",
             TemplateView.as_view(template_name="demo/api/middleware.html"),
             name="middleware",
+            icon="swap_horiz",
+            title="Middleware System",
         ),
-        path(
+        menu_path(
             "utils/",
             TemplateView.as_view(template_name="demo/api/utils.html"),
             name="utils",
+            icon="build",
+            title="Utility Functions",
         ),
-        path(
+        menu_path(
             "views/",
             TemplateView.as_view(template_name="demo/api/views.html"),
             name="views",
+            icon="visibility",
+            title="Views Framework",
         ),
-        path(
+        menu_path(
             "templatetags/",
             TemplateView.as_view(template_name="demo/api/templatetags.html"),
             name="templatetags",
+            icon="code",
+            title="Template Tags",
         ),
     ],
 )
@@ -120,7 +159,7 @@ site = Site(
         api,
     ],
     urlpatterns=[
-        path("", TemplateView.as_view(template_name="demo/index.html"), name="index"),
+        menu_path("", TemplateView.as_view(template_name="demo/index.html"), name="index", icon="home", title="Home"),
     ],
 )
 

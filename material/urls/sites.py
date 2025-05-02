@@ -85,10 +85,25 @@ class Application(IndexViewMixin, Viewset):
             return user.is_authenticated and user.has_perm(self.permission)
         return True
 
-    def menu_items(self) -> Iterator[AppMenuMixin]:
+    def menu_items(self) -> Iterator[AppMenuMixin | dict[str, Any]]:
+        # First yield the viewsets that are AppMenuMixin instances
         for viewset in self._children:
             if isinstance(viewset, AppMenuMixin):
                 yield viewset
+                
+        # Then yield URL patterns created with menu_path() as menu items
+        for url_pattern in self._get_urls():
+            # Check if this is a URLPattern with an icon attribute (created with menu_path)
+            if hasattr(url_pattern, 'icon'):
+                # Create a dictionary with the necessary properties for menu rendering
+                menu_item = {
+                    'title': getattr(url_pattern, 'title', url_pattern.name.replace('_', ' ').title() if url_pattern.name else ''),
+                    'icon': getattr(url_pattern, 'icon', 'dashboard'),
+                    'name': url_pattern.name,
+                    'pattern': url_pattern.pattern,
+                    'is_url_pattern': True
+                }
+                yield menu_item
 
 
 class Site(IndexViewMixin, Viewset):

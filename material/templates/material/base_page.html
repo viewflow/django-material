@@ -2,12 +2,13 @@
 
 {% block body %}
   {% block nav %}
-    <c-nav.container>
+    <c-nav.container id="main_nav">
       <c-slot name="header">
         {% block nav_header %}{% endblock nav_header %}
       </c-slot>
       
       {% block nav_items %}
+      {% url 'index' as index_url %}{% if index_url %}<c-nav.item icon="home" href="{{ index_url }}" up_target="main, #main_nav">Home</c-nav.item>{% endif %}      
       {% if site and site.menu_template_name %}{% include site.menu_template_name %}{% endif %}
       {% endblock nav_items %}
       

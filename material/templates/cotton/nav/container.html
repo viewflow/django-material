@@ -23,13 +23,14 @@
 <nav up-nav
      role="navigation" 
      aria-label="Main navigation"
-     class="{{ width }} {{ layout }} {{ styling }} {{ transitions }} {{ responsive }} {{ state }} {{ active_state }}">
+     class="{{ width }} {{ layout }} {{ styling }} {{ transitions }} {{ responsive }} {{ state }} {{ active_state }}"
+     {{ attrs }}>
   {% if header %}
     <div class="p-2">
       {{ header }}
     </div>
   {% endif %}
-  <ul role="list" class="flex-grow min-h-0 overflow-y-auto list-none [scrollbar-width:thin]">
+  <ul role="list" class="flex-grow min-h-0 overflow-hidden hover:overflow-y-auto list-none [scrollbar-width:thin] transition-all duration-300">
     {{ slot }}
   </ul>
   {% if footer %}

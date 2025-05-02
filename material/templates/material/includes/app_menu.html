@@ -1,0 +1,27 @@
+{% load material i18n %}
+
+<div class="border-l-2 ml-6 border-primary-container mb-2">
+  {% for item in app.menu_items %}
+    {% if item.is_url_pattern %}
+      {% url app.app_name|add:':'|add:item.name as item_url %}
+      <c-nav.item 
+        href="{{ item_url }}" 
+        up-alias="{{ item_url }}*"
+        icon="{{ item.icon }}">
+        {% trans item.title %}
+      </c-nav.item>
+    {% elif item|has_perm:request.user %}
+      {% reverse item 'index' as index_url %}
+      <c-nav.item 
+        href="{{ index_url }}" 
+        up-alias="{{ index_url }}*"
+        icon="{{ item.icon|default:'dashboard' }}">
+        {% trans item.title %}
+      </c-nav.item>
+    {% endif %}
+  {% empty %}
+    <li class="px-4 py-2 text-sm text-error pl-4 ml-4">
+      {% trans 'No menu entries found.' %}
+    </li>
+  {% endfor %}
+</div>

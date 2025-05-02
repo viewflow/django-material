@@ -4,6 +4,7 @@ from material.urls.base import (
     Route,
     Viewset,
     ViewsetMeta,
+    menu_path,
     route,
 )
 from material.urls.sites import Site, Application, AppMenuMixin
@@ -19,4 +20,5 @@ __all__ = [
     "Site",
     "Application",
     "AppMenuMixin",
+    "menu_path",
 ]

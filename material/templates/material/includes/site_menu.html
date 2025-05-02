@@ -14,10 +14,15 @@
     {% reverse app 'index' as index_url %}
     <c-nav.item 
       href="{{ index_url }}" 
+      up_target="main, #main_nav"
       icon="{{ app.icon|default:'apps' }}">
       {% trans app.title %}
     </c-nav.item>
-    {% block app_links_extra %}{% endblock %}
+    {% block app_links_extra %}
+    {% if app == request.resolver_match.app and app.menu_template_name %}
+      {% include app.menu_template_name %}
+    {% endif %}  
+    {% endblock %}
   {% endif %}
 {% empty %}
   <li class="px-4 py-2 text-sm text-error">
