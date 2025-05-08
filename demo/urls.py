@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.urls import include, path
 from django.views.generic import TemplateView
 from material.urls import Site, Application, menu_path
-
+from demo.crud.atlas.viewset import AtlasApp
 
 cotton = Application(
     title="Compoments",
@@ -150,6 +150,7 @@ site = Site(
     viewsets=[
         cotton,
         api,
+        AtlasApp(),
     ],
     urlpatterns=[
         menu_path(

@@ -24,7 +24,7 @@
           <!-- Page actions -->
           <div class="flex flex-wrap gap-3 mt-4 md:mt-0">
             {% for action in view.get_page_actions %}
-              <c-button.{{ action.style|default:"text" }} href="{{ action.url }}">
+              <c-button.text href="{{ action.url }}">
                 {{ action.label }}
               </c-button.{{ action.style|default:"text" }}>
             {% endfor %}
@@ -36,12 +36,12 @@
         <div class="mb-6">
           <form method="GET" class="flex gap-4">
             <div class="flex-grow">
-              <input type="search" name="_search" value="{{ request.GET._search|default:'' }}" 
+              <input type="search" name="x_search" value="{{ request.GET.x_search|default:'' }}" 
                      placeholder="{% trans 'Search' %}" 
                      class="w-full px-4 py-2 border border-outline-variant rounded-md focus:border-primary focus:outline-none">
             </div>
             <c-button.filled type="submit">{% trans 'Search' %}</c-button.filled>
-            {% if request.GET._search %}
+            {% if request.GET.x_search %}
               <c-button.text href="?">{% trans 'Clear' %}</c-button.text>
             {% endif %}
           </form>
@@ -55,18 +55,10 @@
               <c-table.header>
                 <c-table.header_row>
                   {% for column in view.list_columns.values %}
-                    <c-table.header 
-                      {% if column.orderby %}
-                        sortable="true"
-                        {% with column_ordering=view.columns_order|get_item:column %}
-                          {% if column_ordering == "asc" %}
-                            sort-direction="asc"
-                          {% elif column_ordering == "desc" %}
-                            sort-direction="desc"
-                          {% endif %}
-                        {% endwith %}
-                        href="?{% if request.GET._search %}_search={{ request.GET._search }}&{% endif %}{{ view.ordering_kwarg }}={{ column.attr_name }}"
-                      {% endif %}
+                    <c-table.header
+                      :sortable="column.orderby"
+                      :sort-direction="column.orderby and (view.columns_order|get_item:column)"
+                      :href="column.orderby and '?' + (request.GET._search and '_search=' + request.GET._search + '&' or '') + view.ordering_kwarg + '=' + column.attr_name"
                     >
                       {{ column.header }}
                     </c-table.header>
@@ -123,7 +115,7 @@
                 </div>
                 <div class="flex gap-3">
                   {% for action in bulk_actions %}
-                    <c-button.{{ action.style|default:"text" }} href="{{ action.url }}">
+                    <c-button.text href="{{ action.url }}">
                       {{ action.label }}
                     </c-button.{{ action.style|default:"text" }}>
                   {% endfor %}

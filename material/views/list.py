@@ -539,7 +539,8 @@ class BulkActionsMixin:
         """
         result = list(actions)
         if self.viewset is not None and hasattr(self.viewset, "get_list_bulk_actions"):
-            result = self.viewset.get_list_bulk_actions(self.request) + result
+            viewset_actions = self.viewset.get_list_bulk_actions(self.request)
+            result = list(viewset_actions) + result
         if self.bulk_actions:
             result = list(self.bulk_actions) + result
         return result
@@ -731,7 +732,8 @@ class BaseListModelView(generic.ListView):
         """
         result = list(actions)
         if self.viewset is not None and hasattr(self.viewset, "get_list_page_actions"):
-            result = self.viewset.get_list_page_actions(self.request) + result
+            viewset_actions = self.viewset.get_list_page_actions(self.request)
+            result = list(viewset_actions) + result
         if self.page_actions:
             result = list(self.page_actions) + result
         return result

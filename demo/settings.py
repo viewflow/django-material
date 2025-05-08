@@ -18,6 +18,7 @@ INSTALLED_APPS = [
     "django_cotton",
     "material",
     "tests",
+    "demo.crud.atlas",
 ]
 
 MIDDLEWARE = [

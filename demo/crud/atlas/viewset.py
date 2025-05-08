@@ -1,9 +1,8 @@
 from django.utils.translation import gettext_lazy as _
 
-from viewflow import Icon
-from viewflow.contrib.import_export import ExportViewsetMixin
-from viewflow.forms import Layout, FieldSet, Row, DependentModelSelect
-from viewflow.urls import (
+from material.contrib.import_export import ExportViewsetMixin
+from material.forms import AjaxModelSelect, Layout, FieldSet, Row, DependentModelSelect
+from material.urls import (
     Application,
     DetailViewMixin,
     DeleteViewMixin,
@@ -30,7 +29,7 @@ class CityViewset(ExportViewsetMixin, DetailViewMixin, DeleteViewMixin, ModelVie
 
     """
 
-    icon = Icon("location_city")
+    icon = "location_city"
     model = models.City
     list_columns = ("name", "country", "population")
     list_filter_fields = (
@@ -39,20 +38,14 @@ class CityViewset(ExportViewsetMixin, DetailViewMixin, DeleteViewMixin, ModelVie
     )
     list_search_fields = ["name"]
     queryset = model._default_manager.select_related("country")
-    try:
-        from viewflow.forms import AjaxModelSelect
-
-        form_widgets = {"country": AjaxModelSelect(lookups=["name__istartswith"])}
-    except ImportError:
-        # pro-only
-        pass
+    form_widgets = {"country": AjaxModelSelect(lookups=["name__istartswith"])}
 
     def get_create_form_class(self, request):
         """
         Custom form class that restricts capital city creation to admin users
         """
         from django import forms
-        from viewflow.forms import ModelForm
+        from material.forms import ModelForm
 
         class CityCreateForm(ModelForm):
             class Meta:
@@ -89,7 +82,7 @@ class ContinentViewset(ExportViewsetMixin, ModelViewset):
         surrounded_oceans: Returns a string listing the names of oceans surrounding a continent.
     """
 
-    icon = Icon("terrain")
+    icon = "terrain"
     model = models.Continent
     list_columns = (
         "name",
@@ -130,7 +123,7 @@ class ContinentViewset(ExportViewsetMixin, ModelViewset):
 
 
 class CountryViewset(DeleteViewMixin, ModelViewset):
-    icon = Icon("nature_people")
+    icon = "nature_people"
     update_form_class = forms.CountryForm
     model = models.Country
     list_columns = (
@@ -156,15 +149,13 @@ class CountryViewset(DeleteViewMixin, ModelViewset):
         if country.independence_day:
             return 1900 <= country.independence_day.year <= 2000
 
-    became_independent_in_20_century.short_description = _(
-        "Became independent in XX century"
-    )
+    became_independent_in_20_century.short_description = _("Became independent in XX century")
     became_independent_in_20_century.boolean = True
 
 
 ocean_viewset = ReadonlyModelViewset(
     app_name="ocean",
-    icon=Icon("directions_boat"),
+    icon="directions_boat",
     model=models.Ocean,
     list_columns=(
         "name",
@@ -174,7 +165,7 @@ ocean_viewset = ReadonlyModelViewset(
 
 
 class SeaViewset(DeleteViewMixin, ModelViewset):
-    icon = Icon("beach_access")
+    icon = "beach_access"
     model = models.Sea
     list_columns = (
         "name",
@@ -208,17 +199,17 @@ class SeaViewset(DeleteViewMixin, ModelViewset):
     def get_queryset(self, request):
         return self.model._default_manager.select_related("ocean", "parent")
 
-    @property
-    def list_filterset_initial(self):
-        ocean = models.Ocean.objects.filter(name="Atlantic").first()
-        if ocean:
-            return {"ocean": ocean.pk}
-        return None
+    # @property
+    # def list_filterset_initial(self):
+    #     ocean = models.Ocean.objects.filter(name="Atlantic").first()
+    #     if ocean:
+    #         return {"ocean": ocean.pk}
+    #     return None
 
 
 class AtlasApp(Application):
     title = "CRUD sample"
-    icon = Icon("extension")
+    icon = "extension"
     app_name = "atlas"
     permission = "atlas.can_view_city"
     viewsets = [

@@ -45,7 +45,7 @@ class Ocean(models.Model):
         """Format area with thousands separator."""
         return f"{self.area:,} km²"
 
-    formatted_area.short_description = _("Formatted Area")
+    # formatted_area.short_description = _("Formatted Area")
 
 
 class Sea(models.Model):
@@ -117,13 +117,13 @@ class Sea(models.Model):
             return f"{self.avg_depth} - {self.max_depth} m"
         return None
 
-    depth_range.short_description = _("Depth Range")
+    # depth_range.short_description = _("Depth Range")
 
     def child_seas_count(self):
         """Count of child seas."""
         return self.child_seas.count()
 
-    child_seas_count.short_description = _("Child Seas")
+    # child_seas_count.short_description = _("Child Seas")
 
 
 class Continent(models.Model):
@@ -214,7 +214,7 @@ class Continent(models.Model):
         """Format population with thousands separator."""
         return f"{self.population:,}"
 
-    formatted_population.short_description = _("Formatted Population")
+    # formatted_population.short_description = _("Formatted Population")
 
 
 class Country(models.Model):
@@ -270,7 +270,7 @@ class Country(models.Model):
             return years
         return None
 
-    years_since_independence.short_description = _("Years Independent")
+    # years_since_independence.short_description = _("Years Independent")
 
 
 class City(models.Model):
@@ -306,11 +306,11 @@ class City(models.Model):
         ordering = ["name"]
 
     def __str__(self):
-        return f"{self.name}, {self.country.name}"
+        return f"{self.name}, {self.country.name}" if self.country_id else self.name
 
     @property
     def formatted_population(self):
         """Format population with thousands separator."""
         return f"{self.population:,}"
 
-    formatted_population.short_description = _("Formatted Population")
+    # formatted_population.short_description = _("Formatted Population")
