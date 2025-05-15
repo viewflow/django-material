@@ -1,5 +1,5 @@
 {% extends request.resolver_match.app.base_template_name|default:'material/base_page.html' %}
-{% load i18n %}
+{% load i18n material %}
 
 {% block content %}
 <div class="container mx-auto px-4 py-8">
@@ -10,14 +10,14 @@
         <!-- Header -->
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
           <div>
-            <h1 class="text-2xl font-medium text-on-surface">{{ view.model|title }}</h1>
+            <h1 class="text-2xl font-medium text-on-surface">{{ page.paginator.object_list.model|title }}</h1>
             
             <!-- Breadcrumbs -->
             <c-breadcrumbs.container>
-              {% if view.viewset %}
-                <c-breadcrumbs.item href="../">{{ view.model|title }}</c-breadcrumbs.item>
-              {% endif %}
-              <c-breadcrumbs.item current="true">{% trans 'List' %}</c-breadcrumbs.item>
+              {% for parent in viewset.parents %}{% if forloop.counter0 %}
+                <c-breadcrumbs.item href="{% reverse parent 'index' %}">{{ parent.title }}</c-breadcrumbs.item>
+              {% endif %}{% endfor %}
+              <c-breadcrumbs.item current="true">{{ viewset.title }}</c-breadcrumbs.item>
             </c-breadcrumbs.container>
           </div>
           

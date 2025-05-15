@@ -257,6 +257,19 @@ wheels = [
 ]
 
 [[package]]
+name = "django-redis"
+version = "5.4.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "django" },
+    { name = "redis" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/83/9d/2272742fdd9d0a9f0b28cd995b0539430c9467a2192e4de2cea9ea6ad38c/django-redis-5.4.0.tar.gz", hash = "sha256:6a02abaa34b0fea8bf9b707d2c363ab6adc7409950b2db93602e6cb292818c42", size = 52567 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/b7/f1/63caad7c9222c26a62082f4f777de26389233b7574629996098bf6d25a4d/django_redis-5.4.0-py3-none-any.whl", hash = "sha256:ebc88df7da810732e2af9987f7f426c96204bf89319df4c6da6ca9a2942edd5b", size = 31119 },
+]
+
+[[package]]
 name = "django-stubs"
 version = "5.1.3"
 source = { registry = "https://pypi.org/simple" }
@@ -431,6 +444,7 @@ dev = [
     { name = "ansible" },
     { name = "black" },
     { name = "django-formtools" },
+    { name = "django-redis" },
     { name = "django-stubs" },
     { name = "ipdb" },
     { name = "ruff" },
@@ -453,6 +467,7 @@ dev = [
     { name = "ansible", specifier = ">=9.5.0" },
     { name = "black", specifier = ">=25.1.0" },
     { name = "django-formtools", specifier = ">=2.5.1" },
+    { name = "django-redis", specifier = ">=5.4.0" },
     { name = "django-stubs", specifier = ">=5.1.3" },
     { name = "ipdb", specifier = ">=0.13.13" },
     { name = "ruff", specifier = ">=0.5.0" },
@@ -600,6 +615,15 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/fe/0f/25911a9f080464c59fab9027482f822b86bf0608957a5fcc6eaac85aa515/PyYAML-6.0.2-cp313-cp313-musllinux_1_1_x86_64.whl", hash = "sha256:68ccc6023a3400877818152ad9a1033e3db8625d899c72eacb5a668902e4d652", size = 751597 },
     { url = "https://files.pythonhosted.org/packages/14/0d/e2c3b43bbce3cf6bd97c840b46088a3031085179e596d4929729d8d68270/PyYAML-6.0.2-cp313-cp313-win32.whl", hash = "sha256:bc2fa7c6b47d6bc618dd7fb02ef6fdedb1090ec036abab80d4681424b84c1183", size = 140527 },
     { url = "https://files.pythonhosted.org/packages/fa/de/02b54f42487e3d3c6efb3f89428677074ca7bf43aae402517bc7cca949f3/PyYAML-6.0.2-cp313-cp313-win_amd64.whl", hash = "sha256:8388ee1976c416731879ac16da0aff3f63b286ffdd57cdeb95f3f2e085687563", size = 156446 },
+]
+
+[[package]]
+name = "redis"
+version = "6.1.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/a6/af/e875d57383653e5d9065df8552de1deb7576b4d3cf3af90cde2e79ff7f65/redis-6.1.0.tar.gz", hash = "sha256:c928e267ad69d3069af28a9823a07726edf72c7e37764f43dc0123f37928c075", size = 4629300 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/28/5f/cf36360f80ae233bd1836442f5127818cfcfc7b1846179b60b2e9a4c45c9/redis-6.1.0-py3-none-any.whl", hash = "sha256:3b72622f3d3a89df2a6041e82acd896b0e67d9f54e9bcd906d091d23ba5219f6", size = 273750 },
 ]
 
 [[package]]

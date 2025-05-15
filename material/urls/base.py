@@ -159,6 +159,24 @@ class BaseViewset:
             )
         self._parent = value
 
+    def parents(self) -> list[BaseViewset]:
+        """
+        Get all parent viewsets in the hierarchy from root to immediate parent.
+        
+        This method traverses the viewset hierarchy upward, collecting all parent
+        viewsets in order from the root ancestor to the immediate parent of this viewset.
+        
+        Returns:
+            list[BaseViewset]: A list of parent viewsets in order from root to immediate parent.
+            Returns an empty list if this viewset has no parent.
+        """
+        result = []
+        current = self._parent
+        while current is not None:
+            result.append(current)
+            current = current._parent
+        return list(reversed(result))
+
     @property
     def urls(self) -> tuple[list[URLResolver], str | None, str | None]:
         """
@@ -462,14 +480,14 @@ def menu_path(
     view: Any,
     kwargs: Optional[dict[str, Any]] = None,
     name: Optional[str] = None,
-    icon: str = 'dashboard',
+    icon: str = "dashboard",
     title: Optional[str] = None,
 ) -> URLPattern:
     """
     Create a URL pattern with additional metadata for menu items.
 
     This function extends Django's path() function to include icon and title information,
-    which allows menu items to be displayed with appropriate icons and titles in the 
+    which allows menu items to be displayed with appropriate icons and titles in the
     application menu. The resulting paths can be included in an Application's urlpatterns.
 
     Args:
@@ -478,28 +496,28 @@ def menu_path(
         kwargs (Optional[dict[str, Any]]): Additional arguments to pass to the view
         name (Optional[str]): Name for this URL pattern, used in reverse resolution
         icon (str): Icon name for the menu item, defaults to 'dashboard'
-        title (Optional[str]): Custom title for the menu item. If not provided, 
+        title (Optional[str]): Custom title for the menu item. If not provided,
                               the name will be used (with underscores replaced by spaces)
 
     Returns:
         URLPattern: A URL pattern object with attached metadata
     """
     url_pattern = path(route, view, kwargs, name)
-    
+
     # Attach icon as metadata to the URL pattern
-    setattr(url_pattern, 'icon', icon)
-    
+    setattr(url_pattern, "icon", icon)
+
     # Attach title as metadata to the URL pattern
     if title is None and name:
-        title = name.replace('_', ' ').title()
-    setattr(url_pattern, 'title', title)
-    
+        title = name.replace("_", " ").title()
+    setattr(url_pattern, "title", title)
+
     # If view has a view_class attribute (class-based views), attach metadata there too
-    if hasattr(view, 'view_class'):
-        setattr(view.view_class, 'icon', icon)
+    if hasattr(view, "view_class"):
+        setattr(view.view_class, "icon", icon)
         if title:
-            setattr(view.view_class, 'title', title)
-    
+            setattr(view.view_class, "title", title)
+
     return url_pattern
 
 
