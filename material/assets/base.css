@@ -4,6 +4,10 @@
   --font-sans: "Roboto", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
+.djdt-hidden {
+  display: none;
+}
+
 /* Navigation - Unpoly Current Item Styling */
 .up-current {
   @apply bg-primary-container text-on-primary-container;

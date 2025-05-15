@@ -19,6 +19,7 @@
         {% url 'javascript-catalog' as javascript_catalog_url %}{% if javascript_catalog_url %}<script type="text/javascript" src="{{ javascript_catalog_url }}"></script>{% endif %}
         <script type="text/javascript" src="{% static 'material/js/unpoly.js' %}"></script>
         <script type="text/javascript" src="{% static 'material/js/material.js' %}"></script>
+        {% if debug %}<script type="text/javascript" src="{% static 'material/js/debug-toolbar-unpoly.js' %}"></script>{% endif %}
       {% endblock js %}
       {% block extrahead %}{% endblock %}
     </head>

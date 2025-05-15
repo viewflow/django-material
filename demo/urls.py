@@ -3,6 +3,7 @@ from django.urls import include, path
 from django.views.generic import TemplateView
 from material.urls import Site, Application, menu_path
 from demo.crud.atlas.viewset import AtlasApp
+import debug_toolbar
 
 cotton = Application(
     title="Compoments",
@@ -168,4 +169,5 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("widgets/", include("demo.forms.widgets.urls")),
     path("showcases/", include("demo.forms.showcases.urls")),
+    path("__debug__/", include(debug_toolbar.urls)),
 ]

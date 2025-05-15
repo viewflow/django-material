@@ -143,7 +143,7 @@ class BaseColumn:
         if value is None:
             return ""
         elif isinstance(value, datetime.datetime):
-            return formats.localize(timezone.template_localtime(value))
+            return formats.localize(timezone.localtime(value))
         elif isinstance(value, (datetime.date, datetime.time)):
             return formats.localize(value)
         elif isinstance(value, (int, float, decimal.Decimal)):
