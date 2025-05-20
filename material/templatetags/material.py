@@ -13,6 +13,7 @@ from django.http import HttpRequest
 from django.forms import Form
 
 from material.urls.base import Viewset
+from material.forms import MaterialFormRenderer
 
 register = template.Library()
 
@@ -28,7 +29,10 @@ def render(form: Form, layout: Optional[Any] = None) -> str:
     """
     if layout is None:
         # If no layout is specified, render the form normally
-        return form.render()
+        return form.render(
+            renderer=MaterialFormRenderer(),
+            template_name="material/django/forms/div.html",
+        )
 
     return layout.render(form)
 
