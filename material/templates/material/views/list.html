@@ -2,6 +2,21 @@
 {% load i18n material %}
 
 {% block content %}
+  <c-breadcrumbs.container>
+    <c-breadcrumbs.home href="{% url 'index' %}"></c-breadcrumbs.home>
+    {% for parent in viewset.parents %}{% if forloop.counter0 %}
+      <c-breadcrumbs.item href="{% reverse parent 'index' %}">{{ parent.title }}</c-breadcrumbs.item>
+    {% endif %}{% endfor %}
+    <c-breadcrumbs.item current="true">{{ viewset.title }}</c-breadcrumbs.item>
+  </c-breadcrumbs.container>
+
+  <h1 class="text-3xl font-medium mb-8">{% block page_title%}{{ viewset.title }}{% endblock %}</h1>
+
+  {% block page_content %}
+  {% endblock %}
+{% endblock content %}
+
+{% block content2 %}
 <div class="container mx-auto px-4 py-8">
   <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
     <div class="md:col-span-12">
@@ -130,4 +145,4 @@
     </div>
   </div>
 </div>
-{% endblock content %}
+{% endblock content2 %}
