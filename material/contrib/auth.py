@@ -35,9 +35,7 @@ class AuthenticationForm(auth_forms.AuthenticationForm):
         self.fields["username"].widget = forms.TextInput(
             attrs={"autofocus": True, "leading-icon": "account_box"},
         )
-        self.fields["password"].widget = forms.PasswordInput(
-            attrs={"leading-icon": "lock"}
-        )
+        self.fields["password"].widget = forms.PasswordInput(attrs={"leading-icon": "lock"})
 
 
 @method_decorator(user_passes_test(lambda u: u.is_authenticated), name="dispatch")
@@ -74,12 +72,8 @@ class ProfileView(generic.DetailView):
             file_name = "avatars/{}.png".format(request.user.pk)
             if default_storage.exists(file_name):
                 default_storage.delete(file_name)
-            default_storage.save(
-                file_name, form.cleaned_data["avatar"], max_length=512 * 1024
-            )
-            key = make_template_fragment_key(
-                "django-viewflow-avatar", [request.user.pk]
-            )
+            default_storage.save(file_name, form.cleaned_data["avatar"], max_length=512 * 1024)
+            key = make_template_fragment_key("django-viewflow-avatar", [request.user.pk])
             cache.delete(key)
             messages.add_message(
                 self.request,
@@ -92,9 +86,7 @@ class ProfileView(generic.DetailView):
                 f"{field}: " + "".join(error["message"] for error in errors)
                 for field, errors in form.errors.get_json_data(escape_html=True).items()
             )
-            messages.add_message(
-                self.request, messages.ERROR, message, fail_silently=True
-            )
+            messages.add_message(self.request, messages.ERROR, message, fail_silently=True)
         return self.get(request, *args, **kwargs)
 
 
@@ -103,9 +95,7 @@ def get_user_avatar_url(user):
 
     key = make_template_fragment_key("django-viewflow-avatar", [user.pk])
     url = cache.get(key)
-    if url is not None and "LocMemCache" not in settings.CACHES.get("default", {}).get(
-        "BACKEND"
-    ):
+    if url is not None and "LocMemCache" not in settings.CACHES.get("default", {}).get("BACKEND"):
         return url
 
     file_name = "avatars/{}.png".format(user.pk)
@@ -114,9 +104,7 @@ def get_user_avatar_url(user):
             modified = default_storage.get_modified_time(file_name)
         except NotImplementedError:
             modified = datetime.now()
-        url = default_storage.url(file_name) + "?timestamp={}".format(
-            modified.timestamp()
-        )
+        url = default_storage.url(file_name) + "?timestamp={}".format(modified.timestamp())
     else:
         if apps.is_installed("django.contrib.staticfiles"):
             from django.contrib.staticfiles.storage import staticfiles_storage
@@ -256,9 +244,7 @@ class AuthViewset(Viewset):
         :return: URL pattern for the password change view.
         """
         if self.allow_password_change:
-            return path(
-                "password_change/", self.pass_change_view, name="password_change"
-            )
+            return path("password_change/", self.pass_change_view, name="password_change")
 
     """
     Password Change Done
@@ -281,9 +267,7 @@ class AuthViewset(Viewset):
 
         :return: Configured password change done view class.
         """
-        return self.pass_change_done_view_class.as_view(
-            **self.get_pass_change_done_view_kwargs()
-        )
+        return self.pass_change_done_view_class.as_view(**self.get_pass_change_done_view_kwargs())
 
     @property
     def pass_change_done_path(self):
@@ -353,9 +337,7 @@ class AuthViewset(Viewset):
 
         :return: Configured password reset request done view class.
         """
-        return self.pass_reset_done_view_class.as_view(
-            **self.get_pass_reset_done_view_kwargs()
-        )
+        return self.pass_reset_done_view_class.as_view(**self.get_pass_reset_done_view_kwargs())
 
     @property
     def pass_reset_done_path(self):
@@ -488,7 +470,7 @@ class AuthViewset(Viewset):
 
     def get_allauth_providers(self):
         try:
-            from allauth.socialaccount import providers
+            from allauth.socialaccount import providers  # type: ignore
 
             return providers.registry.get_class_list()
         except ImportError:

@@ -7,21 +7,23 @@
 
 from django.apps import AppConfig
 from django.conf import settings
+from typing import List, Any
 
 
 class MaterialConfig(AppConfig):
     """
     Default Material app configuration that automatically installs middleware.
-    
+
     This configuration automatically adds the SiteMiddleware to your settings
     if it's not already included.
     """
-    name = "material"
-    default = True
-    verbose_name = "Material Design"
-    
-    def ready(self):
-        middleware_path = "material.middleware.SiteMiddleware"
+
+    name: str = "material"
+    default: bool = True
+    verbose_name: str = "Django Material"
+
+    def ready(self) -> None:
+        middleware_path: str = "material.middleware.SiteMiddleware"
         if middleware_path not in settings.MIDDLEWARE:
             settings.MIDDLEWARE.append(middleware_path)
 
@@ -29,14 +31,15 @@ class MaterialConfig(AppConfig):
 class MaterialManualConfig(AppConfig):
     """
     Manual Material app configuration without auto middleware setup.
-    
+
     Use this configuration if you prefer to set up middleware manually.
     To use this config, replace 'material' with 'material.apps.MaterialManualConfig'
     in your INSTALLED_APPS setting.
     """
-    name = "material"
-    verbose_name = "Material Design (Manual Setup)"
-    
-    def ready(self):
+
+    name: str = "material"
+    verbose_name: str = "Django Material"
+
+    def ready(self) -> None:
         # Does nothing, allowing for manual middleware setup
         pass

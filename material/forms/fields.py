@@ -4,10 +4,32 @@
 # This work is dual-licensed under AGPL defined in file 'LICENSE' with
 # LICENSE_EXCEPTION and the Commercial license defined in file 'COMM_LICENSE',
 # which is part of this source code package.
-from typing import Type
+from typing import (
+    Any,
+    Dict,
+    List,
+    Optional,
+    Type,
+    Union,
+    cast,
+    Callable,
+    ClassVar,
+    Iterable,
+    Mapping,
+    Set,
+    Tuple,
+    TYPE_CHECKING,
+)
+
+if TYPE_CHECKING:
+    from .forms import Form, ModelForm
+    from django.forms.fields import Field
 
 from django.core.exceptions import ObjectDoesNotExist
-from django.forms.models import inlineformset_factory
+from django.forms import BaseForm
+from django.forms.models import BaseModelForm, inlineformset_factory, BaseInlineFormSet
+from django.forms.formsets import BaseFormSet
+from django.db import models
 
 from .boundfield import CompositeBoundField
 from .widgets import FormWidget, FormSetWidget
@@ -19,49 +41,49 @@ class BaseCompositeField(object):
     with the ``django.forms.Field`` class.
     """
 
-    widget: Type[FormWidget]
-    show_hidden_initial = False
+    widget_class: ClassVar[Any] = FormWidget
+    show_hidden_initial: bool = False
 
     # Tracks each time a FormSetField instance is created. Used to retain
     # order.
-    creation_counter = 0
+    creation_counter: ClassVar[int] = 0
 
     def __init__(
         self,
-        required=True,
-        widget=None,
-        label=None,
-        help_text="",
-        localize=False,
-        disabled=False,
-        initial=None,
-    ):
-        self.required = required
-        self.label = label
-        self.help_text = help_text
-        self.disabled = disabled
-        self.initial = None
+        required: bool = True,
+        widget: Optional[Union[Type[FormWidget], FormWidget]] = None,
+        label: Optional[str] = None,
+        help_text: str = "",
+        localize: bool = False,
+        disabled: bool = False,
+        initial: Optional[Any] = None,
+    ) -> None:
+        self.required: bool = required
+        self.label: Optional[str] = label
+        self.help_text: str = help_text
+        self.disabled: bool = disabled
+        self.initial: Optional[Any] = None
 
-        widget = widget or self.widget
-        if isinstance(widget, type):
-            widget = widget()
+        widget_to_use = widget or self.widget_class
+        if isinstance(widget_to_use, type):
+            widget_to_use = widget_to_use()
 
         # Trigger the localization machinery if needed.
-        self.localize = localize
+        self.localize: bool = localize
         if self.localize:
-            widget.is_localized = True
+            widget_to_use.is_localized = True
 
         # Let the widget know whether it should display as required.
-        widget.is_required = self.required
+        widget_to_use.is_required = self.required
 
         # We do not call self.widget_attrs() here as the original field is
         # doing it.
 
-        self.widget = widget
+        self.widget = widget_to_use  # type: ignore
 
         # Increase the creation counter, and save our local copy.
-        self.creation_counter = BaseCompositeField.creation_counter
-        BaseCompositeField.creation_counter += 1
+        self._creation_counter: int = BaseCompositeField.creation_counter
+        BaseCompositeField.creation_counter += 1  # type: ignore
 
 
 class CompositeField(BaseCompositeField):
@@ -70,19 +92,25 @@ class CompositeField(BaseCompositeField):
     This field cannot be used directly, use a subclass of it.
     """
 
-    prefix_name = "composite"
+    prefix_name: str = "composite"
+    default_kwargs: Dict[str, Any] = {}
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
         super().__init__(*args, **kwargs)
 
         # Let the widget know about the field for easier complex renderings in
         # the template.
-        self.widget.field = self
+        # Note: FormWidget has a dynamic attribute 'field' that's not in the type annotations
+        # Ignore type error since CompositeBoundField is not a django Field but works at runtime
+        if hasattr(self.widget, 'field'):
+            self.widget.field = self  # type: ignore
 
-    def get_bound_field(self, form, field_name):
-        return CompositeBoundField(form, self, field_name)
+    def get_bound_field(self, form: "Form", field_name: str) -> CompositeBoundField:
+        """Return a CompositeBoundField instance for this field."""
+        # Type ignore because CompositeBoundField accepts our field type but pyright expects django Field
+        return CompositeBoundField(form, self, field_name)  # type: ignore
 
-    def get_prefix(self, form, name):
+    def get_prefix(self, form: "Form", name: str) -> str:
         """
         Return the prefix that is used for the formset.
         """
@@ -92,22 +120,21 @@ class CompositeField(BaseCompositeField):
             field_name=name,
         )
 
-    def get_initial(self, form, name):
+    def get_initial(self, form: "Form", name: str) -> Optional[Any]:
         """
         Get the initial data that got passed into the material form for this
         composite field. It should return ``None`` if no initial values where
         given.
         """
-
         if hasattr(form, "initial"):
             return form.initial.get(name, None)
         return None
 
-    def get_kwargs(self, form, name):
+    def get_kwargs(self, form: "Form", name: str) -> Dict[str, Any]:
         """
         Return the keyword arguments that are used to instantiate the formset.
         """
-        kwargs = {
+        kwargs: Dict[str, Any] = {
             "prefix": self.get_prefix(form, name),
             "initial": self.get_initial(form, name),
         }
@@ -158,18 +185,23 @@ class FormField(CompositeField):
     The first method (using ``kwargs``) will take precedence.
     """
 
-    prefix_name = "form"
-    widget = FormWidget
+    prefix_name: str = "form"
+    widget_class = FormWidget
 
-    def __init__(self, form_class, kwargs=None, **field_kwargs):
+    def __init__(
+        self, 
+        form_class: Type[BaseForm], 
+        kwargs: Optional[Dict[str, Any]] = None, 
+        **field_kwargs: Any
+    ) -> None:
         super().__init__(**field_kwargs)
 
-        self.form_class = form_class
+        self.form_class: Type[BaseForm] = form_class
         if kwargs is None:
             kwargs = {}
-        self.default_kwargs = kwargs
+        self.default_kwargs: Dict[str, Any] = kwargs
 
-    def get_form_class(self, form, name):
+    def get_form_class(self, form: "Form", name: str) -> Type[BaseForm]:
         """
         Return the form class that will be used for instantiation in
         ``get_form``. You can override this method in subclasses to change
@@ -177,7 +209,7 @@ class FormField(CompositeField):
         """
         return self.form_class
 
-    def get_form(self, form, name):
+    def get_form(self, form: "Form", name: str) -> BaseForm:
         """
         Get an instance of the form.
         """
@@ -186,7 +218,7 @@ class FormField(CompositeField):
         composite_form = form_class(
             data=form.data if form.is_bound else None,
             files=form.files if form.is_bound else None,
-            **kwargs
+            **kwargs,
         )
         return composite_form
 
@@ -230,13 +262,13 @@ class ModelFormField(FormField):
         to take care of saving the nested model form yourself.
     """
 
-    def get_initial(self, form, name):
+    def get_initial(self, form: "Form", name: str) -> Optional[Any]:
         """
         TODO: Fix, return form dictionary
         """
         return None
 
-    def get_instance(self, form, name):
+    def get_instance(self, form: "Form", name: str) -> Optional[models.Model]:
         """
         Provide an instance that shall be used when instantiating the
         modelform. The ``form`` argument is the material form instance that this
@@ -247,7 +279,7 @@ class ModelFormField(FormField):
         """
         return None
 
-    def get_kwargs(self, form, name):
+    def get_kwargs(self, form: "Form", name: str) -> Dict[str, Any]:
         """
         Return the keyword arguments that are used to instantiate the formset.
         The ``instance`` kwarg will be set to the value returned by
@@ -261,7 +293,7 @@ class ModelFormField(FormField):
         kwargs.setdefault("empty_permitted", not self.required)
         return kwargs
 
-    def shall_save(self, form, name, composite_form):
+    def shall_save(self, form: "Form", name: str, composite_form: BaseModelForm) -> bool:
         """
         Return ``True`` if the given ``composite_form`` (the nested form of
         this field) shall be saved. Return ``False`` if the form shall not be
@@ -274,7 +306,13 @@ class ModelFormField(FormField):
             return False
         return True
 
-    def save(self, form, name, composite_form, commit):
+    def save(
+        self, 
+        form: "Form", 
+        name: str, 
+        composite_form: BaseModelForm, 
+        commit: bool
+    ) -> Optional[models.Model]:
         """
         This method is called by
         :meth:`material.forms.ModelForm.save` in order to save the
@@ -290,13 +328,18 @@ class ModelFormField(FormField):
 
 class ForeignKeyFormField(ModelFormField):
     def __init__(
-        self, form_class, kwargs=None, field_name=None, blank=None, **field_kwargs
-    ):
+        self, 
+        form_class: Type[BaseModelForm], 
+        kwargs: Optional[Dict[str, Any]] = None, 
+        field_name: Optional[str] = None, 
+        blank: Optional[bool] = None, 
+        **field_kwargs: Any
+    ) -> None:
         super().__init__(form_class, kwargs, **field_kwargs)
-        self.field_name = field_name
-        self.blank = blank
+        self.field_name: Optional[str] = field_name
+        self.blank: Optional[bool] = blank
 
-    def get_kwargs(self, form, name):
+    def get_kwargs(self, form: "Form", name: str) -> Dict[str, Any]:
         kwargs = super().get_kwargs(form, name)
         if "instance" not in kwargs:
             kwargs.setdefault("instance", self.get_instance(form, name))
@@ -305,41 +348,51 @@ class ForeignKeyFormField(ModelFormField):
                 kwargs["empty_permitted"] = True
         return kwargs
 
-    def get_field_name(self, form, name):
+    def get_field_name(self, form: "Form", name: str) -> str:
         return self.field_name or name
 
-    def allow_blank(self, form, name):
+    def allow_blank(self, form: "Form", name: str) -> bool:
         """
         Allow blank determines if the form might be completely empty. If it's
         empty it will result in a None as the saved value for the ForeignKey.
         """
         if self.blank is not None:
             return self.blank
-        model = form._meta.model
+        # This is safe for ModelForm but not for Form, so we type-ignore it
+        # The FormMixin from our forms module ensures ModelForm has _meta.model
+        model = form._meta.model  # type: ignore
         field = model._meta.get_field(self.get_field_name(form, name))
         return field.blank
 
-    def get_form_class(self, form, name):
-        form_class = self.form_class
-        return form_class
+    def get_form_class(self, form: "Form", name: str) -> Type[BaseForm]:
+        return self.form_class
 
-    def get_instance(self, form, name):
+    def get_instance(self, form: "Form", name: str) -> Optional[models.Model]:
         try:
             field_name = self.get_field_name(form, name)
-            return getattr(form.instance, field_name)
+            # This is safe for ModelForm but not for Form, so we type-ignore it
+            return getattr(form.instance, field_name)  # type: ignore
         except ObjectDoesNotExist:
             return None
 
-    def save(self, form, name, composite_form, commit):
+    def save(
+        self, 
+        form: "Form", 
+        name: str, 
+        composite_form: BaseModelForm, 
+        commit: bool
+    ) -> Optional[models.Model]:
         # Support the ``empty_permitted`` attribute. This is set if the field
         # is ``blank=True`` .
         if composite_form.empty_permitted and not composite_form.has_changed():
             saved_obj = composite_form.instance
         else:
             saved_obj = super().save(form, name, composite_form, commit)
-        setattr(form.instance, self.get_field_name(form, name), saved_obj)
+        # This is safe for ModelForm but not for Form, so we type-ignore it
+        setattr(form.instance, self.get_field_name(form, name), saved_obj)  # type: ignore
         if commit:
-            form.instance.save()
+            # This is safe for ModelForm but not for Form, so we type-ignore it
+            form.instance.save()  # type: ignore
         else:
             raise NotImplementedError(
                 "ForeignKeyFormField cannot yet be used with non-commiting "
@@ -356,18 +409,23 @@ class FormSetField(CompositeField):
     are used when the ``formset_class`` is instantiated.
     """
 
-    prefix_name = "formset"
-    widget = FormSetWidget
+    prefix_name: str = "formset"
+    widget_class = FormSetWidget
 
-    def __init__(self, formset_class, kwargs=None, **field_kwargs):
+    def __init__(
+        self, 
+        formset_class: Type[BaseFormSet], 
+        kwargs: Optional[Dict[str, Any]] = None, 
+        **field_kwargs: Any
+    ) -> None:
         super().__init__(**field_kwargs)
 
         self.formset_class = formset_class
         if kwargs is None:
             kwargs = {}
-        self.default_kwargs = kwargs
+        self.default_kwargs: Dict[str, Any] = kwargs
 
-    def get_formset_class(self, form, name):
+    def get_formset_class(self, form: "Form", name: str) -> Type[BaseFormSet]:
         """
         Return the formset class that will be used for instantiation in
         ``get_formset``. You can override this method in subclasses to change
@@ -375,27 +433,35 @@ class FormSetField(CompositeField):
         """
         return self.formset_class
 
-    def get_formset(self, form, name):
+    def get_formset(self, form: "Form", name: str) -> BaseFormSet:
         """
         Get an instance of the formset.
         """
         kwargs = self.get_kwargs(form, name)
         formset_class = self.get_formset_class(form, name)
         formset = formset_class(
-            form.data if form.is_bound else None,
-            form.files if form.is_bound else None,
+            form.data if form.is_bound else None, 
+            form.files if form.is_bound else None, 
             **kwargs
         )
         return formset
 
 
 class ModelFormSetField(FormSetField):
-    def shall_save(self, form, name, formset):
+    def shall_save(self, form: "Form", name: str, formset: BaseFormSet) -> bool:
         return True
 
-    def save(self, form, name, formset, commit):
+    def save(
+        self, 
+        form: "Form", 
+        name: str, 
+        formset: BaseFormSet, 
+        commit: bool
+    ) -> Optional[List[models.Model]]:
         if self.shall_save(form, name, formset):
-            return formset.save(commit=commit)
+            # BaseFormSet doesn't have save() method by default,
+            # but ModelFormSet classes will have it at runtime
+            return formset.save(commit=commit)  # type: ignore
         return None
 
 
@@ -444,13 +510,13 @@ class InlineFormSetField(ModelFormSetField):
     """
 
     def __init__(
-        self,
-        parent_model=None,
-        model=None,
-        formset_class=None,
-        kwargs=None,
-        **factory_kwargs
-    ):
+        self, 
+        parent_model: Optional[Type[models.Model]] = None, 
+        model: Optional[Type[models.Model]] = None, 
+        formset_class: Any = None,  # Using Any to avoid type error with None
+        kwargs: Optional[Dict[str, Any]] = None, 
+        **factory_kwargs: Any
+    ) -> None:
         """
         You need to either provide the ``formset_class`` or the ``model``
         argument.
@@ -461,14 +527,14 @@ class InlineFormSetField(ModelFormSetField):
 
         # Make sure that all standard arguments will get passed through to the
         # parent's __init__ method.
-        field_kwargs = {}
+        field_kwargs: Dict[str, Any] = {}
         for arg in ["required", "widget", "label", "help_text", "localize"]:
             if arg in factory_kwargs:
                 field_kwargs[arg] = factory_kwargs.pop(arg)
 
-        self.parent_model = parent_model
-        self.model = model
-        self.formset_factory_kwargs = factory_kwargs
+        self.parent_model: Optional[Type[models.Model]] = parent_model
+        self.model: Optional[Type[models.Model]] = model
+        self.formset_factory_kwargs: Dict[str, Any] = factory_kwargs
         super().__init__(formset_class, kwargs=kwargs, **field_kwargs)
         if (
             self.formset_class is None
@@ -482,15 +548,18 @@ class InlineFormSetField(ModelFormSetField):
                 "when creating a {0}.".format(self.__class__.__name__)
             )
 
-    def get_model(self, form, name):  # noqa D102
+    def get_model(self, form: "Form", name: str) -> Type[models.Model]:  # noqa D102
+        if self.model is None:
+            raise ValueError("Model is not specified")
         return self.model
 
-    def get_parent_model(self, form, name):  # noqa D102
+    def get_parent_model(self, form: "Form", name: str) -> Type[models.Model]:  # noqa D102
         if self.parent_model is not None:
             return self.parent_model
-        return form._meta.model
+        # This is safe for ModelForm but not for Form, so we type-ignore it
+        return form._meta.model  # type: ignore
 
-    def get_formset_class(self, form, name):
+    def get_formset_class(self, form: "Form", name: str) -> Type[BaseFormSet]:
         """
         Return a formset class for the field.
 
@@ -503,11 +572,12 @@ class InlineFormSetField(ModelFormSetField):
         formset_class = inlineformset_factory(
             self.get_parent_model(form, name),
             self.get_model(form, name),
-            **self.formset_factory_kwargs
+            **self.formset_factory_kwargs,
         )
         return formset_class
 
-    def get_kwargs(self, form, name):  # noqa D102
+    def get_kwargs(self, form: "Form", name: str) -> Dict[str, Any]:  # noqa D102
         kwargs = super().get_kwargs(form, name)
-        kwargs.setdefault("instance", form.instance)
+        # This is safe for ModelForm but not for Form, so we type-ignore it
+        kwargs.setdefault("instance", form.instance)  # type: ignore
         return kwargs

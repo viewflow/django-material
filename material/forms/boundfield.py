@@ -5,7 +5,12 @@
 # LICENSE_EXCEPTION and the Commercial licence defined in file 'COMM_LICENSE',
 # which is part of this source code package.
 
+from typing import Any, Dict, Iterable, Optional, Union, TYPE_CHECKING, cast
+
 from django.forms.boundfield import BoundField
+
+if TYPE_CHECKING:
+    from .forms import FormMixin
 
 
 class CompositeBoundField(BoundField):
@@ -23,18 +28,24 @@ class CompositeBoundField(BoundField):
     # __init__, no changes required
     # __str__, no changes required
 
-    def __iter__(self):
+    def __iter__(self) -> Iterable[Any]:
         """Iterate over the composite field.
 
         For ``FormSetField`` this will return form instances. For
         ``FormField`` this will return bound form fields.
         """
-        for item in self.form.get_composite_field_value(self.name):
-            yield item
+        form = self.form
+        # Use TYPE_CHECKING to tell the type checker that self.form is a FormMixin
+        if TYPE_CHECKING:
+            form = cast("FormMixin", form)
+        value = form.get_composite_field_value(self.name)
+        if value is not None:
+            for item in value:
+                yield item
 
     # __len__, no changes required
 
-    def __getitem__(self, item):
+    def __getitem__(self, item: Union[str, int]) -> Any:
         """
         Access to field by name.
 
@@ -50,7 +61,12 @@ class CompositeBoundField(BoundField):
             {# That is useful in the template as well: #}
             {{ form.address.street }}
         """
-        composite_item = self.form.get_composite_field_value(self.name)
+        form = self.form
+        if TYPE_CHECKING:
+            form = cast("FormMixin", form)
+        composite_item = form.get_composite_field_value(self.name)
+        if composite_item is None:
+            raise KeyError(f"No composite field value found for '{self.name}'")
         return composite_item[item]
 
     def __bool__(self):
@@ -117,13 +133,16 @@ class CompositeBoundField(BoundField):
         """
         return None
 
-    def value(self):
+    def value(self) -> Any:
         """Return the form/formset for this BoundField.
 
         This is passed into the call for ``self.widget.render`` in the
         ``as_widget`` method.
         """
-        return self.form.get_composite_field_value(self.name)
+        form = self.form
+        if TYPE_CHECKING:
+            form = cast("FormMixin", form)
+        return form.get_composite_field_value(self.name)
 
     # label_tag, no changes required
     # auto_id, no changes required
