@@ -102,7 +102,7 @@ class CompositeField(BaseCompositeField):
         # the template.
         # Note: FormWidget has a dynamic attribute 'field' that's not in the type annotations
         # Ignore type error since CompositeBoundField is not a django Field but works at runtime
-        if hasattr(self.widget, 'field'):
+        if hasattr(self.widget, "field"):
             self.widget.field = self  # type: ignore
 
     def get_bound_field(self, form: "Form", field_name: str) -> CompositeBoundField:
@@ -189,10 +189,10 @@ class FormField(CompositeField):
     widget_class = FormWidget
 
     def __init__(
-        self, 
-        form_class: Type[BaseForm], 
-        kwargs: Optional[Dict[str, Any]] = None, 
-        **field_kwargs: Any
+        self,
+        form_class: Type[BaseForm],
+        kwargs: Optional[Dict[str, Any]] = None,
+        **field_kwargs: Any,
     ) -> None:
         super().__init__(**field_kwargs)
 
@@ -307,11 +307,7 @@ class ModelFormField(FormField):
         return True
 
     def save(
-        self, 
-        form: "Form", 
-        name: str, 
-        composite_form: BaseModelForm, 
-        commit: bool
+        self, form: "Form", name: str, composite_form: BaseModelForm, commit: bool
     ) -> Optional[models.Model]:
         """
         This method is called by
@@ -328,12 +324,12 @@ class ModelFormField(FormField):
 
 class ForeignKeyFormField(ModelFormField):
     def __init__(
-        self, 
-        form_class: Type[BaseModelForm], 
-        kwargs: Optional[Dict[str, Any]] = None, 
-        field_name: Optional[str] = None, 
-        blank: Optional[bool] = None, 
-        **field_kwargs: Any
+        self,
+        form_class: Type[BaseModelForm],
+        kwargs: Optional[Dict[str, Any]] = None,
+        field_name: Optional[str] = None,
+        blank: Optional[bool] = None,
+        **field_kwargs: Any,
     ) -> None:
         super().__init__(form_class, kwargs, **field_kwargs)
         self.field_name: Optional[str] = field_name
@@ -376,11 +372,7 @@ class ForeignKeyFormField(ModelFormField):
             return None
 
     def save(
-        self, 
-        form: "Form", 
-        name: str, 
-        composite_form: BaseModelForm, 
-        commit: bool
+        self, form: "Form", name: str, composite_form: BaseModelForm, commit: bool
     ) -> Optional[models.Model]:
         # Support the ``empty_permitted`` attribute. This is set if the field
         # is ``blank=True`` .
@@ -395,8 +387,7 @@ class ForeignKeyFormField(ModelFormField):
             form.instance.save()  # type: ignore
         else:
             raise NotImplementedError(
-                "ForeignKeyFormField cannot yet be used with non-commiting "
-                "form saves."
+                "ForeignKeyFormField cannot yet be used with non-commiting form saves."
             )
         return saved_obj
 
@@ -413,10 +404,10 @@ class FormSetField(CompositeField):
     widget_class = FormSetWidget
 
     def __init__(
-        self, 
-        formset_class: Type[BaseFormSet], 
-        kwargs: Optional[Dict[str, Any]] = None, 
-        **field_kwargs: Any
+        self,
+        formset_class: Type[BaseFormSet],
+        kwargs: Optional[Dict[str, Any]] = None,
+        **field_kwargs: Any,
     ) -> None:
         super().__init__(**field_kwargs)
 
@@ -440,9 +431,7 @@ class FormSetField(CompositeField):
         kwargs = self.get_kwargs(form, name)
         formset_class = self.get_formset_class(form, name)
         formset = formset_class(
-            form.data if form.is_bound else None, 
-            form.files if form.is_bound else None, 
-            **kwargs
+            form.data if form.is_bound else None, form.files if form.is_bound else None, **kwargs
         )
         return formset
 
@@ -452,11 +441,7 @@ class ModelFormSetField(FormSetField):
         return True
 
     def save(
-        self, 
-        form: "Form", 
-        name: str, 
-        formset: BaseFormSet, 
-        commit: bool
+        self, form: "Form", name: str, formset: BaseFormSet, commit: bool
     ) -> Optional[List[models.Model]]:
         if self.shall_save(form, name, formset):
             # BaseFormSet doesn't have save() method by default,
@@ -510,12 +495,12 @@ class InlineFormSetField(ModelFormSetField):
     """
 
     def __init__(
-        self, 
-        parent_model: Optional[Type[models.Model]] = None, 
-        model: Optional[Type[models.Model]] = None, 
+        self,
+        parent_model: Optional[Type[models.Model]] = None,
+        model: Optional[Type[models.Model]] = None,
         formset_class: Any = None,  # Using Any to avoid type error with None
-        kwargs: Optional[Dict[str, Any]] = None, 
-        **factory_kwargs: Any
+        kwargs: Optional[Dict[str, Any]] = None,
+        **factory_kwargs: Any,
     ) -> None:
         """
         You need to either provide the ``formset_class`` or the ``model``

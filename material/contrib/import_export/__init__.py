@@ -16,9 +16,7 @@ class ExportViewsetMixin(BaseExportMixin, metaclass=ViewsetMeta):
             url=self.reverse("export"),
             icon="download",
         )
-        return super().get_list_bulk_actions(
-            request, *(export_selected_action, *actions)
-        )
+        return super().get_list_bulk_actions(request, *(export_selected_action, *actions))
 
     def get_export_view_kwargs(self, **kwargs):
         view_kwargs = {

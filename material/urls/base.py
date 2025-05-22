@@ -162,10 +162,10 @@ class BaseViewset:
     def parents(self) -> list[BaseViewset]:
         """
         Get all parent viewsets in the hierarchy from root to immediate parent.
-        
+
         This method traverses the viewset hierarchy upward, collecting all parent
         viewsets in order from the root ancestor to the immediate parent of this viewset.
-        
+
         Returns:
             list[BaseViewset]: A list of parent viewsets in order from root to immediate parent.
             Returns an empty list if this viewset has no parent.

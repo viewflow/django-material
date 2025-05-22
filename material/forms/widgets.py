@@ -265,9 +265,7 @@ class DependentModelSelect(forms.Select):
         # TODO exclude_self option for queryset
 
         if not self.depends_on or self.queryset is None:
-            raise ValueError(
-                "DependentModelSelect need both depends_on and queryset been provided"
-            )
+            raise ValueError("DependentModelSelect need both depends_on and queryset been provided")
         super().__init__(*args, **kwargs)
 
     def get_context(self, name, value, attrs):

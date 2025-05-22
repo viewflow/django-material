@@ -26,9 +26,7 @@ class BaseBulkActionView(FilterableViewMixin, MultipleObjectMixin, generic.FormV
     def get_template_names(self):
         opts = self.model._meta
         return [
-            "{}/{}{}.html".format(
-                opts.app_label, opts.model_name, self.template_name_suffix
-            ),
+            "{}/{}{}.html".format(opts.app_label, opts.model_name, self.template_name_suffix),
             self.template_name,
         ]
 
@@ -54,10 +52,7 @@ class BaseBulkActionView(FilterableViewMixin, MultipleObjectMixin, generic.FormV
 
     @cached_property
     def objects_count(self):
-        if (
-            self.request.POST.get("select_all")
-            and not self.filterset.form.has_changed()
-        ):
+        if self.request.POST.get("select_all") and not self.filterset.form.has_changed():
             return None
         return self.object_list.count()
 
@@ -93,18 +88,14 @@ class DeleteBulkActionView(BaseBulkActionView):
     def get_deleted_objects(self, query):
         collector = Collector(using=router.db_for_write(self.model))
         collector.collect(query)
-        return [
-            (model_class, objects) for model_class, objects in collector.data.items()
-        ]
+        return [(model_class, objects) for model_class, objects in collector.data.items()]
 
     def get_context_data(self, **kwargs):
         """Extend view context data.
         `{{ deleted_objects }}` - list of related objects to delete
         """
         if self.form.is_valid() and not self.form.cleaned_data.get("select_all"):
-            kwargs.setdefault(
-                "deleted_objects", self.get_deleted_objects(self.get_queryset())
-            )
+            kwargs.setdefault("deleted_objects", self.get_deleted_objects(self.get_queryset()))
         return super(DeleteBulkActionView, self).get_context_data(**kwargs)
 
     def form_valid(self, form):
@@ -114,6 +105,4 @@ class DeleteBulkActionView(BaseBulkActionView):
 
     def message_user(self):
         message = "The objects were deleted successfully"
-        messages.add_message(
-            self.request, messages.SUCCESS, message, fail_silently=True
-        )
+        messages.add_message(self.request, messages.SUCCESS, message, fail_silently=True)

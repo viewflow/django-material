@@ -46,7 +46,7 @@ class BaseModelViewset(Viewset):
                 "viewset": self,
                 "queryset": self.queryset,
                 **kwargs,
-            }
+            },
         )
 
     @property
@@ -180,9 +180,7 @@ class UpdateViewMixin(metaclass=ViewsetMeta):
     def get_update_view_kwargs(self, **kwargs):
         view_kwargs = {
             "form_class": first_not_default(self.update_form_class, self.form_class),
-            "form_widgets": first_not_default(
-                self.update_form_widgets, self.form_widgets
-            ),
+            "form_widgets": first_not_default(self.update_form_widgets, self.form_widgets),
             "layout": first_not_default(self.update_form_layout, self.form_layout),
             **self.update_view_kwargs,
             **kwargs,
@@ -355,9 +353,7 @@ class DetailViewMixin(metaclass=ViewsetMeta):
         return actions
 
 
-class ReadonlyModelViewset(
-    DetailViewMixin, ListBulkActionsMixin, AppMenuMixin, BaseModelViewset
-):
+class ReadonlyModelViewset(DetailViewMixin, ListBulkActionsMixin, AppMenuMixin, BaseModelViewset):
     """
     Readonly model viewset with List and object details view only
     """
