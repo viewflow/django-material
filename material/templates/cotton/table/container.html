@@ -1,10 +1,11 @@
 <c-vars
-  class="min-w-full border-collapse"
+  base_class="min-w-full border-collapse"
+  class=""
   caption=""
   density="default"
 />
 
-<table class="{{ class }}" data-density="{{ density }}" {{ attrs }}>
+<table class="{{ base_class }} {{ class }}" data-density="{{ density }}" {{ attrs }}>
   {% if caption %}
     <caption class="text-lg font-medium my-2 text-left">{{ caption }}</caption>
   {% endif %}

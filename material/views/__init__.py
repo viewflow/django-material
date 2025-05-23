@@ -7,8 +7,8 @@ from material.views.list import (
     ListModelView,
     OrderableListViewMixin,
     BulkActionsMixin,
-    FilterableViewMixin,
 )
+from material.views.filters import FilterableViewMixin
 from material.views.search import SearchableViewMixin
 from material.views.update import UpdateModelView
 

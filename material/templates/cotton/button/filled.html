@@ -6,7 +6,7 @@
   icon_class="material-symbols mr-2 leading-[1px] text-lg" />
 
 <button
-  class="{{ base_class }} {{ state_class }} {{ disabled_class }} bg-{{ color }} text-on-{{ color }} hover:bg-{{ color }}/80 focus:bg-{{ color }}/70 {{ class }}"
+  class="{{ base_class }} {{ state_class }} {{ disabled_class }} bg-{{ color }} text-on-{{ color }} hover:bg-{{ color }}/80 focus:bg-{{ color }}/70 {{ class }} {% if icon %}pl-4{% endif %}"
   {% if disabled %}disabled{% endif %}
   {% if aria_label %}aria-label="{{ aria_label }}"{% endif %}
   role="button"

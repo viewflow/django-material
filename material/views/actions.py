@@ -13,7 +13,7 @@ from django.utils.functional import cached_property
 from django.views import generic
 from django.views.generic.list import MultipleObjectMixin
 from .base import BulkActionForm
-from .list import FilterableViewMixin
+from .filters import FilterableViewMixin
 
 
 class BaseBulkActionView(FilterableViewMixin, MultipleObjectMixin, generic.FormView):
