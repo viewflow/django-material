@@ -1,0 +1,43 @@
+<c-vars
+  color="primary"
+  size="medium"
+  href=""
+  class=""
+  base_class="inline-flex items-center justify-center rounded-full overflow-hidden"
+  state_class="transition-all duration-300 ease-in-out hover:shadow-xl hover:scale-105 focus:outline-none focus:shadow-lg active:ripple"
+  disabled_class="disabled:bg-surface-variant disabled:text-on-surface-variant disabled:shadow-none disabled:cursor-not-allowed"
+  icon_class="material-symbols text-[24px] leading-[1px]" />
+
+{% if size == "small" %}
+{% if href %}<a href="{{ href }}"{% else %}<button{% endif %}
+  class="{{ base_class }} {{ state_class }} {{ disabled_class }} w-10 h-10 shadow-md bg-{{ color }} text-on-{{ color }} hover:bg-{{ color }}/80 focus:bg-{{ color }}/70 {{ class }}"
+  {% if disabled %}{% if href %}tabindex="-1"{% else %}disabled{% endif %}{% endif %}
+  {% if aria_label %}aria-label="{{ aria_label }}"{% endif %}
+  role="button"
+  up-ripple
+  {{ attrs }}>
+  <span class="{{ icon_class }}" aria-hidden="true">{{ slot }}</span>
+{% if href %}</a>{% else %}</button>{% endif %}
+
+{% elif size == "large" %}
+{% if href %}<a href="{{ href }}"{% else %}<button{% endif %}
+  class="{{ base_class }} {{ state_class }} {{ disabled_class }} w-18 h-18 shadow-lg bg-{{ color }} text-on-{{ color }} hover:bg-{{ color }}/80 focus:bg-{{ color }}/70 {{ class }}"
+  {% if disabled %}{% if href %}tabindex="-1"{% else %}disabled{% endif %}{% endif %}
+  {% if aria_label %}aria-label="{{ aria_label }}"{% endif %}
+  role="button"
+  up-ripple
+  {{ attrs }}>
+  <span class="{{ icon_class }} text-[36px]" aria-hidden="true">{{ slot }}</span>
+{% if href %}</a>{% else %}</button>{% endif %}
+
+{% else %}
+{% if href %}<a href="{{ href }}"{% else %}<button{% endif %}
+  class="{{ base_class }} {{ state_class }} {{ disabled_class }} w-14 h-14 shadow-md bg-{{ color }} text-on-{{ color }} hover:bg-{{ color }}/80 focus:bg-{{ color }}/70 {{ class }}"
+  {% if disabled %}{% if href %}tabindex="-1"{% else %}disabled{% endif %}{% endif %}
+  {% if aria_label %}aria-label="{{ aria_label }}"{% endif %}
+  role="button"
+  up-ripple
+  {{ attrs }}>
+  <span class="{{ icon_class }}" aria-hidden="true">{{ slot }}</span>
+{% if href %}</a>{% else %}</button>{% endif %}
+{% endif %}

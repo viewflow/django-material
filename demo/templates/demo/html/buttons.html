@@ -5,6 +5,60 @@
 {% block page_title %}Button Components{% endblock %}
 
 {% block page_content %}
+<section id="fab-buttons" class="mb-12">
+  <h2 class="text-2xl mb-4">Floating Action Buttons (FAB)</h2>
+  <p class="mb-6">
+    Floating action buttons (FABs) help people take primary actions. They're used to represent the most important action on a screen, 
+    such as Create or Reply. A FAB represents the most important action on a screen and puts key actions within reach.
+  </p>
+
+  <div class="flex flex-wrap gap-8 mb-8">
+    <!-- Small FAB -->
+    <div class="flex flex-col items-center">
+      <c-button.fab size="small" aria_label="Add item">add</c-button.fab>
+      <span class="text-sm mt-4">size="small" (40px)</span>
+    </div>
+
+    <!-- Medium FAB (default) -->
+    <div class="flex flex-col items-center">
+      <c-button.fab aria_label="Create">edit</c-button.fab>
+      <span class="text-sm mt-4">Default (56px)</span>
+    </div>
+
+    <!-- Large FAB -->
+    <div class="flex flex-col items-center">
+      <c-button.fab size="large" aria_label="Create post">add</c-button.fab>
+      <span class="text-sm mt-4">size="large" (96px)</span>
+    </div>
+  </div>
+
+  <div class="flex flex-wrap gap-8 mb-8">
+    <!-- Secondary color -->
+    <div class="flex flex-col items-center">
+      <c-button.fab color="secondary" aria_label="Take photo">photo_camera</c-button.fab>
+      <span class="text-sm mt-4">color="secondary"</span>
+    </div>
+
+    <!-- Tertiary color -->
+    <div class="flex flex-col items-center">
+      <c-button.fab color="tertiary" aria_label="Share">share</c-button.fab>
+      <span class="text-sm mt-4">color="tertiary"</span>
+    </div>
+
+    <!-- With href -->
+    <div class="flex flex-col items-center">
+      <c-button.fab href="/demo" aria_label="Go to homepage">home</c-button.fab>
+      <span class="text-sm mt-4">With href</span>
+    </div>
+
+    <!-- Disabled state -->
+    <div class="flex flex-col items-center">
+      <c-button.fab disabled aria_label="Action disabled">add</c-button.fab>
+      <span class="text-sm mt-4">disabled</span>
+    </div>
+  </div>
+</section>
+
 <section id="filled-buttons" class="mb-12">
   <h2 class="text-2xl mb-4">Filled Buttons</h2>
   <p class="mb-6">
@@ -317,7 +371,27 @@
   <h2 class="text-2xl mb-4">Usage</h2>
   
   <div class="bg-surface-container-low p-6 rounded-lg shadow-sm mb-6">
-    <pre class="text-on-surface-variant"><code>&lt;!-- Filled Button (high emphasis) --&gt;
+    <pre class="text-on-surface-variant"><code>&lt;!-- Floating Action Button (FAB) --&gt;
+&lt;c-button.fab aria_label="Create"&gt;add&lt;/c-button.fab&gt;
+
+&lt;!-- FAB with size variations --&gt;
+&lt;c-button.fab size="small" aria_label="Add item"&gt;add&lt;/c-button.fab&gt;
+&lt;c-button.fab size="large" aria_label="Create post"&gt;add&lt;/c-button.fab&gt;
+
+&lt;!-- FAB with color variants --&gt;
+&lt;c-button.fab color="secondary" aria_label="Take photo"&gt;photo_camera&lt;/c-button.fab&gt;
+&lt;c-button.fab color="tertiary" aria_label="Share"&gt;share&lt;/c-button.fab&gt;
+
+&lt;!-- FAB with positioning --&gt;
+&lt;c-button.fab class="absolute bottom-6 right-6 z-10" aria_label="Add new item"&gt;add&lt;/c-button.fab&gt;
+
+&lt;!-- FAB with href link --&gt;
+&lt;c-button.fab href="/create" aria_label="Create new item"&gt;add&lt;/c-button.fab&gt;
+
+&lt;!-- Disabled FAB --&gt;
+&lt;c-button.fab disabled aria_label="Action disabled"&gt;add&lt;/c-button.fab&gt;
+
+&lt;!-- Filled Button (high emphasis) --&gt;
 &lt;c-button.filled&gt;Button Text&lt;/c-button.filled&gt;
 
 &lt;!-- Tonal Button (medium-high emphasis) --&gt;
@@ -385,6 +459,12 @@
         <c-table.cell>Button color theme. Options: "primary", "secondary", "tertiary"</c-table.cell>
       </c-table.row>
       <c-table.row>
+        <c-table.cell><code>size</code></c-table.cell>
+        <c-table.cell>string</c-table.cell>
+        <c-table.cell>"medium"</c-table.cell>
+        <c-table.cell>FAB size. Options: "small" (40px), "medium" (56px), "large" (96px) (FAB only)</c-table.cell>
+      </c-table.row>
+      <c-table.row>
         <c-table.cell><code>variant</code></c-table.cell>
         <c-table.cell>string</c-table.cell>
         <c-table.cell>"standard"</c-table.cell>
@@ -400,7 +480,7 @@
         <c-table.cell><code>slot</code></c-table.cell>
         <c-table.cell>string</c-table.cell>
         <c-table.cell>none</c-table.cell>
-        <c-table.cell>For icon buttons, slot content should be the Material icon name</c-table.cell>
+        <c-table.cell>For icon and FAB buttons, slot content should be the Material icon name</c-table.cell>
       </c-table.row>
       <c-table.row>
         <c-table.cell><code>disabled</code></c-table.cell>
@@ -412,7 +492,7 @@
         <c-table.cell><code>aria_label</code></c-table.cell>
         <c-table.cell>string</c-table.cell>
         <c-table.cell>none</c-table.cell>
-        <c-table.cell>Accessible label for screen readers (required for icon buttons)</c-table.cell>
+        <c-table.cell>Accessible label for screen readers (required for icon and FAB buttons)</c-table.cell>
       </c-table.row>
       <c-table.row>
         <c-table.cell><code>attrs</code></c-table.cell>
