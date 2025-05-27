@@ -206,6 +206,15 @@ wheels = [
 ]
 
 [[package]]
+name = "django-cursor-pagination"
+version = "0.3.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/09/91/73adf878757d3f10c8882e532cbcf1feda4a788bfe8088a03475486ff97c/django_cursor_pagination-0.3.0.tar.gz", hash = "sha256:b09293ea9aa93cd0f3a9f4197e1f11f09283678e6c991cf4d4517a0fe90244c1", size = 7907 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/f7/ae/da7b25f23c97cdc05f97f83555653b5e4b69dee20ed0da5e9cce136d4e00/django_cursor_pagination-0.3.0-py3-none-any.whl", hash = "sha256:ce88147adc1e41c58427217cf54d7cbb4d04d5cf0a3a2c794d81602ad347658e", size = 6822 },
+]
+
+[[package]]
 name = "django-debug-toolbar"
 version = "5.2.0"
 source = { registry = "https://pypi.org/simple" }
@@ -443,6 +452,7 @@ dependencies = [
 dev = [
     { name = "ansible" },
     { name = "black" },
+    { name = "django-cursor-pagination" },
     { name = "django-formtools" },
     { name = "django-redis" },
     { name = "django-stubs" },
@@ -466,6 +476,7 @@ requires-dist = [
 dev = [
     { name = "ansible", specifier = ">=9.5.0" },
     { name = "black", specifier = ">=25.1.0" },
+    { name = "django-cursor-pagination", specifier = ">=0.3.0" },
     { name = "django-formtools", specifier = ">=2.5.1" },
     { name = "django-redis", specifier = ">=5.4.0" },
     { name = "django-stubs", specifier = ">=5.1.3" },

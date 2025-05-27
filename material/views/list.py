@@ -1,16 +1,107 @@
-from typing import TYPE_CHECKING, Optional
+import collections.abc
+from typing import TYPE_CHECKING, Any, Literal, Optional
 from django.contrib.auth.decorators import login_required
 from django.db import models
+from django.core.paginator import Page
 from django.http import HttpRequest
 from django.utils.decorators import method_decorator
+from django.utils.translation import gettext_lazy as _
 from django.views import generic
 
-if TYPE_CHECKING:
-    from material.urls import BaseModelViewset
+from material.utils import DEFAULT, MARKER
 
-# { page_obj: ?? а вот как page и columns сводить,
-#   columns:
-# }
+if TYPE_CHECKING:
+    from django_stubs_ext import StrPromise
+    from material.urls import BaseModelViewset
+    from cursor_pagination import CursorPage
+
+
+class BaseColumn:
+    title: "str | StrPromise"
+
+    def __init__(self, name: str, title: Optional["str | StrPromise"]) -> None:
+        self.name = name
+        self.title = title if title else _(self.name.title())
+
+    def get_data(self, viewset: "BaseModelViewset", obj: object) -> Any:
+        raise NotImplementedError("Subclasses should override this")
+
+    def __str__(self):
+        return self.title
+
+    def orderby(self) -> Optional[str]:
+        """None if column can't be ordered"""
+        return None
+
+
+class Column(BaseColumn):
+    """Get data from object field"""
+
+    def __init__(
+        self,
+        lookup: str,
+        title: Optional["str | StrPromise"] = None,
+        orderby: str = DEFAULT,  # type: ignore
+    ) -> None:
+        self.lookup = lookup
+        self.order_by_column: str = self.lookup if orderby is DEFAULT else orderby
+
+        name = lookup.split("__", 1)[0]
+        super().__init__(name, title)
+
+    def get_data(self, viewset: "BaseModelViewset", obj: object) -> Any:
+        value = obj
+        for part in self.lookup.split("__"):
+            value = getattr(value, part, None)
+            if value is None:
+                break
+        return value
+
+    def orderby(self) -> Optional[str]:
+        return self.order_by_column
+
+
+class List(collections.abc.Sequence):
+    """Wrap page to provide object list with desired columns"""
+
+    def __init__(self, columns: list[BaseColumn], page: "Page | CursorPage"):
+        self.page = page
+        self.columns = columns
+
+    def __len__(self):
+        return len(self.page)
+
+    def __getitem__(self, key):
+        return self.page[key]
+
+
+def get_ordering(columns: list[BaseColumn], order_spec: Optional[str]) -> list[str]:
+    """
+    Builds a list of database ordering expressions based on the given order specification.
+
+    Args:
+        columns (list[BaseColumn]): A list of column objects, each with a `name` attribute and an `orderby()` method.
+        order_spec (str): A comma-separated string specifying the sort order, with optional '-' for descending.
+                          Example: "-created_at,name"
+
+    Returns:
+        list[str]: A list of database order expressions (e.g., ["-created_at", "name"]).
+                   Only includes columns present in `columns` with a valid `orderby()` result.
+    """
+    if not order_spec:
+        return []
+
+    result = []
+    for order in order_spec.split(","):
+        field_name = order.lstrip("-")
+        order_direction = "-" if order.startswith("-") else ""
+        for col in columns:
+            if col.name == field_name:
+                db_order_column = col.orderby()
+                if db_order_column is not None:
+                    result.append(f"{order_direction}{db_order_column}")
+                    break
+    return result
 
 
 class OrderableListViewMixin:
@@ -27,6 +118,7 @@ class BaseListModelView(generic.ListView):
     request: HttpRequest
     viewset: Optional["BaseModelViewset"]
     model: type[models.Model]
+    paginate_by: int = 50
 
     def get_template_names(self) -> list[str]:
         """

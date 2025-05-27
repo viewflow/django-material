@@ -16,6 +16,7 @@ dependencies = [
 dev = [
     "ansible>=9.5.0",
     "black>=25.1.0",
+    "django-cursor-pagination>=0.3.0",
     "django-formtools>=2.5.1",
     "django-redis>=5.4.0",
     "django-stubs>=5.1.3",

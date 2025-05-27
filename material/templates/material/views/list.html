@@ -30,7 +30,9 @@
   <c-table.container class="mb-16">
     <c-slot name="header">      
       <c-table.header_row>
+        {% for column in columns %}
         <c-table.header>Test</c-table.header>
+        {% endfor %}
       </c-table.header_row>      
     </c-slot>
 
