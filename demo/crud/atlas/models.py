@@ -121,7 +121,7 @@ class Sea(models.Model):
 
     def child_seas_count(self):
         """Count of child seas."""
-        return self.child_seas.count()
+        return self.child_seas.count()  # type: ignore
 
     # child_seas_count.short_description = _("Child Seas")
 
@@ -204,7 +204,7 @@ class Continent(models.Model):
 
     def countries_count(self):
         """Count countries in this continent."""
-        return self.countries.count()
+        return self.countries.count()  # type: ignore
 
     countries_count.short_description = _("Countries")
     countries_count.column_type = "numeric"
@@ -306,7 +306,7 @@ class City(models.Model):
         ordering = ["name"]
 
     def __str__(self):
-        return f"{self.name}, {self.country.name}" if self.country_id else self.name
+        return f"{self.name}, {self.country.name}" if self.country_id else self.name  # type: ignore
 
     @property
     def formatted_population(self):

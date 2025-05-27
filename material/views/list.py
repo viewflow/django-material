@@ -1,5 +1,5 @@
 import collections.abc
-from typing import TYPE_CHECKING, Any, Literal, Optional
+from typing import TYPE_CHECKING, Any, Literal, Optional, Sequence
 from django.contrib.auth.decorators import login_required
 from django.db import models
 from django.core.paginator import Page
@@ -23,7 +23,7 @@ class BaseColumn:
         self.name = name
         self.title = title if title else _(self.name.title())
 
-    def get_data(self, viewset: "BaseModelViewset", obj: object) -> Any:
+    def get_data(self, obj: object, viewset: Optional["BaseModelViewset"] = None) -> Any:
         raise NotImplementedError("Subclasses should override this")
 
     def __str__(self):
@@ -49,7 +49,7 @@ class Column(BaseColumn):
         name = lookup.split("__", 1)[0]
         super().__init__(name, title)
 
-    def get_data(self, viewset: "BaseModelViewset", obj: object) -> Any:
+    def get_data(self, obj: object, viewset: Optional["BaseModelViewset"] = None) -> Any:
         value = obj
         for part in self.lookup.split("__"):
             value = getattr(value, part, None)
@@ -64,7 +64,11 @@ class Column(BaseColumn):
 class List(collections.abc.Sequence):
     """Wrap page to provide object list with desired columns"""
 
-    def __init__(self, columns: list[BaseColumn], page: "Page | CursorPage"):
+    def __init__(
+        self,
+        columns: Sequence[BaseColumn],
+        page: "Page | CursorPage",
+    ):
         self.page = page
         self.columns = columns
 
@@ -75,7 +79,7 @@ class List(collections.abc.Sequence):
         return self.page[key]
 
 
-def get_ordering(columns: list[BaseColumn], order_spec: Optional[str]) -> list[str]:
+def get_ordering(columns: Sequence[BaseColumn], order_spec: Optional[str]) -> list[str]:
     """
     Builds a list of database ordering expressions based on the given order specification.
 
