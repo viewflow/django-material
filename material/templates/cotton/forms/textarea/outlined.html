@@ -18,7 +18,7 @@
         {% if required %}required{% endif %}
         {% if disabled %}disabled{% endif %}
         {% if readonly %}readonly{% endif %}
-        aria-describedby="{% if id %}{{ id }}_help{% endif %}"
+        aria-describedby="{% if help_text and id %}{{ id }}_help{% endif %}{% if error and id %} {{ id }}_error{% endif %}"
         aria-invalid="{% if error %}true{% else %}false{% endif %}">{{ value }}</textarea>
       
       <label 
@@ -55,7 +55,7 @@
   {% endif %}
   
   {% if error %}
-    <div class="mt-1 px-4 text-xs text-error">
+    <div id="{% if id %}{{ id }}_error{% endif %}" class="mt-1 px-4 text-xs text-error">
       {{ error }}
     </div>
   {% endif %}

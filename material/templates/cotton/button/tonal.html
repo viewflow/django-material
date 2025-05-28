@@ -9,7 +9,6 @@
   class="{{ base_class }} {{ state_class }} {{ disabled_class }} bg-{{ color }}-container text-on-{{ color }}-container hover:bg-{{ color }}-container/80 focus:bg-{{ color }}-container/70 {{ class }}"
   {% if disabled %}disabled{% endif %}
   {% if aria_label %}aria-label="{{ aria_label }}"{% endif %}
-  role="button"
   up-ripple
   {{ attrs }}>
   {% if icon %}

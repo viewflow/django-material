@@ -4,22 +4,24 @@
   total_pages="1"
 />
 
-<div class="{{ class }}" {{ attrs }}>
+<nav class="{{ class }}" aria-label="Pagination navigation" {{ attrs }}>
   <div class="flex items-center">
     <span class="text-sm text-on-surface-variant mr-4">Page {{ current_page }} of {{ total_pages }}</span>
     <div class="flex">
       <button 
+        type="button"
         class="p-1 rounded-full hover:bg-surface-container-highest disabled:opacity-50" 
-        aria-label="Previous page"
+        aria-label="Go to previous page{% if current_page == 1 %}, disabled{% endif %}"
         {% if current_page == 1 %}disabled{% endif %}>
         <span class="material-symbols" aria-hidden="true">navigate_before</span>
       </button>
       <button 
+        type="button"
         class="p-1 rounded-full hover:bg-surface-container-highest disabled:opacity-50" 
-        aria-label="Next page"
+        aria-label="Go to next page{% if current_page == total_pages %}, disabled{% endif %}"
         {% if current_page == total_pages %}disabled{% endif %}>
         <span class="material-symbols" aria-hidden="true">navigate_next</span>
       </button>
     </div>
   </div>
-</div>
+</nav>

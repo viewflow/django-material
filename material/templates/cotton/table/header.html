@@ -8,7 +8,8 @@
   <div class="flex items-center gap-1">
     {{ slot }}
     {% if sortable == "true" %}
-      <button class="text-on-surface-variant" aria-label="Sort column">
+      <button type="button" class="text-on-surface-variant hover:text-on-surface focus:outline-none focus:ring-2 focus:ring-primary rounded" 
+              aria-label="Sort column {{ slot|striptags }}{% if sort_direction == 'asc' %}, currently sorted ascending{% elif sort_direction == 'desc' %}, currently sorted descending{% else %}, not sorted{% endif %}">
         {% if sort_direction == "asc" %}
           <span class="material-symbols" aria-hidden="true">arrow_upward</span>
         {% elif sort_direction == "desc" %}

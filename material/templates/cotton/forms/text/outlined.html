@@ -60,7 +60,7 @@
   </div>
   
   {% if help_text %}
-    <div id="{% if id %}_help{% endif %}" class="mt-1 px-4 text-xs text-on-surface-variant {% if error %}text-error{% endif %}">
+    <div id="{% if id %}{{ id }}_help{% endif %}" class="mt-1 px-4 text-xs text-on-surface-variant {% if error %}text-error{% endif %}">
       {{ help_text }}
     </div>
   {% endif %}

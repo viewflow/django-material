@@ -1,6 +1,7 @@
 <c-vars
   role="listitem"
-  base_class="flex items-center px-4 min-h-[56px]" />
+  base_class="flex items-center px-4 min-h-[56px]"
+  current="false" />
 
 <li 
   class="{{ base_class }}
@@ -14,6 +15,8 @@
     {% endif %}
     {{ class }}"
   role="{{ role }}"
+  {% if current == "true" %}aria-current="true"{% endif %}
+  {% if clickable %}tabindex="0"{% endif %}
   {{ attrs }}>
   {% if leading %}
     <div class="mr-4 flex-shrink-0">
