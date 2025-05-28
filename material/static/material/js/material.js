@@ -43,6 +43,7 @@
     let documentClickHandler = null;
     let documentKeyHandler = null;
     let windowResizeHandler = null;
+    let documentScrollHandler = null;
     function positionMenu() {
       const anchorRect = anchor.getBoundingClientRect();
       const menuRect = menu.getBoundingClientRect();
@@ -51,46 +52,39 @@
         height: window.innerHeight
       };
       let top, left;
-      switch (placement) {
-        case "bottom-start":
-          top = anchorRect.bottom;
-          left = anchorRect.left;
-          break;
-        case "bottom-end":
-          top = anchorRect.bottom;
-          left = anchorRect.right - menuRect.width;
-          break;
+      let actualPlacement = placement;
+      const spaceBelow = viewport.height - anchorRect.bottom;
+      const spaceAbove = anchorRect.top;
+      if ((placement.startsWith("bottom") || placement === "bottom-start") && spaceBelow < menuRect.height && spaceAbove > menuRect.height) {
+        actualPlacement = placement.replace("bottom", "top");
+      }
+      const anchorCenter = anchorRect.left + anchorRect.width / 2;
+      const onRightSide = anchorCenter > viewport.width / 2;
+      if (onRightSide && anchorRect.right > menuRect.width) {
+        actualPlacement = actualPlacement.replace("start", "end");
+      }
+      switch (actualPlacement) {
         case "top-start":
-          top = anchorRect.top - menuRect.height;
-          left = anchorRect.left;
+          top = -menuRect.height;
+          left = 0;
           break;
         case "top-end":
-          top = anchorRect.top - menuRect.height;
-          left = anchorRect.right - menuRect.width;
+          top = -menuRect.height;
+          left = anchorRect.width - menuRect.width;
           break;
-        case "right-start":
-          top = anchorRect.top;
-          left = anchorRect.right;
+        case "bottom-end":
+          top = anchorRect.height;
+          left = anchorRect.width - menuRect.width;
           break;
-        case "left-start":
-          top = anchorRect.top;
-          left = anchorRect.left - menuRect.width;
-          break;
+        case "bottom-start":
         default:
-          top = anchorRect.bottom;
-          left = anchorRect.left;
+          top = anchorRect.height;
+          left = 0;
+          break;
       }
+      if (left < 0) left = 0;
       if (left + menuRect.width > viewport.width) {
-        left = viewport.width - menuRect.width - 8;
-      }
-      if (left < 8) {
-        left = 8;
-      }
-      if (top + menuRect.height > viewport.height) {
-        top = anchorRect.top - menuRect.height;
-      }
-      if (top < 8) {
-        top = 8;
+        left = Math.max(0, anchorRect.width - menuRect.width);
       }
       menu.style.left = `${left}px`;
       menu.style.top = `${top}px`;
