@@ -60,6 +60,24 @@ class Column(BaseColumn):
         return self.order_by_column
 
 
+class RowWrapper:
+    """Wrapper for a single row object that iterates over columns"""
+    
+    def __init__(self, obj: object, columns: Sequence[BaseColumn], viewset: Optional["BaseModelViewset"] = None):
+        self.obj = obj
+        self.columns = columns
+        self.viewset = viewset
+    
+    def __iter__(self):
+        """Iterate over columns and return values from column.get_data"""
+        for column in self.columns:
+            yield column.get_data(self.obj, self.viewset)
+    
+    def __getattr__(self, name):
+        """Delegate attribute access to the wrapped object"""
+        return getattr(self.obj, name)
+
+
 class List(collections.abc.Sequence):
     """Wrap page to provide object list with desired columns"""
 
@@ -67,15 +85,18 @@ class List(collections.abc.Sequence):
         self,
         columns: Sequence[BaseColumn],
         page: "Page | CursorPage",
+        viewset: Optional["BaseModelViewset"] = None,
     ):
         self.page = page
         self.columns = columns
+        self.viewset = viewset
 
     def __len__(self):
         return len(self.page)
 
     def __getitem__(self, key):
-        return self.page[key]
+        obj = self.page[key]
+        return RowWrapper(obj, self.columns, self.viewset)
 
 
 def get_ordering(columns: Sequence[BaseColumn], order_spec: Optional[str]) -> list[str]:
