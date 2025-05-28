@@ -10,4 +10,7 @@ import './forms/textarea/script.js';
 // Import button scripts
 import './button/script.js';
 
+// Import menu scripts
+import './menu/script.js';
+
 // More component scripts can be added here as they are created

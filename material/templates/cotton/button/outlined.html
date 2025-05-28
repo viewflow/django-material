@@ -1,0 +1,19 @@
+<c-vars
+  color="primary"
+  base_class="inline-flex relative items-center justify-center rounded-full px-6 py-2 font-medium text-sm leading-6 overflow-hidden border"
+  state_class="transition-all duration-300 ease-in-out focus:outline-none active:ripple"
+  disabled_class="disabled:border-on-surface/12 disabled:text-on-surface/38 disabled:cursor-not-allowed"
+  icon_class="material-symbols mr-2 leading-[1px] text-lg" />
+
+<button
+  class="{{ base_class }} {{ state_class }} {{ disabled_class }} border-outline text-{{ color }} hover:bg-{{ color }}/10 focus:bg-{{ color }}/20 {{ class }}"
+  {% if disabled %}disabled{% endif %}
+  {% if aria_label %}aria-label="{{ aria_label }}"{% endif %}
+  role="button"
+  up-ripple
+  {{ attrs }}>
+  {% if icon %}
+    <span class="{{ icon_class }}" aria-hidden="true">{{ icon }}</span>
+  {% endif %}
+  {{ slot }}
+</button>

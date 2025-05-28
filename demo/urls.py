@@ -53,6 +53,13 @@ cotton = Application(
             title="Lists",
         ),
         menu_path(
+            "menus/",
+            TemplateView.as_view(template_name="demo/html/menus.html"),
+            name="menus",
+            icon="more_vert",
+            title="Menus",
+        ),
+        menu_path(
             "navigation/",
             TemplateView.as_view(template_name="demo/html/navigation.html"),
             name="navigation",

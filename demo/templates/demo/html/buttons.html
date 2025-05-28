@@ -47,7 +47,7 @@
 
     <!-- With href -->
     <div class="flex flex-col items-center">
-      <c-button.fab href="/demo" aria_label="Go to homepage">home</c-button.fab>
+      <c-button.fab href="/" aria_label="Go to homepage">home</c-button.fab>
       <span class="text-sm mt-4">With href</span>
     </div>
 
@@ -198,6 +198,54 @@
     <!-- With aria-label -->
     <div class="flex flex-col items-center">
       <c-button.text icon="info" aria_label="More information">Info</c-button.text>
+      <span class="text-sm mt-2">With aria_label</span>
+    </div>
+  </div>
+</section>
+
+<section id="outlined-buttons" class="mb-12">
+  <h2 class="text-2xl mb-4">Outlined Buttons</h2>
+  <p class="mb-6">
+    Outlined buttons are medium-emphasis buttons with a visible border and no container fill.
+    They are useful for important actions that need more prominence than text buttons but less than filled buttons.
+  </p>
+
+  <div class="flex flex-wrap gap-4 mb-8">
+    <!-- Primary color (default) -->
+    <div class="flex flex-col items-center">
+      <c-button.outlined>Primary</c-button.outlined>
+      <span class="text-sm mt-2">Default</span>
+    </div>
+
+    <!-- Secondary color -->
+    <div class="flex flex-col items-center">
+      <c-button.outlined color="secondary">Secondary</c-button.outlined>
+      <span class="text-sm mt-2">color="secondary"</span>
+    </div>
+
+    <!-- Tertiary color -->
+    <div class="flex flex-col items-center">
+      <c-button.outlined color="tertiary">Tertiary</c-button.outlined>
+      <span class="text-sm mt-2">color="tertiary"</span>
+    </div>
+
+    <!-- Disabled state -->
+    <div class="flex flex-col items-center">
+      <c-button.outlined disabled>Disabled</c-button.outlined>
+      <span class="text-sm mt-2">disabled</span>
+    </div>
+  </div>
+
+  <div class="flex flex-wrap gap-4 mb-8">
+    <!-- With icon -->
+    <div class="flex flex-col items-center">
+      <c-button.outlined icon="download">Download</c-button.outlined>
+      <span class="text-sm mt-2">icon="download"</span>
+    </div>
+
+    <!-- With aria-label -->
+    <div class="flex flex-col items-center">
+      <c-button.outlined icon="settings" aria_label="Open settings">Settings</c-button.outlined>
       <span class="text-sm mt-2">With aria_label</span>
     </div>
   </div>
@@ -400,6 +448,9 @@
 &lt;!-- Elevated Button (medium emphasis) --&gt;
 &lt;c-button.elevated&gt;Elevated Button&lt;/c-button.elevated&gt;
 
+&lt;!-- Outlined Button (medium emphasis) --&gt;
+&lt;c-button.outlined&gt;Outlined Button&lt;/c-button.outlined&gt;
+
 &lt;!-- Text Button (low emphasis) --&gt;
 &lt;c-button.text&gt;Text Button&lt;/c-button.text&gt;
 
@@ -415,6 +466,7 @@
 &lt;c-button.filled color="secondary"&gt;Secondary Button&lt;/c-button.filled&gt;
 &lt;c-button.tonal color="tertiary"&gt;Tertiary Tonal&lt;/c-button.tonal&gt;
 &lt;c-button.elevated color="tertiary"&gt;Tertiary Button&lt;/c-button.elevated&gt;
+&lt;c-button.outlined color="secondary"&gt;Secondary Outlined&lt;/c-button.outlined&gt;
 &lt;c-button.text color="secondary"&gt;Secondary Text&lt;/c-button.text&gt;
 &lt;c-button.icon color="tertiary" aria_label="Settings"&gt;settings&lt;/c-button.icon&gt;
 
@@ -422,12 +474,14 @@
 &lt;c-button.filled icon="add"&gt;Add Item&lt;/c-button.filled&gt;
 &lt;c-button.tonal icon="edit"&gt;Edit Item&lt;/c-button.tonal&gt;
 &lt;c-button.elevated icon="star"&gt;Star Item&lt;/c-button.elevated&gt;
+&lt;c-button.outlined icon="download"&gt;Download Item&lt;/c-button.outlined&gt;
 &lt;c-button.text icon="link"&gt;Link Item&lt;/c-button.text&gt;
 
 &lt;!-- Disabled state --&gt;
 &lt;c-button.filled disabled&gt;Disabled Button&lt;/c-button.filled&gt;
 &lt;c-button.tonal disabled&gt;Disabled Tonal&lt;/c-button.tonal&gt;
 &lt;c-button.elevated disabled&gt;Disabled Elevated&lt;/c-button.elevated&gt;
+&lt;c-button.outlined disabled&gt;Disabled Outlined&lt;/c-button.outlined&gt;
 &lt;c-button.text disabled&gt;Disabled Text&lt;/c-button.text&gt;
 &lt;c-button.icon disabled aria_label="Print"&gt;print&lt;/c-button.icon&gt;
 
@@ -435,6 +489,7 @@
 &lt;c-button.filled icon="favorite" aria_label="Add to favorites"&gt;Favorite&lt;/c-button.filled&gt;
 &lt;c-button.tonal icon="share" aria_label="Share content"&gt;Share&lt;/c-button.tonal&gt;
 &lt;c-button.elevated icon="download" aria_label="Download file"&gt;Download&lt;/c-button.elevated&gt;
+&lt;c-button.outlined icon="settings" aria_label="Open settings"&gt;Settings&lt;/c-button.outlined&gt;
 &lt;c-button.text icon="info" aria_label="More information"&gt;Info&lt;/c-button.text&gt;</code></pre>
   </div>
 </section>

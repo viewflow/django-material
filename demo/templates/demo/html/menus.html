@@ -1,0 +1,274 @@
+{% extends 'demo/html/base_page.html' %}
+{% load i18n %}
+
+{% block page_breadcrumb %}Menus{% endblock %}
+{% block page_title %}Menu Components{% endblock %}
+
+{% block page_content %}
+
+  <section id="menu-container" class="mb-12">
+    <h2 class="text-2xl mb-4">Menu Container</h2>
+    <p class="mb-6">
+      The menu container provides a dropdown menu that can be anchored to any element. 
+      It supports automatic positioning, viewport boundary detection, and keyboard navigation.
+    </p>
+
+    <div class="border p-6 rounded-lg mb-8 bg-surface-container-low">
+      <div class="flex flex-wrap gap-4">
+        <div class="relative">
+          <c-button.filled id="menu-trigger-1">Open Menu</c-button.filled>
+          <c-menu.container anchor="#menu-trigger-1" placement="bottom-start">
+            <c-menu.item>Profile</c-menu.item>
+            <c-menu.item>Settings</c-menu.item>
+            <c-menu.item>Sign out</c-menu.item>
+          </c-menu.container>
+        </div>
+
+        <div class="relative">
+          <c-button.outlined id="menu-trigger-2">With Icons</c-button.outlined>
+          <c-menu.container anchor="#menu-trigger-2" placement="bottom-end">
+            <c-menu.item>
+              <c-slot name="leading">
+                <span class="material-symbols">person</span>
+              </c-slot>
+              Profile
+            </c-menu.item>
+            <c-menu.item>
+              <c-slot name="leading">
+                <span class="material-symbols">settings</span>
+              </c-slot>
+              Settings
+            </c-menu.item>
+            <c-menu.item>
+              <c-slot name="leading">
+                <span class="material-symbols">logout</span>
+              </c-slot>
+              Sign out
+            </c-menu.item>
+          </c-menu.container>
+        </div>
+
+        <div class="relative">
+          <c-button.text id="menu-trigger-3">Scrollable Menu</c-button.text>
+          <c-menu.container anchor="#menu-trigger-3" max_height="200px">
+            <c-menu.item>Item 1</c-menu.item>
+            <c-menu.item>Item 2</c-menu.item>
+            <c-menu.item>Item 3</c-menu.item>
+            <c-menu.item>Item 4</c-menu.item>
+            <c-menu.item>Item 5</c-menu.item>
+            <c-menu.item>Item 6</c-menu.item>
+            <c-menu.item>Item 7</c-menu.item>
+            <c-menu.item>Item 8</c-menu.item>
+            <c-menu.item>Item 9</c-menu.item>
+            <c-menu.item>Item 10</c-menu.item>
+          </c-menu.container>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="menu-items" class="mb-12">
+    <h2 class="text-2xl mb-4">Menu Items</h2>
+    <p class="mb-6">
+      Menu items are used within menu containers to create interactive options with proper accessibility support.
+    </p>
+
+    <div class="flex flex-wrap gap-4 mb-8">
+      <div class="relative">
+        <c-button.tonal id="menu-trigger-4">Simple Items</c-button.tonal>
+        <c-menu.container anchor="#menu-trigger-4">
+          <c-menu.item>Edit</c-menu.item>
+          <c-menu.item>Copy</c-menu.item>
+          <c-menu.item>Delete</c-menu.item>
+        </c-menu.container>
+      </div>
+
+      <div class="relative">
+        <c-button.tonal id="menu-trigger-5">With Leading & Trailing</c-button.tonal>
+        <c-menu.container anchor="#menu-trigger-5">
+          <c-menu.item>
+            <c-slot name="leading">
+              <span class="material-symbols">edit</span>
+            </c-slot>
+            Edit
+            <c-slot name="trailing">
+              <span class="text-xs text-on-surface-variant">Ctrl+E</span>
+            </c-slot>
+          </c-menu.item>
+          <c-menu.item>
+            <c-slot name="leading">
+              <span class="material-symbols">content_copy</span>
+            </c-slot>
+            Copy
+            <c-slot name="trailing">
+              <span class="text-xs text-on-surface-variant">Ctrl+C</span>
+            </c-slot>
+          </c-menu.item>
+          <c-menu.item>
+            <c-slot name="leading">
+              <span class="material-symbols">delete</span>
+            </c-slot>
+            Delete
+            <c-slot name="trailing">
+              <span class="text-xs text-on-surface-variant">Del</span>
+            </c-slot>
+          </c-menu.item>
+        </c-menu.container>
+      </div>
+    </div>
+  </section>
+
+  <section id="usage" class="mb-12">
+    <h2 class="text-2xl mb-4">Usage</h2>
+    
+    <div class="bg-surface-container-low p-6 rounded-lg mb-6">
+      <pre class="text-on-surface-variant"><code>&lt;!-- Basic Menu --&gt;
+&lt;c-button.filled id="my-trigger"&gt;Open Menu&lt;/c-button.filled&gt;
+&lt;c-menu.container anchor="#my-trigger"&gt;
+  &lt;c-menu.item&gt;Profile&lt;/c-menu.item&gt;
+  &lt;c-menu.item&gt;Settings&lt;/c-menu.item&gt;
+  &lt;c-menu.item&gt;Sign out&lt;/c-menu.item&gt;
+&lt;/c-menu.container&gt;
+
+&lt;!-- Menu with Icons and Shortcuts --&gt;
+&lt;c-menu.container anchor="#trigger-id" placement="bottom-end"&gt;
+  &lt;c-menu.item&gt;
+    &lt;c-slot name="leading"&gt;
+      &lt;span class="material-symbols"&gt;edit&lt;/span&gt;
+    &lt;/c-slot&gt;
+    Edit
+    &lt;c-slot name="trailing"&gt;
+      &lt;span class="text-xs text-on-surface-variant"&gt;Ctrl+E&lt;/span&gt;
+    &lt;/c-slot&gt;
+  &lt;/c-menu.item&gt;
+  &lt;c-menu.item&gt;
+    &lt;c-slot name="leading"&gt;
+      &lt;span class="material-symbols"&gt;delete&lt;/span&gt;
+    &lt;/c-slot&gt;
+    Delete
+  &lt;/c-menu.item&gt;
+&lt;/c-menu.container&gt;
+
+&lt;!-- Scrollable Menu --&gt;
+&lt;c-menu.container anchor="#trigger-id" max_height="200px"&gt;
+  &lt;c-menu.item&gt;Long List Item 1&lt;/c-menu.item&gt;
+  &lt;c-menu.item&gt;Long List Item 2&lt;/c-menu.item&gt;
+  &lt;!-- More items... --&gt;
+&lt;/c-menu.container&gt;</code></pre>
+    </div>
+  </section>
+
+  <section id="attributes" class="mb-12">
+    <h2 class="text-2xl mb-4">Attributes</h2>
+    
+    <h3 class="text-xl font-medium mb-3">Menu Container</h3>
+    <div class="overflow-x-auto mb-6">
+      <c-table.container>
+        <c-slot name="header">
+          <c-table.header_row>
+            <c-table.header>Attribute</c-table.header>
+            <c-table.header>Type</c-table.header>
+            <c-table.header>Default</c-table.header>
+            <c-table.header>Description</c-table.header>
+          </c-table.header_row>
+        </c-slot>
+        <c-table.row>
+          <c-table.cell><code>anchor</code></c-table.cell>
+          <c-table.cell>string</c-table.cell>
+          <c-table.cell>required</c-table.cell>
+          <c-table.cell>CSS selector for the element that triggers the menu</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>placement</code></c-table.cell>
+          <c-table.cell>string</c-table.cell>
+          <c-table.cell>"bottom-start"</c-table.cell>
+          <c-table.cell>Menu position relative to anchor: bottom-start, bottom-end, top-start, top-end, right-start, left-start</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>max_height</code></c-table.cell>
+          <c-table.cell>string</c-table.cell>
+          <c-table.cell>"300px"</c-table.cell>
+          <c-table.cell>Maximum height of the menu before scrolling</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>slot</code></c-table.cell>
+          <c-table.cell>slot</c-table.cell>
+          <c-table.cell>required</c-table.cell>
+          <c-table.cell>Menu items content</c-table.cell>
+        </c-table.row>
+      </c-table.container>
+    </div>
+
+    <h3 class="text-xl font-medium mb-3">Menu Item</h3>
+    <div class="overflow-x-auto mb-6">
+      <c-table.container>
+        <c-slot name="header">
+          <c-table.header_row>
+            <c-table.header>Attribute</c-table.header>
+            <c-table.header>Type</c-table.header>
+            <c-table.header>Default</c-table.header>
+            <c-table.header>Description</c-table.header>
+          </c-table.header_row>
+        </c-slot>
+        <c-table.row>
+          <c-table.cell><code>leading</code></c-table.cell>
+          <c-table.cell>slot</c-table.cell>
+          <c-table.cell>none</c-table.cell>
+          <c-table.cell>Content to display before the item text (icons, avatars)</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>trailing</code></c-table.cell>
+          <c-table.cell>slot</c-table.cell>
+          <c-table.cell>none</c-table.cell>
+          <c-table.cell>Content to display after the item text (shortcuts, badges)</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>slot</code></c-table.cell>
+          <c-table.cell>slot</c-table.cell>
+          <c-table.cell>required</c-table.cell>
+          <c-table.cell>Primary text content of the menu item</c-table.cell>
+        </c-table.row>
+      </c-table.container>
+    </div>
+  </section>
+
+  <section id="keyboard-navigation" class="mb-12">
+    <h2 class="text-2xl mb-4">Keyboard Navigation</h2>
+    <p class="mb-6">Menus support full keyboard navigation for accessibility:</p>
+    
+    <div class="overflow-x-auto">
+      <c-table.container>
+        <c-slot name="header">
+          <c-table.header_row>
+            <c-table.header>Key</c-table.header>
+            <c-table.header>Action</c-table.header>
+          </c-table.header_row>
+        </c-slot>
+        <c-table.row>
+          <c-table.cell><kbd class="px-2 py-1 text-xs bg-surface-variant rounded">↓</kbd></c-table.cell>
+          <c-table.cell>Move focus to next menu item</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><kbd class="px-2 py-1 text-xs bg-surface-variant rounded">↑</kbd></c-table.cell>
+          <c-table.cell>Move focus to previous menu item</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><kbd class="px-2 py-1 text-xs bg-surface-variant rounded">Enter</kbd></c-table.cell>
+          <c-table.cell>Activate focused menu item</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><kbd class="px-2 py-1 text-xs bg-surface-variant rounded">Space</kbd></c-table.cell>
+          <c-table.cell>Activate focused menu item</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><kbd class="px-2 py-1 text-xs bg-surface-variant rounded">Esc</kbd></c-table.cell>
+          <c-table.cell>Close menu and return focus to trigger</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><kbd class="px-2 py-1 text-xs bg-surface-variant rounded">Tab</kbd></c-table.cell>
+          <c-table.cell>Close menu and move focus to next element</c-table.cell>
+        </c-table.row>
+      </c-table.container>
+    </div>
+  </section>
+{% endblock %}

@@ -1,0 +1,19 @@
+<c-vars
+  anchor=""
+  placement="bottom-start"
+  max_height="300px"
+  base_class="fixed z-50 hidden bg-surface border border-outline rounded-lg shadow-lg overflow-y-auto [scrollbar-width:thin]"
+  list_class="max-h-full overflow-y-auto" />
+
+<div 
+  class="{{ base_class }} {{ class }}"
+  style="max-height: {{ max_height }}"
+  up-menu
+  data-anchor="{{ anchor }}"
+  data-placement="{{ placement }}"
+  role="menu"
+  {{ attrs }}>
+  <c-list.container class="{{ list_class }}" role="none">
+    {{ slot }}
+  </c-list.container>
+</div>
