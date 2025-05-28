@@ -45,16 +45,19 @@ def reverse(context: Context, viewset: Viewset, view_name: str, *args: Any, **kw
     Example:
         {% reverse viewset 'view_name' arg1 arg2 name1=val1 name2=val2 as var %}
     """
+    if viewset == "":
+        return ""
+
     if not isinstance(viewset, Viewset):
         raise template.TemplateSyntaxError(
             f"reverse '{view_name}' first argument must be a viewset instance, got '{viewset}'"
         )
 
     try:
-        current_app = context.request.current_app
+        current_app = context.request.current_app  # type: ignore
     except AttributeError:
         try:
-            current_app = context.request.resolver_match.namespace
+            current_app = context.request.resolver_match.namespace  # type: ignore
         except AttributeError:
             current_app = None
 

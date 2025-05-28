@@ -11,17 +11,16 @@ from django.views import generic
 from material.utils import DEFAULT, MARKER
 
 if TYPE_CHECKING:
-    from django_stubs_ext import StrPromise
     from material.urls import BaseModelViewset
     from cursor_pagination import CursorPage
 
 
 class BaseColumn:
-    title: "str | StrPromise"
+    title: str
 
-    def __init__(self, name: str, title: Optional["str | StrPromise"]) -> None:
+    def __init__(self, name: str, title: Optional[str]) -> None:
         self.name = name
-        self.title = title if title else _(self.name.title())
+        self.title = title if title else self.name.replace("_", " ").capitalize()
 
     def get_data(self, obj: object, viewset: Optional["BaseModelViewset"] = None) -> Any:
         raise NotImplementedError("Subclasses should override this")
@@ -40,7 +39,7 @@ class Column(BaseColumn):
     def __init__(
         self,
         lookup: str,
-        title: Optional["str | StrPromise"] = None,
+        title: Optional[str] = None,
         orderby: str = DEFAULT,  # type: ignore
     ) -> None:
         self.lookup = lookup

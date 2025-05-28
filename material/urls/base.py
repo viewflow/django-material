@@ -10,7 +10,7 @@ import copy
 import types
 import warnings
 from collections import OrderedDict, namedtuple
-from typing import Any, Callable, Optional, Union
+from typing import Any, Callable, Optional, Sequence, Union
 
 from django.urls import ResolverMatch, URLPattern, URLResolver, include, path, reverse
 from django.urls.resolvers import RoutePattern
@@ -198,7 +198,7 @@ class BaseViewset:
     def reverse(
         self,
         viewname: str,
-        args: list[Any] | None = None,
+        args: Sequence[Any] | None = None,
         kwargs: dict[str, Any] | None = None,
         current_app: str | None = None,
     ) -> str:

@@ -3,45 +3,50 @@
 
 {% block content %}
 <div class="flex items-center space-x-2 mb-2">
-  <c-breadcrumbs.container class="flex-grow">
+  {% block page_breadcrumbs %}
+  <c-breadcrumbs.container class="flex-grow">{% if viewset %}
     <c-breadcrumbs.home href="{% url 'index' %}"></c-breadcrumbs.home>
     {% for parent in viewset.parents %}{% if forloop.counter0 %}
       <c-breadcrumbs.item href="{% reverse parent 'index' %}">{{ parent.title }}</c-breadcrumbs.item>
     {% endif %}{% endfor %}
     <c-breadcrumbs.item current="true">{{ viewset.title }}</c-breadcrumbs.item>
-  </c-breadcrumbs.container>
+  {% endif %}</c-breadcrumbs.container>
+  {% endblock %}
 
   <c-button.icon variant="" aria_label="Search">search</c-button.icon>
   <c-button.icon variant="filled2" aria_label="Add">filter_list</c-button.icon>
 </div>
 
   <h1 class="text-3xl font-medium mb-4 flex items-center gap-2">
-    {% block page_title%}
-      <span>{{ viewset.title }}</span>
+    {% block page_title %}
+    <span>{% if viewset %}{{ viewset.title }}{% else %}List{% endif %}</span>
     {% endblock %}
   </h1>
 
   {% block page_content %}
-  <c-button.fab
-    href="{% reverse viewset 'add' %}"
-    class="absolute bottom-6 right-6 z-10" 
-    aria_label="Add new item">add</c-button.fab>
+    {% block page_add_button %}
+      {% reverse viewset 'add' as add_url %}
+      {% if add_url %}<c-button.fab
+        href="{{ add_url }}"
+        class="absolute bottom-6 right-6 z-10" 
+        aria_label="Add new item">add</c-button.fab>{% endif %}
+    {% endblock %}
 
-  <c-table.container class="mb-16">
-    <c-slot name="header">      
-      <c-table.header_row>
-        {% for column in columns %}
-        <c-table.header>Test</c-table.header>
-        {% endfor %}
-      </c-table.header_row>      
-    </c-slot>
+    <c-table.container class="mb-16">
+      <c-slot name="header">      
+        <c-table.header_row>
+          {% for column in list.columns %}
+          <c-table.header>{{ column }}</c-table.header>
+          {% endfor %}
+        </c-table.header_row>      
+      </c-slot>
 
-    <tr><td>content</td></tr>
+      <tr><td>content</td></tr>
 
-    <c-slot name="footer">
-      <tr><td>pagination</td></tr>
-    </c-slot>
-  </c-table.container>  
+      <c-slot name="footer">
+        <tr><td>pagination</td></tr>
+      </c-slot>
+    </c-table.container>  
   {% endblock %}
 {% endblock content %}
 
