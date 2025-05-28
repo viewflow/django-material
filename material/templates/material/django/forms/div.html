@@ -4,11 +4,11 @@
 </div>
 {% endif %}
 
-{% for field, errors in fields %}
-<div class="mb-4 {{ field.css_classes }}" {% if field.id_for_label %}id="{{ field.id_for_label }}_container"{% endif %}>
-  {{ field.as_field_group }}
+<div class="flex flex-col gap-4 w-full {% if attrs.class %}{{ attrs.class }}{% endif %}">
+  {% for field, errors in fields %}
+    {{ field }}
+  {% endfor %}
   {% if forloop.last %}
     {% for field in hidden_fields %}{{ field }}{% endfor %}
   {% endif %}
 </div>
-{% endfor %}
