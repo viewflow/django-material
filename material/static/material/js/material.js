@@ -253,9 +253,11 @@
       window.addEventListener("resize", windowResizeHandler);
       requestAnimationFrame(() => {
         positionMenu();
+        const selectedItem = menu.querySelector('[up-select-option][aria-selected="true"]');
         const firstItem = menu.querySelector("[up-select-option]");
-        if (firstItem) {
-          firstItem.focus();
+        const itemToFocus = selectedItem || firstItem;
+        if (itemToFocus) {
+          itemToFocus.focus();
         }
       });
     }
