@@ -256,9 +256,13 @@ class ModelFormMixin(FormMixin):
     def __init__(self, *args: Any, **kwargs: Any) -> None:
         super().__init__(*args, **kwargs)
 
-        # iterate over fields like Django's apply_limit_choices_to_to_formfield
-        # to apply DependentModelSelect query
+        # Process all fields in a single loop for efficiency
         for field in self.fields.values():
+            # Set empty_label to empty string for choice fields to match Material Design patterns
+            if hasattr(field, 'empty_label'):
+                field.empty_label = ''  # type: ignore
+
+            # Apply DependentModelSelect query logic
             if hasattr(field.widget, "depends_on") and hasattr(field.widget, "queryset"):
                 field_queryset = field.queryset  # type: ignore
                 field.queryset = field_queryset.none()  # type: ignore
