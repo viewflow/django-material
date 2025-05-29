@@ -282,6 +282,150 @@
     </div>
   </section>
   
+  <section id="typeahead-demo" class="mb-12">
+    <h2 class="text-2xl mb-4">Keyboard Typing & Typeahead</h2>
+    <p class="mb-6">
+      Select components support native-like keyboard typing to quickly find options. Start typing when the menu is open to jump to options that start with those letters.
+      The typeahead search resets after 1 second of inactivity.
+    </p>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div>
+        <h3 class="text-xl mb-4">Countries (Filled) - Type to Search</h3>
+        <p class="text-sm text-on-surface-variant mb-4">
+          Open the menu and try typing: "u" for United States, "c" for Canada, "g" for Germany, etc.
+        </p>
+        <c-forms.select.filled id="countries_typeahead" menu_max_height="300px">
+          Country
+          <c-slot name="options">
+            <c-forms.select.option value="afghanistan">Afghanistan</c-forms.select.option>
+            <c-forms.select.option value="albania">Albania</c-forms.select.option>
+            <c-forms.select.option value="algeria">Algeria</c-forms.select.option>
+            <c-forms.select.option value="argentina">Argentina</c-forms.select.option>
+            <c-forms.select.option value="australia">Australia</c-forms.select.option>
+            <c-forms.select.option value="austria">Austria</c-forms.select.option>
+            <c-forms.select.option value="bangladesh">Bangladesh</c-forms.select.option>
+            <c-forms.select.option value="belgium">Belgium</c-forms.select.option>
+            <c-forms.select.option value="brazil">Brazil</c-forms.select.option>
+            <c-forms.select.option value="bulgaria">Bulgaria</c-forms.select.option>
+            <c-forms.select.option value="canada">Canada</c-forms.select.option>
+            <c-forms.select.option value="chile">Chile</c-forms.select.option>
+            <c-forms.select.option value="china">China</c-forms.select.option>
+            <c-forms.select.option value="colombia">Colombia</c-forms.select.option>
+            <c-forms.select.option value="croatia">Croatia</c-forms.select.option>
+            <c-forms.select.option value="czech_republic">Czech Republic</c-forms.select.option>
+            <c-forms.select.option value="denmark">Denmark</c-forms.select.option>
+            <c-forms.select.option value="egypt">Egypt</c-forms.select.option>
+            <c-forms.select.option value="estonia">Estonia</c-forms.select.option>
+            <c-forms.select.option value="finland">Finland</c-forms.select.option>
+            <c-forms.select.option value="france">France</c-forms.select.option>
+            <c-forms.select.option value="germany">Germany</c-forms.select.option>
+            <c-forms.select.option value="greece">Greece</c-forms.select.option>
+            <c-forms.select.option value="hungary">Hungary</c-forms.select.option>
+            <c-forms.select.option value="iceland">Iceland</c-forms.select.option>
+            <c-forms.select.option value="india">India</c-forms.select.option>
+            <c-forms.select.option value="indonesia">Indonesia</c-forms.select.option>
+            <c-forms.select.option value="ireland">Ireland</c-forms.select.option>
+            <c-forms.select.option value="israel">Israel</c-forms.select.option>
+            <c-forms.select.option value="italy">Italy</c-forms.select.option>
+            <c-forms.select.option value="japan">Japan</c-forms.select.option>
+            <c-forms.select.option value="kenya">Kenya</c-forms.select.option>
+            <c-forms.select.option value="latvia">Latvia</c-forms.select.option>
+            <c-forms.select.option value="lithuania">Lithuania</c-forms.select.option>
+            <c-forms.select.option value="luxembourg">Luxembourg</c-forms.select.option>
+            <c-forms.select.option value="malaysia">Malaysia</c-forms.select.option>
+            <c-forms.select.option value="mexico">Mexico</c-forms.select.option>
+            <c-forms.select.option value="netherlands">Netherlands</c-forms.select.option>
+            <c-forms.select.option value="new_zealand">New Zealand</c-forms.select.option>
+            <c-forms.select.option value="norway">Norway</c-forms.select.option>
+            <c-forms.select.option value="poland">Poland</c-forms.select.option>
+            <c-forms.select.option value="portugal">Portugal</c-forms.select.option>
+            <c-forms.select.option value="romania">Romania</c-forms.select.option>
+            <c-forms.select.option value="russia">Russia</c-forms.select.option>
+            <c-forms.select.option value="singapore">Singapore</c-forms.select.option>
+            <c-forms.select.option value="slovakia">Slovakia</c-forms.select.option>
+            <c-forms.select.option value="slovenia">Slovenia</c-forms.select.option>
+            <c-forms.select.option value="south_africa">South Africa</c-forms.select.option>
+            <c-forms.select.option value="south_korea">South Korea</c-forms.select.option>
+            <c-forms.select.option value="spain">Spain</c-forms.select.option>
+            <c-forms.select.option value="sweden">Sweden</c-forms.select.option>
+            <c-forms.select.option value="switzerland">Switzerland</c-forms.select.option>
+            <c-forms.select.option value="thailand">Thailand</c-forms.select.option>
+            <c-forms.select.option value="turkey">Turkey</c-forms.select.option>
+            <c-forms.select.option value="ukraine">Ukraine</c-forms.select.option>
+            <c-forms.select.option value="united_kingdom">United Kingdom</c-forms.select.option>
+            <c-forms.select.option value="united_states">United States</c-forms.select.option>
+            <c-forms.select.option value="vietnam">Vietnam</c-forms.select.option>
+          </c-slot>
+        </c-forms.select.filled>
+      </div>
+      
+      <div>
+        <h3 class="text-xl mb-4">Programming Languages (Outlined)</h3>
+        <p class="text-sm text-on-surface-variant mb-4">
+          Try typing multiple letters like "py" for Python, "ja" for Java, "ty" for TypeScript.
+        </p>
+        <c-forms.select.outlined id="languages_typeahead" menu_max_height="300px">
+          Programming Language
+          <c-slot name="options">
+            <c-forms.select.option value="assembly">Assembly</c-forms.select.option>
+            <c-forms.select.option value="bash">Bash</c-forms.select.option>
+            <c-forms.select.option value="c">C</c-forms.select.option>
+            <c-forms.select.option value="cpp">C++</c-forms.select.option>
+            <c-forms.select.option value="csharp">C#</c-forms.select.option>
+            <c-forms.select.option value="css">CSS</c-forms.select.option>
+            <c-forms.select.option value="dart">Dart</c-forms.select.option>
+            <c-forms.select.option value="dockerfile">Dockerfile</c-forms.select.option>
+            <c-forms.select.option value="elixir">Elixir</c-forms.select.option>
+            <c-forms.select.option value="erlang">Erlang</c-forms.select.option>
+            <c-forms.select.option value="fortran">Fortran</c-forms.select.option>
+            <c-forms.select.option value="go">Go</c-forms.select.option>
+            <c-forms.select.option value="graphql">GraphQL</c-forms.select.option>
+            <c-forms.select.option value="haskell">Haskell</c-forms.select.option>
+            <c-forms.select.option value="html">HTML</c-forms.select.option>
+            <c-forms.select.option value="java">Java</c-forms.select.option>
+            <c-forms.select.option value="javascript">JavaScript</c-forms.select.option>
+            <c-forms.select.option value="json">JSON</c-forms.select.option>
+            <c-forms.select.option value="julia">Julia</c-forms.select.option>
+            <c-forms.select.option value="kotlin">Kotlin</c-forms.select.option>
+            <c-forms.select.option value="lua">Lua</c-forms.select.option>
+            <c-forms.select.option value="markdown">Markdown</c-forms.select.option>
+            <c-forms.select.option value="matlab">MATLAB</c-forms.select.option>
+            <c-forms.select.option value="nginx">Nginx</c-forms.select.option>
+            <c-forms.select.option value="objective_c">Objective-C</c-forms.select.option>
+            <c-forms.select.option value="perl">Perl</c-forms.select.option>
+            <c-forms.select.option value="php">PHP</c-forms.select.option>
+            <c-forms.select.option value="python">Python</c-forms.select.option>
+            <c-forms.select.option value="r">R</c-forms.select.option>
+            <c-forms.select.option value="ruby">Ruby</c-forms.select.option>
+            <c-forms.select.option value="rust">Rust</c-forms.select.option>
+            <c-forms.select.option value="scala">Scala</c-forms.select.option>
+            <c-forms.select.option value="shell">Shell</c-forms.select.option>
+            <c-forms.select.option value="sql">SQL</c-forms.select.option>
+            <c-forms.select.option value="swift">Swift</c-forms.select.option>
+            <c-forms.select.option value="typescript">TypeScript</c-forms.select.option>
+            <c-forms.select.option value="vbnet">VB.NET</c-forms.select.option>
+            <c-forms.select.option value="xml">XML</c-forms.select.option>
+            <c-forms.select.option value="yaml">YAML</c-forms.select.option>
+            <c-forms.select.option value="zig">Zig</c-forms.select.option>
+          </c-slot>
+        </c-forms.select.outlined>
+      </div>
+    </div>
+    
+    <div class="mt-8 p-4 bg-surface-container-low rounded-lg">
+      <h4 class="text-lg mb-2">How to Use Typeahead:</h4>
+      <ul class="space-y-1 text-on-surface-variant">
+        <li>• Open a select menu by clicking or using keyboard (Enter, Space, Arrow keys)</li>
+        <li>• Start typing letters to search for options that start with those letters</li>
+        <li>• The search is case-insensitive and matches from the beginning of option text</li>
+        <li>• Continue typing to narrow down the search (e.g., "py" will find "Python")</li>
+        <li>• The search string resets after 1 second of inactivity</li>
+        <li>• Use Arrow keys for manual navigation, Enter/Space to select</li>
+      </ul>
+    </div>
+  </section>
+  
   <section id="usage" class="mb-12">
     <h2 class="text-2xl mb-4">Usage</h2>
     

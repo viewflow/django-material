@@ -11,6 +11,47 @@ up.compiler('[up-select-trigger]', function (trigger) {
   let documentKeyHandler = null;
   let windowResizeHandler = null;
   
+  // Typeahead functionality
+  let typeaheadString = '';
+  let typeaheadTimeout = null;
+  
+  // Find option that starts with the given string
+  function findOptionByPrefix(prefix) {
+    const options = menu.querySelectorAll('[up-select-option]');
+    const normalizedPrefix = prefix.toLowerCase();
+    
+    for (const option of options) {
+      const text = (option.textContent || '').trim().toLowerCase();
+      if (text.startsWith(normalizedPrefix)) {
+        return option;
+      }
+    }
+    return null;
+  }
+  
+  // Handle typeahead search
+  function handleTypeahead(char) {
+    // Clear previous timeout
+    if (typeaheadTimeout) {
+      clearTimeout(typeaheadTimeout);
+    }
+    
+    // Add character to search string
+    typeaheadString += char.toLowerCase();
+    
+    // Find matching option
+    const matchingOption = findOptionByPrefix(typeaheadString);
+    if (matchingOption) {
+      matchingOption.focus();
+      matchingOption.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+    
+    // Clear search string after delay
+    typeaheadTimeout = setTimeout(() => {
+      typeaheadString = '';
+    }, 1000);
+  }
+  
   // Position menu relative to trigger
   function positionMenu() {
     const triggerRect = trigger.getBoundingClientRect();
@@ -80,6 +121,10 @@ up.compiler('[up-select-trigger]', function (trigger) {
       if (e.key === 'Escape' && !menu.classList.contains('hidden')) {
         hideMenu();
         trigger.focus();
+      } else if (!menu.classList.contains('hidden') && e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey) {
+        // Handle typeahead for single character keys
+        e.preventDefault();
+        handleTypeahead(e.key);
       }
     };
     
@@ -149,6 +194,7 @@ up.compiler('[up-select-trigger]', function (trigger) {
   menu.showMenu = showMenu;
   menu.hideMenu = hideMenu;
   menu.toggleMenu = toggleMenu;
+  trigger.handleTypeahead = handleTypeahead;
   
   // Click on trigger toggles menu
   trigger.addEventListener('click', function(e) {
@@ -258,6 +304,19 @@ up.compiler('[up-select-option]', function (option) {
         // Allow tab to close menu and move focus
         if (menu.hideMenu) {
           menu.hideMenu();
+        }
+        break;
+      default:
+        // Handle typeahead for single character keys
+        if (e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey) {
+          e.preventDefault();
+          if (menu.closest('.group').querySelector('[up-select-trigger]')) {
+            // Get the select component and call its typeahead function
+            const selectTrigger = menu.closest('.group').querySelector('[up-select-trigger]');
+            if (selectTrigger.handleTypeahead) {
+              selectTrigger.handleTypeahead(e.key);
+            }
+          }
         }
         break;
     }
