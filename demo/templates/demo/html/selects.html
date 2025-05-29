@@ -8,6 +8,116 @@
 
 {% block page_content %}
   
+  <section id="filled-selects" class="mb-12">
+    <h2 class="text-2xl mb-4">Filled Select Fields</h2>
+    <p class="mb-6">
+      Filled select fields use a solid background (surface-container-low) and are the default variant for form selects.
+      They provide clear visual prominence for user input areas with a bottom border that animates on focus.
+    </p>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div>
+        <h3 class="text-xl mb-4">Default</h3>
+        <c-forms.select.filled id="country_filled1">
+          Country
+          <c-slot name="options">
+            <c-forms.select.option value="us">United States</c-forms.select.option>
+            <c-forms.select.option value="ca">Canada</c-forms.select.option>
+            <c-forms.select.option value="uk">United Kingdom</c-forms.select.option>
+            <c-forms.select.option value="de">Germany</c-forms.select.option>
+            <c-forms.select.option value="fr">France</c-forms.select.option>
+          </c-slot>
+        </c-forms.select.filled>
+      </div>
+      
+      <div>
+        <h3 class="text-xl mb-4">With Help Text</h3>
+        <c-forms.select.filled id="country_filled2" help_text="Select your country of residence">
+          Country
+          <c-slot name="options">
+            <c-forms.select.option value="us">United States</c-forms.select.option>
+            <c-forms.select.option value="ca">Canada</c-forms.select.option>
+            <c-forms.select.option value="uk">United Kingdom</c-forms.select.option>
+          </c-slot>
+        </c-forms.select.filled>
+      </div>
+      
+      <div>
+        <h3 class="text-xl mb-4">Required</h3>
+        <c-forms.select.filled id="language_filled1" required>
+          Preferred Language
+          <c-slot name="options">
+            <c-forms.select.option value="en">English</c-forms.select.option>
+            <c-forms.select.option value="es">Spanish</c-forms.select.option>
+            <c-forms.select.option value="fr">French</c-forms.select.option>
+            <c-forms.select.option value="de">German</c-forms.select.option>
+          </c-slot>
+        </c-forms.select.filled>
+      </div>
+      
+      <div>
+        <h3 class="text-xl mb-4">Disabled</h3>
+        <c-forms.select.filled id="disabled_filled1" disabled>
+          Status
+          <c-slot name="options">
+            <c-forms.select.option value="active">Active</c-forms.select.option>
+            <c-forms.select.option value="inactive">Inactive</c-forms.select.option>
+          </c-slot>
+        </c-forms.select.filled>
+      </div>
+      
+      <div>
+        <h3 class="text-xl mb-4">With Error</h3>
+        <c-forms.select.filled id="priority_filled1" error="Please select a priority level">
+          Priority
+          <c-slot name="options">
+            <c-forms.select.option value="low">Low</c-forms.select.option>
+            <c-forms.select.option value="medium">Medium</c-forms.select.option>
+            <c-forms.select.option value="high">High</c-forms.select.option>
+            <c-forms.select.option value="urgent">Urgent</c-forms.select.option>
+          </c-slot>
+        </c-forms.select.filled>
+      </div>
+      
+      <div>
+        <h3 class="text-xl mb-4">With Pre-selected Value</h3>
+        <c-forms.select.filled id="timezone_filled1" value="America/New_York">
+          Timezone
+          <c-slot name="options">
+            <c-forms.select.option value="America/New_York">Eastern Time</c-forms.select.option>
+            <c-forms.select.option value="America/Chicago">Central Time</c-forms.select.option>
+            <c-forms.select.option value="America/Denver">Mountain Time</c-forms.select.option>
+            <c-forms.select.option value="America/Los_Angeles">Pacific Time</c-forms.select.option>
+          </c-slot>
+        </c-forms.select.filled>
+      </div>
+      
+      <div>
+        <h3 class="text-xl mb-4">Secondary Color</h3>
+        <c-forms.select.filled id="theme_filled1" color="secondary">
+          Theme
+          <c-slot name="options">
+            <c-forms.select.option value="light">Light</c-forms.select.option>
+            <c-forms.select.option value="dark">Dark</c-forms.select.option>
+            <c-forms.select.option value="auto">Auto</c-forms.select.option>
+          </c-slot>
+        </c-forms.select.filled>
+      </div>
+      
+      <div>
+        <h3 class="text-xl mb-4">Tertiary Color</h3>
+        <c-forms.select.filled id="notifications_filled1" color="tertiary">
+          Notifications
+          <c-slot name="options">
+            <c-forms.select.option value="all">All notifications</c-forms.select.option>
+            <c-forms.select.option value="important">Important only</c-forms.select.option>
+            <c-forms.select.option value="none">None</c-forms.select.option>
+          </c-slot>
+        </c-forms.select.filled>
+      </div>
+    </div>
+  </section>
+  
   <section id="outlined-selects" class="mb-12">
     <h2 class="text-2xl mb-4">Outlined Select Fields</h2>
     <p class="mb-6">
@@ -176,8 +286,18 @@
     <h2 class="text-2xl mb-4">Usage</h2>
     
     <div class="bg-surface-container-low p-6 rounded-lg shadow-sm mb-6 overflow-x-auto">
-      <pre class="text-on-surface-variant whitespace-pre-wrap break-words"><code>&lt;!-- Basic select field --&gt;
-&lt;c-forms.select.outlined id="country"&gt;
+      <pre class="text-on-surface-variant whitespace-pre-wrap break-words"><code>&lt;!-- Filled select field (default variant) --&gt;
+&lt;c-forms.select.filled id="country"&gt;
+  Country
+  &lt;c-slot name="options"&gt;
+    &lt;c-forms.select.option value="us"&gt;United States&lt;/c-forms.select.option&gt;
+    &lt;c-forms.select.option value="ca"&gt;Canada&lt;/c-forms.select.option&gt;
+    &lt;c-forms.select.option value="uk"&gt;United Kingdom&lt;/c-forms.select.option&gt;
+  &lt;/c-slot&gt;
+&lt;/c-forms.select.filled&gt;
+
+&lt;!-- Outlined select field --&gt;
+&lt;c-forms.select.outlined id="country_outlined"&gt;
   Country
   &lt;c-slot name="options"&gt;
     &lt;c-forms.select.option value="us"&gt;United States&lt;/c-forms.select.option&gt;
@@ -187,7 +307,14 @@
 &lt;/c-forms.select.outlined&gt;
 
 &lt;!-- With help text --&gt;
-&lt;c-forms.select.outlined id="language" help_text="Select your preferred language"&gt;
+&lt;c-forms.select.filled id="language" help_text="Select your preferred language"&gt;
+  Language
+  &lt;c-slot name="options"&gt;
+    &lt;c-forms.select.option value="en"&gt;English&lt;/c-forms.select.option&gt;
+    &lt;c-forms.select.option value="es"&gt;Spanish&lt;/c-forms.select.option&gt;
+  &lt;/c-slot&gt;
+&lt;/c-forms.select.filled&gt;
+&lt;c-forms.select.outlined id="outlined_language" help_text="Select your preferred language"&gt;
   Language
   &lt;c-slot name="options"&gt;
     &lt;c-forms.select.option value="en"&gt;English&lt;/c-forms.select.option&gt;
@@ -196,7 +323,7 @@
 &lt;/c-forms.select.outlined&gt;
 
 &lt;!-- Required field --&gt;
-&lt;c-forms.select.outlined id="priority" required&gt;
+&lt;c-forms.select.filled id="priority" required&gt;
   Priority
   &lt;c-slot name="options"&gt;
     &lt;c-forms.select.option value="low"&gt;Low&lt;/c-forms.select.option&gt;
@@ -205,7 +332,7 @@
 &lt;/c-forms.select.outlined&gt;
 
 &lt;!-- With error message --&gt;
-&lt;c-forms.select.outlined id="status" error="Please select a status"&gt;
+&lt;c-forms.select.filled id="status" error="Please select a status"&gt;
   Status
   &lt;c-slot name="options"&gt;
     &lt;c-forms.select.option value="active"&gt;Active&lt;/c-forms.select.option&gt;
@@ -214,7 +341,7 @@
 &lt;/c-forms.select.outlined&gt;
 
 &lt;!-- With pre-selected value --&gt;
-&lt;c-forms.select.outlined id="theme" value="dark"&gt;
+&lt;c-forms.select.filled id="theme" value="dark"&gt;
   Theme
   &lt;c-slot name="options"&gt;
     &lt;c-forms.select.option value="light"&gt;Light&lt;/c-forms.select.option&gt;
@@ -242,7 +369,7 @@
 &lt;/c-forms.select.outlined&gt;
 
 &lt;!-- Disabled field --&gt;
-&lt;c-forms.select.outlined id="locked" disabled&gt;
+&lt;c-forms.select.filled id="locked" disabled&gt;
   Locked Field
   &lt;c-slot name="options"&gt;
     &lt;c-forms.select.option value="option1"&gt;Option 1&lt;/c-forms.select.option&gt;
@@ -250,7 +377,7 @@
 &lt;/c-forms.select.outlined&gt;
 
 &lt;!-- With color variants --&gt;
-&lt;c-forms.select.outlined id="secondary" color="secondary"&gt;
+&lt;c-forms.select.filled id="secondary" color="secondary"&gt;
   Secondary Field
   &lt;c-slot name="options"&gt;
     &lt;c-forms.select.option value="opt1"&gt;Option 1&lt;/c-forms.select.option&gt;

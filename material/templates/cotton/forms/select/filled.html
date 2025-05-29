@@ -1,0 +1,72 @@
+<c-vars
+  class="relative w-full group"
+  color="primary"
+  placeholder=""
+  menu_max_height="300px" />
+
+<div class="{{ class }}" {{ attrs }}>
+  <div class="relative bg-surface-container-low rounded-t-md">
+    <div class="flex items-center relative">
+      <input 
+        type="text"
+        id="{{ id }}"
+        name="{{ name }}"
+        value="{{ value }}"
+        placeholder=" "
+        readonly
+        class="w-full mt-1 px-4 pr-10 pt-5 pb-2 text-base bg-transparent border-0 border-b border-outline appearance-none focus:outline-none focus:border-{{ color }} focus:border-b-2 cursor-pointer peer
+        disabled:opacity-60 disabled:border-outline/50 disabled:bg-transparent
+        aria-invalid:border-error focus:aria-invalid:border-error"
+        {% if required %}required{% endif %}
+        {% if disabled %}disabled{% endif %}
+        aria-describedby="{% if id %}{{ id }}_help{% endif %}"
+        aria-invalid="{% if error %}true{% else %}false{% endif %}"
+        aria-expanded="false"
+        aria-haspopup="listbox"
+        role="combobox"
+        up-select-trigger />
+
+      <span class="absolute right-3 material-symbols text-on-surface-variant pointer-events-none transition-transform duration-200" up-select-arrow>
+        expand_more
+      </span>
+      
+      <label 
+        for="{{ id }}" 
+        class="pointer-events-none absolute text-base text-on-surface-variant duration-200 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-4 
+        peer-focus:text-{{ color }}
+        peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4
+        peer-data-[select-open]:text-{{ color }} peer-data-[select-open]:scale-75 peer-data-[select-open]:-translate-y-4
+        peer-disabled:text-on-surface-variant/70
+        peer-aria-invalid:text-error peer-focus:peer-aria-invalid:text-error">
+        {{ slot }}
+      </label>
+    </div>
+
+    <!-- Select Menu -->
+    <div 
+      class="absolute z-50 hidden bg-surface border border-outline rounded-lg shadow-lg overflow-y-auto [scrollbar-width:thin]"
+      style="max-height: {{ menu_max_height }}"
+      up-select-menu
+      data-anchor="#{{ id }}"
+      data-placement="bottom-start"
+      role="listbox"
+      aria-labelledby="{{ id }}">
+      <c-list.container class="max-h-full overflow-y-auto" role="none">
+        {# Options will be provided via named slots #}
+        {{ options }}
+      </c-list.container>
+    </div>
+  </div>
+  
+  {% if help_text %}
+    <div id="{% if id %}{{ id }}_help{% endif %}" class="text-xs text-on-surface-variant mt-1 px-4 {% if error %}text-error{% endif %}">
+      {{ help_text }}
+    </div>
+  {% endif %}
+  
+  {% if error %}
+    <div class="text-xs text-error mt-1 px-4">
+      {{ error }}
+    </div>
+  {% endif %}
+</div>

@@ -97,10 +97,13 @@ up.compiler('[up-select-trigger]', function (trigger) {
     requestAnimationFrame(() => {
       positionMenu();
       
-      // Focus first menu item
+      // Focus the currently selected item, or first item if none selected
+      const selectedItem = menu.querySelector('[up-select-option][aria-selected="true"]');
       const firstItem = menu.querySelector('[up-select-option]');
-      if (firstItem) {
-        firstItem.focus();
+      const itemToFocus = selectedItem || firstItem;
+      
+      if (itemToFocus) {
+        itemToFocus.focus();
       }
     });
   }
