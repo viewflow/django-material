@@ -13,4 +13,7 @@ import './button/script.js';
 // Import menu scripts
 import './menu/script.js';
 
+// Import select scripts
+import './forms/select/script.js';
+
 // More component scripts can be added here as they are created

@@ -1,0 +1,92 @@
+<c-vars
+  class="relative w-full group"
+  color="primary"
+  placeholder=""
+  menu_max_height="300px" />
+
+<div class="{{ class }}" {{ attrs }}>
+  <div class="relative">
+    <div class="flex items-center relative">
+      <input 
+        type="text"
+        id="{{ id }}"
+        name="{{ name }}"
+        value="{{ value }}"
+        placeholder=" "
+        readonly
+        class="peer w-full p-4 pr-10 text-base bg-transparent rounded-md appearance-none focus:outline-none cursor-pointer
+        disabled:opacity-60 disabled:border-outline/50 disabled:bg-transparent
+        aria-invalid:border-error focus:aria-invalid:border-error"
+        {% if required %}required{% endif %}
+        {% if disabled %}disabled{% endif %}
+        aria-describedby="{% if id %}{{ id }}_help{% endif %}"
+        aria-invalid="{% if error %}true{% else %}false{% endif %}"
+        aria-expanded="false"
+        aria-haspopup="listbox"
+        role="combobox"
+        up-select-trigger />
+
+      <span class="absolute right-3 material-symbols text-on-surface-variant pointer-events-none transition-transform duration-200" up-select-arrow>
+        expand_more
+      </span>
+      
+      <label 
+        for="{{ id }}" 
+        class="pointer-events-none absolute z-10 px-1 text-base text-on-surface-variant origin-[0] 
+        -translate-y-1/2 scale-75 top-0 left-4 duration-300
+        peer-placeholder-shown:scale-100 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 
+        peer-focus:left-4 peer-focus:top-0 peer-focus:scale-75 peer-focus:-translate-y-1/2 peer-focus:text-{{ color }}
+        peer-focus:opacity-0 peer-not-placeholder-shown:opacity-0
+        peer-data-[select-open]:opacity-0 peer-data-[select-open]:scale-75 peer-data-[select-open]:top-0 peer-data-[select-open]:-translate-y-1/2
+        peer-[:-webkit-autofill]:opacity-0
+        peer-disabled:text-on-surface-variant/70
+        peer-aria-invalid:text-error peer-focus:peer-aria-invalid:text-error">
+        {{ slot }}
+      </label>
+      <fieldset class="absolute inset-x-0 -top-1.5 bottom-0 m-0 p-2 overflow-hidden 
+        pointer-events-none border rounded border-outline
+        transition duration-300 ease-in-out
+        hover:border-[rgba(0,0,0,0.87)]
+        peer-focus:border-{{ color }}
+        peer-not-placeholder-shown:border-{{ color }}
+        peer-data-[select-open]:border-{{ color }}
+        peer-aria-invalid:border-error peer-aria-invalid:[&>legend>span]:text-error
+        peer-focus:peer-aria-invalid:border-error peer-focus:peer-aria-invalid:[&>legend>span]:text-error
+        peer-disabled:border-outline/50
+        peer-focus:[&>legend>span]:visible peer-focus:[&>legend>span]:max-w-full peer-focus:[&>legend>span]:px-1 
+        peer-not-placeholder-shown:[&>legend>span]:visible peer-not-placeholder-shown:[&>legend>span]:max-w-full peer-not-placeholder-shown:[&>legend>span]:px-1
+        peer-data-[select-open]:[&>legend>span]:visible peer-data-[select-open]:[&>legend>span]:max-w-full peer-data-[select-open]:[&>legend>span]:px-1
+        peer-[:-webkit-autofill]:border-{{ color }} peer-[:-webkit-autofill]:[&>legend>span]:visible peer-[:-webkit-autofill]:[&>legend>span]:max-w-full peer-[:-webkit-autofill]:[&>legend>span]:px-1"
+        aria-hidden="true">
+        <legend class="ml-1"><span class="invisible block max-w-0 whitespace-nowrap text-xs text-{{ color }} transition duration-300 ease-in-out">{{ slot }}</span></legend>
+      </fieldset>
+    </div>
+
+    <!-- Select Menu -->
+    <div 
+      class="absolute z-50 hidden bg-surface border border-outline rounded-lg shadow-lg overflow-y-auto [scrollbar-width:thin]"
+      style="max-height: {{ menu_max_height }}"
+      up-select-menu
+      data-anchor="#{{ id }}"
+      data-placement="bottom-start"
+      role="listbox"
+      aria-labelledby="{{ id }}">
+      <c-list.container class="max-h-full overflow-y-auto" role="none">
+        {# Options will be provided via named slots #}
+        {{ options }}
+      </c-list.container>
+    </div>
+  </div>
+  
+  {% if help_text %}
+    <div id="{% if id %}{{ id }}_help{% endif %}" class="mt-1 px-4 text-xs text-on-surface-variant {% if error %}text-error{% endif %}">
+      {{ help_text }}
+    </div>
+  {% endif %}
+  
+  {% if error %}
+    <div class="mt-1 px-4 text-xs text-error">
+      {{ error }}
+    </div>
+  {% endif %}
+</div>

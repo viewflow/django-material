@@ -1,0 +1,408 @@
+{% extends 'demo/html/base_page.html' %}
+{% load i18n %}
+
+{% block title %}Material 3 Select Fields{% endblock %}
+
+{% block page_breadcrumb %}Select Fields{% endblock %}
+{% block page_title %}Select Field Components{% endblock %}
+
+{% block page_content %}
+  
+  <section id="outlined-selects" class="mb-12">
+    <h2 class="text-2xl mb-4">Outlined Select Fields</h2>
+    <p class="mb-6">
+      Select fields allow users to choose from a list of options. They use a readonly input field that triggers a menu dropdown with selectable options.
+      The outlined variant uses a border to define boundaries and works well in dense UIs.
+    </p>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div>
+        <h3 class="text-xl mb-4">Default</h3>
+        <c-forms.select.outlined id="country1">
+          Country
+          <c-slot name="options">
+            <c-forms.select.option value="us">United States</c-forms.select.option>
+            <c-forms.select.option value="ca">Canada</c-forms.select.option>
+            <c-forms.select.option value="uk">United Kingdom</c-forms.select.option>
+            <c-forms.select.option value="de">Germany</c-forms.select.option>
+            <c-forms.select.option value="fr">France</c-forms.select.option>
+          </c-slot>
+        </c-forms.select.outlined>
+      </div>
+      
+      <div>
+        <h3 class="text-xl mb-4">With Help Text</h3>
+        <c-forms.select.outlined id="country2" help_text="Select your country of residence">
+          Country
+          <c-slot name="options">
+            <c-forms.select.option value="us">United States</c-forms.select.option>
+            <c-forms.select.option value="ca">Canada</c-forms.select.option>
+            <c-forms.select.option value="uk">United Kingdom</c-forms.select.option>
+          </c-slot>
+        </c-forms.select.outlined>
+      </div>
+      
+      <div>
+        <h3 class="text-xl mb-4">Required</h3>
+        <c-forms.select.outlined id="language1" required>
+          Preferred Language
+          <c-slot name="options">
+            <c-forms.select.option value="en">English</c-forms.select.option>
+            <c-forms.select.option value="es">Spanish</c-forms.select.option>
+            <c-forms.select.option value="fr">French</c-forms.select.option>
+            <c-forms.select.option value="de">German</c-forms.select.option>
+          </c-slot>
+        </c-forms.select.outlined>
+      </div>
+      
+      <div>
+        <h3 class="text-xl mb-4">Disabled</h3>
+        <c-forms.select.outlined id="disabled1" disabled>
+          Status
+          <c-slot name="options">
+            <c-forms.select.option value="active">Active</c-forms.select.option>
+            <c-forms.select.option value="inactive">Inactive</c-forms.select.option>
+          </c-slot>
+        </c-forms.select.outlined>
+      </div>
+      
+      <div>
+        <h3 class="text-xl mb-4">With Error</h3>
+        <c-forms.select.outlined id="priority1" error="Please select a priority level">
+          Priority
+          <c-slot name="options">
+            <c-forms.select.option value="low">Low</c-forms.select.option>
+            <c-forms.select.option value="medium">Medium</c-forms.select.option>
+            <c-forms.select.option value="high">High</c-forms.select.option>
+            <c-forms.select.option value="urgent">Urgent</c-forms.select.option>
+          </c-slot>
+        </c-forms.select.outlined>
+      </div>
+      
+      <div>
+        <h3 class="text-xl mb-4">With Pre-selected Value</h3>
+        <c-forms.select.outlined id="timezone1" value="America/New_York">
+          Timezone
+          <c-slot name="options">
+            <c-forms.select.option value="America/New_York">Eastern Time</c-forms.select.option>
+            <c-forms.select.option value="America/Chicago">Central Time</c-forms.select.option>
+            <c-forms.select.option value="America/Denver">Mountain Time</c-forms.select.option>
+            <c-forms.select.option value="America/Los_Angeles">Pacific Time</c-forms.select.option>
+          </c-slot>
+        </c-forms.select.outlined>
+      </div>
+      
+      <div>
+        <h3 class="text-xl mb-4">With Leading Icons</h3>
+        <c-forms.select.outlined id="department1">
+          Department
+          <c-slot name="options">
+            <c-forms.select.option value="engineering">
+              <c-slot name="leading">
+                <span class="material-symbols text-on-surface-variant">code</span>
+              </c-slot>
+              Engineering
+            </c-forms.select.option>
+            <c-forms.select.option value="design">
+              <c-slot name="leading">
+                <span class="material-symbols text-on-surface-variant">palette</span>
+              </c-slot>
+              Design
+            </c-forms.select.option>
+            <c-forms.select.option value="marketing">
+              <c-slot name="leading">
+                <span class="material-symbols text-on-surface-variant">campaign</span>
+              </c-slot>
+              Marketing
+            </c-forms.select.option>
+            <c-forms.select.option value="sales">
+              <c-slot name="leading">
+                <span class="material-symbols text-on-surface-variant">trending_up</span>
+              </c-slot>
+              Sales
+            </c-forms.select.option>
+          </c-slot>
+        </c-forms.select.outlined>
+      </div>
+      
+      <div>
+        <h3 class="text-xl mb-4">Long Options List</h3>
+        <c-forms.select.outlined id="cities1" menu_max_height="200px">
+          City
+          <c-slot name="options">
+            <c-forms.select.option value="nyc">New York City</c-forms.select.option>
+            <c-forms.select.option value="la">Los Angeles</c-forms.select.option>
+            <c-forms.select.option value="chicago">Chicago</c-forms.select.option>
+            <c-forms.select.option value="houston">Houston</c-forms.select.option>
+            <c-forms.select.option value="phoenix">Phoenix</c-forms.select.option>
+            <c-forms.select.option value="philadelphia">Philadelphia</c-forms.select.option>
+            <c-forms.select.option value="san_antonio">San Antonio</c-forms.select.option>
+            <c-forms.select.option value="san_diego">San Diego</c-forms.select.option>
+            <c-forms.select.option value="dallas">Dallas</c-forms.select.option>
+            <c-forms.select.option value="san_jose">San Jose</c-forms.select.option>
+            <c-forms.select.option value="austin">Austin</c-forms.select.option>
+            <c-forms.select.option value="jacksonville">Jacksonville</c-forms.select.option>
+          </c-slot>
+        </c-forms.select.outlined>
+      </div>
+      
+      <div>
+        <h3 class="text-xl mb-4">Secondary Color</h3>
+        <c-forms.select.outlined id="theme1" color="secondary">
+          Theme
+          <c-slot name="options">
+            <c-forms.select.option value="light">Light</c-forms.select.option>
+            <c-forms.select.option value="dark">Dark</c-forms.select.option>
+            <c-forms.select.option value="auto">Auto</c-forms.select.option>
+          </c-slot>
+        </c-forms.select.outlined>
+      </div>
+      
+      <div>
+        <h3 class="text-xl mb-4">Tertiary Color</h3>
+        <c-forms.select.outlined id="notifications1" color="tertiary">
+          Notifications
+          <c-slot name="options">
+            <c-forms.select.option value="all">All notifications</c-forms.select.option>
+            <c-forms.select.option value="important">Important only</c-forms.select.option>
+            <c-forms.select.option value="none">None</c-forms.select.option>
+          </c-slot>
+        </c-forms.select.outlined>
+      </div>
+    </div>
+  </section>
+  
+  <section id="usage" class="mb-12">
+    <h2 class="text-2xl mb-4">Usage</h2>
+    
+    <div class="bg-surface-container-low p-6 rounded-lg shadow-sm mb-6 overflow-x-auto">
+      <pre class="text-on-surface-variant whitespace-pre-wrap break-words"><code>&lt;!-- Basic select field --&gt;
+&lt;c-forms.select.outlined id="country"&gt;
+  Country
+  &lt;c-slot name="options"&gt;
+    &lt;c-forms.select.option value="us"&gt;United States&lt;/c-forms.select.option&gt;
+    &lt;c-forms.select.option value="ca"&gt;Canada&lt;/c-forms.select.option&gt;
+    &lt;c-forms.select.option value="uk"&gt;United Kingdom&lt;/c-forms.select.option&gt;
+  &lt;/c-slot&gt;
+&lt;/c-forms.select.outlined&gt;
+
+&lt;!-- With help text --&gt;
+&lt;c-forms.select.outlined id="language" help_text="Select your preferred language"&gt;
+  Language
+  &lt;c-slot name="options"&gt;
+    &lt;c-forms.select.option value="en"&gt;English&lt;/c-forms.select.option&gt;
+    &lt;c-forms.select.option value="es"&gt;Spanish&lt;/c-forms.select.option&gt;
+  &lt;/c-slot&gt;
+&lt;/c-forms.select.outlined&gt;
+
+&lt;!-- Required field --&gt;
+&lt;c-forms.select.outlined id="priority" required&gt;
+  Priority
+  &lt;c-slot name="options"&gt;
+    &lt;c-forms.select.option value="low"&gt;Low&lt;/c-forms.select.option&gt;
+    &lt;c-forms.select.option value="high"&gt;High&lt;/c-forms.select.option&gt;
+  &lt;/c-slot&gt;
+&lt;/c-forms.select.outlined&gt;
+
+&lt;!-- With error message --&gt;
+&lt;c-forms.select.outlined id="status" error="Please select a status"&gt;
+  Status
+  &lt;c-slot name="options"&gt;
+    &lt;c-forms.select.option value="active"&gt;Active&lt;/c-forms.select.option&gt;
+    &lt;c-forms.select.option value="inactive"&gt;Inactive&lt;/c-forms.select.option&gt;
+  &lt;/c-slot&gt;
+&lt;/c-forms.select.outlined&gt;
+
+&lt;!-- With pre-selected value --&gt;
+&lt;c-forms.select.outlined id="theme" value="dark"&gt;
+  Theme
+  &lt;c-slot name="options"&gt;
+    &lt;c-forms.select.option value="light"&gt;Light&lt;/c-forms.select.option&gt;
+    &lt;c-forms.select.option value="dark"&gt;Dark&lt;/c-forms.select.option&gt;
+  &lt;/c-slot&gt;
+&lt;/c-forms.select.outlined&gt;
+
+&lt;!-- With icons in options --&gt;
+&lt;c-forms.select.outlined id="department"&gt;
+  Department
+  &lt;c-slot name="options"&gt;
+    &lt;c-forms.select.option value="eng"&gt;
+      &lt;c-slot name="leading"&gt;
+        &lt;span class="material-symbols text-on-surface-variant"&gt;code&lt;/span&gt;
+      &lt;/c-slot&gt;
+      Engineering
+    &lt;/c-forms.select.option&gt;
+    &lt;c-forms.select.option value="design"&gt;
+      &lt;c-slot name="leading"&gt;
+        &lt;span class="material-symbols text-on-surface-variant"&gt;palette&lt;/span&gt;
+      &lt;/c-slot&gt;
+      Design
+    &lt;/c-forms.select.option&gt;
+  &lt;/c-slot&gt;
+&lt;/c-forms.select.outlined&gt;
+
+&lt;!-- Disabled field --&gt;
+&lt;c-forms.select.outlined id="locked" disabled&gt;
+  Locked Field
+  &lt;c-slot name="options"&gt;
+    &lt;c-forms.select.option value="option1"&gt;Option 1&lt;/c-forms.select.option&gt;
+  &lt;/c-slot&gt;
+&lt;/c-forms.select.outlined&gt;
+
+&lt;!-- With color variants --&gt;
+&lt;c-forms.select.outlined id="secondary" color="secondary"&gt;
+  Secondary Field
+  &lt;c-slot name="options"&gt;
+    &lt;c-forms.select.option value="opt1"&gt;Option 1&lt;/c-forms.select.option&gt;
+  &lt;/c-slot&gt;
+&lt;/c-forms.select.outlined&gt;
+
+&lt;!-- Custom menu height for long lists --&gt;
+&lt;c-forms.select.outlined id="cities" menu_max_height="200px"&gt;
+  City
+  &lt;c-slot name="options"&gt;
+    &lt;!-- Many options... --&gt;
+  &lt;/c-slot&gt;
+&lt;/c-forms.select.outlined&gt;</code></pre>
+    </div>
+  </section>
+
+  <section id="attributes" class="mb-12">
+    <h2 class="text-2xl mb-4">Attributes</h2>
+    
+    <div class="overflow-x-auto mb-6 max-w-full">
+      <c-table.container>
+        <c-slot name="header">
+          <c-table.header_row>
+            <c-table.header>Attribute</c-table.header>
+            <c-table.header>Type</c-table.header>
+            <c-table.header>Default</c-table.header>
+            <c-table.header>Description</c-table.header>
+          </c-table.header_row>
+        </c-slot>
+        <c-table.row>
+          <c-table.cell><code>id</code></c-table.cell>
+          <c-table.cell>string</c-table.cell>
+          <c-table.cell>none</c-table.cell>
+          <c-table.cell>Unique identifier for the select field (required)</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>color</code></c-table.cell>
+          <c-table.cell>string</c-table.cell>
+          <c-table.cell>"primary"</c-table.cell>
+          <c-table.cell>Select color theme. Options: "primary", "secondary", "tertiary"</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>menu_max_height</code></c-table.cell>
+          <c-table.cell>string</c-table.cell>
+          <c-table.cell>"300px"</c-table.cell>
+          <c-table.cell>Maximum height of the dropdown menu</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>help_text</code></c-table.cell>
+          <c-table.cell>string</c-table.cell>
+          <c-table.cell>none</c-table.cell>
+          <c-table.cell>Helper text displayed below the select</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>error</code></c-table.cell>
+          <c-table.cell>string</c-table.cell>
+          <c-table.cell>none</c-table.cell>
+          <c-table.cell>Error message to display</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>value</code></c-table.cell>
+          <c-table.cell>string</c-table.cell>
+          <c-table.cell>none</c-table.cell>
+          <c-table.cell>Pre-selected value (matches option value)</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>required</code></c-table.cell>
+          <c-table.cell>boolean</c-table.cell>
+          <c-table.cell>false</c-table.cell>
+          <c-table.cell>When true, the field is required</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>disabled</code></c-table.cell>
+          <c-table.cell>boolean</c-table.cell>
+          <c-table.cell>false</c-table.cell>
+          <c-table.cell>When true, the select is disabled and non-interactive</c-table.cell>
+        </c-table.row>
+      </c-table.container>
+    </div>
+  </section>
+
+  <section id="option-attributes" class="mb-12">
+    <h2 class="text-2xl mb-4">Option Attributes</h2>
+    
+    <div class="overflow-x-auto mb-6 max-w-full">
+      <c-table.container>
+        <c-slot name="header">
+          <c-table.header_row>
+            <c-table.header>Attribute</c-table.header>
+            <c-table.header>Type</c-table.header>
+            <c-table.header>Default</c-table.header>
+            <c-table.header>Description</c-table.header>
+          </c-table.header_row>
+        </c-slot>
+        <c-table.row>
+          <c-table.cell><code>value</code></c-table.cell>
+          <c-table.cell>string</c-table.cell>
+          <c-table.cell>text content</c-table.cell>
+          <c-table.cell>Value submitted with the form (defaults to text content)</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>leading</code></c-table.cell>
+          <c-table.cell>slot</c-table.cell>
+          <c-table.cell>none</c-table.cell>
+          <c-table.cell>Content displayed before the option text (usually icons)</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>trailing</code></c-table.cell>
+          <c-table.cell>slot</c-table.cell>
+          <c-table.cell>none</c-table.cell>
+          <c-table.cell>Content displayed after the option text</c-table.cell>
+        </c-table.row>
+      </c-table.container>
+    </div>
+  </section>
+
+  <section id="keyboard-navigation" class="mb-12">
+    <h2 class="text-2xl mb-4">Keyboard Navigation</h2>
+    
+    <div class="overflow-x-auto mb-6 max-w-full">
+      <c-table.container>
+        <c-slot name="header">
+          <c-table.header_row>
+            <c-table.header>Key</c-table.header>
+            <c-table.header>Action</c-table.header>
+          </c-table.header_row>
+        </c-slot>
+        <c-table.row>
+          <c-table.cell><kbd class="px-2 py-1 bg-surface-container-high text-on-surface rounded text-sm">Enter</kbd></c-table.cell>
+          <c-table.cell>Open menu when focused on trigger, select option when focused on option</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><kbd class="px-2 py-1 bg-surface-container-high text-on-surface rounded text-sm">Space</kbd></c-table.cell>
+          <c-table.cell>Open menu when focused on trigger, select option when focused on option</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><kbd class="px-2 py-1 bg-surface-container-high text-on-surface rounded text-sm">↓ Arrow Down</kbd></c-table.cell>
+          <c-table.cell>Open menu or move to next option</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><kbd class="px-2 py-1 bg-surface-container-high text-on-surface rounded text-sm">↑ Arrow Up</kbd></c-table.cell>
+          <c-table.cell>Open menu or move to previous option</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><kbd class="px-2 py-1 bg-surface-container-high text-on-surface rounded text-sm">Escape</kbd></c-table.cell>
+          <c-table.cell>Close menu and return focus to trigger</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><kbd class="px-2 py-1 bg-surface-container-high text-on-surface rounded text-sm">Tab</kbd></c-table.cell>
+          <c-table.cell>Close menu and move to next focusable element</c-table.cell>
+        </c-table.row>
+      </c-table.container>
+    </div>
+  </section>
+{% endblock page_content %}

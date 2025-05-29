@@ -1,0 +1,25 @@
+<c-vars
+  value=""
+  role="option"
+  tabindex="-1"
+  base_class="block w-full text-left cursor-pointer"
+  hover_class="hover:bg-on-surface/8 focus:bg-on-surface/12 focus:outline-none" />
+
+<c-list.item 
+  class="{{ base_class }} {{ hover_class }} {{ class }}"
+  role="{{ role }}"
+  tabindex="{{ tabindex }}"
+  up-menu-item
+  up-select-option
+  data-value="{{ value }}"
+  {{ attrs }}>
+  {% if leading %}
+    <c-slot name="leading">{{ leading }}</c-slot>
+  {% endif %}
+  
+  {{ slot }}
+  
+  {% if trailing %}
+    <c-slot name="trailing">{{ trailing }}</c-slot>
+  {% endif %}
+</c-list.item>

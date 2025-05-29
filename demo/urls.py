@@ -94,6 +94,13 @@ cotton = Application(
             icon="input",
             title="Text Fields",
         ),
+        menu_path(
+            "selects/",
+            TemplateView.as_view(template_name="demo/html/selects.html"),
+            name="selects",
+            icon="arrow_drop_down_circle",
+            title="Select Fields",
+        ),
     ],
 )
 
