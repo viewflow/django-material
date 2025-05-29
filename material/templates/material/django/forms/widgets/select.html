@@ -1,0 +1,23 @@
+<c-forms.select.outlined
+  id="id_{{ widget.name }}"
+  name="{{ widget.name }}"
+  help_text="{{ bound_field.help_text }}"
+  :disabled=widget.attrs.disabled
+  :required=widget.attrs.required
+  :color=widget.attrs.color
+  :error=bound_field.errors.0
+>{{ bound_field.label }}
+  <c-slot name="options">
+    {% for group_name, group_choices, group_index in widget.optgroups %}
+      {% if group_name %}
+        <c-list.subheader>{{ group_name }}</c-list.subheader>
+      {% endif %}
+      {% for option in group_choices %}
+        <c-forms.select.option 
+          value="{{ option.value|stringformat:'s' }}"
+          :disabled= option.attrs.disabled
+        >{{ option.label }}</c-forms.select.option>
+      {% endfor %}
+    {% endfor %}
+  </c-slot>
+</c-forms.select.outlined>
