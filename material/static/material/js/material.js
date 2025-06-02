@@ -1,4 +1,53 @@
 (() => {
+  // material/templates/cotton/django-i18n.js
+  var pluralidx = window.pluralidx;
+  var gettext = window.gettext;
+  var ngettext = window.ngettext;
+  var gettext_noop = window.gettext_noop;
+  var pgettext = window.pgettext;
+  var npgettext = window.npgettext;
+  var get_format = window.get_format;
+  var interpolate = window.interpolate;
+  if (!window.django || !window.django.jsi18n_initialized) {
+    pluralidx = (count) => count === 1 ? 0 : 1;
+    gettext = (msg) => msg;
+    ngettext = (singular, plural, count) => count === 1 ? singular : plural;
+    gettext_noop = (msg) => msg;
+    pgettext = (context, msg) => msg;
+    npgettext = (context, singular, plural, count) => count === 1 ? singular : plural;
+    const formats = {
+      "DATETIME_FORMAT": "N j, Y, P",
+      "DATETIME_INPUT_FORMATS": ["%Y-%m-%d %H:%M:%S"],
+      "DATE_FORMAT": "N j, Y",
+      "DATE_INPUT_FORMATS": ["%Y-%m-%d"],
+      "DECIMAL_SEPARATOR": ".",
+      "FIRST_DAY_OF_WEEK": 0,
+      "MONTH_DAY_FORMAT": "F j",
+      "NUMBER_GROUPING": 3,
+      "SHORT_DATETIME_FORMAT": "m/d/Y P",
+      "SHORT_DATE_FORMAT": "m/d/Y",
+      "THOUSAND_SEPARATOR": ",",
+      "TIME_FORMAT": "P",
+      "TIME_INPUT_FORMATS": ["%H:%M:%S"],
+      "YEAR_MONTH_FORMAT": "F Y"
+    };
+    get_format = (formatType) => {
+      const value = formats[formatType];
+      return typeof value === "undefined" ? formatType : value;
+    };
+    interpolate = (fmt, obj, named) => {
+      if (named) {
+        return fmt.replace(/%\(\w+\)s/g, (match) => {
+          const key = match.slice(2, -2);
+          return String(obj[key] || match);
+        });
+      } else {
+        const objCopy = [...obj];
+        return fmt.replace(/%s/g, () => String(objCopy.shift() || ""));
+      }
+    };
+  }
+
   // material/templates/cotton/nav/script.js
   up.compiler("[up-nav-toggle]", function(element) {
     element.addEventListener("click", function() {
