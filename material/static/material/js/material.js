@@ -1,1 +1,432 @@
-(()=>{up.compiler("[up-nav-toggle]",function(e){e.addEventListener("click",function(){document.body.toggleAttribute("data-nav-open")})});up.compiler("[up-nav-toggle-off]",function(e){e.addEventListener("click",function(){document.body.removeAttribute("data-nav-open")})});up.compiler("[up-auto-grow]",function(e){requestAnimationFrame(function(){i(e)}),e.addEventListener("input",function(){i(e)});function i(t){t.style.height="auto",t.style.height=t.scrollHeight+2+"px"}});up.compiler("[up-ripple]",function(e){e.addEventListener("pointerdown",i=>{e.style.setProperty("--ripple-x",`${i.offsetX}px`),e.style.setProperty("--ripple-y",`${i.offsetY}px`)})});up.compiler("[up-menu]",function(e){let i=e.dataset.anchor,t=e.dataset.placement||"bottom-start";if(!i)return;let c=document.querySelector(i);if(!c)return;let r=null,l=null,s=null,f=null;function d(){let o=c.getBoundingClientRect(),u=e.getBoundingClientRect(),g={width:window.innerWidth,height:window.innerHeight},n,a,h=t,y=g.height-o.bottom,w=o.top;switch((t.startsWith("bottom")||t==="bottom-start")&&y<u.height&&w>u.height&&(h=t.replace("bottom","top")),o.left+o.width/2>g.width/2&&o.right>u.width&&(h=h.replace("start","end")),h){case"top-start":n=-u.height,a=0;break;case"top-end":n=-u.height,a=o.width-u.width;break;case"bottom-end":n=o.height,a=o.width-u.width;break;case"bottom-start":default:n=o.height,a=0;break}a<0&&(a=0),a+u.width>g.width&&(a=Math.max(0,o.width-u.width)),e.style.left=`${a}px`,e.style.top=`${n}px`}function v(){e.classList.remove("hidden"),r=function(o){!e.contains(o.target)&&!c.contains(o.target)&&p()},l=function(o){o.key==="Escape"&&!e.classList.contains("hidden")&&(p(),c.focus())},s=function(){e.classList.contains("hidden")||d()},document.addEventListener("click",r),document.addEventListener("keydown",l),window.addEventListener("resize",s),requestAnimationFrame(()=>{d();let o=e.querySelector("[up-menu-item]");o&&o.focus()})}function p(){e.classList.add("hidden"),r&&(document.removeEventListener("click",r),r=null),l&&(document.removeEventListener("keydown",l),l=null),s&&(window.removeEventListener("resize",s),s=null)}function m(){e.classList.contains("hidden")?v():p()}e.showMenu=v,e.hideMenu=p,e.toggleMenu=m,c.addEventListener("click",function(o){o.preventDefault(),m()})});up.compiler("[up-menu-item]",function(e){let i=e.closest("[up-menu]");i&&(e.addEventListener("keydown",function(t){let c=Array.from(i.querySelectorAll("[up-menu-item]")),r=c.indexOf(e);switch(t.key){case"ArrowDown":t.preventDefault();let l=(r+1)%c.length;c[l].focus();break;case"ArrowUp":t.preventDefault();let s=r===0?c.length-1:r-1;c[s].focus();break;case"Enter":case" ":t.preventDefault(),e.click();break;case"Tab":i.hideMenu();break}}),e.addEventListener("click",function(){setTimeout(()=>{i.hideMenu()},100)}))});up.compiler("[up-select-trigger]",function(e){let i=e.closest(".group"),t=i.querySelector("[up-select-menu]"),c=i.querySelector("[up-select-arrow]");if(!t)return;let r=null,l=null,s=null,f="",d=null;function v(n){let a=t.querySelectorAll("[up-select-option]"),h=n.toLowerCase();for(let y of a)if((y.textContent||"").trim().toLowerCase().startsWith(h))return y;return null}function p(n){d&&clearTimeout(d),f+=n.toLowerCase();let a=v(f);a&&(a.focus(),a.scrollIntoView({behavior:"smooth",block:"nearest"})),d=setTimeout(()=>{f=""},1e3)}function m(){let n=e.getBoundingClientRect(),a=t.getBoundingClientRect(),h={width:window.innerWidth,height:window.innerHeight},y,w,b=t.dataset.placement||"bottom-start",k=b,L=h.height-n.bottom,x=n.top;switch(b.startsWith("bottom")&&L<a.height&&x>a.height&&(k=b.replace("bottom","top")),k){case"top-start":y=-a.height,w=0;break;case"bottom-start":default:y=n.height,w=0;break}w<0&&(w=0),w+a.width>h.width&&(w=Math.max(0,n.width-a.width)),t.style.left=`${w}px`,t.style.top=`${y}px`,t.style.minWidth=`${n.width}px`}function o(){t.classList.remove("hidden"),e.setAttribute("aria-expanded","true"),e.setAttribute("data-select-open","true"),c&&(c.style.transform="rotate(180deg)"),r=function(n){!t.contains(n.target)&&!e.contains(n.target)&&u()},l=function(n){n.key==="Escape"&&!t.classList.contains("hidden")?(u(),e.focus()):!t.classList.contains("hidden")&&n.key.length===1&&!n.ctrlKey&&!n.metaKey&&!n.altKey&&(n.preventDefault(),p(n.key))},s=function(){t.classList.contains("hidden")||m()},document.addEventListener("click",r),document.addEventListener("keydown",l),window.addEventListener("resize",s),requestAnimationFrame(()=>{m();let n=t.querySelector('[up-select-option][aria-selected="true"]'),a=t.querySelector("[up-select-option]"),h=n||a;h&&h.focus()})}function u(){t.classList.add("hidden"),e.setAttribute("aria-expanded","false"),e.removeAttribute("data-select-open"),c&&(c.style.transform="rotate(0deg)"),r&&(document.removeEventListener("click",r),r=null),l&&(document.removeEventListener("keydown",l),l=null),s&&(window.removeEventListener("resize",s),s=null)}function g(){t.classList.contains("hidden")?o():u()}t.showMenu=o,t.hideMenu=u,t.toggleMenu=g,e.handleTypeahead=p,e.addEventListener("click",function(n){n.preventDefault(),g()}),e.addEventListener("keydown",function(n){switch(n.key){case"Enter":case" ":case"ArrowDown":case"ArrowUp":n.preventDefault(),t.classList.contains("hidden")&&o();break;case"Escape":t.classList.contains("hidden")||(n.preventDefault(),u(),e.focus());break}}),e.addEventListener("selectstart",function(n){n.preventDefault()})});up.compiler("[up-select-option]",function(e){let i=e.closest("[up-select-menu]"),t=i?.closest(".group"),c=t?.querySelector("[up-select-trigger]");if(!c||!i)return;e.addEventListener("click",function(s){s.preventDefault();let f=e.dataset.value||e.textContent.trim(),d=e.textContent.trim();c.value=d,c.setAttribute("value",d);let v=t.querySelector('input[type="hidden"]');v&&(v.value=f),i.querySelectorAll("[up-select-option]").forEach(o=>{o.classList.remove("bg-on-surface/12"),o.setAttribute("aria-selected","false")}),e.classList.add("bg-on-surface/12"),e.setAttribute("aria-selected","true");let m=new Event("change",{bubbles:!0});c.dispatchEvent(m),setTimeout(()=>{i.hideMenu&&i.hideMenu(),c.focus()},100)}),e.addEventListener("keydown",function(s){let f=Array.from(i.querySelectorAll("[up-select-option]")),d=f.indexOf(e);switch(s.key){case"ArrowDown":s.preventDefault();let v=(d+1)%f.length;f[v].focus();break;case"ArrowUp":s.preventDefault();let p=d===0?f.length-1:d-1;f[p].focus();break;case"Enter":case" ":s.preventDefault(),e.click();break;case"Tab":i.hideMenu&&i.hideMenu();break;default:if(s.key.length===1&&!s.ctrlKey&&!s.metaKey&&!s.altKey&&(s.preventDefault(),i.closest(".group").querySelector("[up-select-trigger]"))){let m=i.closest(".group").querySelector("[up-select-trigger]");m.handleTypeahead&&m.handleTypeahead(s.key)}break}});let r=c.value,l=e.dataset.value||e.textContent.trim();r===l||r===e.textContent.trim()?(e.classList.add("bg-on-surface/12"),e.setAttribute("aria-selected","true")):e.setAttribute("aria-selected","false")});})();
+(() => {
+  // material/templates/cotton/nav/script.js
+  up.compiler("[up-nav-toggle]", function(element) {
+    element.addEventListener("click", function() {
+      document.body.toggleAttribute("data-nav-open");
+    });
+  });
+  up.compiler("[up-nav-toggle-off]", function(element) {
+    element.addEventListener("click", function() {
+      document.body.removeAttribute("data-nav-open");
+    });
+  });
+
+  // material/templates/cotton/forms/textarea/script.js
+  up.compiler("[up-auto-grow]", function(element) {
+    requestAnimationFrame(function() {
+      adjustHeight(element);
+    });
+    element.addEventListener("input", function() {
+      adjustHeight(element);
+    });
+    function adjustHeight(el) {
+      el.style.height = "auto";
+      el.style.height = el.scrollHeight + 2 + "px";
+    }
+  });
+
+  // material/templates/cotton/button/script.js
+  up.compiler("[up-ripple]", function(elementWithRipple) {
+    elementWithRipple.addEventListener("pointerdown", (mouseEvent) => {
+      elementWithRipple.style.setProperty("--ripple-x", `${mouseEvent.offsetX}px`);
+      elementWithRipple.style.setProperty("--ripple-y", `${mouseEvent.offsetY}px`);
+    });
+  });
+
+  // material/templates/cotton/menu/script.js
+  up.compiler("[up-menu]", function(menu) {
+    const anchorSelector = menu.dataset.anchor;
+    const placement = menu.dataset.placement || "bottom-start";
+    if (!anchorSelector) return;
+    const anchor = document.querySelector(anchorSelector);
+    if (!anchor) return;
+    let documentClickHandler = null;
+    let documentKeyHandler = null;
+    let windowResizeHandler = null;
+    let documentScrollHandler = null;
+    function positionMenu() {
+      const anchorRect = anchor.getBoundingClientRect();
+      const menuRect = menu.getBoundingClientRect();
+      const viewport = {
+        width: window.innerWidth,
+        height: window.innerHeight
+      };
+      let top, left;
+      let actualPlacement = placement;
+      const spaceBelow = viewport.height - anchorRect.bottom;
+      const spaceAbove = anchorRect.top;
+      if ((placement.startsWith("bottom") || placement === "bottom-start") && spaceBelow < menuRect.height && spaceAbove > menuRect.height) {
+        actualPlacement = placement.replace("bottom", "top");
+      }
+      const anchorCenter = anchorRect.left + anchorRect.width / 2;
+      const onRightSide = anchorCenter > viewport.width / 2;
+      if (onRightSide && anchorRect.right > menuRect.width) {
+        actualPlacement = actualPlacement.replace("start", "end");
+      }
+      switch (actualPlacement) {
+        case "top-start":
+          top = -menuRect.height;
+          left = 0;
+          break;
+        case "top-end":
+          top = -menuRect.height;
+          left = anchorRect.width - menuRect.width;
+          break;
+        case "bottom-end":
+          top = anchorRect.height;
+          left = anchorRect.width - menuRect.width;
+          break;
+        case "bottom-start":
+        default:
+          top = anchorRect.height;
+          left = 0;
+          break;
+      }
+      if (left < 0) left = 0;
+      if (left + menuRect.width > viewport.width) {
+        left = Math.max(0, anchorRect.width - menuRect.width);
+      }
+      menu.style.left = `${left}px`;
+      menu.style.top = `${top}px`;
+    }
+    function showMenu() {
+      menu.classList.remove("hidden");
+      documentClickHandler = function(e) {
+        if (!menu.contains(e.target) && !anchor.contains(e.target)) {
+          hideMenu();
+        }
+      };
+      documentKeyHandler = function(e) {
+        if (e.key === "Escape" && !menu.classList.contains("hidden")) {
+          hideMenu();
+          anchor.focus();
+        }
+      };
+      windowResizeHandler = function() {
+        if (!menu.classList.contains("hidden")) {
+          positionMenu();
+        }
+      };
+      document.addEventListener("click", documentClickHandler);
+      document.addEventListener("keydown", documentKeyHandler);
+      window.addEventListener("resize", windowResizeHandler);
+      requestAnimationFrame(() => {
+        positionMenu();
+        const firstItem = menu.querySelector("[up-menu-item]");
+        if (firstItem) {
+          firstItem.focus();
+        }
+      });
+    }
+    function hideMenu() {
+      menu.classList.add("hidden");
+      if (documentClickHandler) {
+        document.removeEventListener("click", documentClickHandler);
+        documentClickHandler = null;
+      }
+      if (documentKeyHandler) {
+        document.removeEventListener("keydown", documentKeyHandler);
+        documentKeyHandler = null;
+      }
+      if (windowResizeHandler) {
+        window.removeEventListener("resize", windowResizeHandler);
+        windowResizeHandler = null;
+      }
+    }
+    function toggleMenu() {
+      if (menu.classList.contains("hidden")) {
+        showMenu();
+      } else {
+        hideMenu();
+      }
+    }
+    menu.showMenu = showMenu;
+    menu.hideMenu = hideMenu;
+    menu.toggleMenu = toggleMenu;
+    anchor.addEventListener("click", function(e) {
+      e.preventDefault();
+      toggleMenu();
+    });
+  });
+  up.compiler("[up-menu-item]", function(menuItem) {
+    const menu = menuItem.closest("[up-menu]");
+    if (!menu) return;
+    menuItem.addEventListener("keydown", function(e) {
+      const items = Array.from(menu.querySelectorAll("[up-menu-item]"));
+      const currentIndex = items.indexOf(menuItem);
+      switch (e.key) {
+        case "ArrowDown":
+          e.preventDefault();
+          const nextIndex = (currentIndex + 1) % items.length;
+          items[nextIndex].focus();
+          break;
+        case "ArrowUp":
+          e.preventDefault();
+          const prevIndex = currentIndex === 0 ? items.length - 1 : currentIndex - 1;
+          items[prevIndex].focus();
+          break;
+        case "Enter":
+        case " ":
+          e.preventDefault();
+          menuItem.click();
+          break;
+        case "Tab":
+          menu.hideMenu();
+          break;
+      }
+    });
+    menuItem.addEventListener("click", function() {
+      setTimeout(() => {
+        menu.hideMenu();
+      }, 100);
+    });
+  });
+
+  // material/templates/cotton/forms/select/script.js
+  up.compiler("[up-select-trigger]", function(trigger) {
+    const container = trigger.closest(".group");
+    const menu = container.querySelector("[up-select-menu]");
+    const arrow = container.querySelector("[up-select-arrow]");
+    if (!menu) return;
+    let documentClickHandler = null;
+    let documentKeyHandler = null;
+    let windowResizeHandler = null;
+    let typeaheadString = "";
+    let typeaheadTimeout = null;
+    function findOptionByPrefix(prefix) {
+      const options = menu.querySelectorAll("[up-select-option]");
+      const normalizedPrefix = prefix.toLowerCase();
+      for (const option of options) {
+        const text = (option.textContent || "").trim().toLowerCase();
+        if (text.startsWith(normalizedPrefix)) {
+          return option;
+        }
+      }
+      return null;
+    }
+    function handleTypeahead(char) {
+      if (typeaheadTimeout) {
+        clearTimeout(typeaheadTimeout);
+      }
+      typeaheadString += char.toLowerCase();
+      const matchingOption = findOptionByPrefix(typeaheadString);
+      if (matchingOption) {
+        matchingOption.focus();
+        matchingOption.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      }
+      typeaheadTimeout = setTimeout(() => {
+        typeaheadString = "";
+      }, 1e3);
+    }
+    function positionMenu() {
+      const triggerRect = trigger.getBoundingClientRect();
+      const menuRect = menu.getBoundingClientRect();
+      const viewport = {
+        width: window.innerWidth,
+        height: window.innerHeight
+      };
+      let top, left;
+      const placement = menu.dataset.placement || "bottom-start";
+      let actualPlacement = placement;
+      const spaceBelow = viewport.height - triggerRect.bottom;
+      const spaceAbove = triggerRect.top;
+      if (placement.startsWith("bottom") && spaceBelow < menuRect.height && spaceAbove > menuRect.height) {
+        actualPlacement = placement.replace("bottom", "top");
+      }
+      switch (actualPlacement) {
+        case "top-start":
+          top = -menuRect.height;
+          left = 0;
+          break;
+        case "bottom-start":
+        default:
+          top = triggerRect.height;
+          left = 0;
+          break;
+      }
+      if (left < 0) left = 0;
+      if (left + menuRect.width > viewport.width) {
+        left = Math.max(0, triggerRect.width - menuRect.width);
+      }
+      menu.style.left = `${left}px`;
+      menu.style.top = `${top}px`;
+      menu.style.minWidth = `${triggerRect.width}px`;
+    }
+    function showMenu() {
+      menu.classList.remove("hidden");
+      trigger.setAttribute("aria-expanded", "true");
+      trigger.setAttribute("data-select-open", "true");
+      if (arrow) {
+        arrow.style.transform = "rotate(180deg)";
+      }
+      documentClickHandler = function(e) {
+        if (!menu.contains(e.target) && !trigger.contains(e.target)) {
+          hideMenu();
+        }
+      };
+      documentKeyHandler = function(e) {
+        if (e.key === "Escape" && !menu.classList.contains("hidden")) {
+          hideMenu();
+          trigger.focus();
+        } else if (!menu.classList.contains("hidden") && e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey) {
+          e.preventDefault();
+          handleTypeahead(e.key);
+        }
+      };
+      windowResizeHandler = function() {
+        if (!menu.classList.contains("hidden")) {
+          positionMenu();
+        }
+      };
+      document.addEventListener("click", documentClickHandler);
+      document.addEventListener("keydown", documentKeyHandler);
+      window.addEventListener("resize", windowResizeHandler);
+      requestAnimationFrame(() => {
+        positionMenu();
+        const selectedItem = menu.querySelector('[up-select-option][aria-selected="true"]');
+        const firstItem = menu.querySelector("[up-select-option]");
+        const itemToFocus = selectedItem || firstItem;
+        if (itemToFocus) {
+          itemToFocus.focus();
+        }
+      });
+    }
+    function hideMenu() {
+      menu.classList.add("hidden");
+      trigger.setAttribute("aria-expanded", "false");
+      trigger.removeAttribute("data-select-open");
+      if (arrow) {
+        arrow.style.transform = "rotate(0deg)";
+      }
+      if (documentClickHandler) {
+        document.removeEventListener("click", documentClickHandler);
+        documentClickHandler = null;
+      }
+      if (documentKeyHandler) {
+        document.removeEventListener("keydown", documentKeyHandler);
+        documentKeyHandler = null;
+      }
+      if (windowResizeHandler) {
+        window.removeEventListener("resize", windowResizeHandler);
+        windowResizeHandler = null;
+      }
+    }
+    function toggleMenu() {
+      if (menu.classList.contains("hidden")) {
+        showMenu();
+      } else {
+        hideMenu();
+      }
+    }
+    menu.showMenu = showMenu;
+    menu.hideMenu = hideMenu;
+    menu.toggleMenu = toggleMenu;
+    trigger.handleTypeahead = handleTypeahead;
+    trigger.addEventListener("click", function(e) {
+      e.preventDefault();
+      toggleMenu();
+    });
+    trigger.addEventListener("keydown", function(e) {
+      switch (e.key) {
+        case "Enter":
+        case " ":
+        case "ArrowDown":
+        case "ArrowUp":
+          e.preventDefault();
+          if (menu.classList.contains("hidden")) {
+            showMenu();
+          }
+          break;
+        case "Escape":
+          if (!menu.classList.contains("hidden")) {
+            e.preventDefault();
+            hideMenu();
+            trigger.focus();
+          }
+          break;
+      }
+    });
+    trigger.addEventListener("selectstart", function(e) {
+      e.preventDefault();
+    });
+  });
+  up.compiler("[up-select-option]", function(option) {
+    const menu = option.closest("[up-select-menu]");
+    const container = menu?.closest(".group");
+    const trigger = container?.querySelector("[up-select-trigger]");
+    if (!trigger || !menu) return;
+    option.addEventListener("click", function(e) {
+      e.preventDefault();
+      const value = option.dataset.value;
+      const displayText = option.textContent.trim();
+      const finalDisplayText = value === "" || value === "null" || value === "undefined" ? "" : displayText;
+      trigger.value = finalDisplayText;
+      trigger.setAttribute("value", finalDisplayText);
+      const hiddenInput = container.querySelector("input[up-select-value]");
+      if (hiddenInput) {
+        hiddenInput.value = value === "" || value === "null" || value === "undefined" ? "" : value;
+      }
+      const allOptions = menu.querySelectorAll("[up-select-option]");
+      allOptions.forEach((opt) => {
+        opt.classList.remove("bg-on-surface/12");
+        opt.setAttribute("aria-selected", "false");
+      });
+      option.classList.add("bg-on-surface/12");
+      option.setAttribute("aria-selected", "true");
+      const changeEvent = new Event("change", { bubbles: true });
+      trigger.dispatchEvent(changeEvent);
+      setTimeout(() => {
+        if (menu.hideMenu) {
+          menu.hideMenu();
+        }
+        trigger.focus();
+      }, 100);
+    });
+    option.addEventListener("keydown", function(e) {
+      const items = Array.from(menu.querySelectorAll("[up-select-option]"));
+      const currentIndex = items.indexOf(option);
+      switch (e.key) {
+        case "ArrowDown":
+          e.preventDefault();
+          const nextIndex = (currentIndex + 1) % items.length;
+          items[nextIndex].focus();
+          break;
+        case "ArrowUp":
+          e.preventDefault();
+          const prevIndex = currentIndex === 0 ? items.length - 1 : currentIndex - 1;
+          items[prevIndex].focus();
+          break;
+        case "Enter":
+        case " ":
+          e.preventDefault();
+          option.click();
+          break;
+        case "Tab":
+          if (menu.hideMenu) {
+            menu.hideMenu();
+          }
+          break;
+        default:
+          if (e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey) {
+            e.preventDefault();
+            if (menu.closest(".group").querySelector("[up-select-trigger]")) {
+              const selectTrigger = menu.closest(".group").querySelector("[up-select-trigger]");
+              if (selectTrigger.handleTypeahead) {
+                selectTrigger.handleTypeahead(e.key);
+              }
+            }
+          }
+          break;
+      }
+    });
+    const triggerValue = trigger.value;
+    const optionValue = option.dataset.value;
+    if (triggerValue === optionValue || triggerValue === option.textContent.trim()) {
+      option.classList.add("bg-on-surface/12");
+      option.setAttribute("aria-selected", "true");
+    } else {
+      option.setAttribute("aria-selected", "false");
+    }
+  });
+})();
+//# sourceMappingURL=material.js.map

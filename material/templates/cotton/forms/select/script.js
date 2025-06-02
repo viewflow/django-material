@@ -243,17 +243,20 @@ up.compiler('[up-select-option]', function (option) {
     e.preventDefault();
     
     // Get the value and text from the option
-    const value = option.dataset.value || option.textContent.trim();
+    const value = option.dataset.value;
     const displayText = option.textContent.trim();
     
     // Update the trigger input
-    trigger.value = displayText;
-    trigger.setAttribute('value', displayText);
+    // Set empty display text if data-value is empty, null, or undefined
+    const finalDisplayText = (value === '' || value === 'null' || value === 'undefined') ? '' : displayText;
+    trigger.value = finalDisplayText;
+    trigger.setAttribute('value', finalDisplayText);
     
     // Update hidden input if it exists (for form submission)
-    const hiddenInput = container.querySelector('input[type="hidden"]');
+    const hiddenInput = container.querySelector('input[up-select-value]');
     if (hiddenInput) {
-      hiddenInput.value = value;
+      // Set empty string if data-value is empty, null, or undefined
+      hiddenInput.value = (value === '' || value === 'null' || value === 'undefined') ? '' : value;
     }
     
     // Update selected state
@@ -324,7 +327,7 @@ up.compiler('[up-select-option]', function (option) {
   
   // Set initial selected state based on trigger value
   const triggerValue = trigger.value;
-  const optionValue = option.dataset.value || option.textContent.trim();
+  const optionValue = option.dataset.value;
   if (triggerValue === optionValue || triggerValue === option.textContent.trim()) {
     option.classList.add('bg-on-surface/12');
     option.setAttribute('aria-selected', 'true');

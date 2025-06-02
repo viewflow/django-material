@@ -6,12 +6,17 @@
 
 <div class="{{ class }}" {{ attrs }}>
   <div class="relative">
+    <!-- Hidden input for form submission -->
+    <input 
+      type="hidden"
+      name="{{ name }}"
+      value="{{ value }}"
+      up-select-value />
+    
     <div class="flex items-center relative">
       <input 
         type="text"
         id="{{ id }}"
-        name="{{ name }}"
-        value="{{ value }}"
         placeholder=" "
         readonly
         class="peer w-full p-4 pr-10 text-base bg-transparent rounded-md appearance-none focus:outline-none cursor-pointer
