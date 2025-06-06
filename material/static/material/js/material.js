@@ -477,5 +477,528 @@
       option.setAttribute("aria-selected", "false");
     }
   });
+
+  // material/templates/cotton/date/date-utils.js
+  var MaterialDateUtils = class _MaterialDateUtils {
+    static firstDayOfWeek = parseInt(get_format("FIRST_DAY_OF_WEEK"), 10);
+    static monthsOfYear = [
+      gettext("January"),
+      gettext("February"),
+      gettext("March"),
+      gettext("April"),
+      gettext("May"),
+      gettext("June"),
+      gettext("July"),
+      gettext("August"),
+      gettext("September"),
+      gettext("October"),
+      gettext("November"),
+      gettext("December")
+    ];
+    static monthsOfYearAbbr = [
+      pgettext("three letter January", "Jan"),
+      pgettext("three letter February", "Feb"),
+      pgettext("three letter March", "Mar"),
+      pgettext("three letter April", "Apr"),
+      pgettext("three letter May", "May"),
+      pgettext("three letter June", "Jun"),
+      pgettext("three letter July", "Jul"),
+      pgettext("three letter August", "Aug"),
+      pgettext("three letter September", "Sep"),
+      pgettext("three letter October", "Oct"),
+      pgettext("three letter November", "Nov"),
+      pgettext("three letter December", "Dec")
+    ];
+    static daysOfWeek = [
+      pgettext("one letter Sunday", "S"),
+      pgettext("one letter Monday", "M"),
+      pgettext("one letter Tuesday", "T"),
+      pgettext("one letter Wednesday", "W"),
+      pgettext("one letter Thursday", "T"),
+      pgettext("one letter Friday", "F"),
+      pgettext("one letter Saturday", "S")
+    ];
+    static daysOfWeekAbbr = [
+      pgettext("three letter Sunday", "Sun"),
+      pgettext("three letter Monday", "Mon"),
+      pgettext("three letter Tuesday", "Tue"),
+      pgettext("three letter Wednesday", "Wed"),
+      pgettext("three letter Thursday", "Thu"),
+      pgettext("three letter Friday", "Fri"),
+      pgettext("three letter Saturday", "Sat")
+    ];
+    /**
+     * Formats a Date object using Django-style format strings.
+     * @param {string} format - Django date format string (e.g., '%Y-%m-%d')
+     * @param {Date} value - Date object to format
+     * @returns {string} Formatted date string
+     */
+    static formatDate(format, value) {
+      if (!(value instanceof Date) || isNaN(value)) {
+        throw new Error("Invalid date provided to formatDate");
+      }
+      let result = "";
+      for (let i = 0; i < format.length; i++) {
+        if (format[i] === "%" && i + 1 < format.length) {
+          switch (format[i + 1]) {
+            case "d":
+              result += String(value.getDate()).padStart(2, "0");
+              break;
+            case "m":
+              result += String(value.getMonth() + 1).padStart(2, "0");
+              break;
+            case "b":
+              result += _MaterialDateUtils.monthsOfYearAbbr[value.getMonth()];
+              break;
+            case "Y":
+              result += value.getFullYear();
+              break;
+            case "I":
+              const twelveHour = value.getHours() % 12 || 12;
+              result += String(twelveHour).padStart(2, "0");
+              break;
+            case "H":
+              result += String(value.getHours()).padStart(2, "0");
+              break;
+            case "M":
+              result += String(value.getMinutes()).padStart(2, "0");
+              break;
+            case "S":
+              result += String(value.getSeconds()).padStart(2, "0");
+              break;
+            case "p":
+              result += value.getHours() >= 12 ? "pm" : "am";
+              break;
+            default:
+              result += format[i] + format[i + 1];
+          }
+          i++;
+        } else {
+          result += format[i];
+        }
+      }
+      return result;
+    }
+    /**
+     * Parses a date string using Django-style format strings.
+     * @param {string} format - Django date format string
+     * @param {string} value - Date string to parse
+     * @returns {Date} Parsed Date object
+     */
+    static parseDateTime(format, value) {
+      if (!format || !value) {
+        throw new Error("Format and value are required for parsing");
+      }
+      const splitFormat = format.split(/[.\-/:,\s]+/);
+      const dateParts = value.split(/[.\-/:,\s]+/);
+      if (splitFormat.length !== dateParts.length) {
+        throw new Error("Format and value structure mismatch");
+      }
+      let day = 1;
+      let month = 0;
+      let year = (/* @__PURE__ */ new Date()).getFullYear();
+      let hour = 0;
+      let minute = 0;
+      let second = 0;
+      for (let i = 0; i < splitFormat.length; i++) {
+        const formatPart = splitFormat[i];
+        const datePart = dateParts[i];
+        if (!datePart) continue;
+        switch (formatPart) {
+          case "%d":
+            day = parseInt(datePart, 10);
+            if (isNaN(day) || day < 1 || day > 31) {
+              throw new Error(`Invalid day: ${datePart}`);
+            }
+            break;
+          case "%m":
+            month = parseInt(datePart, 10) - 1;
+            if (isNaN(month) || month < 0 || month > 11) {
+              throw new Error(`Invalid month: ${datePart}`);
+            }
+            break;
+          case "%Y":
+            year = parseInt(datePart, 10);
+            if (isNaN(year)) {
+              throw new Error(`Invalid year: ${datePart}`);
+            }
+            break;
+          case "%b":
+            month = _MaterialDateUtils.monthsOfYearAbbr.indexOf(datePart);
+            if (month === -1) {
+              throw new Error(`Invalid month abbreviation: ${datePart}`);
+            }
+            break;
+          case "%H":
+            hour = parseInt(datePart, 10);
+            if (isNaN(hour) || hour < 0 || hour > 23) {
+              throw new Error(`Invalid hour: ${datePart}`);
+            }
+            break;
+          case "%M":
+            minute = parseInt(datePart, 10);
+            if (isNaN(minute) || minute < 0 || minute > 59) {
+              throw new Error(`Invalid minute: ${datePart}`);
+            }
+            break;
+          case "%S":
+            second = parseInt(datePart, 10);
+            if (isNaN(second) || second < 0 || second > 59) {
+              throw new Error(`Invalid second: ${datePart}`);
+            }
+            break;
+        }
+      }
+      const result = new Date(year, month, day, hour, minute, second);
+      if (isNaN(result.getTime())) {
+        throw new Error("Invalid date constructed from parsed values");
+      }
+      return result;
+    }
+    /**
+     * Returns the number of days in a given month and year.
+     * @param {number} year - Full year (e.g., 2024)
+     * @param {number} month - Month index (0-11)
+     * @returns {number} Number of days in the month
+     */
+    static daysInMonth(year, month) {
+      if (typeof year !== "number" || typeof month !== "number") {
+        throw new Error("Year and month must be numbers");
+      }
+      if (month < 0 || month > 11) {
+        throw new Error("Month must be between 0 and 11");
+      }
+      return new Date(year, month + 1, 0).getDate();
+    }
+    /**
+     * Checks if a year is a leap year.
+     * @param {number} year - Full year to check
+     * @returns {boolean} True if leap year
+     */
+    static isLeapYear(year) {
+      return year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0);
+    }
+    /**
+     * Gets the day of week for the first day of a month.
+     * @param {number} year - Full year
+     * @param {number} month - Month index (0-11)
+     * @returns {number} Day of week (0-6, where 0 is Sunday)
+     */
+    static getFirstDayOfMonth(year, month) {
+      return new Date(year, month, 1).getDay();
+    }
+    /**
+     * Validates if a date is within reasonable bounds.
+     * @param {Date} date - Date to validate
+     * @returns {boolean} True if date is valid and reasonable
+     */
+    static isValidDate(date) {
+      if (!(date instanceof Date)) return false;
+      if (isNaN(date.getTime())) return false;
+      const year = date.getFullYear();
+      return year >= 1900 && year <= 2100;
+    }
+  };
+
+  // material/templates/cotton/date/script.js
+  up.compiler("[data-calendar]", function(element) {
+    const color = element.dataset.color || "primary";
+    const format = element.dataset.format || "%Y-%m-%d";
+    const header = element.dataset.header === "true";
+    const actions = element.dataset.actions === "true";
+    const disabled = element.dataset.disabled === "true";
+    let currentYear = (/* @__PURE__ */ new Date()).getFullYear();
+    let currentMonth = (/* @__PURE__ */ new Date()).getMonth();
+    let selectedDate = null;
+    if (element.dataset.value) {
+      try {
+        selectedDate = MaterialDateUtils.parseDateTime(format, element.dataset.value);
+        currentYear = selectedDate.getFullYear();
+        currentMonth = selectedDate.getMonth();
+      } catch (e) {
+        console.warn("Invalid initial date value:", element.dataset.value);
+      }
+    }
+    const monthYearEl = element.querySelector("[data-month-year]");
+    const daysContainer = element.querySelector("[data-calendar-days]");
+    const prevButton = element.querySelector("[data-prev-month]");
+    const nextButton = element.querySelector("[data-next-month]");
+    const cancelButton = element.querySelector("[data-calendar-cancel]");
+    const acceptButton = element.querySelector("[data-calendar-accept]");
+    const selectedWeekdayEl = element.querySelector("[data-selected-weekday]");
+    const selectedDateEl = element.querySelector("[data-selected-date]");
+    const weekdayElements = element.querySelectorAll("[data-weekday]");
+    weekdayElements.forEach((el, index) => {
+      const dayIndex = (index + MaterialDateUtils.firstDayOfWeek) % 7;
+      el.textContent = MaterialDateUtils.daysOfWeek[dayIndex];
+    });
+    function updateHeader() {
+      if (!header || !selectedDate) return;
+      if (selectedWeekdayEl) {
+        selectedWeekdayEl.textContent = MaterialDateUtils.daysOfWeekAbbr[selectedDate.getDay()] + ",";
+      }
+      if (selectedDateEl) {
+        selectedDateEl.textContent = MaterialDateUtils.monthsOfYearAbbr[selectedDate.getMonth()] + " " + selectedDate.getDate();
+      }
+    }
+    function renderCalendar() {
+      if (!monthYearEl || !daysContainer) return;
+      monthYearEl.textContent = `${MaterialDateUtils.monthsOfYear[currentMonth]} ${currentYear}`;
+      daysContainer.innerHTML = "";
+      const firstDay = MaterialDateUtils.getFirstDayOfMonth(currentYear, currentMonth);
+      const daysInMonth = MaterialDateUtils.daysInMonth(currentYear, currentMonth);
+      const startPos = (firstDay - MaterialDateUtils.firstDayOfWeek + 7) % 7;
+      for (let week = 0; week < 6; week++) {
+        for (let day = 0; day < 7; day++) {
+          const cell = week * 7 + day;
+          const dayNumber = cell >= startPos && cell < daysInMonth + startPos ? cell - startPos + 1 : "";
+          const dayEl = document.createElement("div");
+          dayEl.className = "flex justify-center items-center h-9";
+          if (dayNumber) {
+            const span = document.createElement("span");
+            const isSelected = selectedDate && selectedDate.getFullYear() === currentYear && selectedDate.getMonth() === currentMonth && selectedDate.getDate() === dayNumber;
+            if (isSelected) {
+              span.className = `inline-block rounded-full w-9 h-9 leading-9 text-xs bg-${color} text-on-${color} cursor-pointer transition-colors`;
+              if (!disabled) {
+                span.className += ` hover:bg-${color}`;
+              }
+            } else {
+              span.className = `inline-block rounded-full w-9 h-9 leading-9 text-xs text-on-surface cursor-pointer transition-colors`;
+              if (!disabled) {
+                span.className += ` hover:bg-surface-variant`;
+              }
+            }
+            span.textContent = dayNumber;
+            span.dataset.day = dayNumber;
+            dayEl.appendChild(span);
+          }
+          daysContainer.appendChild(dayEl);
+        }
+      }
+      updateHeader();
+    }
+    function changeMonth(delta) {
+      if (disabled) return;
+      currentMonth += delta;
+      if (currentMonth < 0) {
+        currentMonth = 11;
+        currentYear--;
+      } else if (currentMonth > 11) {
+        currentMonth = 0;
+        currentYear++;
+      }
+      renderCalendar();
+      if (selectedDate) {
+        const newDay = Math.min(selectedDate.getDate(), MaterialDateUtils.daysInMonth(currentYear, currentMonth));
+        selectDate(newDay);
+      }
+    }
+    function selectDate(day) {
+      if (disabled) return;
+      const newDate = new Date(currentYear, currentMonth, day);
+      selectedDate = newDate;
+      const formattedDate = MaterialDateUtils.formatDate(format, newDate);
+      element.dataset.value = formattedDate;
+      const changeEvent = new CustomEvent("calendar:change", {
+        detail: { date: newDate, formatted: formattedDate },
+        bubbles: true
+      });
+      element.dispatchEvent(changeEvent);
+      renderCalendar();
+    }
+    function onDayClick(event) {
+      if (disabled || event.target.tagName !== "SPAN") return;
+      const day = parseInt(event.target.dataset.day);
+      if (!isNaN(day)) {
+        selectDate(day);
+      }
+    }
+    function onPrevMonth() {
+      changeMonth(-1);
+    }
+    function onNextMonth() {
+      changeMonth(1);
+    }
+    function onCancel() {
+      const cancelEvent = new CustomEvent("calendar:cancel", { bubbles: true });
+      element.dispatchEvent(cancelEvent);
+    }
+    function onAccept() {
+      const acceptEvent = new CustomEvent("calendar:accept", {
+        detail: { date: selectedDate, formatted: selectedDate ? MaterialDateUtils.formatDate(format, selectedDate) : null },
+        bubbles: true
+      });
+      element.dispatchEvent(acceptEvent);
+    }
+    function onPrevButtonKeyDown(event) {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        onPrevMonth();
+      }
+    }
+    function onNextButtonKeyDown(event) {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        onNextMonth();
+      }
+    }
+    if (daysContainer) {
+      daysContainer.addEventListener("click", onDayClick);
+    }
+    if (prevButton) {
+      prevButton.addEventListener("click", onPrevMonth);
+      prevButton.addEventListener("keydown", onPrevButtonKeyDown);
+    }
+    if (nextButton) {
+      nextButton.addEventListener("click", onNextMonth);
+      nextButton.addEventListener("keydown", onNextButtonKeyDown);
+    }
+    if (cancelButton) {
+      cancelButton.addEventListener("click", onCancel);
+    }
+    if (acceptButton) {
+      acceptButton.addEventListener("click", onAccept);
+    }
+    function onKeyDown(event) {
+      if (disabled) return;
+      if (event.target === cancelButton || event.target === acceptButton) {
+        return;
+      }
+      switch (event.key) {
+        case "ArrowLeft":
+          event.preventDefault();
+          if (selectedDate) {
+            const newDay = selectedDate.getDate() - 1;
+            if (newDay >= 1) {
+              selectDate(newDay);
+            } else {
+              changeMonth(-1);
+              const prevMonthDays = MaterialDateUtils.daysInMonth(currentYear, currentMonth);
+              selectDate(prevMonthDays);
+            }
+          }
+          break;
+        case "ArrowRight":
+          event.preventDefault();
+          if (selectedDate) {
+            const maxDays = MaterialDateUtils.daysInMonth(currentYear, currentMonth);
+            const newDay = selectedDate.getDate() + 1;
+            if (newDay <= maxDays) {
+              selectDate(newDay);
+            } else {
+              changeMonth(1);
+              selectDate(1);
+            }
+          }
+          break;
+        case "ArrowUp":
+          event.preventDefault();
+          if (selectedDate) {
+            const newDay = selectedDate.getDate() - 7;
+            if (newDay >= 1) {
+              selectDate(newDay);
+            } else {
+              changeMonth(-1);
+              const prevMonthDays = MaterialDateUtils.daysInMonth(currentYear, currentMonth);
+              selectDate(Math.max(1, prevMonthDays + newDay));
+            }
+          }
+          break;
+        case "ArrowDown":
+          event.preventDefault();
+          if (selectedDate) {
+            const maxDays = MaterialDateUtils.daysInMonth(currentYear, currentMonth);
+            const newDay = selectedDate.getDate() + 7;
+            if (newDay <= maxDays) {
+              selectDate(newDay);
+            } else {
+              changeMonth(1);
+              selectDate(Math.min(MaterialDateUtils.daysInMonth(currentYear, currentMonth), newDay - maxDays));
+            }
+          }
+          break;
+        case "Enter":
+        case " ":
+          event.preventDefault();
+          if (selectedDate && acceptButton) {
+            onAccept();
+          }
+          break;
+        case "Escape":
+          event.preventDefault();
+          if (cancelButton) {
+            onCancel();
+          }
+          break;
+      }
+    }
+    element.addEventListener("keydown", onKeyDown);
+    element.setAttribute("tabindex", "0");
+    element.materialCalendar = {
+      getValue: () => selectedDate ? MaterialDateUtils.formatDate(format, selectedDate) : null,
+      setValue: (value) => {
+        if (!value) {
+          selectedDate = null;
+        } else {
+          try {
+            selectedDate = MaterialDateUtils.parseDateTime(format, value);
+            currentYear = selectedDate.getFullYear();
+            currentMonth = selectedDate.getMonth();
+          } catch (e) {
+            console.warn("Invalid date value:", value);
+            return;
+          }
+        }
+        element.dataset.value = value || "";
+        renderCalendar();
+      },
+      getDate: () => selectedDate,
+      setDate: (date) => {
+        if (date instanceof Date && MaterialDateUtils.isValidDate(date)) {
+          selectedDate = date;
+          currentYear = date.getFullYear();
+          currentMonth = date.getMonth();
+          element.dataset.value = MaterialDateUtils.formatDate(format, date);
+          renderCalendar();
+        }
+      }
+    };
+    renderCalendar();
+    return function() {
+      if (daysContainer) {
+        daysContainer.removeEventListener("click", onDayClick);
+      }
+      if (prevButton) {
+        prevButton.removeEventListener("click", onPrevMonth);
+        prevButton.removeEventListener("keydown", onPrevButtonKeyDown);
+      }
+      if (nextButton) {
+        nextButton.removeEventListener("click", onNextMonth);
+        nextButton.removeEventListener("keydown", onNextButtonKeyDown);
+      }
+      if (cancelButton) {
+        cancelButton.removeEventListener("click", onCancel);
+      }
+      if (acceptButton) {
+        acceptButton.removeEventListener("click", onAccept);
+      }
+      element.removeEventListener("keydown", onKeyDown);
+    };
+  });
+  up.compiler("[data-inline-calendar]", function(element) {
+    const hiddenInput = element.parentElement.querySelector("[data-inline-calendar-input]");
+    if (!hiddenInput) return;
+    function onCalendarChange(event) {
+      hiddenInput.value = event.detail.formatted || "";
+      const inputEvent = new Event("input", { bubbles: true });
+      hiddenInput.dispatchEvent(inputEvent);
+      const changeEvent = new Event("change", { bubbles: true });
+      hiddenInput.dispatchEvent(changeEvent);
+    }
+    element.addEventListener("calendar:change", onCalendarChange);
+    return function() {
+      element.removeEventListener("calendar:change", onCalendarChange);
+    };
+  });
 })();
 //# sourceMappingURL=material.js.map
