@@ -12,6 +12,7 @@ up.compiler('[data-calendar]', function(element) {
   let currentYear = new Date().getFullYear();
   let currentMonth = new Date().getMonth();
   let selectedDate = null;
+  let isYearPickerOpen = false;
   
   // Initialize from value if provided
   if (element.dataset.value) {
@@ -26,6 +27,8 @@ up.compiler('[data-calendar]', function(element) {
   
   // DOM elements
   const monthYearEl = element.querySelector('[data-month-year]');
+  const yearPicker = element.querySelector('[data-year-picker]');
+  const weekdaysContainer = element.querySelector('[data-weekdays]');
   const daysContainer = element.querySelector('[data-calendar-days]');
   const prevButton = element.querySelector('[data-prev-month]');
   const nextButton = element.querySelector('[data-next-month]');
@@ -107,6 +110,85 @@ up.compiler('[data-calendar]', function(element) {
     
     updateHeader();
   }
+
+  /**
+   * Shows the year picker grid
+   */
+  function showYearPicker() {
+    if (!yearPicker || disabled) return;
+    
+    isYearPickerOpen = true;
+    
+    // Hide weekdays and calendar days, show year picker
+    if (weekdaysContainer) weekdaysContainer.classList.add('hidden');
+    daysContainer.classList.add('hidden');
+    yearPicker.classList.remove('hidden');
+    
+    // Clear existing years
+    yearPicker.innerHTML = '';
+    
+    // Create 6 rows × 4 columns = 24 years (current year ± 11)
+    const startYear = currentYear - 11;
+    const endYear = currentYear + 12;
+    
+    for (let year = startYear; year <= endYear; year++) {
+      const yearButton = document.createElement('button');
+      yearButton.type = 'button';
+      yearButton.className = 'h-9 px-2 py-1 text-sm rounded transition-colors focus:outline-none focus:ring-2 focus:ring-primary/20';
+      yearButton.textContent = year;
+      
+      if (year === currentYear) {
+        yearButton.className += ` bg-${color} text-on-${color}`;
+      } else {
+        yearButton.className += ' text-on-surface hover:bg-surface-variant';
+      }
+      
+      yearButton.addEventListener('click', () => selectYear(year));
+      yearPicker.appendChild(yearButton);
+    }
+    
+    // Focus current year (should be around the middle)
+    const currentYearIndex = currentYear - startYear;
+    const currentYearButton = yearPicker.querySelector(`button:nth-child(${currentYearIndex + 1})`);
+    if (currentYearButton) {
+      currentYearButton.focus();
+    }
+  }
+
+  /**
+   * Hides the year picker grid
+   */
+  function hideYearPicker() {
+    if (!yearPicker) return;
+    
+    isYearPickerOpen = false;
+    
+    // Show weekdays and calendar days, hide year picker
+    if (weekdaysContainer) weekdaysContainer.classList.remove('hidden');
+    daysContainer.classList.remove('hidden');
+    yearPicker.classList.add('hidden');
+  }
+
+  /**
+   * Selects a year and updates the calendar
+   */
+  function selectYear(year) {
+    currentYear = year;
+    renderCalendar();
+    hideYearPicker();
+    monthYearEl?.focus();
+  }
+
+  /**
+   * Toggles the year picker dropdown
+   */
+  function toggleYearPicker() {
+    if (isYearPickerOpen) {
+      hideYearPicker();
+    } else {
+      showYearPicker();
+    }
+  }
   
   function changeMonth(delta) {
     if (disabled) return;
@@ -158,6 +240,13 @@ up.compiler('[data-calendar]', function(element) {
       selectDate(day);
     }
   }
+
+  function onMonthYearClick() {
+    if (!disabled) {
+      toggleYearPicker();
+    }
+  }
+
   
   function onPrevMonth() {
     changeMonth(-1);
@@ -195,9 +284,23 @@ up.compiler('[data-calendar]', function(element) {
     }
   }
 
+  function onMonthYearKeyDown(event) {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      toggleYearPicker();
+    } else if (event.key === 'Escape' && isYearPickerOpen) {
+      event.preventDefault();
+      hideYearPicker();
+    }
+  }
+
   // Attach event listeners
   if (daysContainer) {
     daysContainer.addEventListener('click', onDayClick);
+  }
+  if (monthYearEl) {
+    monthYearEl.addEventListener('click', onMonthYearClick);
+    monthYearEl.addEventListener('keydown', onMonthYearKeyDown);
   }
   if (prevButton) {
     prevButton.addEventListener('click', onPrevMonth);
@@ -213,13 +316,14 @@ up.compiler('[data-calendar]', function(element) {
   if (acceptButton) {
     acceptButton.addEventListener('click', onAccept);
   }
+
   
   // Keyboard navigation
   function onKeyDown(event) {
     if (disabled) return;
     
-    // Don't handle keyboard events if focus is on action buttons
-    if (event.target === cancelButton || event.target === acceptButton) {
+    // Don't handle keyboard events if focus is on action buttons or year picker is open
+    if (event.target === cancelButton || event.target === acceptButton || isYearPickerOpen) {
       return;
     }
     
@@ -285,7 +389,9 @@ up.compiler('[data-calendar]', function(element) {
         break;
       case 'Escape':
         event.preventDefault();
-        if (cancelButton) {
+        if (isYearPickerOpen) {
+          hideYearPicker();
+        } else if (cancelButton) {
           onCancel();
         }
         break;
@@ -333,6 +439,10 @@ up.compiler('[data-calendar]', function(element) {
   return function() {
     if (daysContainer) {
       daysContainer.removeEventListener('click', onDayClick);
+    }
+    if (monthYearEl) {
+      monthYearEl.removeEventListener('click', onMonthYearClick);
+      monthYearEl.removeEventListener('keydown', onMonthYearKeyDown);
     }
     if (prevButton) {
       prevButton.removeEventListener('click', onPrevMonth);
