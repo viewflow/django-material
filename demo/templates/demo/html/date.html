@@ -1,0 +1,423 @@
+{% extends 'demo/html/base_page.html' %}
+{% load i18n %}
+
+{% block page_breadcrumb %}Date & Calendar{% endblock %}
+{% block page_title %}Date & Calendar Components{% endblock %}
+
+{% block page_content %}
+
+<section id="calendar-overview" class="mb-12">
+  <h2 class="text-2xl mb-4">Calendar Overview</h2>
+  <p class="mb-6">
+    Calendar components provide an intuitive way for users to select dates. Built following Material Design 3 principles,
+    these components offer flexible display options, internationalization support, and full accessibility features including
+    keyboard navigation and screen reader compatibility.
+  </p>
+
+  <div class="grid md:grid-cols-2 gap-6 mb-8">
+    <c-card.elevated title="Basic Calendar">
+      <c-date.calendar />
+    </c-card.elevated>
+    
+    <c-card.elevated title="With Header">
+      <c-date.calendar header value="2024-06-15" />
+    </c-card.elevated>
+  </div>
+</section>
+
+<section id="calendar-variants" class="mb-12">
+  <h2 class="text-2xl mb-4">Calendar Variants</h2>
+  
+  <div class="mb-8">
+    <h3 class="text-lg font-medium mb-4">Color Variants</h3>
+    <div class="grid lg:grid-cols-3 gap-6">
+      <c-card.elevated title="Primary (default)">
+        <c-date.calendar color="primary" value="2024-06-15" />
+      </c-card.elevated>
+      
+      <c-card.elevated title="Secondary">
+        <c-date.calendar color="secondary" value="2024-06-15" />
+      </c-card.elevated>
+      
+      <c-card.elevated title="Tertiary">
+        <c-date.calendar color="tertiary" value="2024-06-15" />
+      </c-card.elevated>
+    </div>
+  </div>
+
+  <div class="grid md:grid-cols-2 gap-6 mb-8">
+    <c-card.elevated title="With Action Buttons">
+      <c-date.calendar actions value="2024-06-15" />
+    </c-card.elevated>
+
+    <c-card.elevated title="Disabled State">
+      <c-date.calendar disabled value="2024-06-15" />
+    </c-card.elevated>
+  </div>
+</section>
+
+<section id="inline-calendar" class="mb-12">
+  <h2 class="text-2xl mb-4">Inline Calendar Form Field</h2>
+  <p class="mb-6">
+    The inline calendar component is designed for form integration, providing a hidden input field
+    that automatically updates when a date is selected. Perfect for date input fields in forms.
+  </p>
+
+  <c-card.elevated title="Form Integration Example" class="max-w-2xl mx-auto mb-8">
+    <form class="max-w-md mx-auto">
+      <c-date.inline 
+        name="event_date" 
+        id="event_date"
+        value="2024-06-15"
+        help_text="Select the date for your event">
+        Event Date
+      </c-date.inline>
+      
+      <div class="mt-6">
+        <c-date.inline 
+          name="deadline" 
+          id="deadline"
+          required
+          color="secondary"
+          help_text="This field is required">
+          Project Deadline
+        </c-date.inline>
+      </div>
+      
+      <div class="mt-6 text-center">
+        <c-button.filled type="submit">Submit Form</c-button.filled>
+      </div>
+    </form>
+  </c-card.elevated>
+</section>
+
+<section id="usage-examples" class="mb-12">
+  <h2 class="text-2xl mb-4">Usage Examples</h2>
+  
+  <div class="mb-8">
+    <h3 class="text-lg font-medium mb-4">Basic Calendar</h3>
+    <div class="bg-surface-container-low p-6 rounded-lg mb-6">
+      <pre class="text-on-surface-variant"><code>&lt;c-date.calendar /&gt;
+
+&lt;!-- With initial value --&gt;
+&lt;c-date.calendar value="2024-06-15" /&gt;
+
+&lt;!-- With custom color --&gt;
+&lt;c-date.calendar color="secondary" /&gt;</code></pre>
+    </div>
+  </div>
+
+  <div class="mb-8">
+    <h3 class="text-lg font-medium mb-4">Calendar with Header and Actions</h3>
+    <div class="bg-surface-container-low p-6 rounded-lg mb-6">
+      <pre class="text-on-surface-variant"><code>&lt;c-date.calendar 
+  header 
+  actions 
+  value="2024-06-15"
+  color="primary" /&gt;</code></pre>
+    </div>
+  </div>
+
+  <div class="mb-8">
+    <h3 class="text-lg font-medium mb-4">Inline Calendar Form Field</h3>
+    <div class="bg-surface-container-low p-6 rounded-lg mb-6">
+      <pre class="text-on-surface-variant"><code>&lt;c-date.inline 
+  name="birthday" 
+  id="birthday"
+  value=""
+  required
+  help_text="Enter your date of birth"&gt;
+  Date of Birth
+&lt;/c-date.inline&gt;</code></pre>
+    </div>
+  </div>
+
+  <div class="mb-8">
+    <h3 class="text-lg font-medium mb-4">JavaScript Integration</h3>
+    <div class="bg-surface-container-low p-6 rounded-lg mb-6">
+      <pre class="text-on-surface-variant"><code>// Listen for date changes
+document.querySelector('[data-calendar]')
+  .addEventListener('calendar:change', function(event) {
+    console.log('Selected date:', event.detail.formatted);
+    console.log('Date object:', event.detail.date);
+  });
+
+// Programmatically set date
+const calendar = document.querySelector('[data-calendar]');
+calendar.materialCalendar.setValue('2024-12-25');
+
+// Get current value
+const currentDate = calendar.materialCalendar.getValue();</code></pre>
+    </div>
+  </div>
+</section>
+
+<section id="calendar-attributes" class="mb-12">
+  <h2 class="text-2xl mb-4">Calendar Attributes</h2>
+  <div class="overflow-x-auto mb-6">
+    <c-table.container>
+      <c-table.header_row>
+        <c-table.header>Attribute</c-table.header>
+        <c-table.header>Type</c-table.header>
+        <c-table.header>Default</c-table.header>
+        <c-table.header>Description</c-table.header>
+      </c-table.header_row>
+      
+      <c-table.row>
+        <c-table.cell><code>color</code></c-table.cell>
+        <c-table.cell>string</c-table.cell>
+        <c-table.cell><code>"primary"</code></c-table.cell>
+        <c-table.cell>Color theme: primary, secondary, tertiary</c-table.cell>
+      </c-table.row>
+      
+      <c-table.row>
+        <c-table.cell><code>header</code></c-table.cell>
+        <c-table.cell>boolean</c-table.cell>
+        <c-table.cell><code>false</code></c-table.cell>
+        <c-table.cell>Show date header panel</c-table.cell>
+      </c-table.row>
+      
+      <c-table.row>
+        <c-table.cell><code>actions</code></c-table.cell>
+        <c-table.cell>boolean</c-table.cell>
+        <c-table.cell><code>false</code></c-table.cell>
+        <c-table.cell>Show cancel/OK buttons</c-table.cell>
+      </c-table.row>
+      
+      <c-table.row>
+        <c-table.cell><code>disabled</code></c-table.cell>
+        <c-table.cell>boolean</c-table.cell>
+        <c-table.cell><code>false</code></c-table.cell>
+        <c-table.cell>Disable interaction</c-table.cell>
+      </c-table.row>
+      
+      <c-table.row>
+        <c-table.cell><code>format</code></c-table.cell>
+        <c-table.cell>string</c-table.cell>
+        <c-table.cell><code>"%Y-%m-%d"</code></c-table.cell>
+        <c-table.cell>Django date format string</c-table.cell>
+      </c-table.row>
+      
+      <c-table.row>
+        <c-table.cell><code>value</code></c-table.cell>
+        <c-table.cell>string</c-table.cell>
+        <c-table.cell><code>""</code></c-table.cell>
+        <c-table.cell>Initial date value in specified format</c-table.cell>
+      </c-table.row>
+      
+      <c-table.row>
+        <c-table.cell><code>class</code></c-table.cell>
+        <c-table.cell>string</c-table.cell>
+        <c-table.cell><code>"flex max-w-lg"</code></c-table.cell>
+        <c-table.cell>Additional CSS classes</c-table.cell>
+      </c-table.row>
+    </c-table.container>
+  </div>
+</section>
+
+<section id="inline-attributes" class="mb-12">
+  <h2 class="text-2xl mb-4">Inline Calendar Attributes</h2>
+  <div class="overflow-x-auto mb-6">
+    <c-table.container>
+      <c-table.header_row>
+        <c-table.header>Attribute</c-table.header>
+        <c-table.header>Type</c-table.header>
+        <c-table.header>Default</c-table.header>
+        <c-table.header>Description</c-table.header>
+      </c-table.header_row>
+      
+      <c-table.row>
+        <c-table.cell><code>name</code></c-table.cell>
+        <c-table.cell>string</c-table.cell>
+        <c-table.cell>-</c-table.cell>
+        <c-table.cell>Form field name for the hidden input</c-table.cell>
+      </c-table.row>
+      
+      <c-table.row>
+        <c-table.cell><code>id</code></c-table.cell>
+        <c-table.cell>string</c-table.cell>
+        <c-table.cell>-</c-table.cell>
+        <c-table.cell>Form field ID for the hidden input</c-table.cell>
+      </c-table.row>
+      
+      <c-table.row>
+        <c-table.cell><code>required</code></c-table.cell>
+        <c-table.cell>boolean</c-table.cell>
+        <c-table.cell><code>false</code></c-table.cell>
+        <c-table.cell>Mark field as required</c-table.cell>
+      </c-table.row>
+      
+      <c-table.row>
+        <c-table.cell><code>help_text</code></c-table.cell>
+        <c-table.cell>string</c-table.cell>
+        <c-table.cell>-</c-table.cell>
+        <c-table.cell>Helper text displayed below calendar</c-table.cell>
+      </c-table.row>
+      
+      <c-table.row>
+        <c-table.cell><code>error</code></c-table.cell>
+        <c-table.cell>string</c-table.cell>
+        <c-table.cell>-</c-table.cell>
+        <c-table.cell>Error message displayed below calendar</c-table.cell>
+      </c-table.row>
+      
+      <c-table.row>
+        <c-table.cell colspan="4"><em>Also inherits all calendar attributes (color, format, value, disabled)</em></c-table.cell>
+      </c-table.row>
+    </c-table.container>
+  </div>
+</section>
+
+<section id="date-formats" class="mb-12">
+  <h2 class="text-2xl mb-4">Date Format Codes</h2>
+  <p class="mb-6">
+    The calendar components use Django-style date format codes. Here are the supported format codes:
+  </p>
+  
+  <div class="overflow-x-auto mb-6">
+    <c-table.container>
+      <c-table.header_row>
+        <c-table.header>Code</c-table.header>
+        <c-table.header>Description</c-table.header>
+        <c-table.header>Example</c-table.header>
+      </c-table.header_row>
+      
+      <c-table.row>
+        <c-table.cell><code>%d</code></c-table.cell>
+        <c-table.cell>Day of month (01-31)</c-table.cell>
+        <c-table.cell>01, 15, 31</c-table.cell>
+      </c-table.row>
+      
+      <c-table.row>
+        <c-table.cell><code>%m</code></c-table.cell>
+        <c-table.cell>Month (01-12)</c-table.cell>
+        <c-table.cell>01, 06, 12</c-table.cell>
+      </c-table.row>
+      
+      <c-table.row>
+        <c-table.cell><code>%b</code></c-table.cell>
+        <c-table.cell>Month abbreviation</c-table.cell>
+        <c-table.cell>Jan, Jun, Dec</c-table.cell>
+      </c-table.row>
+      
+      <c-table.row>
+        <c-table.cell><code>%Y</code></c-table.cell>
+        <c-table.cell>4-digit year</c-table.cell>
+        <c-table.cell>2024</c-table.cell>
+      </c-table.row>
+      
+      <c-table.row>
+        <c-table.cell><code>%H</code></c-table.cell>
+        <c-table.cell>Hour (00-23)</c-table.cell>
+        <c-table.cell>00, 14, 23</c-table.cell>
+      </c-table.row>
+      
+      <c-table.row>
+        <c-table.cell><code>%I</code></c-table.cell>
+        <c-table.cell>Hour (01-12)</c-table.cell>
+        <c-table.cell>01, 02, 12</c-table.cell>
+      </c-table.row>
+      
+      <c-table.row>
+        <c-table.cell><code>%M</code></c-table.cell>
+        <c-table.cell>Minute (00-59)</c-table.cell>
+        <c-table.cell>00, 30, 59</c-table.cell>
+      </c-table.row>
+      
+      <c-table.row>
+        <c-table.cell><code>%S</code></c-table.cell>
+        <c-table.cell>Second (00-59)</c-table.cell>
+        <c-table.cell>00, 30, 59</c-table.cell>
+      </c-table.row>
+      
+      <c-table.row>
+        <c-table.cell><code>%p</code></c-table.cell>
+        <c-table.cell>AM/PM</c-table.cell>
+        <c-table.cell>am, pm</c-table.cell>
+      </c-table.row>
+    </c-table.container>
+  </div>
+  
+  <div class="bg-surface-container-low p-6 rounded-lg mb-6">
+    <h4 class="font-medium mb-4">Common Format Examples</h4>
+    <pre class="text-on-surface-variant"><code>"%Y-%m-%d"         → 2024-06-15 (ISO format)
+"%d/%m/%Y"         → 15/06/2024 (European format)
+"%m/%d/%Y"         → 06/15/2024 (US format)
+"%b %d, %Y"        → Jun 15, 2024 (Long format)
+"%Y-%m-%d %H:%M"   → 2024-06-15 14:30 (With time)</code></pre>
+  </div>
+</section>
+
+<section id="accessibility" class="mb-12">
+  <h2 class="text-2xl mb-4">Accessibility</h2>
+  <p class="mb-6">
+    The calendar components are designed with accessibility in mind, following WCAG guidelines and 
+    providing comprehensive keyboard navigation support.
+  </p>
+
+  <div class="bg-surface-container-low p-6 rounded-lg mb-6">
+    <h4 class="font-medium mb-4">Keyboard Navigation</h4>
+    <ul class="space-y-2 text-on-surface-variant">
+      <li><kbd class="px-2 py-1 bg-surface-variant rounded text-xs">Arrow Keys</kbd> - Navigate between dates</li>
+      <li><kbd class="px-2 py-1 bg-surface-variant rounded text-xs">Enter</kbd> or <kbd class="px-2 py-1 bg-surface-variant rounded text-xs">Space</kbd> - Select current date</li>
+      <li><kbd class="px-2 py-1 bg-surface-variant rounded text-xs">Escape</kbd> - Cancel selection (when actions enabled)</li>
+      <li><kbd class="px-2 py-1 bg-surface-variant rounded text-xs">Tab</kbd> - Move focus to navigation buttons</li>
+    </ul>
+  </div>
+
+  <div class="bg-surface-container-low p-6 rounded-lg mb-6">
+    <h4 class="font-medium mb-4">Screen Reader Support</h4>
+    <ul class="space-y-2 text-on-surface-variant">
+      <li>• Proper ARIA labels for navigation buttons</li>
+      <li>• Semantic HTML structure with appropriate roles</li>
+      <li>• Descriptive text for selected dates</li>
+      <li>• Form integration with hidden inputs for proper labeling</li>
+    </ul>
+  </div>
+</section>
+
+<section id="javascript-api" class="mb-12">
+  <h2 class="text-2xl mb-4">JavaScript API</h2>
+  <p class="mb-6">
+    Each calendar component exposes a JavaScript API for programmatic interaction:
+  </p>
+
+  <div class="bg-surface-container-low p-6 rounded-lg mb-6">
+    <h4 class="font-medium mb-4">Methods</h4>
+    <pre class="text-on-surface-variant"><code>// Get the calendar element
+const calendar = document.querySelector('[data-calendar]');
+
+// Get current value as formatted string
+const value = calendar.materialCalendar.getValue();
+
+// Set value from formatted string
+calendar.materialCalendar.setValue('2024-12-25');
+
+// Get current date as Date object
+const date = calendar.materialCalendar.getDate();
+
+// Set date from Date object
+calendar.materialCalendar.setDate(new Date(2024, 11, 25));</code></pre>
+  </div>
+
+  <div class="bg-surface-container-low p-6 rounded-lg mb-6">
+    <h4 class="font-medium mb-4">Events</h4>
+    <pre class="text-on-surface-variant"><code>// Listen for date changes
+calendar.addEventListener('calendar:change', function(event) {
+  console.log('Date changed:', event.detail.formatted);
+  console.log('Date object:', event.detail.date);
+});
+
+// Listen for cancel action (when actions enabled)
+calendar.addEventListener('calendar:cancel', function(event) {
+  console.log('Calendar cancelled');
+});
+
+// Listen for accept action (when actions enabled)
+calendar.addEventListener('calendar:accept', function(event) {
+  console.log('Date accepted:', event.detail.formatted);
+});</code></pre>
+  </div>
+</section>
+
+{% endblock %}

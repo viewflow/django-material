@@ -41,6 +41,34 @@
 <c-component :options="[{'label': 'Name', 'value': 'val'}]"></c-component>
 ```
 
+#### Boolean Attributes
+Boolean attributes reduce boilerplate when we just want to indicate a certain attribute should be True or not.
+
+```html
+<!-- Boolean attributes - pass without values -->
+<c-button external>Contact</c-button>
+<c-date.calendar header actions disabled />
+
+<!-- Pass boolean variables correctly -->
+<c-component disabled={{ is_readonly }} />
+
+<!-- NOT like this -->
+<c-component disabled="true" />
+<c-component :disabled="{{ disabled }}" />
+```
+
+In component templates, use boolean checks:
+```html
+<!-- cotton/component.html -->
+<div {% if header %}data-header="true"{% endif %}>
+  {% if disabled %}
+    <div class="w-10"></div>
+  {% else %}
+    <button>Active Button</button>
+  {% endif %}
+</div>
+```
+
 ### Material Design 3 Component Standards
 
 #### Color System

@@ -1,0 +1,91 @@
+<c-vars
+  class="flex max-w-lg"
+  color="primary"
+  format="%Y-%m-%d"
+  value="" />
+
+<div class="{{ class }} focus:outline-none focus:ring-2 focus:ring-{{ color }}/20 focus:ring-offset-2 rounded-lg" 
+     data-calendar
+     data-color="{{ color }}"
+     data-format="{{ format }}"
+     data-value="{{ value }}"
+     {% if header %}data-header="true"{% endif %}
+     {% if actions %}data-actions="true"{% endif %}
+     {% if disabled %}data-disabled="true"{% endif %}
+     {{ attrs }}>
+  
+  {% if header %}
+  <div class="w-40 flex-shrink-0 bg-{{ color }} text-on-{{ color }} p-6 mr-2 rounded-lg hidden sm:block">
+    <div class="text-base text-medium opacity-80 mb-2">
+      <span data-selected-weekday></span>
+    </div>
+    <div class="text-3xl font-light">
+      <span data-selected-date></span>
+    </div>
+  </div>
+  {% endif %}
+  
+  <div class="relative text-center flex-1">
+    <div data-calendar-surface>
+      <div class="flex items-center justify-between py-3.5 px-4">
+        {% if disabled %}
+        <div class="w-10"></div>
+        {% else %}
+        <c-button.icon 
+          variant="standard"
+          color="{{ color }}"
+          aria_label="Previous month"
+          type="button"
+          data-prev-month>
+          chevron_left
+        </c-button.icon>
+        {% endif %}
+        
+        <span class="text-sm font-medium text-on-surface" data-month-year></span>
+        
+        {% if disabled %}
+        <div class="w-10"></div>
+        {% else %}
+        <c-button.icon 
+          variant="standard"
+          color="{{ color }}"
+          aria_label="Next month"
+          type="button"
+          data-next-month>
+          chevron_right
+        </c-button.icon>
+        {% endif %}
+      </div>
+      
+      <div class="grid grid-cols-7 gap-0 mb-2">
+        <div class="text-xs text-on-surface-variant h-9 leading-9 text-center" data-weekday="0"></div>
+        <div class="text-xs text-on-surface-variant h-9 leading-9 text-center" data-weekday="1"></div>
+        <div class="text-xs text-on-surface-variant h-9 leading-9 text-center" data-weekday="2"></div>
+        <div class="text-xs text-on-surface-variant h-9 leading-9 text-center" data-weekday="3"></div>
+        <div class="text-xs text-on-surface-variant h-9 leading-9 text-center" data-weekday="4"></div>
+        <div class="text-xs text-on-surface-variant h-9 leading-9 text-center" data-weekday="5"></div>
+        <div class="text-xs text-on-surface-variant h-9 leading-9 text-center" data-weekday="6"></div>
+      </div>
+      
+      <div class="grid grid-cols-7 gap-0" data-calendar-days></div>
+    </div>
+    
+    {% if actions %}
+    <div class="flex justify-end gap-2 pb-2 pr-2 mt-2">
+      <c-button.text 
+        color="{{ color }}"
+        data-calendar-cancel>
+        Cancel
+      </c-button.text>
+      
+      <c-button.filled 
+        color="{{ color }}"
+        data-calendar-accept>
+        OK
+      </c-button.filled>
+    </div>
+    {% endif %}
+  </div>
+  
+  {{ slot }}
+</div>

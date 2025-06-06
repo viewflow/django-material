@@ -46,6 +46,13 @@ cotton = Application(
             title="Color System",
         ),
         menu_path(
+            "date/",
+            TemplateView.as_view(template_name="demo/html/date.html"),
+            name="date",
+            icon="calendar_month",
+            title="Date & Calendar",
+        ),
+        menu_path(
             "lists/",
             TemplateView.as_view(template_name="demo/html/lists.html"),
             name="lists",

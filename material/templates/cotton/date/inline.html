@@ -1,0 +1,37 @@
+<c-vars
+  class="w-full"
+  color="primary"
+  format="%Y-%m-%d"
+  value="" />
+
+<div class="{{ class }}" {{ attrs }}>
+  <label class="block text-xs text-on-surface-variant mb-2 {% if required %}after:content-['*'] after:ml-0.5{% endif %} {% if error %}text-error{% endif %}">
+    {{ slot }}
+  </label>
+  
+  <c-date.calendar 
+    color="{{ color }}"
+    format="{{ format }}"
+    value="{{ value }}"
+    data-inline-calendar
+    disabled={{ disabled }} />
+  
+  <input type="hidden" 
+         name="{{ name }}" 
+         id="{{ id }}"
+         value="{{ value }}"
+         {% if required %}required{% endif %}
+         data-inline-calendar-input />
+  
+  {% if help_text %}
+  <div class="mt-2 text-xs text-on-surface-variant text-center max-w-lg mx-auto {% if error %}text-error{% endif %}">
+    {{ help_text }}
+  </div>
+  {% endif %}
+  
+  {% if error %}
+  <div class="mt-2 text-xs text-error text-center max-w-lg mx-auto">
+    {{ error }}
+  </div>
+  {% endif %}
+</div>
