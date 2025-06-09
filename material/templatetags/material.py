@@ -27,14 +27,14 @@ def render(form: Form, layout: Optional[Any] = None) -> str:
       {% render form form.layout %}
       {% render form %}
     """
-    if layout is None:
-        # If no layout is specified, render the form normally
-        return form.render(
-            renderer=MaterialFormRenderer(),
-            template_name="material/django/forms/div.html",
-        )
+    if layout:
+        return layout.render(form)
 
-    return layout.render(form)
+    # If no layout is specified, render the form normally
+    return form.render(
+        renderer=MaterialFormRenderer(),
+        template_name="material/django/forms/div.html",
+    )
 
 
 @register.simple_tag(takes_context=True)

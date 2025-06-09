@@ -29,7 +29,7 @@
     <c-card.elevated title="{{ title }}">
       <c-slot name="subtitle">Form showcase demo</c-slot>
       <div class="space-y-6">
-        {% render form form.layout %}
+        {% if view.layout %}{% render form view.layout %}{% else %}{% render form form.layout %}{% endif %}
       </div>
       
       <c-slot name="footer">
