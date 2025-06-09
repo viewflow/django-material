@@ -110,6 +110,8 @@ DEBUG_TOOLBAR_CONFIG = {
     "INSERT_BEFORE": "</main>",
 }
 
+DEBUG_TOOLBAR_CONFIG = {"SKIP_TEMPLATE_PREFIXES": ("cotton/",)}
+
 # Use in-memory session storage instead of database
 SESSION_ENGINE = "django.contrib.sessions.backends.cache"
 SESSION_CACHE_ALIAS = "default"
