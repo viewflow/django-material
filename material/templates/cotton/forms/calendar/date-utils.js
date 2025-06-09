@@ -1,5 +1,5 @@
 /* eslint camelcase: 0 */
-import { gettext, pgettext, get_format } from '../django-i18n';
+import { gettext, pgettext, get_format } from '../../django-i18n';
 
 /**
  * Date utilities for Material Design date components.

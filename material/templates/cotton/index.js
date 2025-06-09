@@ -19,8 +19,8 @@ import './menu/script.js';
 // Import select scripts
 import './forms/select/script.js';
 
-// Import date/calendar scripts
-import './date/script.js';
+// Import calendar scripts
+import './forms/calendar/script.js';
 
 // Import Django form widgets scripts
 import '../material/django/forms/widgets/script.js';

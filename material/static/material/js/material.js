@@ -478,7 +478,7 @@
     }
   });
 
-  // material/templates/cotton/date/date-utils.js
+  // material/templates/cotton/forms/calendar/date-utils.js
   var MaterialDateUtils = class _MaterialDateUtils {
     static firstDayOfWeek = parseInt(get_format("FIRST_DAY_OF_WEEK"), 10);
     static monthsOfYear = [
@@ -700,7 +700,7 @@
     }
   };
 
-  // material/templates/cotton/date/script.js
+  // material/templates/cotton/forms/calendar/script.js
   up.compiler("[data-calendar]", function(element) {
     const color = element.dataset.color || "primary";
     const format = element.dataset.format || "%Y-%m-%d";

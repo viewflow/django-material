@@ -16,11 +16,11 @@
 
   <div class="grid md:grid-cols-2 gap-6 mb-8">
     <c-card.elevated title="Basic Calendar">
-      <c-date.calendar />
+      <c-forms.calendar />
     </c-card.elevated>
     
     <c-card.elevated title="With Header">
-      <c-date.calendar header value="2024-06-15" />
+      <c-forms.calendar header value="2024-06-15" />
     </c-card.elevated>
   </div>
 </section>
@@ -32,26 +32,26 @@
     <h3 class="text-lg font-medium mb-4">Color Variants</h3>
     <div class="grid lg:grid-cols-3 gap-6">
       <c-card.elevated title="Primary (default)">
-        <c-date.calendar color="primary" value="2024-06-15" />
+        <c-forms.calendar color="primary" value="2024-06-15" />
       </c-card.elevated>
       
       <c-card.elevated title="Secondary">
-        <c-date.calendar color="secondary" value="2024-06-15" />
+        <c-forms.calendar color="secondary" value="2024-06-15" />
       </c-card.elevated>
       
       <c-card.elevated title="Tertiary">
-        <c-date.calendar color="tertiary" value="2024-06-15" />
+        <c-forms.calendar color="tertiary" value="2024-06-15" />
       </c-card.elevated>
     </div>
   </div>
 
   <div class="grid md:grid-cols-2 gap-6 mb-8">
     <c-card.elevated title="With Action Buttons">
-      <c-date.calendar actions value="2024-06-15" />
+      <c-forms.calendar actions value="2024-06-15" />
     </c-card.elevated>
 
     <c-card.elevated title="Disabled State">
-      <c-date.calendar disabled value="2024-06-15" />
+      <c-forms.calendar disabled value="2024-06-15" />
     </c-card.elevated>
   </div>
 </section>
@@ -65,7 +65,7 @@
 
   <c-card.elevated title="Form Integration Example" class="max-w-2xl mx-auto mb-8">
     <form class="max-w-md mx-auto">
-      <c-date.inline 
+      <c-forms.calendar.inline 
         name="event_date" 
         id="event_date"
         value="2024-06-15"
@@ -74,7 +74,7 @@
       </c-date.inline>
       
       <div class="mt-6">
-        <c-date.inline 
+        <c-forms.calendar.inline 
           name="deadline" 
           id="deadline"
           required
@@ -97,20 +97,20 @@
   <div class="mb-8">
     <h3 class="text-lg font-medium mb-4">Basic Calendar</h3>
     <div class="bg-surface-container-low p-6 rounded-lg mb-6">
-      <pre class="text-on-surface-variant"><code>&lt;c-date.calendar /&gt;
+      <pre class="text-on-surface-variant"><code>&lt;c-forms.calendar /&gt;
 
 &lt;!-- With initial value --&gt;
-&lt;c-date.calendar value="2024-06-15" /&gt;
+&lt;c-forms.calendar value="2024-06-15" /&gt;
 
 &lt;!-- With custom color --&gt;
-&lt;c-date.calendar color="secondary" /&gt;</code></pre>
+&lt;c-forms.calendar color="secondary" /&gt;</code></pre>
     </div>
   </div>
 
   <div class="mb-8">
     <h3 class="text-lg font-medium mb-4">Calendar with Header and Actions</h3>
     <div class="bg-surface-container-low p-6 rounded-lg mb-6">
-      <pre class="text-on-surface-variant"><code>&lt;c-date.calendar 
+      <pre class="text-on-surface-variant"><code>&lt;c-forms.calendar 
   header 
   actions 
   value="2024-06-15"
@@ -121,14 +121,14 @@
   <div class="mb-8">
     <h3 class="text-lg font-medium mb-4">Inline Calendar Form Field</h3>
     <div class="bg-surface-container-low p-6 rounded-lg mb-6">
-      <pre class="text-on-surface-variant"><code>&lt;c-date.inline 
+      <pre class="text-on-surface-variant"><code>&lt;c-forms.calendar.inline 
   name="birthday" 
   id="birthday"
   value=""
   required
   help_text="Enter your date of birth"&gt;
   Date of Birth
-&lt;/c-date.inline&gt;</code></pre>
+&lt;/c-forms.calendar.inline&gt;</code></pre>
     </div>
   </div>
 

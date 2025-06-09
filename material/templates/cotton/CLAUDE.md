@@ -47,7 +47,7 @@ Boolean attributes reduce boilerplate when we just want to indicate a certain at
 ```html
 <!-- Boolean attributes - pass without values -->
 <c-button external>Contact</c-button>
-<c-date.calendar header actions disabled />
+<c-forms.calendar header actions disabled />
 
 <!-- Pass boolean variables correctly -->
 <c-component disabled={{ is_readonly }} />
