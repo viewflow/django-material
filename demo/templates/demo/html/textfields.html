@@ -70,6 +70,21 @@
         <h3 class="text-xl mb-4">Tertiary Color</h3>
         <c-forms.text.filled id="tertiary" color="tertiary">Tertiary Field</c-forms.text.filled>
       </div>
+      
+      <div>
+        <h3 class="text-xl mb-4">Trailing Button</h3>
+        <c-forms.text.filled id="filled_trailing_button" :trailing_button="{'icon': 'visibility', 'title': 'Toggle visibility', 'onclick': 'alert(this.title)'}">Password</c-forms.text.filled>
+      </div>
+      
+      <div>
+        <h3 class="text-xl mb-4">Trailing Link</h3>
+        <c-forms.text.filled id="filled_trailing_link" :trailing_link="{'icon': 'help', 'href': '#help', 'title': 'Get help'}">Field with Help</c-forms.text.filled>
+      </div>
+      
+      <div>
+        <h3 class="text-xl mb-4">Simple Trailing Button</h3>
+        <c-forms.text.filled id="filled_simple_button" :trailing_button="{'icon': 'clear', 'onclick': 'this.closest(\'div\').querySelector(\'input\').value=\'\''}">Clearable Field</c-forms.text.filled>
+      </div>
     </div>
   </section>
   
@@ -135,6 +150,26 @@
         <h3 class="text-xl mb-4">Tertiary Color</h3>
         <c-forms.text.outlined id="outlined_tertiary" color="tertiary">Tertiary Field</c-forms.text.outlined>
       </div>
+      
+      <div>
+        <h3 class="text-xl mb-4">Trailing Button</h3>
+        <c-forms.text.outlined id="outlined_trailing_button" :trailing_button="{'icon': 'visibility', 'title': 'Toggle visibility', 'onclick': 'alert(this.title)'}">Password</c-forms.text.outlined>
+      </div>
+      
+      <div>
+        <h3 class="text-xl mb-4">Trailing Link</h3>
+        <c-forms.text.outlined id="outlined_trailing_link" :trailing_link="{'icon': 'help', 'href': '#help', 'title': 'Get help'}">Field with Help</c-forms.text.outlined>
+      </div>
+      
+      <div>
+        <h3 class="text-xl mb-4">Simple Trailing Button</h3>
+        <c-forms.text.outlined id="outlined_simple_button" :trailing_button="{'icon': 'clear', 'onclick': 'this.closest(\'div\').querySelector(\'input\').value=\'\''}">Clearable Field</c-forms.text.outlined>
+      </div>
+      
+      <div>
+        <h3 class="text-xl mb-4">Simple Trailing Link</h3>
+        <c-forms.text.outlined id="outlined_simple_link" trailing_link="info">Field with Info</c-forms.text.outlined>
+      </div>
     </div>
   </section>
   
@@ -165,6 +200,26 @@
 &lt;!-- With icons --&gt;
 &lt;c-forms.text.filled id="leading_icon" leading_icon="person"&gt;Username&lt;/c-forms.text.filled&gt;
 &lt;c-forms.text.outlined id="outlined_icon" leading_icon="mail" trailing_icon="send"&gt;Email&lt;/c-forms.text.outlined&gt;
+
+&lt;!-- With trailing button (simple) --&gt;
+&lt;c-forms.text.filled id="simple_button" trailing_button="clear"&gt;Clearable Field&lt;/c-forms.text.filled&gt;
+&lt;c-forms.text.outlined id="simple_button" trailing_button="clear"&gt;Clearable Field&lt;/c-forms.text.outlined&gt;
+
+&lt;!-- With trailing button (advanced) --&gt;
+&lt;c-forms.text.filled id="advanced_button" 
+    :trailing_button="{'icon': 'visibility', 'title': 'Toggle visibility', 'onclick': 'alert(this.title)'}"&gt;Password&lt;/c-forms.text.filled&gt;
+&lt;c-forms.text.outlined id="advanced_button" 
+    :trailing_button="{'icon': 'visibility', 'title': 'Toggle visibility', 'onclick': 'alert(this.title)'}"&gt;Password&lt;/c-forms.text.outlined&gt;
+
+&lt;!-- With trailing link (simple) --&gt;
+&lt;c-forms.text.filled id="simple_link" trailing_link="help"&gt;Field with Help&lt;/c-forms.text.filled&gt;
+&lt;c-forms.text.outlined id="simple_link" trailing_link="help"&gt;Field with Help&lt;/c-forms.text.outlined&gt;
+
+&lt;!-- With trailing link (advanced) --&gt;
+&lt;c-forms.text.filled id="advanced_link" 
+    :trailing_link="{'icon': 'info', 'href': '/help', 'title': 'Get help', 'target': '_blank'}"&gt;Field with External Help&lt;/c-forms.text.filled&gt;
+&lt;c-forms.text.outlined id="advanced_link" 
+    :trailing_link="{'icon': 'info', 'href': '/help', 'title': 'Get help', 'target': '_blank'}"&gt;Field with External Help&lt;/c-forms.text.outlined&gt;
 
 &lt;!-- Disabled field --&gt;
 &lt;c-forms.text.filled id="disabled" disabled&gt;Disabled Field&lt;/c-forms.text.filled&gt;
@@ -217,6 +272,18 @@
           <c-table.cell>string</c-table.cell>
           <c-table.cell>none</c-table.cell>
           <c-table.cell>Material icon name to display at the end of the input</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>trailing_button</code></c-table.cell>
+          <c-table.cell>string or object</c-table.cell>
+          <c-table.cell>none</c-table.cell>
+          <c-table.cell>Interactive button at the end of input. String for icon name, or object with icon, title, onclick properties</c-table.cell>
+        </c-table.row>
+        <c-table.row>
+          <c-table.cell><code>trailing_link</code></c-table.cell>
+          <c-table.cell>string or object</c-table.cell>
+          <c-table.cell>none</c-table.cell>
+          <c-table.cell>Link at the end of input. String for icon name, or object with icon, href, title, target properties</c-table.cell>
         </c-table.row>
         <c-table.row>
           <c-table.cell><code>help_text</code></c-table.cell>

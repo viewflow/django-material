@@ -22,4 +22,7 @@ import './forms/select/script.js';
 // Import date/calendar scripts
 import './date/script.js';
 
+// Import Django form widgets scripts
+import '../material/django/forms/widgets/script.js';
+
 // More component scripts can be added here as they are created

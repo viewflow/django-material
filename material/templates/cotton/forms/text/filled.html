@@ -13,7 +13,7 @@
         name="{{ name }}"
         value="{{ value }}"
         placeholder=" "
-        class="w-full mt-1 px-4 {% if leading_icon %}pl-10{% endif %} {% if trailing_icon %}pr-10{% endif %} pt-5 pb-2 text-base bg-transparent border-0 border-b border-outline appearance-none focus:outline-none focus:border-{{ color }} focus:border-b-2 peer
+        class="w-full mt-1 px-4 {% if leading_icon %}pl-10{% endif %} {% if trailing_icon or trailing_button or trailing_link %}pr-10{% endif %} pt-5 pb-2 text-base bg-transparent border-0 border-b border-outline appearance-none focus:outline-none focus:border-{{ color }} focus:border-b-2 peer
         disabled:opacity-60 disabled:border-outline/50 disabled:bg-transparent
         aria-invalid:border-error focus:aria-invalid:border-error"
         {% if required %}required{% endif %}
@@ -27,6 +27,17 @@
       {% endif %}
       {% if trailing_icon %}
       <span class="material-symbols text-on-surface-variant absolute right-3">{{ trailing_icon }}</span>
+      {% endif %}
+      {% if trailing_button %}
+      <button type="button" class="absolute right-3 p-1 text-on-surface-variant hover:text-on-surface hover:bg-on-surface/8 rounded transition duration-200 material-symbols"
+              data-trailing-button
+              {% if trailing_button.title %}title="{{ trailing_button.title }}"{% endif %}
+              {% if trailing_button.onclick %}onclick="{{ trailing_button.onclick }}"{% endif %}>{{ trailing_button.icon|default:trailing_button }}</button>
+      {% endif %}
+      {% if trailing_link %}
+      <a href="{{ trailing_link.href|default:'#' }}" class="absolute right-3 p-1 text-on-surface-variant hover:text-primary hover:bg-primary/8 rounded transition duration-200 material-symbols"
+         {% if trailing_link.title %}title="{{ trailing_link.title }}"{% endif %}
+         {% if trailing_link.target %}target="{{ trailing_link.target }}"{% endif %}>{{ trailing_link.icon|default:trailing_link }}</a>
       {% endif %}
       
       <label 
