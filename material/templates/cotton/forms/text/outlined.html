@@ -19,7 +19,8 @@
         {% if disabled %}disabled{% endif %}
         {% if readonly %}readonly{% endif %}
         aria-describedby="{% if id %}{{ id }}_help{% endif %}"
-        aria-invalid="{% if error %}true{% else %}false{% endif %}" />
+        aria-invalid="{% if error %}true{% else %}false{% endif %}"
+        data-input />
 
       {% if leading_icon %}
       <span class="absolute z-10 ml-3 material-symbols text-on-surface-variant">{{ leading_icon }}</span>

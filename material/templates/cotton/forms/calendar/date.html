@@ -1,0 +1,39 @@
+<c-vars
+  class="relative w-full"
+  color="primary"
+  format="%Y-%m-%d"
+  value=""
+  placeholder="Select date" />
+
+<div class="{{ class }}" {{ attrs }} data-date-field>
+  <!-- Outlined text field with calendar button -->
+  <c-forms.text.outlined
+    id="{{ id }}"
+    name="{{ name }}"
+    value="{{ value }}"
+    color="{{ color }}"
+    readonly
+    class="cursor-pointer"
+    help_text="{{ help_text }}"
+    error="{{ error }}"
+    :trailing_button="{'icon': 'calendar_today', 'title': 'Open calendar'}"
+    required={{ required }}
+    disabled={{ disabled }}    
+    data-format="{{ format }}">
+    {{ slot }}
+  </c-forms.text.outlined>
+  
+  <!-- Calendar Popup -->
+  <div class="fixed z-[9999] bg-surface shadow-lg rounded-lg border border-outline-variant hidden"
+       data-date-popup
+       role="dialog"
+       aria-modal="true"
+       aria-label="Select date">
+    <c-forms.calendar
+      color="{{ color }}"
+      format="{{ format }}"
+      value="{{ value }}"
+      actions
+      data-popup-calendar />
+  </div>
+</div>

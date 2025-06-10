@@ -339,6 +339,10 @@ up.compiler('[data-calendar]', function(element) {
             const prevMonthDays = MaterialDateUtils.daysInMonth(currentYear, currentMonth);
             selectDate(prevMonthDays);
           }
+        } else {
+          // No date selected, select the last day of current month
+          const maxDays = MaterialDateUtils.daysInMonth(currentYear, currentMonth);
+          selectDate(maxDays);
         }
         break;
       case 'ArrowRight':
@@ -352,6 +356,9 @@ up.compiler('[data-calendar]', function(element) {
             changeMonth(1);
             selectDate(1);
           }
+        } else {
+          // No date selected, select the first day of current month
+          selectDate(1);
         }
         break;
       case 'ArrowUp':
@@ -365,6 +372,9 @@ up.compiler('[data-calendar]', function(element) {
             const prevMonthDays = MaterialDateUtils.daysInMonth(currentYear, currentMonth);
             selectDate(Math.max(1, prevMonthDays + newDay));
           }
+        } else {
+          // No date selected, select the first day of current month
+          selectDate(1);
         }
         break;
       case 'ArrowDown':
@@ -378,6 +388,9 @@ up.compiler('[data-calendar]', function(element) {
             changeMonth(1);
             selectDate(Math.min(MaterialDateUtils.daysInMonth(currentYear, currentMonth), newDay - maxDays));
           }
+        } else {
+          // No date selected, select the first day of current month
+          selectDate(1);
         }
         break;
       case 'Enter':
@@ -485,5 +498,223 @@ up.compiler('[data-inline-calendar]', function(element) {
   // Cleanup
   return function() {
     element.removeEventListener('calendar:change', onCalendarChange);
+  };
+});
+
+// Date field popup component
+up.compiler('[data-date-field]', function(element) {
+  const input = element.querySelector('[data-input]');
+  const trigger = element.querySelector('[data-trailing-button]');
+  const popup = element.querySelector('[data-date-popup]');
+  const calendar = popup?.querySelector('[data-popup-calendar]');
+  
+  if (!input || !trigger || !popup || !calendar) return;
+  
+  const format = element.dataset.format || '%Y-%m-%d';
+  
+  // Store references for cleanup
+  let documentClickHandler = null;
+  let documentKeyHandler = null;
+  let windowResizeHandler = null;
+  let documentScrollHandler = null;
+  let isPopupMoved = false;
+  
+  // Position popup relative to input field using fixed positioning
+  function positionPopup() {
+    const inputRect = input.getBoundingClientRect();
+    const popupRect = popup.getBoundingClientRect();
+    const viewport = {
+      width: window.innerWidth,
+      height: window.innerHeight
+    };
+    
+    // Calculate position relative to viewport
+    let top = inputRect.bottom + 4; // 4px margin below input
+    let left = inputRect.left;
+    
+    // Check if there's enough space below
+    const spaceBelow = viewport.height - inputRect.bottom;
+    const spaceAbove = inputRect.top;
+    
+    // Auto-flip to top if no space below
+    if (spaceBelow < popupRect.height && spaceAbove > popupRect.height) {
+      top = inputRect.top - popupRect.height - 4;
+    }
+    
+    // Ensure popup doesn't go off-screen horizontally
+    if (left + popupRect.width > viewport.width) {
+      left = Math.max(8, viewport.width - popupRect.width - 8); // 8px margin from edge
+    }
+    
+    // Ensure popup doesn't go off left edge
+    if (left < 8) {
+      left = 8;
+    }
+    
+    // Update position using JavaScript (position: fixed is set in CSS)
+    popup.style.left = `${left}px`;
+    popup.style.top = `${top}px`;
+  }
+  
+  // Show popup
+  function showPopup() {
+    // Move popup to body to avoid container clipping
+    if (!isPopupMoved) {
+      document.body.appendChild(popup);
+      isPopupMoved = true;
+    }
+    
+    popup.classList.remove('hidden');
+    
+    // Set calendar value from input
+    if (input.value && calendar.materialCalendar) {
+      calendar.materialCalendar.setValue(input.value);
+    }
+    
+    // Add global event listeners
+    documentClickHandler = function(e) {
+      if (!element.contains(e.target) && !popup.contains(e.target)) {
+        hidePopup();
+      }
+    };
+    
+    documentKeyHandler = function(e) {
+      if (e.key === 'Escape' && !popup.classList.contains('hidden')) {
+        hidePopup();
+        input.focus();
+      }
+    };
+    
+    windowResizeHandler = function() {
+      if (!popup.classList.contains('hidden')) {
+        positionPopup();
+      }
+    };
+    
+    documentScrollHandler = function() {
+      if (!popup.classList.contains('hidden')) {
+        positionPopup();
+      }
+    };
+    
+    document.addEventListener('click', documentClickHandler);
+    document.addEventListener('keydown', documentKeyHandler);
+    window.addEventListener('resize', windowResizeHandler);
+    document.addEventListener('scroll', documentScrollHandler, true); // Use capture phase
+    
+    // Position popup
+    requestAnimationFrame(() => {
+      positionPopup();
+      calendar.focus();
+    });
+  }
+  
+  // Hide popup
+  function hidePopup() {
+    popup.classList.add('hidden');
+    
+    // Remove global event listeners
+    if (documentClickHandler) {
+      document.removeEventListener('click', documentClickHandler);
+      documentClickHandler = null;
+    }
+    
+    if (documentKeyHandler) {
+      document.removeEventListener('keydown', documentKeyHandler);
+      documentKeyHandler = null;
+    }
+    
+    if (windowResizeHandler) {
+      window.removeEventListener('resize', windowResizeHandler);
+      windowResizeHandler = null;
+    }
+    
+    if (documentScrollHandler) {
+      document.removeEventListener('scroll', documentScrollHandler, true);
+      documentScrollHandler = null;
+    }
+  }
+  
+  // Handle trigger click
+  function onTriggerClick(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    if (popup.classList.contains('hidden')) {
+      showPopup();
+    } else {
+      hidePopup();
+    }
+  }
+  
+  // Handle input click
+  function onInputClick(e) {
+    e.preventDefault();
+    if (popup.classList.contains('hidden')) {
+      showPopup();
+    }
+  }
+  
+  // Handle calendar changes
+  function onCalendarChange(event) {
+    const formattedDate = event.detail.formatted;
+    input.value = formattedDate || '';
+    
+    // Update input display value (for user-friendly formats)
+    if (formattedDate) {
+      try {
+        const date = MaterialDateUtils.parseDateTime(format, formattedDate);
+        input.value = MaterialDateUtils.formatDate(format, date);
+      } catch (e) {
+        input.value = formattedDate;
+      }
+    }
+    
+    // Trigger input events for form validation
+    const inputEvent = new Event('input', { bubbles: true });
+    input.dispatchEvent(inputEvent);
+    
+    const changeEvent = new Event('change', { bubbles: true });
+    input.dispatchEvent(changeEvent);
+  }
+  
+  // Handle calendar accept/cancel
+  function onCalendarAccept(event) {
+    onCalendarChange(event);
+    hidePopup();
+    input.focus();
+  }
+  
+  function onCalendarCancel() {
+    hidePopup();
+    input.focus();
+  }
+  
+  // Add event listeners
+  trigger.addEventListener('click', onTriggerClick);
+  input.addEventListener('click', onInputClick);
+  calendar.addEventListener('calendar:change', onCalendarChange);
+  calendar.addEventListener('calendar:accept', onCalendarAccept);
+  calendar.addEventListener('calendar:cancel', onCalendarCancel);
+  
+  // Store functions for external access
+  element.showDatePopup = showPopup;
+  element.hideDatePopup = hidePopup;
+  
+  // Cleanup function
+  return function() {
+    hidePopup();
+    
+    // Move popup back to original parent if it was moved
+    if (isPopupMoved && popup.parentNode === document.body) {
+      element.appendChild(popup);
+      isPopupMoved = false;
+    }
+    
+    trigger.removeEventListener('click', onTriggerClick);
+    input.removeEventListener('click', onInputClick);
+    calendar.removeEventListener('calendar:change', onCalendarChange);
+    calendar.removeEventListener('calendar:accept', onCalendarAccept);
+    calendar.removeEventListener('calendar:cancel', onCalendarCancel);
   };
 });

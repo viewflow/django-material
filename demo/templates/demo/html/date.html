@@ -56,6 +56,55 @@
   </div>
 </section>
 
+<section id="date-field" class="mb-12">
+  <h2 class="text-2xl mb-4">Date Field with Popup Calendar</h2>
+  <p class="mb-6">
+    The date field component combines an outlined text field with a popup calendar picker. 
+    Click the field or calendar icon to open an interactive calendar for date selection.
+    Perfect for forms where you want a clean text input with calendar functionality.
+  </p>
+
+  <div class="grid md:grid-cols-2 gap-6 mb-8">
+    <c-card.elevated title="Basic Date Field">
+      <c-forms.calendar.date 
+        id="basic_date"
+        name="basic_date"
+        value="2024-06-15">
+        Select Date
+      </c-forms.calendar.date>
+    </c-card.elevated>
+    
+    <c-card.elevated title="With Help Text">
+      <c-forms.calendar.date 
+        id="help_date"
+        name="help_date"
+        help_text="Choose your preferred date">
+        Preferred Date
+      </c-forms.calendar.date>
+    </c-card.elevated>
+    
+    <c-card.elevated title="Required Field">
+      <c-forms.calendar.date 
+        id="required_date"
+        name="required_date"
+        required
+        color="secondary">
+        Event Date
+      </c-forms.calendar.date>
+    </c-card.elevated>
+    
+    <c-card.elevated title="Disabled State">
+      <c-forms.calendar.date 
+        id="disabled_date"
+        name="disabled_date"
+        disabled
+        value="2024-12-25">
+        Disabled Date
+      </c-forms.calendar.date>
+    </c-card.elevated>
+  </div>
+</section>
+
 <section id="inline-calendar" class="mb-12">
   <h2 class="text-2xl mb-4">Inline Calendar Form Field</h2>
   <p class="mb-6">
@@ -71,7 +120,7 @@
         value="2024-06-15"
         help_text="Select the date for your event">
         Event Date
-      </c-date.inline>
+      </c-forms.calendar.inline>
       
       <div class="mt-6">
         <c-forms.calendar.inline 
@@ -81,7 +130,7 @@
           color="secondary"
           help_text="This field is required">
           Project Deadline
-        </c-date.inline>
+        </c-forms.calendar.inline>
       </div>
       
       <div class="mt-6 text-center">
@@ -115,6 +164,20 @@
   actions 
   value="2024-06-15"
   color="primary" /&gt;</code></pre>
+    </div>
+  </div>
+
+  <div class="mb-8">
+    <h3 class="text-lg font-medium mb-4">Date Field with Popup</h3>
+    <div class="bg-surface-container-low p-6 rounded-lg mb-6">
+      <pre class="text-on-surface-variant"><code>&lt;c-forms.calendar.date 
+  name="event_date" 
+  id="event_date"
+  value="2024-06-15"
+  required
+  help_text="Select your event date"&gt;
+  Event Date
+&lt;/c-forms.calendar.date&gt;</code></pre>
     </div>
   </div>
 

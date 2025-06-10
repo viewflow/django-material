@@ -20,6 +20,7 @@
         {% if disabled %}disabled{% endif %}
         {% if readonly %}readonly{% endif %}
         aria-describedby="{% if help_text and id %}{{ id }}_help{% endif %}{% if error and id %} {{ id }}_error{% endif %}"
+        data-input
         aria-invalid="{% if error %}true{% else %}false{% endif %}" />
 
       {% if leading_icon %}
