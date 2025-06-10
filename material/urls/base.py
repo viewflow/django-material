@@ -508,7 +508,7 @@ def menu_path(
     Returns:
         URLPattern: A URL pattern object with attached metadata
     """
-    url_pattern = path(route, view, kwargs, name)
+    url_pattern = path(route, view, kwargs=kwargs or {}, name=name)  # type: ignore
 
     # Attach icon as metadata to the URL pattern
     url_pattern.icon = icon
@@ -567,14 +567,14 @@ def _get_index_redirect_url(viewset: BaseViewset) -> str | None:
                 )
 
                 if is_suitable_index:
-                    return prefix + url_pattern.pattern._route
+                    return prefix + url_pattern.pattern._route  # type: ignore
 
             elif isinstance(url_pattern, URLResolver) and isinstance(
                 url_pattern.pattern, RoutePattern
             ):
                 # Recursively check patterns in nested resolvers
                 nested_index = _get_index_url(
-                    url_pattern.url_patterns, prefix + url_pattern.pattern._route
+                    url_pattern.url_patterns, prefix + url_pattern.pattern._route  # type: ignore
                 )
                 if nested_index:
                     return nested_index
