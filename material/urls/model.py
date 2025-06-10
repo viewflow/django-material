@@ -28,10 +28,10 @@ class BaseModelViewset(Viewset):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        assert self.model is not DEFAULT, "No model specified for {}".format(self)
+        assert self.model is not DEFAULT, f"No model specified for {self}"
 
     def __getattribute__(self, name):
-        attr = super(BaseModelViewset, self).__getattribute__(name)
+        attr = super().__getattribute__(name)
         if name == "title" and attr is None:
             return self.model._meta.verbose_name_plural.capitalize()
         elif name == "app_name" and attr is None:

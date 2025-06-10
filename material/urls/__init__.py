@@ -7,18 +7,18 @@ from material.urls.base import (
     menu_path,
     route,
 )
+from material.urls.sites import Application, AppMenuMixin, Site
+
 from .model import (
     BaseModelViewset,
+    CreateViewMixin,
     DeleteViewMixin,
     DetailViewMixin,
-    CreateViewMixin,
-    UpdateViewMixin,
     ListBulkActionsMixin,
     ModelViewset,
     ReadonlyModelViewset,
+    UpdateViewMixin,
 )
-from material.urls.sites import Site, Application, AppMenuMixin
-
 
 __all__ = [
     "BaseModelViewset",

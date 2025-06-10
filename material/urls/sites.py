@@ -100,10 +100,10 @@ class Application(IndexViewMixin, Viewset):
                     "title": getattr(
                         url_pattern,
                         "title",
-                        url_pattern.name.replace("_", " ").title() if url_pattern.name else "",
+                        url_pattern.name.replace("_", " ").title() if url_pattern.name else "",  # type: ignore
                     ),
                     "icon": getattr(url_pattern, "icon", "dashboard"),
-                    "name": url_pattern.name,
+                    "name": url_pattern.name,  # type: ignore
                     "pattern": url_pattern.pattern,
                     "is_url_pattern": True,
                 }
@@ -175,9 +175,9 @@ class Site(IndexViewMixin, Viewset):
             if (
                 hasattr(viewset, "model")
                 and hasattr(viewset, "get_object_url")
-                and viewset.model not in result
+                and viewset.model not in result  # type: ignore
             ):
-                result[viewset.model] = viewset
+                result[viewset.model] = viewset  # type: ignore
 
             # Use getattr to access _children since some types might not have it defined
             children = getattr(viewset, "_children", [])
