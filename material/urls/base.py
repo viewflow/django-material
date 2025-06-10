@@ -10,7 +10,10 @@ import copy
 import types
 import warnings
 from collections import OrderedDict, namedtuple
-from typing import Any, Callable, Optional, Sequence, Union
+from typing import TYPE_CHECKING, Any
+
+if TYPE_CHECKING:
+    from collections.abc import Sequence
 
 from django.urls import ResolverMatch, URLPattern, URLResolver, include, path, reverse
 from django.urls.resolvers import RoutePattern
@@ -32,9 +35,11 @@ class _UrlName(str):
     hierarchy by attaching extra context data.
     """
 
+    extra: dict[str, Any]
+
     def __new__(cls, value: str) -> _UrlName:
         instance = super().__new__(cls, value)
-        instance.extra: dict[str, Any] = {}
+        instance.extra = {}
         return instance
 
 
@@ -286,8 +291,8 @@ class ViewsetMeta(type):
                     declared_patterns.pop(attr)
 
         # Give precedence to current class patterns over inherited patterns
-        new_class.declared_patterns = OrderedDict(current_patterns)
-        new_class.declared_patterns.update(
+        new_class.declared_patterns = OrderedDict(current_patterns)  # type: ignore
+        new_class.declared_patterns.update(  # type: ignore
             {
                 key: value
                 for key, value in declared_patterns.items()
@@ -319,6 +324,7 @@ class Viewset(BaseViewset, metaclass=ViewsetMeta):
     viewsets: list[BaseViewset] | None = None
     turbo_disabled: bool = False
     urlpatterns: list[URLPattern | URLResolver | Route] | None = None
+    declared_patterns: dict
 
     def __init__(self, **initkwargs: Any) -> None:
         """
@@ -478,10 +484,10 @@ class Viewset(BaseViewset, metaclass=ViewsetMeta):
 def menu_path(
     route: str,
     view: Any,
-    kwargs: Optional[dict[str, Any]] = None,
-    name: Optional[str] = None,
+    kwargs: dict[str, Any] | None = None,
+    name: str | None = None,
     icon: str = "dashboard",
-    title: Optional[str] = None,
+    title: str | None = None,
 ) -> URLPattern:
     """
     Create a URL pattern with additional metadata for menu items.
@@ -505,18 +511,18 @@ def menu_path(
     url_pattern = path(route, view, kwargs, name)
 
     # Attach icon as metadata to the URL pattern
-    setattr(url_pattern, "icon", icon)
+    url_pattern.icon = icon
 
     # Attach title as metadata to the URL pattern
     if title is None and name:
         title = name.replace("_", " ").title()
-    setattr(url_pattern, "title", title)
+    url_pattern.title = title
 
     # If view has a view_class attribute (class-based views), attach metadata there too
     if hasattr(view, "view_class"):
-        setattr(view.view_class, "icon", icon)
+        view.view_class.icon = icon
         if title:
-            setattr(view.view_class, "title", title)
+            view.view_class.title = title
 
     return url_pattern
 

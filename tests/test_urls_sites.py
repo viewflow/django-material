@@ -7,10 +7,12 @@ from material.urls import Viewset, route
 from material.urls.sites import Application, AppMenuMixin, Site
 
 
-class TestAppMenuMixin(AppMenuMixin):
+class TestAppMenuMixin(AppMenuMixin, Viewset):
     """Test implementation of AppMenuMixin."""
 
-    pass
+    app_name = "test_menu"
+    
+    page_path = path("page/", TemplateView.as_view(template_name="material/base.html"), name="page")
 
 
 class TestApplicationNoTitle(Application):
