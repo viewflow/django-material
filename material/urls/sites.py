@@ -8,9 +8,17 @@
 from __future__ import annotations
 
 from typing import TYPE_CHECKING, Any, TypeVar
+from collections.abc import Callable
 
 if TYPE_CHECKING:
-    from collections.abc import Callable, Iterator
+    from collections.abc import Iterator
+    from django.contrib.auth.models import AbstractUser
+    from django.http import HttpRequest
+    from django.urls import URLPattern
+
+# Type aliases for better readability
+MenuItemType = "AppMenuMixin | dict[str, Any]"
+SiteItemType = "Site | Application"
 
 from django.urls import NoReverseMatch
 from django.utils.functional import cached_property
@@ -41,7 +49,7 @@ class AppMenuMixin:
 
         return attr
 
-    def has_view_permission(self, user: Any, obj: Any | None = None) -> bool:
+    def has_view_permission(self, user: AbstractUser, obj: Any | None = None) -> bool:
         parent_class = super()
         if hasattr(parent_class, "has_view_permission"):
             # Use type ignore because the parent might not be correctly typed
@@ -54,7 +62,7 @@ class Application(IndexViewMixin, Viewset):
     icon: str = "view_module"
     menu_template_name: str = "material/includes/app_menu.html"
     base_template_name: str = "material/base_page.html"
-    permission: str | Callable[[Any], bool] | None = None
+    permission: str | Callable[[AbstractUser], bool] | None = None
 
     def __getattribute__(self, name: str) -> Any:
         attr = super().__getattribute__(name)
@@ -75,7 +83,7 @@ class Application(IndexViewMixin, Viewset):
     def _get_resolver_extra(self) -> dict[str, Any]:
         return {"viewset": self, "app": self}
 
-    def get_context_data(self, request: Any) -> dict[str, Any]:
+    def get_context_data(self, request: HttpRequest) -> dict[str, Any]:
         return {}
 
     def has_view_permission(self, user: Any, obj: Any | None = None) -> bool:

@@ -14,6 +14,8 @@ from typing import TYPE_CHECKING, Any
 
 if TYPE_CHECKING:
     from collections.abc import Sequence
+    from django.contrib.auth.models import AbstractUser
+    from django.http import HttpRequest
 
 from django.urls import ResolverMatch, URLPattern, URLResolver, include, path, reverse
 from django.urls.resolvers import RoutePattern

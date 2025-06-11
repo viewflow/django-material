@@ -10,7 +10,10 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, Any
 
 if TYPE_CHECKING:
-    from django.db.models import Model
+    from django.contrib.auth.models import AbstractUser
+    from django.db.models import Model, QuerySet
+    from django.forms import ModelForm
+    from django.http import HttpRequest
 
 from django.urls import path
 from django.utils.translation import gettext_lazy as _
@@ -78,17 +81,17 @@ class BaseModelViewset(Viewset):
     list_search_fields = DEFAULT
     list_ordering_fields = DEFAULT
 
-    def has_view_permission(self, user, obj=None):
+    def has_view_permission(self, user: AbstractUser, obj: Any = None) -> bool:
         if has_object_perm(user, "view", self.model, obj=obj):
             return True
         if hasattr(self, "has_change_permission"):
             return self.has_change_permission(user, obj=obj)  # type: ignore
         return False
 
-    def get_list_page_actions(self, request, *actions):
+    def get_list_page_actions(self, request: HttpRequest, *actions: Any) -> tuple[Any, ...]:
         return (*self.list_page_actions, *actions)
 
-    def get_list_view_kwargs(self, **kwargs):
+    def get_list_view_kwargs(self, **kwargs: Any) -> dict[str, Any]:
         view_kwargs = {
             "columns": self.list_columns,
             "paginate_by": self.list_paginate_by,
@@ -132,10 +135,10 @@ class CreateViewMixin(metaclass=ViewsetMeta):
     create_form_class = DEFAULT
     create_form_widgets = DEFAULT
 
-    def has_add_permission(self, user):
+    def has_add_permission(self, user: AbstractUser) -> bool:
         return has_object_perm(user, "add", self.model)
 
-    def get_create_view_kwargs(self, **kwargs):
+    def get_create_view_kwargs(self, **kwargs: Any) -> dict[str, Any]:
         view_kwargs = {
             "form_class": first_not_default(
                 self.create_form_class, getattr(self, "form_class", DEFAULT)
@@ -187,10 +190,10 @@ class UpdateViewMixin(metaclass=ViewsetMeta):
     form_class = DEFAULT
     form_widgets = DEFAULT
 
-    def has_change_permission(self, user, obj=None) -> bool:
+    def has_change_permission(self, user: AbstractUser, obj: Any = None) -> bool:
         return has_object_perm(user, "change", self.model, obj=obj)
 
-    def get_update_view_kwargs(self, **kwargs):
+    def get_update_view_kwargs(self, **kwargs: Any) -> dict[str, Any]:
         view_kwargs = {
             "form_class": first_not_default(self.update_form_class, self.form_class),
             "form_widgets": first_not_default(self.update_form_widgets, self.form_widgets),
@@ -239,7 +242,7 @@ class DeleteViewMixin(metaclass=ViewsetMeta):
     model: type[Model]  # Required when used with BaseModelViewset
     delete_view_class = DeleteModelView
 
-    def has_delete_permission(self, user, obj=None):
+    def has_delete_permission(self, user: AbstractUser, obj: Any = None) -> bool:
         return has_object_perm(user, "delete", self.model, obj=obj)
 
     """
