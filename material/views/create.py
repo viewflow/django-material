@@ -25,7 +25,12 @@ from django.utils.html import format_html
 from django.utils.translation import gettext_lazy as _
 from django.views import generic
 
-from material.forms import FormAjaxCompleteMixin, FormDependentSelectMixin, ModelForm
+from material.forms import (
+    FormAjaxCompleteMixin,
+    FormDependentSelectMixin,
+    ModelForm,
+    MaterialFormRenderer,
+)
 from material.utils import has_object_perm, viewprop
 
 from .base import FormLayoutMixin
@@ -148,6 +153,11 @@ class CreateModelView(
                 fields=self.fields,
                 widgets=self.get_form_widgets(),  # type: ignore
             )
+
+    def get_form_kwargs(self) -> dict:
+        result = super().get_form_kwargs()
+        result["renderer"] = MaterialFormRenderer
+        return result
 
     def get_template_names(self) -> list[str]:
         """

@@ -21,13 +21,18 @@ from django.core.exceptions import PermissionDenied, ValidationError
 from django.db import models
 from django.forms import Form, ModelForm as DjangoModelForm, Widget
 from django.forms.models import modelform_factory
-from django.http import Http404, HttpRequest, HttpResponse, HttpResponseRedirect
+from django.http import Http404, HttpRequest, HttpResponseRedirect
 from django.utils.decorators import method_decorator
 from django.utils.html import format_html
 from django.utils.translation import gettext_lazy as _
 from django.views import generic
 
-from material.forms import FormAjaxCompleteMixin, FormDependentSelectMixin, ModelForm
+from material.forms import (
+    FormAjaxCompleteMixin,
+    FormDependentSelectMixin,
+    ModelForm,
+    MaterialFormRenderer,
+)
 from material.utils import has_object_perm, viewprop
 
 from .base import FormLayoutMixin
@@ -169,6 +174,11 @@ class UpdateModelView(
                 fields=self.fields,
                 widgets=self.get_form_widgets(),  # type: ignore
             )
+
+    def get_form_kwargs(self) -> dict:
+        result = super().get_form_kwargs()
+        result["renderer"] = MaterialFormRenderer
+        return result
 
     def get_object(self) -> models.Model:
         """

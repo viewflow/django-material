@@ -26,7 +26,6 @@ class MaterialConfig(AppConfig):
         middleware_path: str = "material.middleware.SiteMiddleware"
         if middleware_path not in settings.MIDDLEWARE:
             settings.MIDDLEWARE.append(middleware_path)
-        settings.FORM_RENDERER = "material.forms.MaterialFormRenderer"
 
 
 class MaterialManualConfig(AppConfig):
