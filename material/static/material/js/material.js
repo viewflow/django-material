@@ -945,6 +945,9 @@
               const prevMonthDays = MaterialDateUtils.daysInMonth(currentYear, currentMonth);
               selectDate(prevMonthDays);
             }
+          } else {
+            const maxDays = MaterialDateUtils.daysInMonth(currentYear, currentMonth);
+            selectDate(maxDays);
           }
           break;
         case "ArrowRight":
@@ -958,6 +961,8 @@
               changeMonth(1);
               selectDate(1);
             }
+          } else {
+            selectDate(1);
           }
           break;
         case "ArrowUp":
@@ -971,6 +976,8 @@
               const prevMonthDays = MaterialDateUtils.daysInMonth(currentYear, currentMonth);
               selectDate(Math.max(1, prevMonthDays + newDay));
             }
+          } else {
+            selectDate(1);
           }
           break;
         case "ArrowDown":
@@ -984,6 +991,8 @@
               changeMonth(1);
               selectDate(Math.min(MaterialDateUtils.daysInMonth(currentYear, currentMonth), newDay - maxDays));
             }
+          } else {
+            selectDate(1);
           }
           break;
         case "Enter":
@@ -1073,6 +1082,159 @@
     element.addEventListener("calendar:change", onCalendarChange);
     return function() {
       element.removeEventListener("calendar:change", onCalendarChange);
+    };
+  });
+  up.compiler("[data-date-field]", function(element) {
+    const input = element.querySelector("[data-input]");
+    const trigger = element.querySelector("[data-trailing-button]");
+    const popup = element.querySelector("[data-date-popup]");
+    const calendar = popup?.querySelector("[data-popup-calendar]");
+    if (!input || !trigger || !popup || !calendar) return;
+    const format = element.dataset.format || "%Y-%m-%d";
+    let documentClickHandler = null;
+    let documentKeyHandler = null;
+    let windowResizeHandler = null;
+    let documentScrollHandler = null;
+    let isPopupMoved = false;
+    function positionPopup() {
+      const inputRect = input.getBoundingClientRect();
+      const popupRect = popup.getBoundingClientRect();
+      const viewport = {
+        width: window.innerWidth,
+        height: window.innerHeight
+      };
+      let top = inputRect.bottom + 4;
+      let left = inputRect.left;
+      const spaceBelow = viewport.height - inputRect.bottom;
+      const spaceAbove = inputRect.top;
+      if (spaceBelow < popupRect.height && spaceAbove > popupRect.height) {
+        top = inputRect.top - popupRect.height - 4;
+      }
+      if (left + popupRect.width > viewport.width) {
+        left = Math.max(8, viewport.width - popupRect.width - 8);
+      }
+      if (left < 8) {
+        left = 8;
+      }
+      popup.style.left = `${left}px`;
+      popup.style.top = `${top}px`;
+    }
+    function showPopup() {
+      if (!isPopupMoved) {
+        document.body.appendChild(popup);
+        isPopupMoved = true;
+      }
+      popup.classList.remove("hidden");
+      if (input.value && calendar.materialCalendar) {
+        calendar.materialCalendar.setValue(input.value);
+      }
+      documentClickHandler = function(e) {
+        if (!element.contains(e.target) && !popup.contains(e.target)) {
+          hidePopup();
+        }
+      };
+      documentKeyHandler = function(e) {
+        if (e.key === "Escape" && !popup.classList.contains("hidden")) {
+          hidePopup();
+          input.focus();
+        }
+      };
+      windowResizeHandler = function() {
+        if (!popup.classList.contains("hidden")) {
+          positionPopup();
+        }
+      };
+      documentScrollHandler = function() {
+        if (!popup.classList.contains("hidden")) {
+          positionPopup();
+        }
+      };
+      document.addEventListener("click", documentClickHandler);
+      document.addEventListener("keydown", documentKeyHandler);
+      window.addEventListener("resize", windowResizeHandler);
+      document.addEventListener("scroll", documentScrollHandler, true);
+      requestAnimationFrame(() => {
+        positionPopup();
+        calendar.focus();
+      });
+    }
+    function hidePopup() {
+      popup.classList.add("hidden");
+      if (documentClickHandler) {
+        document.removeEventListener("click", documentClickHandler);
+        documentClickHandler = null;
+      }
+      if (documentKeyHandler) {
+        document.removeEventListener("keydown", documentKeyHandler);
+        documentKeyHandler = null;
+      }
+      if (windowResizeHandler) {
+        window.removeEventListener("resize", windowResizeHandler);
+        windowResizeHandler = null;
+      }
+      if (documentScrollHandler) {
+        document.removeEventListener("scroll", documentScrollHandler, true);
+        documentScrollHandler = null;
+      }
+    }
+    function onTriggerClick(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      if (popup.classList.contains("hidden")) {
+        showPopup();
+      } else {
+        hidePopup();
+      }
+    }
+    function onInputClick(e) {
+      e.preventDefault();
+      if (popup.classList.contains("hidden")) {
+        showPopup();
+      }
+    }
+    function onCalendarChange(event) {
+      const formattedDate = event.detail.formatted;
+      input.value = formattedDate || "";
+      if (formattedDate) {
+        try {
+          const date = MaterialDateUtils.parseDateTime(format, formattedDate);
+          input.value = MaterialDateUtils.formatDate(format, date);
+        } catch (e) {
+          input.value = formattedDate;
+        }
+      }
+      const inputEvent = new Event("input", { bubbles: true });
+      input.dispatchEvent(inputEvent);
+      const changeEvent = new Event("change", { bubbles: true });
+      input.dispatchEvent(changeEvent);
+    }
+    function onCalendarAccept(event) {
+      onCalendarChange(event);
+      hidePopup();
+      input.focus();
+    }
+    function onCalendarCancel() {
+      hidePopup();
+      input.focus();
+    }
+    trigger.addEventListener("click", onTriggerClick);
+    input.addEventListener("click", onInputClick);
+    calendar.addEventListener("calendar:change", onCalendarChange);
+    calendar.addEventListener("calendar:accept", onCalendarAccept);
+    calendar.addEventListener("calendar:cancel", onCalendarCancel);
+    element.showDatePopup = showPopup;
+    element.hideDatePopup = hidePopup;
+    return function() {
+      hidePopup();
+      if (isPopupMoved && popup.parentNode === document.body) {
+        element.appendChild(popup);
+        isPopupMoved = false;
+      }
+      trigger.removeEventListener("click", onTriggerClick);
+      input.removeEventListener("click", onInputClick);
+      calendar.removeEventListener("calendar:change", onCalendarChange);
+      calendar.removeEventListener("calendar:accept", onCalendarAccept);
+      calendar.removeEventListener("calendar:cancel", onCalendarCancel);
     };
   });
 

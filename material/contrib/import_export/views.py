@@ -1,3 +1,11 @@
+from __future__ import annotations
+
+from typing import TYPE_CHECKING, Any
+
+if TYPE_CHECKING:
+    from django.db.models import QuerySet
+    from django.http import HttpRequest
+
 from django import forms
 from django.http import HttpResponse
 from django.utils.translation import gettext_lazy as _
@@ -24,7 +32,7 @@ class ExportForm(BulkActionForm):
                     f().get_title(),
                 )
             )
-        self.fields["file_format"].choices = choices
+        self.fields["file_format"].choices = choices  # type: ignore
 
 
 class ExportView(BaseBulkActionView):
@@ -34,17 +42,17 @@ class ExportView(BaseBulkActionView):
 
     def get_form_kwargs(self):
         return {
-            "formats": self.viewset.get_export_formats(),
+            "formats": self.viewset.get_export_formats(),  # type: ignore
             **super().get_form_kwargs(),
         }
 
     def get_export_data(self, file_format, queryset, *args, **kwargs):
-        data = self.viewset.get_data_for_export(self.request, queryset, *args, **kwargs)
+        data = self.viewset.get_data_for_export(self.request, queryset, *args, **kwargs)  # type: ignore
         export_data = file_format.export_data(data)
         return export_data
 
     def form_valid(self, form):
-        formats = self.viewset.get_export_formats()
+        formats = self.viewset.get_export_formats()  # type: ignore
         file_format = formats[int(form.cleaned_data["file_format"] or "0")]()
 
         queryset = self.get_queryset()
@@ -52,7 +60,7 @@ class ExportView(BaseBulkActionView):
         content_type = file_format.get_content_type()
         response = HttpResponse(export_data, content_type=content_type, status=201)
         response["Content-Disposition"] = 'attachment; filename="%s"' % (
-            self.viewset.get_export_filename(file_format),
+            self.viewset.get_export_filename(file_format),  # type: ignore
         )
         post_export.send(sender=None, model=self.model)
         return response
