@@ -5,14 +5,19 @@
 # LICENSE_EXCEPTION and the Commercial license defined in file 'COMM_LICENSE',
 # which is part of this source code package.
 
-from typing import Any
+from __future__ import annotations
+
+from typing import TYPE_CHECKING, Any
 from urllib.parse import quote as urlquote
+
+if TYPE_CHECKING:
+    from django.http import HttpResponseBase
 
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import PermissionDenied
 from django.db import models
-from django.forms import Form, Widget
+from django.forms import Form, ModelForm as DjangoModelForm, Widget
 from django.forms.models import modelform_factory
 from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
 from django.utils.decorators import method_decorator
@@ -75,7 +80,7 @@ class CreateModelView(
         if self.viewset is not None and hasattr(self.viewset, "get_object_url"):
             return self.viewset.get_object_url(self.request, obj)
         elif hasattr(obj, "get_absolute_url") and has_object_perm(self.request.user, "change", obj):
-            return obj.get_absolute_url()
+            return obj.get_absolute_url()  # type: ignore
         return None
 
     def message_user(self) -> None:
@@ -90,7 +95,7 @@ class CreateModelView(
             link = format_html('<a href="{}">{}</a>', urlquote(url), _("View"))
 
         message = format_html(
-            _("The {obj} was added successfully. {link}"),
+            str(_("The {obj} was added successfully. {link}")),
             obj=str(self.object),
             link=link,
         )
@@ -123,7 +128,7 @@ class CreateModelView(
             return self.viewset.get_form_widgets(self.request)
         return None
 
-    def get_form_class(self) -> type[Form]:
+    def get_form_class(self) -> type[Form] | type[DjangoModelForm[Any]]:
         """
         Get the form class for this view.
 
@@ -141,7 +146,7 @@ class CreateModelView(
                 self.model,
                 form=ModelForm,
                 fields=self.fields,
-                widgets=self.get_form_widgets(),
+                widgets=self.get_form_widgets(),  # type: ignore
             )
 
     def get_template_names(self) -> list[str]:
@@ -177,7 +182,7 @@ class CreateModelView(
         """
         response = super().form_valid(form)
         self.message_user()
-        return response
+        return response  # type: ignore
 
     def get_success_url(self) -> str:
         """
@@ -190,7 +195,7 @@ class CreateModelView(
             return self.viewset.get_success_url(self.request, obj=self.object)
         return "../"
 
-    def dispatch(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponse:
+    def dispatch(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponseBase:
         """
         Main entry point for handling requests.
 

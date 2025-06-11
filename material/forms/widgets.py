@@ -160,7 +160,7 @@ class AjaxMultipleModelSelect(forms.TextInput):
 
     def value_from_datadict(self, data, files, name):
         try:
-            getter = data.getlist
+            getter = data.getlist  # type: ignore
         except AttributeError:
             getter = data.get
         return getter(name)

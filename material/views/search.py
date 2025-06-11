@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from collections.abc import Sequence
 from typing import Any, TypeVar
 
@@ -28,7 +30,7 @@ def lookup_spawns_duplicates(opts: Options, lookup_path: str) -> bool:
         else:
             if hasattr(field, "path_infos"):
                 # This field is a relation; update opts to follow the relation.
-                path_info = field.path_infos
+                path_info = field.path_infos  # type: ignore
                 opts = path_info[-1].to_opts
                 if any(path.m2m for path in path_info):
                     # This field is a m2m relation so duplicates must be
@@ -69,13 +71,13 @@ def construct_search(opts: Options, field_name: str) -> str:
             field = opts.get_field(path_part)
         except FieldDoesNotExist:
             # Use valid query lookups.
-            if prev_field and prev_field.get_lookup(path_part):
+            if prev_field and hasattr(prev_field, "get_lookup") and prev_field.get_lookup(path_part):  # type: ignore
                 return field_name
         else:
             prev_field = field
             if hasattr(field, "path_infos"):
                 # Update opts to follow the relation.
-                opts = field.path_infos[-1].to_opts
+                opts = field.path_infos[-1].to_opts  # type: ignore
 
     # Otherwise, use the field with icontains.
     return f"{field_name}__icontains"
