@@ -1,0 +1,12 @@
+{% load i18n %}
+<c-forms.calendar.date
+  id="{{ widget.attrs.id }}"
+  name="{{ widget.name }}"
+  value="{{ widget.value|default:'' }}"
+  class="{{ widget.attrs.class }}"
+  color="{{ widget.attrs.color|default:'primary' }}"
+  :placeholder=widget.attrs.placeholder
+  :required=widget.required
+  :disabled=widget.attrs.disabled
+  >{{ bound_field.label|default:'' }}
+</c-forms.calendar.date>

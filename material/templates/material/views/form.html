@@ -2,66 +2,108 @@
 {% load i18n material %}
 
 {% block content %}
-<div class="container mx-auto px-4 py-8">
-  <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
-    <div class="md:col-span-10 md:col-start-2">      
-      <form method="POST" {% if form.is_multipart %}enctype="multipart/form-data"{% endif %} class="mt-6">
-        <c-card.elevated>
-
-          <div class="flex flex-col">
-            <h1 class="text-2xl font-medium text-on-surface">
-              {% if object %}
-                {{ object }}
-              {% else %}
-                {% trans 'New' %} {{ view.model|title }}
-              {% endif %}
-            </h1>
-          
-            <!-- Breadcrumbs -->
-            <c-breadcrumbs.container>
-              {% if view.viewset %}
-                <c-breadcrumbs.item href="../">{{ view.model|title }}</c-breadcrumbs.item>
-              {% endif %}
-              {% if object and object.pk %}
-                <c-breadcrumbs.item href="../{{ object.pk }}/">{{ object }}</c-breadcrumbs.item>
-                <c-breadcrumbs.item current="true">{% trans 'Edit' %}</c-breadcrumbs.item>
-              {% else %}
-                <c-breadcrumbs.item current="true">{% trans 'New' %}</c-breadcrumbs.item>
-              {% endif %}
-            </c-breadcrumbs.container>
-          </div>
-        
-          {% render form %}
-
-          <!-- Errors -->
-          {% if form.non_field_errors %}
-            <div class="bg-error-container rounded-lg p-4 mb-6">
-              <ul class="text-on-error-container">
-                {% for error in form.non_field_errors %}
-                  <li>{{ error }}</li>
-                {% endfor %}
-              </ul>
-            </div>
-          {% endif %}
-          
-          <!-- Actions -->
-          <c-slot name="footer">
-            <div class="flex justify-end gap-3">
-              <c-button.text href="{% if object %}../{{ object.pk }}/{% else %}../{% endif %}">
-                {% trans 'Cancel' %}
-              </c-button.text>
-              <c-button.filled type="submit">
-                {% if object %}
-                  {% trans 'Save' %}
-                {% else %}
-                  {% trans 'Create' %}
-                {% endif %}
-              </c-button.filled>
-            </div>
-          </c-slot>
-      </c-card.elevated>
-    </form>      
-    </div>
-  </div>
+<!-- Breadcrumbs -->
+<div class="flex items-center space-x-2 mb-2">
+  {% block page_breadcrumbs %}
+  <c-breadcrumbs.container class="flex-grow">
+    {% if viewset %}
+      <c-breadcrumbs.home href="{% url 'index' %}"></c-breadcrumbs.home>
+      {% for parent in viewset.parents %}{% if forloop.counter0 %}
+        <c-breadcrumbs.item href="{% reverse parent 'index' %}">{{ parent.title }}</c-breadcrumbs.item>
+      {% endif %}{% endfor %}
+      <c-breadcrumbs.item href="../">{{ viewset.title }}</c-breadcrumbs.item>
+      {% if object and object.pk %}
+        <c-breadcrumbs.item href="../{{ object.pk }}/">{{ object }}</c-breadcrumbs.item>
+        <c-breadcrumbs.item current="true">{% trans 'Edit' %}</c-breadcrumbs.item>
+      {% else %}
+        <c-breadcrumbs.item current="true">{% trans 'New' %}</c-breadcrumbs.item>
+      {% endif %}
+    {% else %}
+      {% if object and object.pk %}
+        <c-breadcrumbs.item href="../">{{ opts.verbose_name_plural|title }}</c-breadcrumbs.item>
+        <c-breadcrumbs.item href="../{{ object.pk }}/">{{ object }}</c-breadcrumbs.item>
+        <c-breadcrumbs.item current="true">{% trans 'Edit' %}</c-breadcrumbs.item>
+      {% else %}
+        <c-breadcrumbs.item href="../">{{ opts.verbose_name_plural|title }}</c-breadcrumbs.item>
+        <c-breadcrumbs.item current="true">{% trans 'New' %}</c-breadcrumbs.item>
+      {% endif %}
+    {% endif %}
+  </c-breadcrumbs.container>
+  {% endblock %}
 </div>
+
+<!-- Page Header -->
+<h1 class="text-3xl font-medium mb-4 flex items-center gap-2">
+  {% block page_title %}
+  <span>
+    {% if object %}
+      {% trans 'Edit' %} {{ object }}
+    {% else %}
+      {% trans 'New' %} {% if viewset %}{{ viewset.model|title }}{% else %}{{ opts.verbose_name|title }}{% endif %}
+    {% endif %}
+  </span>
+  {% endblock %}
+</h1>
+
+{% block page_content %}
+<!-- Form Content -->
+<c-list.container>
+  <form method="POST" {% if form.is_multipart %}enctype="multipart/form-data"{% endif %}>
+    {% csrf_token %}
+    
+    <!-- Form Fields -->
+    {% render form %}
+
+    <!-- Form Errors -->
+    {% if form.non_field_errors %}
+      <c-list.item class="bg-error-container rounded-lg">
+        <c-slot name="leading">
+          <span class="material-symbols-rounded text-error">error</span>
+        </c-slot>
+        <div class="text-on-error-container">
+          {% for error in form.non_field_errors %}
+            <div>{{ error }}</div>
+          {% endfor %}
+        </div>
+      </c-list.item>
+    {% endif %}
+    
+    <!-- Action Buttons -->
+    <c-list.item class="border-t border-outline-variant">
+      <div class="flex justify-end gap-3 py-4">
+        <c-button.text href="{% if object %}../{% else %}../{% endif %}">
+          {% trans 'Cancel' %}
+        </c-button.text>
+        <c-button.filled type="submit">
+          {% if object %}
+            {% trans 'Save' %}
+          {% else %}
+            {% trans 'Create' %}
+          {% endif %}
+        </c-button.filled>
+      </div>
+    </c-list.item>
+  </form>
+</c-list.container>
+
+<!-- Page Actions (if object exists) -->
+{% if object and view.get_page_actions %}
+  <div class="mt-6">
+    <h2 class="text-lg font-medium mb-4 text-on-surface-variant">{% trans 'Actions' %}</h2>
+    <c-list.container>
+      {% for action in view.get_page_actions %}
+        <c-list.item href="{{ action.url }}">
+          <c-slot name="leading">
+            <span class="material-symbols-rounded">{{ action.icon|default:'arrow_forward' }}</span>
+          </c-slot>
+          {{ action.name }}
+          <c-slot name="trailing">
+            <span class="material-symbols-rounded text-on-surface-variant">chevron_right</span>
+          </c-slot>
+        </c-list.item>
+      {% endfor %}
+    </c-list.container>
+  </div>
+{% endif %}
+{% endblock %}
 {% endblock content %}
