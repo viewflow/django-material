@@ -7,7 +7,7 @@ from demo.crud.atlas.views import list_view, cursor_list_view
 import debug_toolbar
 
 cotton = Application(
-    title="Compoments",
+    title="Components",
     app_name="html",
     icon="layers",
     urlpatterns=[
