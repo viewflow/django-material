@@ -11,11 +11,40 @@ Group={{ project_group }}
 RuntimeDirectory=material
 WorkingDirectory={{ project_dir }}
 Environment="PATH={{ venv_path }}/bin"
-ExecStart={{ venv_path }}/bin/gunicorn demo.wsgi:application --workers=3 --bind=unix:/run/material/material-web.sock
+ExecStart={{ venv_path }}/bin/gunicorn demo.wsgi:application --workers=3 --bind=unix:/run/material/material-web.sock --max-requests=1000 --max-requests-jitter=100 --worker-class=sync --worker-connections=1000 --timeout=30 --keepalive=5
 ExecReload=/bin/kill -s HUP $MAINPID
 KillMode=mixed
 TimeoutStopSec=5
 PrivateTmp=true
+
+# Auto-restart configuration
+Restart=always
+RestartSec=5
+StartLimitInterval=60
+StartLimitBurst=3
+
+# Memory management
+MemoryMax=512M
+MemorySwapMax=0
+MemoryAccounting=true
+TasksMax=1024
+
+# Security hardening
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths={{ project_dir }}/logs {{ project_dir }}/media /tmp
+PrivateDevices=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictRealtime=true
+RestrictSUIDSGID=true
+LockPersonality=true
+ProtectKernelLogs=true
+ProtectClock=true
+SystemCallFilter=@system-service
+SystemCallErrorNumber=EPERM
 
 [Install]
 WantedBy=multi-user.target
