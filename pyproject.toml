@@ -1,16 +1,50 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
 [project]
-name = "material"
-version = "0.1.0"
-description = "Modern Material Design framework for Django"
+name = "django-material"
+version = "3.0.0a0"
+description = "Modern Material Design 3 components and full-featured CRUD/admin interfaces for Django"
 readme = "README.md"
 requires-python = ">=3.12"
+license = "AGPL-3.0-or-later"
+authors = [
+    {name = "Mikhail Podgurskiy", email = "mikhail@viewflow.io"},
+]
+maintainers = [
+    {name = "Mikhail Podgurskiy", email = "mikhail@viewflow.io"},
+]
+keywords = ["django", "material", "design", "components", "ui", "framework", "crud", "admin"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Web Environment",
+    "Framework :: Django",
+    "Framework :: Django :: 5.2",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Internet :: WWW/HTTP",
+    "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Software Development :: User Interfaces",
+]
 dependencies = [
     "django>=5.2",
     "django-cotton>=2.0.0",
-    "django-debug-toolbar>=5.2.0",
     "django-filter>=25.1",
-    "django-import-export>=4.3.7",
 ]
+
+[project.urls]
+Homepage = "https://material.viewflow.io"
+Documentation = "https://material.viewflow.io"
+Repository = "https://github.com/viewflow/django-material"
+Issues = "https://github.com/viewflow/django-material/issues"
+Changelog = "https://github.com/viewflow/django-material/releases"
 
 [dependency-groups]
 dev = [
@@ -22,9 +56,23 @@ dev = [
     "django-stubs>=5.1.3",
     "ipdb>=0.13.13",
     "ruff>=0.5.0",
+    "django-debug-toolbar>=5.2.0",
+    "django-import-export>=4.3.7",
+    "build>=1.2.2.post1",
+    "twine>=6.1.0",
 ]
 prod = [
     "gunicorn>=21.2.0",
+]
+
+[tool.setuptools.packages.find]
+include = ["material*"]
+exclude = ["demo*", "tests*", "config*", "node_modules*"]
+
+[tool.setuptools.package-data]
+material = [
+    "static/**/*",
+    "templates/**/*",
 ]
 
 [tool.pyright]

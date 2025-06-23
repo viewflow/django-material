@@ -19,7 +19,8 @@
     "update:fonts": "npx get-google-fonts --input=\"https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,600,700,900&display=swap\" --output=\"material/static/material/fonts/roboto/\" && npx get-google-fonts --input=\"https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded&display=swap\" --output=\"material/static/material/fonts/material-symbols/\"",
     "provision": "uv run ansible-playbook -i material.viewflow.io, deploy.yml -u root --ask-vault-pass",
     "deploy": "uv run ansible-playbook -i material.viewflow.io, deploy.yml -u root --tags=update",
-    "edit-env": "uv run ansible-vault edit config/env.enc"
+    "edit-env": "uv run ansible-vault edit config/env.enc",
+    "release": "npm run build:css && npm run build:js && uv run python -m build && uv run python -m twine upload dist/*"
   },
   "devDependencies": {
     "@tailwindcss/cli": "^4.0.14",

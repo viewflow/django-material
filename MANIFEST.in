@@ -1,0 +1,8 @@
+include README.md
+include LICENSE
+include LICENSE_EXCEPTION
+include COMM-LICENSE
+recursive-include material/static *
+recursive-include material/templates *
+recursive-exclude * __pycache__
+recursive-exclude * *.py[co]
