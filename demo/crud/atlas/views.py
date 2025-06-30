@@ -48,7 +48,7 @@ def cursor_list_view(request: HttpRequest) -> HttpResponse:
     """
     Display a paginated and sortable list of cities using cursor-based pagination.
     """
-    queryset = City.objects.all()
+    queryset = City.objects.all().order_by("id")
 
     columns = [
         list.Column("name"),

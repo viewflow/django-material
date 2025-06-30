@@ -41,12 +41,12 @@
         </c-table.header_row>      
       </c-slot>
 
-      <tr><td>content</td></tr>
+      {% for row_data in list %}<c-table.row>{% for item in row_data %}
+      <c-table.cell>{{ item }}</c-table.cell>
+      {% endfor %}</c-table.row>{% endfor %}
 
-      <c-slot name="footer">
-        <tr><td>pagination</td></tr>
-      </c-slot>
     </c-table.container>  
+    <c-table.pagination current_page="1" total_pages="5" />
   {% endblock %}
 {% endblock content %}
 
