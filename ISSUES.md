@@ -5,7 +5,7 @@
 - [X] unpoly links on index page
 - [ ] overal re-structure using Site and Application
 
-## Compoments
+## Components
 
 - [X] Add esbild esbuild main.js --bundle --outfile=bundle.js --format=iife --global-name=MyLib --minify
 - [ ] use {{ debug }} to add min or not minified fiels
